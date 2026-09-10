@@ -299,33 +299,39 @@ une description collée là sera refusée, avec raison.
 le nom affiché et la description, sous **Localisations** (anglais États-Unis),
 puis le prix et la disponibilité.
 
-| Nom de référence | Identifiant de produit | Nom affiché (30) | Description (45) |
+| Nom de référence | Identifiant de produit | Nom affiché (35) | Description (55) |
 |---|---|---|---|
-| Rock 70 80 Pack | `com.oulhen.riskelo.us.pack.rock7080` | Rock 70-80 | `Rock of the 1970s and 80s. 400 questions.` |
-| History Grade 6 Pack | `com.oulhen.riskelo.us.pack.history6` | History — Grade 6 | `Egypt, Greece and Rome. 200 questions.` |
-| Geography Grade 6 Pack | `com.oulhen.riskelo.us.pack.geography6` | Geography — Grade 6 | `Maps, landforms, Africa, Asia. 200 questions.` |
-| English Grade 6 Pack | `com.oulhen.riskelo.us.pack.english6` | English — Grade 6 | `Grammar, word roots, myths. 200 questions.` |
-| Science Grade 6 Pack | `com.oulhen.riskelo.us.pack.science6` | Science — Grade 6 | `Earth science and space. 200 questions.` |
-| History Grade 7 Pack | `com.oulhen.riskelo.us.pack.history7` | History — Grade 7 | `Medieval and early modern. 200 questions.` |
-| Geography Grade 7 Pack | `com.oulhen.riskelo.us.pack.geography7` | Geography — Grade 7 | `Europe, the Americas, Pacific. 200 questions.` |
-| English Grade 7 Pack | `com.oulhen.riskelo.us.pack.english7` | English — Grade 7 | `Poetry, fiction and drama. 200 questions.` |
-| Science Grade 7 Pack | `com.oulhen.riskelo.us.pack.science7` | Science — Grade 7 | `Cells, plants, animals, body. 200 questions.` |
-| History Grade 8 Pack | `com.oulhen.riskelo.us.pack.history8` | History — Grade 8 | `US history to Reconstruction. 200 questions.` |
-| Geography Grade 8 Pack | `com.oulhen.riskelo.us.pack.geography8` | Geography — Grade 8 | `The fifty states. 200 questions.` |
-| English Grade 8 Pack | `com.oulhen.riskelo.us.pack.english8` | English — Grade 8 | `American literature. 200 questions.` |
-| Science Grade 8 Pack | `com.oulhen.riskelo.us.pack.science8` | Science — Grade 8 | `Matter, atoms, forces, waves. 200 questions.` |
-| History Grade 9 Pack | `com.oulhen.riskelo.us.pack.history9` | History — Grade 9 | `The modern world since 1750. 200 questions.` |
-| Geography Grade 9 Pack | `com.oulhen.riskelo.us.pack.geography9` | Geography — Grade 9 | `People, cities and trade. 200 questions.` |
-| English Grade 9 Pack | `com.oulhen.riskelo.us.pack.english9` | English — Grade 9 | `Shakespeare and the classics. 200 questions.` |
-| Science Grade 9 Pack | `com.oulhen.riskelo.us.pack.science9` | Science — Grade 9 | `Biology: DNA and evolution. 200 questions.` |
+| Rock 70 80 Pack | `com.oulhen.riskelo.us.pack.rock7080` | Rock 70-80 | `Bands and voices of the 1970s and 80s. 400 questions.` |
+| History Grade 6 Pack | `com.oulhen.riskelo.us.pack.history6` | History — Grade 6 | `Mesopotamia, Egypt, Greece and Rome. 200 questions.` |
+| Geography Grade 6 Pack | `com.oulhen.riskelo.us.pack.geography6` | Geography — Grade 6 | `Map skills, landforms, Africa, Asia. 200 questions.` |
+| English Grade 6 Pack | `com.oulhen.riskelo.us.pack.english6` | English — Grade 6 | `Grammar, punctuation, roots and myths. 200 questions.` |
+| Science Grade 6 Pack | `com.oulhen.riskelo.us.pack.science6` | Science — Grade 6 | `Earth science: rocks, weather, space. 200 questions.` |
+| History Grade 7 Pack | `com.oulhen.riskelo.us.pack.history7` | History — Grade 7 | `The medieval and early modern world. 200 questions.` |
+| Geography Grade 7 Pack | `com.oulhen.riskelo.us.pack.geography7` | Geography — Grade 7 | `Europe, the Americas, the Pacific. 200 questions.` |
+| English Grade 7 Pack | `com.oulhen.riskelo.us.pack.english7` | English — Grade 7 | `Poetry, fiction, drama and novels. 200 questions.` |
+| Science Grade 7 Pack | `com.oulhen.riskelo.us.pack.science7` | Science — Grade 7 | `Life science: cells, plants, animals. 200 questions.` |
+| History Grade 8 Pack | `com.oulhen.riskelo.us.pack.history8` | History — Grade 8 | `Colonial America to Reconstruction. 200 questions.` |
+| Geography Grade 8 Pack | `com.oulhen.riskelo.us.pack.geography8` | Geography — Grade 8 | `The fifty states and their geography. 200 questions.` |
+| English Grade 8 Pack | `com.oulhen.riskelo.us.pack.english8` | English — Grade 8 | `American literature, Poe to Morrison. 200 questions.` |
+| Science Grade 8 Pack | `com.oulhen.riskelo.us.pack.science8` | Science — Grade 8 | `Atoms, reactions, forces and waves. 200 questions.` |
+| History Grade 9 Pack | `com.oulhen.riskelo.us.pack.history9` | History — Grade 9 | `The modern world, 1750 to today. 200 questions.` |
+| Geography Grade 9 Pack | `com.oulhen.riskelo.us.pack.geography9` | Geography — Grade 9 | `Population, cities and world trade. 200 questions.` |
+| English Grade 9 Pack | `com.oulhen.riskelo.us.pack.english9` | English — Grade 9 | `Shakespeare and world literature. 200 questions.` |
+| Science Grade 9 Pack | `com.oulhen.riskelo.us.pack.science9` | Science — Grade 9 | `Biology: DNA, genetics and evolution. 200 questions.` |
 
 Les deux premières colonnes vont dans le dialogue de création, les deux
-dernières dans la fiche qui s'ouvre ensuite. Le nom affiché est limité à 30
-signes et la description à **45** — plus serré qu'il n'y paraît. La ligne
-`! detail` en tête de chaque fichier de questions, celle que montre la boutique
-de l'application, en fait quatre-vingts ou quatre-vingt-dix, parce que là-bas
-la place existe. Les formes courtes ci-dessus sont écrites pour le champ
-d'Apple et ne servent nulle part ailleurs. Toutes ont été comptées.
+dernières dans « Ajouter la langue dans l'App Store », en anglais États-Unis.
+
+Le nom affiché est limité à **35** signes et la description à **55**. Attention
+au compteur d'App Store Connect : il affiche le **restant**, pas le saisi — un
+champ vide marque donc la limite du champ, et non zéro.
+
+La ligne `! detail` en tête de chaque fichier de questions, celle que montre la
+boutique de l'application, en fait quatre-vingts ou quatre-vingt-dix : là-bas
+la place existe. Les formes ci-dessus sont écrites pour le champ d'Apple et ne
+servent nulle part ailleurs. Toutes ont été comptées, avec deux signes de marge
+sous la limite — assez pour qu'une divergence de comptage d'un caractère ne
+casse rien.
 
 ### Ce qui reste à décider
 
