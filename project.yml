@@ -17,7 +17,7 @@ settings:
     # This is a new app record, not an update to the French one: it starts
     # over at 1.0 / 1, whatever version the original has reached.
     MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    CURRENT_PROJECT_VERSION: "2"
     # Set here rather than in Xcode: "xcodegen generate" rewrites the project,
     # and a team filled in by hand would vanish on the next regeneration.
     DEVELOPMENT_TEAM: 38DQ8FW23J

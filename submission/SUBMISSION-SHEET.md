@@ -46,7 +46,7 @@ enregistrement ; les deux ne partagent qu'un ancêtre.
 | Identifiant Apple de l'app | attribué par App Store Connect à la création |
 | Langue principale | Anglais (États-Unis) |
 | Version | `1.0` |
-| Build | `1` |
+| Build | `2` |
 | Plateformes | iOS et macOS (une seule cible, deux plateformes sur la fiche) |
 | Version minimale | iOS 17.0 · macOS 14.0 |
 | Appareils | iPhone et iPad (`TARGETED_DEVICE_FAMILY = 1,2`) et Mac |
@@ -65,7 +65,9 @@ Les deux numéros se lisent dans `project.yml` (`MARKETING_VERSION`,
 dans le bundle celui qu'il affiche. Le build monte à chaque envoi ; la version
 monte quand ce qui part mérite un nom.
 
-C'est une première version, donc les deux partent à 1.
+C'est une première version : la version reste à `1.0`. Le build est à `2` —
+le numéro doit monter à chaque envoi, et un numéro déjà déposé ne se redonne
+pas, même si l'envoi a échoué.
 
 ## 2. Les adresses
 
