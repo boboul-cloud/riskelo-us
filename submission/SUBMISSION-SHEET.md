@@ -14,15 +14,15 @@ record; the two share nothing but an ancestor.
 Read this section before anything else. The rest of the document assumes these
 are settled.
 
-1. **blocker — The website does not exist.** Apple requires a live Support URL
-   and a live Privacy Policy URL, and refuses the submission without examining
-   anything else if either fails. All four candidate addresses return 404
-   today, because GitHub Pages has never been switched on for
-   `boboul-cloud/riskelo-us` and `docs/` still holds the French pages under
-   French filenames. See section 2.
-2. **blocker — The app declares no support address at all.** `ManualView`
-   publishes a site, a privacy page and a terms page, but nothing for support.
-   Apple asks for one and it has to resolve. See section 2.
+1. **The website is written — switch GitHub Pages on.** `docs/` now holds four
+   English pages: `index.html`, `privacy.html`, `terms.html` and
+   `support.html`, under the exact filenames the app asks for. They will stay
+   404 until Pages is enabled on `boboul-cloud/riskelo-us`. See section 2.
+2. **The app still declares no support address.** `ManualView` publishes a
+   site, a privacy page and a terms page — the three links on the home and
+   setup screens — but nothing for support. `support.html` exists for Apple's
+   required Support URL field; wiring it into the app is optional. See
+   section 2.
 3. **blocker — The screenshots are of the French app.** The eighteen files in
    `soumission/captures/` show French text on every panel. They cannot be used
    for an English listing. See section 7.
@@ -66,29 +66,29 @@ This is a first version, so both start at 1.
 
 ## 2. Addresses
 
-**None of these resolve today.** This is the first blocker, and it is the
-cheapest one to clear.
+The pages are written and in the repository. What is left is switching on the
+host.
 
-| App Store Connect field | Address | Status |
+| App Store Connect field | Address | Page |
 |---|---|---|
-| Marketing URL (optional) | `https://boboul-cloud.github.io/riskelo-us/` | 404 |
-| **Support URL** (required) | `https://boboul-cloud.github.io/riskelo-us/support.html` | 404 — and not declared in the app |
-| **Privacy Policy URL** (required) | `https://boboul-cloud.github.io/riskelo-us/privacy.html` | 404 |
-| Custom EULA (optional) | `https://boboul-cloud.github.io/riskelo-us/terms.html` | 404 |
-| Code and site repository | `https://github.com/boboul-cloud/riskelo-us` | live |
+| Marketing URL (optional) | `https://boboul-cloud.github.io/riskelo-us/` | `docs/index.html` |
+| **Support URL** (required) | `https://boboul-cloud.github.io/riskelo-us/support.html` | `docs/support.html` |
+| **Privacy Policy URL** (required) | `https://boboul-cloud.github.io/riskelo-us/privacy.html` | `docs/privacy.html` |
+| Custom EULA (optional) | `https://boboul-cloud.github.io/riskelo-us/terms.html` | `docs/terms.html` |
+| Code and site repository | `https://github.com/boboul-cloud/riskelo-us` | — |
 
-Three things have to line up, and today none of them do:
+The filenames are not decorative: `privacy.html` and `terms.html` are what
+`Manual.privacyURL` and `Manual.termsURL` publish, and those two links sit on
+the home screen, on the setup screen and in the manual's legal chapter. Rename
+a file and three buttons in the app break.
 
-- **`docs/` is still the French site**, with French filenames:
-  `assistance.html`, `conditions.html`, `confidentialite.html`. The app asks
-  for `privacy.html` and `terms.html`. Even translated, the files have to be
-  renamed to what the app publishes — or `ManualView` changed to match.
-- **There is no support page** in either language, and no `supportURL` in
-  `ManualView`. Apple will accept the marketing URL as the Support URL if that
-  page offers a way to get help — an email address is enough — so the cheapest
-  fix is a contact line on the home page and the same URL in both fields.
-- **GitHub Pages is off.** Repository ▸ Settings ▸ Pages ▸ Source: `main`,
-  folder `/docs`. It takes a minute or two to go live.
+**GitHub Pages** — Repository ▸ Settings ▸ Pages ▸ Source: `main`, folder
+`/docs`. A minute or two to go live.
+
+`support.html` is not linked from the app: the app has no support button.
+It exists because Apple's Support URL field is required and has to resolve.
+Adding a `supportURL` to `Manual` and a fourth link beside the other three is
+a five-line change if you want it.
 
 Check before submitting. Anything other than 200 and the review stops there:
 
@@ -590,9 +590,8 @@ the Mac join later under the same record.
       explaining itself
 - [ ] If the app is paid, or the packs are sold: paid contract, banking and tax
       details
-- [ ] GitHub Pages switched on, `docs/` translated and renamed, the four
-      addresses in section 2 returning 200
-- [ ] A support page that exists, and `supportURL` added to `ManualView`
+- [ ] GitHub Pages switched on and the four addresses in section 2 returning 200
+- [ ] *(optional)* `supportURL` added to `Manual` and a fourth link in the app
 - [ ] App ID `com.oulhen.riskelo.us` registered on the portal
 - [ ] Record created in App Store Connect (the name is reserved at that moment
       — settle section 4 first)
@@ -634,7 +633,7 @@ Not blockers for the binary, but all of them show to a user or a reviewer:
 
 | Thing | State |
 |---|---|
-| `docs/` | The French site, French filenames. Blocks the two required URLs. |
+| `docs/` | Done — four English pages, matching the filenames the app publishes. |
 | `soumission/` | The French app's dossier — this file supersedes its submission sheet. The screenshots inside are of the French UI. |
 | `README.md` | French. |
 | `outils/icone.swift` | French comments and identifiers. Runs fine. |
