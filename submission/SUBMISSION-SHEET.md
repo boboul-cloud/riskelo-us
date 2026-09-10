@@ -299,6 +299,24 @@ une description collée là sera refusée, avec raison.
 le nom affiché et la description, sous **Localisations** (anglais États-Unis),
 puis le prix et la disponibilité.
 
+**3. La capture de vérification**, dans « Informations pour la vérification »,
+est obligatoire pour chaque article. Elle n'est jamais montrée aux clients :
+elle sert à prouver au relecteur que l'article existe dans l'application.
+
+Elle est prête : `submission/screenshots/iap-review-packs.png` — l'écran Packs,
+1206 × 2622, prix affichés. **Le même fichier se dépose pour les dix-sept** :
+ils sont tous sur cet écran, il n'y a pas dix-sept captures à faire.
+
+Pour la refaire, si l'écran change : elle ne peut pas se prendre depuis le
+simulateur seul, où StoreKit ne répond pas et où chaque pack affiche
+« unavailable ». Il faut lancer depuis **Xcode** (`⌘R`), qui attache
+`Resources/RiskeloUS.storekit` au schéma — c'est de là que viennent les 2,99 $.
+Puis, l'écran Packs ouvert :
+
+```bash
+xcrun simctl io booted screenshot submission/screenshots/iap-review-packs.png
+```
+
 | Nom de référence | Identifiant de produit | Nom affiché (35) | Description (55) |
 |---|---|---|---|
 | Rock 70 80 Pack | `com.oulhen.riskelo.us.pack.rock7080` | Rock 70-80 | `Bands and voices of the 1970s and 80s. 400 questions.` |
