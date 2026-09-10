@@ -1,0 +1,242 @@
+# English Language Arts — Grade 7 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Seventh grade: poetry and its machinery, how fiction is built, the
+# stage, argument and its fallacies, the writing process, a second pass
+# at grammar, and the novels a middle school actually reads.
+
+! id      | english-7
+! name    | English — Grade 7
+! detail  | Poetry, fiction, drama, argument, writing craft and middle school novels.
+! icon    | text.book.closed
+! tint    | 0.72 0.44 0.62
+! rank    | 13
+! product | com.oulhen.riskelo.us.pack.english7
+
+
+# --- Poetry ---
+
+E | Which term names a group of lines in a poem? | A stanza | A paragraph | A foot | A canto
+E | Which term names the beat pattern of a poem? | Rhythm | Rhyme | Imagery | Diction
+E | Which term names words that end with the same sound? | Rhyme | Rhythm | Meter | Alliteration
+E | Which poem of three lines counts five, seven and five syllables? | A haiku | A sonnet | A limerick | A ballad
+E | Which comic poem has five lines and a bouncing rhythm? | A limerick | A haiku | A sonnet | An elegy
+E | Which poem has fourteen lines? | A sonnet | A ballad | An ode | An elegy
+E | Which poem tells a story in short rhyming stanzas? | A ballad | An ode | An elegy | A sonnet
+E | Which poem has no regular rhyme or meter? | Free verse | Blank verse | A sonnet | A villanelle
+E | Which term names the pattern of end rhymes, marked with letters? | The rhyme scheme | The meter | The stanza form | The refrain
+E | Which term names two rhyming lines in a row? | A couplet | A tercet | A quatrain | A sestet
+E | Which term names a four-line stanza? | A quatrain | A couplet | A tercet | An octave
+M | Which poem praises its subject at length? | An ode | An elegy | A ballad | A limerick
+M | Which poem mourns someone who has died? | An elegy | An ode | A ballad | A sonnet
+M | Which poetry has regular meter but no rhyme? | Blank verse | Free verse | Doggerel | A ballad
+M | Which term names a line or lines repeated through a poem? | A refrain | A stanza | A couplet | An envoi
+M | Which term names a three-line stanza? | A tercet | A quatrain | A couplet | A sestet
+M | Which term names a poem shaped like the thing it describes? | A concrete poem | A prose poem | A found poem | An acrostic
+H | Which term names a unit of stressed and unstressed syllables? | A foot | A stanza | A line | A caesura
+H | Which foot has an unstressed then a stressed syllable? | An iamb | A trochee | An anapest | A dactyl
+H | Which foot has a stressed then an unstressed syllable? | A trochee | An iamb | A spondee | An anapest
+H | Which meter has five iambs to the line? | Iambic pentameter | Iambic tetrameter | Trochaic pentameter | Dactylic hexameter
+H | Which poem spells a word down its first letters? | An acrostic | A concrete poem | A cinquain | A villanelle
+H | Which term names running a sentence past the end of a line? | Enjambment | Caesura | Elision | Anaphora
+H | Which term names a pause inside a line of verse? | A caesura | An enjambment | A stanza break | A volta
+H | Which term names rhyme that is close but not exact? | Slant rhyme | End rhyme | Internal rhyme | Eye rhyme
+H | Which term names rhyme falling inside a single line? | Internal rhyme | End rhyme | Slant rhyme | Masculine rhyme
+H | Which sonnet form ends with a rhyming couplet? | The Shakespearean sonnet | The Petrarchan sonnet | The Spenserian octave | The curtal sonnet
+H | Which sonnet form splits into an octave and a sestet? | The Petrarchan sonnet | The Shakespearean sonnet | The Miltonic couplet | The terza rima
+H | Which term names the turn of thought in a sonnet? | The volta | The refrain | The envoi | The coda
+H | Which term names repeating a phrase at the start of several lines? | Anaphora | Epistrophe | Chiasmus | Antithesis
+H | Which term names the voice that speaks a poem? | The speaker | The author | The editor | The reader
+H | Which American poet wrote Song of Myself? | Walt Whitman | Emily Dickinson | Edgar Allan Poe | Robert Frost
+H | Which poet wrote The Road Not Taken? | Robert Frost | Carl Sandburg | Langston Hughes | William Carlos Williams
+H | Which poet asked what happens to a dream deferred? | Langston Hughes | Countee Cullen | Claude McKay | Paul Laurence Dunbar
+
+# --- How fiction is built ---
+
+E | Which term names a work of fiction short enough to read at a sitting? | A short story | A novel | A novella | An epic
+E | Which term names a book-length work of fiction? | A novel | A short story | An essay | A memoir
+E | Which term names the tension about what will happen next? | Suspense | Irony | Mood | Pacing
+E | Which character changes over the course of a story? | A dynamic character | A static character | A flat character | A stock character
+E | Which character stays the same from beginning to end? | A static character | A dynamic character | A round character | A foil
+M | Which term names a work between a short story and a novel? | A novella | An anthology | A serial | A vignette
+M | Which term names a collection of stories by many writers? | An anthology | A novella | A trilogy | A compendium
+M | Which term names the way an author builds a character? | Characterization | Exposition | Description | Narration
+M | Which characterization tells the reader outright what a character is like? | Direct characterization | Indirect characterization | Dynamic characterization | Flat characterization
+M | Which characterization shows a character through actions and speech? | Indirect characterization | Direct characterization | Static characterization | Round characterization
+M | Which character is fully drawn with many sides? | A round character | A flat character | A stock character | A static character
+M | Which character is drawn with a single trait? | A flat character | A round character | A dynamic character | A protagonist
+M | Which term names a familiar character type like the wise old mentor? | A stock character | A round character | A dynamic character | A confidant
+M | Which term names a surprise ending that overturns expectations? | A twist | A denouement | A climax | A frame
+M | Which term names a story told inside another story? | A frame story | A subplot | A flashback | An episode
+M | Which term names a second story line running beside the main one? | A subplot | A frame story | A digression | An interlude
+M | Which term names the way a writer chooses and arranges words? | Style | Plot | Theme | Setting
+M | Which term names an author's particular word choice? | Diction | Syntax | Meter | Register
+H | Which term names the final unwinding after the climax? | The denouement | The exposition | The inciting incident | The rising action
+H | Which term names the event that sets the plot in motion? | The inciting incident | The denouement | The climax | The resolution
+H | Which term names the arrangement of words within a sentence? | Syntax | Diction | Tone | Voice
+H | Which term names the speed at which a story unfolds? | Pacing | Diction | Syntax | Tension
+H | Which narrator cannot be trusted to report events truly? | An unreliable narrator | An omniscient narrator | A frame narrator | An intrusive narrator
+H | Which term names an opening line that draws the reader in? | The hook | The premise | The prologue | The epigraph
+H | Which term names a section placed before the first chapter? | A prologue | An epilogue | An appendix | A colophon
+H | Which term names a section placed after the last chapter? | An epilogue | A prologue | A postscript | A frontispiece
+
+# --- The stage ---
+
+E | Which term names a play written to be performed? | A drama | A novel | An essay | An epic
+E | Which term names the words the actors speak? | Dialogue | Narration | Exposition | Prose
+E | Which term names instructions for movement and set in a script? | Stage directions | Dialogue | Monologue | Blocking notes
+E | Which term names a major division of a play? | An act | A scene | A stanza | A chapter
+E | Which term names a smaller division within an act? | A scene | An act | A canto | A verse
+E | Which kind of play ends in the downfall of its hero? | A tragedy | A comedy | A farce | A melodrama
+E | Which kind of play ends happily, often with a wedding? | A comedy | A tragedy | A history | An elegy
+E | Which term names the writer of a play? | The playwright | The director | The dramaturge | The librettist
+M | Which term names a long speech by one character to others? | A monologue | A soliloquy | An aside | A dialogue
+M | Which term names a speech delivered alone on stage? | A soliloquy | A monologue | An aside | A prologue
+M | Which term names a remark to the audience the others do not hear? | An aside | A soliloquy | A monologue | A cue
+M | Which term names the group commenting on the action in Greek drama? | The chorus | The company | The ensemble | The troupe
+M | Which term names the person who shapes a play's staging? | The director | The producer | The playwright | The stage manager
+H | Which term names the flaw that brings down a tragic hero? | The tragic flaw | The catastrophe | The catharsis | The peripeteia
+H | Which Greek term names the release of emotion an audience feels? | Catharsis | Hubris | Mimesis | Anagnorisis
+H | Which Greek term names the pride that destroys a hero? | Hubris | Catharsis | Nemesis | Pathos
+H | Which term names the moment a character recognizes the truth? | Anagnorisis | Peripeteia | Catharsis | Hamartia
+H | Which term names the reversal of fortune in a tragedy? | Peripeteia | Anagnorisis | Catharsis | Denouement
+
+# --- Argument ---
+
+E | Which term names a short piece of writing on one subject? | An essay | A novel | A play | A stanza
+E | Which term names the sentence stating an essay's main claim? | The thesis statement | The topic sentence | The hook | The conclusion
+E | Which term names the sentence stating a paragraph's main point? | The topic sentence | The thesis statement | The transition | The clincher
+E | Which term names the reasons and facts that support a claim? | Evidence | Counterclaims | Rebuttals | Anecdotes
+M | Which term names an opposing view an essay addresses? | A counterclaim | A thesis | A premise | A concession
+M | Which term names the reply to an opposing view? | A rebuttal | A counterclaim | A concession | A premise
+M | Which term names admitting an opponent has a point? | A concession | A rebuttal | A fallacy | A claim
+M | Which appeal relies on logic and evidence? | Logos | Ethos | Pathos | Kairos
+M | Which appeal relies on the speaker's credibility? | Ethos | Logos | Pathos | Kairos
+M | Which appeal relies on the audience's emotions? | Pathos | Logos | Ethos | Kairos
+M | Which reasoning moves from specific cases to a general rule? | Inductive reasoning | Deductive reasoning | Circular reasoning | Analogical reasoning
+M | Which reasoning moves from a general rule to a specific case? | Deductive reasoning | Inductive reasoning | Abductive reasoning | Inverse reasoning
+M | Which term names a mistake in reasoning? | A logical fallacy | A rebuttal | A syllogism | A premise
+M | Which fallacy attacks the person rather than the argument? | Ad hominem | Straw man | False dilemma | Slippery slope
+M | Which fallacy misrepresents an opponent's position to knock it down? | Straw man | Ad hominem | Bandwagon | Red herring
+M | Which fallacy claims one small step leads to disaster? | Slippery slope | Straw man | False dilemma | Appeal to authority
+M | Which fallacy offers only two options when more exist? | False dilemma | Slippery slope | Hasty generalization | Circular reasoning
+M | Which fallacy says everyone is doing it, so you should too? | Bandwagon | Ad hominem | Red herring | Straw man
+H | Which fallacy draws a broad conclusion from too few cases? | Hasty generalization | False dilemma | Bandwagon | Non sequitur
+H | Which fallacy distracts the reader with an unrelated point? | Red herring | Straw man | Slippery slope | Circular reasoning
+H | Which fallacy uses its conclusion as its own evidence? | Circular reasoning | Hasty generalization | Red herring | Non sequitur
+H | Which term names a conclusion that does not follow from its premises? | A non sequitur | A syllogism | A corollary | A tautology
+H | Which form of argument has two premises and a conclusion? | A syllogism | An enthymeme | A dilemma | An analogy
+H | Which term names writing that attacks folly by ridicule? | Satire | Parody | Eulogy | Polemic
+H | Which term names an imitation of a work for comic effect? | A parody | A satire | A pastiche | A lampoon
+H | Which term names a short firsthand account of a personal experience? | An anecdote | A vignette | A memoir | A profile
+
+# --- The writing process ---
+
+E | Which stage of writing comes first, before any draft? | Prewriting | Revising | Editing | Publishing
+E | Which stage of writing fixes spelling and punctuation? | Editing | Prewriting | Drafting | Publishing
+E | Which stage of writing reshapes ideas and organization? | Revising | Editing | Proofreading | Formatting
+E | Which prewriting method lists ideas as fast as they come? | Brainstorming | Outlining | Drafting | Peer review
+E | Which prewriting method arranges ideas in a numbered plan? | Outlining | Brainstorming | Freewriting | Clustering
+E | Which writing tells a story? | Narrative writing | Expository writing | Persuasive writing | Descriptive writing
+E | Which writing explains or informs? | Expository writing | Narrative writing | Persuasive writing | Reflective writing
+E | Which writing tries to change the reader's mind? | Persuasive writing | Expository writing | Narrative writing | Technical writing
+E | Which writing paints a picture with sensory details? | Descriptive writing | Expository writing | Persuasive writing | Analytical writing
+M | Which prewriting method writes without stopping to fix anything? | Freewriting | Outlining | Proofreading | Editing
+M | Which diagram groups related ideas around a center? | A cluster map | A Venn diagram | A timeline | A flowchart
+M | Which diagram shows what two things share and do not share? | A Venn diagram | A cluster map | A flowchart | A storyboard
+M | Which advice tells writers to show rather than tell? | Use scene and detail | Use more adverbs | Summarize the feeling | Explain the moral
+M | Which term names the audience a piece is written for? | Its intended readers | Its register | Its medium | Its genre
+M | Which term names how formal or informal writing is? | Its register | Its genre | Its format | Its medium
+M | Which term names the first full version of a piece? | A rough draft | An outline | A final copy | A proof
+M | Which comments do classmates give on a draft? | Peer feedback | Copy editing | Fact checking | Proofreading
+M | Which mark shows where text should be inserted? | A caret | An asterisk | A pilcrow | A dagger
+H | Which term names the sentence that closes a paragraph strongly? | The clincher | The hook | The thesis | The transition
+H | Which words carry a reader from one idea to the next? | Transitions | Modifiers | Qualifiers | Determiners
+H | Which term names varying sentence length and shape for effect? | Sentence variety | Parallelism | Redundancy | Subordination
+H | Which fault repeats the same idea in different words? | Redundancy | Ambiguity | Equivocation | Ellipsis
+H | Which term names cutting away unnecessary words? | Concision | Elaboration | Amplification | Digression
+H | Which term names overused expressions like fit as a fiddle? | Cliches | Idioms | Colloquialisms | Aphorisms
+H | Which term names informal words used in everyday speech? | Colloquialisms | Archaisms | Neologisms | Euphemisms
+H | Which term names the specialized vocabulary of a trade? | Jargon | Slang | Dialect | Cant
+H | Which term names a newly coined word? | A neologism | An archaism | A loanword | A portmanteau
+H | Which term names a word blended from two others, like brunch? | A portmanteau | An acronym | A compound | A clipping
+
+# --- Grammar, second pass ---
+
+E | Which tense tells what is happening now? | The present tense | The past tense | The future tense | The perfect tense
+E | Which tense tells what already happened? | The past tense | The present tense | The future tense | The conditional
+E | Which tense tells what will happen? | The future tense | The past tense | The present tense | The perfect tense
+E | Which word is the possessive, its or it's? | Its | It's | Its' | Its's
+E | Which spelling is correct for the contraction of you are? | You're | Your | Youre | Yours
+E | Which word is correct before a vowel sound, a or an? | An | A | Either one | Neither one
+M | Which tense shows an action finished before now? | The present perfect | The simple past | The past progressive | The future perfect
+M | Which form shows an action still in progress? | The progressive | The perfect | The simple | The subjunctive
+M | Which pronoun case works as the subject of a sentence? | The subjective case | The objective case | The possessive case | The reflexive case
+M | Which pronoun case receives the action? | The objective case | The subjective case | The possessive case | The vocative case
+M | Which pronoun is correct after a preposition, me or I? | Me | I | Myself | Mine
+M | Which word goes with countable things, fewer or less? | Fewer | Less | Either one | Lesser
+M | Which word means to have an effect on, affect or effect? | Affect | Effect | Both equally | Neither one
+M | Which word means belonging to them, their or there? | Their | There | They're | Theres
+M | Which word is used in a comparison, than or then? | Than | Then | Thann | Thanne
+M | Which verb agrees with a compound subject joined by and? | A plural verb | A singular verb | Either verb | No verb at all
+H | Which tense shows an action finished before another past action? | The past perfect | The present perfect | The simple past | The future perfect
+H | Which subject decides the verb when two are joined by or? | The nearer subject | The first subject | Always the plural | Always the singular
+H | Which term names a phrase beginning with a preposition? | A prepositional phrase | A participial phrase | An infinitive phrase | An absolute phrase
+H | Which term names a phrase built on an -ing or -ed verb form? | A participial phrase | A prepositional phrase | A noun phrase | An absolute phrase
+H | Which clause acts as an adjective and often begins with who? | A relative clause | A noun clause | An adverb clause | An absolute clause
+H | Which clause acts as a noun in the sentence? | A noun clause | A relative clause | An adverb clause | A participial clause
+H | Which clause tells when, where or why the action happens? | An adverb clause | A noun clause | A relative clause | An appositive clause
+H | Which clause adds information without changing the meaning? | A nonrestrictive clause | A restrictive clause | A conditional clause | A concessive clause
+H | Which clause is needed to identify the noun it follows? | A restrictive clause | A nonrestrictive clause | A parenthetical clause | An absolute clause
+H | Which error uses two negatives where one is meant? | A double negative | A comma splice | A split infinitive | A dangling participle
+H | Which usage places a word between to and the verb? | A split infinitive | A dangling modifier | A misplaced clause | A double comparative
+H | Which sentence has two independent clauses and one dependent? | A compound-complex sentence | A complex sentence | A compound sentence | A periodic sentence
+
+# --- Novels of the middle grades ---
+
+E | Which novel follows Wilbur the pig and the spider who saves him? | Charlotte's Web | Stuart Little | The Trumpet of the Swan | The One and Only Ivan
+E | Which novel sends four siblings through a wardrobe? | The Lion, the Witch and the Wardrobe | The Hobbit | A Wrinkle in Time | Peter Pan
+E | Which novel follows a hobbit who finds a magic ring? | The Hobbit | The Lord of the Rings | The Silmarillion | Watership Down
+E | Which novel follows a boy raised by wolves in India? | The Jungle Book | Tarzan of the Apes | Kim | The Secret Garden
+E | Which novel follows a boy and a runaway man down the Mississippi? | The Adventures of Huckleberry Finn | Tom Sawyer | Treasure Island | Moby-Dick
+E | Which novel follows a girl who slips through a wrinkle in time? | A Wrinkle in Time | The Giver | The Phantom Tollbooth | Tuck Everlasting
+E | Which novel follows Jonas in a community without color or pain? | The Giver | The Hunger Games | A Wrinkle in Time | Among the Hidden
+M | Which novel opens with a girl sent to live on Prince Edward Island? | Anne of Green Gables | Little Women | Heidi | The Secret Garden
+M | Which novel follows four sisters through the Civil War years? | Little Women | Anne of Green Gables | Pride and Prejudice | Jane Eyre
+M | Which novel follows a girl who finds a locked garden in Yorkshire? | The Secret Garden | A Little Princess | Heidi | Anne of Green Gables
+M | Which novel begins when a boy finds a pirate's treasure map? | Treasure Island | Kidnapped | Robinson Crusoe | The Coral Island
+M | Which novel strands a sailor alone on a desert island for years? | Robinson Crusoe | Treasure Island | Lord of the Flies | The Swiss Family Robinson
+M | Which novel strands English schoolboys on an island with no adults? | Lord of the Flies | Robinson Crusoe | Treasure Island | The Coral Island
+M | Which novel follows a boy who survives a plane crash with a hatchet? | Hatchet | My Side of the Mountain | Island of the Blue Dolphins | Julie of the Wolves
+M | Which novel follows a girl left alone on an island off California? | Island of the Blue Dolphins | Julie of the Wolves | Hatchet | The Cay
+M | Which novel follows an Inuit girl who lives with a wolf pack? | Julie of the Wolves | Island of the Blue Dolphins | The Call of the Wild | White Fang
+M | Which novel follows a dog stolen into the Klondike gold rush? | The Call of the Wild | White Fang | Old Yeller | Where the Red Fern Grows
+M | Which novel follows a boy and his two coonhounds in the Ozarks? | Where the Red Fern Grows | Old Yeller | Shiloh | Sounder
+M | Which novel sets the Greasers against the Socs in Oklahoma? | The Outsiders | Rumble Fish | Tex | The Chocolate War
+M | Which novel follows two friends who invent the kingdom of Terabithia? | Bridge to Terabithia | The Great Gilly Hopkins | Tuck Everlasting | Holes
+M | Which novel sends a boy to dig holes at a desert camp? | Holes | Hatchet | Maniac Magee | Freak the Mighty
+M | Which novel follows a boy with a facial difference starting school? | Wonder | Out of My Mind | Fish in a Tree | Rules
+M | Which novel follows the Logan family defending their land in Mississippi? | Roll of Thunder, Hear My Cry | Sounder | The Land | Bud, Not Buddy
+M | Which novel follows a boy searching for his father during the Depression? | Bud, Not Buddy | Holes | Maniac Magee | Sounder
+M | Which novel drives a family from Flint to Alabama in 1963? | The Watsons Go to Birmingham | Roll of Thunder, Hear My Cry | Bud, Not Buddy | The Land
+M | Which diary was written by a girl hiding in Amsterdam? | The Diary of a Young Girl | Night | Number the Stars | The Book Thief
+M | Which novel follows a Danish girl helping her Jewish friend escape? | Number the Stars | The Diary of a Young Girl | The Book Thief | Milkweed
+M | Which memoir recounts a teenager's survival of the Nazi camps? | Night | The Diary of a Young Girl | Maus | Survival in Auschwitz
+M | Which novel is narrated by Death during the Second World War? | The Book Thief | Night | Number the Stars | Milkweed
+H | Which novel follows Ponyboy and his brothers after their parents die? | The Outsiders | Rumble Fish | Tex | The Pigman
+H | Which novel trains a boy in space to fight an alien war? | Ender's Game | The Giver | A Wrinkle in Time | Dune
+H | Which novel follows a family who cannot die after drinking spring water? | Tuck Everlasting | The Giver | Bridge to Terabithia | The Westing Game
+H | Which novel summons sixteen heirs to solve a millionaire's puzzle? | The Westing Game | Chasing Vermeer | The Egypt Game | Harriet the Spy
+H | Which novel sends two children to hide in a New York museum? | From the Mixed-Up Files | The Westing Game | Harriet the Spy | The Great Brain
+H | Which novel follows a boy who runs faster than anyone in Two Mills? | Maniac Magee | Holes | Bridge to Terabithia | Crash
+H | Which novel pairs a boy with a brilliant mind and a tall friend? | Freak the Mighty | Holes | Wonder | Stargirl
+H | Which novel brings a girl with a ukulele to a desert high school? | Stargirl | Speak | Wonder | Out of My Mind
+H | Which novel follows a girl who stops speaking after a summer party? | Speak | Stargirl | Wonder | The Outsiders
+H | Which novel puts a boy and a tiger in the same lifeboat? | Life of Pi | The Old Man and the Sea | Kon-Tiki | The Cay
+H | Which novel follows a blind French girl and a German boy in wartime? | All the Light We Cannot See | The Book Thief | Sarah's Key | Milkweed

@@ -1,28 +1,28 @@
 //
 //  Persistence.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Garder la partie en cours d'une fois sur l'autre.
+//  Keeping the game in progress from one launch to the next.
 //
-//  Tout l'état du jeu est déjà une valeur — c'était le pari du moteur — et il
-//  suffit donc de savoir l'écrire. Trois choix de fabrication :
+//  The whole game state is already a value — that was the engine's bet — so
+//  all that is needed is knowing how to write it. Three build decisions:
 //
-//  Le plateau n'est pas enregistré : il se regénère du plan, à l'identique.
-//  On garde sa signature — la liste de ses territoires — et l'on écarte la
-//  sauvegarde si elle ne correspond plus. Un plan retouché ne doit pas
-//  restaurer une partie de travers, il doit la refuser.
+//  The board is not saved: it is regenerated from the plan, identically. We
+//  keep its signature — the list of its territories — and set the save aside
+//  if it no longer matches. A reworked plan must not restore a game that no
+//  longer lines up, it must refuse it.
 //
-//  La banque de questions non plus : seule la liste de celles déjà posées est
-//  gardée, les questions elles-mêmes sont dans le code.
+//  Nor is the question bank: only the list of those already asked is kept,
+//  the questions themselves are in the bundle.
 //
-//  Le tirage au sort, en revanche, est enregistré. Sans lui, une partie
-//  reprise ne serait plus la même : ce serait une autre partie qui commence
-//  au même endroit.
+//  The random draw, on the other hand, is saved. Without it a resumed game
+//  would no longer be the same one: it would be another game starting in the
+//  same place.
 //
 
 import Foundation
 
-// MARK: - De quoi écrire les valeurs du moteur
+// MARK: - What it takes to write the engine's values
 
 extension SeededRandom: Codable {
     private enum CodingKeys: String, CodingKey { case state }
@@ -39,61 +39,61 @@ extension SeededRandom: Codable {
 }
 
 extension QuestionBank: Codable {
-    private enum CodingKeys: String, CodingKey { case served, places, vues }
+    private enum CodingKeys: String, CodingKey { case served, slots, seen }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         self.init()
         restore(served: try c.decode(Set<String>.self, forKey: .served))
-        // Le sac des places voyage avec elle : une sauvegarde d'avant le sac
-        // n'en a pas, et repart d'un sac plein — ce qui est sans conséquence.
-        restore(places: try c.decodeIfPresent([Int].self, forKey: .places) ?? [])
-        // La mémoire longue voyage aussi, et c'est indispensable au second
-        // appareil : celui qui rejoint reçoit la partie entière et doit tirer
-        // exactement les mêmes questions que celui qui l'héberge. S'il
-        // repartait de sa propre mémoire, les deux écrans poseraient deux
-        // questions différentes à la même seconde.
-        restore(vues: try c.decodeIfPresent([String: Int].self, forKey: .vues) ?? [:])
+        // The bag of slots travels with the bank. Missing, we start from a
+        // full bag, which is without consequence.
+        restore(slots: try c.decodeIfPresent([Int].self, forKey: .slots) ?? [])
+        // The long memory travels too, and it is indispensable to the second
+        // device: whoever joins receives the whole game and must draw exactly
+        // the same questions as the host. If they started from their own
+        // memory, the two screens would ask two different questions at the
+        // same second.
+        restore(seen: try c.decodeIfPresent([String: Int].self, forKey: .seen) ?? [:])
     }
 
     func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
         try c.encode(alreadyServed, forKey: .served)
-        try c.encode(placesRestantes, forKey: .places)
-        try c.encode(dejaVues, forKey: .vues)
+        try c.encode(remainingSlots, forKey: .slots)
+        try c.encode(alreadySeen, forKey: .seen)
     }
 }
 
-// MARK: - La partie
+// MARK: - The game
 
 extension GameState: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case board, signature, rules, players, owner, armies, current, phase, assault
         case siege, knowledge, lastCategoryAgainst, bonusPaid, turn, journal, bank, rng
-        case deck, discard, hands, exchanges, conqueredThisTurn, objectifs, elimines
+        case deck, discard, hands, exchanges, conqueredThisTurn, objectives, eliminated
     }
 
-    /// Ce qui identifie le plateau : la liste de ses territoires, dans
-    /// l'ordre. Deux plans différents ne peuvent pas la partager.
+    /// What identifies the board: the list of its territories, in order. Two
+    /// different plans cannot share it.
     static func signature(of board: Board) -> String {
         board.map.order.joined(separator: ",")
     }
 
     enum LoadError: Error, LocalizedError {
-        case autrePlateau
+        case otherBoard
         var errorDescription: String? {
-            "Cette partie a été jouée sur un autre plateau."
+            "This game was played on another board."
         }
     }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        // Le plateau lui-même n'est pas enregistré : on note lequel c'était,
-        // et l'on vérifie qu'il n'a pas changé de dessin depuis.
-        let board = try c.decodeIfPresent(Boards.self, forKey: .board) ?? .anneau
+        // The board itself is not saved: we note which one it was, and check
+        // that its drawing has not changed since.
+        let board = try c.decodeIfPresent(Boards.self, forKey: .board) ?? .ring
         guard try c.decode(String.self, forKey: .signature) == GameState.signature(of: board.board)
-        else { throw LoadError.autrePlateau }
+        else { throw LoadError.otherBoard }
         self.init(restoring: board,
                   rules: try c.decode(Rules.self, forKey: .rules),
                   players: try c.decode([Player].self, forKey: .players),
@@ -108,6 +108,9 @@ extension GameState: Codable {
                   knowledge: try c.decode([PlayerID: [Category: Score]].self, forKey: .knowledge),
                   lastCategoryAgainst: try c.decode([PlayerID: Category].self,
                                                     forKey: .lastCategoryAgainst),
+                  // These fields are read leniently: a state written by a
+                  // half-finished build, or truncated on disk, should degrade
+                  // into a playable game rather than into nothing at all.
                   bonusPaid: try c.decodeIfPresent([PlayerID: Int].self, forKey: .bonusPaid) ?? [:],
                   deck: try c.decodeIfPresent([Card].self, forKey: .deck) ?? [],
                   discard: try c.decodeIfPresent([Card].self, forKey: .discard) ?? [],
@@ -115,13 +118,10 @@ extension GameState: Codable {
                   exchanges: try c.decodeIfPresent(Int.self, forKey: .exchanges) ?? 0,
                   conqueredThisTurn: try c.decodeIfPresent(Bool.self,
                                                            forKey: .conqueredThisTurn) ?? false,
-                  // Une sauvegarde d'avant les conquêtes personnelles n'en a
-                  // pas : la partie reprend sans, ce qui est exactement ce
-                  // qu'elle était.
-                  objectifs: try c.decodeIfPresent([PlayerID: Objectif].self,
-                                                   forKey: .objectifs) ?? [:],
-                  elimines: try c.decodeIfPresent([PlayerID: PlayerID].self,
-                                                  forKey: .elimines) ?? [:],
+                  objectives: try c.decodeIfPresent([PlayerID: Objective].self,
+                                                    forKey: .objectives) ?? [:],
+                  eliminated: try c.decodeIfPresent([PlayerID: PlayerID].self,
+                                                    forKey: .eliminated) ?? [:],
                   turn: try c.decode(Int.self, forKey: .turn),
                   journal: try c.decode([Entry].self, forKey: .journal))
     }
@@ -146,8 +146,8 @@ extension GameState: Codable {
         try c.encode(hands, forKey: .hands)
         try c.encode(exchanges, forKey: .exchanges)
         try c.encode(conqueredThisTurn, forKey: .conqueredThisTurn)
-        try c.encode(objectifs, forKey: .objectifs)
-        try c.encode(elimines, forKey: .elimines)
+        try c.encode(objectives, forKey: .objectives)
+        try c.encode(eliminated, forKey: .eliminated)
         try c.encode(turn, forKey: .turn)
         try c.encode(journal, forKey: .journal)
         try c.encode(bank, forKey: .bank)
@@ -155,14 +155,13 @@ extension GameState: Codable {
     }
 }
 
-// MARK: - Le tiroir
+// MARK: - The drawer
 
-/// Où dort la partie en cours.
+/// Where the game in progress sleeps.
 ///
-/// Un fichier, et non les réglages du système : une partie est un document.
-/// L'écriture est atomique — une coupure de courant en plein enregistrement
-/// laisserait sinon un fichier à moitié écrit, c'est-à-dire une partie perdue
-/// en croyant la sauver.
+/// A file, and not the system settings: a game is a document. The write is
+/// atomic — a power cut in the middle of saving would otherwise leave a
+/// half-written file, which is a game lost while believing it saved.
 struct GameStore {
 
     static let shared = GameStore()
@@ -172,16 +171,16 @@ struct GameStore {
                                                  in: .userDomainMask,
                                                  appropriateFor: nil, create: true))
             ?? URL(fileURLWithPath: NSTemporaryDirectory())
-        let dossier = base.appendingPathComponent("Riskelo", isDirectory: true)
-        try? FileManager.default.createDirectory(at: dossier, withIntermediateDirectories: true)
-        return dossier.appendingPathComponent("partie-en-cours.json")
+        let folder = base.appendingPathComponent("RiskeloUS", isDirectory: true)
+        try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        return folder.appendingPathComponent("game-in-progress.json")
     }()
 
-    /// L'identité de la partie en cours dans la bibliothèque. Elle vit à
-    /// côté de l'état, et non dedans : la changer n'invalide pas les
-    /// sauvegardes déjà écrites.
+    /// The identity of the game in progress within the library. It lives
+    /// beside the state, not inside it: changing it does not invalidate the
+    /// saves already written.
     private var idURL: URL {
-        url.deletingLastPathComponent().appendingPathComponent("partie-en-cours-id.txt")
+        url.deletingLastPathComponent().appendingPathComponent("game-in-progress-id.txt")
     }
 
     var hasSavedGame: Bool { FileManager.default.fileExists(atPath: url.path) }
@@ -199,9 +198,9 @@ struct GameStore {
             let data = try JSONEncoder().encode(game)
             try data.write(to: url, options: .atomic)
         } catch {
-            // Une sauvegarde ratée ne doit pas interrompre une partie : on la
-            // retentera au coup suivant, il y en a un toutes les secondes.
-            print("Riskelo — sauvegarde impossible : \(error)")
+            // A failed save must not interrupt a game: we will try again on
+            // the next move, and there is one every second.
+            print("Riskelo US — could not save: \(error)")
         }
     }
 
@@ -210,9 +209,9 @@ struct GameStore {
         do {
             return try JSONDecoder().decode(GameState.self, from: data)
         } catch {
-            // Sauvegarde d'un autre plateau, ou d'une version qui ne se lit
-            // plus : on l'écarte plutôt que de reprendre une partie fausse.
-            print("Riskelo — sauvegarde écartée : \(error.localizedDescription)")
+            // A save from another board, or from a build that no longer reads
+            // back: we set it aside rather than resume a game that is wrong.
+            print("Riskelo US — save set aside: \(error.localizedDescription)")
             discard()
             return nil
         }
@@ -223,95 +222,57 @@ struct GameStore {
     }
 }
 
-// MARK: - La mémoire des questions
+// MARK: - The question memory
 
-/// Ce que cet appareil a déjà vu passer, d'une partie sur l'autre.
+/// What this device has already seen go by, from one game to the next.
 ///
-/// Une partie ne le sait pas d'elle-même : elle s'ouvre avec une banque
-/// neuve, tire au sort dans le sac plein, et repose donc les questions de la
-/// veille. Celui qui joue seul enchaîne les parties, et c'est le seul à qui
-/// cela saute aux yeux — il reconnaît la question avant de l'avoir lue, et le
-/// duel ne décide plus rien.
+/// A game does not know this by itself: it opens with a fresh bank, draws
+/// from the full bag, and therefore asks yesterday's questions again. Someone
+/// playing alone runs games back to back, and they are the only one it leaps
+/// out at — they recognize the question before having read it, and the duel
+/// stops deciding anything.
 ///
-/// Le compte est gardé ici, à côté de la partie et sous la même forme : un
-/// fichier, parce que c'est un registre de mille lignes qui grossit, et non
-/// un réglage. Il survit à la partie, aux archives et à la reprise ; il ne
-/// survit pas à la désinstallation, et c'est bien ainsi.
-struct MemoireDesQuestions {
+/// The count is kept here, beside the game and in the same form: a file,
+/// because it is a register of a thousand lines that grows, and not a
+/// setting. It survives the game, the archives and resumption; it does not
+/// survive being uninstalled, and that is as it should be.
+struct QuestionMemory {
 
-    static let shared = MemoireDesQuestions()
+    static let shared = QuestionMemory()
 
     private let url: URL = {
         let base = (try? FileManager.default.url(for: .applicationSupportDirectory,
                                                  in: .userDomainMask,
                                                  appropriateFor: nil, create: true))
             ?? URL(fileURLWithPath: NSTemporaryDirectory())
-        let dossier = base.appendingPathComponent("Riskelo", isDirectory: true)
-        try? FileManager.default.createDirectory(at: dossier, withIntermediateDirectories: true)
-        return dossier.appendingPathComponent("questions-deja-posees.json")
+        let folder = base.appendingPathComponent("RiskeloUS", isDirectory: true)
+        try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        return folder.appendingPathComponent("questions-already-asked.json")
     }()
 
-    /// Combien de fois chaque question est déjà sortie.
-    func charger() -> [String: Int] {
+    /// How many times each question has already come up.
+    func load() -> [String: Int] {
         guard let data = try? Data(contentsOf: url),
-              let compte = try? JSONDecoder().decode([String: Int].self, from: data)
+              let count = try? JSONDecoder().decode([String: Int].self, from: data)
         else { return [:] }
-        let traduit = MemoireDesQuestions.traduire(compte)
-        // On réécrit une fois, et l'on n'y revient plus : sans cela, la
-        // traduction se referait à chaque ouverture de partie.
-        if traduit != compte { enregistrer(traduit) }
-        return traduit
+        return count
     }
 
-    /// La mémoire d'avant les identifiants stables, remise à jour.
-    ///
-    /// Jusqu'à la 1.3, une question était nommée par son **rang** dans son
-    /// fichier — « histoire-12 ». Elle l'est désormais par son énoncé. Une
-    /// mémoire ancienne nomme donc des questions qui n'existent plus, et le
-    /// jeu l'écarterait proprement : celui qui joue depuis des mois reverrait
-    /// d'un coup ses premières questions, sans comprendre pourquoi.
-    ///
-    /// Le rang reste lisible : c'est la place dans le fichier, et les six
-    /// thèmes d'origine n'ont pas bougé d'une ligne — on leur a seulement
-    /// ajouté un en-tête, qui ne compte pas. La traduction est donc exacte.
-    ///
-    /// Un rang qui ne retrouve pas sa question est laissé de côté : il vaut
-    /// mieux perdre une ligne qu'en inventer une.
-    static func traduire(_ ancienne: [String: Int]) -> [String: Int] {
-        // Les nouveaux identifiants portent deux points ; les anciens, jamais.
-        guard ancienne.keys.contains(where: { !$0.contains(":") }) else { return ancienne }
-
-        var parTheme: [String: [Question]] = [:]
-        for fichier in QuestionBank.tousLesThemes {
-            parTheme[fichier.theme.id] = fichier.questions
-        }
-        var neuve: [String: Int] = [:]
-        for (cle, compte) in ancienne {
-            if cle.contains(":") { neuve[cle] = compte; continue }
-            guard let tiret = cle.lastIndex(of: "-"),
-                  let rang = Int(cle[cle.index(after: tiret)...]),
-                  let questions = parTheme[String(cle[..<tiret])],
-                  questions.indices.contains(rang)
-            else { continue }
-            neuve[questions[rang].id, default: 0] += compte
-        }
-        return neuve
-    }
-
-    /// L'écriture est atomique, comme celle de la partie : une coupure au
-    /// milieu laisserait un fichier illisible, donc une mémoire perdue.
-    func enregistrer(_ comptes: [String: Int]) {
-        guard let data = try? JSONEncoder().encode(comptes) else { return }
+    /// The write is atomic, like the game's: a cut in the middle would leave
+    /// an unreadable file, and therefore a lost memory.
+    func save(_ counts: [String: Int]) {
+        guard let data = try? JSONEncoder().encode(counts) else { return }
         try? data.write(to: url, options: .atomic)
     }
 
-    /// Tout oublier. Le joueur qui a fait le tour de la banque peut vouloir
-    /// la reprendre à neuf plutôt que de la voir se répéter au deuxième tour.
-    func oublier() {
+    /// Forget everything. A player who has been all the way through the bank
+    /// may want to take it fresh rather than watch it repeat on the second
+    /// pass.
+    func forget() {
         try? FileManager.default.removeItem(at: url)
     }
 
-    /// Combien de questions différentes sont déjà sorties. C'est le seul
-    /// chiffre qu'on montre au joueur.
-    func combienDeVues() -> Int { charger().count }
+    /// How many different questions have already come up. It is the only
+    /// figure shown to the player.
+    func distinctSeen() -> Int { load().count }
 }

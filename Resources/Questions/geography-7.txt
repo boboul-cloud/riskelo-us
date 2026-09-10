@@ -1,0 +1,242 @@
+# Geography — Grade 7 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Seventh grade: the regions the medieval and early modern course visits —
+# Europe first, then Russia and the north, the Americas from Canada down
+# to Cape Horn, and the Pacific world with the two poles.
+
+! id      | geography-7
+! name    | Geography — Grade 7
+! detail  | Europe, Russia, the Americas, the Pacific and the poles.
+! icon    | mountain.2
+! tint    | 0.38 0.58 0.48
+! rank    | 12
+! product | com.oulhen.riskelo.us.pack.geography7
+
+
+# --- Europe: land and water ---
+
+E | Which mountains wall off the Iberian Peninsula from France? | The Pyrenees | The Alps | The Apennines | The Carpathians
+E | Which mountain range curves through Switzerland and Austria? | The Alps | The Pyrenees | The Balkans | The Urals
+E | Which peninsula holds Spain and Portugal? | The Iberian Peninsula | The Italian Peninsula | The Balkan Peninsula | The Jutland Peninsula
+E | Which sea lies between Italy and the Balkans? | The Adriatic | The Aegean | The Tyrrhenian | The Ionian
+E | Which river flows through Vienna, Budapest and Belgrade? | The Danube | The Rhine | The Elbe | The Vistula
+E | Which channel separates England from France? | The English Channel | The North Sea | The Irish Sea | The Skagerrak
+E | Which is Europe's longest river? | The Volga | The Danube | The Rhine | The Dnieper
+E | Which summit on the French-Italian border tops the Alps? | Mont Blanc | The Matterhorn | Monte Rosa | The Jungfrau
+E | Which Scandinavian country is famous for its deep fjords? | Norway | Sweden | Denmark | Finland
+E | Which volcano buried Pompeii and still overlooks Naples? | Vesuvius | Etna | Stromboli | Campi Flegrei
+M | Which river runs from the Alps to a Dutch delta past Cologne? | The Rhine | The Danube | The Meuse | The Moselle
+M | Which mountains run down the spine of Italy? | The Apennines | The Dolomites | The Dinaric Alps | The Carpathians
+M | Which mountains arc through Romania and Slovakia? | The Carpathians | The Balkans | The Rhodopes | The Tatras
+M | Which sea is nearly enclosed by Scandinavia and the Baltic states? | The Baltic Sea | The North Sea | The White Sea | The Barents Sea
+M | Which strait links the Mediterranean to the Atlantic? | The Strait of Gibraltar | The Strait of Dover | The Kattegat | The Strait of Messina
+M | Which country lies largely below sea level behind its dikes? | The Netherlands | Belgium | Denmark | Ireland
+M | Which large island lies west of Great Britain? | Ireland | Iceland | Sicily | Corsica
+M | Which volcano on Sicily is Europe's most active? | Etna | Vesuvius | Stromboli | Hekla
+M | Which North Atlantic island country sits on a spreading ridge? | Iceland | Ireland | The Faroes | Greenland
+M | Which lowland plain stretches from France across Poland into Russia? | The North European Plain | The Pannonian Basin | The Po Valley | The Great Hungarian Plain
+M | Which river carries the most freight in Europe? | The Rhine | The Danube | The Seine | The Elbe
+M | Which strait separates Denmark from Sweden? | The Oresund | The Kattegat | The Great Belt | The Skagerrak
+M | Which sea lies between Greece and Turkey? | The Aegean | The Adriatic | The Black Sea | The Sea of Marmara
+H | Which basin holds Hungary and its neighbors? | The Pannonian Basin | The Po Basin | The Aquitaine Basin | The Thracian Basin
+H | Which lake is the largest lying entirely in Europe? | Lake Ladoga | Lake Vanern | Lake Balaton | Lake Geneva
+H | Which mountains form Europe's eastern boundary with Asia? | The Urals | The Caucasus | The Carpathians | The Altai
+H | Which peak in the Caucasus is often called Europe's highest? | Mount Elbrus | Mont Blanc | Mount Etna | Monte Rosa
+H | Which wind sweeps cold and dry down France's Rhone valley? | The mistral | The sirocco | The foehn | The bora
+H | Which warm dry wind falls on the northern side of the Alps? | The foehn | The mistral | The bora | The tramontane
+H | Which great river reaches the sea through a delta in Romania? | The Danube | The Dnieper | The Don | The Dniester
+
+# --- Europe: countries and cities ---
+
+E | Which country's capital is Rome? | Italy | Spain | Greece | Portugal
+E | Which country's capital is Madrid? | Spain | Portugal | Mexico | Argentina
+E | Which country's capital is Berlin? | Germany | Austria | Poland | Switzerland
+E | Which country's capital is Lisbon? | Portugal | Spain | Brazil | Morocco
+E | Which country's capital is Athens? | Greece | Cyprus | Turkey | Albania
+E | Which country's capital is Dublin? | Ireland | Scotland | Wales | Iceland
+E | Which country's capital is Warsaw? | Poland | Czechia | Hungary | Lithuania
+E | Which country's capital is Vienna? | Austria | Germany | Switzerland | Slovakia
+E | Which country's capital is Brussels? | Belgium | The Netherlands | Luxembourg | France
+E | Which country's capital is Prague? | Czechia | Slovakia | Poland | Hungary
+E | Which country's capital is Budapest? | Hungary | Romania | Austria | Serbia
+E | Which country's capital is Oslo? | Norway | Sweden | Denmark | Iceland
+E | Which country's capital is Copenhagen? | Denmark | Norway | Sweden | The Netherlands
+E | Which country's capital is Helsinki? | Finland | Estonia | Sweden | Latvia
+E | Which country's capital is Kyiv? | Ukraine | Belarus | Moldova | Poland
+M | Which country's capital is Bern? | Switzerland | Austria | Belgium | Liechtenstein
+M | Which country's capital is Bucharest? | Romania | Bulgaria | Moldova | Serbia
+M | Which country's capital is Sofia? | Bulgaria | Romania | Serbia | North Macedonia
+M | Which country's capital is Reykjavik? | Iceland | Norway | Greenland | The Faroes
+M | Which country's capital is Zagreb? | Croatia | Slovenia | Serbia | Bosnia
+M | Which country's capital is Belgrade? | Serbia | Croatia | Romania | Bulgaria
+M | Which country has Ankara as its capital? | Turkey | Greece | Armenia | Georgia
+M | Which three Baltic states regained independence in 1991? | Estonia, Latvia, Lithuania | Finland, Estonia, Latvia | Poland, Lithuania, Belarus | Latvia, Belarus, Ukraine
+M | Which tiny state is entirely surrounded by the city of Rome? | Vatican City | San Marino | Monaco | Andorra
+M | Which microstate sits between France and Spain in the Pyrenees? | Andorra | Monaco | San Marino | Liechtenstein
+M | Which microstate lies on the French Riviera? | Monaco | Andorra | San Marino | Malta
+M | Which country split peacefully into two states in 1993? | Czechoslovakia | Yugoslavia | The Soviet Union | Belgium
+M | Which country broke apart in a decade of wars in the 1990s? | Yugoslavia | Czechoslovakia | Austria-Hungary | The USSR
+M | Which German city was cut in two by a wall until 1989? | Berlin | Bonn | Hamburg | Leipzig
+H | Which country claims to be the oldest republic still standing? | San Marino | Switzerland | Iceland | The Netherlands
+H | Which microstate lies between Switzerland and Austria? | Liechtenstein | San Marino | Andorra | Monaco
+H | Which island nation south of Sicily speaks a Semitic language? | Malta | Cyprus | Crete | Corsica
+H | Which Mediterranean island is divided between Greek and Turkish communities? | Cyprus | Crete | Rhodes | Sicily
+H | Which three countries make up Benelux? | Belgium, Netherlands, Luxembourg | Britain, Norway, Luxembourg | Belgium, Norway, Latvia | Bulgaria, Netherlands, Luxembourg
+H | Which city hosts the European Parliament alongside Brussels? | Strasbourg | Geneva | The Hague | Luxembourg
+H | Which Dutch city hosts the International Court of Justice? | The Hague | Amsterdam | Rotterdam | Utrecht
+
+# --- Russia and the north ---
+
+E | Which is the largest country in the world by area? | Russia | Canada | China | The United States
+E | Which region east of the Urals covers most of Russia? | Siberia | The Caucasus | Karelia | The Kuban
+M | Which Russian lake holds more fresh water than any other lake? | Lake Baikal | Lake Ladoga | Lake Onega | The Caspian Sea
+M | Which Russian peninsula bristles with volcanoes on the Pacific? | Kamchatka | Sakhalin | Taymyr | Kola
+M | Across how many time zones does the Russian clock change? | Eleven | Five | Eight | Fifteen
+M | Which railway crosses Russia from Moscow to the Pacific? | The Trans-Siberian | The Baikal-Amur line | The Turksib | The Northern Route
+H | Which Russian city was called Leningrad in Soviet times? | Saint Petersburg | Volgograd | Nizhny Novgorod | Yekaterinburg
+H | Which Russian city on the Volga was once called Stalingrad? | Volgograd | Saint Petersburg | Samara | Perm
+H | Which permanently frozen ground covers much of Siberia? | Permafrost | Tundra soil | Loess | Chernozem
+H | Which fertile black soil belt crosses Ukraine and southern Russia? | Chernozem | Podzol | Laterite | Regosol
+H | Which Russian exclave lies between Poland and Lithuania? | Kaliningrad | Pskov | Smolensk | Murmansk
+H | Which Arctic sea stays partly ice-free thanks to a warm current? | The Barents Sea | The Kara Sea | The Laptev Sea | The White Sea
+H | Which is the longest river flowing wholly within Russia? | The Lena | The Ob | The Yenisei | The Amur
+H | Which Russian island chain stretches from Kamchatka toward Japan? | The Kurils | The Aleutians | The Commander Islands | The Ryukyus
+
+# --- North America ---
+
+E | Which is the largest country in North America by area? | Canada | The United States | Mexico | Greenland
+E | Which mountain range runs down western North America? | The Rockies | The Appalachians | The Sierra Madre | The Coast Range
+E | Which river drains the middle of the United States to the Gulf? | The Mississippi | The Colorado | The Columbia | The Rio Grande
+E | Which five lakes lie along the United States border with Canada? | The Great Lakes | The Finger Lakes | The Great Slave chain | The Manitoba lakes
+E | Which country shares the long southern border of the United States? | Mexico | Guatemala | Cuba | Panama
+E | Which is Canada's capital city? | Ottawa | Toronto | Montreal | Vancouver
+E | Which is Mexico's capital city? | Mexico City | Guadalajara | Monterrey | Puebla
+M | Which is North America's highest peak? | Denali | Mount Logan | Mount Whitney | Pico de Orizaba
+M | Which Canadian province is largely French-speaking? | Quebec | Ontario | Manitoba | New Brunswick
+M | Which river forms much of the United States border with Mexico? | The Rio Grande | The Colorado | The Gila | The Pecos
+M | Which falls lie between Lake Erie and Lake Ontario? | Niagara Falls | Montmorency Falls | Great Falls | Shoshone Falls
+M | Which bay cuts deep into northern Canada? | Hudson Bay | Baffin Bay | The Bay of Fundy | Ungava Bay
+M | Which is the largest island in the world, and Danish territory? | Greenland | Baffin Island | Victoria Island | Ellesmere Island
+M | Which Canadian territory was created in 1999 for the Inuit? | Nunavut | Yukon | Northwest Territories | Labrador
+M | Which mountain range runs along the eastern United States? | The Appalachians | The Rockies | The Ozarks | The Cascades
+M | Which desert covers much of the American Southwest and Sonora? | The Sonoran | The Mojave | The Chihuahuan | The Great Basin
+M | Which canyon did the Colorado River carve in Arizona? | The Grand Canyon | Zion Canyon | Bryce Canyon | Glen Canyon
+M | Which Canadian bay has the highest tides in the world? | The Bay of Fundy | Hudson Bay | Chesapeake Bay | Frobisher Bay
+M | Which Canadian province is the largest by area? | Quebec | Ontario | British Columbia | Alberta
+M | Which Canadian city has the largest population? | Toronto | Montreal | Vancouver | Calgary
+M | Which line of latitude marks much of the Canada-United States border? | The 49th parallel | The 45th parallel | The 38th parallel | The 60th parallel
+H | Which two mountain chains flank Mexico's central plateau? | The Sierra Madre ranges | The Rockies and Cascades | The Appalachians and Ozarks | The Coast and Cascade ranges
+H | Which volcano near Mexico City is nicknamed Popo? | Popocatepetl | Iztaccihuatl | Colima | Paricutin
+H | Which peninsula juts north from Mexico into the Gulf? | Yucatan | Baja California | Florida | Nicoya
+H | Which long narrow peninsula runs south from the California border? | Baja California | Yucatan | Kamchatka | Olympic
+H | Which three Canadian provinces are called the Prairies? | Alberta, Saskatchewan, Manitoba | Ontario, Quebec, Manitoba | British Columbia, Alberta, Yukon | Manitoba, Ontario, Nunavut
+H | Which Canadian river flows north to the Arctic Ocean? | The Mackenzie | The Saskatchewan | The Fraser | The Churchill
+H | Which sea route through Canada's Arctic islands was long sought? | The Northwest Passage | The Northeast Passage | The Bering Route | The Davis Route
+H | Which Mexican mountain is the country's highest? | Pico de Orizaba | Popocatepetl | Iztaccihuatl | Nevado de Toluca
+H | Which North American desert holds Death Valley? | The Mojave | The Sonoran | The Chihuahuan | The Colorado desert
+
+# --- Middle America and the Caribbean ---
+
+E | Which canal cuts through Central America between two oceans? | The Panama Canal | The Suez Canal | The Nicaragua Canal | The Kiel Canal
+E | Which Caribbean island covers the most square miles? | Cuba | Hispaniola | Jamaica | Puerto Rico
+M | Which two countries share the island of Hispaniola? | Haiti and the Dominican Republic | Cuba and Jamaica | Haiti and Puerto Rico | Trinidad and Tobago
+M | Which Central American country abolished its army in 1948? | Costa Rica | Panama | Belize | Honduras
+M | Which Central American country was once British Honduras? | Belize | Guyana | Honduras | Nicaragua
+M | Which is the largest lake in Central America? | Lake Nicaragua | Lake Atitlan | Lake Izabal | Lake Yojoa
+M | Which sea lies between Central America and the Antilles? | The Caribbean Sea | The Sargasso Sea | The Gulf of Mexico | The Sea of Cortez
+M | Which Caribbean territory is a commonwealth of the United States? | Puerto Rico | Jamaica | The Bahamas | Barbados
+M | Which chain of small islands curves from Puerto Rico to Venezuela? | The Lesser Antilles | The Greater Antilles | The Bahamas | The Leeward Passage
+M | Which storms threaten the Caribbean from June to November? | Hurricanes | Typhoons | Bay cyclones | Monsoon depressions
+M | Which narrow country links North America to South America? | Panama | Costa Rica | Nicaragua | Colombia
+M | Which language is official in most of Central America? | Spanish | Portuguese | English | French
+H | Which Caribbean island's 1995 eruption buried its capital? | Montserrat | Martinique | Saint Lucia | Dominica
+H | Which 1902 eruption destroyed the town of Saint-Pierre? | Mount Pelee | La Soufriere | Soufriere Hills | Kick em Jenny
+H | Which gulf lies between Mexico, the United States and Cuba? | The Gulf of Mexico | The Caribbean Sea | The Gulf of Honduras | The Bay of Campeche
+H | Which four islands make up the Greater Antilles? | Cuba, Hispaniola, Jamaica, Puerto Rico | Trinidad, Tobago, Barbados, Aruba | The Bahamas and Turks and Caicos | Martinique, Guadeloupe, Dominica
+H | Which limestone landscape of sinkholes marks the Yucatan? | Karst riddled with cenotes | Badlands | Loess terraces | Volcanic mesas
+H | Which Caribbean nation is the poorest in the Americas? | Haiti | Nicaragua | Honduras | Guyana
+
+# --- South America ---
+
+E | Which mountain range runs the length of western South America? | The Andes | The Rockies | The Atlas | The Alps
+E | Which South American country covers nearly half the continent? | Brazil | Argentina | Peru | Colombia
+E | Which rainforest covers much of northern South America? | The Amazon | The Congo | The taiga | The Valdivian forest
+E | Which river carries more water than any other on Earth? | The Amazon | The Nile | The Congo | The Yangtze
+E | Which language do Brazilian schools teach as the national tongue? | Portuguese | Spanish | French | Dutch
+E | Which is Peru's capital city? | Lima | Cusco | Arequipa | Trujillo
+E | Which is Argentina's capital city? | Buenos Aires | Cordoba | Rosario | Montevideo
+E | Which is Brazil's capital city? | Brasilia | Rio de Janeiro | Sao Paulo | Salvador
+E | Which is the largest city in South America? | Sao Paulo | Buenos Aires | Rio de Janeiro | Lima
+M | Which is the highest peak in the Andes? | Aconcagua | Ojos del Salado | Chimborazo | Huascaran
+M | Which Chilean desert is the driest place on Earth? | The Atacama | The Patagonian | The Sechura | The Monte
+M | Which Andean lake is the highest navigable one in the world? | Lake Titicaca | Lake Poopo | Lake Junin | Lake Maracaibo
+M | Which waterfall in Venezuela is the tallest in the world? | Angel Falls | Iguazu Falls | Kaieteur Falls | Salto Grande
+M | Which falls lie on the border of Argentina and Brazil? | Iguazu Falls | Angel Falls | Kaieteur Falls | Cataratas del Toro
+M | Which grassland plain spreads across central Argentina? | The Pampas | The Llanos | The Cerrado | The Gran Chaco
+M | Which cold windswept region covers southern Argentina and Chile? | Patagonia | The Altiplano | The Gran Chaco | The Sertao
+M | Which island group belongs to Ecuador and inspired Darwin? | The Galapagos | The Juan Fernandez islands | Fernando de Noronha | Chiloe
+M | Which two South American countries have no coastline? | Bolivia and Paraguay | Peru and Ecuador | Uruguay and Paraguay | Bolivia and Chile
+M | Which South American capital sits highest above sea level? | La Paz | Quito | Bogota | Asuncion
+M | Which is Chile's capital city? | Santiago | Valparaiso | Concepcion | Antofagasta
+M | Which is Colombia's capital city? | Bogota | Medellin | Cali | Cartagena
+H | Which high plateau is shared by Bolivia and Peru? | The Altiplano | The Guiana Shield | The Mato Grosso | The Patagonian plateau
+H | Which salt flat in Bolivia is the largest in the world? | Salar de Uyuni | Salinas Grandes | Salar de Atacama | Salar de Coipasa
+H | Which strait at South America's tip is named for a navigator? | The Strait of Magellan | The Drake Passage | The Beagle Channel | The Le Maire Strait
+H | Which stormy passage lies between South America and Antarctica? | The Drake Passage | The Strait of Magellan | The Scotia Sea | The Weddell approach
+H | Which archipelago at the continent's tip is called the land of fire? | Tierra del Fuego | The Chonos archipelago | The Falkland Islands | The Juan Fernandez islands
+H | Which South American country speaks Dutch as its official language? | Suriname | Guyana | French Guiana | Venezuela
+H | Which South American territory is an overseas department of France? | French Guiana | Suriname | Guyana | Curacao
+H | Which river forms much of the border between Argentina and Uruguay? | The Uruguay | The Parana | The Paraguay | The Pilcomayo
+H | Which estuary lies between Buenos Aires and Montevideo? | The Rio de la Plata | The Gulf of San Matias | Bahia Blanca | The Lagoa dos Patos
+H | Which savanna spreads across Venezuela and eastern Colombia? | The Llanos | The Pampas | The Cerrado | The Gran Chaco
+H | Which Brazilian savanna region lies south of the Amazon? | The Cerrado | The Caatinga | The Pantanal | The Llanos
+H | Which vast wetland straddles Brazil, Bolivia and Paraguay? | The Pantanal | The Cerrado | The Gran Chaco | The Amazon floodplain
+H | Which warm current flows south along the coast of Brazil? | The Brazil Current | The Peru Current | The Benguela Current | The Guiana Current
+
+# --- Oceania and the poles ---
+
+E | Which is the largest country in Oceania? | Australia | New Zealand | Papua New Guinea | Fiji
+E | Which is Australia's capital city? | Canberra | Sydney | Melbourne | Perth
+E | Which reef stretches along Australia's northeast coast? | The Great Barrier Reef | The Ningaloo Reef | The Belize Barrier Reef | The Coral Triangle
+E | Which country lies southeast of Australia across the Tasman Sea? | New Zealand | Papua New Guinea | Fiji | Indonesia
+E | Which continent holds the South Pole? | Antarctica | Australia | South America | Africa
+E | Which ocean lies north of Alaska and Siberia? | The Arctic Ocean | The Pacific Ocean | The Southern Ocean | The Atlantic Ocean
+E | Which is Australia's largest city? | Sydney | Melbourne | Brisbane | Perth
+E | Which is New Zealand's capital city? | Wellington | Auckland | Christchurch | Dunedin
+M | Which is New Zealand's largest city? | Auckland | Wellington | Christchurch | Hamilton
+M | Which huge sandstone rock rises from central Australia? | Uluru | Kata Tjuta | Mount Augustus | The Devils Marbles
+M | Which mountains run along Australia's eastern edge? | The Great Dividing Range | The MacDonnell Ranges | The Flinders Ranges | The Hamersley Range
+M | Which is Australia's longest river? | The Murray | The Darling | The Murrumbidgee | The Fitzroy
+M | Which sea separates Australia from New Zealand? | The Tasman Sea | The Coral Sea | The Arafura Sea | The Timor Sea
+M | Which strait separates Australia from Tasmania? | The Bass Strait | The Torres Strait | The Cook Strait | The Foveaux Strait
+M | Which strait separates New Zealand's two main islands? | The Cook Strait | The Bass Strait | The Torres Strait | The Foveaux Strait
+M | Which three groupings divide the Pacific islands? | Melanesia, Micronesia, Polynesia | Australasia, Oceania, Malaysia | Antilles, Sunda, Coral | Nesia, Mela, Poly
+M | Which Pacific island nation is made mostly of low coral atolls? | Kiribati | Papua New Guinea | Fiji | Vanuatu
+M | Which island far off Chile holds rows of giant stone heads? | Easter Island | Pitcairn | Norfolk Island | Guam
+M | Which Australian state is an island? | Tasmania | Victoria | Queensland | South Australia
+M | Which explorer's team first reached the South Pole? | Amundsen | Scott | Shackleton | Byrd
+M | Which people have long lived across Arctic Canada and Greenland? | The Inuit | The Sami | The Nenets | The Aleut
+M | Which continent holds most of the world's fresh water as ice? | Antarctica | North America | Asia | Europe
+H | Which treeless plain stretches across southern Australia? | The Nullarbor | The Barkly Tableland | The Gibson | The Simpson
+H | Which Australian desert is the largest by area? | The Great Victoria Desert | The Simpson Desert | The Gibson Desert | The Tanami Desert
+H | Which New Zealand island holds the Southern Alps? | The South Island | The North Island | Stewart Island | Chatham Island
+H | Which New Zealand region is famous for geysers and hot springs? | Rotorua | Fiordland | Northland | Otago
+H | Which people were the first inhabitants of New Zealand? | The Maori | The Aboriginal Australians | The Samoans | The Torres Strait Islanders
+H | Which Pacific nation has Suva as its capital? | Fiji | Samoa | Tonga | Vanuatu
+H | Which Pacific nation is the world's smallest island republic? | Nauru | Tuvalu | Palau | Kiribati
+H | Which two Pacific nations are most threatened by rising seas? | Tuvalu and Kiribati | Fiji and Samoa | Palau and Guam | Tonga and Niue
+H | Which strait separates Australia from Papua New Guinea? | The Torres Strait | The Bass Strait | The Arafura Passage | The Timor Strait
+H | Which 1959 treaty set Antarctica aside for science? | The Antarctic Treaty | The Law of the Sea | The Madrid Protocol | The Ross Convention
+H | Which is the coldest temperature ever recorded on Earth? | About 128 below zero in Antarctica | About 90 below zero in Siberia | About 100 below zero in Greenland | About 110 below zero in Canada
+H | Which floating ice shelf borders Antarctica's Ross Sea? | The Ross Ice Shelf | The Ronne Ice Shelf | The Amery Ice Shelf | The Larsen Ice Shelf
+H | Which polar region is ocean rather than land? | The Arctic | Antarctica | Greenland's interior | Svalbard
+H | Which Norwegian archipelago lies far north in the Arctic Ocean? | Svalbard | The Lofoten Islands | The Faroe Islands | The Aland Islands
+H | Which line of latitude marks the Antarctic Circle? | About 66 degrees south | About 60 degrees south | About 45 degrees south | About 80 degrees south
+H | Which dry interior region do Australians call the outback? | The arid center | The Nullarbor | The Kimberley | The Top End

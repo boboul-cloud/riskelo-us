@@ -1,0 +1,245 @@
+# Geography — Grade 9 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Ninth grade turns from where things are to why they are there: people
+# and how they move, cities, culture, development and trade, farming,
+# resources and the environment, borders and globalization.
+
+! id      | geography-9
+! name    | Geography — Grade 9
+! detail  | Human geography: population, cities, development, resources and trade.
+! icon    | person.3
+! tint    | 0.52 0.60 0.30
+! rank    | 20
+! product | com.oulhen.riskelo.us.pack.geography9
+
+
+# --- Population ---
+
+E | Roughly how many people live on Earth today? | About 8 billion | About 5 billion | About 12 billion | About 3 billion
+E | Which country has the largest population? | India | China | The United States | Indonesia
+E | Which term names the number of people in a given area? | Population density | Population growth | Carrying capacity | Fertility rate
+E | Which term names births per thousand people each year? | The birth rate | The fertility rate | The growth rate | The natural increase
+E | Which term names deaths per thousand people each year? | The death rate | The mortality ratio | The attrition rate | The decline rate
+E | Which region has the fastest population growth today? | Sub-Saharan Africa | Western Europe | East Asia | North America
+E | Which country's one-child policy reshaped its age structure? | China | India | Japan | Vietnam
+M | Which figure results from subtracting deaths from births? | The natural increase | The net migration | The dependency ratio | The doubling time
+M | Which measure counts the average number of children per woman? | The total fertility rate | The crude birth rate | The replacement index | The natality quotient
+M | Which fertility rate roughly keeps a population steady? | About 2.1 | About 1.0 | About 3.5 | About 4.0
+M | Which graph shows a country's population by age and sex? | A population pyramid | A choropleth map | A scatter plot | A Lorenz curve
+M | Which shape of population pyramid shows rapid growth? | A wide base tapering fast | A narrow base | A rectangle | An inverted triangle
+M | Which continent's population is shrinking in many countries? | Europe | Africa | South America | Oceania
+M | Which term names people too young or too old to work? | The dependent population | The labor force | The active cohort | The reserve army
+M | Which measure divides dependents by working-age adults? | The dependency ratio | The sex ratio | The literacy rate | The Gini index
+M | Which measure counts deaths of babies before their first birthday? | The infant mortality rate | The child fertility rate | The crude death rate | The neonatal ratio
+M | Which measure estimates how long a newborn can expect to live? | Life expectancy | The survival index | The mortality gap | The age median
+H | Which model describes a shift from high to low birth and death rates? | The demographic transition model | The gravity model | The Malthus model | The Rostow model
+H | Which stage of that model has high births and falling deaths? | Stage two | Stage one | Stage four | Stage five
+H | Which thinker warned that population would outrun the food supply? | Malthus | Ricardo | Boserup | Rostow
+H | Which thinker argued that population pressure spurs farming innovation? | Boserup | Malthus | Ricardo | Smith
+H | Which term names the largest population an environment can support? | Carrying capacity | Overshoot | Density ceiling | Saturation point
+H | Which country has the oldest median age in the world? | Japan | Nigeria | Brazil | Egypt
+H | Which term names the share of a population living in towns and cities? | The urbanization rate | The density ratio | The settlement index | The nucleation rate
+H | Which measure compares the number of men to women? | The sex ratio | The dependency ratio | The vital ratio | The cohort index
+H | Which term names the years a population takes to double? | Doubling time | Growth window | Replacement span | Turnover period
+H | Which continent holds about sixty percent of humanity? | Asia | Africa | Europe | The Americas
+H | Which term names a sharp drop in births after a boom? | A baby bust | A demographic dividend | A population trough | A cohort gap
+H | Which advantage comes when a country's working-age share peaks? | The demographic dividend | The Malthusian check | The dependency trap | The urban premium
+H | Which map shades areas by value with darker and lighter color? | A choropleth map | An isoline map | A cartogram | A dot map
+
+# --- Migration ---
+
+E | Which word names people leaving their home country? | Emigrants | Immigrants | Refugees | Nomads
+E | Which word names people arriving to settle in a new country? | Immigrants | Emigrants | Expatriates | Transients
+E | Which forces drive people away from a place? | Push factors | Pull factors | Intervening obstacles | Chain effects
+E | Which forces draw people toward a place? | Pull factors | Push factors | Counterflows | Step barriers
+E | Which term names people fleeing war or persecution? | Refugees | Migrant workers | Expatriates | Commuters
+E | Which money do migrants send home to their families? | Remittances | Subsidies | Foreign aid | Royalties
+E | Which loss does a country suffer when its skilled workers leave? | Brain drain | Brain gain | Labor slack | Capital flight
+E | Which forced migration carried Africans across the Atlantic? | The Atlantic slave trade | The Great Migration | The Columbian Exchange | The indentured trade
+M | Which term names people displaced but still inside their own country? | Internally displaced people | Refugees | Asylum seekers | Returnees
+M | Which term names someone asking another country for protection? | An asylum seeker | A guest worker | A sojourner | A repatriate
+M | Which movement happens when migrants follow relatives already abroad? | Chain migration | Step migration | Circular migration | Return migration
+M | Which movement takes migrants toward a city in several stages? | Step migration | Chain migration | Forced migration | Transhumance
+M | Which movement takes workers back and forth with the seasons? | Circular migration | Chain migration | Forced migration | Counterurbanization
+M | Which people move with their herds between seasonal pastures? | Pastoral nomads | Sedentary farmers | Sharecroppers | Market gardeners
+H | Which principle says migration falls as distance grows? | Distance decay | The gravity law | The rank-size rule | The law of retail gravitation
+H | Which model predicts flows from the size of and distance between places? | The gravity model | The demographic transition model | The Von Thunen model | The concentric zone model
+H | Which nineteenth-century laws of migration are named for their author? | Ravenstein's laws | Zelinsky's laws | Lee's laws | Christaller's laws
+H | Which barrier between origin and destination did Lee call an obstacle? | An intervening obstacle | A push factor | A pull factor | A counterflow
+H | Which rule limits how many migrants a country will admit? | An immigration quota | A tariff | An embargo | A visa waiver
+H | Which country hosts the most international migrants? | The United States | Germany | Russia | Canada
+H | Which war after 2011 sent millions of Syrians abroad? | The Syrian civil war | The Tunisian uprising | The Iraq invasion | The Yemen blockade
+H | Which sea has become the deadliest crossing for migrants to Europe? | The Mediterranean | The Baltic | The Black Sea | The North Sea
+
+# --- Cities ---
+
+E | Which word names the growth of cities and their populations? | Urbanization | Suburbanization | Gentrification | Agglomeration
+E | Which term names the business heart of a city? | The central business district | The greenbelt | The periphery | The exurb
+E | Which term names a city of more than ten million people? | A megacity | A metropolis | A conurbation | A primate city
+E | Which term names the outward spread of low-density housing? | Urban sprawl | Infill | Densification | Nucleation
+E | Which term names wealthier residents moving into a poorer neighborhood? | Gentrification | Filtering | Redlining | Blockbusting
+E | Which effect makes cities warmer than the countryside around them? | The urban heat island | The rain shadow | The canyon effect | The albedo drop
+M | Which term names a city far larger than any other in its country? | A primate city | A megacity | A world city | A gateway city
+M | Which rule says the second city is half the size of the largest? | The rank-size rule | The gravity rule | The law of primacy | The threshold rule
+M | Which theory explains the spacing of towns by the reach of their markets? | Central place theory | Concentric zone theory | Sector theory | Bid-rent theory
+M | Which model shows a city as rings around a core? | The concentric zone model | The sector model | The multiple nuclei model | The peripheral model
+M | Which model shows a city growing in wedges along transport lines? | The sector model | The concentric zone model | The multiple nuclei model | The galactic model
+M | Which model shows a city built around several separate centers? | The multiple nuclei model | The concentric zone model | The sector model | The bid-rent model
+M | Which term names people moving from cities out to the countryside? | Counterurbanization | Urbanization | Suburbanization | Agglomeration
+M | Which term names a ring of protected open land around a city? | A greenbelt | A brownfield | An exurb | A commuter shed
+M | Which term names abandoned industrial land awaiting reuse? | A brownfield | A greenfield | A greenbelt | A gray zone
+M | Which term names a settlement of self-built homes on a city's edge? | A squatter settlement | A garden suburb | A company town | A new town
+M | Which term names a chain of cities that have grown together? | A conurbation | A hinterland | A hierarchy | A node
+M | Which term names the surrounding region a city serves and draws from? | Its hinterland | Its threshold | Its range | Its footprint
+H | Which term names the minimum number of customers a service needs? | Its threshold | Its range | Its hinterland | Its multiplier
+H | Which term names the distance people will travel for a service? | Its range | Its threshold | Its reach index | Its catchment radius
+H | Which curve shows land rent falling with distance from the center? | The bid-rent curve | The Lorenz curve | The Kuznets curve | The gravity curve
+H | Which cities are the top nodes of global finance and services? | World cities | Primate cities | Gateway cities | Edge cities
+H | Which term names a business district that grew up in the suburbs? | An edge city | An exurb | A satellite town | A greenfield park
+H | Which practice denied home loans to residents of certain neighborhoods? | Redlining | Zoning | Eminent domain | Blockbusting
+H | Which policy sets what may be built where in a city? | Zoning | Redlining | Filtering | Annexation
+H | Which power lets the state take private land for public use? | Eminent domain | Escheat | Zoning | Annexation
+H | Which planned Brazilian capital was built inland in the 1950s? | Brasilia | Belo Horizonte | Goiania | Palmas
+H | Which African country moved its capital inland to Abuja? | Nigeria | Ghana | Kenya | Tanzania
+
+# --- Culture and language ---
+
+E | Which language has the most native speakers? | Mandarin Chinese | English | Spanish | Hindi
+E | Which language is most widely used as a second language? | English | French | Arabic | Russian
+E | Which religion has the most followers worldwide? | Christianity | Islam | Hinduism | Buddhism
+E | Which religion has the second most followers worldwide? | Islam | Hinduism | Buddhism | Judaism
+E | Which is the oldest of the major world faiths still practiced? | Hinduism | Christianity | Islam | Sikhism
+E | Which three faiths trace their roots to Abraham? | Judaism, Christianity, Islam | Hinduism, Buddhism, Jainism | Shinto, Daoism, Confucianism | Sikhism, Jainism, Baha'i
+E | Which language family includes English, Hindi and Russian? | Indo-European | Sino-Tibetan | Afro-Asiatic | Niger-Congo
+M | Which religions began in the Indian subcontinent? | Hinduism and Buddhism | Judaism and Islam | Christianity and Islam | Shinto and Daoism
+M | Which faith is practiced in Japan alongside Buddhism? | Shinto | Daoism | Confucianism | Jainism
+M | Which term names a religion that seeks converts everywhere? | A universalizing religion | An ethnic religion | A folk religion | A syncretic religion
+M | Which term names a religion tied to one people and place? | An ethnic religion | A universalizing religion | A civil religion | A mystery religion
+M | Which language family includes Arabic and Hebrew? | Afro-Asiatic | Indo-European | Altaic | Dravidian
+M | Which language family covers most of southern India? | Dravidian | Indo-European | Austroasiatic | Sino-Tibetan
+M | Which continent holds the most living languages? | Asia | Europe | North America | Antarctica
+M | Which term names a simplified language used for trade? | A pidgin | A creole | A dialect | An isogloss
+M | Which term names a pidgin that becomes a community's first language? | A creole | A dialect | A lingua franca | A patois
+M | Which term names a language used between speakers of different tongues? | A lingua franca | A vernacular | A substrate | An idiolect
+H | Which term names the spread of an idea from its place of origin? | Diffusion | Convergence | Assimilation | Acculturation
+H | Which diffusion carries an idea by people physically moving? | Relocation diffusion | Contagious diffusion | Hierarchical diffusion | Stimulus diffusion
+H | Which diffusion spreads an idea from big cities down to small towns? | Hierarchical diffusion | Contagious diffusion | Relocation diffusion | Reverse diffusion
+H | Which diffusion spreads an idea evenly outward like a rumor? | Contagious diffusion | Hierarchical diffusion | Relocation diffusion | Stimulus diffusion
+H | Which term names the place where a cultural trait begins? | A hearth | A node | A core | A locus
+H | Which term names blending a minority culture into a dominant one? | Assimilation | Acculturation | Syncretism | Diffusion
+H | Which term names a landscape shaped by human activity? | A cultural landscape | A natural region | A formal region | A vernacular region
+H | Which kind of region exists mainly in people's minds, like the Midwest? | A vernacular region | A formal region | A functional region | A nodal region
+H | Which kind of region is defined by a shared measurable trait? | A formal region | A vernacular region | A functional region | A perceptual region
+
+# --- Development and trade ---
+
+E | Which term names the total value of what a country produces in a year? | Gross domestic product | The trade balance | The money supply | The consumer index
+E | Which sector grows food and extracts raw materials? | The primary sector | The secondary sector | The tertiary sector | The quaternary sector
+E | Which sector makes goods in factories? | The secondary sector | The primary sector | The tertiary sector | The quinary sector
+E | Which sector provides services? | The tertiary sector | The primary sector | The secondary sector | The informal sector
+E | Which measure divides national output by population? | GDP per capita | The Gini index | The trade balance | The savings rate
+E | Which four Asian economies were called the tigers? | South Korea, Taiwan, Hong Kong, Singapore | China, Japan, India, Vietnam | Thailand, Malaysia, Indonesia, Philippines | Japan, Korea, China, Taiwan
+E | Which term names hiring another firm to do part of your work? | Outsourcing | Offshoring | Franchising | Licensing
+E | Which 1994 agreement linked Canada, Mexico and the United States? | NAFTA | The European Union | Mercosur | ASEAN
+E | Which organization sets the rules of global trade? | The World Trade Organization | The World Bank | The IMF | The OECD
+E | Which institution lends to countries facing a financial crisis? | The International Monetary Fund | The World Trade Organization | The United Nations | The Bank for Settlements
+M | Which sector handles information and research? | The quaternary sector | The primary sector | The secondary sector | The tertiary sector
+M | Which index combines income, schooling and life expectancy? | The Human Development Index | The Gini coefficient | The Lorenz index | The purchasing power index
+M | Which measure describes how unevenly income is shared? | The Gini coefficient | GDP per capita | The dependency ratio | The trade balance
+M | Which curve plots income share against population share? | The Lorenz curve | The bid-rent curve | The Kuznets curve | The demand curve
+M | Which countries make up the global core? | Wealthy industrial states | Newly industrialized states | Low-income states | Landlocked states
+M | Which term names poorer countries supplying raw materials to richer ones? | The periphery | The core | The semi-periphery | The enclave
+M | Which term names countries climbing between those two groups? | The semi-periphery | The core | The periphery | The margin
+M | Which theory sorts the world into core, semi-periphery and periphery? | World systems theory | Rostow's stages | Dependency theory | Central place theory
+M | Which model describes five stages of economic growth? | Rostow's stages of growth | Wallerstein's world systems | The demographic transition | The Von Thunen rings
+M | Which term names moving production to a cheaper country? | Offshoring | Onshoring | Nearshoring | Vertical integration
+M | Which zone offers tax breaks to attract export factories? | A special economic zone | A greenbelt | A common market | A customs union
+M | Which term names small loans made to poor entrepreneurs? | Microfinance | Venture capital | Sovereign lending | Remittance banking
+M | Which trade movement guarantees producers a minimum price? | Fair trade | Free trade | Managed trade | Barter trade
+H | Which theory says poor countries stay poor because of the rich ones? | Dependency theory | Modernization theory | Rostow's model | Comparative advantage
+H | Which principle says each country should make what it makes best? | Comparative advantage | Autarky | Import substitution | Protectionism
+H | Which policy raises taxes on imported goods? | Tariffs | Export subsidies | Quotas on exports | Devaluation
+H | Which policy replaces imports with goods made at home? | Import substitution | Export promotion | Free trade | Devaluation
+H | Which term names work that is untaxed and unregistered? | The informal economy | The gig economy | The black market | The barter sector
+H | Which industrial location theory weighs transport and labor costs? | Weber's least cost theory | Von Thunen's rings | Christaller's places | Losch's demand cones
+H | Which model explains farming rings around a market town? | Von Thunen's model | Weber's model | Rostow's model | Hotelling's model
+H | Which industries locate near their customers rather than their inputs? | Market-oriented industries | Bulk-reducing industries | Extractive industries | Resource-oriented industries
+H | Which term names firms free to locate almost anywhere? | Footloose industries | Bulk-gaining industries | Heavy industries | Primary industries
+
+# --- Farming and food ---
+
+E | Which farming grows just enough to feed the farmer's family? | Subsistence farming | Commercial farming | Plantation farming | Market gardening
+E | Which farming grows crops to sell for a profit? | Commercial farming | Subsistence farming | Shifting cultivation | Nomadic herding
+E | Which method of clearing land burns the cut vegetation? | Slash and burn | Contour plowing | Terracing | Fallowing
+E | Which crop feeds more people in Asia than any other? | Rice | Wheat | Corn | Millet
+E | Which mid-century surge in crop yields is called a revolution? | The Green Revolution | The Blue Revolution | The White Revolution | The Second Agricultural Revolution
+M | Which farming clears a plot, uses it, then moves on? | Shifting cultivation | Intensive farming | Mixed farming | Ranching
+M | Which farming cuts steps into hillsides to hold water? | Terracing | Strip cropping | Ranching | Dry farming
+M | Which farming raises cattle on wide open grazing land? | Ranching | Market gardening | Truck farming | Horticulture
+M | Which large estate grows one export crop in the tropics? | A plantation | A grain hacienda | A collective farm | A market garden
+M | Which scientist's wheat varieties drove that surge in yields? | Norman Borlaug | Rachel Carson | Gregor Mendel | Fritz Haber
+M | Which term names farming without chemical pesticides or fertilizer? | Organic farming | Conventional farming | Precision farming | Hydroponics
+M | Which term names raising fish and shellfish for food? | Aquaculture | Silviculture | Horticulture | Viticulture
+M | Which term names growing grapes for wine? | Viticulture | Horticulture | Aquaculture | Sericulture
+M | Which term names a neighborhood where fresh food is hard to buy? | A food desert | A food shed | A green desert | A supply gap
+H | Which revolution first turned humans from foragers into farmers? | The Neolithic Revolution | The Green Revolution | The Second Agricultural Revolution | The Columbian Exchange
+H | Which exchange moved crops and animals between hemispheres after 1492? | The Columbian Exchange | The Green Revolution | The triangular trade | The spice trade
+H | Which term names farming run by a few large corporations? | Agribusiness | Cooperative farming | Collective farming | Smallholding
+H | Which practice leaves a field unplanted to restore its fertility? | Fallowing | Double cropping | Intercropping | Monoculture
+H | Which practice grows a single crop over a large area? | Monoculture | Polyculture | Intercropping | Crop rotation
+H | Which problem builds up salt in irrigated soils? | Salinization | Leaching | Acidification | Compaction
+H | Which term names using satellites and sensors to guide farming? | Precision agriculture | Extensive agriculture | Subsistence agriculture | Shifting agriculture
+H | Which practice plows across a slope rather than down it? | Contour plowing | Deep tillage | Strip cropping | Terracing
+
+# --- Resources and the environment ---
+
+E | Which energy sources formed from ancient buried life? | Fossil fuels | Solar power | Wind power | Geothermal heat
+E | Which three are the main fossil fuels? | Coal, oil and natural gas | Wood, peat and charcoal | Uranium, thorium and plutonium | Ethanol, biodiesel and methane
+E | Which energy source uses moving air to turn turbines? | Wind power | Hydropower | Solar power | Tidal power
+E | Which energy source uses falling water to generate electricity? | Hydropower | Geothermal power | Wind power | Nuclear power
+E | Which resource can be replaced within a human lifetime? | A renewable resource | A nonrenewable resource | A fossil resource | A stock resource
+E | Which energy source splits atoms to release heat? | Nuclear power | Geothermal power | Biomass | Hydropower
+E | Which 2015 agreement set national climate targets? | The Paris Agreement | The Kyoto Protocol | The Montreal Protocol | The Rio Declaration
+E | Which term names the clearing of forests for other uses? | Deforestation | Reforestation | Afforestation | Succession
+M | Which energy source taps heat from inside the Earth? | Geothermal power | Solar power | Tidal power | Biomass
+M | Which country leads the world in solar power capacity? | China | Norway | Kenya | Argentina
+M | Which gas builds up in the air and traps the most heat? | Carbon dioxide | Argon | Neon | Helium
+M | Which 1987 protocol phased out ozone-destroying chemicals? | The Montreal Protocol | The Kyoto Protocol | The Paris Agreement | The Basel Convention
+M | Which chemicals thinned the ozone layer over Antarctica? | Chlorofluorocarbons | Nitrogen oxides | Sulfates | Methane
+M | Which pollution falls as rain made acidic by sulfur and nitrogen? | Acid rain | Photochemical smog | Ozone haze | Particulate fallout
+M | Which forest holds the greatest variety of species on Earth? | The tropical rainforest | The boreal forest | The temperate forest | The mangrove forest
+M | Which term names the variety of living things in an area? | Biodiversity | Biomass | Biocapacity | Biome density
+M | Which term names shortage where water demand outruns supply? | Water scarcity | Aridity | Drawdown | Evapotranspiration
+M | Which problem chokes lakes with algae fed by farm runoff? | Eutrophication | Acidification | Thermal pollution | Turbidity
+H | Which measure estimates the land needed to support a lifestyle? | The ecological footprint | The carbon budget | The biocapacity index | The resource quotient
+H | Which term names growth that meets needs without robbing the future? | Sustainable development | Extensive growth | Import substitution | Resource nationalism
+H | Which 1987 United Nations report defined that idea? | The Brundtland Report | The Stern Review | The Limits to Growth | The Rio Declaration
+H | Which 1962 book warned about pesticides and launched a movement? | Silent Spring | The Population Bomb | Limits to Growth | The Closing Circle
+H | Which term names a country's trap of depending on one commodity? | The resource curse | Comparative advantage | Import substitution | Vertical integration
+H | Which market system lets firms trade permits to emit carbon? | Cap and trade | Carbon tariffs | Feed-in tariffs | Fuel rationing
+H | Which change most threatens low-lying island states? | Rising seas from warming | Falling seas from evaporation | Tidal amplification | Isostatic rebound
+H | Which convention limits shipping hazardous waste across borders? | The Basel Convention | The Montreal Protocol | The Ramsar Convention | The Bonn Agreement
+H | Which agreement protects wetlands of international importance? | The Ramsar Convention | The Basel Convention | The Bern Convention | The Aarhus Convention
+H | Which term names species carried by people into new habitats? | Invasive species | Endemic species | Keystone species | Indicator species
+
+# --- Borders and globalization ---
+
+E | Which term names a country with fixed borders and a government? | A state | A nation | A region | A colony
+E | Which term names a people sharing culture and identity? | A nation | A state | A territory | A province
+E | Which term names a state whose people share one culture? | A nation-state | A multinational state | A stateless nation | A city-state
+M | Which people are often called the largest nation without a state? | The Kurds | The Basques | The Catalans | The Uyghurs
+M | Which boundary is drawn on a map without regard to the people below? | A geometric boundary | A physical boundary | A cultural boundary | A relic boundary
+M | Which boundary no longer functions but is still visible? | A relic boundary | An antecedent boundary | A subsequent boundary | A superimposed boundary
+M | Which term names a piece of a country cut off from the main body? | An exclave | An enclave | A buffer state | A shatter belt
+H | Which term names a state entirely surrounded by one other state? | An enclave state | An exclave state | A buffer state | A landlocked state
+H | Which term names a country with no access to the sea? | A landlocked state | A fragmented state | A perforated state | A prorupted state
+H | Which term names a long narrow extension of a country's territory? | A proruption | A panhandle enclave | A corridor state | A salient buffer
+H | Which theory held that whoever ruled eastern Europe ruled the world? | Mackinder's heartland theory | Mahan's sea power theory | Spykman's rimland theory | Ratzel's organic theory
+H | Which term names the growing connection of economies worldwide? | Globalization | Regionalization | Devolution | Balkanization

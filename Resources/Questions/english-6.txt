@@ -1,0 +1,242 @@
+# English Language Arts — Grade 6 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Sixth grade: the parts of speech, sentences and punctuation, word
+# roots, the habits of a careful reader, figurative language, the shape
+# of a story, and the myths and fables every reader meets first.
+
+! id      | english-6
+! name    | English — Grade 6
+! detail  | Grammar, punctuation, word roots, reading skills and the first myths.
+! icon    | textformat.abc
+! tint    | 0.55 0.45 0.75
+! rank    | 9
+! product | com.oulhen.riskelo.us.pack.english6
+
+
+# --- Parts of speech ---
+
+E | Which part of speech names a person, place or thing? | A noun | A verb | An adjective | An adverb
+E | Which part of speech shows action or being? | A verb | A noun | An adjective | A conjunction
+E | Which part of speech describes a noun? | An adjective | An adverb | A verb | A preposition
+E | Which part of speech describes a verb? | An adverb | An adjective | A noun | A pronoun
+E | Which part of speech takes the place of a noun? | A pronoun | An adjective | An adverb | An article
+E | Which part of speech joins words or groups of words? | A conjunction | A preposition | An interjection | An article
+E | Which part of speech shows a relationship of place or time? | A preposition | A conjunction | An interjection | An adverb
+E | Which part of speech expresses sudden feeling? | An interjection | A conjunction | A preposition | A pronoun
+E | Which three words are the articles in English? | A, an and the | Is, are and was | In, on and at | And, but and or
+M | Which kind of noun names a particular person or place? | A proper noun | A common noun | A collective noun | An abstract noun
+M | Which kind of noun names an idea you cannot touch? | An abstract noun | A concrete noun | A proper noun | A compound noun
+M | Which kind of noun names a group acting as one? | A collective noun | A proper noun | An abstract noun | A plural noun
+M | Which pronouns are I, you, he, she and they? | Personal pronouns | Possessive pronouns | Relative pronouns | Demonstrative pronouns
+M | Which pronouns are mine, yours and theirs? | Possessive pronouns | Reflexive pronouns | Indefinite pronouns | Interrogative pronouns
+M | Which pronouns end in self or selves? | Reflexive pronouns | Relative pronouns | Demonstrative pronouns | Personal pronouns
+M | Which pronouns are this, that, these and those? | Demonstrative pronouns | Relative pronouns | Reflexive pronouns | Indefinite pronouns
+M | Which verbs help the main verb, like has, will and can? | Helping verbs | Linking verbs | Action verbs | Irregular verbs
+M | Which verbs join a subject to a word that describes it? | Linking verbs | Action verbs | Helping verbs | Transitive verbs
+M | Which comparison form of an adjective compares two things? | The comparative | The superlative | The positive | The absolute
+M | Which comparison form compares three or more things? | The superlative | The comparative | The positive | The relative
+M | Which is the correct comparative of good? | Better | Gooder | More good | Best
+M | Which is the correct superlative of bad? | Worst | Baddest | More bad | Worse
+H | Which pronouns are who, whom, whose, which and that? | Relative pronouns | Interrogative pronouns | Reflexive pronouns | Personal pronouns
+H | Which noun does a pronoun stand in for? | Its antecedent | Its complement | Its modifier | Its appositive
+H | Which verb form ends in -ing and acts as a noun? | A gerund | A participle | An infinitive | A modal
+H | Which verb form is to plus the base verb? | An infinitive | A gerund | A participle | A modal
+H | Which verb takes a direct object? | A transitive verb | An intransitive verb | A linking verb | A modal verb
+H | Which verb takes no direct object? | An intransitive verb | A transitive verb | A helping verb | A causative verb
+H | Which verbs do not add -ed to form the past tense? | Irregular verbs | Regular verbs | Modal verbs | Phrasal verbs
+H | Which is the past tense of lie meaning to recline? | Lay | Laid | Lied | Lain
+H | Which is the past participle of go? | Gone | Went | Goed | Going
+H | Which term names a verb plus a small word that changes its meaning? | A phrasal verb | A compound verb | A modal verb | A gerund
+H | Which term names a word that renames the noun beside it? | An appositive | An antecedent | A predicate | A complement
+H | Which term names the noun or pronoun that performs the verb? | The subject | The predicate | The object | The complement
+
+# --- Sentences and punctuation ---
+
+E | Which mark ends a statement? | A period | A question mark | An exclamation point | A comma
+E | Which mark ends a question? | A question mark | A period | A semicolon | A colon
+E | Which mark shows strong feeling at the end of a sentence? | An exclamation point | A period | A comma | A dash
+E | Which mark shows possession or a missing letter? | An apostrophe | A comma | A hyphen | A colon
+E | Which marks surround someone's exact words? | Quotation marks | Parentheses | Brackets | Braces
+M | Which sentence makes a statement? | A declarative sentence | An interrogative sentence | An imperative sentence | An exclamatory sentence
+M | Which sentence asks something? | An interrogative sentence | A declarative sentence | An imperative sentence | An exclamatory sentence
+M | Which sentence gives a command? | An imperative sentence | A declarative sentence | An interrogative sentence | An exclamatory sentence
+M | Which sentence has one independent clause and nothing else? | A simple sentence | A compound sentence | A complex sentence | A fragment
+M | Which sentence joins two independent clauses? | A compound sentence | A simple sentence | A complex sentence | A run-on
+M | Which sentence joins an independent and a dependent clause? | A complex sentence | A compound sentence | A simple sentence | A fragment
+M | Which error runs two sentences together with no punctuation? | A run-on | A fragment | A dangling modifier | A split infinitive
+M | Which error leaves a group of words without a subject or verb? | A fragment | A run-on | A comma splice | An agreement error
+M | Which mark joins two closely related independent clauses? | A semicolon | A colon | A comma | A hyphen
+M | Which mark introduces a list or an explanation? | A colon | A semicolon | An apostrophe | A dash
+M | Which mark separates items in a simple list? | A comma | A colon | A semicolon | A period
+M | Which rule says a singular subject takes a singular verb? | Subject-verb agreement | Parallel structure | Pronoun case | Antecedent clarity
+M | Which mark joins parts of a compound word like well-known? | A hyphen | A dash | A slash | An underscore
+H | Which error joins two sentences with only a comma? | A comma splice | A fragment | An unmarked run-on | A misplaced modifier
+H | Which seven words make up the coordinating conjunctions? | For, and, nor, but, or, yet, so | If, when, while, since, as, because | This, that, these, those | Who, whom, whose, which, that
+H | Which comma comes before and in a list of three? | The serial comma | The appositive comma | The parenthetical comma | The introductory comma
+H | Which mark sets off an abrupt break in thought? | A dash | A hyphen | A colon | A comma
+H | Which clause can stand alone as a sentence? | An independent clause | A dependent clause | A relative clause | A noun clause
+H | Which clause cannot stand alone as a sentence? | A dependent clause | An independent clause | A main clause | A simple clause
+H | Which group of words has no subject and no verb? | A phrase | A clause | A sentence | A predicate
+H | Which words begin dependent clauses, like because and although? | Subordinating conjunctions | Coordinating conjunctions | Correlative conjunctions | Conjunctive adverbs
+H | Which conjunctions come in pairs, like either and or? | Correlative conjunctions | Coordinating conjunctions | Subordinating conjunctions | Relative pronouns
+H | Which error places a describing phrase next to the wrong word? | A misplaced modifier | A comma splice | A fragment | A double negative
+H | Which error leaves a describing phrase with nothing to describe? | A dangling modifier | A misplaced modifier | A run-on | A split infinitive
+H | Which principle keeps items in a list in the same grammatical form? | Parallel structure | Subject-verb agreement | Pronoun case | Active voice
+H | Which voice puts the subject on the receiving end of the action? | The passive voice | The active voice | The imperative mood | The subjunctive mood
+H | Which mood expresses a wish or a condition contrary to fact? | The subjunctive | The indicative | The imperative | The interrogative
+
+# --- Word study ---
+
+E | Which word part is added to the front of a word? | A prefix | A suffix | A root | An ending
+E | Which word part is added to the end of a word? | A suffix | A prefix | A root | A stem
+E | Which prefix means not, as in unhappy? | Un- | Re- | Pre- | Sub-
+E | Which prefix means again, as in rebuild? | Re- | Un- | Mis- | Dis-
+E | Which prefix means before, as in preview? | Pre- | Post- | Sub- | Inter-
+E | Which words have the same meaning? | Synonyms | Antonyms | Homonyms | Eponyms
+E | Which words have opposite meanings? | Antonyms | Synonyms | Homographs | Acronyms
+M | Which prefix means after, as in postgame? | Post- | Pre- | Ante- | Trans-
+M | Which prefix means under, as in submarine? | Sub- | Super- | Trans- | Inter-
+M | Which prefix means between, as in international? | Inter- | Intra- | Extra- | Ultra-
+M | Which prefix means across, as in transport? | Trans- | Inter- | Circum- | Ex-
+M | Which Greek root means far off, as in telephone? | Tele- | Micro- | Macro- | Mono-
+M | Which Greek root means small, as in microscope? | Micro- | Mega- | Poly- | Tele-
+M | Which Greek root means earth, as in geography? | Geo- | Bio- | Astro- | Hydro-
+M | Which Greek root means life, as in biology? | Bio- | Geo- | Zoo- | Photo-
+M | Which words sound alike but are spelled differently? | Homophones | Homographs | Synonyms | Antonyms
+M | Which spelling of the word meaning to get is correct? | Receive | Recieve | Receeve | Reseive
+M | Which spelling of the word meaning to set apart is correct? | Separate | Seperate | Seperete | Separete
+H | Which Latin root means to write, as in scribble? | Scrib- | Dict- | Port- | Spect-
+H | Which Latin root means to say, as in dictate? | Dict- | Scrib- | Aud- | Vid-
+H | Which Latin root means to carry, as in portable? | Port- | Duc- | Mit- | Ven-
+H | Which Latin root means to look, as in inspect? | Spect- | Aud- | Tang- | Cred-
+H | Which words are spelled alike but mean different things? | Homographs | Homophones | Synonyms | Cognates
+H | Which spelling of the word meaning required is correct? | Necessary | Neccessary | Necesary | Neccesary
+H | Which term names a shortened form like don't? | A contraction | An abbreviation | An acronym | A clipping
+H | Which term names a word made from the first letters of a phrase? | An acronym | A contraction | An eponym | A palindrome
+H | Which term names the dictionary meaning of a word? | Its denotation | Its connotation | Its etymology | Its inflection
+H | Which term names the feelings a word carries beyond its definition? | Its connotation | Its denotation | Its syntax | Its morphology
+H | Which reference book lists synonyms grouped by meaning? | A thesaurus | A dictionary | An almanac | An atlas
+H | Which term names the study of where a word came from? | Etymology | Entomology | Phonology | Semantics
+
+# --- Reading skills ---
+
+E | Which term names what a passage is mostly about? | The main idea | A supporting detail | The setting | The tone
+E | Which term names the facts that back up the main idea? | Supporting details | Inferences | Conclusions | Themes
+E | Which term names a short retelling of the important points? | A summary | A prediction | An inference | A critique
+M | Which term names a conclusion drawn from clues and knowledge? | An inference | A summary | A quotation | A citation
+M | Which term names a guess about what will happen next? | A prediction | An inference | A conclusion | A theme
+M | Which text structure tells events in the order they happened? | Chronological order | Compare and contrast | Cause and effect | Problem and solution
+M | Which text structure shows how one event leads to another? | Cause and effect | Chronological order | Description | Sequence
+M | Which text structure shows how two things are alike and different? | Compare and contrast | Cause and effect | Problem and solution | Description
+M | Which text structure names a difficulty and how it was fixed? | Problem and solution | Compare and contrast | Description | Chronological order
+M | Which term names the writer's reason for writing? | The author's purpose | The tone | The mood | The theme
+M | Which purpose aims to convince the reader? | To persuade | To inform | To entertain | To describe
+M | Which purpose aims to explain or teach? | To inform | To persuade | To entertain | To amuse
+M | Which term names a statement that can be proved true? | A fact | An opinion | An inference | A hypothesis
+M | Which term names a statement of belief or judgment? | An opinion | A fact | A citation | A summary
+M | Which part of a book lists chapters and page numbers? | The table of contents | The index | The glossary | The appendix
+M | Which part of a book lists topics alphabetically with pages? | The index | The table of contents | The glossary | The preface
+H | Which term names the writer's attitude toward the subject? | Tone | Mood | Theme | Voice
+H | Which term names the feeling a piece of writing gives the reader? | Mood | Tone | Purpose | Style
+H | Which part of a book defines its special terms? | The glossary | The index | The appendix | The bibliography
+H | Which list at the end of a report names the sources used? | The bibliography | The glossary | The index | The abstract
+H | Which term names using someone else's words as your own? | Plagiarism | Paraphrasing | Summarizing | Quoting
+H | Which term names putting a passage into your own words? | Paraphrasing | Quoting | Plagiarizing | Annotating
+H | Which term names the note that credits a source in the text? | A citation | A running head | A caption | An epigraph
+H | Which source gives a firsthand account of an event? | A primary source | A secondary source | A tertiary source | A reference source
+H | Which source discusses an event after studying other accounts? | A secondary source | A primary source | An original source | A field source
+H | Which term names one-sided writing that favors a point of view? | Bias | Objectivity | Neutrality | Balance
+
+# --- Figurative language ---
+
+E | Which comparison uses like or as? | A simile | A metaphor | Personification | Hyperbole
+E | Which comparison says one thing is another? | A metaphor | A simile | An analogy | An allusion
+E | Which device gives human traits to something not human? | Personification | Hyperbole | Alliteration | Irony
+E | Which device uses extreme exaggeration? | Hyperbole | Understatement | Personification | Onomatopoeia
+E | Which device repeats the first sound of nearby words? | Alliteration | Assonance | Consonance | Rhyme
+M | Which device uses words that imitate sounds? | Onomatopoeia | Alliteration | Assonance | Euphony
+M | Which device repeats vowel sounds inside words? | Assonance | Consonance | Alliteration | Onomatopoeia
+M | Which device repeats consonant sounds inside or ending words? | Consonance | Assonance | Alliteration | Rhyme
+M | Which phrase means something different from its literal words? | An idiom | A simile | A pun | An allusion
+M | Which device plays on words with two meanings? | A pun | An idiom | An allusion | An oxymoron
+M | Which device refers to a famous person, place or work? | An allusion | An idiom | A metaphor | A motif
+M | Which term names language that appeals to the five senses? | Imagery | Diction | Syntax | Meter
+M | Which term names an object that stands for a larger idea? | A symbol | A motif | A theme | An allegory
+H | Which device pairs two words that contradict each other? | An oxymoron | A paradox | An idiom | A pun
+H | Which statement seems to contradict itself but holds a truth? | A paradox | An oxymoron | A pun | An idiom
+H | Which device says less than is meant? | Understatement | Hyperbole | Irony | Sarcasm
+H | Which device uses a part to stand for the whole? | Synecdoche | Metonymy | Simile | Allusion
+H | Which device substitutes a related term, like crown for king? | Metonymy | Synecdoche | Simile | Euphemism
+H | Which device replaces a harsh word with a gentler one? | A euphemism | An idiom | A pun | A paradox
+H | Which term names an idea or image that repeats through a work? | A motif | A theme | A symbol | A conflict
+H | Which term names a story where everything stands for something else? | An allegory | A parable | A fable | A myth
+H | Which irony means saying the opposite of what is meant? | Verbal irony | Situational irony | Dramatic irony | Cosmic irony
+H | Which irony happens when the opposite of what is expected occurs? | Situational irony | Verbal irony | Dramatic irony | Structural irony
+H | Which irony lets the reader know what a character does not? | Dramatic irony | Verbal irony | Situational irony | Tragic irony
+
+# --- How a story is built ---
+
+E | Which term names where and when a story takes place? | The setting | The plot | The theme | The conflict
+E | Which term names the events of a story in order? | The plot | The setting | The theme | The mood
+E | Which term names the main character of a story? | The protagonist | The antagonist | The narrator | The foil
+E | Which term names the character who opposes the main one? | The antagonist | The protagonist | The narrator | The confidant
+E | Which term names the message or lesson of a story? | The theme | The plot | The setting | The summary
+E | Which term names writing that is made up? | Fiction | Nonfiction | Reference | Journalism
+E | Which term names writing about real people and events? | Nonfiction | Fiction | Fantasy | Fable
+E | Which term names the struggle at the heart of a story? | The conflict | The setting | The resolution | The exposition
+E | Which part of the plot is the turning point? | The climax | The exposition | The falling action | The resolution
+E | Which point of view uses I and me? | First person | Second person | Third person limited | Third person omniscient
+E | Which term names the person telling the story? | The narrator | The author | The protagonist | The speaker
+E | Which term names an account of a life written by that person? | An autobiography | A biography | A profile | A eulogy
+E | Which genre is set in a world with magic or impossible things? | Fantasy | Realistic fiction | Historical fiction | Biography
+E | Which genre imagines the science and technology of the future? | Science fiction | Fantasy | Mystery | Historical fiction
+E | Which genre builds a story around solving a crime? | Mystery | Fantasy | Romance | Adventure
+M | Which part of the plot introduces characters and setting? | The exposition | The climax | The resolution | The rising action
+M | Which part of the plot ties up loose ends at the end? | The resolution | The climax | The exposition | The rising action
+M | Which conflict pits a character against another character? | Character against character | Character against self | Character against nature | Character against society
+M | Which term names an account of someone's life by another writer? | A biography | An autobiography | A memoir | A diary
+M | Which term names a short story that teaches a lesson through animals? | A fable | A myth | A legend | A tall tale
+M | Which term names a traditional story explaining nature or the gods? | A myth | A fable | A legend | A memoir
+M | Which genre sets invented characters in a real past? | Historical fiction | Science fiction | Realistic fiction | Fantasy
+H | Which conflict happens inside a character's own mind? | Character against self | Character against nature | Character against society | Character against fate
+H | Which point of view uses he and she but follows one mind? | Third person limited | First person | Third person omniscient | Second person
+H | Which point of view knows every character's thoughts? | Third person omniscient | Third person limited | First person | Second person
+H | Which term names a story about a real person grown larger in the telling? | A legend | A myth | A fable | A parable
+H | Which term names a wildly exaggerated American folk story? | A tall tale | A fable | A myth | A parable
+H | Which term names a character who highlights another by contrast? | A foil | A confidant | A stock character | An archetype
+H | Which term names a hint about what will happen later? | Foreshadowing | Flashback | Suspense | Irony
+H | Which term names a scene that jumps back in time? | A flashback | Foreshadowing | An aside | A frame story
+
+# --- Myths, fables and first classics ---
+
+E | Which Greek hero wandered ten years on his way home from Troy? | Odysseus | Achilles | Hector | Perseus
+E | Which winged horse appears in Greek myth? | Pegasus | The centaur | The griffin | The chimera
+E | Which fable tells of a slow racer who wins? | The Tortoise and the Hare | The Fox and the Grapes | The Lion and the Mouse | The Ant and the Grasshopper
+E | Which storyteller is credited with the ancient Greek fables? | Aesop | Homer | Ovid | Hesiod
+E | Which fable warns against raising a false alarm? | The Boy Who Cried Wolf | The Lion and the Mouse | The Ant and the Grasshopper | The Dog and Its Reflection
+E | Which Greek hero completed twelve labors? | Heracles | Theseus | Jason | Achilles
+E | Which Norse god wields a hammer named Mjolnir? | Thor | Odin | Loki | Balder
+M | Which fable gives us the phrase sour grapes? | The Fox and the Grapes | The Tortoise and the Hare | The Boy Who Cried Wolf | The Crow and the Pitcher
+M | Which fable teaches that small friends can help the mighty? | The Lion and the Mouse | The Fox and the Crow | The Wind and the Sun | The Milkmaid and Her Pail
+M | Which Greek hero killed the Minotaur in the labyrinth? | Theseus | Perseus | Jason | Heracles
+M | Which Greek hero cut off Medusa's head? | Perseus | Theseus | Odysseus | Bellerophon
+M | Which boy flew too near the sun on wings of wax? | Icarus | Phaethon | Ganymede | Adonis
+M | Which king turned everything he touched to gold? | Midas | Croesus | Tantalus | Sisyphus
+M | Which Titan holds up the sky in Greek myth? | Atlas | Prometheus | Helios | Oceanus
+M | Which Norse god is the trickster of the myths? | Loki | Thor | Odin | Heimdall
+M | Which book follows a girl down a rabbit hole? | Alice's Adventures in Wonderland | The Secret Garden | Peter Pan | The Jungle Book
+M | Which book sends a Kansas girl over the rainbow? | The Wonderful Wizard of Oz | Alice in Wonderland | Peter Pan | The Secret Garden
+H | Which figure was doomed to roll a boulder uphill forever? | Sisyphus | Tantalus | Prometheus | Atlas
+H | Which Titan was punished for giving fire to humans? | Prometheus | Atlas | Cronus | Epimetheus
+H | Which woman opened a jar and let troubles into the world? | Pandora | Persephone | Cassandra | Antigone
+H | Which Greek hero sailed in search of the Golden Fleece? | Jason | Odysseus | Perseus | Orpheus
+H | Which epic poem tells of the last year of the Trojan War? | The Iliad | The Odyssey | The Aeneid | The Metamorphoses
+H | Which epic poem tells of the long journey home from Troy? | The Odyssey | The Iliad | The Aeneid | Beowulf
+H | Which Roman poet retold the Greek myths in verse? | Ovid | Virgil | Horace | Livy

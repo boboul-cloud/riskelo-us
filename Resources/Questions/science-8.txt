@@ -1,0 +1,242 @@
+# Physical Science — Grade 8 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Eighth grade science turns to matter and motion: states and mixtures,
+# the atom and the periodic table, reactions, forces, energy, waves and
+# the two halves of one thing, electricity and magnetism.
+
+! id      | science-8
+! name    | Science — Grade 8
+! detail  | Physical science: matter, atoms, reactions, forces, energy and waves.
+! icon    | atom
+! tint    | 0.78 0.58 0.26
+! rank    | 18
+! product | com.oulhen.riskelo.us.pack.science8
+
+
+# --- Matter ---
+
+E | Which term names anything that has mass and takes up space? | Matter | Energy | Force | Charge
+E | Which three states of matter are the most common on Earth? | Solid, liquid and gas | Solid, plasma and gas | Liquid, gas and crystal | Solid, liquid and plasma
+E | Which state has a fixed shape and a fixed volume? | A solid | A liquid | A gas | A plasma
+E | Which state has a fixed volume but takes its container's shape? | A liquid | A solid | A gas | A crystal
+E | Which state fills whatever container it is put in? | A gas | A solid | A liquid | A crystal
+E | Which change turns a solid into a liquid? | Melting | Freezing | Condensation | Sublimation
+E | Which change turns a liquid into a solid? | Freezing | Melting | Boiling | Evaporation
+E | Which fourth state of matter is found in stars? | Plasma | Solid | Liquid | Gas
+E | Which property measures mass per unit of volume? | Density | Weight | Volume | Pressure
+M | Which change turns a solid straight into a gas? | Sublimation | Melting | Condensation | Deposition
+M | Which change turns a gas straight into a solid? | Deposition | Sublimation | Freezing | Condensation
+M | Which object floats in water? | One less dense than water | One heavier than water | One larger than water | One warmer than water
+M | Which change makes an entirely new substance? | A chemical change | A physical change | A phase change | A dissolution
+M | Which change alters the form but keeps the same substance? | A physical change | A chemical change | A reaction | Combustion
+M | Which two parts make up a solution? | A solute and a solvent | Two solids | Two gases | Two immiscible liquids
+H | Which property of matter does not depend on the amount present? | An intensive property | An extensive property | A chemical change | A mixture
+H | Which property depends on how much material there is? | An extensive property | An intensive property | A physical constant | A phase
+H | Which mixture looks the same all the way through? | A homogeneous mixture | A heterogeneous mixture | A suspension | A colloid
+H | Which mixture has visibly different parts? | A heterogeneous mixture | A homogeneous mixture | A solution | An alloy
+H | Which part of a solution does the dissolving? | The solvent | The solute | The precipitate | The residue
+H | Which method separates a solid from a liquid using paper? | Filtration | Distillation | Chromatography | Decanting
+H | Which method separates liquids by their boiling points? | Distillation | Filtration | Decanting | Sieving
+H | Which method separates dyes by how far they travel on paper? | Chromatography | Distillation | Filtration | Centrifuging
+H | Which mixture keeps particles suspended and scatters light? | A colloid | A solution | An alloy | A compound
+H | Which law says matter is neither created nor destroyed? | Conservation of mass | Conservation of energy | Definite proportions | Multiple proportions
+H | Which term names a substance of two or more elements bonded together? | A compound | A mixture | An alloy | An isotope
+
+# --- Atoms and the periodic table ---
+
+E | Which particle carries a positive charge in an atom? | The proton | The electron | The neutron | The photon
+E | Which particle carries a negative charge? | The electron | The proton | The neutron | The positron
+E | Which particle has no charge at all? | The neutron | The proton | The electron | The ion
+E | Where in the atom are the protons and neutrons found? | In the nucleus | In the shells | In the orbitals | Outside the atom
+E | Which number of protons defines an element? | The atomic number | The mass number | The valence number | The isotope number
+E | Which chart arranges the elements by atomic number? | The periodic table | The activity series | The solubility chart | The electrochemical series
+E | Which element is the most common in the universe? | Hydrogen | Helium | Oxygen | Carbon
+E | Which element has the symbol Fe? | Iron | Fluorine | Francium | Fermium
+E | Which element has the symbol Au? | Gold | Silver | Aluminum | Argon
+M | Which term names a row of the periodic table? | A period | A group | A block | A series
+M | Which term names a column of the periodic table? | A group | A period | A shell | A block
+M | Which elements sit in the far left column? | The alkali metals | The noble gases | The halogens | The transition metals
+M | Which elements sit in the far right column? | The noble gases | The alkali metals | The halogens | The metalloids
+M | Which element has atomic number 6? | Carbon | Oxygen | Nitrogen | Boron
+M | Which element has the symbol Na? | Sodium | Nitrogen | Nickel | Neon
+M | Which term names an atom that has gained or lost electrons? | An ion | An isotope | A radical | A molecule
+H | Which Russian chemist left gaps in his table for undiscovered elements? | Dmitri Mendeleev | John Dalton | Ernest Rutherford | Niels Bohr
+H | Which reactive elements fill the column next to the noble gases? | The halogens | The alkali metals | The alkaline earth metals | The lanthanides
+H | Which element has the symbol K? | Potassium | Krypton | Calcium | Cadmium
+H | Which element has the symbol Ag? | Silver | Gold | Argon | Astatine
+H | Which element has the symbol Pb? | Lead | Phosphorus | Palladium | Platinum
+H | Which term names atoms of one element with different neutron counts? | Isotopes | Ions | Allotropes | Isomers
+H | Which ion forms when an atom loses electrons? | A positive ion | A negative ion | A neutral ion | A radical
+H | Which electrons take part in bonding? | The valence electrons | The core electrons | The nuclear electrons | The inner shell electrons
+H | Which model placed electrons in fixed orbits around a nucleus? | The Bohr model | The plum pudding model | The quantum cloud model | Dalton's model
+H | Which experiment showed the atom has a tiny dense nucleus? | Rutherford's gold foil | Millikan's oil drop | Thomson's cathode ray | Chadwick's beryllium test
+H | Which scientist discovered the electron? | J. J. Thomson | Ernest Rutherford | James Chadwick | Niels Bohr
+H | Which scientist discovered the neutron? | James Chadwick | J. J. Thomson | Ernest Rutherford | Marie Curie
+H | Which elements have properties between metals and nonmetals? | The metalloids | The halogens | The noble gases | The actinides
+H | Which number counts protons plus neutrons together? | The mass number | The atomic number | The valence number | The oxidation number
+
+# --- Reactions and bonds ---
+
+E | Which bond holds two atoms together by shared electrons? | A covalent bond | An ionic bond | A metallic bond | A hydrogen bond
+E | Which bond forms when one atom gives electrons to another? | An ionic bond | A covalent bond | A metallic bond | A van der Waals bond
+E | Which formula names water? | H2O | CO2 | NaCl | O2
+E | Which formula names carbon dioxide? | CO2 | H2O | CH4 | N2
+E | Which formula names table salt? | NaCl | KCl | CaCO3 | NaOH
+M | Which substances start a chemical reaction? | The reactants | The products | The catalysts | The residues
+M | Which substances come out of a chemical reaction? | The products | The reactants | The solvents | The inhibitors
+M | Which sign shows a chemical reaction has taken place? | A new substance forms | The mixture is stirred | The container is moved | The liquid is poured
+M | Which reaction releases heat? | An exothermic reaction | An endothermic reaction | A neutral reaction | A reversible reaction
+M | Which reaction absorbs heat? | An endothermic reaction | An exothermic reaction | A combustion reaction | A synthesis reaction
+M | Which reaction burns fuel with oxygen? | Combustion | Decomposition | Synthesis | Neutralization
+M | Which scale measures how acidic or basic something is? | The pH scale | The Mohs scale | The Kelvin scale | The Richter scale
+M | Which pH value is neutral? | Seven | Zero | Fourteen | One
+M | Which pH range belongs to acids? | Below seven | Above seven | Exactly seven | Above fourteen
+M | Which pH range belongs to bases? | Above seven | Below seven | Exactly seven | Below zero
+M | Which household liquid is a common weak acid? | Vinegar | Bleach | Ammonia | Soapy water
+H | Which bond lets electrons flow freely through a metal? | A metallic bond | An ionic bond | A covalent bond | A polar bond
+H | Which substance speeds a reaction without being used up? | A catalyst | An inhibitor | A reactant | A product
+H | Which reaction combines two substances into one? | Synthesis | Decomposition | Single replacement | Combustion
+H | Which reaction breaks one substance into two or more? | Decomposition | Synthesis | Neutralization | Precipitation
+H | Which household solid dissolves into a common weak base? | Baking soda | Table sugar | Table salt | Cornstarch
+H | Which reaction between an acid and a base makes salt and water? | Neutralization | Combustion | Oxidation | Fermentation
+H | Which paper changes color to show acidity? | Litmus paper | Filter paper | Wax paper | Tracing paper
+H | Which term names writing a reaction with equal atoms on each side? | Balancing the equation | Reducing the formula | Naming the compound | Titrating the mixture
+H | Which law makes balancing an equation necessary? | Conservation of mass | Conservation of charge | The ideal gas law | Avogadro's law
+H | Which number counts the particles in one mole? | Avogadro's number | Planck's constant | The Faraday constant | The gas constant
+H | Which reaction transfers electrons between substances? | A redox reaction | A neutralization | A precipitation | A phase change
+H | Which process slowly turns iron into rust? | Oxidation | Reduction | Sublimation | Condensation
+
+# --- Motion and forces ---
+
+E | Which quantity is distance divided by time? | Speed | Force | Mass | Acceleration
+E | Which quantity is speed with a direction? | Velocity | Distance | Mass | Energy
+E | Which quantity measures a change in velocity over time? | Acceleration | Speed | Momentum | Power
+E | Which force makes a dropped ball fall to the floor? | Gravity | Friction | Magnetism | Tension
+E | Which force resists motion between two surfaces? | Friction | Gravity | Buoyancy | Magnetism
+E | Which force pushes up on an object in a fluid? | Buoyancy | Friction | Drag | Gravity
+E | Which unit measures force? | The newton | The joule | The watt | The pascal
+E | Which scientist stated the three laws of motion? | Isaac Newton | Galileo Galilei | Albert Einstein | Johannes Kepler
+E | Which simple machine is a bar that turns on a fixed point? | A lever | A pulley | A wedge | A screw
+M | Which law says an object keeps moving unless a force acts? | The first law | The second law | The third law | The law of gravitation
+M | Which quantity does inertia depend on? | Mass | Volume | Shape | Color
+M | Which law relates force to mass times acceleration? | The second law | The first law | The third law | The law of conservation
+M | Which law says every action has an equal opposite reaction? | The third law | The first law | The second law | The zeroth law
+M | Which forces cancel out and leave the motion unchanged? | Balanced forces | Unbalanced forces | Net forces | Applied forces
+M | Which forces change an object's motion? | Unbalanced forces | Balanced forces | Equal forces | Internal forces
+M | Which force pulls a satellite into a curved path? | Gravity | Friction | Magnetism | The normal force
+M | Which unit measures mass in the metric system? | The kilogram | The newton | The pound | The slug
+M | Which fixed point does a lever turn on? | The fulcrum | The load | The effort | The axle
+M | Which simple machine is a wheel with a rope over it? | A pulley | A lever | An inclined plane | A wedge
+M | Which simple machine is a slope used to raise a load? | An inclined plane | A pulley | A lever | A gear
+H | Which term names the tendency to keep doing what it is doing? | Inertia | Momentum | Impulse | Torque
+H | Which quantity is mass times velocity? | Momentum | Force | Energy | Power
+H | Which measurement changes with location, mass or weight? | Weight | Mass | Density | Volume
+H | Which motion holds a constant speed in a straight line? | Uniform motion | Accelerated motion | Circular motion | Oscillation
+H | Which line shows constant speed on a distance-time graph? | A straight sloping line | A curved rising line | A flat line | A vertical line
+H | Which line shows an object at rest on a distance-time graph? | A flat horizontal line | A steep line | A curved line | A sloping line
+H | Which simple machine is an inclined plane wrapped in a spiral? | A screw | A wedge | A pulley | A cam
+H | Which simple machine splits things apart? | A wedge | A pulley | A screw | An axle
+H | Which term names how much a machine multiplies your force? | Mechanical advantage | Efficiency | Power | Work output
+H | Which quantity is force times distance in the direction of motion? | Work | Power | Momentum | Impulse
+H | Which quantity is work divided by time? | Power | Force | Energy | Torque
+H | Which term names a force that turns something around an axis? | Torque | Momentum | Impulse | Tension
+
+# --- Energy ---
+
+E | Which unit measures energy? | The joule | The newton | The watt | The ampere
+E | Which energy does a moving object have? | Kinetic energy | Potential energy | Chemical energy | Nuclear energy
+E | Which energy does a raised object have? | Gravitational potential energy | Kinetic energy | Sound energy | Electrical energy
+E | Which unit measures power? | The watt | The joule | The newton | The volt
+E | Which law says energy cannot be created or destroyed? | Conservation of energy | Conservation of mass | The second law | Ohm's law
+E | Which transfer of heat moves through direct contact? | Conduction | Convection | Radiation | Insulation
+E | Which device turns motion into electricity? | A generator | A motor | A transformer | A capacitor
+M | Which energy is stored in the bonds of food and fuel? | Chemical energy | Nuclear energy | Elastic energy | Thermal energy
+M | Which energy is stored in a stretched spring? | Elastic potential energy | Kinetic energy | Chemical energy | Sound energy
+M | Which energy comes from the motion of particles in a substance? | Thermal energy | Chemical energy | Light energy | Nuclear energy
+M | Which transfer of heat moves through a flowing fluid? | Convection | Conduction | Radiation | Absorption
+M | Which transfer of heat needs no material at all? | Radiation | Conduction | Convection | Diffusion
+M | Which materials let heat pass through easily? | Conductors | Insulators | Dielectrics | Semiconductors
+M | Which materials slow heat down? | Insulators | Conductors | Metals | Alloys
+M | Which scale sets water freezing at zero degrees? | Celsius | Fahrenheit | Kelvin | Rankine
+M | Which energy sources can be replaced within a lifetime? | Renewable sources | Nonrenewable sources | Fossil sources | Fissile sources
+M | Which energy source comes from the heat of the Earth? | Geothermal energy | Solar energy | Tidal energy | Biomass energy
+M | Which device turns electricity into motion? | A motor | A generator | A resistor | A diode
+H | Which energy is released when atomic nuclei split or join? | Nuclear energy | Chemical energy | Elastic energy | Magnetic energy
+H | Which temperature scale starts at absolute zero? | Kelvin | Celsius | Fahrenheit | Reaumur
+H | Which temperature is absolute zero on the Celsius scale? | About minus 273 degrees | Zero degrees | Minus 100 degrees | Minus 40 degrees
+H | Which term names useful energy out divided by energy in? | Efficiency | Power | Mechanical advantage | Work
+H | Which form does lost energy usually take in a machine? | Waste heat | Extra motion | Stored charge | Added mass
+H | Which law says heat flows from hot to cold on its own? | The second law of thermodynamics | The first law | Ohm's law | Hooke's law
+
+# --- Waves, sound and light ---
+
+E | Which term names the distance between two wave crests? | The wavelength | The amplitude | The frequency | The period
+E | Which term names the height of a wave from its rest position? | The amplitude | The wavelength | The frequency | The speed
+E | Which term names how many waves pass a point each second? | The frequency | The amplitude | The wavelength | The period
+E | Which unit measures frequency? | The hertz | The joule | The decibel | The lumen
+E | Which waves need a material to travel through? | Mechanical waves | Electromagnetic waves | Light waves | Radio waves
+E | Which waves can cross empty space? | Electromagnetic waves | Sound waves | Water waves | Seismic waves
+M | Which waves move particles at right angles to the wave? | Transverse waves | Longitudinal waves | Standing waves | Surface waves
+M | Which waves squeeze and stretch along the direction of travel? | Longitudinal waves | Transverse waves | Torsional waves | Shear waves
+M | Which kind of wave travels through air as sound? | A longitudinal wave | A transverse wave | An electromagnetic wave | A standing wave
+M | Which medium carries sound fastest? | A solid | A liquid | A gas | A vacuum
+M | Which property of sound do we hear as loudness? | Amplitude | Frequency | Wavelength | Phase
+M | Which property of sound do we hear as pitch? | Frequency | Amplitude | Speed | Timbre
+M | In which unit is sound level reported? | The decibel | The hertz | The watt | The lumen
+M | Which effect changes a siren's pitch as it passes you? | The Doppler effect | The Coriolis effect | The photoelectric effect | Refraction
+M | Which sound returns after bouncing off a surface? | An echo | A resonance | A beat | An overtone
+M | Which term names light bouncing off a surface? | Reflection | Refraction | Diffraction | Absorption
+M | Which term names light bending as it enters water? | Refraction | Reflection | Diffraction | Dispersion
+M | Which term names light spreading around an edge? | Diffraction | Refraction | Reflection | Polarization
+M | Which shape of lens makes objects look larger? | A convex lens | A concave lens | A plane mirror | A flat pane
+H | Which term names white light splitting into colors? | Dispersion | Diffraction | Reflection | Absorption
+H | Which mirror curves inward and can focus light? | A concave mirror | A convex mirror | A plane mirror | A one-way mirror
+H | Which order lists visible colors from the longest wavelength? | Red, orange, yellow, green | Violet, blue, green, yellow | Green, blue, indigo, violet | Yellow, red, blue, violet
+H | Which electromagnetic waves have the longest wavelength? | Radio waves | Gamma rays | X-rays | Ultraviolet
+H | Which electromagnetic waves have the shortest wavelength? | Gamma rays | Radio waves | Microwaves | Infrared
+H | Which waves warm your skin in front of a fire? | Infrared | Ultraviolet | X-rays | Radio waves
+H | Which waves cause sunburn? | Ultraviolet | Infrared | Microwaves | Radio waves
+H | How fast does light travel in a vacuum? | About 300,000 km per second | About 300 km per second | About 3,000 km per second | About 30 million km per hour
+H | What happens when two wave crests meet? | Constructive interference | Destructive interference | Refraction | Damping
+H | What happens when a crest meets a trough? | Destructive interference | Constructive interference | Resonance | Dispersion
+H | Which effect makes an object vibrate strongly at its own frequency? | Resonance | Interference | Diffraction | Damping
+
+# --- Electricity and magnetism ---
+
+E | Which particle moves to make an electric current? | The electron | The proton | The neutron | The nucleus
+E | Which unit measures electric current? | The ampere | The volt | The ohm | The watt
+E | Which unit measures voltage? | The volt | The ampere | The ohm | The joule
+E | Which unit measures resistance? | The ohm | The volt | The ampere | The farad
+E | Which materials let current flow easily? | Conductors | Insulators | Dielectrics | Resistors
+E | Which materials block an electric current? | Insulators | Conductors | Metals | Electrolytes
+E | Which two poles does every magnet have? | North and south | Positive and negative | East and west | Up and down
+E | Which magnetic poles attract each other? | Opposite poles | Like poles | Only north poles | Only south poles
+M | Which law links voltage, current and resistance? | Ohm's law | Newton's law | Coulomb's law | Faraday's law
+M | Which circuit has only one path for the current? | A series circuit | A parallel circuit | A short circuit | An open circuit
+M | Which circuit has more than one path for the current? | A parallel circuit | A series circuit | A closed circuit | A simple circuit
+M | Which circuit keeps working when one bulb burns out? | A parallel circuit | A series circuit | A short circuit | An open circuit
+M | Which device stores chemical energy to power a circuit? | A battery | A resistor | A capacitor | A switch
+M | Which device opens or closes a circuit? | A switch | A resistor | A diode | A fuse
+M | Which device melts to protect a circuit from too much current? | A fuse | A switch | A resistor | A capacitor
+M | Which charge builds up when you rub a balloon on your hair? | Static charge | Current | Voltage | Resistance
+M | Which charges repel each other? | Like charges | Opposite charges | Neutral charges | Grounded charges
+M | Which metal is most used in household wiring? | Copper | Iron | Zinc | Tin
+M | Which three metals are strongly magnetic? | Iron, nickel and cobalt | Copper, silver and gold | Aluminum, tin and lead | Zinc, brass and bronze
+M | Which region around a magnet exerts a force? | The magnetic field | The electric field | The gravitational field | The pressure field
+M | Which instrument uses a magnet to find direction? | A compass | A voltmeter | A galvanometer | An ammeter
+M | Which magnet is made by running current through a coil? | An electromagnet | A permanent magnet | A bar magnet | A lodestone
+M | Which way does current flow in a direct current circuit? | One way only | Back and forth | In a spiral | At random
+M | Which current reverses direction many times a second? | Alternating current | Direct current | Static current | Eddy current
+H | Which scientist showed that a current creates a magnetic field? | Hans Christian Oersted | Michael Faraday | Alessandro Volta | Georg Ohm
+H | Which scientist showed that a moving magnet makes a current? | Michael Faraday | Hans Christian Oersted | James Maxwell | Charles Coulomb
+H | Which device changes the voltage of alternating current? | A transformer | A generator | A motor | A rectifier
+H | Which instrument measures the current in a circuit? | An ammeter | A voltmeter | An ohmmeter | A barometer
+H | Which instrument measures the voltage across a component? | A voltmeter | An ammeter | A wattmeter | A galvanometer
+H | Which safety path sends stray current into the earth? | The ground wire | The live wire | The neutral wire | The fuse wire

@@ -1,13 +1,12 @@
 //
 //  Random.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Un tirage reproductible.
+//  A draw that can be replayed.
 //
-//  Le générateur du système ne se rejoue pas : une partie qui tourne mal est
-//  perdue pour l'analyse, et un test qui échoue une fois sur trente n'apprend
-//  rien. Celui-ci est un SplitMix64 — quelques lignes, une graine, et la même
-//  partie deux fois.
+//  The system generator cannot be replayed: a game that goes wrong is lost
+//  for analysis, and a test that fails once in thirty teaches nothing. This
+//  one is a SplitMix64 — a few lines, a seed, and the same game twice.
 //
 
 import Foundation
@@ -18,9 +17,9 @@ struct SeededRandom: RandomNumberGenerator {
     init(seed: UInt64) { state = seed }
     init() { state = UInt64.random(in: .min ... .max) }
 
-    /// Où en est la suite. Reprendre une partie sans cela n'en serait pas
-    /// une reprise : ce serait une autre partie qui commence au même endroit.
-    /// `init(seed:)` la remet exactement où elle était.
+    /// How far along the sequence is. Resuming a game without this would not
+    /// be resuming it: it would be another game starting in the same place.
+    /// `init(seed:)` puts it back exactly where it was.
     var rawState: UInt64 { state }
 
     mutating func next() -> UInt64 {

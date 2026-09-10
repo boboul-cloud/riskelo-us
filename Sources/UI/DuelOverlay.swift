@@ -1,12 +1,12 @@
 //
 //  DuelOverlay.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Le duel, en plein écran.
+//  The duel, full screen.
 //
-//  Il prend tout l'écran parce qu'il remplace le lancer de dés : c'est le
-//  moment où la partie se décide, et rien d'autre ne doit être lisible à cet
-//  instant. Le plateau réapparaît quand la question est réglée.
+//  It takes the whole screen because it replaces the roll of the dice: this
+//  is the moment the game is decided, and nothing else should be readable at
+//  that instant. The board reappears once the question is settled.
 //
 
 import SwiftUI
@@ -19,7 +19,7 @@ struct DuelOverlay: View {
         if let stage = session.stage, stage != .announcing {
             VStack(spacing: 0) {
                 Spacer(minLength: 0)
-                contenu(stage)
+                content(stage)
                     .padding(.horizontal, 18)
                     .padding(.top, 16)
                     .padding(.bottom, 20)
@@ -30,16 +30,16 @@ struct DuelOverlay: View {
                             .shadow(color: .black.opacity(0.5), radius: 14, y: -4)
                     )
                     .overlay(alignment: .top) {
-                        // La poignée : elle dit que c'est une feuille posée
-                        // sur le plateau, et non un écran qui l'a remplacé.
+                        // The grab handle: it says this is a sheet laid over
+                        // the board, and not a screen that replaced it.
                         Capsule().fill(Palette.dim.opacity(0.5))
                             .frame(width: 34, height: 4).padding(.top, 7)
                     }
                     .frame(maxWidth: .infinity)
-                    .couvreLeBas()
+                    .coversBottom()
             }
-            // Aucun voile sur le plateau : c'est tout l'objet de la feuille.
-            // On doit voir les hommes tomber pendant qu'on répond.
+            // No veil over the board: that is the whole point of the sheet.
+            // You have to see the troops fall while you answer.
             .contentShape(Rectangle())
             .onTapGesture { if session.canSkip { session.skipAhead() } }
             .transition(.move(edge: .bottom))
@@ -47,85 +47,85 @@ struct DuelOverlay: View {
     }
 
     @ViewBuilder
-    private func contenu(_ stage: GameSession.Stage) -> some View {
+    private func content(_ stage: GameSession.Stage) -> some View {
         switch stage {
         case .announcing: EmptyView()
         case .handover: handover
-        case .adversaireRepond: adversaire
+        case .opponentAnswering: opponentAnswering
         case .asking, .revealed: question
         case .summary: summary
         }
     }
 
-    // MARK: - « Prêt ? »
+    // MARK: - "Ready?"
 
     @ViewBuilder private var handover: some View {
         if let a = session.assault, let duel = session.duel,
-           let attaquant = session.player(a.attacker), let defenseur = session.player(a.defender),
-           let qui = session.repondeur, let repondeur = session.player(qui) {
-            // En face à face, celui qui doit répondre n'est plus forcément le
-            // défenseur : c'est lui qu'il faut nommer, et lui dont on prend la
-            // couleur, sans quoi on tend l'appareil au mauvais joueur.
-            let croise = session.game.rules.mode == .faceAFace
+           let attacker = session.player(a.attacker), let defender = session.player(a.defender),
+           let who = session.responder, let responder = session.player(who) {
+            // In a showdown, whoever has to answer is no longer necessarily
+            // the defender: they are the one to name, and the one whose color
+            // is taken, or you hand the device to the wrong player.
+            let showdown = session.game.rules.mode == .showdown
             VStack(spacing: 26) {
-                Image(systemName: qui == a.defender ? "shield.lefthalf.filled" : "flag.fill")
+                Image(systemName: who == a.defender ? "shield.lefthalf.filled" : "flag.fill")
                     .font(.system(size: 46))
-                    .foregroundStyle(Palette.camp(repondeur.id))
+                    .foregroundStyle(Palette.side(responder.id))
                 VStack(spacing: 8) {
-                    Text("\(attaquant.name) attaque \(session.game.name(a.to))")
+                    Text("\(attacker.name) attacks \(session.game.name(a.to))")
                         .font(.title3.weight(.semibold))
-                    Text("Question \(duel.question.category.apresDe)"
+                    Text("\(duel.question.category.asQuestion)"
                          + " — \(duel.question.difficulty.label.lowercased())")
                         .foregroundStyle(Palette.dim)
-                    if croise, a.defenderAnswer != nil {
-                        // On dit qu'il a répondu, jamais ce qu'il a répondu.
-                        Text("\(defenseur.name) a répondu. À vous la même question.")
+                    if showdown, a.defenderAnswer != nil {
+                        // We say they have answered, never what they answered.
+                        Text("\(defender.name) has answered. The same question is yours.")
                             .font(.footnote)
                             .foregroundStyle(Palette.dim)
-                    } else if croise {
-                        Text("Vous répondez tous les deux à la même question.")
+                    } else if showdown {
+                        Text("You both answer the same question.")
                             .font(.footnote)
                             .foregroundStyle(Palette.dim)
                     }
-                    if a.mise > 1 {
-                        Label("Enjeu doublé : deux hommes", systemImage: "arrow.up.circle.fill")
+                    if a.stake > 1 {
+                        Label("Stake doubled: two troops", systemImage: "arrow.up.circle.fill")
                             .font(.footnote.weight(.semibold))
-                            .foregroundStyle(Palette.lostVif)
+                            .foregroundStyle(Palette.lostBright)
                     }
                 }
                 .multilineTextAlignment(.center)
 
-                sablier(duel.allowance, siege: duel.siege)
+                hourglass(duel.allowance, siege: duel.siege)
 
-                Text("À \(repondeur.name) de répondre.")
+                Text("\(responder.name) to answer.")
                     .font(.headline)
                 Button {
                     withAnimation { session.beginAnswering() }
                 } label: {
-                    Text("Je suis prêt")
+                    Text("I'm ready")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(Palette.camp(repondeur.id))
+                .tint(Palette.side(responder.id))
             }
             .foregroundStyle(Palette.ink)
         }
     }
 
-    /// Pendant que l'autre répond. On dit son nom, le thème, et ce qui va
-    /// suivre — jamais l'énoncé, qui viendrait deux fois.
-    @ViewBuilder private var adversaire: some View {
-        if let duel = session.duel, let qui = session.repondeur,
-           let repondeur = session.player(qui) {
+    /// While the other player answers. We give their name, the theme, and
+    /// what is coming — never the prompt, which would arrive twice.
+    @ViewBuilder private var opponentAnswering: some View {
+        if let duel = session.duel, let who = session.responder,
+           let responder = session.player(who) {
             VStack(spacing: 14) {
                 Image(systemName: "ellipsis.bubble")
                     .font(.system(size: 38))
-                    .foregroundStyle(Palette.camp(repondeur.id))
+                    .foregroundStyle(Palette.side(responder.id))
                 Text(session.assault?.defenderAnswer != nil
-                     ? "Réponse prise. \(repondeur.name) répond…"
-                     : "\(repondeur.name) répond…")
+                     ? "Answer taken. \(responder.name) is answering…"
+                     : "\(responder.name) is answering…")
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(Palette.ink)
                     .multilineTextAlignment(.center)
@@ -136,12 +136,12 @@ struct DuelOverlay: View {
                                 in: Capsule())
                     .foregroundStyle(Palette.category(duel.question.category))
                 Text(session.assault?.defenderAnswer != nil
-                     ? "Votre réponse est prise. \(repondeur.name) répond maintenant à "
-                       + "la même question : le plus sûr l'emporte, et si vous savez "
-                       + "tous les deux, le plus rapide."
-                     : "Vous recevrez la même question juste après : en face à face, "
-                       + "l'attaquant répond aussi. Le plus sûr l'emporte, et si vous "
-                       + "savez tous les deux, le plus rapide.")
+                     ? "Your answer is taken. \(responder.name) is now answering "
+                       + "the same question: the surer wins, and if you both know, "
+                       + "the faster."
+                     : "You will get the same question right after: in a showdown "
+                       + "the attacker answers too. The surer wins, and if you both "
+                       + "know, the faster.")
                     .font(.footnote).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -149,32 +149,31 @@ struct DuelOverlay: View {
         }
     }
 
-    private func sablier(_ allowance: TimeInterval, siege: Int) -> some View {
+    private func hourglass(_ allowance: TimeInterval, siege: Int) -> some View {
         VStack(spacing: 4) {
-            Label("\(Int(allowance.rounded())) secondes", systemImage: "hourglass")
+            Label("\(Int(allowance.rounded())) seconds", systemImage: "hourglass")
                 .font(.subheadline.weight(.medium))
             if siege > 0 {
-                Text("\(siege + 1)ᵉ question sur cette place ce tour-ci — le temps se resserre")
+                Text("Question \(siege + 1) on this place this turn — the clock tightens")
                     .font(.caption)
-                    .foregroundStyle(Palette.lostVif.opacity(0.9))
+                    .foregroundStyle(Palette.lostBright.opacity(0.9))
                     .multilineTextAlignment(.center)
             }
         }
     }
 
-    // MARK: - La question
+    // MARK: - The question
 
-    /// La question que l'écran doit montrer.
+    /// The question the screen has to show.
     ///
-    /// Ce n'est pas toujours celle que le moteur tient prête. Dès qu'une
-    /// réponse lui parvient, il enchaîne : il compte la perte et tire aussitôt
-    /// la question suivante de la salve. L'écran, lui, en est encore à
-    /// dévoiler la précédente — et il affichait donc la suivante, sa bonne
-    /// réponse déjà marquée en vert, avant que personne n'y ait répondu.
+    /// It is not always the one the engine is holding ready. As soon as an
+    /// answer reaches it, it carries on: it counts the loss and immediately
+    /// draws the next question of the volley. The screen is still revealing
+    /// the previous one — and so it was showing the next, its correct answer
+    /// already marked in green, before anyone had answered it.
     ///
-    /// Tant qu'un compte rendu est là, c'est sa question qui règne. Le moteur
-    /// attendra.
-    private var duelAffiche: Duel? {
+    /// While a report is there, its question reigns. The engine will wait.
+    private var shownDuel: Duel? {
         if let r = session.report {
             return Duel(question: r.question, allowance: r.allowance, siege: 0)
         }
@@ -182,10 +181,10 @@ struct DuelOverlay: View {
     }
 
     @ViewBuilder private var question: some View {
-        if let duel = duelAffiche {
+        if let duel = shownDuel {
             VStack(spacing: 18) {
-                entete(duel)
-                compteARebours(duel.allowance)
+                header(duel)
+                countdown(duel.allowance)
 
                 Text(duel.question.prompt)
                     .font(.headline)
@@ -195,29 +194,30 @@ struct DuelOverlay: View {
                     .padding(.vertical, 2)
 
                 VStack(spacing: 8) {
-                    ForEach(Array(duel.question.choices.enumerated()), id: \.offset) { i, choix in
-                        proposition(i, choix, duel: duel)
+                    ForEach(Array(duel.question.choices.enumerated()), id: \.offset) { i, choice in
+                        choiceRow(i, choice, duel: duel)
                     }
                 }
 
-                if session.puisJeRelancer {
-                    Button { withAnimation { session.relancer() } } label: {
-                        Label("Doubler l'enjeu", systemImage: "arrow.up.circle")
+                if session.canIRaise {
+                    Button { withAnimation { session.raise() } } label: {
+                        Label("Double the stake", systemImage: "arrow.up.circle")
                             .font(.subheadline.weight(.semibold))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 10)
                     }
                     .buttonStyle(.bordered)
-                    .tint(Palette.lostVif)
+                    .tint(Palette.lostBright)
                     .transition(.opacity)
-                } else if let a = session.assault, a.mise > 1, session.report == nil {
-                    Label("Enjeu doublé : deux hommes", systemImage: "arrow.up.circle.fill")
+                } else if let a = session.assault, a.stake > 1, session.report == nil {
+                    Label("Stake doubled: two troops", systemImage: "arrow.up.circle.fill")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(Palette.lostVif)
+                        .foregroundStyle(Palette.lostBright)
                 }
 
                 if session.thinking {
-                    Label(session.enReseau ? "L'adversaire répond…" : "L'adversaire réfléchit…",
+                    Label(session.networked ? "Your opponent is answering…"
+                                            : "Your opponent is thinking…",
                           systemImage: "ellipsis.bubble")
                         .font(.subheadline)
                         .foregroundStyle(Palette.dim)
@@ -225,11 +225,11 @@ struct DuelOverlay: View {
                     verdict(r)
                 }
 
-                // L'invite ne paraît qu'une fois passé le premier instant :
-                // affichée d'emblée, elle pousserait à écourter ce qu'on
-                // vient tout juste d'ouvrir.
+                // The prompt only appears once the first instant has passed:
+                // shown right away, it would push you to cut short what you
+                // have only just opened.
                 if session.canSkip, session.waitPart < 0.8 {
-                    Text("Touchez pour continuer")
+                    Text("Tap to continue")
                         .font(.caption2)
                         .foregroundStyle(Palette.dim.opacity(0.8))
                         .transition(.opacity)
@@ -238,7 +238,7 @@ struct DuelOverlay: View {
         }
     }
 
-    private func entete(_ duel: Duel) -> some View {
+    private func header(_ duel: Duel) -> some View {
         HStack {
             Label(duel.question.category.label, systemImage: duel.question.category.symbol)
                 .font(.subheadline.weight(.semibold))
@@ -250,9 +250,9 @@ struct DuelOverlay: View {
                 Text("\(session.game.name(a.from)) → \(session.game.name(a.to))")
                     .font(.caption)
                     .foregroundStyle(Palette.dim)
-                // Une fois la réponse donnée, le moteur a déjà compté la
-                // question : le compteur affichait « 2/1 ». C'est celle qu'on
-                // vient de régler qu'il faut montrer, pas la suivante.
+                // Once the answer is given, the engine has already counted
+                // the question: the counter showed "2/1". It is the one just
+                // settled that has to be shown, not the next.
                 Text("· \(min(max(session.report == nil ? a.asked + 1 : a.asked, 1), a.volley))/\(a.volley)")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(Palette.dim)
@@ -260,250 +260,252 @@ struct DuelOverlay: View {
         }
     }
 
-    /// La barre du haut dit deux choses selon qui répond, et il faut qu'on les
-    /// distingue : le sablier du défenseur, qui décide de l'issue, se tient en
-    /// couleur ; le temps de lecture, qui ne décide de rien, reste gris.
+    /// The top bar says two different things depending on who is answering,
+    /// and they have to be told apart: the defender's hourglass, which
+    /// decides the outcome, is in color; the reading time, which decides
+    /// nothing, stays grey.
     ///
-    /// Dans les deux cas elle ne descend qu'une fois par question. Quand c'est
-    /// un humain qui a répondu, elle se fige où elle en était — ce qui lui
-    /// restait de temps est une information, pas un décompte à rejouer.
-    private func compteARebours(_ allowance: TimeInterval) -> some View {
-        let sablier = session.aMoiDeRepondre
-        let part = sablier
+    /// In both cases it descends only once per question. When a human has
+    /// answered, it freezes where it was — the time they had left is
+    /// information, not a countdown to replay.
+    private func countdown(_ allowance: TimeInterval) -> some View {
+        let live = session.myTurnToAnswer
+        let part = live
             ? max(0, min(1, session.remaining / max(allowance, 0.001)))
             : session.waitPart
-        let teinte: Color = sablier
+        let tint: Color = live
             ? (part > 0.5 ? Palette.held : (part > 0.25 ? Color.orange : Palette.lost))
             : Palette.dim.opacity(0.45)
         return GeometryReader { g in
             ZStack(alignment: .leading) {
                 Capsule().fill(Palette.panel)
-                Capsule().fill(teinte).frame(width: g.size.width * part)
+                Capsule().fill(tint).frame(width: g.size.width * part)
             }
         }
         .frame(height: 7)
         .animation(.linear(duration: 0.1), value: part)
     }
 
-    private func proposition(_ index: Int, _ texte: String, duel: Duel) -> some View {
+    private func choiceRow(_ index: Int, _ text: String, duel: Duel) -> some View {
         let r = session.report
-        let choisi: Int? = { if case let .chosen(i, _) = maReponse { return i } else { return nil } }()
-        let estBonne = index == duel.question.answer
-        let fond: Color = {
+        let picked: Int? = { if case let .chosen(i, _) = myAnswer { return i } else { return nil } }()
+        let isRight = index == duel.question.answer
+        let background: Color = {
             guard r != nil else { return Palette.panel }
-            if estBonne { return Palette.held.opacity(0.85) }
-            if index == choisi { return Palette.lost.opacity(0.8) }
+            if isRight { return Palette.held.opacity(0.85) }
+            if index == picked { return Palette.lost.opacity(0.8) }
             return Palette.panel
         }()
         return Button {
             session.answer(index)
         } label: {
             HStack {
-                Text(texte)
+                Text(text)
                     .font(.body.weight(.medium))
                     .multilineTextAlignment(.leading)
                 Spacer()
-                if r != nil, estBonne { Image(systemName: "checkmark") }
-                if r != nil, index == choisi, !estBonne { Image(systemName: "xmark") }
+                if r != nil, isRight { Image(systemName: "checkmark") }
+                if r != nil, index == picked, !isRight { Image(systemName: "xmark") }
             }
             .foregroundStyle(Palette.ink)
             .padding(.horizontal, 14).padding(.vertical, 11)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(fond, in: RoundedRectangle(cornerRadius: 12))
+            .background(background, in: RoundedRectangle(cornerRadius: 12))
         }
         .buttonStyle(.plain)
-        // Ne pas répondre n'est pas la même chose qu'être délavé. Un bouton
-        // « disabled » perd son contraste, et l'attaquant — qui ne répond
-        // pas — ne pouvait plus lire les propositions. Or les lire et y
-        // répondre dans sa tête est tout son jeu pendant ce duel-là.
+        // Not answering is not the same as being washed out. A "disabled"
+        // button loses its contrast, and the attacker — who does not answer —
+        // could no longer read the choices. Yet reading them and answering in
+        // their head is their whole game during that duel.
         .allowsHitTesting(session.stage == .asking && session.report == nil
-                          && !session.thinking && session.aMoiDeRepondre)
+                          && !session.thinking && session.myTurnToAnswer)
         .animation(.easeOut(duration: 0.2), value: session.report)
     }
 
-    /// Vert ou rouge selon ce qui vous arrive **à vous**, et non selon le camp
-    /// qui tient. « Khanat tient bon » s'affichait en vert alors que la phrase
-    /// vous coûtait un homme : la couleur disait le contraire du texte, et
-    /// c'est elle qu'on lit en premier. À deux humains sur un appareil, il n'y
-    /// a pas de « vous » : la phrase reste alors blanche.
-    private func couleurDuVerdict(_ r: DuelReport) -> Color {
+    /// Green or red according to what happens **to you**, and not according
+    /// to the side that holds. "Khanate holds" showed in green while the
+    /// sentence cost you a troop: the color said the opposite of the text,
+    /// and it is the color you read first. With two humans on one device
+    /// there is no "you": the sentence then stays white.
+    private func verdictColor(_ r: DuelReport) -> Color {
         guard let a = session.assault else { return Palette.ink }
-        let attaquantEstMoi: Bool
-        if session.enReseau {
-            attaquantEstMoi = a.attacker == session.monRang
+        let iAmAttacker: Bool
+        if session.networked {
+            iAmAttacker = a.attacker == session.mySeat
         } else {
-            let attaquantHumain = !(session.player(a.attacker)?.isBot ?? true)
-            let defenseurHumain = !(session.player(a.defender)?.isBot ?? true)
-            guard attaquantHumain != defenseurHumain else { return Palette.ink }
-            attaquantEstMoi = attaquantHumain
+            let attackerIsHuman = !(session.player(a.attacker)?.isBot ?? true)
+            let defenderIsHuman = !(session.player(a.defender)?.isBot ?? true)
+            guard attackerIsHuman != defenderIsHuman else { return Palette.ink }
+            iAmAttacker = attackerIsHuman
         }
-        let jeLEmporte = attaquantEstMoi
+        let iWin = iAmAttacker
             ? r.outcome == .attackerBreaks
             : r.outcome == .defenderHolds
-        return jeLEmporte ? Palette.held : Palette.lostVif
+        return iWin ? Palette.held : Palette.lostBright
     }
 
-    /// Ce que la réponse valait, dit dans les termes du Risk.
+    /// What the answer was worth, said in Risk's terms.
     private func verdict(_ r: DuelReport) -> some View {
         VStack(spacing: 10) {
-            if r.verdict == .reponse {
+            if r.verdict == .answered {
                 HStack(spacing: 14) {
-                    de(r.dice.attacker, legende: "assaut")
+                    die(r.dice.attacker, label: "assault")
                     Image(systemName: r.outcome == .defenderHolds ? "lessthan" : "greaterthan")
                         .font(.title3.weight(.bold))
                         .foregroundStyle(Palette.dim)
-                    de(r.dice.defender, legende: "défense")
+                    die(r.dice.defender, label: "defense")
                 }
             } else {
-                confrontation(r)
+                showdownRows(r)
             }
-            Text(verdictTexte(r))
+            Text(verdictText(r))
                 .font(.subheadline.weight(.medium))
                 .multilineTextAlignment(.center)
-                // Sans cela, la phrase se fait tronquer sur une ligne : le
-                // texte est le seul de l'écran qui n'ait pas de largeur
-                // imposée, et SwiftUI le rogne plutôt que de le replier.
+                // Without this the sentence gets truncated onto one line: the
+                // text is the only thing on screen with no imposed width, and
+                // SwiftUI clips it rather than wrapping it.
                 .fixedSize(horizontal: false, vertical: true)
-                .foregroundStyle(couleurDuVerdict(r))
+                .foregroundStyle(verdictColor(r))
         }
         .transition(.opacity.combined(with: .scale(scale: 0.95)))
     }
 
-    /// Qui a répondu, et ce que cela coûte.
+    /// Who answered, and what it costs.
     ///
-    /// La phrase ne disait pas de qui elle parlait. Quand c'est vous qui
-    /// attaquez, c'est l'adversaire qui répond : lire « bonne réponse » puis
-    /// perdre un homme se prend alors pour une erreur de l'application. Nommer
-    /// celui qui répond lève tout le doute, et la place nommée dit où l'homme
-    /// tombe.
-    private func verdictTexte(_ r: DuelReport) -> String {
-        let nom = session.assault.flatMap { session.player($0.defender)?.name } ?? "Le défenseur"
-        let att = session.assault.flatMap { session.player($0.attacker)?.name } ?? "L'assaillant"
-        let lieu = session.assault.map { session.game.name($0.to) } ?? "La place"
-        let cout = r.mise > 1 ? "deux hommes" : "un homme"
+    /// The sentence did not say who it was talking about. When you are the
+    /// one attacking, it is your opponent who answers: reading "correct
+    /// answer" and then losing a troop is taken for a bug in the app. Naming
+    /// whoever answers removes all doubt, and the place named says where the
+    /// troop falls.
+    private func verdictText(_ r: DuelReport) -> String {
+        let defName = session.assault.flatMap { session.player($0.defender)?.name } ?? "The defender"
+        let attName = session.assault.flatMap { session.player($0.attacker)?.name } ?? "The attacker"
+        let place = session.assault.map { session.game.name($0.to) } ?? "The place"
+        let cost = r.stake > 1 ? "two troops" : "a troop"
 
         switch r.verdict {
-        case .reponse:
-            let vous = session.aMoiDeRepondre
+        case .answered:
+            let mine = session.myTurnToAnswer
             if r.correct {
-                return (vous ? "Vous avez répondu juste" : "\(nom) a répondu juste")
-                    + " : \(lieu) tient, l'assaillant laisse \(cout)."
+                return (mine ? "You answered correctly" : "\(defName) answered correctly")
+                    + ": \(place) holds, the attacker leaves \(cost)."
             }
-            let faute = r.answer == .timeout
-                ? (vous ? "Vous n'avez pas répondu à temps" : "\(nom) n'a pas répondu à temps")
-                : (vous ? "Vous vous êtes trompé" : "\(nom) s'est trompé")
-            return faute + " : \(lieu) perd \(cout)."
+            let fault = r.answer == .timeout
+                ? (mine ? "You did not answer in time" : "\(defName) did not answer in time")
+                : (mine ? "You got it wrong" : "\(defName) got it wrong")
+            return fault + ": \(place) loses \(cost)."
 
-        case .seul:
+        case .onlyOne:
             return r.correct
-                ? "\(nom) savait, \(att) non : \(lieu) tient, l'assaillant laisse \(cout)."
-                : "\(att) savait, \(nom) non : \(lieu) perd \(cout)."
+                ? "\(defName) knew, \(attName) did not: \(place) holds, the attacker leaves \(cost)."
+                : "\(attName) knew, \(defName) did not: \(place) loses \(cost)."
 
-        case .vitesse:
+        case .speed:
             return r.outcome == .defenderHolds
-                ? "Les deux savaient. \(nom) a été le plus vif : \(lieu) tient, "
-                    + "l'assaillant laisse \(cout)."
-                : "Les deux savaient. \(att) a été le plus vif : \(lieu) perd \(cout)."
+                ? "Both knew. \(defName) was quicker: \(place) holds, "
+                    + "the attacker leaves \(cost)."
+                : "Both knew. \(attName) was quicker: \(place) loses \(cost)."
 
-        case .egalite:
-            return "Personne ne savait. Comme sur une égalité de dés, \(lieu) tient "
-                + "et l'assaillant laisse \(cout)."
+        case .tie:
+            return "Nobody knew. As on a tie of dice, \(place) holds "
+                + "and the attacker leaves \(cost)."
         }
     }
 
-    /// Ma propre réponse, pour savoir où poser la croix. En face à face les
-    /// deux joueurs ont coché une case : montrer celle du défenseur à
-    /// l'attaquant lui ferait croire qu'il s'est trompé.
-    private var maReponse: Answer? {
+    /// My own answer, so we know where to put the cross. In a showdown both
+    /// players have ticked a box: showing the defender's to the attacker
+    /// would make them think they had got it wrong.
+    private var myAnswer: Answer? {
         guard let r = session.report else { return nil }
-        guard r.verdict != .reponse, let a = session.assault else { return r.answer }
-        let jeDefends = session.enReseau
-            ? a.defender == session.monRang
+        guard r.verdict != .answered, let a = session.assault else { return r.answer }
+        let iDefend = session.networked
+            ? a.defender == session.mySeat
             : !(session.player(a.defender)?.isBot ?? true)
-        return jeDefends ? r.answer : r.attackerAnswer
+        return iDefend ? r.answer : r.attackerAnswer
     }
 
-    /// Les deux réponses côte à côte, avec le temps de chacun.
+    /// The two answers side by side, with each one's time.
     ///
-    /// C'est la pièce qui manquait au face à face. Quatre échanges sur dix se
-    /// décident au sablier : sans voir les deux temps, on perd une place en
-    /// ayant répondu juste, et l'on ne peut que croire à une erreur du jeu.
-    @ViewBuilder private func confrontation(_ r: DuelReport) -> some View {
+    /// This is the piece the showdown was missing. Four exchanges out of ten
+    /// are decided on the clock: without seeing the two times, you lose a
+    /// place having answered correctly, and can only believe the game got it
+    /// wrong.
+    @ViewBuilder private func showdownRows(_ r: DuelReport) -> some View {
         if let a = session.assault {
             VStack(spacing: 4) {
-                camp(a.attacker, r.attackerAnswer, juste: r.attackerCorrect, de: r,
-                     emporte: r.outcome == .attackerBreaks)
-                camp(a.defender, r.answer, juste: r.correct, de: r,
-                     emporte: r.outcome == .defenderHolds)
+                sideRow(a.attacker, r.attackerAnswer, correct: r.attackerCorrect, of: r,
+                        wins: r.outcome == .attackerBreaks)
+                sideRow(a.defender, r.answer, correct: r.correct, of: r,
+                        wins: r.outcome == .defenderHolds)
             }
         }
     }
 
-    private func camp(_ joueur: PlayerID, _ reponse: Answer?, juste: Bool,
-                      de r: DuelReport, emporte: Bool) -> some View {
-        let nom = session.player(joueur)?.name ?? "?"
-        var texte = "sans réponse"
-        var temps: String?
-        if case let .chosen(i, e)? = reponse {
-            if r.question.choices.indices.contains(i) { texte = r.question.choices[i] }
-            temps = String(format: "%.1f s", min(e, r.allowance))
+    private func sideRow(_ player: PlayerID, _ answer: Answer?, correct: Bool,
+                         of r: DuelReport, wins: Bool) -> some View {
+        let name = session.player(player)?.name ?? "?"
+        var text = "no answer"
+        var time: String?
+        if case let .chosen(i, e)? = answer {
+            if r.question.choices.indices.contains(i) { text = r.question.choices[i] }
+            time = String(format: "%.1fs", min(e, r.allowance))
         }
         return HStack(spacing: 7) {
-            Circle().fill(Palette.camp(joueur)).frame(width: 7, height: 7)
-            Text(nom).font(.caption.weight(.semibold))
-                .foregroundStyle(Palette.camp(joueur))
-            Image(systemName: juste ? "checkmark" : "xmark")
+            Circle().fill(Palette.side(player)).frame(width: 7, height: 7)
+            Text(name).font(.caption.weight(.semibold))
+                .foregroundStyle(Palette.side(player))
+            Image(systemName: correct ? "checkmark" : "xmark")
                 .font(.caption2.weight(.bold))
-                .foregroundStyle(juste ? Palette.held : Palette.lostVif)
-            Text(texte).font(.caption).foregroundStyle(Palette.ink)
+                .foregroundStyle(correct ? Palette.held : Palette.lostBright)
+            Text(text).font(.caption).foregroundStyle(Palette.ink)
                 .lineLimit(1).truncationMode(.tail)
             Spacer(minLength: 4)
-            if let temps {
-                Text(temps).font(.caption2.monospacedDigit()).foregroundStyle(Palette.dim)
+            if let time {
+                Text(time).font(.caption2.monospacedDigit()).foregroundStyle(Palette.dim)
             }
             Image(systemName: "crown.fill")
                 .font(.caption2)
-                .foregroundStyle(emporte ? Palette.held : .clear)
+                .foregroundStyle(wins ? Palette.held : .clear)
         }
         .padding(.horizontal, 10).padding(.vertical, 6)
-        .background(emporte ? Palette.held.opacity(0.14) : Color.clear,
+        .background(wins ? Palette.held.opacity(0.14) : Color.clear,
                     in: RoundedRectangle(cornerRadius: 8))
     }
 
-    private func de(_ face: Int, legende: String) -> some View {
+    private func die(_ face: Int, label: String) -> some View {
         VStack(spacing: 3) {
             Image(systemName: "die.face.\(min(6, max(1, face)))")
                 .font(.system(size: 34))
                 .foregroundStyle(Palette.ink)
-            Text(legende).font(.caption2).foregroundStyle(Palette.dim)
+            Text(label).font(.caption2).foregroundStyle(Palette.dim)
         }
     }
 
-    // MARK: - Le bilan de l'assaut
+    // MARK: - The assault summary
 
     @ViewBuilder private var summary: some View {
         if let a = session.assault {
             VStack(spacing: 22) {
                 Image(systemName: a.conquered ? "flag.fill" : "shield.slash")
                     .font(.system(size: 44))
-                    .foregroundStyle(a.conquered ? Palette.camp(a.attacker) : Palette.dim)
+                    .foregroundStyle(a.conquered ? Palette.side(a.attacker) : Palette.dim)
                 Text(a.conquered
-                     ? "\(session.game.name(a.to)) est prise."
-                     : "\(session.game.name(a.to)) tient bon.")
+                     ? "\(session.game.name(a.to)) is taken."
+                     : "\(session.game.name(a.to)) holds.")
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(Palette.ink)
 
                 HStack(spacing: 28) {
-                    bilan("Assaillant", a.attackerLosses, a.attacker)
-                    bilan("Défenseur", a.defenderLosses, a.defender)
+                    tally("Attacker", a.attackerLosses, a.attacker)
+                    tally("Defender", a.defenderLosses, a.defender)
                 }
 
-                // Le bilan d'un assaut que l'on subit est en lecture seule.
-                // Sans cette condition, une place prise par la machine vous
-                // tendait **son** panneau d'occupation : vous auriez choisi
-                // combien de ses hommes avancent chez vous.
-                if !session.aMoiDeJouer {
-                    Text("Touchez pour continuer")
+                // The summary of an assault you are on the receiving end of
+                // is read-only. Without this condition, a place taken by the
+                // machine handed you **its** occupation panel: you would have
+                // chosen how many of its troops advance into your land.
+                if !session.myTurnToPlay {
+                    Text("Tap to continue")
                         .font(.caption2)
                         .foregroundStyle(Palette.dim.opacity(0.8))
                 } else if case let .occupation(from, to, minimum, maximum) = session.game.phase {
@@ -511,43 +513,42 @@ struct DuelOverlay: View {
                                     minimum: minimum, maximum: maximum)
                 } else {
                     Button { withAnimation { session.closeAssault() } } label: {
-                        Text("Continuer").font(.headline)
+                        Text("Continue").font(.headline)
                             .frame(maxWidth: .infinity).padding(.vertical, 13)
                     }
                     .buttonStyle(.borderedProminent)
-                    .tint(Palette.camp(a.attacker))
+                    .tint(Palette.side(a.attacker))
                 }
             }
         }
     }
 
-    private func bilan(_ titre: String, _ pertes: Int, _ camp: PlayerID) -> some View {
+    private func tally(_ title: String, _ losses: Int, _ side: PlayerID) -> some View {
         VStack(spacing: 5) {
-            Text(titre).font(.caption).foregroundStyle(Palette.dim)
-            Text("−\(pertes)")
+            Text(title).font(.caption).foregroundStyle(Palette.dim)
+            Text("−\(losses)")
                 .font(.title2.weight(.bold).monospacedDigit())
-                .foregroundStyle(pertes > 0 ? Palette.lostVif : Palette.dim)
-            Circle().fill(Palette.camp(camp)).frame(width: 10, height: 10)
+                .foregroundStyle(losses > 0 ? Palette.lostBright : Palette.dim)
+            Circle().fill(Palette.side(side)).frame(width: 10, height: 10)
         }
     }
 }
 
-/// Combien d'hommes avancent dans la place conquise.
+/// How many troops advance into the conquered place.
 ///
-/// Le nombre passe devant le bouton, et non l'inverse. Le choix tenait dans
-/// un `Stepper` — deux flèches grises de la taille d'un ongle — posé au-dessus
-/// d'un bouton plein largeur, plein de la couleur du camp : on voyait le
-/// bouton, on le touchait, et un seul homme avançait sur la place qu'on
-/// venait de prendre. Le joueur ne s'en apercevait qu'au tour suivant, en
-/// trouvant sa garnison restée derrière, et croyait que l'application avait
-/// tranché à sa place.
+/// The number comes before the button, and not the other way round. The
+/// choice used to sit in a `Stepper` — two grey arrows the size of a
+/// fingernail — laid above a full-width button, full of the side's color: you
+/// saw the button, you touched it, and a single troop advanced onto the place
+/// you had just taken. The player only noticed the following turn, finding
+/// their garrison left behind, and thought the app had decided for them.
 ///
-/// D'où trois changements qui vont tous dans le même sens. Le chiffre est
-/// gros et se règle par deux touches rondes de quarante-quatre points — le
-/// plancher de ce qui se touche sans rater, et ici on les touche plusieurs
-/// fois de suite. Trois raccourcis prennent les cas courants, car personne ne
-/// tape onze fois sur « plus ». Et le bouton **porte le nombre choisi** : le
-/// doigt pressé lit encore ce qu'il valide.
+/// Hence three changes that all pull the same way. The number is large and is
+/// set by two round forty-four-point buttons — the floor for what can be
+/// touched without missing, and here they are touched several times running.
+/// Three shortcuts take the common cases, because nobody taps "plus" eleven
+/// times. And the button **carries the chosen number**: the pressing finger
+/// can still read what it is confirming.
 struct OccupationPanel: View {
     let session: GameSession
     let from: TerritoryID
@@ -556,159 +557,160 @@ struct OccupationPanel: View {
     let maximum: Int
     @State private var count = 1
 
-    /// Le haut de la plage. Le moteur donne toujours un maximum au moins égal
-    /// au minimum, mais une plage qui s'inverse fait tomber l'écran : on ne
-    /// s'y fie pas.
-    private var haut: Int { max(minimum, maximum) }
-    private var camp: PlayerID { session.game.currentPlayer.id }
-    /// Ce qui reste à la place de départ. Les hommes n'ont pas encore bougé —
-    /// le moteur ne les déplace qu'à la validation.
-    private var reste: Int { max(1, session.game.armies(from) - count) }
+    /// The top of the range. The engine always gives a maximum at least equal
+    /// to the minimum, but a range that inverts brings the screen down: we do
+    /// not rely on it.
+    private var top: Int { max(minimum, maximum) }
+    private var side: PlayerID { session.game.currentPlayer.id }
+    /// What is left at the starting place. The troops have not moved yet —
+    /// the engine only moves them on confirmation.
+    private var left: Int { max(1, session.game.armies(from) - count) }
 
     var body: some View {
         VStack(spacing: 12) {
-            if haut > minimum {
-                selecteur
+            if top > minimum {
+                picker
             } else {
-                // Rien à choisir : le dire, plutôt que de tendre un réglage
-                // qui ne bouge pas.
+                // Nothing to choose: say so, rather than hand over a setting
+                // that does not move.
                 Text(minimum > 1
-                     ? "\(minimum) hommes avancent — c'est tout ce que la place de départ peut céder."
-                     : "Un homme avance — c'est tout ce que la place de départ peut céder.")
+                     ? "\(minimum) troops advance — that is all the starting place can spare."
+                     : "One troop advances — that is all the starting place can spare.")
                     .font(.footnote).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
             }
 
             Button { withAnimation { session.occupy(count) } } label: {
-                Text(count > 1 ? "Faire avancer \(count) hommes" : "Faire avancer 1 homme")
+                Text(count > 1 ? "Advance \(count) troops" : "Advance 1 troop")
                     .font(.headline)
                     .contentTransition(.numericText())
                     .frame(maxWidth: .infinity).padding(.vertical, 13)
             }
             .buttonStyle(.borderedProminent)
-            .tint(Palette.camp(camp))
+            .tint(Palette.side(side))
         }
         .onAppear { count = minimum }
     }
 
-    /// Le choix, dans son cadre. Le cadre n'est pas un ornement : il donne au
-    /// réglage le poids que le bouton lui prenait, et la couleur du camp en
-    /// liseré dit que c'est encore votre geste — le fond, lui, reste mat.
-    private var selecteur: some View {
+    /// The choice, in its frame. The frame is not an ornament: it gives the
+    /// setting the weight the button was taking from it, and the side's color
+    /// as an outline says this is still your move — the ground itself stays
+    /// matte.
+    private var picker: some View {
         VStack(spacing: 10) {
-            Text("Combien d'hommes avancent ?")
+            Text("How many troops advance?")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(Palette.ink)
 
             HStack(spacing: 16) {
-                pas(-1, "minus")
+                step(-1, "minus")
                 VStack(spacing: 0) {
                     Text("\(count)")
                         .font(.system(size: 44, weight: .bold, design: .rounded).monospacedDigit())
-                        .foregroundStyle(Palette.campVif(camp))
+                        .foregroundStyle(Palette.brightSide(side))
                         .contentTransition(.numericText())
-                    Text("sur \(haut)")
+                    Text("of \(top)")
                         .font(.caption.monospacedDigit()).foregroundStyle(Palette.dim)
                 }
                 .frame(minWidth: 84)
-                pas(+1, "plus")
+                step(+1, "plus")
             }
 
             HStack(spacing: 8) {
-                raccourci("Le minimum", minimum)
-                if let moitie { raccourci("La moitié", moitie) }
-                raccourci("Tous", haut)
+                shortcut("Minimum", minimum)
+                if let half { shortcut("Half", half) }
+                shortcut("All", top)
             }
 
-            bilanDuMouvement
+            moveSummary
             if minimum > 1 {
-                Text("Au moins \(minimum) : autant que de questions posées.")
+                Text("At least \(minimum): as many as there were questions.")
                     .font(.caption).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
             }
         }
         .padding(.horizontal, 14).padding(.top, 12).padding(.bottom, 14)
         .frame(maxWidth: .infinity)
-        .background(Palette.campVif(camp).opacity(0.10),
+        .background(Palette.brightSide(side).opacity(0.10),
                     in: RoundedRectangle(cornerRadius: 18))
         .overlay(RoundedRectangle(cornerRadius: 18)
-            .strokeBorder(Palette.campVif(camp).opacity(0.65), lineWidth: 1.5))
+            .strokeBorder(Palette.brightSide(side).opacity(0.65), lineWidth: 1.5))
     }
 
-    /// Ce que le mouvement laisse de part et d'autre, à jour du chiffre
-    /// choisi.
+    /// What the move leaves on each side, kept up to date with the chosen
+    /// number.
     ///
-    /// La feuille couvre le bas de la carte au moment même où l'on décide, et
-    /// l'on ne voyait donc plus **où** les hommes avancent — ni ce qu'il
-    /// resterait derrière. Les deux places sont nommées ici, avec la garnison
-    /// que chacune aura une fois le mouvement fait : c'est de cela qu'on
-    /// décide, et cela ne dépend d'aucun recadrage.
-    private var bilanDuMouvement: some View {
+    /// The sheet covers the bottom of the map at the very moment you decide,
+    /// so you could no longer see **where** the troops advance — nor what
+    /// would be left behind. Both places are named here, with the garrison
+    /// each will have once the move is made: that is what you are deciding
+    /// about, and it does not depend on any reframing.
+    private var moveSummary: some View {
         HStack(spacing: 12) {
-            place(session.game.name(from), reste, teinte: Palette.ink.opacity(0.85))
+            place(session.game.name(from), left, tint: Palette.ink.opacity(0.85))
             Image(systemName: "arrow.right")
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(Palette.dim)
-            place(session.game.name(to), count, teinte: Palette.campVif(camp))
+            place(session.game.name(to), count, tint: Palette.brightSide(side))
         }
     }
 
-    private func place(_ nom: String, _ hommes: Int, teinte: Color) -> some View {
+    private func place(_ name: String, _ troops: Int, tint: Color) -> some View {
         VStack(spacing: 1) {
-            Text(nom)
+            Text(name)
                 .font(.caption2).foregroundStyle(Palette.dim)
                 .lineLimit(1).minimumScaleFactor(0.7)
-            Text("\(hommes)")
-                .font(.headline.monospacedDigit()).foregroundStyle(teinte)
+            Text("\(troops)")
+                .font(.headline.monospacedDigit()).foregroundStyle(tint)
                 .contentTransition(.numericText())
         }
         .frame(maxWidth: 120)
     }
 
-    /// Un cran de plus ou de moins. La touche s'éteint quand elle est au bout
-    /// de la plage, au lieu de disparaître : la paire reste symétrique, et le
-    /// doigt ne cherche pas où est passé le « moins ».
-    private func pas(_ delta: Int, _ icone: String) -> some View {
-        let cible = min(max(count + delta, minimum), haut)
-        let mort = cible == count
+    /// One notch up or down. The button dims when it is at the end of the
+    /// range instead of disappearing: the pair stays symmetrical, and the
+    /// finger does not go looking for where the "minus" went.
+    private func step(_ delta: Int, _ icon: String) -> some View {
+        let wanted = min(max(count + delta, minimum), top)
+        let dead = wanted == count
         return Button {
-            withAnimation(.snappy(duration: 0.12)) { count = cible }
+            withAnimation(.snappy(duration: 0.12)) { count = wanted }
         } label: {
-            Image(systemName: icone)
+            Image(systemName: icon)
                 .font(.title3.weight(.bold))
                 .frame(width: 44, height: 44)
-                .background(Circle().fill(Color.white.opacity(mort ? 0.03 : 0.08)))
-                .overlay(Circle().strokeBorder(mort ? Palette.dim.opacity(0.3)
-                                                    : Palette.campVif(camp).opacity(0.8),
+                .background(Circle().fill(Color.white.opacity(dead ? 0.03 : 0.08)))
+                .overlay(Circle().strokeBorder(dead ? Palette.dim.opacity(0.3)
+                                                    : Palette.brightSide(side).opacity(0.8),
                                                lineWidth: 1.5))
-                .foregroundStyle(mort ? Palette.dim.opacity(0.45) : Palette.campVif(camp))
+                .foregroundStyle(dead ? Palette.dim.opacity(0.45) : Palette.brightSide(side))
         }
         .buttonStyle(.plain)
-        .disabled(mort)
+        .disabled(dead)
     }
 
-    /// Les cas courants, en un appui.
-    private func raccourci(_ titre: String, _ valeur: Int) -> some View {
-        let choisi = count == valeur
+    /// The common cases, in one tap.
+    private func shortcut(_ title: String, _ value: Int) -> some View {
+        let chosen = count == value
         return Button {
-            withAnimation(.snappy(duration: 0.12)) { count = valeur }
+            withAnimation(.snappy(duration: 0.12)) { count = value }
         } label: {
-            Text(titre)
+            Text(title)
                 .font(.caption.weight(.semibold)).lineLimit(1)
                 .padding(.horizontal, 12).padding(.vertical, 8)
-                .background(Capsule().fill(choisi ? Palette.campVif(camp).opacity(0.28)
+                .background(Capsule().fill(chosen ? Palette.brightSide(side).opacity(0.28)
                                                   : Color.white.opacity(0.06)))
-                .overlay(Capsule().strokeBorder(choisi ? Palette.campVif(camp)
+                .overlay(Capsule().strokeBorder(chosen ? Palette.brightSide(side)
                                                        : Palette.dim.opacity(0.45),
                                                 lineWidth: 1))
-                .foregroundStyle(choisi ? Palette.ink : Palette.dim)
+                .foregroundStyle(chosen ? Palette.ink : Palette.dim)
         }
         .buttonStyle(.plain)
     }
 
-    /// La moitié, et seulement quand elle dit autre chose que les deux bouts.
-    private var moitie: Int? {
-        let m = min(haut, max(minimum, (haut + 1) / 2))
-        return m > minimum && m < haut ? m : nil
+    /// Half, and only when it says something other than the two ends.
+    private var half: Int? {
+        let m = min(top, max(minimum, (top + 1) / 2))
+        return m > minimum && m < top ? m : nil
     }
 }

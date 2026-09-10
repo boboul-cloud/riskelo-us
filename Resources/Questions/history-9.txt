@@ -1,0 +1,255 @@
+# History — Grade 9 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# The ninth-grade modern world history course: the Enlightenment and the
+# age of revolutions, industry, nationalism, empire, the two world wars,
+# the Cold War and decolonization.
+#
+# Two hundred questions, and no prompt duplicates one in any other file —
+# including the free History deck, which crosses the same centuries at a
+# gentler altitude.
+
+! id      | history-9
+! name    | History — Grade 9
+! detail  | The modern world, from the Enlightenment to the fall of the Wall.
+! icon    | globe.europe.africa
+! tint    | 0.45 0.50 0.72
+! rank    | 19
+! product | com.oulhen.riskelo.us.pack.history9
+
+
+# --- The Enlightenment and the age of revolutions ---
+
+E | Which French uprising began with the storming of the Bastille in 1789? | The French Revolution | The Paris Commune | The July Revolution | The Fronde
+E | Which French emperor crowned himself in 1804? | Napoleon Bonaparte | Louis XVI | Charles X | Napoleon III
+E | Which 1815 battle ended Napoleon's rule for good? | Waterloo | Austerlitz | Trafalgar | Borodino
+E | Which thinker argued that power should be split into three branches? | Montesquieu | Voltaire | Rousseau | Diderot
+E | Which movement of the 1700s put reason above inherited tradition? | The Enlightenment | The Renaissance | Romanticism | The Reformation
+M | Which document did the French National Assembly adopt in 1789? | The Declaration of the Rights of Man | The Civil Code | The Tennis Court Oath | The Constitution of 1791
+M | Which period of the French Revolution is named for its executions? | The Terror | The Directory | The Consulate | Thermidor
+M | Which lawyer dominated the Committee of Public Safety? | Robespierre | Danton | Marat | Sieyes
+M | Which device became the symbol of revolutionary executions? | The guillotine | The gallows | The garrote | The pillory
+M | Which legal code did Napoleon impose across much of Europe? | The Napoleonic Code | The Justinian Code | The Salic law | The Code of Hammurabi
+M | Which island held Napoleon after his final defeat? | Saint Helena | Elba | Corsica | Malta
+M | Which congress redrew Europe's borders after Napoleon fell? | The Congress of Vienna | The Congress of Berlin | The Peace of Westphalia | The Treaty of Utrecht
+M | Which Caribbean colony won independence after a slave revolt in 1804? | Haiti | Cuba | Jamaica | Martinique
+M | Which leader led the Haitian revolt before the French captured him? | Toussaint Louverture | Jean-Jacques Dessalines | Henri Christophe | Andre Rigaud
+M | Which general liberated much of northern South America? | Simon Bolivar | Jose de San Martin | Bernardo O'Higgins | Miguel Hidalgo
+M | Which general led independence campaigns in Argentina, Chile and Peru? | Jose de San Martin | Simon Bolivar | Antonio Sucre | Francisco Miranda
+M | Which priest launched Mexico's independence movement in 1810? | Miguel Hidalgo | Jose Morelos | Agustin de Iturbide | Benito Juarez
+M | Which Portuguese colony became an independent empire in 1822? | Brazil | Angola | Mozambique | Goa
+H | Which philosopher wrote The Social Contract? | Rousseau | Locke | Hobbes | Voltaire
+H | Which English philosopher argued for natural rights to life, liberty and property? | John Locke | Thomas Hobbes | David Hume | Adam Smith
+H | Which 1776 book by Adam Smith argued for free markets? | The Wealth of Nations | Leviathan | The Spirit of the Laws | Principles of Economics
+H | Which writer's Candide mocked blind optimism? | Voltaire | Rousseau | Montesquieu | Beaumarchais
+H | Which multi-volume French work tried to gather all human knowledge? | The Encyclopedie | The Grand Dictionnaire | The Almanach | The Summa
+H | Which three estates made up French society before 1789? | Clergy, nobility, commoners | Nobles, merchants, peasants | Crown, church, army | Rich, middling, poor
+H | Which oath did deputies swear in 1789 rather than disband? | The Tennis Court Oath | The Oath of the Horatii | The Civic Oath | The Oath of Strasbourg
+H | Which 1799 coup brought Napoleon to power? | The coup of 18 Brumaire | The coup of Fructidor | The Vendemiaire rising | The Thermidor reaction
+H | Which 1812 campaign destroyed Napoleon's Grande Armee? | The invasion of Russia | The Peninsular War | The Egyptian campaign | The Italian campaign
+H | Which British admiral broke the French fleet in 1805? | Nelson | Collingwood | Rodney | Jellicoe
+H | Which 1848 wave of uprisings shook capitals across Europe? | The Springtime of Nations | The July Revolution | The Chartist risings | The Decembrist revolt
+H | Which 1830 French revolution replaced Charles X with Louis-Philippe? | The July Revolution | The February Revolution | The Paris Commune | The Hundred Days
+
+# --- The Industrial Revolution ---
+
+E | In which country did the Industrial Revolution begin? | Britain | France | Germany | The United States
+E | Which fuel powered the first industrial factories and railways? | Coal | Oil | Natural gas | Peat
+E | Which invention freed factories from the need for a water wheel? | The steam engine | The dynamo | The turbine | The windmill
+M | Which Scottish engineer improved the steam engine in the 1760s? | James Watt | Thomas Newcomen | Richard Arkwright | George Stephenson
+M | Which industry industrialized first in Britain? | Textiles | Steel | Chemicals | Shipbuilding
+M | Which invention sped up weaving in the early 1700s? | The flying shuttle | The cotton gin | The power loom | The spinning jenny
+M | Which invention of Eli Whitney sped up the cleaning of cotton? | The cotton gin | The reaper | The sewing machine | The spinning mule
+M | Which transport network spread across Britain from the 1830s? | Railways | Canals | Turnpikes | Tramways
+M | Which movement of people marked industrial growth? | Urbanization | Emigration | Nomadism | Depopulation
+M | Which English workers smashed the machines they blamed for lost jobs? | The Luddites | The Chartists | The Fabians | The Levellers
+M | Which British movement demanded the vote for working men in the 1840s? | Chartism | Owenism | Fenianism | Radicalism
+M | Which organizations did workers form to bargain with employers? | Trade unions | Guilds | Cartels | Cooperatives
+H | Which 1848 pamphlet by Marx and Engels called on workers to unite? | The Communist Manifesto | Das Kapital | The German Ideology | What Is to Be Done
+H | Which system did Marx expect to follow capitalism? | Communism | Mercantilism | Corporatism | Physiocracy
+H | Which process made cheap steel possible from the 1850s? | The Bessemer process | The Haber process | The Solvay process | The Siemens furnace
+H | Which American opened a moving assembly line for cars in 1913? | Henry Ford | Ransom Olds | Walter Chrysler | William Durant
+H | Which system of factory management is named for Frederick Taylor? | Scientific management | Fordism | Vertical integration | Piecework
+H | Which British laws limited the hours children could work in mills? | The Factory Acts | The Corn Laws | The Poor Laws | The Combination Acts
+H | Which British laws taxing imported grain were repealed in 1846? | The Corn Laws | The Navigation Acts | The Enclosure Acts | The stamp duties
+H | Which practice fenced off English common land for private farming? | Enclosure | Tithing | Manorialism | Sharecropping
+H | Which 1851 London fair showed off industry in a palace of glass? | The Great Exhibition | The Paris Exposition | The Columbian Exposition | The Crystal Fair
+H | Which second wave of industry ran on electricity, steel and chemicals? | The Second Industrial Revolution | The Machine Age | The Gilded expansion | The Age of Empire
+
+# --- Nations and nationalism ---
+
+E | Which country was unified in 1871 under Prussian leadership? | Germany | Italy | Austria | Poland
+M | Which Prussian minister engineered German unification? | Otto von Bismarck | Wilhelm I | Helmuth von Moltke | Friedrich Ebert
+M | Which palace hosted the proclamation of the German Empire in 1871? | Versailles | Sanssouci | Schonbrunn | The Hofburg
+M | Which kingdom led the unification of Italy? | Piedmont-Sardinia | Naples | Tuscany | Venetia
+M | Which soldier led the Thousand into Sicily in 1860? | Giuseppe Garibaldi | Camillo Cavour | Victor Emmanuel II | Giuseppe Mazzini
+M | Which statesman steered Piedmont's diplomacy toward Italian unity? | Cavour | Garibaldi | Mazzini | Crispi
+M | Which city became Italy's capital in 1871? | Rome | Turin | Florence | Milan
+M | Which empire was reorganized as a dual monarchy in 1867? | Austria-Hungary | The Ottoman Empire | Russia | Prussia
+M | Which empire did nineteenth-century diplomats call the sick man of Europe? | The Ottoman Empire | The Habsburg Empire | The Russian Empire | The Spanish Empire
+H | Which 1870 war brought down France's Second Empire? | The Franco-Prussian War | The Crimean War | The Austro-Prussian War | The Italian war of 1859
+H | Which French province did Germany take in 1871? | Alsace-Lorraine | Savoy | Franche-Comte | The Saar
+H | Which 1871 Paris uprising was crushed after two months? | The Paris Commune | The June Days | The July Days | The Boulanger affair
+H | Which affair split France over an officer wrongly convicted of treason? | The Dreyfus affair | The Panama scandal | The Boulanger crisis | The Stavisky affair
+H | Which 1853 war pitted Russia against Britain, France and the Ottomans? | The Crimean War | The Russo-Turkish War | The Balkan War | The Great Game
+H | Which nurse reformed military hospitals during the Crimean War? | Florence Nightingale | Clara Barton | Edith Cavell | Dorothea Dix
+H | Which idea holds that a people sharing a language deserves its own state? | Nationalism | Liberalism | Socialism | Conservatism
+
+# --- Empire ---
+
+E | Which continent did European powers carve up in the late 1800s? | Africa | South America | Australia | Antarctica
+E | Which country ruled India until 1947? | Britain | France | Portugal | The Netherlands
+M | Which 1884 conference set the rules for partitioning Africa? | The Berlin Conference | The Vienna Congress | The Hague Conference | The Algeciras Conference
+M | Which Belgian king ran the Congo as his private property? | Leopold II | Albert I | Baudouin | Leopold I
+M | Which two African states were still independent in 1900? | Ethiopia and Liberia | Morocco and Egypt | Sudan and Somalia | Ghana and Mali
+M | Which 1896 battle saw Ethiopia destroy an Italian army? | Adwa | Omdurman | Isandlwana | Ulundi
+M | Which 1857 uprising shook British rule in India? | The Sepoy Rebellion | The Boxer Rebellion | The Taiping Rebellion | The Quit India movement
+M | Which company ruled much of India before the Crown took over? | The East India Company | The Hudson's Bay Company | The Levant Company | The Dutch East India Company
+M | Which wars forced China to open its ports to British traders? | The Opium Wars | The Boxer wars | The Sino-Japanese wars | The Taiping wars
+M | Which Chinese uprising of 1900 targeted foreigners and missionaries? | The Boxer Rebellion | The Taiping Rebellion | The White Lotus revolt | The May Fourth movement
+M | Which canal opened in 1869 between the Mediterranean and the Red Sea? | The Suez Canal | The Panama Canal | The Kiel Canal | The Corinth Canal
+M | Which Japanese era beginning in 1868 brought rapid modernization? | The Meiji Restoration | The Tokugawa shogunate | The Taisho era | The Showa era
+H | Which 1905 war saw Japan defeat a European great power? | The Russo-Japanese War | The First Sino-Japanese War | The Boxer war | The Manchurian incident
+H | Which American commodore forced Japan open to trade in 1854? | Matthew Perry | Oliver Perry | David Farragut | George Dewey
+H | Which British writer urged empire in a poem about the white man's burden? | Rudyard Kipling | Joseph Conrad | H. Rider Haggard | Alfred Tennyson
+H | Which Joseph Conrad novel exposed the horrors of the Congo? | Heart of Darkness | Lord Jim | Nostromo | The Secret Agent
+H | Which theory twisted evolution into a defense of conquest? | Social Darwinism | Malthusianism | Positivism | Utilitarianism
+H | Which British businessman pushed for a Cape-to-Cairo railway? | Cecil Rhodes | Joseph Chamberlain | David Livingstone | Frederick Lugard
+H | Which 1899 war pitted Britain against Dutch-descended settlers? | The Second Boer War | The Zulu War | The Ashanti War | The Mahdist War
+H | Which 1898 clash nearly brought Britain and France to war in Sudan? | The Fashoda incident | The Agadir crisis | The Tangier crisis | The Dogger Bank affair
+
+# --- The First World War ---
+
+E | Which assassination in 1914 set off the First World War? | The killing of Archduke Franz Ferdinand | The killing of Tsar Nicholas II | The killing of Jean Jaures | The killing of King Alexander
+E | Which city hosted the 1914 assassination that began the war? | Sarajevo | Belgrade | Vienna | Zagreb
+E | Which kind of warfare defined the Western Front? | Trench warfare | Blitzkrieg | Naval blockade | Guerrilla raids
+E | Which nickname did American soldiers of 1917 and 1918 carry? | Doughboys | Tommies | Poilus | Diggers
+E | Which organization was founded in 1920 to keep the peace? | The League of Nations | The United Nations | The Hague Court | The Concert of Europe
+E | Which 1919 treaty imposed harsh terms on Germany? | The Treaty of Versailles | The Treaty of Trianon | The Treaty of Sevres | The Treaty of Rapallo
+M | Which alliance grouped Germany, Austria-Hungary and the Ottomans? | The Central Powers | The Triple Entente | The Allies | The Axis
+M | Which 1916 battle around a French fortress city lasted ten months? | Verdun | The Marne | Ypres | Passchendaele
+M | Which 1916 battle cost Britain some 57,000 casualties on its first day? | The Somme | Verdun | The Aisne | Cambrai
+M | Which weapon made its battlefield debut at the Somme in 1916? | The tank | The machine gun | The flamethrower | The howitzer
+M | Which gas was first used on a large scale at Ypres in 1915? | Chlorine | Mustard gas | Phosgene | Tear gas
+M | Which 1915 sinking turned American opinion against Germany? | The Lusitania | The Maine | The Titanic | The Athenia
+M | Which German policy attacked merchant ships without warning? | Unrestricted submarine warfare | The distant blockade | Cruiser commerce raiding | The Baltic strategy
+M | Which telegram proposed a German alliance with Mexico? | The Zimmermann telegram | The Ems dispatch | The Kruger telegram | The Willy-Nicky letters
+M | On which date did the guns fall silent in 1918? | 11 November | 28 June | 3 September | 1 August
+H | Which failed 1915 Allied landing targeted the Dardanelles? | Gallipoli | Salonika | Anzio | Narvik
+H | Which German plan aimed to beat France before turning on Russia? | The Schlieffen Plan | Plan XVII | Case Yellow | The Hindenburg programme
+H | Which 1914 battle halted the German advance short of Paris? | The Marne | The Aisne | The Frontiers | Charleroi
+H | Which article of the Versailles treaty assigned Germany war guilt? | Article 231 | Article 10 | Article 48 | Article 5
+H | Which American president proposed the Fourteen Points? | Woodrow Wilson | Theodore Roosevelt | William Taft | Warren Harding
+H | Which 1918 treaty took Russia out of the war? | Brest-Litovsk | Versailles | Trianon | Saint-Germain
+H | Which genocide targeted Armenians in the Ottoman Empire from 1915? | The Armenian genocide | The Holodomor | The Greek expulsion | The Assyrian deportations
+
+# --- Revolution in Russia ---
+
+E | Which 1917 revolution brought the Bolsheviks to power? | The October Revolution | The February Revolution | The 1905 Revolution | The Decembrist revolt
+E | Which leader headed the Bolsheviks in 1917? | Lenin | Stalin | Trotsky | Kerensky
+E | Which state did the Bolsheviks found in 1922? | The Soviet Union | The Russian Federation | The Commonwealth | The Warsaw Pact
+E | Which leader took control of the Soviet Union after Lenin died? | Stalin | Trotsky | Bukharin | Zinoviev
+M | Which Russian ruling family was overthrown in 1917? | The Romanovs | The Habsburgs | The Hohenzollerns | The Bourbons
+M | Which Soviet policy forced peasants onto state-run farms? | Collectivization | Perestroika | The New Economic Policy | War communism
+M | Which famine struck Soviet Ukraine in 1932 and 1933? | The Holodomor | The Volga famine | The Kazakh famine | The siege famine
+H | Which councils of workers and soldiers shared power in 1917 Russia? | The soviets | The dumas | The zemstvos | The artels
+H | Which secret police force served the earliest Soviet state? | The Cheka | The Okhrana | The Stasi | The Securitate
+H | Which purges of the late 1930s killed Soviet party leaders and officers? | The Great Purge | The Red Terror | The doctors' plot | The Leningrad affair
+H | Which network of Soviet labor camps did Solzhenitsyn describe? | The Gulag | The kolkhoz | The Politburo | The Komsomol
+H | Which rival did Stalin exile and later have killed in Mexico? | Trotsky | Kamenev | Rykov | Kirov
+H | Which Soviet plans set production targets in blocks of five years? | The Five-Year Plans | The Great Leap Forward | The New Course | The Ten-Year Programs
+H | Which 1905 event saw troops fire on marchers at the Winter Palace? | Bloody Sunday | The July Days | The Kronstadt revolt | The Potemkin mutiny
+
+# --- Between the wars ---
+
+E | Which market collapse of October 1929 opened a decade of depression? | The Wall Street crash | The Dust Bowl | The gold panic | The bank holiday
+E | Which German leader took power in 1933? | Adolf Hitler | Paul von Hindenburg | Heinrich Bruning | Ernst Rohm
+E | Which Italian leader founded fascism and marched on Rome in 1922? | Mussolini | Balbo | Ciano | Badoglio
+M | Which German republic governed between the world wars? | The Weimar Republic | The Second Reich | The Rhineland Republic | The Bonn Republic
+M | Which crisis wiped out German savings in 1923? | Hyperinflation | Deflation | A stock crash | A banking freeze
+M | Which American program of relief and reform answered the Depression? | The New Deal | The Fair Deal | The Square Deal | The Great Society
+M | Which 1938 agreement handed Germany the Sudetenland? | The Munich Agreement | The Locarno pact | The Anti-Comintern Pact | The Anschluss treaty
+M | Which policy of yielding to Hitler's demands is remembered from Munich? | Appeasement | Containment | Collective security | Isolationism
+M | Which 1939 pact divided eastern Europe between Germany and the USSR? | The Nazi-Soviet Pact | The Pact of Steel | The Tripartite Pact | The Kellogg-Briand Pact
+M | Which 1936 war served as a rehearsal for a wider conflict? | The Spanish Civil War | The Rif War | The Carlist war | The Asturias rising
+H | Which Spanish general won that civil war and ruled until 1975? | Franco | Primo de Rivera | Sanjurjo | Mola
+H | Which Picasso painting protested the bombing of a Basque town? | Guernica | The Weeping Woman | Massacre in Korea | The Charnel House
+H | Which 1935 laws stripped German Jews of their citizenship? | The Nuremberg Laws | The Enabling Act | The Reichstag decrees | The Aryan statutes
+H | Which 1938 night of attacks wrecked Jewish shops and synagogues? | Kristallnacht | The Night of the Long Knives | The Beer Hall Putsch | The Reichstag fire
+
+# --- The Second World War ---
+
+E | Which 1939 invasion began the Second World War in Europe? | The invasion of Poland | The invasion of France | The invasion of Norway | The invasion of Finland
+E | Which 1941 raid on a Hawaiian naval base drew the United States in? | Pearl Harbor | Midway | The Doolittle raid | The Aleutians landing
+E | Which 1944 landings opened a front in Normandy? | D-Day | Operation Torch | Operation Market Garden | The Anzio landings
+E | Which genocide killed six million Jews? | The Holocaust | The Great Purge | The Rape of Nanking | The Cambodian killings
+E | Which two Japanese cities were struck by atomic bombs? | Hiroshima and Nagasaki | Tokyo and Osaka | Kyoto and Kobe | Yokohama and Sapporo
+E | Which German tactic of fast armored attack opened the war? | Blitzkrieg | Trench assault | Total blockade | Infiltration
+E | Which British prime minister led his country through the war? | Winston Churchill | Neville Chamberlain | Clement Attlee | Anthony Eden
+E | Which camp in occupied Poland became the largest Nazi death camp? | Auschwitz | Dachau | Buchenwald | Bergen-Belsen
+M | Which 1940 air campaign pitted the Luftwaffe against the RAF? | The Battle of Britain | The Blitz | Operation Sea Lion | The Channel Dash
+M | Which 1941 operation launched the German invasion of the USSR? | Operation Barbarossa | Operation Typhoon | Operation Citadel | Operation Blue
+M | Which Soviet city endured a siege of almost nine hundred days? | Leningrad | Stalingrad | Sevastopol | Moscow
+M | Which 1942 battle on the Volga turned the war in the east? | Stalingrad | Kursk | Kharkov | Rostov
+M | Which 1942 Pacific battle cost Japan four aircraft carriers? | Midway | Coral Sea | Leyte Gulf | Guadalcanal
+M | Which German field marshal led the Afrika Korps? | Erwin Rommel | Gerd von Rundstedt | Walther Model | Friedrich Paulus
+M | Which American general commanded Allied forces in western Europe? | Dwight Eisenhower | George Patton | Omar Bradley | Douglas MacArthur
+M | On which date in 1945 did Germany surrender? | 8 May | 6 June | 2 September | 11 November
+M | On which date in 1945 did Japan sign its surrender? | 2 September | 15 August | 8 May | 6 August
+H | Which 1940 evacuation rescued Allied troops from a French beach? | Dunkirk | Dieppe | Calais | Le Havre
+H | Which French general broadcast a call to keep fighting from London? | Charles de Gaulle | Philippe Petain | Maxime Weygand | Jean Moulin
+H | Which French regime collaborated with Germany from 1940? | Vichy | The Third Republic | The Free French | The Popular Front
+H | Which 1943 battle was the largest tank engagement of the war? | Kursk | Stalingrad | El Alamein | Bagration
+H | Which 1942 conference planned the murder of Europe's Jews? | The Wannsee Conference | The Munich Conference | The Casablanca Conference | The Potsdam Conference
+H | Which 1943 revolt resisted deportations from a Polish city's Jewish quarter? | The Warsaw Ghetto uprising | The Warsaw uprising of 1944 | The Sobibor revolt | The Bialystok revolt
+H | Which project built the first atomic bomb? | The Manhattan Project | The Tube Alloys project | Project Alberta | The Trinity program
+H | Which 1944 German offensive in the Ardennes was its last in the west? | The Battle of the Bulge | Operation Nordwind | Operation Cobra | Operation Dragoon
+H | Which trials judged surviving Nazi leaders after the war? | The Nuremberg trials | The Tokyo trials | The Hague trials | The Dachau trials
+
+# --- The Cold War ---
+
+E | Which two superpowers faced each other in the Cold War? | The United States and the USSR | Britain and France | China and Japan | Germany and Russia
+E | Which wall divided a German city from 1961 to 1989? | The Berlin Wall | The Iron Curtain fence | The Maginot Line | The Oder line
+E | Which alliance did western nations form in 1949? | NATO | The Warsaw Pact | The United Nations | The Comintern
+E | Which alliance grouped the Soviet bloc from 1955? | The Warsaw Pact | NATO | Comecon | The Rio Pact
+E | Which Cuban leader took power in 1959? | Fidel Castro | Che Guevara | Fulgencio Batista | Raul Castro
+E | Which leader founded the People's Republic of China in 1949? | Mao Zedong | Chiang Kai-shek | Zhou Enlai | Deng Xiaoping
+E | Which 1957 satellite opened the space race? | Sputnik | Explorer 1 | Vostok 1 | Telstar
+E | Which 1969 mission put humans on the Moon? | Apollo 11 | Apollo 8 | Gemini 12 | Soyuz 4
+E | Which Soviet leader introduced glasnost and perestroika? | Mikhail Gorbachev | Boris Yeltsin | Konstantin Chernenko | Eduard Shevardnadze
+E | In which year did the Berlin Wall come down? | 1989 | 1987 | 1990 | 1991
+E | In which year did the Soviet flag come down over the Kremlin? | 1991 | 1989 | 1990 | 1993
+M | Which American policy aimed to stop communism from spreading? | Containment | Detente | Appeasement | Rollback
+M | Which American plan sent aid to rebuild western Europe? | The Marshall Plan | The Truman Doctrine | Lend-Lease | The Point Four program
+M | Which airlift supplied a blockaded city in 1948 and 1949? | The Berlin airlift | The Hump airlift | The Hanoi airlift | The Suez airlift
+M | Which war split a peninsula along the 38th parallel? | The Korean War | The Vietnam War | The Chinese Civil War | The Manchurian conflict
+M | Which 1962 crisis brought nuclear war closest? | The Cuban missile crisis | The Berlin crisis | The Suez crisis | The Able Archer scare
+M | Which Chinese campaign of the 1960s attacked old customs and elites? | The Cultural Revolution | The Great Leap Forward | The Hundred Flowers | The Four Modernizations
+M | Which Soviet leader denounced Stalin in a secret speech in 1956? | Nikita Khrushchev | Leonid Brezhnev | Georgy Malenkov | Yuri Andropov
+H | Which 1956 uprising in Hungary was crushed by Soviet tanks? | The Hungarian Revolution | The Prague Spring | The Poznan protests | The Solidarity strikes
+H | Which 1968 reform movement in Czechoslovakia ended under invasion? | The Prague Spring | The Velvet Revolution | The Budapest thaw | The Warsaw thaw
+H | Which Polish trade union movement challenged communist rule in 1980? | Solidarity | Charter 77 | The Workers' Defense Committee | The Round Table
+H | Which 1975 accords eased tension and recognized European borders? | The Helsinki Accords | The Camp David Accords | The Paris Accords | The Yalta agreements
+
+# --- Decolonization and the world since ---
+
+E | Which leader led India's nonviolent independence movement? | Gandhi | Nehru | Jinnah | Bose
+E | Which South African system of racial segregation ended in 1994? | Apartheid | Jim Crow | The pass laws | Bantu rule
+E | Which South African prisoner became president in 1994? | Nelson Mandela | Desmond Tutu | Thabo Mbeki | Steve Biko
+E | Which two states were created when British India was partitioned? | India and Pakistan | India and Bangladesh | Pakistan and Kashmir | India and Ceylon
+E | Which organization replaced the League of Nations in 1945? | The United Nations | The Council of Europe | The Hague Court | The Commonwealth
+E | Which currency did most European Union members adopt in 2002? | The euro | The ecu | The franc | The mark
+M | Which war of independence against France ended in 1962? | The Algerian War | The Indochina War | The Suez war | The Rif War
+M | Which year saw seventeen African colonies become independent? | 1960 | 1950 | 1970 | 1945
+M | Which Vietnamese leader fought both France and the United States? | Ho Chi Minh | Ngo Dinh Diem | Vo Nguyen Giap | Pol Pot
+M | Which 1954 defeat ended French rule in Indochina? | Dien Bien Phu | Cao Bang | Hanoi | Saigon
+M | Which state was created in 1948 in former British Palestine? | Israel | Jordan | Lebanon | Syria
+H | Which 1956 crisis followed Egypt's seizure of a canal company? | The Suez crisis | The Sinai campaign of 1967 | The Aswan crisis | The Nile dispute
+H | Which 1994 genocide killed hundreds of thousands in a hundred days? | The Rwandan genocide | The Bosnian war | The Darfur crisis | The Biafra war
+H | Which regime emptied Cambodia's cities from 1975 and killed a fifth of its people? | The Khmer Rouge | The Viet Cong | The Pathet Lao | The Lon Nol government

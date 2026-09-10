@@ -1,18 +1,18 @@
 //
 //  HexPlan.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Le plateau d'essai, écrit comme on le dessinerait sur un carnet.
+//  The board plan, written the way you would sketch it on a notepad.
 //
-//  Une carte de Risk se fabrique d'ordinaire à la main, territoire par
-//  territoire, avec ses voisinages saisis un à un — et une erreur de voisinage
-//  ne se voit pas : elle rend juste un territoire imprenable, trois parties
-//  plus tard. Ici le plan est un damier d'hexagones décrit par un dessin en
-//  toutes lettres ; les voisinages s'en déduisent, et ne peuvent donc pas être
-//  faux. Le plateau se retouche en déplaçant une lettre.
+//  A Risk map is usually built by hand, territory by territory, with its
+//  adjacencies typed in one at a time — and a wrong adjacency does not show:
+//  it merely makes a territory unassailable, three games later. Here the plan
+//  is a checkerboard of hexagons described by a drawing in plain characters;
+//  the adjacencies follow from it, and so they cannot be wrong. The board is
+//  reworked by moving a letter.
 //
-//  Décalage « odd-r » : une ligne sur deux est poussée d'une demi-case vers la
-//  droite, comme sur un nid d'abeilles.
+//  "odd-r" offset: every other row is pushed half a cell to the right, like
+//  a honeycomb.
 //
 
 import Foundation
@@ -23,12 +23,12 @@ enum HexPlan {
         let id: ContinentID
         let name: String
         let bonus: Int
-        /// Les noms de territoires, consommés dans l'ordre de lecture du plan.
+        /// Territory names, consumed in the plan's reading order.
         let names: [String]
     }
 
-    /// Construit carte et dessin à partir du plan. `rows` se lit ligne à ligne,
-    /// un caractère par case ; le point est de la mer, les espaces sont ignorés.
+    /// Builds map and drawing from the plan. `rows` reads line by line, one
+    /// character per cell; a dot is sea, spaces are ignored.
     static func build(rows: [String], continents: [ContinentSpec],
                       seaRoutes: [(String, String)] = []) -> Board {
         var cells: [(col: Int, row: Int, key: Character)] = []
@@ -40,11 +40,11 @@ enum HexPlan {
             }
         }
 
-        // Nommage : chaque continent puise dans sa liste, dans l'ordre de
-        // lecture. Si la liste est trop courte, on numérote plutôt que de
-        // planter — un plan en cours de retouche doit rester jouable.
+        // Naming: each continent draws from its list, in reading order. If
+        // the list is too short we number instead of crashing — a plan being
+        // reworked has to stay playable.
         var used: [Character: Int] = [:]
-        var idOf: [String: TerritoryID] = [:]      // "col,row" -> identifiant
+        var idOf: [String: TerritoryID] = [:]      // "col,row" -> identifier
         var nameOf: [TerritoryID: String] = [:]
         var continentOf: [TerritoryID: ContinentID] = [:]
         let specs = Dictionary(uniqueKeysWithValues: continents.map { (Character($0.id), $0) })
@@ -60,7 +60,7 @@ enum HexPlan {
             continentOf[id] = spec?.id ?? String(cell.key)
         }
 
-        // Voisinages « odd-r ».
+        // "odd-r" adjacency.
         func neighbourKeys(col c: Int, row r: Int) -> [String] {
             let odd = r % 2 != 0
             let deltas: [(Int, Int)] = odd
@@ -77,13 +77,13 @@ enum HexPlan {
                                          continent: continentOf[id]!, neighbors: ns))
         }
 
-        // Les traversées, désignées par les noms : c'est ce qui se relit.
-        var idParNom: [String: TerritoryID] = [:]
-        for (id, nom) in nameOf { idParNom[nom] = id }
+        // Crossings are named by territory name: that is what reads back.
+        var idByName: [String: TerritoryID] = [:]
+        for (id, name) in nameOf { idByName[name] = id }
         var routes: [SeaRoute] = []
         for (a, b) in seaRoutes {
-            guard let ia = idParNom[a], let ib = idParNom[b] else {
-                assertionFailure("Traversée vers un territoire inconnu : \(a) – \(b)")
+            guard let ia = idByName[a], let ib = idByName[b] else {
+                assertionFailure("Crossing to an unknown territory: \(a) – \(b)")
                 continue
             }
             routes.append(SeaRoute(from: ia, to: ib))
@@ -101,13 +101,13 @@ enum HexPlan {
 
         var grouped: [ContinentID: [TerritoryID]] = [:]
         for t in territories { grouped[t.continent, default: []].append(t.id) }
-        let conts = continents.enumerated().map { rang, spec in
+        let conts = continents.enumerated().map { rank, spec in
             Continent(id: spec.id, name: spec.name, bonus: spec.bonus,
-                      territories: grouped[spec.id] ?? [], tint: rang)
+                      territories: grouped[spec.id] ?? [], tint: rank)
         }
 
-        // Géométrie : hexagone pointe en haut, rayon 1. Largeur √3, hauteur 2,
-        // les lignes se recouvrent d'un quart de hauteur.
+        // Geometry: pointy-top hexagon, radius 1. Width √3, height 2, rows
+        // overlapping by a quarter of their height.
         let w = 3.0.squareRoot()
         var raw: [TerritoryID: Point] = [:]
         for cell in cells {
@@ -116,46 +116,46 @@ enum HexPlan {
             raw[id] = Point(x: Double(cell.col) * w + dx, y: Double(cell.row) * 1.5)
         }
 
-        // Mise à l'échelle sur x uniquement : les hexagones restent réguliers.
+        // Scaled on x only: the hexagons stay regular.
         let minX = raw.values.map(\.x).min() ?? 0, maxX = raw.values.map(\.x).max() ?? 1
         let minY = raw.values.map(\.y).min() ?? 0, maxY = raw.values.map(\.y).max() ?? 1
-        let span = (maxX - minX) + w              // une case de marge : le bord
-        let height = (maxY - minY) + 2.0          // ne doit pas rogner les pointes
+        let span = (maxX - minX) + w              // one cell of margin: the edge
+        let height = (maxY - minY) + 2.0          // must not clip the points
         var centers: [TerritoryID: Point] = [:]
         for (id, p) in raw {
             centers[id] = Point(x: (p.x - minX + w / 2) / span,
                                 y: (p.y - minY + 1.0) / span)
         }
 
-        // Les six directions, dans l'ordre des arêtes du tracé : l'arête 0
-        // part du sommet du haut vers la droite, et l'on tourne dans le sens
-        // des aiguilles. À chacune correspond un voisin — ou la mer.
+        // The six directions, in the order of the drawn edges: edge 0 leaves
+        // the top vertex heading right, and we turn clockwise. Each one has a
+        // neighbor across it — or the sea.
         func directions(row r: Int) -> [(Int, Int)] {
             let odd = r % 2 != 0
             return [
-                odd ? (1, -1) : (0, -1),   // 0 — haut-droite
-                (1, 0),                     // 1 — droite
-                odd ? (1, 1) : (0, 1),      // 2 — bas-droite
-                odd ? (0, 1) : (-1, 1),     // 3 — bas-gauche
-                (-1, 0),                    // 4 — gauche
-                odd ? (0, -1) : (-1, -1),   // 5 — haut-gauche
+                odd ? (1, -1) : (0, -1),   // 0 — upper right
+                (1, 0),                     // 1 — right
+                odd ? (1, 1) : (0, 1),      // 2 — lower right
+                odd ? (0, 1) : (-1, 1),     // 3 — lower left
+                (-1, 0),                    // 4 — left
+                odd ? (0, -1) : (-1, -1),   // 5 — upper left
             ]
         }
-        var frontieres: [TerritoryID: Set<Int>] = [:]
+        var frontiers: [TerritoryID: Set<Int>] = [:]
         for cell in cells {
             let id = idOf["\(cell.col),\(cell.row)"]!
-            var bords = Set<Int>()
+            var edges = Set<Int>()
             for (k, d) in directions(row: cell.row).enumerated() {
-                let voisin = idOf["\(cell.col + d.0),\(cell.row + d.1)"]
-                if voisin == nil || continentOf[voisin!] != continentOf[id] { bords.insert(k) }
+                let neighbor = idOf["\(cell.col + d.0),\(cell.row + d.1)"]
+                if neighbor == nil || continentOf[neighbor!] != continentOf[id] { edges.insert(k) }
             }
-            frontieres[id] = bords
+            frontiers[id] = edges
         }
 
         let layout = BoardLayout(centers: centers,
                                  cellRadius: 1.0 / span,
                                  aspect: height / span,
-                                 frontierEdges: frontieres,
+                                 frontierEdges: frontiers,
                                  seaRoutes: routes)
         return Board(map: GameMap(territories: territories, continents: conts), layout: layout)
     }

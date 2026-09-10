@@ -1,70 +1,68 @@
 //
 //  Combat.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Le duel : une question à la place d'une paire de dés.
+//  The duel: one question in place of a pair of dice.
 //
-//  La règle tient en deux lignes. L'attaquant choisit une catégorie et pose
-//  une ou deux questions — ses dés. Le défenseur répond.
+//  The rule fits in two lines. The attacker picks a category and asks one or
+//  two questions — their dice. The defender answers.
 //
-//      bonne réponse  → le dé du défenseur est supérieur → l'attaquant perd un soldat
-//      mauvaise, ou temps écoulé → le dé de l'attaquant l'emporte → le défenseur perd un soldat
+//      correct answer            → the defender's die is higher → the attacker loses a soldier
+//      wrong, or time runs out   → the attacker's die wins      → the defender loses a soldier
 //
-//  Une paire de dés, une perte : c'est exactement la comparaison du Risk, et
-//  le pari est le même — deux questions, c'est deux pertes possibles de son
-//  propre côté.
+//  A pair of dice, one loss: that is exactly Risk's comparison, and the bet
+//  is the same — two questions means two possible losses on your own side.
 //
-//  L'égalité, au Risk, profite au défenseur. Elle n'a pas d'équivalent en
-//  classique : une question n'a pas de match nul. Le principe est sauf — le
-//  doute reste du côté de celui qui tient la place.
+//  A tie, in Risk, favors the defender. It has no equivalent in classic play:
+//  a question has no draw. The principle survives — doubt stays on the side
+//  of whoever holds the place.
 //
-//  En **face à face**, elle en retrouve un. Les deux joueurs répondent à la
-//  même question, et il n'y a plus une réponse mais deux à comparer :
+//  In a **showdown** it finds one again. Both players answer the same
+//  question, and there is no longer one answer but two to compare:
 //
-//      un seul sait            → il emporte l'échange
-//      les deux savent         → le plus vif l'emporte, l'égalité au défenseur
-//      aucun des deux ne sait  → la place tient, l'assaillant laisse un homme
+//      only one knows      → they win the exchange
+//      both know           → the quicker wins, a tie goes to the defender
+//      neither knows       → the place holds, the attacker leaves a troop
 //
-//  C'est là, et là seulement, que la vitesse décide quelque chose. Elle ne
-//  départage jamais deux réponses inégales — un ignorant rapide ne bat pas un
-//  savant lent — elle ne sert qu'à trancher ce que le Risk tranchait par le
-//  chiffre du dé.
+//  That is where, and only where, speed decides anything. It never separates
+//  two unequal answers — a fast ignoramus does not beat a slow scholar — it
+//  serves only to settle what Risk settled with the number on the die.
 //
 
 import Foundation
 
-/// Ce que le défenseur a fait de la question.
+/// What the defender did with the question.
 enum Answer: Equatable, Codable {
     case chosen(Int, elapsed: TimeInterval)
     case timeout
 }
 
 enum DuelOutcome: Equatable {
-    /// Bonne réponse : la place tient, l'assaillant laisse un homme.
+    /// Correct answer: the place holds, the attacker leaves a troop.
     case defenderHolds
-    /// Mauvaise réponse ou silence : la ligne cède.
+    /// Wrong answer or silence: the line gives way.
     case attackerBreaks
 }
 
-/// La question en cours, avec le temps qui lui est accordé.
+/// The question in play, with the time allowed for it.
 struct Duel: Equatable, Codable {
     let question: AskedQuestion
     let allowance: TimeInterval
-    /// Combien de questions ce territoire a déjà subies dans le tour.
+    /// How many questions this territory has already faced this turn.
     let siege: Int
 }
 
-/// L'équivalence en dés. Elle ne décide de rien — elle montre la règle.
-/// La bonne réponse passe au-dessus de l'assaut, d'autant plus haut qu'elle
-/// est venue vite ; la mauvaise passe en dessous.
+/// The equivalent in dice. It decides nothing — it shows the rule. A correct
+/// answer comes out above the assault, the higher the faster it arrived; a
+/// wrong one comes out below.
 ///
-/// En classique elle est à moitié muette : l'attaquant ne répondant pas, son
-/// dé est un 3 de convention. En face à face les deux faces sont vraies.
+/// In classic play it is half mute: since the attacker does not answer, their
+/// die is a 3 by convention. In a showdown both faces are real.
 struct DiceEquivalence: Equatable {
     var attacker: Int
     var defender: Int
 
-    /// Ce que vaut une réponse, sur six faces.
+    /// What an answer is worth, on six faces.
     static func face(_ answer: Answer?, allowance: TimeInterval, correct: Bool) -> Int {
         guard correct, case let .chosen(_, elapsed)? = answer else {
             return answer == .timeout ? 1 : 2
@@ -79,66 +77,65 @@ struct DiceEquivalence: Equatable {
     }
 }
 
-/// Comment l'échange s'est décidé. C'est ce que la feuille raconte au joueur,
-/// et c'est la seule chose qui change vraiment d'un mode à l'autre.
+/// How the exchange was decided. This is what the sheet tells the player, and
+/// it is the one thing that really changes from one mode to the other.
 enum DuelVerdict: String, Equatable, Codable {
-    /// Classique : le défenseur seul répondait.
-    case reponse
-    /// Face à face : un seul des deux a su.
-    case seul
-    /// Face à face : les deux ont su, le sablier a tranché.
-    case vitesse
-    /// Face à face : aucun des deux n'a su. La place tient — l'égalité du Risk.
-    case egalite
+    /// Classic: the defender alone was answering.
+    case answered
+    /// Showdown: only one of the two knew.
+    case onlyOne
+    /// Showdown: both knew, the hourglass settled it.
+    case speed
+    /// Showdown: neither knew. The place holds — Risk's tie.
+    case tie
 }
 
-/// Le compte rendu d'un duel, tel que la vue le raconte.
+/// The report of a duel, as the view tells it.
 struct DuelReport: Equatable, Identifiable {
     let id = UUID()
     let question: AskedQuestion
-    /// Celle du défenseur : c'est lui qui répond dans les deux modes.
+    /// The defender's: they are the one who answers in both modes.
     let answer: Answer
     let correct: Bool
-    /// En face à face, ce qu'a répondu l'attaquant.
+    /// In a showdown, what the attacker answered.
     var attackerAnswer: Answer?
     var attackerCorrect = false
     let outcome: DuelOutcome
-    var verdict: DuelVerdict = .reponse
-    /// Ce que l'échange coûte au perdant : un homme, deux si le défenseur
-    /// avait relancé.
-    var mise = 1
+    var verdict: DuelVerdict = .answered
+    /// What the exchange costs the loser: one troop, two if the defender had
+    /// raised.
+    var stake = 1
     let dice: DiceEquivalence
     let allowance: TimeInterval
 
     static func == (a: DuelReport, b: DuelReport) -> Bool { a.id == b.id }
 }
 
-/// Un assaut : une déclaration, puis une ou deux questions.
+/// An assault: a declaration, then one or two questions.
 struct Assault: Equatable, Codable {
     let attacker: PlayerID
     let defender: PlayerID
     let from: TerritoryID
     let to: TerritoryID
-    /// La catégorie, choisie par l'attaquant. C'est là qu'est son adresse :
-    /// il ne répond à rien, mais il choisit le terrain.
+    /// The category, chosen by the attacker. That is where their skill lies:
+    /// they answer nothing, but they choose the ground.
     ///
-    /// Absente, c'est qu'il ne l'a pas choisie : la question se tire dans
-    /// toute la banque, thème compris. L'attaquant y renonce à son seul
-    /// avantage — en face à face, où il répond aussi, c'est un terrain qu'il
-    /// ne se choisit pas non plus à lui-même.
+    /// Absent means they did not choose it: the question is drawn from the
+    /// whole bank, themes included. The attacker gives up their only
+    /// advantage — in a showdown, where they answer too, it is a ground they
+    /// do not pick for themselves either.
     let category: Category?
-    /// Le nombre de questions annoncées : un ou deux dés.
+    /// The number of questions declared: one die or two.
     let volley: Int
 
-    /// Face à face : la réponse du défenseur attend celle de l'attaquant.
-    /// La montrer plus tôt donnerait la solution à qui doit encore répondre —
-    /// c'est la seule raison pour laquelle elle dort ici.
+    /// Showdown: the defender's answer waits for the attacker's. Showing it
+    /// earlier would hand the solution to someone who still has to answer —
+    /// that is the only reason it sleeps here.
     var defenderAnswer: Answer?
 
-    /// La mise du défenseur. Un homme, ou deux s'il a relancé : c'est son
-    /// second dé, celui que le Risk lui donne et que le mode classique lui
-    /// refusait.
-    var mise = 1
+    /// The defender's stake. One troop, or two if they raised: that is their
+    /// second die, the one Risk gives them and classic mode refused them.
+    var stake = 1
 
     var asked = 0
     var attackerLosses = 0
@@ -147,7 +144,7 @@ struct Assault: Equatable, Codable {
     var current: Duel?
     var reports: [DuelReport] = []
 
-    /// L'assaut est terminé quand la place est prise ou la salve épuisée.
+    /// The assault is over when the place is taken or the volley spent.
     var isOver: Bool { conquered || (current == nil && asked >= volley) }
 
     static func == (a: Assault, b: Assault) -> Bool {
@@ -155,21 +152,21 @@ struct Assault: Equatable, Codable {
             && a.conquered == b.conquered && a.current == b.current
     }
 
-    /// Les comptes rendus ne sont pas enregistrés : ils ne servent qu'au
-    /// bilan d'un assaut en cours, et une partie reprise repart de la
-    /// question posée, pas de son résumé.
+    /// The reports are not saved: they serve only the summary of an assault
+    /// in progress, and a resumed game restarts from the question asked, not
+    /// from its summary.
     private enum CodingKeys: String, CodingKey {
         case attacker, defender, from, to, category, volley
         case asked, attackerLosses, defenderLosses, conquered, current
-        case defenderAnswer, mise
+        case defenderAnswer, stake
     }
 }
 
 enum Combat {
 
-    /// Une réponse est-elle juste ? Le temps fait partie de la question :
-    /// arrivée après le sablier, elle ne compte pas, même exacte.
-    static func juste(_ answer: Answer, of duel: Duel) -> Bool {
+    /// Is an answer correct? Time is part of the question: arriving after the
+    /// hourglass, it does not count, even if exact.
+    static func isCorrect(_ answer: Answer, of duel: Duel) -> Bool {
         switch answer {
         case .timeout: false
         case let .chosen(index, elapsed):
@@ -177,16 +174,16 @@ enum Combat {
         }
     }
 
-    /// Le temps mis, plafonné au sablier. C'est lui qui départage deux
-    /// bonnes réponses, et rien d'autre.
-    static func delai(_ answer: Answer, of duel: Duel) -> TimeInterval {
+    /// The time taken, capped at the hourglass. That is what separates two
+    /// correct answers, and nothing else.
+    static func timeTaken(_ answer: Answer, of duel: Duel) -> TimeInterval {
         guard case let .chosen(_, elapsed) = answer else { return duel.allowance }
         return min(elapsed, duel.allowance)
     }
 
-    /// Classique : le seul endroit où se décide l'issue d'une question.
+    /// Classic: the one place where the outcome of a question is decided.
     static func resolve(_ answer: Answer, of duel: Duel) -> DuelReport {
-        let correct = juste(answer, of: duel)
+        let correct = isCorrect(answer, of: duel)
         return DuelReport(question: duel.question,
                           answer: answer,
                           correct: correct,
@@ -195,32 +192,32 @@ enum Combat {
                           allowance: duel.allowance)
     }
 
-    /// Face à face : les deux ont répondu à la même question.
-    static func resolveCroise(defender: Answer, attacker: Answer,
-                              of duel: Duel, mise: Int) -> DuelReport {
-        let d = juste(defender, of: duel)
-        let a = juste(attacker, of: duel)
+    /// Showdown: both answered the same question.
+    static func resolveShowdown(defender: Answer, attacker: Answer,
+                                of duel: Duel, stake: Int) -> DuelReport {
+        let d = isCorrect(defender, of: duel)
+        let a = isCorrect(attacker, of: duel)
 
         let outcome: DuelOutcome
         let verdict: DuelVerdict
         switch (d, a) {
         case (true, false):
             outcome = .defenderHolds
-            verdict = .seul
+            verdict = .onlyOne
         case (false, true):
             outcome = .attackerBreaks
-            verdict = .seul
+            verdict = .onlyOne
         case (true, true):
-            // Les deux savent. Le sablier tranche, et l'égalité stricte reste
-            // au défenseur : il faut être plus vif, pas aussi vif.
-            outcome = delai(attacker, of: duel) < delai(defender, of: duel)
+            // Both know. The hourglass settles it, and a strict tie stays
+            // with the defender: you have to be quicker, not as quick.
+            outcome = timeTaken(attacker, of: duel) < timeTaken(defender, of: duel)
                 ? .attackerBreaks : .defenderHolds
-            verdict = .vitesse
+            verdict = .speed
         case (false, false):
-            // Personne ne savait. Au Risk, l'égalité coûte un homme à
-            // l'assaillant : la place tient.
+            // Nobody knew. In Risk a tie costs the attacker a troop: the
+            // place holds.
             outcome = .defenderHolds
-            verdict = .egalite
+            verdict = .tie
         }
 
         return DuelReport(question: duel.question,
@@ -230,7 +227,7 @@ enum Combat {
                           attackerCorrect: a,
                           outcome: outcome,
                           verdict: verdict,
-                          mise: mise,
+                          stake: stake,
                           dice: DiceEquivalence(
                             attacker: DiceEquivalence.face(attacker,
                                                            allowance: duel.allowance, correct: a),

@@ -1,119 +1,118 @@
 //
 //  CombatTests.swift
-//  RiskeloTests
+//  RiskeloUSTests
 //
-//  La variante tient en une phrase — « une bonne réponse vaut un dé
-//  supérieur » — et c'est cette phrase-là qu'il faut clouer. Le sens de la
-//  perte s'inverse d'un caractère : si l'attaquant perdait un homme sur une
-//  mauvaise réponse, le jeu tournerait quand même, à l'envers, et personne ne
-//  saurait dire pourquoi il ne prend jamais rien.
+//  The variant fits in one sentence — "a correct answer is worth a higher
+//  die" — and that is the sentence to nail down. The direction of the loss
+//  flips on one character: if the attacker lost a troop on a wrong answer,
+//  the game would still run, backwards, and nobody could say why they never
+//  take anything.
 //
 
 import Foundation
 import Testing
-@testable import Riskelo
+@testable import RiskeloUS
 
 struct CombatTests {
 
     private func duel(_ allowance: TimeInterval = 15, siege: Int = 0) -> Duel {
         var rng = SeededRandom(seed: 1)
-        let posee = QuestionBank.francaises[0].asked(using: &rng)
-        return Duel(question: posee, allowance: allowance, siege: siege)
+        let asked = QuestionBank.all[0].asked(using: &rng)
+        return Duel(question: asked, allowance: allowance, siege: siege)
     }
 
-    @Test func laBonneReponseRepousseLAssaut() {
+    @Test func correctAnswerPushesTheAssaultBack() {
         let d = duel()
         let r = Combat.resolve(.chosen(d.question.answer, elapsed: 4), of: d)
         #expect(r.correct)
         #expect(r.outcome == .defenderHolds)
     }
 
-    @Test func laMauvaiseReponseOuvreLaPlace() {
+    @Test func wrongAnswerOpensThePlace() {
         let d = duel()
-        let faux = (0..<4).first { $0 != d.question.answer }!
-        let r = Combat.resolve(.chosen(faux, elapsed: 4), of: d)
+        let wrong = (0..<4).first { $0 != d.question.answer }!
+        let r = Combat.resolve(.chosen(wrong, elapsed: 4), of: d)
         #expect(!r.correct)
         #expect(r.outcome == .attackerBreaks)
     }
 
-    @Test func leSilenceVautUneMauvaiseReponse() {
+    @Test func silenceCountsAsAWrongAnswer() {
         let r = Combat.resolve(.timeout, of: duel())
         #expect(r.outcome == .attackerBreaks)
         #expect(r.dice.defender == 1)
     }
 
-    /// Le temps fait partie de la question : juste mais en retard ne compte pas.
-    @Test func laReponseJusteMaisTardiveNeComptePas() {
+    /// Time is part of the question: right but late does not count.
+    @Test func aCorrectButLateAnswerDoesNotCount() {
         let d = duel(15)
         let r = Combat.resolve(.chosen(d.question.answer, elapsed: 15.4), of: d)
         #expect(!r.correct)
         #expect(r.outcome == .attackerBreaks)
     }
 
-    @Test func lEquivalenceEnDesSuitLaRegle() {
+    @Test func theDiceEquivalenceFollowsTheRule() {
         let d = duel(15)
-        let vite = Combat.resolve(.chosen(d.question.answer, elapsed: 2), of: d)
-        let tard = Combat.resolve(.chosen(d.question.answer, elapsed: 13), of: d)
-        let faux = Combat.resolve(.chosen((d.question.answer + 1) % 4, elapsed: 2), of: d)
-        #expect(vite.dice.defender > vite.dice.attacker)
-        #expect(tard.dice.defender > tard.dice.attacker)   // juste, donc supérieur
-        #expect(vite.dice.defender > tard.dice.defender)   // mais vite vaut mieux
-        #expect(faux.dice.defender < faux.dice.attacker)
+        let fast = Combat.resolve(.chosen(d.question.answer, elapsed: 2), of: d)
+        let slow = Combat.resolve(.chosen(d.question.answer, elapsed: 13), of: d)
+        let wrong = Combat.resolve(.chosen((d.question.answer + 1) % 4, elapsed: 2), of: d)
+        #expect(fast.dice.defender > fast.dice.attacker)
+        #expect(slow.dice.defender > slow.dice.attacker)   // correct, so higher
+        #expect(fast.dice.defender > slow.dice.defender)   // but fast is worth more
+        #expect(wrong.dice.defender < wrong.dice.attacker)
     }
 
-    /// Le jugement, éprouvé sur toute la banque : chaque question, plusieurs
-    /// mélanges, et les quatre propositions l'une après l'autre. Une seule
-    /// inversion — un `==` devenu `!=`, un index décalé par un mélange —
-    /// retournerait le jeu sans rien casser, et personne ne saurait dire
-    /// pourquoi il perd en répondant juste.
-    @Test func aucuneReponseNEstJugeeALEnvers() {
+    /// The judgment, exercised over the whole bank: every question, several
+    /// shuffles, and the four choices one after another. A single inversion —
+    /// a `==` become a `!=`, an index shifted by a shuffle — would turn the
+    /// game inside out without breaking anything, and nobody could say why
+    /// they lose by answering correctly.
+    @Test func noAnswerIsJudgedBackwards() {
         var rng = SeededRandom(seed: 77)
-        for question in QuestionBank.francaises {
+        for question in QuestionBank.all {
             for _ in 0 ..< 6 {
-                let posee = question.asked(using: &rng)
-                #expect(posee.choices[posee.answer] == question.correct,
-                        "\(question.id) : le mélange a perdu la bonne réponse")
-                let d = Duel(question: posee, allowance: 15, siege: 0)
-                for i in posee.choices.indices {
-                    let juste = posee.choices[i] == question.correct
+                let asked = question.asked(using: &rng)
+                #expect(asked.choices[asked.answer] == question.correct,
+                        "\(question.id): the shuffle lost the correct answer")
+                let d = Duel(question: asked, allowance: 15, siege: 0)
+                for i in asked.choices.indices {
+                    let right = asked.choices[i] == question.correct
                     let r = Combat.resolve(.chosen(i, elapsed: 3), of: d)
-                    #expect(r.correct == juste, "\(question.id) : « \(posee.choices[i]) »")
-                    #expect(r.outcome == (juste ? .defenderHolds : .attackerBreaks))
-                    #expect(juste ? r.dice.defender > r.dice.attacker
+                    #expect(r.correct == right, "\(question.id): \"\(asked.choices[i])\"")
+                    #expect(r.outcome == (right ? .defenderHolds : .attackerBreaks))
+                    #expect(right ? r.dice.defender > r.dice.attacker
                                   : r.dice.defender < r.dice.attacker)
                 }
             }
         }
     }
 
-    /// La machine répond toujours. Un temps écoulé ne marque aucune
-    /// proposition à l'écran : on ne voyait que la bonne réponse en vert
-    /// pendant que le verdict annonçait un silence, et l'on croyait
-    /// l'application en train de juger une bonne réponse mauvaise.
-    @Test func laMachineNeLaissePasPasserLeTemps() {
+    /// The machine always answers. A timeout marks no choice on screen: all
+    /// you saw was the correct answer in green while the verdict announced
+    /// silence, and you thought the app was judging a correct answer wrong.
+    @Test func theMachineDoesNotLetTimeRunOut() {
         var rng = SeededRandom(seed: 21)
         var bank = QuestionBank()
-        let regles = Rules()
-        for niveau in [0.20, 0.45, 0.70, 0.95] {
+        let rules = Rules()
+        for level in [0.20, 0.45, 0.70, 0.95] {
             for _ in 0 ..< 300 {
-                let posee = bank.draw(category: nil, difficulty: nil, using: &rng)!
-                let d = Duel(question: posee, allowance: regles.answerTime(siege: 4), siege: 4)
-                let reponse = Bot.answer(to: d, level: niveau, rules: regles, using: &rng)
-                #expect(reponse != .timeout, "la machine s'est tue (niveau \(niveau))")
+                let asked = bank.draw(category: nil, difficulty: nil, using: &rng)!
+                let d = Duel(question: asked, allowance: rules.answerTime(siege: 4), siege: 4)
+                let answer = Bot.answer(to: d, level: level, rules: rules, using: &rng)
+                #expect(answer != .timeout, "the machine went silent (level \(level))")
             }
         }
     }
 
-    /// L'usure du siège : c'est elle qui remplace l'avantage statistique de
-    /// l'attaquant au Risk. Sans elle, un joueur qui sait ne perd jamais rien.
-    @Test func leSablierSeResserreAChaqueQuestion() {
+    /// The wear of a siege: it is what replaces the attacker's statistical
+    /// advantage in Risk. Without it, a player who knows never loses anything.
+    @Test func theClockTightensWithEveryQuestion() {
         let r = Rules()
-        let temps = (0..<6).map { r.answerTime(siege: $0) }
-        for (avant, apres) in zip(temps, temps.dropFirst()) {
-            #expect(apres <= avant)
+        let times = (0..<6).map { r.answerTime(siege: $0) }
+        for (before, after) in zip(times, times.dropFirst()) {
+            #expect(after <= before)
         }
-        #expect(temps[0] == r.baseSeconds)
-        #expect(temps.last == r.minSeconds)
-        #expect(temps[1] < temps[0])
+        #expect(times[0] == r.baseSeconds)
+        #expect(times.last == r.minSeconds)
+        #expect(times[1] < times[0])
     }
 }

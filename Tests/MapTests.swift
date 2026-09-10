@@ -1,242 +1,241 @@
 //
 //  MapTests.swift
-//  RiskeloTests
+//  RiskeloUSTests
 //
-//  Le plateau est engendré par un dessin en toutes lettres, et non saisi
-//  territoire par territoire. C'est justement pour cela qu'il faut le
-//  vérifier : une lettre déplacée dans le plan ne se voit pas, et peut isoler
-//  un territoire ou couper un continent en deux. Une partie ne pourrait plus
-//  finir, et rien ne l'annoncerait.
+//  The board is generated from a drawing in plain characters, not typed in
+//  territory by territory. That is exactly why it has to be checked: a letter
+//  moved in the plan does not show, and can isolate a territory or cut a
+//  continent in two. A game could no longer finish, and nothing would say so.
 //
 
 import CoreGraphics
 import Testing
-@testable import Riskelo
+@testable import RiskeloUS
 
-/// Les mêmes vérifications s'appliquent à chaque plateau du catalogue : un
-/// plateau ajouté ne doit pas pouvoir entrer sans les passer.
+/// The same checks apply to every board in the catalogue: a board added must
+/// not be able to get in without passing them.
 struct MapTests {
 
-    let board = Boards.anneau.board
+    let board = Boards.ring.board
 
     @Test(arguments: Boards.allCases)
-    func chaquePlateauSeTient(_ p: Boards) {
+    func everyBoardHoldsTogether(_ p: Boards) {
         let m = p.board.map
-        #expect(m.isConnected, "\(p.label) est en morceaux")
-        #expect(m.order.count >= 20, "\(p.label) est trop petit")
+        #expect(m.isConnected, "\(p.label) is in pieces")
+        #expect(m.order.count >= 20, "\(p.label) is too small")
         #expect(m.continentsInOrder.count >= 4)
         for id in m.order {
-            #expect(!m.neighbors(of: id).isEmpty, "\(p.label) : \(id) ne touche rien")
-            for voisin in m.neighbors(of: id) {
-                #expect(m.areAdjacent(voisin, id), "\(p.label) : voisinage à sens unique")
+            #expect(!m.neighbors(of: id).isEmpty, "\(p.label): \(id) touches nothing")
+            for neighbor in m.neighbors(of: id) {
+                #expect(m.areAdjacent(neighbor, id), "\(p.label): one-way adjacency")
             }
         }
-        let noms = m.order.compactMap { m[$0]?.name }
-        #expect(Set(noms).count == noms.count, "\(p.label) : deux territoires du même nom")
+        let names = m.order.compactMap { m[$0]?.name }
+        #expect(Set(names).count == names.count, "\(p.label): two territories share a name")
 
         for continent in m.continentsInOrder {
-            let dedans = Set(continent.territories)
-            var vus: Set<TerritoryID> = [continent.territories[0]]
-            var pile = [continent.territories[0]]
-            while let id = pile.popLast() {
-                for n in m.neighbors(of: id) where dedans.contains(n) && !vus.contains(n) {
-                    vus.insert(n); pile.append(n)
+            let inside = Set(continent.territories)
+            var seen: Set<TerritoryID> = [continent.territories[0]]
+            var stack = [continent.territories[0]]
+            while let id = stack.popLast() {
+                for n in m.neighbors(of: id) where inside.contains(n) && !seen.contains(n) {
+                    seen.insert(n); stack.append(n)
                 }
             }
-            #expect(vus.count == dedans.count, "\(p.label) : \(continent.name) est en morceaux")
-            let portes = Set(continent.territories.filter { id in
+            #expect(seen.count == inside.count, "\(p.label): \(continent.name) is in pieces")
+            let doors = Set(continent.territories.filter { id in
                 m.neighbors(of: id).contains { m[$0]?.continent != continent.id }
             })
-            #expect(portes.count >= 1, "\(p.label) : \(continent.name) est inatteignable")
+            #expect(doors.count >= 1, "\(p.label): \(continent.name) is unreachable")
         }
 
-        // Un continent à porte unique est imprenable une fois tenu, et décide
-        // la partie à lui seul : c'est l'Australie du Risk d'origine. Un
-        // plateau a le droit d'en avoir une — c'est un parti pris de jeu —
-        // mais jamais deux, sans quoi la partie se joue à qui les prend.
-        let forteresses = m.continentsInOrder.filter { c in
+        // A continent with a single door is unassailable once held, and
+        // decides the game on its own: that is Risk's Australia. A board is
+        // allowed one — it is a design choice — but never two, or the game
+        // comes down to who takes them.
+        let fortresses = m.continentsInOrder.filter { c in
             Set(c.territories.filter { id in
                 m.neighbors(of: id).contains { m[$0]?.continent != c.id }
             }).count == 1
         }
-        #expect(forteresses.count <= 1,
-                "\(p.label) : \(forteresses.map(\.name).joined(separator: ", ")) sont toutes à porte unique")
+        #expect(fortresses.count <= 1,
+                "\(p.label): \(fortresses.map(\.name).joined(separator: ", ")) all have a single door")
     }
 
-    @Test func lePlateauEstDUnSeulTenant() {
+    @Test func theBoardIsInOnePiece() {
         #expect(board.map.isConnected)
         #expect(board.map.order.count == 28)
         #expect(board.map.continentsInOrder.count == 5)
     }
 
-    @Test func leVoisinageEstReciproque() {
+    @Test func adjacencyIsReciprocal() {
         for id in board.map.order {
-            for voisin in board.map.neighbors(of: id) {
-                #expect(board.map.areAdjacent(voisin, id),
-                        "\(id) touche \(voisin), mais pas l'inverse")
+            for neighbor in board.map.neighbors(of: id) {
+                #expect(board.map.areAdjacent(neighbor, id),
+                        "\(id) touches \(neighbor), but not the other way round")
             }
         }
     }
 
-    @Test func personneNEstIsole() {
+    @Test func nobodyIsIsolated() {
         for id in board.map.order {
-            #expect(!board.map.neighbors(of: id).isEmpty, "\(id) ne touche rien")
+            #expect(!board.map.neighbors(of: id).isEmpty, "\(id) touches nothing")
         }
     }
 
-    @Test func chaqueContinentEstDUnSeulTenant() {
+    @Test func everyContinentIsInOnePiece() {
         for continent in board.map.continentsInOrder {
-            let dedans = Set(continent.territories)
-            var vus: Set<TerritoryID> = [continent.territories[0]]
-            var pile = [continent.territories[0]]
-            while let id = pile.popLast() {
-                for n in board.map.neighbors(of: id) where dedans.contains(n) && !vus.contains(n) {
-                    vus.insert(n)
-                    pile.append(n)
+            let inside = Set(continent.territories)
+            var seen: Set<TerritoryID> = [continent.territories[0]]
+            var stack = [continent.territories[0]]
+            while let id = stack.popLast() {
+                for n in board.map.neighbors(of: id) where inside.contains(n) && !seen.contains(n) {
+                    seen.insert(n)
+                    stack.append(n)
                 }
             }
-            #expect(vus.count == dedans.count, "\(continent.name) est en morceaux")
+            #expect(seen.count == inside.count, "\(continent.name) is in pieces")
         }
     }
 
-    /// Un continent à porte unique est imprenable, et décide la partie à lui
-    /// seul — c'est le défaut de l'Australie du Risk d'origine.
-    @Test func aucunContinentNAUneSeulePorte() {
+    /// A continent with a single door is unassailable, and decides the game on
+    /// its own — that is the flaw of Australia in the original Risk.
+    @Test func noContinentHasASingleDoor() {
         for continent in board.map.continentsInOrder {
-            let portes = Set(continent.territories.filter { id in
+            let doors = Set(continent.territories.filter { id in
                 board.map.neighbors(of: id).contains { board.map[$0]?.continent != continent.id }
             })
-            #expect(portes.count >= 2, "\(continent.name) n'a que \(portes.count) porte")
+            #expect(doors.count >= 2, "\(continent.name) has only \(doors.count) door")
         }
     }
 
-    @Test func chaqueTerritoireAUnNomEtUnePlace() {
+    @Test func everyTerritoryHasANameAndAPlace() {
         for id in board.map.order {
             let t = board.map[id]
             #expect(t != nil)
             #expect(!(t?.name.isEmpty ?? true))
-            let centre = board.layout.centers[id]
-            #expect(centre != nil)
-            #expect((0...1).contains(centre?.x ?? -1))
-            #expect((centre?.y ?? -1) >= 0 && (centre?.y ?? 99) <= board.layout.aspect)
+            let center = board.layout.centers[id]
+            #expect(center != nil)
+            #expect((0...1).contains(center?.x ?? -1))
+            #expect((center?.y ?? -1) >= 0 && (center?.y ?? 99) <= board.layout.aspect)
         }
     }
 
-    /// Une case a six côtés ; ceux qui ne donnent pas sur un voisin du même
-    /// continent sont des frontières. Les traversées, elles, ne passent par
-    /// aucun côté — c'est tout leur intérêt — et sont donc mises à part.
+    /// A cell has six sides; those that do not face a neighbor in the same
+    /// continent are borders. Crossings go through no side at all — that is
+    /// the whole point of them — and so are set aside.
     @Test(arguments: Boards.allCases)
-    func chaquePlateauSaitOuSontSesFrontieres(_ p: Boards) {
+    func everyBoardKnowsWhereItsBordersAre(_ p: Boards) {
         let m = p.board.map
         for id in m.order {
-            let outreMer = Set(p.board.layout.seaRoutes.compactMap { r -> TerritoryID? in
+            let overseas = Set(p.board.layout.seaRoutes.compactMap { r -> TerritoryID? in
                 r.from == id ? r.to : (r.to == id ? r.from : nil)
             })
-            let memeContinent = m.neighbors(of: id).filter {
-                !outreMer.contains($0) && m[$0]?.continent == m[id]?.continent
+            let sameContinent = m.neighbors(of: id).filter {
+                !overseas.contains($0) && m[$0]?.continent == m[id]?.continent
             }.count
-            #expect(p.board.layout.frontierEdges[id]?.count == 6 - memeContinent,
-                    "\(p.label) : \(m[id]?.name ?? id)")
+            #expect(p.board.layout.frontierEdges[id]?.count == 6 - sameContinent,
+                    "\(p.label): \(m[id]?.name ?? id)")
         }
     }
 
-    /// Une traversée doit être réciproque et mener quelque part. Écrite à la
-    /// main, c'est la seule partie du plateau qui puisse être fausse.
+    /// A crossing has to be reciprocal and lead somewhere. Written by hand,
+    /// it is the only part of the board that can be wrong.
     @Test(arguments: Boards.allCases)
-    func lesTraverseesSontReciproques(_ p: Boards) {
+    func crossingsAreReciprocal(_ p: Boards) {
         let m = p.board.map
         for route in p.board.layout.seaRoutes {
-            #expect(m[route.from] != nil, "\(p.label) : traversée depuis nulle part")
-            #expect(m[route.to] != nil, "\(p.label) : traversée vers nulle part")
-            #expect(m.areAdjacent(route.from, route.to), "\(p.label) : traversée à sens unique")
-            #expect(m.areAdjacent(route.to, route.from), "\(p.label) : traversée à sens unique")
+            #expect(m[route.from] != nil, "\(p.label): crossing from nowhere")
+            #expect(m[route.to] != nil, "\(p.label): crossing to nowhere")
+            #expect(m.areAdjacent(route.from, route.to), "\(p.label): one-way crossing")
+            #expect(m.areAdjacent(route.to, route.from), "\(p.label): one-way crossing")
             #expect(route.from != route.to)
         }
     }
 
-    /// Les traits de frontière sont calculés une fois, à la fabrication du
-    /// plan, et le plateau les dessine sans réfléchir. Si une lettre du plan
-    /// bouge et que ce calcul se décale, les continents apparaîtront faux
-    /// sans que rien ne plante — le joueur croira devoir prendre un territoire
-    /// qui n'en fait pas partie.
+    /// The border lines are computed once, when the plan is built, and the
+    /// board draws them without thinking. If a letter of the plan moves and
+    /// that computation shifts, the continents will look wrong without
+    /// anything crashing — the player will think they have to take a
+    /// territory that is not part of it.
     ///
-    /// L'invariant est simple : une case a six côtés ; ceux qui ne donnent pas
-    /// sur un voisin du même continent sont des frontières.
-    @Test func lesFrontieresCollentAuxContinents() {
+    /// The invariant is simple: a cell has six sides; those that do not face
+    /// a neighbor in the same continent are borders.
+    @Test func bordersMatchTheContinents() {
         for id in board.map.order {
-            let memeContinent = board.map.neighbors(of: id).filter {
+            let sameContinent = board.map.neighbors(of: id).filter {
                 board.map[$0]?.continent == board.map[id]?.continent
             }.count
-            let traits = board.layout.frontierEdges[id]?.count ?? -1
-            #expect(traits == 6 - memeContinent,
-                    "\(board.map[id]?.name ?? id) : \(traits) traits pour \(6 - memeContinent) attendus")
+            let lines = board.layout.frontierEdges[id]?.count ?? -1
+            #expect(lines == 6 - sameContinent,
+                    "\(board.map[id]?.name ?? id): \(lines) lines for \(6 - sameContinent) expected")
         }
     }
 
-    @Test func lesNomsSontUniques() {
-        let noms = board.map.order.compactMap { board.map[$0]?.name }
-        #expect(Set(noms).count == noms.count)
+    @Test func namesAreUnique() {
+        let names = board.map.order.compactMap { board.map[$0]?.name }
+        #expect(Set(names).count == names.count)
     }
 }
 
-// MARK: - Le cadrage
+// MARK: - Framing
 
-/// Jusqu'où le plateau peut se déplacer sous un panneau qui lui mange le bas.
+/// How far the board can move under a panel eating its bottom.
 ///
-/// Le recadrage visait juste et la borne l'arrêtait en chemin : les deux
-/// places d'un assaut restaient sous le panneau, sur un téléphone où celui-ci
-/// couvre les trois quarts de la carte. On ne voyait donc plus où l'on se
-/// battait au moment de décider combien d'hommes avancent — et une capture
-/// d'écran à la main était le seul moyen de s'en apercevoir. C'est de
-/// l'arithmétique : elle se vérifie ici.
-struct CadrageTests {
+/// The reframing aimed true and the bound stopped it on the way: the two
+/// places of an assault stayed under the panel, on a phone where it covers
+/// three quarters of the map. So you could no longer see where you were
+/// fighting at the moment of deciding how many troops advance — and a
+/// screenshot taken by hand was the only way to notice. This is arithmetic:
+/// it gets checked here.
+struct FramingTests {
 
-    /// Les mesures d'un iPhone ordinaire au moment du choix : le plateau
-    /// dispose de 587 points de haut, la carte en occupe 400, et le panneau
-    /// couvre les trois quarts de ce qui reste.
-    let vue: CGFloat = 587, plateau: CGFloat = 400, couvert: CGFloat = 0.75
+    /// The measurements of an ordinary iPhone at the moment of choosing: the
+    /// board has 587 points of height, the map takes 400 of them, and the
+    /// panel covers three quarters of what is left.
+    let view: CGFloat = 587, board: CGFloat = 400, covered: CGFloat = 0.75
 
-    /// Une place du bas de la carte doit pouvoir remonter dans la bande
-    /// libre. C'est le cas qui a échoué deux fois de suite.
-    @Test func onPeutRemonterUnePlaceDuBasDansLaBandeLibre() {
-        let milieuDeLaBande = vue * (1 - couvert) / 2
-        // Une place aux quatre cinquièmes de la carte, vue du haut du plateau.
-        let place = (vue - plateau) / 2 + plateau * 0.8
-        let vise = milieuDeLaBande - place
-        let bornes = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: plateau,
-                                              couvert: couvert)
-        #expect(bornes.contains(vise),
-                "le recadrage vise \(vise) et la borne l'arrête à \(bornes.lowerBound)")
+    /// A place at the bottom of the map has to be able to come up into the
+    /// free band. That is the case that failed twice running.
+    @Test func aPlaceAtTheBottomCanComeUpIntoTheFreeBand() {
+        let middleOfBand = view * (1 - covered) / 2
+        // A place four fifths of the way down the map, seen from its top.
+        let place = (view - board) / 2 + board * 0.8
+        let aim = middleOfBand - place
+        let bounds = Framing.verticalBounds(viewHeight: view, boardHeight: board,
+                                            covered: covered)
+        #expect(bounds.contains(aim),
+                "the reframing aims at \(aim) and the bound stops it at \(bounds.lowerBound)")
     }
 
-    /// On ne perd pas le plateau pour autant : monté au maximum, il en reste
-    /// une marge sous le haut de l'écran ; descendu au maximum, son haut
-    /// reste dans la bande que rien ne couvre.
-    @Test func lePlateauNeSortJamaisEntierement() {
-        for couvert in [CGFloat(0), 0.4, 0.75, 0.9] {
-            let bornes = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: plateau,
-                                                  couvert: couvert)
-            let basDuPlateau = (vue + plateau) / 2 + bornes.lowerBound
-            #expect(basDuPlateau >= Cadrage.marge - 0.01,
-                    "couvert \(couvert) : il ne reste que \(basDuPlateau) points de plateau")
-            let hautDuPlateau = (vue - plateau) / 2 + bornes.upperBound
-            #expect(hautDuPlateau <= vue * (1 - couvert) - Cadrage.marge + 0.01,
-                    "couvert \(couvert) : le haut du plateau passe sous la bande libre")
+    /// We do not lose the board for all that: lifted as far as it goes, a
+    /// margin of it stays below the top of the screen; pushed down as far as
+    /// it goes, its top stays within the band nothing covers.
+    @Test func theBoardNeverLeavesEntirely() {
+        for covered in [CGFloat(0), 0.4, 0.75, 0.9] {
+            let bounds = Framing.verticalBounds(viewHeight: view, boardHeight: board,
+                                                covered: covered)
+            let bottomOfBoard = (view + board) / 2 + bounds.lowerBound
+            #expect(bottomOfBoard >= Framing.margin - 0.01,
+                    "covered \(covered): only \(bottomOfBoard) points of board are left")
+            let topOfBoard = (view - board) / 2 + bounds.upperBound
+            #expect(topOfBoard <= view * (1 - covered) - Framing.margin + 0.01,
+                    "covered \(covered): the top of the board passes under the free band")
         }
     }
 
-    /// Une carte plus grande que la vue se promène d'autant plus.
-    @Test func unGrandPlateauSePromeneDavantage() {
-        let petite = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: 300, couvert: 0)
-        let grande = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: 900, couvert: 0)
-        #expect(grande.lowerBound < petite.lowerBound)
-        #expect(grande.upperBound > petite.upperBound)
+    /// A map larger than the view wanders further.
+    @Test func aLargeBoardWandersFurther() {
+        let small = Framing.verticalBounds(viewHeight: view, boardHeight: 300, covered: 0)
+        let large = Framing.verticalBounds(viewHeight: view, boardHeight: 900, covered: 0)
+        #expect(large.lowerBound < small.lowerBound)
+        #expect(large.upperBound > small.upperBound)
     }
 
-    /// Et sans rien qui couvre, la carte se promène des deux côtés.
-    @Test func sansPanneauLeDeplacementResteDeDeuxCotes() {
-        let bornes = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: plateau,
-                                              couvert: 0)
-        #expect(bornes.lowerBound < 0 && bornes.upperBound > 0)
+    /// And with nothing covering, the map wanders both ways.
+    @Test func withNoPanelTheMoveStaysTwoSided() {
+        let bounds = Framing.verticalBounds(viewHeight: view, boardHeight: board,
+                                            covered: 0)
+        #expect(bounds.lowerBound < 0 && bounds.upperBound > 0)
     }
 }

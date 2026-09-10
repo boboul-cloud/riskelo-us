@@ -1,785 +1,784 @@
 //
 //  GameTests.swift
-//  RiskeloTests
+//  RiskeloUSTests
 //
-//  L'enchaînement d'un tour, et les coups qu'il faut refuser.
+//  The sequence of a turn, and the moves that have to be refused.
 //
-//  Un jeu de plateau se triche par accident : attaquer avec sa garnison,
-//  déplacer des hommes vers un territoire qu'on ne tient pas, poser trois
-//  questions au lieu de deux. Rien de tout cela ne fait planter quoi que ce
-//  soit — c'est pourquoi c'est ici et non à l'écran que ça se refuse.
+//  A board game gets cheated at by accident: attacking with your garrison,
+//  moving troops into a territory you do not hold, asking three questions
+//  instead of two. None of that crashes anything — which is why it is refused
+//  here and not on screen.
 //
 
 import Foundation
 import Testing
-@testable import Riskelo
+@testable import RiskeloUS
 
 struct GameTests {
 
-    private func partie(_ n: Int = 2, seed: UInt64 = 42, rules: Rules = Rules()) -> GameState {
-        GameState.start(players: (0..<n).map { Player(id: $0, name: "J\($0)") },
+    private func game(_ n: Int = 2, seed: UInt64 = 42, rules: Rules = Rules()) -> GameState {
+        GameState.start(players: (0..<n).map { Player(id: $0, name: "P\($0)") },
                         rules: rules, seed: seed)
     }
 
-    // MARK: - Mise en place
+    // MARK: - Setting up
 
-    @Test func toutLeMondeEstServi() {
-        let g = partie()
+    @Test func everyoneIsDealtIn() {
+        let g = game()
         #expect(g.map.order.allSatisfy { g.owner[$0] != nil })
         #expect(g.map.order.allSatisfy { g.armies($0) >= 1 })
-        let compte = (0..<2).map { g.territories(of: $0).count }
-        #expect(compte.reduce(0, +) == g.map.order.count)
-        #expect(abs(compte[0] - compte[1]) <= 1)
+        let counts = (0..<2).map { g.territories(of: $0).count }
+        #expect(counts.reduce(0, +) == g.map.order.count)
+        #expect(abs(counts[0] - counts[1]) <= 1)
     }
 
-    /// Ouvrir, dans un jeu où la défense l'emporte, vaut cinq hommes à deux
-    /// joueurs. La simulation l'a mesuré ; le partage doit rester en place.
-    @Test func leSecondJoueurEstCompense() {
-        let g = partie()
-        let armees = (0..<2).map { j in g.territories(of: j).reduce(0) { $0 + g.armies($1) } }
-        #expect(armees[1] - armees[0] == Rules().compensation(playerCount: 2))
+    /// Opening, in a game where the defense wins, is worth troops with two
+    /// players. The simulation measured it; the split has to stay in place.
+    @Test func theSecondPlayerIsCompensated() {
+        let g = game()
+        let armies = (0..<2).map { p in g.territories(of: p).reduce(0) { $0 + g.armies($1) } }
+        #expect(armies[1] - armies[0] == Rules().compensation(playerCount: 2))
     }
 
-    @Test func laPartieCommenceParLesRenforts() {
-        let g = partie()
-        guard case let .reinforcement(reste) = g.phase else { Issue.record("mauvaise phase"); return }
-        #expect(reste == g.reinforcements(for: 0))
-        #expect(reste >= 3)
+    @Test func theGameStartsWithReinforcements() {
+        let g = game()
+        guard case let .reinforcement(left) = g.phase else { Issue.record("wrong phase"); return }
+        #expect(left == g.reinforcements(for: 0))
+        #expect(left >= 3)
     }
 
-    // MARK: - Renforts
+    // MARK: - Reinforcements
 
-    @Test func leBonusDeContinentSAjoute() {
-        var g = partie()
-        let ponant = g.map.continentsInOrder.first { $0.name == "Ponant" }!
-        let sans = g.reinforcements(for: 0)
-        for id in ponant.territories { g.seize(id, by: 0, armies: 1) }
-        #expect(g.reinforcements(for: 0) >= sans + ponant.bonus - 2)
-        #expect(g.continentsHeld(by: 0).contains { $0.id == ponant.id })
+    @Test func theContinentBonusIsAdded() {
+        var g = game()
+        let westmark = g.map.continentsInOrder.first { $0.name == "Westmark" }!
+        let without = g.reinforcements(for: 0)
+        for id in westmark.territories { g.seize(id, by: 0, armies: 1) }
+        #expect(g.reinforcements(for: 0) >= without + westmark.bonus - 2)
+        #expect(g.continentsHeld(by: 0).contains { $0.id == westmark.id })
     }
 
-    @Test func onNePosePasDeRenfortChezLAdversaire() {
-        var g = partie()
-        let chezLautre = g.territories(of: 1)[0]
-        #expect(g.place(on: chezLautre) == false)
+    @Test func youDoNotLayReinforcementsOnTheOpponentsLand() {
+        var g = game()
+        let theirs = g.territories(of: 1)[0]
+        #expect(g.place(on: theirs) == false)
     }
 
-    @Test func lesRenfortsEpuisesOuvrentLaPhaseDAttaque() {
-        var g = partie()
-        guard case let .reinforcement(reste) = g.phase else { return }
-        let chezMoi = g.territories(of: 0)[0]
-        for _ in 0..<reste { g.place(on: chezMoi) }
+    @Test func spentReinforcementsOpenTheAttackPhase() {
+        var g = game()
+        guard case let .reinforcement(left) = g.phase else { return }
+        let mine = g.territories(of: 0)[0]
+        for _ in 0..<left { g.place(on: mine) }
         #expect(g.phase == .attack)
     }
 
-    // MARK: - Assaut
+    // MARK: - Assault
 
-    @Test func onNAttaquePasAvecSaGarnison() {
-        var g = partie()
+    @Test func youDoNotAttackWithYourGarrison() {
+        var g = game()
         g.debugSkipToAttack()
-        let mien = g.territories(of: 0).first { g.armies($0) == 1 && !g.targets(from: $0).isEmpty }
-        if let mien {
-            #expect(g.maxQuestions(from: mien) == 0)
-            let cible = g.targets(from: mien)[0]
-            #expect(g.declareAssault(from: mien, to: cible, questions: 1, category: .histoire) == false)
+        let mine = g.territories(of: 0).first { g.armies($0) == 1 && !g.targets(from: $0).isEmpty }
+        if let mine {
+            #expect(g.maxQuestions(from: mine) == 0)
+            let target = g.targets(from: mine)[0]
+            #expect(g.declareAssault(from: mine, to: target, questions: 1, category: .history) == false)
         }
     }
 
-    @Test func onNePosePasPlusDeDeuxQuestions() {
-        var g = partie()
+    @Test func youDoNotAskMoreThanTwoQuestions() {
+        var g = game()
         g.debugSkipToAttack()
         let base = g.territories(of: 0).first { g.armies($0) >= 4 && !g.targets(from: $0).isEmpty }
         guard let base else { return }
         #expect(g.maxQuestions(from: base) == 2)
         #expect(g.declareAssault(from: base, to: g.targets(from: base)[0],
-                                 questions: 3, category: .histoire) == false)
+                                 questions: 3, category: .history) == false)
     }
 
-    @Test func onNAttaquePasUnVoisinQuOnNeTouchePas() {
-        var g = partie()
+    @Test func youDoNotAttackANeighborYouDoNotTouch() {
+        var g = game()
         g.debugSkipToAttack()
         let base = g.territories(of: 0).first { g.armies($0) >= 2 }!
-        let loin = g.map.order.first { !g.map.areAdjacent(base, $0) && g.owner[$0] != 0 }!
-        #expect(g.declareAssault(from: base, to: loin, questions: 1, category: .arts) == false)
+        let far = g.map.order.first { !g.map.areAdjacent(base, $0) && g.owner[$0] != 0 }!
+        #expect(g.declareAssault(from: base, to: far, questions: 1, category: .arts) == false)
     }
 
-    @Test func laBonneReponseCouteUnHommeALAttaquant() {
-        var g = partie()
+    @Test func aCorrectAnswerCostsTheAttackerATroop() {
+        var g = game()
         g.debugSkipToAttack()
-        guard let (base, cible) = g.debugFirstAssault(minArmies: 3, targetArmies: 2) else { return }
-        let avantAttaquant = g.armies(base), avantDefenseur = g.armies(cible)
-        g.declareAssault(from: base, to: cible, questions: 1, category: .histoire)
-        let bonne = g.assault!.current!.question.answer
-        g.answer(.chosen(bonne, elapsed: 2))
-        #expect(g.armies(base) == avantAttaquant - 1)
-        #expect(g.armies(cible) == avantDefenseur)
+        guard let (base, target) = g.debugFirstAssault(minArmies: 3, targetArmies: 2) else { return }
+        let beforeAttacker = g.armies(base), beforeDefender = g.armies(target)
+        g.declareAssault(from: base, to: target, questions: 1, category: .history)
+        let right = g.assault!.current!.question.answer
+        g.answer(.chosen(right, elapsed: 2))
+        #expect(g.armies(base) == beforeAttacker - 1)
+        #expect(g.armies(target) == beforeDefender)
     }
 
-    /// Le terrain laissé au sort.
+    /// The ground left to chance.
     ///
-    /// L'attaquant peut renoncer à choisir : la question se tire alors dans
-    /// toute la banque. Deux conséquences qui se vérifient — le dossier de
-    /// l'adversaire se crédite du thème **de la question posée**, et non d'un
-    /// thème annoncé qui n'existe pas ; et la machine, qui s'interdit de
-    /// reprendre le même terrain deux fois de suite, n'a rien à retenir d'un
-    /// terrain que personne n'a choisi.
-    @Test func leTerrainPeutEtreLaisseAuSort() {
-        var g = partie()
+    /// The attacker can give up choosing: the question is then drawn from the
+    /// whole bank. Two consequences that get checked — the opponent's file is
+    /// credited with the theme **of the question asked**, and not with an
+    /// announced theme that does not exist; and the machine, which forbids
+    /// itself the same ground twice running, has nothing to remember from a
+    /// ground nobody chose.
+    @Test func theGroundCanBeLeftToChance() {
+        var g = game()
         g.debugSkipToAttack()
-        guard let (base, cible) = g.debugFirstAssault(minArmies: 3, targetArmies: 2) else { return }
-        let defenseur = g.owner[cible]!
-        let declare = g.declareAssault(from: base, to: cible, questions: 1, category: nil)
-        #expect(declare)
+        guard let (base, target) = g.debugFirstAssault(minArmies: 3, targetArmies: 2) else { return }
+        let defender = g.owner[target]!
+        let declared = g.declareAssault(from: base, to: target, questions: 1, category: nil)
+        #expect(declared)
         #expect(g.assault?.category == nil)
-        let posee = g.assault!.current!.question
-        g.answer(.chosen(posee.answer, elapsed: 2))
-        #expect(g.record(of: defenseur, in: posee.category).asked == 1)
-        #expect(g.lastCategoryAgainst[defenseur] == nil)
+        let asked = g.assault!.current!.question
+        g.answer(.chosen(asked.answer, elapsed: 2))
+        #expect(g.record(of: defender, in: asked.category).asked == 1)
+        #expect(g.lastCategoryAgainst[defender] == nil)
     }
 
-    @Test func laMauvaiseReponseCouteUnHommeAuDefenseur() {
-        var g = partie()
+    @Test func aWrongAnswerCostsTheDefenderATroop() {
+        var g = game()
         g.debugSkipToAttack()
-        guard let (base, cible) = g.debugFirstAssault(minArmies: 3, targetArmies: 2) else { return }
-        let avantAttaquant = g.armies(base), avantDefenseur = g.armies(cible)
-        g.declareAssault(from: base, to: cible, questions: 1, category: .histoire)
-        let mauvaise = (g.assault!.current!.question.answer + 1) % 4
-        g.answer(.chosen(mauvaise, elapsed: 2))
-        #expect(g.armies(base) == avantAttaquant)
-        #expect(g.armies(cible) == avantDefenseur - 1)
+        guard let (base, target) = g.debugFirstAssault(minArmies: 3, targetArmies: 2) else { return }
+        let beforeAttacker = g.armies(base), beforeDefender = g.armies(target)
+        g.declareAssault(from: base, to: target, questions: 1, category: .history)
+        let wrong = (g.assault!.current!.question.answer + 1) % 4
+        g.answer(.chosen(wrong, elapsed: 2))
+        #expect(g.armies(base) == beforeAttacker)
+        #expect(g.armies(target) == beforeDefender - 1)
     }
 
-    @Test func deuxQuestionsFontDeuxDuels() {
-        var g = partie()
+    @Test func twoQuestionsMakeTwoDuels() {
+        var g = game()
         g.debugSkipToAttack()
-        guard let (base, cible) = g.debugFirstAssault(minArmies: 4, targetArmies: 3) else { return }
-        g.declareAssault(from: base, to: cible, questions: 2, category: .sciences)
+        guard let (base, target) = g.debugFirstAssault(minArmies: 4, targetArmies: 3) else { return }
+        g.declareAssault(from: base, to: target, questions: 2, category: .science)
         #expect(g.assault?.current != nil)
         g.answer(.chosen(g.assault!.current!.question.answer, elapsed: 2))
-        #expect(g.assault?.current != nil, "la seconde question doit venir")
+        #expect(g.assault?.current != nil, "the second question has to come")
         g.answer(.chosen(g.assault!.current!.question.answer, elapsed: 2))
         #expect(g.assault?.current == nil)
         #expect(g.assault?.isOver == true)
         #expect(g.assault?.attackerLosses == 2)
     }
 
-    /// Le sablier ne se remet pas à zéro entre deux assauts du même tour :
-    /// c'est l'usure du siège.
-    @Test func leSiegeSeSouvientDansLeTour() {
-        var g = partie()
+    /// The clock does not reset between two assaults in the same turn: that
+    /// is the wear of the siege.
+    @Test func theSiegeRemembersWithinTheTurn() {
+        var g = game()
         g.debugSkipToAttack()
-        guard let (base, cible) = g.debugFirstAssault(minArmies: 4, targetArmies: 3) else { return }
-        g.declareAssault(from: base, to: cible, questions: 2, category: .sciences)
-        let premier = g.assault!.current!.allowance
+        guard let (base, target) = g.debugFirstAssault(minArmies: 4, targetArmies: 3) else { return }
+        g.declareAssault(from: base, to: target, questions: 2, category: .science)
+        let first = g.assault!.current!.allowance
         g.answer(.chosen(g.assault!.current!.question.answer, elapsed: 1))
         let second = g.assault!.current!.allowance
-        #expect(second < premier)
+        #expect(second < first)
         #expect(g.assault!.current!.siege == 1)
     }
 
-    @Test func laPlacePriseChangeDeMain() {
-        var g = partie()
+    @Test func aPlaceTakenChangesHands() {
+        var g = game()
         g.debugSkipToAttack()
-        guard let (base, cible) = g.debugFirstAssault(minArmies: 5, targetArmies: 1) else { return }
-        g.declareAssault(from: base, to: cible, questions: 1, category: .arts)
-        let mauvaise = (g.assault!.current!.question.answer + 1) % 4
-        g.answer(.chosen(mauvaise, elapsed: 1))
-        #expect(g.owner[cible] == 0)
+        guard let (base, target) = g.debugFirstAssault(minArmies: 5, targetArmies: 1) else { return }
+        g.declareAssault(from: base, to: target, questions: 1, category: .arts)
+        let wrong = (g.assault!.current!.question.answer + 1) % 4
+        g.answer(.chosen(wrong, elapsed: 1))
+        #expect(g.owner[target] == 0)
         guard case let .occupation(_, _, minimum, maximum) = g.phase else {
-            Issue.record("la conquête doit demander combien d'hommes avancent"); return
+            Issue.record("the conquest has to ask how many troops advance"); return
         }
         #expect(minimum >= 1 && maximum >= minimum)
-        let avant = g.armies(base)
+        let before = g.armies(base)
         g.occupy(maximum)
-        #expect(g.armies(cible) == maximum)
-        #expect(g.armies(base) == avant - maximum)
+        #expect(g.armies(target) == maximum)
+        #expect(g.armies(base) == before - maximum)
         #expect(g.phase == .attack)
     }
 
-    // MARK: - Déplacement, tour, victoire
+    // MARK: - Moving, the turn, victory
 
-    @Test func leDeplacementSuitUneChaineAmie() {
-        var g = partie()
+    @Test func theMoveFollowsAFriendlyChain() {
+        var g = game()
         g.debugSkipToFortify()
-        let mien = g.territories(of: 0)
-        let ennemi = g.territories(of: 1)[0]
-        #expect(g.areLinked(mien[0], mien[0], for: 0))
-        #expect(g.fortify(from: mien[0], to: ennemi, count: 1) == false)
+        let mine = g.territories(of: 0)
+        let enemy = g.territories(of: 1)[0]
+        #expect(g.areLinked(mine[0], mine[0], for: 0))
+        #expect(g.fortify(from: mine[0], to: enemy, count: 1) == false)
     }
 
-    @Test func leTourPasseAuSuivant() {
-        var g = partie()
+    @Test func theTurnPassesToTheNextPlayer() {
+        var g = game()
         g.debugSkipToFortify()
         g.endTurn()
         #expect(g.currentPlayer.id == 1)
-        if case .reinforcement = g.phase {} else { Issue.record("le tour doit ouvrir sur les renforts") }
+        if case .reinforcement = g.phase {} else { Issue.record("the turn has to open on reinforcements") }
     }
 
-    @Test func laDominationSuffitAGagner() {
-        var g = partie()
+    @Test func dominationIsEnoughToWin() {
+        var g = game()
         #expect(g.dominationThreshold == 21)
         #expect(!g.dominates(0))
         for id in g.map.order.prefix(g.dominationThreshold) { g.seize(id, by: 0, armies: 1) }
         #expect(g.dominates(0))
     }
 
-    /// Une faiblesse doit en être une : marquée d'une lunette à côté d'un
-    /// score affiché en vert, elle donnait à croire que l'application se
-    /// trompait sur ce qui est bon et ce qui ne l'est pas.
-    @Test func uneFaiblesseEnEstVraimentUne() {
-        var g = partie()
-        #expect(g.weakness(of: 1) == nil, "sans données, aucune faiblesse")
-        g.seize(.histoire, of: 1, asked: 4, correct: 3)   // 75 %
-        #expect(g.weakness(of: 1) == nil, "trois sur quatre n'est pas une faiblesse")
-        g.seize(.sports, of: 1, asked: 4, correct: 1)     // 25 %
+    /// A weakness has to be one: marked with a scope next to a score shown in
+    /// green, it suggested the app was confused about what is good and what
+    /// is not.
+    @Test func aWeaknessIsReallyAWeakness() {
+        var g = game()
+        #expect(g.weakness(of: 1) == nil, "with no data, no weakness")
+        g.seize(.history, of: 1, asked: 4, correct: 3)   // 75%
+        #expect(g.weakness(of: 1) == nil, "three out of four is not a weakness")
+        g.seize(.sports, of: 1, asked: 4, correct: 1)    // 25%
         #expect(g.weakness(of: 1) == .sports)
     }
 
-    /// Le sens des pertes, dans le moteur complet. Il s'inverse d'un
-    /// caractère, et le jeu tournerait quand même — à l'envers.
-    @Test func leSensDesPertesNeSInversePas() {
-        for juste in [true, false] {
-            var g = partie()
+    /// The direction of the losses, in the full engine. It flips on one
+    /// character, and the game would still run — backwards.
+    @Test func theDirectionOfLossesDoesNotFlip() {
+        for right in [true, false] {
+            var g = game()
             g.debugSkipToAttack()
-            guard let (base, cible) = g.debugFirstAssault(minArmies: 8, targetArmies: 5) else { return }
-            g.declareAssault(from: base, to: cible, questions: 1, category: .histoire)
-            let bon = g.assault!.current!.question.answer
-            let avantMoi = g.armies(base), avantLui = g.armies(cible)
-            g.answer(.chosen(juste ? bon : (bon + 1) % 4, elapsed: 2))
-            if juste {
-                #expect(g.armies(base) == avantMoi - 1, "bonne réponse : l'assaillant paie")
-                #expect(g.armies(cible) == avantLui)
+            guard let (base, target) = g.debugFirstAssault(minArmies: 8, targetArmies: 5) else { return }
+            g.declareAssault(from: base, to: target, questions: 1, category: .history)
+            let good = g.assault!.current!.question.answer
+            let beforeMine = g.armies(base), beforeTheirs = g.armies(target)
+            g.answer(.chosen(right ? good : (good + 1) % 4, elapsed: 2))
+            if right {
+                #expect(g.armies(base) == beforeMine - 1, "correct answer: the attacker pays")
+                #expect(g.armies(target) == beforeTheirs)
             } else {
-                #expect(g.armies(base) == avantMoi)
-                #expect(g.armies(cible) == avantLui - 1, "mauvaise réponse : le défenseur paie")
+                #expect(g.armies(base) == beforeMine)
+                #expect(g.armies(target) == beforeTheirs - 1, "wrong answer: the defender pays")
             }
         }
     }
 
-    /// Le moteur tient déjà la question suivante quand on lui donne une
-    /// réponse : il compte la perte et enchaîne. L'écran, lui, en est encore
-    /// à dévoiler la précédente — et il montrait donc la suivante, bonne
-    /// réponse déjà marquée, avant que personne n'y ait répondu. Ce test fixe
-    /// la règle : c'est le compte rendu qui porte la question jugée.
-    @Test func leCompteRenduPorteLaQuestionQuIlJuge() {
-        var g = partie()
+    /// The engine is already holding the next question when you hand it an
+    /// answer: it counts the loss and carries on. The screen is still
+    /// revealing the previous one — and so it showed the next, its correct
+    /// answer already marked, before anyone had answered it. This test fixes
+    /// the rule: it is the report that carries the question it judged.
+    @Test func theReportCarriesTheQuestionItJudges() {
+        var g = game()
         g.debugSkipToAttack()
-        guard let (base, cible) = g.debugFirstAssault(minArmies: 6, targetArmies: 4) else { return }
-        g.declareAssault(from: base, to: cible, questions: 2, category: .sciences)
-        let posee = g.assault!.current!.question.id
-        let rapport = g.answer(.chosen(g.assault!.current!.question.answer, elapsed: 2))
-        #expect(rapport?.question.id == posee)
+        guard let (base, target) = g.debugFirstAssault(minArmies: 6, targetArmies: 4) else { return }
+        g.declareAssault(from: base, to: target, questions: 2, category: .science)
+        let asked = g.assault!.current!.question.id
+        let report = g.answer(.chosen(g.assault!.current!.question.answer, elapsed: 2))
+        #expect(report?.question.id == asked)
         #expect(g.assault?.current != nil)
-        #expect(g.assault?.current?.question.id != posee, "le moteur tient déjà la suivante")
+        #expect(g.assault?.current?.question.id != asked, "the engine already holds the next one")
     }
 
-    /// Viser à chaque fois la faiblesse exacte est le coup optimal et le plus
-    /// mauvais de tous : dix fois le même sujet, la catégorie s'épuise, et
-    /// chaque duel ressemble au précédent.
-    @Test func laMachineNeMartelePasLeMemeSujet() {
-        var g = GameState.start(players: [Player(id: 0, name: "A", kind: .machine(niveau: 0.7, style: .forte)),
-                                          Player(id: 1, name: "B", kind: .machine(niveau: 0.7, style: .forte))],
+    /// Aiming every time at the exact weakness is the optimal move and the
+    /// worst of all: the same subject ten times, the category runs dry, and
+    /// every duel looks like the last.
+    @Test func theMachineDoesNotHammerTheSameSubject() {
+        var g = GameState.start(players: [Player(id: 0, name: "A", kind: .machine(level: 0.7, style: .strong)),
+                                          Player(id: 1, name: "B", kind: .machine(level: 0.7, style: .strong))],
                                 seed: 4242)
-        var sujets: [Riskelo.Category] = []   // Foundation en expose un autre
-        var precedent: String?
-        var garde = 0
-        while !g.isOver && garde < 200_000 {
-            garde += 1
-            let pas = BotRunner.step(&g)
-            if let q = g.assault?.current?.question, q.id != precedent {
-                sujets.append(q.category)
-                precedent = q.id
+        var subjects: [RiskeloUS.Category] = []   // Foundation exposes another one
+        var previous: String?
+        var safety = 0
+        while !g.isOver && safety < 200_000 {
+            safety += 1
+            let step = BotRunner.step(&g)
+            if let q = g.assault?.current?.question, q.id != previous {
+                subjects.append(q.category)
+                previous = q.id
             }
-            if pas == .idle, g.phase == .fortify { g.endTurn() }
+            if step == .idle, g.phase == .fortify { g.endTurn() }
         }
-        #expect(sujets.count > 20, "la partie doit poser assez de questions pour juger")
+        #expect(subjects.count > 20, "the game has to ask enough questions to judge")
 
-        var serie = 1, serieMax = 1
-        for (avant, apres) in zip(sujets, sujets.dropFirst()) {
-            serie = (avant == apres) ? serie + 1 : 1
-            serieMax = max(serieMax, serie)
+        var run = 1, longestRun = 1
+        for (before, after) in zip(subjects, subjects.dropFirst()) {
+            run = (before == after) ? run + 1 : 1
+            longestRun = max(longestRun, run)
         }
-        #expect(serieMax <= 5, "\(serieMax) fois le même sujet d'affilée")
-        #expect(Set(sujets).count >= 5, "la machine n'explore que \(Set(sujets).count) sujets")
+        #expect(longestRun <= 5, "\(longestRun) times the same subject in a row")
+        #expect(Set(subjects).count >= 5, "the machine only explores \(Set(subjects).count) subjects")
     }
 
-    // MARK: - Renfort d'érudition
+    // MARK: - Scholarship reinforcement
 
-    /// Un homme de plus toutes les N bonnes réponses dans un même thème — et
-    /// jamais deux fois le même : le compte des bonnes réponses ne redescend
-    /// pas, c'est ce qui a été versé qu'il faut retenir.
-    @Test func lEruditionRapporteUnHommeEtNePaiePasDeuxFois() {
+    /// One extra troop for every N correct answers within one theme — and
+    /// never the same one twice: the count of correct answers does not go
+    /// back down, so what has been paid out is what must be remembered.
+    @Test func scholarshipPaysOneTroopAndDoesNotPayTwice() {
         var r = Rules(); r.answersPerBonusMan = 3
-        var g = partie(2, rules: r)
+        var g = game(2, rules: r)
 
-        #expect(g.eruditionOwed(1) == 0)
-        g.seize(.histoire, of: 1, asked: 3, correct: 2)
-        #expect(g.eruditionOwed(1) == 0, "deux bonnes réponses ne suffisent pas")
-        g.seize(.histoire, of: 1, asked: 4, correct: 3)
-        #expect(g.eruditionOwed(1) == 1)
-        g.seize(.sports, of: 1, asked: 7, correct: 6)      // deux de plus
-        #expect(g.eruditionOwed(1) == 3)
+        #expect(g.scholarshipOwed(1) == 0)
+        g.seize(.history, of: 1, asked: 3, correct: 2)
+        #expect(g.scholarshipOwed(1) == 0, "two correct answers are not enough")
+        g.seize(.history, of: 1, asked: 4, correct: 3)
+        #expect(g.scholarshipOwed(1) == 1)
+        g.seize(.sports, of: 1, asked: 7, correct: 6)      // two more
+        #expect(g.scholarshipOwed(1) == 3)
 
-        // Le tour passe : le dû est versé, et ne revient pas au tour suivant.
-        let avant = g.reinforcements(for: 1)
+        // The turn passes: what is owed is paid, and does not come back the
+        // turn after.
+        let before = g.reinforcements(for: 1)
         g.debugSkipToFortify()
         g.endTurn()
-        guard case let .reinforcement(recus) = g.phase else { Issue.record("phase"); return }
+        guard case let .reinforcement(received) = g.phase else { Issue.record("phase"); return }
         #expect(g.currentPlayer.id == 1)
-        #expect(recus == avant, "le versement doit inclure les trois hommes")
-        #expect(g.eruditionOwed(1) == 0)
-        #expect(g.reinforcements(for: 1) == avant - 3, "il ne se paie pas deux fois")
+        #expect(received == before, "the payment has to include the three troops")
+        #expect(g.scholarshipOwed(1) == 0)
+        #expect(g.reinforcements(for: 1) == before - 3, "it is not paid twice")
     }
 
-    /// La règle retirée ne doit rien coûter ni rien rapporter.
-    @Test func lEruditionSeRetire() {
+    /// With the rule removed, nothing is owed and nothing is earned.
+    @Test func scholarshipCanBeRemoved() {
         var r = Rules(); r.answersPerBonusMan = nil
-        var g = partie(2, rules: r)
-        g.seize(.histoire, of: 1, asked: 20, correct: 20)
-        #expect(g.eruditionOwed(1) == 0)
-        #expect(g.eruditionEarned(1) == 0)
+        var g = game(2, rules: r)
+        g.seize(.history, of: 1, asked: 20, correct: 20)
+        #expect(g.scholarshipOwed(1) == 0)
+        #expect(g.scholarshipEarned(1) == 0)
     }
 
-    // MARK: - Jouer à deux appareils
+    // MARK: - Playing across two devices
 
-    /// Tout le jeu en réseau tient sur ceci : la même suite de coups, jouée
-    /// sur deux parties identiques, donne deux parties identiques. Si ce n'est
-    /// pas vrai, les deux écrans montrent chacun une partie cohérente — et ce
-    /// sont deux parties différentes, ce qui ne se voit pas.
-    @Test func lesMemesCoupsDonnentLaMemePartie() throws {
-        var ici = GameState.start(players: [Player(id: 0, name: "A"), Player(id: 1, name: "B")],
-                                  seed: 909)
-        var laBas = try JSONDecoder().decode(GameState.self,
-                                             from: JSONEncoder().encode(ici))
-        #expect(ici.digest == laBas.digest)
+    /// The whole networked game rests on this: the same run of moves, played
+    /// on two identical games, gives two identical games. If that is not
+    /// true, both screens show a coherent game each — and they are two
+    /// different games, which does not show.
+    @Test func theSameMovesGiveTheSameGame() throws {
+        var here = GameState.start(players: [Player(id: 0, name: "A"), Player(id: 1, name: "B")],
+                                   seed: 909)
+        var there = try JSONDecoder().decode(GameState.self,
+                                             from: JSONEncoder().encode(here))
+        #expect(here.digest == there.digest)
 
-        var coups: [Action] = []
-        if case let .reinforcement(n) = ici.phase {
-            let mien = ici.territories(of: 0)[0]
-            coups += Array(repeating: Action.place(mien), count: n)
+        var moves: [Action] = []
+        if case let .reinforcement(n) = here.phase {
+            let mine = here.territories(of: 0)[0]
+            moves += Array(repeating: Action.place(mine), count: n)
         }
-        guard let base = ici.territories(of: 0).first(where: { !ici.targets(from: $0).isEmpty }),
-              let cible = ici.targets(from: base).first else { return }
-        ici.seize(base, by: 0, armies: 9); laBas.seize(base, by: 0, armies: 9)
-        ici.seize(cible, by: 1, armies: 4); laBas.seize(cible, by: 1, armies: 4)
-        coups.append(.declareAssault(from: base, to: cible, questions: 2, category: .histoire))
+        guard let base = here.territories(of: 0).first(where: { !here.targets(from: $0).isEmpty }),
+              let target = here.targets(from: base).first else { return }
+        here.seize(base, by: 0, armies: 9); there.seize(base, by: 0, armies: 9)
+        here.seize(target, by: 1, armies: 4); there.seize(target, by: 1, armies: 4)
+        moves.append(.declareAssault(from: base, to: target, questions: 2, category: .history))
 
-        for coup in coups {
-            ici.apply(coup)
-            laBas.apply(coup)
-            #expect(ici.digest == laBas.digest, "divergence sur \(coup)")
+        for move in moves {
+            here.apply(move)
+            there.apply(move)
+            #expect(here.digest == there.digest, "drift on \(move)")
         }
-        // Y compris les questions tirées : c'est le tirage au sort qui décide.
-        #expect(ici.assault?.current?.question.id == laBas.assault?.current?.question.id)
+        // Including the questions drawn: the random generator decides.
+        #expect(here.assault?.current?.question.id == there.assault?.current?.question.id)
 
-        let bonne = ici.assault!.current!.question.answer
-        ici.apply(.answer(.chosen(bonne, elapsed: 2)))
-        laBas.apply(.answer(.chosen(bonne, elapsed: 2)))
-        #expect(ici.digest == laBas.digest)
-        #expect(ici.assault?.current?.question.id == laBas.assault?.current?.question.id)
+        let right = here.assault!.current!.question.answer
+        here.apply(.answer(.chosen(right, elapsed: 2)))
+        there.apply(.answer(.chosen(right, elapsed: 2)))
+        #expect(here.digest == there.digest)
+        #expect(here.assault?.current?.question.id == there.assault?.current?.question.id)
     }
 
-    /// À quatre appareils, la même suite de coups doit tenir sur quatre
-    /// parties : c'est la condition pour qu'aucun écran ne montre autre chose
-    /// que les autres.
-    @Test func lesMemesCoupsTiennentAQuatre() throws {
-        let joueurs = (0..<4).map { Player(id: $0, name: Boards.nomDeCamp($0)) }
-        var parties = [GameState.start(board: .monde, players: joueurs, seed: 4242)]
+    /// With four devices, the same run of moves has to hold across four
+    /// games: that is the condition for no screen showing anything different
+    /// from the others.
+    @Test func theSameMovesHoldAcrossFour() throws {
+        let players = (0..<4).map { Player(id: $0, name: Boards.sideName($0)) }
+        var games = [GameState.start(board: .world, players: players, seed: 4242)]
         for _ in 0 ..< 3 {
-            parties.append(try JSONDecoder().decode(GameState.self,
-                                                    from: JSONEncoder().encode(parties[0])))
+            games.append(try JSONDecoder().decode(GameState.self,
+                                                  from: JSONEncoder().encode(games[0])))
         }
-        #expect(Set(parties.map(\.digest)).count == 1)
+        #expect(Set(games.map(\.digest)).count == 1)
 
-        // On rejoue une partie entière, coup par coup, sur les quatre.
-        var meneuse = parties[0]
-        var coups: [Action] = []
-        var garde = 0
-        while !meneuse.isOver && garde < 60_000 {
-            garde += 1
-            let avant = meneuse.phase
-            // La machine décide, mais le coup se transmet comme un autre.
-            let pas = BotRunner.step(&meneuse)
-            if pas == .idle, avant == meneuse.phase, case .fortify = meneuse.phase {
-                meneuse.endTurn()
+        // We replay a whole game, move by move, on all four.
+        var leader = games[0]
+        var moves: [Action] = []
+        var safety = 0
+        while !leader.isOver && safety < 60_000 {
+            safety += 1
+            let before = leader.phase
+            // The machine decides, but the move travels like any other.
+            let step = BotRunner.step(&leader)
+            if step == .idle, before == leader.phase, case .fortify = leader.phase {
+                leader.endTurn()
             }
-            if coups.count > 400 { break }
-            if pas == .idle && avant == meneuse.phase { break }
+            if moves.count > 400 { break }
+            if step == .idle && before == leader.phase { break }
         }
-        // La partie menée sert de référence : on vérifie que le rejeu d'une
-        // suite d'actions donne bien la même empreinte sur chaque copie.
-        let suite: [Action] = [.place(meneuse.map.order[0])]
-        for i in parties.indices {
-            for coup in suite { parties[i].apply(coup) }
+        // The leading game serves as the reference: we check that replaying a
+        // run of actions gives the same digest on every copy.
+        let run: [Action] = [.place(leader.map.order[0])]
+        for i in games.indices {
+            for move in run { games[i].apply(move) }
         }
-        #expect(Set(parties.map(\.digest)).count == 1, "les quatre parties ont divergé")
+        #expect(Set(games.map(\.digest)).count == 1, "the four games have drifted apart")
     }
 
-    /// Un coup doit survivre au voyage.
-    @Test func unCoupSeTransmet() throws {
-        let coups: [Action] = [
+    /// A move has to survive the trip.
+    @Test func aMoveTravels() throws {
+        let moves: [Action] = [
             .place("A0"),
-            .declareAssault(from: "A0", to: "A1", questions: 2, category: .sciences),
+            .declareAssault(from: "A0", to: "A1", questions: 2, category: .science),
             .answer(.chosen(2, elapsed: 3.5)), .answer(.timeout),
             .dismissAssault, .occupy(3),
             .fortify(from: "A0", to: "A1", count: 2), .advance, .endTurn,
         ]
-        for (i, coup) in coups.enumerated() {
-            // Par `data`, et non par un encodeur monté ici : c'est lui qui
-            // pose l'enveloppe, et un test qui l'évite ne mesure pas ce qui
-            // voyage vraiment.
-            let data = try #require(Message.coup(coup, numero: i + 1, empreinte: 42).data)
-            guard case let .message(.coup(relu, numero, empreinte)) = Message.lire(data) else {
-                Issue.record("message illisible : \(coup)"); continue
+        for (i, move) in moves.enumerated() {
+            // Through `data`, and not an encoder set up here: that is what
+            // puts the envelope on, and a test that skips it does not measure
+            // what really travels.
+            let data = try #require(Message.move(move, number: i + 1, digest: 42).data)
+            guard case let .message(.move(back, number, digest)) = Message.read(data) else {
+                Issue.record("unreadable message: \(move)"); continue
             }
-            #expect(relu == coup)
-            #expect(numero == i + 1)
-            #expect(empreinte == 42)
+            #expect(back == move)
+            #expect(number == i + 1)
+            #expect(digest == 42)
         }
     }
 
-    /// L'empreinte doit être la même d'un lancement à l'autre — sans quoi deux
-    /// appareils en bonne santé se croiraient divergents.
-    @Test func lEmpreinteNeDependPasDuLancement() throws {
+    /// The digest has to be the same from one launch to the next — or two
+    /// healthy devices would think they had drifted.
+    @Test func theDigestDoesNotDependOnTheLaunch() throws {
         let g = GameState.start(players: [Player(id: 0, name: "A"), Player(id: 1, name: "B")],
                                 seed: 77)
-        let relu = try JSONDecoder().decode(GameState.self, from: JSONEncoder().encode(g))
-        #expect(g.digest == relu.digest)
-        var bouge = g
-        bouge.seize(g.map.order[0], by: 1, armies: 9)
-        #expect(bouge.digest != g.digest, "l'empreinte doit voir un changement")
+        let back = try JSONDecoder().decode(GameState.self, from: JSONEncoder().encode(g))
+        #expect(g.digest == back.digest)
+        var moved = g
+        moved.seize(g.map.order[0], by: 1, armies: 9)
+        #expect(moved.digest != g.digest, "the digest has to see a change")
     }
 
-    // MARK: - Cartes de territoire
+    // MARK: - Territory cards
 
-    @Test func uneCombinaisonSeReconnait() {
-        let inf = Card(id: 0, territory: "A0", symbol: .infanterie)
-        let inf2 = Card(id: 1, territory: "A1", symbol: .infanterie)
-        let inf3 = Card(id: 2, territory: "A2", symbol: .infanterie)
-        let cav = Card(id: 3, territory: "A3", symbol: .cavalerie)
-        let art = Card(id: 4, territory: "A4", symbol: .artillerie)
-        let joker = Card(id: 5, territory: nil, symbol: .infanterie)
+    @Test func aSetIsRecognized() {
+        let inf = Card(id: 0, territory: "A0", symbol: .infantry)
+        let inf2 = Card(id: 1, territory: "A1", symbol: .infantry)
+        let inf3 = Card(id: 2, territory: "A2", symbol: .infantry)
+        let cav = Card(id: 3, territory: "A3", symbol: .cavalry)
+        let art = Card(id: 4, territory: "A4", symbol: .artillery)
+        let wild = Card(id: 5, territory: nil, symbol: .infantry)
 
-        #expect(Deck.estUneCombinaison([inf, inf2, inf3]))       // trois pareils
-        #expect(Deck.estUneCombinaison([inf, cav, art]))          // trois différents
-        #expect(!Deck.estUneCombinaison([inf, inf2, cav]))        // deux et un
-        #expect(Deck.estUneCombinaison([inf, inf2, joker]))       // le joker complète
-        #expect(Deck.estUneCombinaison([inf, cav, joker]))
-        #expect(!Deck.estUneCombinaison([inf, inf2]))             // il en faut trois
-        #expect(!Deck.estUneCombinaison([inf, inf, inf]))         // pas deux fois la même
+        #expect(Deck.isASet([inf, inf2, inf3]))       // three the same
+        #expect(Deck.isASet([inf, cav, art]))         // three different
+        #expect(!Deck.isASet([inf, inf2, cav]))       // two and one
+        #expect(Deck.isASet([inf, inf2, wild]))       // the wild card completes it
+        #expect(Deck.isASet([inf, cav, wild]))
+        #expect(!Deck.isASet([inf, inf2]))            // three are needed
+        #expect(!Deck.isASet([inf, inf, inf]))        // not the same one twice
     }
 
-    /// Le barème monte : c'est lui qui empêche une partie de s'enliser.
-    @Test func leBaremeMonteEtNeRedescendPas() {
-        let valeurs = (1...12).map { Deck.valeur(echangeNumero: $0) }
-        #expect(valeurs.prefix(6) == [4, 6, 8, 10, 12, 15])
-        for (avant, apres) in zip(valeurs, valeurs.dropFirst()) {
-            #expect(apres > avant)
+    /// The scale climbs: that is what keeps a game from bogging down.
+    @Test func theScaleClimbsAndDoesNotComeBackDown() {
+        let values = (1...12).map { Deck.value(forExchange: $0) }
+        #expect(values.prefix(6) == [4, 6, 8, 10, 12, 15])
+        for (before, after) in zip(values, values.dropFirst()) {
+            #expect(after > before)
         }
-        #expect(Deck.valeur(echangeNumero: 7) == 20)
+        #expect(Deck.value(forExchange: 7) == 20)
     }
 
-    /// Une carte se gagne en prenant une place, et pas autrement.
-    @Test func laCarteSeGagneParLaConquete() {
+    /// A card is earned by taking a place, and no other way.
+    @Test func theCardIsEarnedByConquest() {
         var r = Rules(); r.territoryCards = true
-        var g = partie(2, rules: r)
-        #expect(g.deck.count == g.map.order.count + 2, "une carte par territoire, plus deux jokers")
+        var g = game(2, rules: r)
+        #expect(g.deck.count == g.map.order.count + 2, "one card per territory, plus two wild cards")
         #expect(g.hand(of: 0).isEmpty)
 
         g.debugSkipToFortify()
         g.endTurn()
-        #expect(g.hand(of: 0).isEmpty, "un tour sans conquête ne rapporte rien")
+        #expect(g.hand(of: 0).isEmpty, "a turn with no conquest pays nothing")
 
-        var h = partie(2, rules: r)
+        var h = game(2, rules: r)
         h.debugSkipToAttack()
-        guard let (base, cible) = h.debugFirstAssault(minArmies: 6, targetArmies: 1) else { return }
-        h.declareAssault(from: base, to: cible, questions: 1, category: .histoire)
-        let mauvaise = (h.assault!.current!.question.answer + 1) % 4
-        h.answer(.chosen(mauvaise, elapsed: 1))
+        guard let (base, target) = h.debugFirstAssault(minArmies: 6, targetArmies: 1) else { return }
+        h.declareAssault(from: base, to: target, questions: 1, category: .history)
+        let wrong = (h.assault!.current!.question.answer + 1) % 4
+        h.answer(.chosen(wrong, elapsed: 1))
         h.occupy(1)
         h.advance()
         h.endTurn()
-        #expect(h.hand(of: 0).count == 1, "une place prise vaut une carte")
+        #expect(h.hand(of: 0).count == 1, "a place taken is worth a card")
     }
 
-    /// L'échange verse les hommes dans les renforts en cours, une seule fois.
-    @Test func lEchangeVerseLesHommesEtRetireLesCartes() {
+    /// The trade pours the troops into the reinforcements in hand, once only.
+    @Test func theTradePaysTheTroopsAndTakesTheCards() {
         var r = Rules(); r.territoryCards = true
-        var g = partie(2, rules: r)
-        g.seizeHand(of: 0, [Card(id: 900, territory: nil, symbol: .infanterie),
-                            Card(id: 901, territory: nil, symbol: .cavalerie),
-                            Card(id: 902, territory: "A0", symbol: .artillerie)])
-        guard case let .reinforcement(avant) = g.phase else { Issue.record("phase"); return }
-        let valeur = g.prochainEchange
-        // Un appel mutant ne peut pas vivre dans `#expect` : la macro le
-        // capture dans une fermeture, où la partie est immuable.
-        let echange = g.exchange([900, 901, 902])
-        #expect(echange)
-        guard case let .reinforcement(apres) = g.phase else { Issue.record("phase"); return }
-        #expect(apres >= avant + valeur)
+        var g = game(2, rules: r)
+        g.seizeHand(of: 0, [Card(id: 900, territory: nil, symbol: .infantry),
+                            Card(id: 901, territory: nil, symbol: .cavalry),
+                            Card(id: 902, territory: "A0", symbol: .artillery)])
+        guard case let .reinforcement(before) = g.phase else { Issue.record("phase"); return }
+        let value = g.nextExchangeValue
+        // A mutating call cannot live inside `#expect`: the macro captures it
+        // in a closure, where the game is immutable.
+        let traded = g.exchange([900, 901, 902])
+        #expect(traded)
+        guard case let .reinforcement(after) = g.phase else { Issue.record("phase"); return }
+        #expect(after >= before + value)
         #expect(g.hand(of: 0).isEmpty)
         #expect(g.exchanges == 1)
-        let deuxieme = g.exchange([900, 901, 902])
-        #expect(!deuxieme, "les cartes ne sont plus là")
+        let second = g.exchange([900, 901, 902])
+        #expect(!second, "the cards are gone")
     }
 
-    /// Retirée, la règle ne doit rien coûter : ni paquet, ni carte, ni échange.
-    @Test func sansLOptionIlNYAAucuneCarte() {
-        var g = partie(2)
+    /// Removed, the rule must cost nothing: no deck, no card, no trade.
+    @Test func withoutTheOptionThereAreNoCards() {
+        var g = game(2)
         #expect(g.deck.isEmpty)
-        let refuse = g.exchange([0, 1, 2])
-        #expect(!refuse)
+        let refused = g.exchange([0, 1, 2])
+        #expect(!refused)
         g.debugSkipToFortify(); g.endTurn()
         #expect(g.hand(of: 0).isEmpty)
     }
 
-    /// La guerre totale exige tout le monde, sans exception.
-    @Test func laGuerreTotaleExigeToutLePlateau() {
+    /// Total war demands everyone, without exception.
+    @Test func totalWarDemandsTheWholeBoard() {
         var r = Rules(); r.dominationOverride = 0
-        var g = partie(2, rules: r)
+        var g = game(2, rules: r)
         #expect(g.dominationThreshold == g.map.order.count)
-        // Le dernier va d'abord à l'adversaire : sans cela il pouvait déjà
-        // appartenir au joueur 0 depuis la distribution, et le test se
-        // vérifiait lui-même.
+        // The last one goes to the opponent first: without that it could
+        // already belong to player 0 from the deal, and the test would be
+        // checking itself.
         g.seize(g.map.order.last!, by: 1, armies: 1)
         for id in g.map.order.dropLast() { g.seize(id, by: 0, armies: 1) }
-        #expect(!g.dominates(0), "il en manque un, donc ce n'est pas gagné")
+        #expect(!g.dominates(0), "one is missing, so it is not won")
         g.seize(g.map.order.last!, by: 0, armies: 1)
         #expect(g.dominates(0))
     }
 
-    // MARK: - La manœuvre de la machine
+    // MARK: - How the machine maneuvers
 
-    /// Le défaut le plus visible de la première machine : elle prenait une
-    /// place avec dix hommes et en laissait un dedans, en terre ennemie. Le
-    /// stratège garde à sa base ce qu'il lui faut pour tenir, et fait avancer
-    /// tout le reste.
-    @Test func leStrategeNAbandonnePasSesHommes() {
-        for style in [Bot.Style.facile, .moyenne, .forte] {
+    /// The most visible flaw of the first machine: it took a place with ten
+    /// troops and left one inside, in enemy land. The strategist keeps at its
+    /// base what it needs to hold, and moves all the rest forward.
+    @Test func theStrategistDoesNotAbandonItsTroops() {
+        for style in [Bot.Style.easy, .medium, .strong] {
             var g = GameState.start(players: [
-                Player(id: 0, name: "A", kind: .machine(niveau: 0.7, style: style)),
-                Player(id: 1, name: "B", kind: .machine(niveau: 0.7, style: style)),
+                Player(id: 0, name: "A", kind: .machine(level: 0.7, style: style)),
+                Player(id: 1, name: "B", kind: .machine(level: 0.7, style: style)),
             ], seed: 12)
             g.debugSkipToAttack()
-            guard let (base, cible) = g.debugFirstAssault(minArmies: 10, targetArmies: 1)
+            guard let (base, target) = g.debugFirstAssault(minArmies: 10, targetArmies: 1)
             else { return }
-            g.declareAssault(from: base, to: cible, questions: 1, category: .histoire)
-            let mauvaise = (g.assault!.current!.question.answer + 1) % 4
-            g.answer(.chosen(mauvaise, elapsed: 1))
+            g.declareAssault(from: base, to: target, questions: 1, category: .history)
+            let wrong = (g.assault!.current!.question.answer + 1) % 4
+            g.answer(.chosen(wrong, elapsed: 1))
 
-            let avance = Bot.occupation(g)
-            if style.garnisonne {
-                #expect(avance >= 6, "elle doit tenir la place prise, pas la semer")
+            let advancing = Bot.occupation(g)
+            if style.garrisons {
+                #expect(advancing >= 6, "it has to hold the place it took, not scatter it")
             } else {
-                #expect(avance <= 2, "la facile, elle, n'avance que le minimum")
+                #expect(advancing <= 2, "the easy one advances the minimum only")
             }
         }
     }
 
-    // MARK: - L'héritage du vaincu
+    // MARK: - The loser's inheritance
 
-    /// Celui qui achève un joueur prend ses cartes. Sans cette ligne, la main
-    /// du vaincu restait gelée là où elle était : ces cartes-là sortaient du
-    /// jeu pour de bon, et le paquet s'appauvrissait à chaque élimination.
-    @Test func lesCartesDuVaincuVontAuVainqueur() {
+    /// Whoever finishes a player off takes their cards. Without that line the
+    /// loser's hand stayed frozen where it was: those cards left the game for
+    /// good, and the deck grew poorer with every elimination.
+    @Test func theLosersCardsGoToTheWinner() {
         var r = Rules(); r.territoryCards = true
-        var g = GameState.start(players: (0..<3).map { Player(id: $0, name: "J\($0)") },
+        var g = GameState.start(players: (0..<3).map { Player(id: $0, name: "P\($0)") },
                                 rules: r, seed: 42)
         g.debugSkipToAttack()
-        let moi = g.currentPlayer.id
+        let me = g.currentPlayer.id
 
-        // Le vaincu ne tient plus qu'une place, à un homme, voisine de la mienne.
-        guard let base = g.territories(of: moi).first(where: { !g.targets(from: $0).isEmpty }),
-              let derniere = g.targets(from: base).first, let vaincu = g.owner[derniere],
-              let tiers = g.players.map(\.id).first(where: { $0 != moi && $0 != vaincu })
-        else { Issue.record("pas de front"); return }
-        for id in g.territories(of: vaincu) where id != derniere { g.seize(id, by: tiers) }
-        g.seize(base, by: moi, armies: 6)
-        g.seize(derniere, by: vaincu, armies: 1)
+        // The loser holds one place only, at one troop, next to mine.
+        guard let base = g.territories(of: me).first(where: { !g.targets(from: $0).isEmpty }),
+              let last = g.targets(from: base).first, let loser = g.owner[last],
+              let third = g.players.map(\.id).first(where: { $0 != me && $0 != loser })
+        else { Issue.record("no front line"); return }
+        for id in g.territories(of: loser) where id != last { g.seize(id, by: third) }
+        g.seize(base, by: me, armies: 6)
+        g.seize(last, by: loser, armies: 1)
 
-        let butin = Array(Deck.build(for: g.map).prefix(3))
-        g.seizeHand(of: vaincu, butin)
-        g.seizeHand(of: moi, [])
+        let spoils = Array(Deck.build(for: g.map).prefix(3))
+        g.seizeHand(of: loser, spoils)
+        g.seizeHand(of: me, [])
 
-        let declare = g.declareAssault(from: base, to: derniere, questions: 1, category: .histoire)
-        #expect(declare)
-        _ = g.answer(.timeout)          // la place tombe
+        let declared = g.declareAssault(from: base, to: last, questions: 1, category: .history)
+        #expect(declared)
+        _ = g.answer(.timeout)          // the place falls
 
-        #expect(g.players.first { $0.id == vaincu }?.eliminated == true)
-        #expect(g.hand(of: vaincu).isEmpty, "le vaincu ne garde rien")
-        #expect(g.hand(of: moi).map(\.id).sorted() == butin.map(\.id).sorted(),
-                "les trois cartes passent au vainqueur")
+        #expect(g.players.first { $0.id == loser }?.eliminated == true)
+        #expect(g.hand(of: loser).isEmpty, "the loser keeps nothing")
+        #expect(g.hand(of: me).map(\.id).sorted() == spoils.map(\.id).sorted(),
+                "the three cards pass to the winner")
     }
 
-    /// Aucune carte ne disparaît du jeu : c'était tout le problème.
-    @Test func aucuneCarteNeSortDuJeu() {
+    /// No card leaves the game: that was the whole problem.
+    @Test func noCardLeavesTheGame() {
         var r = Rules(); r.territoryCards = true
-        var g = GameState.start(players: (0..<3).map { Player(id: $0, name: "J\($0)") },
+        var g = GameState.start(players: (0..<3).map { Player(id: $0, name: "P\($0)") },
                                 rules: r, seed: 7)
         func total(_ g: GameState) -> Int {
             g.players.reduce(0) { $0 + g.hand(of: $1.id).count } + g.deck.count + g.discard.count
         }
-        let avant = total(g)
+        let before = total(g)
         g.debugSkipToAttack()
-        let moi = g.currentPlayer.id
-        guard let base = g.territories(of: moi).first(where: { !g.targets(from: $0).isEmpty }),
-              let derniere = g.targets(from: base).first, let vaincu = g.owner[derniere],
-              let tiers = g.players.map(\.id).first(where: { $0 != moi && $0 != vaincu })
-        else { Issue.record("pas de front"); return }
-        for id in g.territories(of: vaincu) where id != derniere { g.seize(id, by: tiers) }
-        g.seize(base, by: moi, armies: 6)
-        g.seize(derniere, by: vaincu, armies: 1)
-        g.seizeHand(of: vaincu, Array(Deck.build(for: g.map).prefix(4)))
+        let me = g.currentPlayer.id
+        guard let base = g.territories(of: me).first(where: { !g.targets(from: $0).isEmpty }),
+              let last = g.targets(from: base).first, let loser = g.owner[last],
+              let third = g.players.map(\.id).first(where: { $0 != me && $0 != loser })
+        else { Issue.record("no front line"); return }
+        for id in g.territories(of: loser) where id != last { g.seize(id, by: third) }
+        g.seize(base, by: me, armies: 6)
+        g.seize(last, by: loser, armies: 1)
+        g.seizeHand(of: loser, Array(Deck.build(for: g.map).prefix(4)))
 
-        let apresMise = total(g)
-        let declare = g.declareAssault(from: base, to: derniere, questions: 1, category: .histoire)
-        #expect(declare)
+        let afterSetup = total(g)
+        let declared = g.declareAssault(from: base, to: last, questions: 1, category: .history)
+        #expect(declared)
         _ = g.answer(.timeout)
-        #expect(total(g) == apresMise, "le compte des cartes ne bouge pas")
-        #expect(avant > 0)
+        #expect(total(g) == afterSetup, "the card count does not move")
+        #expect(before > 0)
     }
 
-    /// Les trois niveaux doivent former une échelle, et pas trois noms.
-    /// Chacun ajoute au précédent, et le flair — viser les faiblesses de
-    /// l'adversaire en choisissant le terrain de la question — monte à chaque
-    /// cran. C'est lui qui porte l'échelle : la manœuvre ne départage les
-    /// machines que sur un grand plateau, parce qu'ailleurs la partie se règle
-    /// en sept tours et que c'est le quiz qui décide.
-    @Test func lesTroisNiveauxSOrdonnent() {
-        let echelle: [Bot.Style] = [.facile, .moyenne, .forte]
-        #expect(Bot.Style.allCases == echelle, "l'ordre affiché doit être celui de la force")
-        for (bas, haut) in zip(echelle, echelle.dropFirst()) {
-            #expect(haut.flair > bas.flair, "\(haut.label) doit viser mieux que \(bas.label)")
+    /// The three levels have to form a ladder, and not three names. Each adds
+    /// to the one before, and flair — aiming at the opponent's weaknesses
+    /// when choosing the ground for the question — climbs at every rung. It
+    /// is what carries the ladder: maneuvering only separates the machines on
+    /// a large board, because anywhere else the game settles in seven turns
+    /// and the quiz is what decides.
+    @Test func theThreeLevelsAreOrdered() {
+        let ladder: [Bot.Style] = [.easy, .medium, .strong]
+        #expect(Bot.Style.allCases == ladder, "the displayed order has to be the order of strength")
+        for (low, high) in zip(ladder, ladder.dropFirst()) {
+            #expect(high.flair > low.flair, "\(high.label) has to aim better than \(low.label)")
         }
-        // Ce qui s'acquiert, et ne se reperd pas.
-        #expect(!Bot.Style.facile.garnisonne)
-        #expect(Bot.Style.moyenne.garnisonne && Bot.Style.forte.garnisonne)
-        #expect(!Bot.Style.moyenne.concentre && Bot.Style.forte.concentre)
-        #expect(!Bot.Style.moyenne.exploiteLeSablier && Bot.Style.forte.exploiteLeSablier)
+        // What is acquired, and not lost again.
+        #expect(!Bot.Style.easy.garrisons)
+        #expect(Bot.Style.medium.garrisons && Bot.Style.strong.garrisons)
+        #expect(!Bot.Style.medium.concentrates && Bot.Style.strong.concentrates)
+        #expect(!Bot.Style.medium.exploitsTheClock && Bot.Style.strong.exploitsTheClock)
     }
 
-    /// Sans flair, la machine ne regarde même pas le dossier : elle doit donc
-    /// répartir ses questions sur tous les thèmes.
-    @Test func laFacileNeViseAucuneFaiblesse() {
-        var g = partie(2)
-        g.seize(.histoire, of: 1, asked: 10, correct: 0)   // faiblesse criante
+    /// Without flair the machine does not even look at the file: it therefore
+    /// has to spread its questions across every theme.
+    @Test func theEasyMachineAimsAtNoWeakness() {
+        var g = game(2)
+        g.seize(.history, of: 1, asked: 10, correct: 0)   // a glaring weakness
         var rng = SeededRandom(seed: 4)
-        var facile: [Riskelo.Category] = [], forte: [Riskelo.Category] = []
+        var easy: [RiskeloUS.Category] = [], strong: [RiskeloUS.Category] = []
         for _ in 0 ..< 200 {
-            g.players[0].kind = .machine(niveau: 0.7, style: .facile)
-            facile.append(Bot.category(g, against: 1, using: &rng))
-            g.players[0].kind = .machine(niveau: 0.7, style: .forte)
-            forte.append(Bot.category(g, against: 1, using: &rng))
+            g.players[0].kind = .machine(level: 0.7, style: .easy)
+            easy.append(Bot.category(g, against: 1, using: &rng))
+            g.players[0].kind = .machine(level: 0.7, style: .strong)
+            strong.append(Bot.category(g, against: 1, using: &rng))
         }
-        let visesFacile = facile.filter { $0 == .histoire }.count
-        let visesForte = forte.filter { $0 == .histoire }.count
-        #expect(visesForte > visesFacile * 2,
-                "la forte doit frapper la faiblesse bien plus souvent (\(visesForte) contre \(visesFacile))")
+        let aimedEasy = easy.filter { $0 == .history }.count
+        let aimedStrong = strong.filter { $0 == .history }.count
+        #expect(aimedStrong > aimedEasy * 2,
+                "the strong machine has to hit the weakness far more often (\(aimedStrong) against \(aimedEasy))")
     }
 
-    /// Une pile de deux hommes menacée n'attaque pas : c'est la discipline qui
-    /// sépare les deux machines, et je l'ai mesurée en la desserrant — le
-    /// stratège tombait de 51 % à 32 % sur l'Europe.
-    @Test func leStrategeNAttaquePasAvecSaDernierePaire() {
+    /// A threatened stack of two troops does not attack: that is the
+    /// discipline that separates the two machines, and I measured it by
+    /// loosening it — the strategist dropped from 51% to 32% on Europe.
+    @Test func theStrategistDoesNotAttackWithItsLastPair() {
         var r = Rules()
         r.dominationOverride = nil
         var g = GameState.start(players: [
-            Player(id: 0, name: "A", kind: .machine(niveau: 0.7, style: .forte)),
-            Player(id: 1, name: "B", kind: .machine(niveau: 0.7, style: .forte)),
+            Player(id: 0, name: "A", kind: .machine(level: 0.7, style: .strong)),
+            Player(id: 1, name: "B", kind: .machine(level: 0.7, style: .strong)),
         ], rules: r, seed: 31)
         g.debugSkipToAttack()
-        guard let (base, cible) = g.debugFirstAssault(minArmies: 2, targetArmies: 3) else { return }
-        // Toutes les autres places du camp sont réduites à un homme : la seule
-        // attaque possible partirait de cette paire menacée.
+        guard let (base, target) = g.debugFirstAssault(minArmies: 2, targetArmies: 3) else { return }
+        // Every other place on the side is down to one troop: the only
+        // possible attack would set out from that threatened pair.
         for id in g.territories(of: 0) where id != base { g.seize(id, by: 0, armies: 1) }
         var rng = SeededRandom(seed: 5)
         let plan = Bot.assault(g, boldness: 1.0, using: &rng)
-        #expect(plan?.from != base, "il ne doit pas partir avec sa dernière paire")
-        #expect(g.armies(cible) == 3)
+        #expect(plan?.from != base, "it must not set out with its last pair")
+        #expect(g.armies(target) == 3)
     }
 
-    // MARK: - Reprendre une partie
+    // MARK: - Resuming a game
 
-    /// Une partie reprise doit être la même partie, et non une autre qui
-    /// commence au même endroit. C'est le tirage au sort qui en décide : s'il
-    /// n'était pas enregistré, tout serait juste à l'œil et faux au coup
-    /// suivant.
-    @Test func unePartieRepriseSeDerouleALIdentique() throws {
-        var g = GameState.start(players: [Player(id: 0, name: "A", kind: .machine(niveau: 0.7, style: .forte)),
-                                          Player(id: 1, name: "B", kind: .machine(niveau: 0.6, style: .forte))],
+    /// A resumed game has to be the same game, and not another one starting
+    /// in the same place. The random generator is what decides: if it were
+    /// not saved, everything would look right and be wrong on the next move.
+    @Test func aResumedGameRunsIdentically() throws {
+        var g = GameState.start(players: [Player(id: 0, name: "A", kind: .machine(level: 0.7, style: .strong)),
+                                          Player(id: 1, name: "B", kind: .machine(level: 0.6, style: .strong))],
                                 seed: 1234)
         for _ in 0 ..< 60 { BotRunner.step(&g) }
 
         let data = try JSONEncoder().encode(g)
-        var reprise = try JSONDecoder().decode(GameState.self, from: data)
+        var resumed = try JSONDecoder().decode(GameState.self, from: data)
 
-        #expect(reprise.turn == g.turn)
-        #expect(reprise.currentPlayer.id == g.currentPlayer.id)
-        #expect(reprise.phase == g.phase)
-        #expect(reprise.journal.count == g.journal.count)
-        #expect(reprise.bank.alreadyServed == g.bank.alreadyServed)
-        #expect(reprise.bank.placesRestantes == g.bank.placesRestantes)
+        #expect(resumed.turn == g.turn)
+        #expect(resumed.currentPlayer.id == g.currentPlayer.id)
+        #expect(resumed.phase == g.phase)
+        #expect(resumed.journal.count == g.journal.count)
+        #expect(resumed.bank.alreadyServed == g.bank.alreadyServed)
+        #expect(resumed.bank.remainingSlots == g.bank.remainingSlots)
         #expect(g.map.order.allSatisfy {
-            reprise.owner[$0] == g.owner[$0] && reprise.armies($0) == g.armies($0)
+            resumed.owner[$0] == g.owner[$0] && resumed.armies($0) == g.armies($0)
         })
-        #expect(Themes.tous.allSatisfy {
-            reprise.record(of: 1, in: $0) == g.record(of: 1, in: $0)
+        #expect(Themes.all.allSatisfy {
+            resumed.record(of: 1, in: $0) == g.record(of: 1, in: $0)
         })
 
-        // Et la suite, coup pour coup.
-        var suivie = g
-        for coup in 0 ..< 300 {
-            BotRunner.step(&suivie)
-            BotRunner.step(&reprise)
-            #expect(reprise.turn == suivie.turn, "divergence au coup \(coup)")
-            #expect(reprise.assault?.current?.question.choices
-                    == suivie.assault?.current?.question.choices,
-                    "les propositions ne tombent pas dans le même ordre au coup \(coup)")
-            #expect(reprise.assault?.current?.question.id == suivie.assault?.current?.question.id,
-                    "question différente au coup \(coup)")
+        // And what follows, move for move.
+        var followed = g
+        for move in 0 ..< 300 {
+            BotRunner.step(&followed)
+            BotRunner.step(&resumed)
+            #expect(resumed.turn == followed.turn, "drift at move \(move)")
+            #expect(resumed.assault?.current?.question.choices
+                    == followed.assault?.current?.question.choices,
+                    "the choices do not fall in the same order at move \(move)")
+            #expect(resumed.assault?.current?.question.id == followed.assault?.current?.question.id,
+                    "different question at move \(move)")
         }
     }
 
-    /// Une sauvegarde faite sur un autre plateau doit être refusée, et non
-    /// restaurée de travers : un territoire manquant rendrait la partie
-    /// injouable sans rien annoncer.
-    @Test func uneSauvegardeDUnAutrePlateauEstRefusee() throws {
+    /// A save made on another board has to be refused, and not restored
+    /// wrong: a missing territory would make the game unplayable without
+    /// announcing anything.
+    @Test func aSaveFromAnotherBoardIsRefused() throws {
         let g = GameState.start(players: [Player(id: 0, name: "A"), Player(id: 1, name: "B")],
                                 seed: 7)
         let data = try JSONEncoder().encode(g)
-        let faussee = String(data: data, encoding: .utf8)!
+        let tampered = String(data: data, encoding: .utf8)!
             .replacingOccurrences(of: "\"signature\":\"A0,", with: "\"signature\":\"Z9,")
         #expect(throws: (any Error).self) {
-            try JSONDecoder().decode(GameState.self, from: Data(faussee.utf8))
+            try JSONDecoder().decode(GameState.self, from: Data(tampered.utf8))
         }
     }
 
-    /// Une partie entière, jouée par la machine contre elle-même : elle doit
-    /// se terminer, et sans jamais passer par un état interdit.
+    /// A whole game, played by the machine against itself: it has to finish,
+    /// and never pass through a forbidden state.
     @Test(arguments: [1 as UInt64, 2, 3, 4, 5, 6, 7, 8])
-    func unePartieCompleteSeTermine(seed: UInt64) {
-        var g = GameState.start(players: [Player(id: 0, name: "A", kind: .machine(niveau: 0.7, style: .forte)),
-                                          Player(id: 1, name: "B", kind: .machine(niveau: 0.7, style: .forte))],
+    func aWholeGameFinishes(seed: UInt64) {
+        var g = GameState.start(players: [Player(id: 0, name: "A", kind: .machine(level: 0.7, style: .strong)),
+                                          Player(id: 1, name: "B", kind: .machine(level: 0.7, style: .strong))],
                                 seed: seed)
-        var garde = 0
-        while !g.isOver && garde < 200_000 {
-            garde += 1
-            let avant = g.phase
-            let pas = BotRunner.step(&g)
-            if pas == .idle, g.phase == .fortify { g.endTurn() }
-            if pas == .idle, avant == g.phase, case .reinforcement(let r) = g.phase, r == 0 { g.advance() }
-            // Aucun territoire ne reste vide — sauf la place qu'on vient de
-            // prendre, tant que les hommes qui doivent y entrer n'ont pas
-            // avancé. C'est le seul instant où le plateau a un trou.
-            if case let .occupation(_, prise, _, _) = g.phase {
-                #expect(g.map.order.allSatisfy { $0 == prise || g.armies($0) >= 1 })
+        var safety = 0
+        while !g.isOver && safety < 200_000 {
+            safety += 1
+            let before = g.phase
+            let step = BotRunner.step(&g)
+            if step == .idle, g.phase == .fortify { g.endTurn() }
+            if step == .idle, before == g.phase, case .reinforcement(let r) = g.phase, r == 0 { g.advance() }
+            // No territory stays empty — except the place just taken, until
+            // the troops that have to enter it have advanced. That is the one
+            // instant when the board has a hole.
+            if case let .occupation(_, taken, _, _) = g.phase {
+                #expect(g.map.order.allSatisfy { $0 == taken || g.armies($0) >= 1 })
             } else {
                 #expect(g.map.order.allSatisfy { g.armies($0) >= 1 })
             }
         }
-        #expect(g.isOver, "partie \(seed) : pas de fin")
-        if case let .finished(vainqueur) = g.phase {
-            #expect(g.dominates(vainqueur) || g.players.filter { !$0.eliminated }.count == 1)
+        #expect(g.isOver, "game \(seed): no ending")
+        if case let .finished(winner) = g.phase {
+            #expect(g.dominates(winner) || g.players.filter { !$0.eliminated }.count == 1)
         }
     }
 }

@@ -1,40 +1,41 @@
 //
 //  Link.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Le fil entre deux appareils.
+//  The wire between two devices.
 //
-//  Bonjour pour se trouver, TCP pour se parler — par le framework Network.
+//  Bonjour to find each other, TCP to talk — through the Network framework.
 //
-//  C'était MultipeerConnectivity, et cela paraissait le choix évident : il
-//  prend le Bluetooth et le Wi-Fi direct sans qu'on ait à choisir, ne demande
-//  ni compte ni réseau, et marche dans un train.
+//  It used to be MultipeerConnectivity, and that looked like the obvious
+//  choice: it takes Bluetooth and peer-to-peer Wi-Fi without your having to
+//  choose, asks for neither an account nor a network, and works on a train.
 //
-//  Il avait un défaut qu'aucun réglage ne corrige. Sa session de jeu n'accepte
-//  QUE le Wi-Fi direct — le journal du système le dit mot pour mot :
-//  « use awdl, prohibit fallback ». Or le Wi-Fi direct est interdit sur les
-//  canaux 5 GHz dits « radar » (52 à 140), que les box choisissent toutes
-//  seules et changent sans prévenir. Sur un tel canal, la découverte marche,
-//  l'invitation passe, et la partie ne démarre jamais : « Sendmsg failed with
-//  error No route to host », dix fois, puis l'abandon. Mesuré ici, sur le
-//  canal 104, entre un Mac et un iPhone qui se pinguaient parfaitement.
+//  It had one flaw no setting fixes. Its game session accepts ONLY
+//  peer-to-peer Wi-Fi — the system log says so word for word: "use awdl,
+//  prohibit fallback". And peer-to-peer Wi-Fi is forbidden on the 5 GHz
+//  channels known as "radar" (52 to 140), which routers pick by themselves
+//  and change without warning. On such a channel, discovery works, the
+//  invitation goes through, and the game never starts: "Sendmsg failed with
+//  error No route to host", ten times over, then it gives up. Measured here,
+//  on channel 104, between a Mac and an iPhone that pinged each other
+//  perfectly.
 //
-//  Un joueur n'a ni les journaux, ni la main sur sa box. Faire dépendre le jeu
-//  d'une condition qu'il ne peut ni voir ni corriger n'était pas tenable.
+//  A player has neither the logs nor any say over their router. Making the
+//  game depend on a condition they can neither see nor fix was not tenable.
 //
-//  D'où ce fil-ci. La découverte reste Bonjour, exactement la même ; les
-//  données passent par une connexion TCP ordinaire. `includePeerToPeer` reste
-//  allumé, donc le Wi-Fi direct sert encore quand il est là — dans un train,
-//  sans aucune box. Mais il devient un bonus au lieu d'être une exigence.
+//  Hence this wire. Discovery is still Bonjour, exactly the same; the data
+//  goes over an ordinary TCP connection. `includePeerToPeer` stays on, so
+//  peer-to-peer Wi-Fi still serves when it is there — on a train, with no
+//  router at all. But it becomes a bonus instead of a requirement.
 //
-//  Et toute la danse des invitations disparaît avec lui. Il n'y a plus
-//  d'invitation à accepter, plus de secours à envoyer six secondes plus tard,
-//  plus de rôles à rendre symétriques, plus de délai de quarante-six secondes
-//  au bout duquel on renonce : celui qui rejoint ouvre une connexion, et elle
-//  aboutit ou elle échoue. Une famille entière de pannes s'en va avec.
+//  And the whole dance of invitations goes with it. There is no longer an
+//  invitation to accept, no backup to send six seconds later, no roles to
+//  keep symmetrical, no forty-six-second delay at the end of which you give
+//  up: whoever joins opens a connection, and it either succeeds or it fails.
+//  A whole family of failures leaves with it.
 //
-//  Ce fichier ne connaît rien au jeu : il transporte des paquets d'octets et
-//  dit qui est là. Ce qui circule dedans est l'affaire de `Match`.
+//  This file knows nothing about the game: it carries packets of bytes and
+//  says who is there. What travels inside them is `Match`'s business.
 //
 
 import Foundation
@@ -43,288 +44,293 @@ import Network
 import UIKit
 #endif
 
-/// Un appareil au bout du fil.
+/// A device at the other end of the wire.
 ///
-/// Deux appareils sont le même si leur identité est la même. Le nom, lui, ne
-/// distingue rien : depuis iOS 16 tous les iPhone s'appellent « iPhone » pour
-/// qui n'a pas l'autorisation d'en demander plus.
+/// Two devices are the same if their identity is the same. The name
+/// distinguishes nothing: since iOS 16 every iPhone is called "iPhone" to
+/// anyone without permission to ask for more.
 struct Pair: Hashable, Sendable {
-    /// Gardée d'un lancement sur l'autre. Voir `Link.identite()`.
+    /// Kept from one launch to the next. See `Link.identity()`.
     let id: String
-    /// Ce qu'on montre à l'écran.
-    let nom: String
+    /// What is shown on screen.
+    let name: String
 
     static func == (a: Pair, b: Pair) -> Bool { a.id == b.id }
-    func hash(into hacheur: inout Hasher) { hacheur.combine(id) }
+    func hash(into hasher: inout Hasher) { hasher.combine(id) }
 }
 
 @Observable
 @MainActor
 final class Link {
 
-    /// Le nom du service. Quinze caractères au plus, minuscules et tirets :
-    /// c'est une contrainte de Bonjour, pas un goût.
-    nonisolated static let service = "riskelo-jeu"
+    /// The service name. Fifteen characters at most, lowercase and hyphens:
+    /// that is a Bonjour constraint, not a taste.
+    ///
+    /// It is not the French app's "riskelo-jeu", deliberately: the two apps
+    /// ship different question packs, so a French device and an American one
+    /// must not find each other and sit down to a table neither can play.
+    nonisolated static let service = "riskelo-us"
 
-    /// Ce que l'hôte dit de lui dans son annonce.
+    /// What the host says about itself in its advertisement.
     ///
-    /// Les clés sont courtes parce que tout ceci voyage dans un enregistrement
-    /// Bonjour, qui est petit. Seul l'hôte s'annonce désormais : celui qui
-    /// rejoint n'a plus rien à faire savoir à personne, il se connecte.
-    nonisolated static let cleRole = "r", cleNom = "n", cleId = "i"
-    /// Où joindre l'hôte, sans rien avoir à demander à personne.
+    /// The keys are short because all of this travels in a Bonjour record,
+    /// which is small. Only the host advertises now: whoever joins has
+    /// nothing left to make known to anyone, they connect.
+    nonisolated static let keyRole = "r", keyName = "n", keyID = "i"
+    /// Where to reach the host, without having to ask anyone.
     ///
-    /// Laisser le système résoudre un service Bonjour paraissait naturel, et
-    /// c'était le chemin le plus court sur le papier. Sur l'iPhone de Robert,
-    /// il ne menait nulle part : la table se voyait, son adresse ne s'obtenait
-    /// jamais, et la connexion restait « en préparation » jusqu'au délai —
-    /// sans erreur, sans rien à quoi se raccrocher.
+    /// Letting the system resolve a Bonjour service seemed natural, and it
+    /// was the shortest path on paper. On one iPhone here it led nowhere: the
+    /// table was visible, its address was never obtained, and the connection
+    /// stayed "preparing" until it timed out — no error, nothing to hold on
+    /// to.
     ///
-    /// Or le même iPhone atteignait le Mac en une seconde depuis Safari, et
-    /// le journal du serveur l'a confirmé de l'autre bout : ses paquets
-    /// arrivent, en IPv4 comme en IPv6. C'est la résolution du *service* qui
-    /// ne passe pas, rien d'autre. On annonce donc où l'on est, et l'invité
-    /// s'y rend sans avoir de question à poser.
+    /// And yet the same iPhone reached the Mac in a second from Safari, and
+    /// the server log confirmed it from the other end: its packets arrive,
+    /// over IPv4 as over IPv6. It is resolving the *service* that fails,
+    /// nothing else. So we advertise where we are, and the guest goes there
+    /// with no question to ask.
     ///
-    /// Une **adresse**, et non un nom d'hôte. J'ai essayé le nom, pris de
-    /// `ProcessInfo.hostName` : sur le Mac il rend « macbook-air-de-robert
-    /// .local », mais sur l'iPad il rend « customer.lndngbr1.isp.starlink.com »
-    /// — le nom que le fournisseur d'accès attribue à la connexion. Y coller
-    /// « .local » donnait une adresse qui ne désigne rien. Une adresse IP, au
-    /// moins, ne se devine pas : elle se lit.
-    nonisolated static let cleAdresse = "a", clePort = "p"
-    nonisolated static let hote = "h"
+    /// An **address**, and not a hostname. I tried the name, taken from
+    /// `ProcessInfo.hostName`: on the Mac it returns "macbook-air.local", but
+    /// on the iPad it returns "customer.lndngbr1.isp.starlink.com" — the name
+    /// the internet provider assigns to the connection. Sticking ".local" on
+    /// the end gave an address that designates nothing. An IP address, at
+    /// least, is not guessed at: it is read.
+    nonisolated static let keyAddress = "a", keyPort = "p"
+    nonisolated static let host = "h"
 
-    /// Ce que dit celui qui veut entrer et n'y arrive pas.
+    /// What someone says when they want in and cannot get there.
     ///
-    /// Sur l'iPhone de Robert, iOS laisse l'application **écouter et
-    /// s'annoncer**, et lui refuse les connexions **sortantes** vers le réseau
-    /// local — l'interrupteur des réglages étant vert, et le journal disant
-    /// `localNetworkDenied` à chaque tentative. Mesuré : l'iPhone qui rejoint
-    /// n'aboutit jamais ; l'iPhone qui tient la table est rejoint en une
-    /// seconde. La panne est à sens unique, et aucun réglage ne la lève.
+    /// On one iPhone here, iOS lets the app **listen and advertise**, and
+    /// refuses it **outgoing** connections to the local network — with the
+    /// settings switch green, and the log saying `localNetworkDenied` at
+    /// every attempt. Measured: the joining iPhone never gets through; the
+    /// iPhone holding the table is joined in a second. The failure runs one
+    /// way, and no setting lifts it.
     ///
-    /// Alors on retourne le sens. Celui qui rejoint s'annonce à son tour —
-    /// « je veux entrer à cette table-là » — et c'est l'hôte qui vient à lui.
-    /// Les deux chemins sont tentés en même temps ; le premier qui aboutit
-    /// gagne, l'autre se ferme tout seul (voir `nommer`). Il suffit donc que
-    /// **l'un des deux** appareils puisse composer un numéro, au lieu qu'il
-    /// faille que ce soit celui qui rejoint.
-    nonisolated static let invite = "v"
-    /// La table qu'il vise : seul son hôte doit le rappeler, et non toutes
-    /// les tables ouvertes du réseau.
-    nonisolated static let cleCible = "c"
+    /// So we reverse the direction. Whoever joins advertises in turn — "I
+    /// want in at that table" — and it is the host who comes to them. Both
+    /// paths are tried at once; the first to succeed wins, the other closes
+    /// on its own (see `identify`). It is therefore enough that **one of the
+    /// two** devices can dial out, instead of requiring it to be the one
+    /// joining.
+    nonisolated static let guest = "v"
+    /// The table they are aiming at: only its host should call them back, and
+    /// not every open table on the network.
+    nonisolated static let keyTarget = "c"
 
     enum State: Equatable {
-        case aLArret
-        /// On tient une table et l'on attend qu'on vienne.
-        case ouvert
-        /// On cherche qui en tient une.
-        case cherche
-        /// La connexion est partie, on attend qu'elle aboutisse.
-        case invite(String)
-        case relie(String)
-        case perdu(String)
-        /// Le système a refusé d'ouvrir le réseau, ou la connexion n'a pas
-        /// abouti.
-        case refuse(String)
-        /// Le système coupe l'accès au réseau local à cette application.
+        case stopped
+        /// We are holding a table and waiting for someone to come.
+        case open
+        /// We are looking for someone holding one.
+        case searching
+        /// The connection has left, we are waiting for it to succeed.
+        case calling(String)
+        case linked(String)
+        case lost(String)
+        /// The system refused to open the network, or the connection did not
+        /// succeed.
+        case refused(String)
+        /// The system is cutting this app off from the local network.
         ///
-        /// Il le dit d'une seule façon, et de très loin : « Network is down »
-        /// sur une adresse pourtant valide et joignable. Rien à l'écran, rien
-        /// dans les réglages qui saute aux yeux — l'autorisation « réseau
-        /// local » se refuse une fois et ne se redemande jamais. Sans ce cas,
-        /// le joueur ne voyait que « n'a pas répondu » et cherchait du côté
-        /// de son Wi-Fi, où il n'y avait rien à trouver.
-        case sansAutorisation
+        /// It says so in one way only, and from a long way off: "Network is
+        /// down" on an address that is perfectly valid and reachable. Nothing
+        /// on screen, nothing in the settings that leaps out — the "local
+        /// network" permission is refused once and never asked for again.
+        /// Without this case, the player saw only "did not answer" and went
+        /// looking at their Wi-Fi, where there was nothing to find.
+        case notAllowed
     }
 
-    private(set) var state: State = .aLArret
-    /// Les tables trouvées autour, pour le joueur qui cherche.
-    private(set) var trouves: [Pair] = []
-    /// Les appareils reliés, dans l'ordre où ils sont arrivés : c'est cet
-    /// ordre qui décide des rangs.
-    private(set) var relies: [Pair] = []
+    private(set) var state: State = .stopped
+    /// The tables found nearby, for the player who is searching.
+    private(set) var found: [Pair] = []
+    /// The devices linked, in the order they arrived: that order is what
+    /// decides the seats.
+    private(set) var linked: [Pair] = []
 
-    var jeSuisLHote: Bool { jHeberge }
+    var iAmHost: Bool { hosting }
 
-    /// Ce qui arrive d'un autre appareil, et de qui.
+    /// What arrives from another device, and from whom.
     var onReceive: ((Data, Pair) -> Void)?
-    /// Appelé à chaque appareil relié, avec `true` si c'est nous qui avons
-    /// ouvert la partie. À quatre, il est appelé trois fois.
+    /// Called for each device linked, with `true` if we are the one who
+    /// opened the game. With four players it is called three times.
     var onConnected: ((Bool, Pair) -> Void)?
 
-    /// Combien d'appareils l'hôte attend en tout, lui non compris.
-    /// Il cesse d'annoncer dès que la table est pleine.
-    var attendus = 1
+    /// How many devices the host is waiting for in all, not counting itself.
+    /// It stops advertising as soon as the table is full.
+    var expected = 1
 
-    /// Notre identité sur le fil.
-    let moi = Link.identite()
+    /// Our identity on the wire.
+    let me = Link.identity()
 
-    /// Sommes-nous sur un réseau ?
+    /// Are we on a network?
     ///
-    /// Toute la question du Wi-Fi direct tient là. Une écoute qui l'active
-    /// s'annonce sous un nom d'hôte en forme d'identifiant — mesuré ici :
-    /// « 49f8cb31-8eb0-….local » au lieu de « MacBook-Air-de-Robert.local »,
-    /// et c'est `includePeerToPeer` seul qui en décide. Or ce nom-là ne se
-    /// résout pas toujours par le réseau ordinaire : l'invité reste alors
-    /// bloqué en préparation, sans erreur, jusqu'à ce que le délai tranche.
-    /// Il trouve la table et n'atteint jamais son adresse.
+    /// The whole question of peer-to-peer Wi-Fi hangs on this. A listener
+    /// that turns it on advertises under a hostname shaped like an identifier
+    /// — measured here: "49f8cb31-8eb0-….local" instead of
+    /// "MacBook-Air.local", and it is `includePeerToPeer` alone that decides
+    /// it. And that name does not always resolve over the ordinary network:
+    /// the guest then stays stuck in preparing, with no error, until the
+    /// timeout settles it. They find the table and never reach its address.
     ///
-    /// D'où la règle : **le direct ne sert que faute de réseau**. Dans un
-    /// train il est le seul chemin ; sur un réseau il ne fait que nuire.
-    @ObservationIgnored private let veilleur = NWPathMonitor()
-    private var surUnReseau = true
+    /// Hence the rule: **peer-to-peer serves only for want of a network**. On
+    /// a train it is the only path; on a network it does nothing but harm.
+    @ObservationIgnored private let watcher = NWPathMonitor()
+    private var onANetwork = true
 
     init() {
-        veilleur.pathUpdateHandler = { [weak self] chemin in
-            let dessus = chemin.status == .satisfied
-                && (chemin.usesInterfaceType(.wifi)
-                    || chemin.usesInterfaceType(.wiredEthernet))
-            MainActor.assumeIsolated { self?.surUnReseau = dessus }
+        watcher.pathUpdateHandler = { [weak self] path in
+            let on = path.status == .satisfied
+                && (path.usesInterfaceType(.wifi)
+                    || path.usesInterfaceType(.wiredEthernet))
+            MainActor.assumeIsolated { self?.onANetwork = on }
         }
-        veilleur.start(queue: .main)
+        watcher.start(queue: .main)
     }
 
-    deinit { veilleur.cancel() }
+    deinit { watcher.cancel() }
 
     private var listener: NWListener?
     private var browser: NWBrowser?
-    private var jHeberge = false
-    /// La table est tenue — même quand on a cessé d'accueillir parce qu'elle
-    /// était pleine. Elle ne se referme pour de bon qu'au lancement.
-    private var tableOuverte = false
+    private var hosting = false
+    /// The table is held — even once we have stopped accepting because it was
+    /// full. It only closes for good at launch time.
+    private var tableOpen = false
 
-    /// Les canaux ouverts, par appareil.
-    private var canaux: [Pair: Canal] = [:]
-    /// Les canaux qui n'ont pas encore dit qui ils sont. Un invité qui arrive
-    /// est d'abord un inconnu : c'est son salut qui le nomme.
-    private var anonymes: [Canal] = []
-    /// Où joindre chaque table trouvée.
-    private var adresses: [Pair: NWEndpoint] = [:]
-    /// La même, en adresse IP nue — pour le témoin seulement. Voir `temoin`.
-    private var adressesBrutes: [Pair: NWEndpoint] = [:]
-    /// Le délai d'une connexion en cours.
-    private var attente: Task<Void, Never>?
-    /// Ce que notre propre annonce dit : hôte, ou invité qui attend un rappel.
-    private var monRole = Link.hote
-    private var maCible: String?
-    /// La table dont on attend le rappel. Une connexion entrante ne peut venir
-    /// que d'elle : on ne se laisse pas prendre par une autre.
-    private var cibleAttendue: Pair?
-    /// Les invités déjà rappelés, pour ne pas les appeler deux fois par
-    /// seconde — la découverte se rafraîchit sans cesse.
-    private var appeles: Set<String> = []
+    /// The open channels, by device.
+    private var channels: [Pair: Channel] = [:]
+    /// The channels that have not yet said who they are. A guest arriving is
+    /// a stranger first: it is their greeting that names them.
+    private var anonymous: [Channel] = []
+    /// Where to reach each table found.
+    private var addresses: [Pair: NWEndpoint] = [:]
+    /// The same, as a bare IP address — for the probe only. See `probe`.
+    private var rawAddresses: [Pair: NWEndpoint] = [:]
+    /// The deadline of a connection in progress.
+    private var deadline: Task<Void, Never>?
+    /// What our own advertisement says: host, or guest waiting for a call
+    /// back.
+    private var myRole = Link.host
+    private var myTarget: String?
+    /// The table we are waiting for a call back from. An incoming connection
+    /// can only come from it: we do not let ourselves be picked up by
+    /// another.
+    private var expectedTarget: Pair?
+    /// The guests already called back, so as not to call them twice a second
+    /// — discovery refreshes constantly.
+    private var called: Set<String> = []
 
-    /// Les réglages du transport.
+    /// The transport settings.
     ///
-    /// `includePeerToPeer` laisse le Wi-Fi direct disponible — c'est lui qui
-    /// permet de jouer sans box du tout, dans un train. La différence avec
-    /// MultipeerConnectivity tient en un mot : ici il est *permis*, là il
-    /// était *exigé*.
+    /// `includePeerToPeer` leaves peer-to-peer Wi-Fi available — that is what
+    /// makes it possible to play with no router at all, on a train. The
+    /// difference from MultipeerConnectivity comes down to one word: here it
+    /// is *permitted*, there it was *required*.
     ///
-    /// Mais permis ne suffit pas : quand les deux chemins existent, le système
-    /// peut choisir le Wi-Fi direct — et celui-ci est interdit sur les canaux
-    /// 5 GHz radar, où il échoue en silence. On ouvre donc la découverte aux
-    /// deux, et l'on tente la connexion **par le réseau d'abord**, le Wi-Fi
-    /// direct n'étant essayé qu'ensuite. Le cas courant passe par le chemin
-    /// sûr ; le train reste possible.
-    private static func reglages(direct: Bool = true) -> NWParameters {
+    /// But permitted is not enough: when both paths exist, the system may
+    /// choose peer-to-peer Wi-Fi — and that is forbidden on the 5 GHz radar
+    /// channels, where it fails in silence. So we open discovery to both, and
+    /// try the connection **over the network first**, peer-to-peer being
+    /// tried only afterwards. The common case takes the safe path; the train
+    /// stays possible.
+    private static func settings(direct: Bool = true) -> NWParameters {
         let p = NWParameters.tcp
         p.includePeerToPeer = direct
-        // On n'interdit aucune interface.
+        // We forbid no interface.
         //
-        // J'avais interdit la cellulaire, en me disant qu'une partie se joue
-        // dans la même pièce et que ce chemin ne mène nulle part. C'était une
-        // intuition, posée sans preuve, et elle a coûté cher : le système
-        // répondait alors « Network is down » — il ne restait plus aucun
-        // chemin qu'il s'autorise à prendre. Interdire un chemin inutile
-        // revenait à les fermer tous. On laisse le système choisir : il sait
-        // très bien qu'un nom en « .local » ne s'atteint pas par la cellulaire.
-        // Une partie ne supporte pas qu'un coup attende : sans cela, TCP
-        // regroupe les petits envois et retarde les plus pressés.
+        // I had forbidden cellular, telling myself a game is played in the
+        // same room and that path leads nowhere. It was a hunch, held without
+        // proof, and it cost dearly: the system then answered "Network is
+        // down" — there was no path left it would allow itself to take.
+        // Forbidding one useless path amounted to closing them all. We let
+        // the system choose: it knows perfectly well that a ".local" name is
+        // not reached over cellular.
+        //
+        // A game cannot bear a move waiting: without this, TCP groups small
+        // sends together and delays the most urgent ones.
         if let tcp = p.defaultProtocolStack.transportProtocol as? NWProtocolTCP.Options {
             tcp.noDelay = true
-            // Une liaison morte doit se voir, sinon l'écran attend un joueur
-            // qui est parti depuis longtemps.
-            // Une liaison morte doit se voir, mais sans précipitation :
-            // cinq secondes de silence, c'est un tour de jeu ordinaire.
+            // A dead link has to show, but without haste: five seconds of
+            // silence is an ordinary turn of play.
             tcp.enableKeepalive = true
             tcp.keepaliveIdle = 20
         }
         return p
     }
 
-    /// L'identité de cet appareil, **gardée d'un lancement sur l'autre**.
+    /// The call-back test bench.
     ///
-    /// Elle ne sert plus qu'à se reconnaître d'un bout à l'autre du fil, mais
-    /// elle doit rester stable : deux appareils qui changeraient d'identité en
-    /// cours de route se compteraient deux fois.
-    /// Le banc d'essai du rappel.
-    ///
-    /// La panne qui l'a rendu nécessaire ne se reproduit que sur un appareil
-    /// dont le système refuse les appels sortants vers le réseau local — on ne
-    /// l'a pas sous la main, et l'on ne peut pas la demander à iOS. Avec
-    /// `RISKELO_SANS_APPEL=1`, l'application fait comme si : elle s'annonce et
-    /// n'appelle personne. La liaison doit alors se faire quand même, par
-    /// l'autre sens. C'est la seule façon d'éprouver ce chemin sans attendre
-    /// qu'un joueur le rencontre.
-    nonisolated static let sansAppel =
-        ProcessInfo.processInfo.environment["RISKELO_SANS_APPEL"] == "1"
+    /// The failure that made it necessary only happens on a device whose
+    /// system refuses outgoing calls to the local network — we do not have
+    /// one to hand, and we cannot ask iOS for it. With
+    /// `RISKELO_NO_OUTGOING=1`, the app pretends: it advertises and calls
+    /// nobody. The link then has to happen anyway, from the other direction.
+    /// It is the only way to exercise that path without waiting for a player
+    /// to run into it.
+    nonisolated static let noOutgoingCalls =
+        ProcessInfo.processInfo.environment["RISKELO_NO_OUTGOING"] == "1"
 
-    static func identite() -> Pair {
-        let reglages = UserDefaults.standard
-        let cle = "riskelo.identite"
+    /// This device's identity, **kept from one launch to the next**.
+    ///
+    /// It now serves only to recognize each other from one end of the wire to
+    /// the other, but it has to stay stable: two devices that changed
+    /// identity along the way would count themselves twice.
+    static func identity() -> Pair {
+        let defaults = UserDefaults.standard
+        let key = "riskelo.us.identity"
         let id: String
-        if let gardee = reglages.string(forKey: cle), !gardee.isEmpty {
-            id = gardee
+        if let kept = defaults.string(forKey: key), !kept.isEmpty {
+            id = kept
         } else {
             id = UUID().uuidString
-            reglages.set(id, forKey: cle)
+            defaults.set(id, forKey: key)
         }
-        return Pair(id: id, nom: Link.nomDeLAppareil)
+        return Pair(id: id, name: Link.deviceName)
     }
 
-    /// L'adresse de cette machine sur le réseau local, s'il y en a une.
+    /// This machine's address on the local network, if it has one.
     ///
-    /// La première adresse IPv4 d'une interface « en… » — le Wi-Fi ou
-    /// l'Ethernet. Rien à deviner : on la lit dans le système.
+    /// The first IPv4 address of an "en…" interface — Wi-Fi or Ethernet.
+    /// Nothing to guess at: we read it from the system.
     ///
-    /// `nil` quand il n'y a pas de réseau. C'est exactement le cas où le
-    /// Wi-Fi direct prend le relais, et où l'invité doit repasser par la
-    /// résolution du service : là, aucune adresse fixe n'aurait de sens.
-    static var adresseLocale: String? {
-        var liste: UnsafeMutablePointer<ifaddrs>?
-        guard getifaddrs(&liste) == 0, let debut = liste else { return nil }
-        defer { freeifaddrs(liste) }
-        var courante: UnsafeMutablePointer<ifaddrs>? = debut
-        while let ptr = courante {
-            let carte = ptr.pointee
-            courante = carte.ifa_next
-            let nom = String(cString: carte.ifa_name)
-            let drapeaux = Int32(carte.ifa_flags)
-            guard let adresse = carte.ifa_addr,
-                  drapeaux & IFF_UP != 0,
-                  drapeaux & IFF_LOOPBACK == 0,
-                  adresse.pointee.sa_family == UInt8(AF_INET),
-                  nom.hasPrefix("en")
+    /// `nil` when there is no network. That is exactly the case where
+    /// peer-to-peer Wi-Fi takes over, and where the guest has to fall back on
+    /// resolving the service: there, no fixed address would mean anything.
+    static var localAddress: String? {
+        var list: UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&list) == 0, let start = list else { return nil }
+        defer { freeifaddrs(list) }
+        var current: UnsafeMutablePointer<ifaddrs>? = start
+        while let ptr = current {
+            let entry = ptr.pointee
+            current = entry.ifa_next
+            let name = String(cString: entry.ifa_name)
+            let flags = Int32(entry.ifa_flags)
+            guard let address = entry.ifa_addr,
+                  flags & IFF_UP != 0,
+                  flags & IFF_LOOPBACK == 0,
+                  address.pointee.sa_family == UInt8(AF_INET),
+                  name.hasPrefix("en")
             else { continue }
-            var tampon = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-            guard getnameinfo(adresse, socklen_t(adresse.pointee.sa_len),
-                              &tampon, socklen_t(tampon.count),
+            var buffer = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+            guard getnameinfo(address, socklen_t(address.pointee.sa_len),
+                              &buffer, socklen_t(buffer.count),
                               nil, 0, NI_NUMERICHOST) == 0 else { continue }
-            return String(cString: tampon)
+            return String(cString: buffer)
         }
         return nil
     }
 
-    /// Le nom que porte l'appareil.
+    /// The name the device carries.
     ///
-    /// Il n'est plus `nonisolated`. Il l'était du temps de
-    /// MultipeerConnectivity, dont les rappels arrivaient sur leur propre fil
-    /// et devaient pouvoir le lire. Plus rien ne le lit désormais hors de
-    /// l'acteur principal — et `UIDevice.current` y est justement tenu.
-    static var nomDeLAppareil: String {
+    /// It is no longer `nonisolated`. It was in the days of
+    /// MultipeerConnectivity, whose callbacks arrived on their own thread and
+    /// had to be able to read it. Nothing reads it outside the main actor now
+    /// — and `UIDevice.current` is bound to it precisely.
+    static var deviceName: String {
         #if os(iOS)
         String(UIDevice.current.name.prefix(30))
         #else
@@ -332,141 +338,141 @@ final class Link {
         #endif
     }
 
-    // MARK: - Ouvrir, chercher, raccrocher
+    // MARK: - Opening, searching, hanging up
 
-    /// Tenir une table : on écoute, et l'on s'annonce.
-    func ouvrir() {
-        arreter()
-        jHeberge = true
-        tableOuverte = true
-        monRole = Link.hote
-        maCible = nil
-        demarrerEcoute()
-        // Et l'on cherche, en même temps : un invité dont le système refuse
-        // les appels sortants laisse son adresse, et c'est nous qui l'appelons.
-        demarrerRecherche()
+    /// Hold a table: we listen, and we advertise.
+    func open() {
+        stop()
+        hosting = true
+        tableOpen = true
+        myRole = Link.host
+        myTarget = nil
+        startListening()
+        // And we search at the same time: a guest whose system refuses
+        // outgoing calls leaves their address, and we are the ones who call.
+        startBrowsing()
     }
 
-    /// Écouter, et s'annoncer. Refait tel quel si la table rouvre.
-    private func demarrerEcoute() {
+    /// Listen, and advertise. Redone as is if the table reopens.
+    private func startListening() {
         guard listener == nil else { return }
         do {
-            // Le direct seulement s'il n'y a pas de réseau : voir
-            // `surUnReseau`. C'est ce choix qui décide du nom annoncé, et donc
-            // de la capacité de l'invité à nous atteindre.
-            let direct = !surUnReseau
-            print("Riskelo — table ouverte " + (direct ? "en Wi-Fi direct" : "sur le réseau"))
-            let ecoute = try NWListener(using: Link.reglages(direct: direct))
-            ecoute.service = annonce(port: nil)
-            ecoute.stateUpdateHandler = { [weak self] etat in
-                MainActor.assumeIsolated { self?.listenerAChange(etat) }
+            // Peer-to-peer only if there is no network: see `onANetwork`. It
+            // is this choice that decides the advertised name, and therefore
+            // the guest's ability to reach us.
+            let direct = !onANetwork
+            print("Riskelo US — table open " + (direct ? "over peer-to-peer Wi-Fi" : "on the network"))
+            let listening = try NWListener(using: Link.settings(direct: direct))
+            listening.service = advertisement(port: nil)
+            listening.stateUpdateHandler = { [weak self] state in
+                MainActor.assumeIsolated { self?.listenerChanged(state) }
             }
-            ecoute.newConnectionHandler = { [weak self] connexion in
-                MainActor.assumeIsolated { self?.accueillir(connexion) }
+            listening.newConnectionHandler = { [weak self] connection in
+                MainActor.assumeIsolated { self?.accept(connection) }
             }
-            listener = ecoute
-            ecoute.start(queue: .main)
-            state = .ouvert
+            listener = listening
+            listening.start(queue: .main)
+            state = .open
         } catch {
-            print("Riskelo — table impossible : \(error)")
-            state = .refuse("")
+            print("Riskelo US — table impossible: \(error)")
+            state = .refused("")
         }
     }
 
-    /// Chercher une table.
-    func chercher() {
-        arreter()
-        jHeberge = false
-        direCeQuOnVoit()
-        demarrerRecherche()
-        state = .cherche
+    /// Look for a table.
+    func search() {
+        stop()
+        hosting = false
+        describeNetwork()
+        startBrowsing()
+        state = .searching
     }
 
-    /// Regarder ce qui s'annonce autour. Les deux rôles s'en servent : celui
-    /// qui rejoint y trouve les tables, celui qui héberge y trouve les invités
-    /// qui n'arrivent pas à venir.
-    private func demarrerRecherche() {
+    /// Watch what is advertised around us. Both roles use it: whoever joins
+    /// finds the tables there, whoever hosts finds the guests who cannot get
+    /// through.
+    private func startBrowsing() {
         guard browser == nil else { return }
-        // La même règle que pour l'écoute, et pour la même raison : chercher
-        // en mode Wi-Fi direct rapporte des adresses taillées pour ce
-        // chemin-là. Sur un réseau, c'est le réseau qu'il faut interroger.
-        let cherche = NWBrowser(for: .bonjourWithTXTRecord(type: "_\(Link.service)._tcp",
-                                                           domain: nil),
-                                using: Link.reglages(direct: !surUnReseau))
-        cherche.stateUpdateHandler = { [weak self] etat in
-            MainActor.assumeIsolated { self?.browserAChange(etat) }
+        // The same rule as for listening, and for the same reason: browsing
+        // in peer-to-peer mode returns addresses cut for that path. On a
+        // network, it is the network that has to be asked.
+        let browsing = NWBrowser(for: .bonjourWithTXTRecord(type: "_\(Link.service)._tcp",
+                                                            domain: nil),
+                                 using: Link.settings(direct: !onANetwork))
+        browsing.stateUpdateHandler = { [weak self] state in
+            MainActor.assumeIsolated { self?.browserChanged(state) }
         }
-        cherche.browseResultsChangedHandler = { [weak self] trouvailles, _ in
-            MainActor.assumeIsolated { self?.tablesVues(trouvailles) }
+        browsing.browseResultsChangedHandler = { [weak self] results, _ in
+            MainActor.assumeIsolated { self?.tablesSeen(results) }
         }
-        browser = cherche
-        cherche.start(queue: .main)
+        browser = browsing
+        browsing.start(queue: .main)
     }
 
-    /// Rejoindre une table : on ouvre une connexion, et c'est tout.
+    /// Join a table: we open a connection, and that is all.
     ///
-    /// Il n'y a plus d'invitation à faire accepter, donc plus rien qui puisse
-    /// rester sans réponse. Ou la connexion aboutit, ou elle échoue et le dit.
-    /// Rejoindre une table : on ouvre une connexion, et c'est tout.
+    /// There is no longer an invitation to have accepted, and therefore
+    /// nothing left that can go unanswered. Either the connection succeeds,
+    /// or it fails and says so.
     ///
-    /// Un seul essai, par le même chemin que l'hôte a choisi — le réseau s'il
-    /// y en a un, le Wi-Fi direct sinon. Il y en avait deux : le réseau
-    /// d'abord, le direct six secondes plus tard. Cette seconde tentative
-    /// partait par-dessus la première au moment précis où celle-ci aboutissait,
-    /// et la fermait. L'hôte voyait sa liaison coupée net — « Connection reset
-    /// by peer » — juste après l'avoir acceptée. Une course que rien
-    /// n'obligeait à courir : les deux côtés appliquent déjà la même règle.
-    func rejoindre(_ pair: Pair) {
-        guard let ou = adresses[pair] else { return }
-        let direct = !surUnReseau
-        print("Riskelo — connexion vers \(pair.nom) "
-              + (direct ? "en Wi-Fi direct" : "sur le réseau") + " → \(ou)")
-        state = .invite(pair.nom)
-        if let brute = adressesBrutes[pair] { Link.temoin(vers: brute) }
-        if !Link.sansAppel {
-            let connexion = NWConnection(to: ou, using: Link.reglages(direct: direct))
-            ouvrirCanal(connexion, attendu: pair)
+    /// A single attempt, by the same path the host chose — the network if
+    /// there is one, peer-to-peer otherwise. There used to be two: the
+    /// network first, peer-to-peer six seconds later. That second attempt
+    /// went out over the first at the precise moment the first succeeded, and
+    /// closed it. The host saw its link cut dead — "Connection reset by peer"
+    /// — right after accepting it. A race nothing required us to run: both
+    /// sides already apply the same rule.
+    func join(_ pair: Pair) {
+        guard let endpoint = addresses[pair] else { return }
+        let direct = !onANetwork
+        print("Riskelo US — connecting to \(pair.name) "
+              + (direct ? "over peer-to-peer Wi-Fi" : "on the network") + " → \(endpoint)")
+        state = .calling(pair.name)
+        if let raw = rawAddresses[pair] { Link.probe(to: raw) }
+        if !Link.noOutgoingCalls {
+            let connection = NWConnection(to: endpoint, using: Link.settings(direct: direct))
+            openChannel(connection, expecting: pair)
         } else {
-            print("Riskelo — appel sortant coupé pour l'essai : on attend le rappel")
+            print("Riskelo US — outgoing call cut off for the test: waiting to be called back")
         }
-        // Et l'on s'annonce à son tour : « je veux entrer à cette table ». Si
-        // le système nous refuse l'appel sortant, l'hôte nous rappellera — et
-        // s'il aboutit d'abord, c'est cette annonce-ci qui n'aura servi à rien.
-        cibleAttendue = pair
-        monRole = Link.invite
-        maCible = pair.id
-        demarrerEcoute()
-        // TCP peut mettre longtemps à renoncer, et l'écran serait resté sur
-        // « connexion… » sans rien dire. On tranche nous-mêmes.
-        attente?.cancel()
-        attente = Task { [weak self] in
+        // And we advertise in turn: "I want in at that table". If the system
+        // refuses us the outgoing call, the host will call us back — and if
+        // it succeeds first, this advertisement will have served no purpose.
+        expectedTarget = pair
+        myRole = Link.guest
+        myTarget = pair.id
+        startListening()
+        // TCP can take a long time to give up, and the screen would have sat
+        // on "connecting…" saying nothing. We settle it ourselves.
+        deadline?.cancel()
+        deadline = Task { [weak self] in
             try? await Task.sleep(for: .seconds(15))
-            guard let self, !Task.isCancelled, case .invite = self.state else { return }
-            print("Riskelo — \(pair.nom) n'a pas répondu")
-            self.state = .refuse(pair.nom)
+            guard let self, !Task.isCancelled, case .calling = self.state else { return }
+            print("Riskelo US — \(pair.name) did not answer")
+            self.state = .refused(pair.name)
         }
     }
 
-    /// Une connexion témoin, vers l'**adresse IP nue** de l'hôte.
+    /// A probe connection, to the host's **bare IP address**.
     ///
-    /// Elle ne sert qu'à vérifier une chose, à chaque tentative : qu'iOS
-    /// refuse bien ce chemin-là alors qu'il accorde le service déclaré. Si un
-    /// jour elle réussit, c'est que la règle a changé.
+    /// It serves only to check one thing, at every attempt: that iOS really
+    /// does refuse that path while granting the declared service. If it ever
+    /// succeeds, the rule has changed.
     ///
-    /// Elle n'envoie rien et se ferme au bout de cinq secondes.
-    static func temoin(vers ou: NWEndpoint) {
-        let t = NWConnection(to: ou, using: .tcp)
-        t.stateUpdateHandler = { etat in
-            switch etat {
+    /// It sends nothing and closes after five seconds.
+    static func probe(to endpoint: NWEndpoint) {
+        let t = NWConnection(to: endpoint, using: .tcp)
+        t.stateUpdateHandler = { state in
+            switch state {
             case .ready:
-                print("Riskelo — TÉMOIN (réglages d'Apple) : RELIÉ ✅")
+                print("Riskelo US — PROBE (Apple's settings): LINKED ✅")
                 t.cancel()
             case .waiting(let e):
                 let c = t.currentPath
-                print("Riskelo — TÉMOIN en attente : \(e)"
-                      + " | raison : \(String(describing: c?.unsatisfiedReason))")
+                print("Riskelo US — PROBE waiting: \(e)"
+                      + " | reason: \(String(describing: c?.unsatisfiedReason))")
             case .failed(let e):
-                print("Riskelo — TÉMOIN échoué : \(e)")
+                print("Riskelo US — PROBE failed: \(e)")
             default:
                 break
             }
@@ -475,107 +481,107 @@ final class Link {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) { t.cancel() }
     }
 
-    /// Ce que cet appareil voit du réseau, en toutes lettres.
+    /// What this device sees of the network, spelled out.
     ///
-    /// À comparer d'un appareil à l'autre : c'est le seul endroit où un
-    /// iPhone et un iPad peuvent différer alors qu'ils exécutent le même code.
-    private func direCeQuOnVoit() {
-        let c = veilleur.currentPath
+    /// To be compared from one device to the other: it is the one place where
+    /// an iPhone and an iPad can differ while running the same code.
+    private func describeNetwork() {
+        let c = watcher.currentPath
         print("""
-            Riskelo — état du réseau vu par \(moi.nom) :
-              statut       : \(String(describing: c.status))
-              raison       : \(String(describing: c.unsatisfiedReason))
-              wifi         : \(c.usesInterfaceType(.wifi))
-              ethernet     : \(c.usesInterfaceType(.wiredEthernet))
-              cellulaire   : \(c.usesInterfaceType(.cellular))
-              interfaces   : \(c.availableInterfaces.map { "\($0.name)(\($0.type))" }.joined(separator: ", "))
-              sur un réseau: \(surUnReseau)
+            Riskelo US — network as seen by \(me.name):
+              status      : \(String(describing: c.status))
+              reason      : \(String(describing: c.unsatisfiedReason))
+              wifi        : \(c.usesInterfaceType(.wifi))
+              ethernet    : \(c.usesInterfaceType(.wiredEthernet))
+              cellular    : \(c.usesInterfaceType(.cellular))
+              interfaces  : \(c.availableInterfaces.map { "\($0.name)(\($0.type))" }.joined(separator: ", "))
+              on a network: \(onANetwork)
             """)
     }
 
-    /// Cesse d'accueillir, sans renoncer à la table.
+    /// Stop accepting, without giving up the table.
     ///
-    /// Les connexions déjà ouvertes n'en souffrent pas — arrêter d'écouter ne
-    /// coupe rien de ce qui est établi.
-    private func cesserDAccueillir() {
+    /// The connections already open are unaffected — stopping listening cuts
+    /// nothing that is established.
+    private func stopAccepting() {
         listener?.cancel(); listener = nil
         browser?.cancel(); browser = nil
     }
 
-    /// Ferme la table pour de bon : la partie commence, on n'attend plus
-    /// personne.
-    func fermerLaTable() {
-        tableOuverte = false
-        cesserDAccueillir()
+    /// Close the table for good: the game is starting, we are waiting for
+    /// nobody.
+    func closeTable() {
+        tableOpen = false
+        stopAccepting()
     }
 
-    /// Rouvrir, parce qu'une place s'est libérée avant le lancement.
+    /// Reopen, because a seat came free before launch.
     ///
-    /// Sans cela, un invité qui se relie puis repart — il quitte le salon, ou
-    /// son application passe en arrière-plan — laissait l'hôte muré : il avait
-    /// cessé d'écouter en se croyant complet, et ne recommençait jamais. La
-    /// table restait pourtant annoncée, donc visible : on la voyait, on la
-    /// touchait, et rien n'aboutissait plus jamais.
-    private func rouvrirLaTable() {
-        guard jHeberge, tableOuverte, relies.count < attendus else { return }
-        print("Riskelo — une place s'est libérée, la table rouvre")
-        demarrerEcoute()
+    /// Without this, a guest who links then leaves — they quit the lobby, or
+    /// their app goes to the background — left the host walled in: it had
+    /// stopped listening believing itself full, and never started again. The
+    /// table was still advertised, and therefore visible: you saw it, you
+    /// touched it, and nothing ever came of it again.
+    private func reopenTable() {
+        guard hosting, tableOpen, linked.count < expected else { return }
+        print("Riskelo US — a seat came free, the table reopens")
+        startListening()
     }
 
-    func arreter() {
-        attente?.cancel(); attente = nil
-        tableOuverte = false
-        cibleAttendue = nil
-        appeles = []
-        monRole = Link.hote
-        maCible = nil
-        cesserDAccueillir()
-        canaux.values.forEach { $0.fermer() }
-        canaux = [:]
-        anonymes.forEach { $0.fermer() }
-        anonymes = []
-        adresses = [:]
-        adressesBrutes = [:]
-        trouves = []
-        relies = []
-        state = .aLArret
+    func stop() {
+        deadline?.cancel(); deadline = nil
+        tableOpen = false
+        expectedTarget = nil
+        called = []
+        myRole = Link.host
+        myTarget = nil
+        stopAccepting()
+        channels.values.forEach { $0.close() }
+        channels = [:]
+        anonymous.forEach { $0.close() }
+        anonymous = []
+        addresses = [:]
+        rawAddresses = [:]
+        found = []
+        linked = []
+        state = .stopped
     }
 
-    // MARK: - Ce que le système nous dit
+    // MARK: - What the system tells us
 
-    /// Ce que l'hôte dit de lui. Le port n'est connu qu'une fois l'écoute
-    /// prête : l'annonce se refait alors, complète.
-    private func annonce(port: NWEndpoint.Port?) -> NWListener.Service {
+    /// What the host says about itself. The port is only known once the
+    /// listener is ready: the advertisement is then redone, complete.
+    private func advertisement(port: NWEndpoint.Port?) -> NWListener.Service {
         var txt = NWTXTRecord()
-        txt[Link.cleRole] = monRole
-        txt[Link.cleNom] = moi.nom
-        txt[Link.cleId] = moi.id
-        if let maCible { txt[Link.cleCible] = maCible }
-        if let port, let ou = Link.adresseLocale {
-            txt[Link.cleAdresse] = ou
-            txt[Link.clePort] = String(port.rawValue)
+        txt[Link.keyRole] = myRole
+        txt[Link.keyName] = me.name
+        txt[Link.keyID] = me.id
+        if let myTarget { txt[Link.keyTarget] = myTarget }
+        if let port, let address = Link.localAddress {
+            txt[Link.keyAddress] = address
+            txt[Link.keyPort] = String(port.rawValue)
         }
-        // Le nom d'instance Bonjour doit être unique sur le réseau ; celui de
-        // l'appareil ne l'est pas (tous les iPhone s'appellent « iPhone »). On
-        // y joint donc un fragment de notre identité.
-        return NWListener.Service(name: "\(moi.nom) \(moi.id.prefix(4))",
+        // The Bonjour instance name has to be unique on the network; the
+        // device's name is not (every iPhone is called "iPhone"). So we
+        // attach a fragment of our identity to it.
+        return NWListener.Service(name: "\(me.name) \(me.id.prefix(4))",
                                   type: "_\(Link.service)._tcp",
                                   txtRecord: txt)
     }
 
-    private func listenerAChange(_ etat: NWListener.State) {
-        switch etat {
+    private func listenerChanged(_ newState: NWListener.State) {
+        switch newState {
         case .ready:
-            // Le port est connu : on redit qui l'on est, adresse comprise.
-            if let ecoute = listener, let port = ecoute.port {
-                print("Riskelo — " + (monRole == Link.hote ? "table prête" : "adresse laissée")
-                      + " sur \(Link.adresseLocale ?? "sans adresse"):\(port)")
-                ecoute.service = annonce(port: port)
+            // The port is known: we say who we are again, address included.
+            if let listening = listener, let port = listening.port {
+                print("Riskelo US — " + (myRole == Link.host ? "table ready" : "address left")
+                      + " at \(Link.localAddress ?? "no address"):\(port)")
+                listening.service = advertisement(port: port)
             }
-        case .failed(let erreur):
-            // Presque toujours l'autorisation « réseau local ».
-            print("Riskelo — table impossible : \(erreur)")
-            state = .refuse("")
+        case .failed(let error):
+            // Almost always the "local network" permission.
+            print("Riskelo US — table impossible: \(error)")
+            state = .refused("")
         case .cancelled:
             break
         default:
@@ -583,386 +589,384 @@ final class Link {
         }
     }
 
-    private func browserAChange(_ etat: NWBrowser.State) {
-        if case .failed(let erreur) = etat {
-            print("Riskelo — recherche impossible : \(erreur)")
-            // Chez l'hôte, cette recherche n'est qu'un secours : sa table
-            // tient sans elle, et l'échouer ne doit pas la fermer.
-            if !jHeberge { state = .refuse("") }
+    private func browserChanged(_ newState: NWBrowser.State) {
+        if case .failed(let error) = newState {
+            print("Riskelo US — browsing impossible: \(error)")
+            // At the host, this browsing is only a backup: its table stands
+            // without it, and failing it must not close the table.
+            if !hosting { state = .refused("") }
         }
     }
 
-    /// Les tables vues autour de nous.
-    private func tablesVues(_ trouvailles: Set<NWBrowser.Result>) {
-        if jHeberge { rappelerLesInvites(trouvailles); return }
-        var vues: [Pair] = []
-        var ou: [Pair: NWEndpoint] = [:]
-        for t in trouvailles {
+    /// The tables seen around us.
+    private func tablesSeen(_ results: Set<NWBrowser.Result>) {
+        if hosting { callBackGuests(results); return }
+        var seen: [Pair] = []
+        var endpoints: [Pair: NWEndpoint] = [:]
+        for t in results {
             guard case let .bonjour(txt) = t.metadata,
-                  txt[Link.cleRole] == Link.hote,
-                  let id = txt[Link.cleId], !id.isEmpty
+                  txt[Link.keyRole] == Link.host,
+                  let id = txt[Link.keyID], !id.isEmpty
             else { continue }
-            // Ne jamais se proposer à soi-même.
-            guard id != moi.id else { continue }
-            let pair = Pair(id: id, nom: txt[Link.cleNom] ?? "Appareil")
-            print("Riskelo — table vue : \(t.endpoint)"
-                  + " par [\(t.interfaces.map(\.name).joined(separator: ", "))]")
-            if !vues.contains(pair) { vues.append(pair) }
-            print("Riskelo — table vue : \(t.endpoint)"
-                  + " par [\(t.interfaces.map(\.name).joined(separator: ", "))]")
+            // Never offer ourselves to ourselves.
+            guard id != me.id else { continue }
+            let pair = Pair(id: id, name: txt[Link.keyName] ?? "Device")
+            print("Riskelo US — table seen: \(t.endpoint)"
+                  + " over [\(t.interfaces.map(\.name).joined(separator: ", "))]")
+            if !seen.contains(pair) { seen.append(pair) }
 
-            // **Le service, et non l'adresse.**
+            // **The service, not the address.**
             //
-            // iOS n'accorde pas à une application « le réseau local » en bloc :
-            // il lui accorde les services qu'elle a déclarés dans
-            // `NSBonjourServices`. Une adresse IP nue ne figure dans aucune
-            // déclaration, et se fait refuser — `localNetworkDenied` — quand
-            // bien même l'interrupteur des Réglages est vert.
+            // iOS does not grant an app "the local network" wholesale: it
+            // grants it the services it declared in `NSBonjourServices`. A
+            // bare IP address appears in no declaration, and gets refused —
+            // `localNetworkDenied` — even with the switch in Settings green.
             //
-            // J'étais passé à l'adresse pour contourner une résolution qui
-            // paraissait bloquée. Elle ne l'était pas : ce qui bloquait, c'était
-            // un nom d'hôte inventé, des adresses clouées à la mauvaise
-            // interface, et deux connexions qui se coupaient l'une l'autre —
-            // trois défauts corrigés depuis. En passant à l'adresse IP, j'avais
-            // troqué le chemin autorisé contre un chemin interdit.
+            // I had moved to the address to work around a resolution that
+            // looked stuck. It was not: what was stuck was an invented
+            // hostname, addresses nailed to the wrong interface, and two
+            // connections cutting each other off — three faults fixed since.
+            // By moving to the IP address, I had traded the permitted path
+            // for a forbidden one.
             //
-            // **Sans l'interface** : Bonjour trouve la même table une fois par
-            // interface, et l'adresse qu'il rend est clouée à celle par
-            // laquelle il l'a vue. Détachée, c'est au système de choisir.
-            if case let .service(nom, type, domaine, _) = t.endpoint {
-                ou[pair] = .service(name: nom, type: type, domain: domaine, interface: nil)
+            // **Without the interface**: Bonjour finds the same table once
+            // per interface, and the address it returns is nailed to the one
+            // it saw it through. Detached, it is up to the system to choose.
+            if case let .service(name, type, domain, _) = t.endpoint {
+                endpoints[pair] = .service(name: name, type: type, domain: domain, interface: nil)
             } else {
-                ou[pair] = t.endpoint
+                endpoints[pair] = t.endpoint
             }
-            // L'adresse annoncée ne sert plus qu'au témoin, qui vérifie à
-            // chaque tentative que ce chemin-là reste bien le mauvais.
-            if let brute = txt[Link.cleAdresse], !brute.isEmpty,
-               let n = txt[Link.clePort], let numero = UInt16(n),
-               let port = NWEndpoint.Port(rawValue: numero) {
-                adressesBrutes[pair] = .hostPort(host: NWEndpoint.Host(brute), port: port)
+            // The advertised address now serves only the probe, which checks
+            // at every attempt that this path is indeed still the wrong one.
+            if let raw = txt[Link.keyAddress], !raw.isEmpty,
+               let n = txt[Link.keyPort], let number = UInt16(n),
+               let port = NWEndpoint.Port(rawValue: number) {
+                rawAddresses[pair] = .hostPort(host: NWEndpoint.Host(raw), port: port)
             }
         }
-        adresses = ou
-        trouves = vues
+        addresses = endpoints
+        found = seen
     }
 
-    /// Rappeler ceux qui n'arrivent pas à venir.
+    /// Call back those who cannot get through.
     ///
-    /// On ne rappelle que les invités qui **nous** visent, une seule fois, et
-    /// seulement tant qu'il reste une place. Un appel de plus vers quelqu'un
-    /// de déjà relié n'ajouterait qu'un fil que `nommer` refermerait aussitôt.
-    private func rappelerLesInvites(_ trouvailles: Set<NWBrowser.Result>) {
-        guard tableOuverte, relies.count < attendus else { return }
-        for t in trouvailles {
+    /// We only call back guests aiming at **us**, once each, and only while a
+    /// seat remains. One more call to someone already linked would add
+    /// nothing but a wire that `identify` would close again straight away.
+    private func callBackGuests(_ results: Set<NWBrowser.Result>) {
+        guard tableOpen, linked.count < expected else { return }
+        for t in results {
             guard case let .bonjour(txt) = t.metadata,
-                  txt[Link.cleRole] == Link.invite,
-                  txt[Link.cleCible] == moi.id,
-                  let id = txt[Link.cleId], id != moi.id,
-                  !appeles.contains(id)
+                  txt[Link.keyRole] == Link.guest,
+                  txt[Link.keyTarget] == me.id,
+                  let id = txt[Link.keyID], id != me.id,
+                  !called.contains(id)
             else { continue }
-            let pair = Pair(id: id, nom: txt[Link.cleNom] ?? "Appareil")
-            guard canaux[pair] == nil else { continue }
-            appeles.insert(id)
-            // Sans l'interface, comme pour les tables : c'est au système de
-            // choisir par où passer.
-            let ou: NWEndpoint
-            if case let .service(nom, type, domaine, _) = t.endpoint {
-                ou = .service(name: nom, type: type, domain: domaine, interface: nil)
+            let pair = Pair(id: id, name: txt[Link.keyName] ?? "Device")
+            guard channels[pair] == nil else { continue }
+            called.insert(id)
+            // Without the interface, as for the tables: it is up to the
+            // system to choose which way to go.
+            let endpoint: NWEndpoint
+            if case let .service(name, type, domain, _) = t.endpoint {
+                endpoint = .service(name: name, type: type, domain: domain, interface: nil)
             } else {
-                ou = t.endpoint
+                endpoint = t.endpoint
             }
-            print("Riskelo — \(pair.nom) n'arrive pas à venir : on l'appelle → \(ou)")
-            ouvrirCanal(NWConnection(to: ou, using: Link.reglages(direct: !surUnReseau)),
-                        attendu: pair)
+            print("Riskelo US — \(pair.name) cannot get through: calling them → \(endpoint)")
+            openChannel(NWConnection(to: endpoint, using: Link.settings(direct: !onANetwork)),
+                        expecting: pair)
         }
     }
 
-    /// Un invité se présente à notre table — ou, quand c'est nous qui
-    /// rejoignons, l'hôte qui répond à notre appel.
-    private func accueillir(_ connexion: NWConnection) {
-        guard jHeberge else {
-            // Nous n'hébergeons pas : la seule connexion entrante légitime est
-            // celle de la table que nous avons touchée.
-            guard let attendue = cibleAttendue else { connexion.cancel(); return }
-            ouvrirCanal(connexion, attendu: attendue)
+    /// A guest presents themselves at our table — or, when we are the ones
+    /// joining, the host answering our call.
+    private func accept(_ connection: NWConnection) {
+        guard hosting else {
+            // We are not hosting: the only legitimate incoming connection is
+            // from the table we touched.
+            guard let expected = expectedTarget else { connection.cancel(); return }
+            openChannel(connection, expecting: expected)
             return
         }
-        guard relies.count < attendus else {
-            // La table est pleine : refuser franchement plutôt que de laisser
-            // une connexion ouverte que personne ne lira.
-            connexion.cancel()
+        guard linked.count < expected else {
+            // The table is full: refuse outright rather than leave a
+            // connection open that nobody will read.
+            connection.cancel()
             return
         }
-        ouvrirCanal(connexion, attendu: nil)
+        openChannel(connection, expecting: nil)
     }
 
-    // MARK: - Les canaux
+    // MARK: - The channels
 
-    private func ouvrirCanal(_ connexion: NWConnection, attendu: Pair?) {
-        let canal = Canal(connexion: connexion)
-        anonymes.append(canal)
-        canal.onPret = { [weak self, weak canal] in
-            guard let self, let canal else { return }
-            // Chacun dit qui il est dès que le fil est ouvert. Sans cela,
-            // celui qui accepte une connexion ne saurait jamais qui vient
-            // d'arriver : une adresse n'est pas une identité.
-            canal.envoyer(self.salut())
+    private func openChannel(_ connection: NWConnection, expecting: Pair?) {
+        let channel = Channel(connection: connection)
+        anonymous.append(channel)
+        channel.onReady = { [weak self, weak channel] in
+            guard let self, let channel else { return }
+            // Each side says who it is as soon as the wire is open. Without
+            // that, whoever accepts a connection would never know who had
+            // just arrived: an address is not an identity.
+            channel.send(self.greeting())
         }
-        canal.onPaquet = { [weak self, weak canal] data in
-            guard let self, let canal else { return }
-            self.recu(data, sur: canal, attendu: attendu)
+        channel.onPacket = { [weak self, weak channel] data in
+            guard let self, let channel else { return }
+            self.received(data, on: channel, expecting: expecting)
         }
-        canal.onInterdit = { [weak self] in
+        channel.onForbidden = { [weak self] in
             guard let self else { return }
-            self.attente?.cancel(); self.attente = nil
-            self.state = .sansAutorisation
+            self.deadline?.cancel(); self.deadline = nil
+            self.state = .notAllowed
         }
-        canal.onFerme = { [weak self, weak canal] in
-            guard let self, let canal else { return }
-            self.canalFerme(canal)
+        channel.onClosed = { [weak self, weak channel] in
+            guard let self, let channel else { return }
+            self.channelClosed(channel)
         }
-        canal.demarrer()
+        channel.start()
     }
 
-    /// Notre carte de visite : l'identité et le nom, rien d'autre.
+    /// Our calling card: the identity and the name, nothing else.
     ///
-    /// Elle voyage dans son propre paquet, devant tout le reste, et ne change
-    /// jamais de forme — c'est le seul contrat que toutes les versions à venir
-    /// doivent tenir sur ce fil-ci. Le dialecte du jeu, lui, est l'affaire de
-    /// `Match`, et il se négocie après.
-    private func salut() -> Data {
-        let carte = ["id": moi.id, "nom": moi.nom]
-        return (try? JSONSerialization.data(withJSONObject: carte)) ?? Data()
+    /// It travels in its own packet, ahead of everything else, and never
+    /// changes shape — it is the one contract every future version has to
+    /// keep on this wire. The game's dialect is `Match`'s business, and it is
+    /// negotiated afterwards.
+    private func greeting() -> Data {
+        let card = ["id": me.id, "name": me.name]
+        return (try? JSONSerialization.data(withJSONObject: card)) ?? Data()
     }
 
-    private func recu(_ data: Data, sur canal: Canal, attendu: Pair?) {
-        // Tant qu'il ne s'est pas nommé, tout ce qui arrive est son salut.
-        if canal.pair == nil {
-            guard let carte = try? JSONSerialization.jsonObject(with: data) as? [String: String],
-                  let id = carte["id"], !id.isEmpty
+    private func received(_ data: Data, on channel: Channel, expecting: Pair?) {
+        // Until they have named themselves, everything arriving is their
+        // greeting.
+        if channel.pair == nil {
+            guard let card = try? JSONSerialization.jsonObject(with: data) as? [String: String],
+                  let id = card["id"], !id.isEmpty
             else {
-                print("Riskelo — un appareil s'est présenté sans se nommer")
-                canal.fermer()
+                print("Riskelo US — a device introduced itself without naming itself")
+                channel.close()
                 return
             }
-            let pair = Pair(id: id, nom: carte["nom"] ?? "Appareil")
-            // Si l'on visait quelqu'un, c'est bien lui qu'on doit trouver.
-            if let attendu, attendu != pair {
-                print("Riskelo — attendu \(attendu.nom), reçu \(pair.nom)")
-                canal.fermer()
+            let pair = Pair(id: id, name: card["name"] ?? "Device")
+            // If we were aiming at someone, they are who we must find.
+            if let expecting, expecting != pair {
+                print("Riskelo US — expected \(expecting.name), got \(pair.name)")
+                channel.close()
                 return
             }
-            nommer(canal, pair)
+            identify(channel, pair)
             return
         }
-        guard let pair = canal.pair else { return }
+        guard let pair = channel.pair else { return }
         onReceive?(data, pair)
     }
 
-    /// Un canal vient de dire qui il est : la liaison est faite.
-    private func nommer(_ canal: Canal, _ pair: Pair) {
-        anonymes.removeAll { $0 === canal }
-        // Deux fils vers le même appareil : garder le premier.
-        if canaux[pair] != nil {
-            canal.fermer()
+    /// A channel has just said who it is: the link is made.
+    private func identify(_ channel: Channel, _ pair: Pair) {
+        anonymous.removeAll { $0 === channel }
+        // Two wires to the same device: keep the first.
+        if channels[pair] != nil {
+            channel.close()
             return
         }
-        canal.pair = pair
-        canaux[pair] = canal
-        if !relies.contains(pair) { relies.append(pair) }
-        attente?.cancel(); attente = nil
-        state = .relie(pair.nom)
-        print("Riskelo — \(pair.nom) : relié")
-        // Qui rejoint a fini de chercher. Qui héberge accueille jusqu'à ce que
-        // la table soit pleine, et s'arrête là.
-        if !jHeberge || relies.count >= attendus { cesserDAccueillir() }
-        onConnected?(jHeberge, pair)
+        channel.pair = pair
+        channels[pair] = channel
+        if !linked.contains(pair) { linked.append(pair) }
+        deadline?.cancel(); deadline = nil
+        state = .linked(pair.name)
+        print("Riskelo US — \(pair.name): linked")
+        // Whoever joins has finished searching. Whoever hosts keeps accepting
+        // until the table is full, and stops there.
+        if !hosting || linked.count >= expected { stopAccepting() }
+        onConnected?(hosting, pair)
     }
 
-    private func canalFerme(_ canal: Canal) {
-        anonymes.removeAll { $0 === canal }
-        guard let pair = canal.pair else {
-            // Il n'a jamais dit son nom : c'est une connexion qui n'a pas
-            // abouti. Seul le délai conclut, pour ne pas tuer une liaison qui
-            // allait se faire.
+    private func channelClosed(_ channel: Channel) {
+        anonymous.removeAll { $0 === channel }
+        guard let pair = channel.pair else {
+            // It never said its name: this is a connection that did not
+            // succeed. Only the deadline concludes, so as not to kill a link
+            // that was about to be made.
             return
         }
-        guard canaux[pair] === canal else { return }
-        canaux[pair] = nil
-        relies.removeAll { $0 == pair }
-        // Il pourra être rappelé s'il se réannonce.
-        appeles.remove(pair.id)
-        print("Riskelo — \(pair.nom) : liaison perdue")
-        if case .relie = state { state = .perdu(pair.nom) }
-        rouvrirLaTable()
+        guard channels[pair] === channel else { return }
+        channels[pair] = nil
+        linked.removeAll { $0 == pair }
+        // They can be called back if they advertise again.
+        called.remove(pair.id)
+        print("Riskelo US — \(pair.name): link lost")
+        if case .linked = state { state = .lost(pair.name) }
+        reopenTable()
     }
 
-    // MARK: - Envoyer
+    // MARK: - Sending
 
-    /// À tous. Un coup perdu désynchroniserait les parties : TCP garantit
-    /// l'ordre et la livraison, il n'y a rien à ajouter.
-    func envoyer(_ data: Data) {
-        canaux.values.forEach { $0.envoyer(data) }
+    /// To everyone. A lost move would desynchronize the games: TCP guarantees
+    /// order and delivery, there is nothing to add.
+    func send(_ data: Data) {
+        channels.values.forEach { $0.send(data) }
     }
 
-    /// À un seul appareil : chacun doit apprendre son rang, et lui seul.
-    func envoyer(_ data: Data, a pair: Pair) {
-        canaux[pair]?.envoyer(data)
+    /// To a single device: each has to learn its own seat, and only its own.
+    func send(_ data: Data, to pair: Pair) {
+        channels[pair]?.send(data)
     }
 
-    /// À tous sauf un : c'est ainsi que l'hôte relaie le coup d'un joueur aux
-    /// autres, sans le lui renvoyer.
-    func envoyer(_ data: Data, saufA pair: Pair) {
-        for (qui, canal) in canaux where qui != pair { canal.envoyer(data) }
+    /// To everyone but one: this is how the host relays a player's move to
+    /// the others without sending it back to them.
+    func send(_ data: Data, except pair: Pair) {
+        for (who, channel) in channels where who != pair { channel.send(data) }
     }
 }
 
 private extension NWError {
-    /// « Network is down » sur une adresse du réseau local ne veut pas dire
-    /// que le réseau est coupé — on vient de l'atteindre par ailleurs. Cela
-    /// veut dire que le système le ferme **à cette application**.
-    var estUnRefusDeReseauLocal: Bool {
+    /// "Network is down" on a local-network address does not mean the network
+    /// is cut — we have just reached it another way. It means the system is
+    /// closing it **to this app**.
+    var isLocalNetworkRefusal: Bool {
         if case let .posix(code) = self { return code == .ENETDOWN }
         return false
     }
 }
 
-// MARK: - Un canal, et ses paquets
+// MARK: - A channel, and its packets
 
-/// Une connexion TCP, et de quoi y faire passer des paquets entiers.
+/// A TCP connection, and what it takes to pass whole packets over it.
 ///
-/// TCP est un flot d'octets : il ne connaît pas les messages. Deux envois
-/// peuvent arriver collés, un seul peut arriver coupé en deux. Chaque paquet
-/// part donc précédé de sa longueur sur quatre octets, et l'on ne remonte un
-/// paquet que lorsqu'il est là tout entier. Sans cela, un message sur deux
-/// serait illisible — et la panne ressemblerait à un désaccord de version.
+/// TCP is a stream of bytes: it knows nothing of messages. Two sends can
+/// arrive stuck together, one can arrive cut in two. Each packet therefore
+/// leaves preceded by its length on four bytes, and a packet is only handed
+/// up once it is there in full. Without that, every other message would be
+/// unreadable — and the failure would look like a version disagreement.
 @MainActor
-private final class Canal {
+private final class Channel {
 
-    let connexion: NWConnection
+    let connection: NWConnection
     var pair: Pair?
 
-    var onPret: (() -> Void)?
-    /// Le système nous ferme le réseau local. Voir `State.sansAutorisation`.
-    var onInterdit: (() -> Void)?
-    var onPaquet: ((Data) -> Void)?
-    var onFerme: (() -> Void)?
+    var onReady: (() -> Void)?
+    /// The system is closing the local network to us. See `State.notAllowed`.
+    var onForbidden: (() -> Void)?
+    var onPacket: ((Data) -> Void)?
+    var onClosed: (() -> Void)?
 
-    /// Ce qui est arrivé mais pas encore complet.
-    private var tampon = Data()
-    private var ferme = false
+    /// What has arrived but is not yet complete.
+    private var buffer = Data()
+    private var closed = false
 
-    /// Au-delà, ce n'est plus un paquet du jeu : la partie entière tient très
-    /// largement dans cette taille, et une longueur aberrante ne peut venir
-    /// que d'un flot désaligné.
-    private static let tailleMax = 8 * 1024 * 1024
+    /// Beyond this, it is no longer a packet from this game: the whole game
+    /// fits very comfortably within this size, and an absurd length can only
+    /// come from a misaligned stream.
+    private static let maxSize = 8 * 1024 * 1024
 
-    init(connexion: NWConnection) { self.connexion = connexion }
+    init(connection: NWConnection) { self.connection = connection }
 
-    func demarrer() {
-        connexion.stateUpdateHandler = { [weak self] etat in
+    func start() {
+        connection.stateUpdateHandler = { [weak self] state in
             MainActor.assumeIsolated {
                 guard let self else { return }
-                switch etat {
+                switch state {
                 case .ready:
-                    self.onPret?()
-                    self.lire()
+                    self.onReady?()
+                    self.read()
                 case .preparing:
-                    print("Riskelo — canal en préparation")
-                case .waiting(let erreur):
-                    // L'état qui manquait au journal. Une connexion qui
-                    // n'aboutit pas ne « échoue » pas : elle *attend*, en
-                    // gardant sa raison pour elle.
+                    print("Riskelo US — channel preparing")
+                case .waiting(let error):
+                    // The state the log was missing. A connection that does
+                    // not succeed does not "fail": it *waits*, keeping its
+                    // reason to itself.
                     //
-                    // Et « Network is down » ne dit pas *laquelle* de ses
-                    // raisons. Le système en tient pourtant le compte exact —
-                    // autorisation refusée, Wi-Fi refusé, rien de disponible —
-                    // dans `NWPath.unsatisfiedReason`. C'est le seul endroit
-                    // où il nomme la cause, et c'est celui-là qu'il faut lire.
-                    let chemin = self.connexion.currentPath
+                    // And "Network is down" does not say *which* of its
+                    // reasons. The system keeps the exact count, though —
+                    // permission denied, Wi-Fi denied, nothing available — in
+                    // `NWPath.unsatisfiedReason`. That is the one place where
+                    // it names the cause, and that is the one to read.
+                    let path = self.connection.currentPath
                     print("""
-                        Riskelo — canal en attente : \(erreur)
-                          état du chemin : \(String(describing: chemin?.status))
-                          raison         : \(String(describing: chemin?.unsatisfiedReason))
-                          interfaces     : \(chemin?.availableInterfaces.map(\.name).joined(separator: ", ") ?? "aucune")
-                          coûteux/limité : \(String(describing: chemin?.isExpensive)) / \(String(describing: chemin?.isConstrained))
+                        Riskelo US — channel waiting: \(error)
+                          path status  : \(String(describing: path?.status))
+                          reason       : \(String(describing: path?.unsatisfiedReason))
+                          interfaces   : \(path?.availableInterfaces.map(\.name).joined(separator: ", ") ?? "none")
+                          costly/capped: \(String(describing: path?.isExpensive)) / \(String(describing: path?.isConstrained))
                         """)
-                    if chemin?.unsatisfiedReason == .localNetworkDenied
-                        || erreur.estUnRefusDeReseauLocal {
-                        self.onInterdit?()
+                    if path?.unsatisfiedReason == .localNetworkDenied
+                        || error.isLocalNetworkRefusal {
+                        self.onForbidden?()
                     }
-                case .failed(let erreur):
-                    print("Riskelo — canal rompu : \(erreur)")
-                    self.fermer()
+                case .failed(let error):
+                    print("Riskelo US — channel broken: \(error)")
+                    self.close()
                 case .cancelled:
-                    self.prevenirDeLaFermeture()
+                    self.reportClosure()
                 default:
                     break
                 }
             }
         }
-        connexion.start(queue: .main)
+        connection.start(queue: .main)
     }
 
-    func envoyer(_ data: Data) {
-        guard !ferme else { return }
-        var longueur = UInt32(data.count).bigEndian
-        var paquet = Data(bytes: &longueur, count: 4)
-        paquet.append(data)
-        connexion.send(content: paquet, completion: .contentProcessed { erreur in
-            if let erreur {
-                print("Riskelo — paquet non envoyé : \(erreur)")
+    func send(_ data: Data) {
+        guard !closed else { return }
+        var length = UInt32(data.count).bigEndian
+        var packet = Data(bytes: &length, count: 4)
+        packet.append(data)
+        connection.send(content: packet, completion: .contentProcessed { error in
+            if let error {
+                print("Riskelo US — packet not sent: \(error)")
             }
         })
     }
 
-    func fermer() {
-        guard !ferme else { return }
-        ferme = true
-        connexion.cancel()
-        onFerme?()
+    func close() {
+        guard !closed else { return }
+        closed = true
+        connection.cancel()
+        onClosed?()
     }
 
-    private func prevenirDeLaFermeture() {
-        guard !ferme else { return }
-        ferme = true
-        onFerme?()
+    private func reportClosure() {
+        guard !closed else { return }
+        closed = true
+        onClosed?()
     }
 
-    private func lire() {
-        connexion.receive(minimumIncompleteLength: 1, maximumLength: 64 * 1024) {
-            [weak self] morceau, _, fini, erreur in
+    private func read() {
+        connection.receive(minimumIncompleteLength: 1, maximumLength: 64 * 1024) {
+            [weak self] chunk, _, done, error in
             MainActor.assumeIsolated {
                 guard let self else { return }
-                if let morceau, !morceau.isEmpty {
-                    self.tampon.append(morceau)
-                    self.decouper()
+                if let chunk, !chunk.isEmpty {
+                    self.buffer.append(chunk)
+                    self.split()
                 }
-                if let erreur {
-                    print("Riskelo — lecture interrompue : \(erreur)")
-                    self.fermer()
+                if let error {
+                    print("Riskelo US — read interrupted: \(error)")
+                    self.close()
                     return
                 }
-                if fini { self.fermer(); return }
-                guard !self.ferme else { return }
-                self.lire()
+                if done { self.close(); return }
+                guard !self.closed else { return }
+                self.read()
             }
         }
     }
 
-    /// Remonte tous les paquets entiers présents dans le tampon.
-    private func decouper() {
-        while tampon.count >= 4 {
-            let longueur = tampon.prefix(4).reduce(0) { Int($0) << 8 | Int($1) }
-            guard longueur > 0, longueur <= Canal.tailleMax else {
-                print("Riskelo — longueur de paquet aberrante (\(longueur))")
-                fermer()
+    /// Hands up every whole packet present in the buffer.
+    private func split() {
+        while buffer.count >= 4 {
+            let length = buffer.prefix(4).reduce(0) { Int($0) << 8 | Int($1) }
+            guard length > 0, length <= Channel.maxSize else {
+                print("Riskelo US — absurd packet length (\(length))")
+                close()
                 return
             }
-            guard tampon.count >= 4 + longueur else { return }
-            let corps = tampon.subdata(in: 4 ..< (4 + longueur))
-            tampon.removeSubrange(0 ..< (4 + longueur))
-            onPaquet?(corps)
+            guard buffer.count >= 4 + length else { return }
+            let body = buffer.subdata(in: 4 ..< (4 + length))
+            buffer.removeSubrange(0 ..< (4 + length))
+            onPacket?(body)
         }
     }
 }

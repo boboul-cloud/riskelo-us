@@ -1,0 +1,474 @@
+# History — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# American history first, world history after. Nothing here depends on who
+# holds office today: a question whose answer changes with an election has
+# no business in a deck that ships in an app.
+
+# What this theme declares — readable name, icon, color, and its
+# place in the grid. These lines are not comments: without
+# them the theme has no name.
+
+! id      | history
+! name    | History
+! icon    | building.columns
+! tint    | 0.85 0.66 0.22
+! rank    | 1
+
+
+# --- The founding ---
+
+E | In which year was the Declaration of Independence adopted? | 1776 | 1781 | 1789 | 1765
+E | Who wrote the first draft of the Declaration of Independence? | Thomas Jefferson | John Adams | Benjamin Franklin | George Washington
+E | Who was the first President of the United States? | George Washington | John Adams | Thomas Jefferson | Benjamin Franklin
+E | Which colonial protest dumped tea into a harbor in 1773? | The Boston Tea Party | Shays' Rebellion | The Whiskey Rebellion | The Stamp Act Congress
+E | How many original colonies became the first states? | Thirteen | Twelve | Fifteen | Ten
+M | In which year was the Constitution signed in Philadelphia? | 1787 | 1776 | 1791 | 1783
+M | What are the first ten amendments to the Constitution called? | The Bill of Rights | The Articles | The Federalist Papers | The Preamble
+M | Where were the first shots of the Revolutionary War fired? | Lexington and Concord | Bunker Hill | Saratoga | Trenton
+M | Which battle is considered the turning point of the Revolution? | Saratoga | Bunker Hill | Trenton | Camden
+M | Where did Cornwallis surrender in 1781? | Yorktown | Saratoga | Charleston | Princeton
+M | Which document governed the United States before the Constitution? | The Articles of Confederation | The Bill of Rights | The Mayflower Compact | The Northwest Ordinance
+M | Who was the second President of the United States? | John Adams | Thomas Jefferson | James Madison | John Jay
+M | Which treaty ended the Revolutionary War in 1783? | The Treaty of Paris | The Treaty of Ghent | The Treaty of Versailles | The Treaty of Utrecht
+M | Which winter camp nearly broke the Continental Army in 1777? | Valley Forge | Morristown | West Point | Fort Ticonderoga
+H | Who is called the Father of the Constitution? | James Madison | Thomas Jefferson | Alexander Hamilton | George Washington
+H | Which essays argued for ratifying the Constitution? | The Federalist Papers | Common Sense | The Rights of Man | Poor Richard's Almanack
+H | Who wrote the pamphlet Common Sense in 1776? | Thomas Paine | Patrick Henry | Samuel Adams | John Hancock
+H | Whose signature on the Declaration is the largest? | John Hancock | John Adams | Benjamin Franklin | Samuel Adams
+H | Which 1765 act taxed printed materials in the colonies? | The Stamp Act | The Sugar Act | The Tea Act | The Quartering Act
+H | Who was the first Chief Justice of the Supreme Court? | John Jay | John Marshall | Roger Taney | Oliver Ellsworth
+H | Which 1620 agreement set up self-government at Plymouth? | The Mayflower Compact | The Virginia Charter | The Fundamental Orders | The Albany Plan
+H | Which was the first permanent English settlement in America? | Jamestown | Plymouth | Roanoke | Boston
+H | Who was the first Secretary of the Treasury? | Alexander Hamilton | Thomas Jefferson | James Madison | John Jay
+H | Which 1794 uprising did Washington put down over a tax on liquor? | The Whiskey Rebellion | Shays' Rebellion | Bacon's Rebellion | The Dorr Rebellion
+
+# --- The Presidents ---
+
+E | Which president led the country during the Civil War? | Abraham Lincoln | Andrew Jackson | Ulysses Grant | James Buchanan
+E | Which president is on the one-dollar bill? | George Washington | Abraham Lincoln | Thomas Jefferson | Benjamin Franklin
+E | Which president is on the five-dollar bill? | Abraham Lincoln | George Washington | Ulysses Grant | Andrew Jackson
+E | Which president was elected to four terms? | Franklin Roosevelt | Theodore Roosevelt | Woodrow Wilson | Harry Truman
+E | Which president resigned over Watergate? | Richard Nixon | Gerald Ford | Lyndon Johnson | Jimmy Carter
+E | Which president was assassinated in Dallas in 1963? | John F. Kennedy | Abraham Lincoln | William McKinley | James Garfield
+M | Which president made the Louisiana Purchase? | Thomas Jefferson | James Madison | James Monroe | John Adams
+M | Which president is on the ten-dollar bill? | Alexander Hamilton | Andrew Jackson | Thomas Jefferson | Ulysses Grant
+M | Which president was the first to live in the White House? | John Adams | George Washington | Thomas Jefferson | James Madison
+M | Which president served the shortest term? | William Henry Harrison | James Garfield | Zachary Taylor | Warren Harding
+M | Which general accepted the Confederate surrender and later became president? | Ulysses S. Grant | William Sherman | George McClellan | Winfield Scott
+M | Which president bought Alaska from Russia in 1867? | Andrew Johnson | Abraham Lincoln | Ulysses Grant | James Buchanan
+M | Which president signed the Civil Rights Act of 1964? | Lyndon B. Johnson | John F. Kennedy | Dwight Eisenhower | Richard Nixon
+M | Which president was never elected to the presidency or vice presidency? | Gerald Ford | Chester Arthur | Andrew Johnson | Calvin Coolidge
+M | Which president served two non-consecutive terms in the 1880s and 1890s? | Grover Cleveland | Benjamin Harrison | William McKinley | Rutherford Hayes
+M | Which president was a former Hollywood actor? | Ronald Reagan | Richard Nixon | Gerald Ford | Jimmy Carter
+H | Which president was the youngest ever to take office? | Theodore Roosevelt | John F. Kennedy | Bill Clinton | Ulysses Grant
+H | Which president was the youngest ever elected? | John F. Kennedy | Theodore Roosevelt | Bill Clinton | Barack Obama
+H | Which president delivered the shortest inaugural address? | George Washington | Abraham Lincoln | Calvin Coolidge | Franklin Roosevelt
+H | Which president was known as Old Hickory? | Andrew Jackson | Andrew Johnson | William Henry Harrison | Zachary Taylor
+H | Which president was known as Silent Cal? | Calvin Coolidge | Herbert Hoover | Warren Harding | Chester Arthur
+H | Which two presidents both died on July 4, 1826? | Adams and Jefferson | Washington and Adams | Jefferson and Madison | Madison and Monroe
+H | Which president was the only one to hold a patent? | Abraham Lincoln | Thomas Jefferson | Benjamin Harrison | Herbert Hoover
+H | Which president later served as Chief Justice? | William Howard Taft | John Quincy Adams | James Monroe | Rutherford Hayes
+H | Which president proclaimed the doctrine warning Europe out of the Americas? | James Monroe | James Madison | John Quincy Adams | Andrew Jackson
+H | Which president was in office during the Spanish-American War? | William McKinley | Theodore Roosevelt | Grover Cleveland | Benjamin Harrison
+H | Which president signed the New Deal into being? | Franklin Roosevelt | Herbert Hoover | Harry Truman | Woodrow Wilson
+H | Which president ordered the Berlin Airlift? | Harry Truman | Dwight Eisenhower | Franklin Roosevelt | John F. Kennedy
+
+# --- Growing west ---
+
+E | From which country did the United States buy Louisiana in 1803? | France | Spain | Britain | Mexico
+E | Which two explorers were sent to map the Louisiana Purchase? | Lewis and Clark | Pike and Fremont | Boone and Crockett | Cabot and Hudson
+E | Which 1849 rush drew thousands to California? | The Gold Rush | The Silver Rush | The Land Rush | The Oil Rush
+M | Which forced removal of the Cherokee is called the Trail of Tears? | The 1838 removal to Oklahoma | The Long Walk to New Mexico | The Sand Creek march | The Wounded Knee march
+M | Which mission in Texas fell in 1836? | The Alamo | San Jacinto | Goliad | Presidio
+M | Which war added California and the Southwest to the United States? | The Mexican-American War | The Spanish-American War | The War of 1812 | The Civil War
+M | Which railroad was completed at Promontory Summit in 1869? | The transcontinental railroad | The Baltimore and Ohio | The Erie Canal line | The Santa Fe Trail
+M | Which idea held that the nation was destined to expand to the Pacific? | Manifest Destiny | The Monroe Doctrine | Nullification | Popular Sovereignty
+M | Which Shoshone woman guided Lewis and Clark? | Sacagawea | Pocahontas | Wilma Mankiller | Nancy Ward
+M | Which act of 1862 gave settlers free western land for farming it? | The Homestead Act | The Land Ordinance | The Dawes Act | The Morrill Act
+H | Which 1848 treaty ended the war with Mexico? | The Treaty of Guadalupe Hidalgo | The Treaty of Velasco | The Gadsden Treaty | The Treaty of Paris
+H | Which battle in 1876 destroyed Custer's command? | The Little Bighorn | Wounded Knee | Sand Creek | Rosebud Creek
+H | Which Lakota leader helped defeat Custer? | Sitting Bull | Geronimo | Cochise | Chief Joseph
+H | Which Apache leader surrendered in 1886? | Geronimo | Sitting Bull | Red Cloud | Tecumseh
+H | Which Nez Perce leader said he would fight no more forever? | Chief Joseph | Sitting Bull | Black Hawk | Pontiac
+H | Which 1853 purchase added southern Arizona and New Mexico? | The Gadsden Purchase | The Louisiana Purchase | The Alaska Purchase | The Texas Annexation
+H | Which trail carried settlers from Missouri to the Pacific Northwest? | The Oregon Trail | The Santa Fe Trail | The Chisholm Trail | The Mormon Trail
+H | Which 1890 event ended the Plains wars in South Dakota? | Wounded Knee | The Little Bighorn | Sand Creek | The Ghost Dance ban
+
+# --- The Civil War ---
+
+E | In which years was the American Civil War fought? | 1861 to 1865 | 1851 to 1855 | 1871 to 1875 | 1846 to 1850
+E | Which fort was fired on to open the Civil War? | Fort Sumter | Fort Ticonderoga | Fort McHenry | Fort Donelson
+E | Who commanded the Confederate Army of Northern Virginia? | Robert E. Lee | Ulysses Grant | Stonewall Jackson | Jefferson Davis
+E | Which proclamation freed slaves in the rebelling states? | The Emancipation Proclamation | The Gettysburg Address | The Homestead Act | The Missouri Compromise
+M | Which battle in July 1863 turned the war in the North's favor? | Gettysburg | Antietam | Shiloh | Bull Run
+M | Where did Lee surrender to Grant in April 1865? | Appomattox Court House | Richmond | Vicksburg | Petersburg
+M | Who was president of the Confederacy? | Jefferson Davis | Robert E. Lee | Alexander Stephens | John C. Calhoun
+M | Who shot Abraham Lincoln at Ford's Theatre? | John Wilkes Booth | Charles Guiteau | Leon Czolgosz | Lee Harvey Oswald
+M | Which amendment abolished slavery? | The Thirteenth | The Fourteenth | The Fifteenth | The Twelfth
+M | Which amendment granted citizenship to those born in the United States? | The Fourteenth | The Thirteenth | The Fifteenth | The Nineteenth
+M | Which single day of 1862 was the bloodiest in American history? | Antietam | Gettysburg | Shiloh | Cold Harbor
+H | Which Union general marched from Atlanta to the sea? | William Tecumseh Sherman | Ulysses Grant | George Meade | Philip Sheridan
+H | Which siege on the Mississippi ended on July 4, 1863? | Vicksburg | Petersburg | Port Hudson | Fort Henry
+H | Which amendment barred denying the vote on grounds of race? | The Fifteenth | The Thirteenth | The Fourteenth | The Nineteenth
+H | Which 1857 Supreme Court ruling denied citizenship to Black Americans? | Dred Scott v. Sandford | Plessy v. Ferguson | Marbury v. Madison | McCulloch v. Maryland
+H | Which 1896 ruling upheld separate but equal? | Plessy v. Ferguson | Dred Scott | Brown v. Board | Gibbons v. Ogden
+H | Which two ironclads fought at Hampton Roads in 1862? | The Monitor and the Merrimack | The Alabama and the Kearsarge | The Hunley and the Housatonic | The Essex and the Arkansas
+H | Which 1854 act let settlers vote on slavery in new territories? | The Kansas-Nebraska Act | The Missouri Compromise | The Compromise of 1850 | The Wilmot Proviso
+H | Which abolitionist led the raid on Harpers Ferry in 1859? | John Brown | Frederick Douglass | Nat Turner | William Lloyd Garrison
+H | Which escaped slave became the most famous abolitionist orator? | Frederick Douglass | Booker T. Washington | Nat Turner | Denmark Vesey
+H | Which conductor on the Underground Railroad led scores to freedom? | Harriet Tubman | Sojourner Truth | Harriet Beecher Stowe | Ida B. Wells
+H | Which novel of 1852 turned many northerners against slavery? | Uncle Tom's Cabin | The Scarlet Letter | Moby-Dick | Walden
+
+# --- The American twentieth century ---
+
+E | Which attack brought the United States into the Second World War? | Pearl Harbor | The Lusitania | The Maine | Midway
+E | In which year did Americans first walk on the Moon? | 1969 | 1961 | 1972 | 1957
+E | Who was the first person to walk on the Moon? | Neil Armstrong | Buzz Aldrin | John Glenn | Alan Shepard
+E | Which 1929 event opened the Great Depression? | The stock market crash | The Dust Bowl | The bank holiday | The Smoot-Hawley tariff
+E | Who delivered the I Have a Dream speech in 1963? | Martin Luther King Jr. | Malcolm X | John Lewis | Thurgood Marshall
+E | Which amendment gave women the vote in 1920? | The Nineteenth | The Eighteenth | The Twenty-first | The Fifteenth
+M | Which woman refused to give up her bus seat in Montgomery in 1955? | Rosa Parks | Claudette Colvin | Coretta Scott King | Fannie Lou Hamer
+M | Which 1954 ruling ended segregation in public schools? | Brown v. Board of Education | Plessy v. Ferguson | Loving v. Virginia | Miranda v. Arizona
+M | In which year did the United States enter the First World War? | 1917 | 1914 | 1916 | 1918
+M | Which 1962 standoff brought the superpowers closest to nuclear war? | The Cuban Missile Crisis | The Berlin Airlift | The U-2 incident | The Bay of Pigs
+M | Which plan rebuilt western Europe after 1945? | The Marshall Plan | The New Deal | The Truman Doctrine | Lend-Lease
+M | Which alliance did the United States join in 1949? | NATO | The Warsaw Pact | The League of Nations | SEATO
+M | Which amendment banned alcohol in 1919? | The Eighteenth | The Nineteenth | The Sixteenth | The Twenty-first
+M | Which city hosted the founding conference of the United Nations in 1945? | San Francisco | New York | Geneva | London
+M | Which war divided a peninsula between 1950 and 1953? | The Korean War | The Vietnam War | The Chinese Civil War | The Malayan Emergency
+M | In which city was Martin Luther King Jr. assassinated in 1968? | Memphis | Atlanta | Birmingham | Selma
+H | Which 1917 Russian revolution took the country out of the war? | The Bolshevik Revolution | The February Revolution | The Decembrist Revolt | The Kronstadt Rising
+H | Which ship sunk in 1915 pushed America toward war? | The Lusitania | The Maine | The Arizona | The Reuben James
+H | Which 1919 treaty ended the First World War? | The Treaty of Versailles | The Treaty of Trianon | The Treaty of Brest-Litovsk | The Treaty of Sevres
+H | Which agency did the New Deal create to insure bank deposits? | The FDIC | The SEC | The WPA | The TVA
+H | Which secret project built the first atomic bomb? | The Manhattan Project | Project Paperclip | The Enigma Project | Operation Overlord
+H | On which date did Allied troops land in Normandy? | June 6, 1944 | December 7, 1941 | May 8, 1945 | September 1, 1939
+H | Which 1965 act removed barriers to Black voting in the South? | The Voting Rights Act | The Civil Rights Act | The Fair Housing Act | The Twenty-fourth Amendment
+H | Which 1957 crisis over school integration drew federal troops? | Little Rock | Selma | Birmingham | Greensboro
+H | Which Soviet satellite of 1957 opened the space race? | Sputnik | Vostok | Luna | Soyuz
+H | Which American was the first to orbit the Earth? | John Glenn | Alan Shepard | Neil Armstrong | Gus Grissom
+H | Which scandal forced Nixon from office in 1974? | Watergate | Teapot Dome | Iran-Contra | The Pentagon Papers
+H | Which 1948 airlift supplied a blockaded city for almost a year? | The Berlin Airlift | The Hump | Operation Vittles East | The Danzig Corridor
+H | Which lawyer argued Brown v. Board and later joined the Supreme Court? | Thurgood Marshall | Charles Hamilton Houston | Earl Warren | William Brennan
+H | Which 1933 program put young men to work in forests and parks? | The Civilian Conservation Corps | The Works Progress Administration | The Tennessee Valley Authority | The National Recovery Administration
+
+# --- The ancient world ---
+
+E | Along which river did ancient Egyptian civilization grow? | The Nile | The Tigris | The Indus | The Yangtze
+E | What were Egyptian kings called? | Pharaohs | Emperors | Caesars | Sultans
+E | Which ancient city held the Parthenon? | Athens | Rome | Sparta | Corinth
+E | Who was the first emperor of Rome? | Augustus | Julius Caesar | Nero | Constantine
+E | In which country were the ancient Olympic Games held? | Greece | Rome | Egypt | Persia
+M | Which writing system did the Sumerians invent? | Cuneiform | Hieroglyphs | The alphabet | Linear B
+M | Which Babylonian king left one of the earliest law codes? | Hammurabi | Nebuchadnezzar | Sargon | Cyrus
+M | Which Macedonian king conquered as far as India? | Alexander the Great | Philip II | Darius | Xerxes
+M | In which year was Julius Caesar assassinated? | 44 BC | 27 BC | 79 AD | 146 BC
+M | Which Greek city-state was famous for its army and harsh training? | Sparta | Athens | Thebes | Corinth
+M | Which region between the Tigris and Euphrates is called the cradle of civilization? | Mesopotamia | Anatolia | The Levant | Persia
+M | Which volcano buried Pompeii in 79 AD? | Vesuvius | Etna | Stromboli | Thera
+M | Which Egyptian queen allied with Caesar and Mark Antony? | Cleopatra | Nefertiti | Hatshepsut | Isis
+M | Which Roman emperor legalized Christianity in 313? | Constantine | Augustus | Nero | Diocletian
+H | Which battle of 490 BC saw Athens defeat a Persian invasion? | Marathon | Thermopylae | Salamis | Plataea
+H | Which Greek philosopher taught Alexander the Great? | Aristotle | Plato | Socrates | Diogenes
+H | Which Carthaginian general crossed the Alps with elephants? | Hannibal | Scipio | Hamilcar | Hasdrubal
+H | Which wars did Rome fight against Carthage? | The Punic Wars | The Persian Wars | The Gallic Wars | The Social Wars
+H | In which year did the western Roman Empire fall? | 476 | 410 | 330 | 527
+H | Which Chinese dynasty first unified the empire under one ruler? | The Qin | The Han | The Tang | The Zhou
+H | Which Indian emperor spread Buddhism across his realm in the third century BC? | Ashoka | Chandragupta | Akbar | Harsha
+H | Which Egyptian boy king's tomb was found nearly intact in 1922? | Tutankhamun | Ramses II | Khufu | Akhenaten
+H | Which stone unlocked the reading of hieroglyphs? | The Rosetta Stone | The Palermo Stone | The Narmer Palette | The Behistun Rock
+H | Which people built Machu Picchu? | The Inca | The Aztec | The Maya | The Olmec
+H | Which Mesoamerican people built Tenochtitlan? | The Aztec | The Maya | The Inca | The Toltec
+
+# --- The middle ages and the Renaissance ---
+
+E | Which pandemic killed a third of Europe in the 1340s? | The Black Death | The Spanish flu | Cholera | Smallpox
+E | Which Renaissance figure filled notebooks with flying machines and anatomy? | Leonardo da Vinci | Michelangelo | Galileo | Copernicus
+E | Which German invented movable-type printing in Europe? | Johannes Gutenberg | Martin Luther | Albrecht Durer | Nicolaus Copernicus
+M | Which 1215 charter limited the power of the English king? | Magna Carta | The Bill of Rights | The Petition of Right | The Domesday Book
+M | Which Frankish king was crowned emperor in 800? | Charlemagne | Clovis | Charles Martel | Louis the Pious
+M | Which seafaring people raided Europe from Scandinavia? | The Vikings | The Goths | The Huns | The Magyars
+M | Which religious wars sent European armies to the Holy Land from 1096? | The Crusades | The Reconquista | The Hussite Wars | The Thirty Years' War
+M | Who painted the ceiling of the Sistine Chapel? | Michelangelo | Leonardo | Raphael | Titian
+M | Which monk's ninety-five theses opened the Reformation in 1517? | Martin Luther | John Calvin | Jan Hus | Thomas More
+M | Which French teenager led armies during the Hundred Years' War? | Joan of Arc | Eleanor of Aquitaine | Catherine de Medici | Marguerite of Navarre
+H | Which battle in 1066 gave England to the Normans? | Hastings | Agincourt | Bosworth | Bannockburn
+H | Which English king signed Magna Carta? | John | Henry II | Richard I | Edward I
+H | Which empire took Constantinople in 1453? | The Ottoman Empire | The Byzantine Empire | The Mongol Empire | The Persian Empire
+H | Which Mongol leader built the largest contiguous land empire? | Genghis Khan | Kublai Khan | Tamerlane | Attila
+H | Which Italian city is regarded as the birthplace of the Renaissance? | Florence | Rome | Venice | Milan
+H | Which family ruled Florence and patronized Renaissance artists? | The Medici | The Borgia | The Sforza | The Visconti
+H | Which astronomer argued that the Earth orbits the Sun? | Nicolaus Copernicus | Ptolemy | Tycho Brahe | Johannes Kepler
+H | Which war between England and France lasted from 1337 to 1453? | The Hundred Years' War | The War of the Roses | The Thirty Years' War | The Seven Years' War
+H | Which English civil wars pitted York against Lancaster? | The Wars of the Roses | The Barons' Wars | The Anarchy | The Jacobite Risings
+H | Which cathedral in Paris was begun in the twelfth century? | Notre-Dame | Chartres | Reims | Saint-Denis
+
+# --- Exploration and empires ---
+
+E | Who sailed west across the Atlantic in 1492 under the Spanish flag? | Christopher Columbus | Ferdinand Magellan | Amerigo Vespucci | Vasco da Gama
+M | Whose expedition first sailed all the way around the world? | Ferdinand Magellan's | Christopher Columbus's | Francis Drake's | James Cook's
+M | Which Spaniard toppled the Aztec Empire? | Hernan Cortes | Francisco Pizarro | Ponce de Leon | Hernando de Soto
+M | Which Spaniard toppled the Inca Empire? | Francisco Pizarro | Hernan Cortes | Vasco de Balboa | Cabeza de Vaca
+M | Which explorer first sailed from Europe to India around Africa? | Vasco da Gama | Bartolomeu Dias | Ferdinand Magellan | Prince Henry
+M | Which continent did the Atlantic slave trade take people from? | Africa | Asia | South America | Australia
+H | Which Portuguese navigator first rounded the Cape of Good Hope? | Bartolomeu Dias | Vasco da Gama | Pedro Cabral | Ferdinand Magellan
+H | Which English captain charted the eastern coast of Australia? | James Cook | Francis Drake | Walter Raleigh | Henry Hudson
+H | Which explorer gave his name to a river and a bay in North America? | Henry Hudson | John Cabot | Samuel de Champlain | Jacques Cartier
+H | Which French explorer founded Quebec in 1608? | Samuel de Champlain | Jacques Cartier | La Salle | Marquette
+H | Which 1494 treaty divided the new world between Spain and Portugal? | The Treaty of Tordesillas | The Treaty of Zaragoza | The Treaty of Alcacovas | The Treaty of Madrid
+H | Which trade route carried silk and spices between China and the West? | The Silk Road | The Amber Road | The Incense Route | The Grand Trunk Road
+
+# --- The modern world ---
+
+E | In which years was the First World War fought? | 1914 to 1918 | 1912 to 1916 | 1916 to 1920 | 1918 to 1922
+E | In which years was the Second World War fought? | 1939 to 1945 | 1937 to 1943 | 1941 to 1945 | 1940 to 1946
+E | Which wall divided a German city until 1989? | The Berlin Wall | The Iron Curtain gate | The Brandenburg Wall | The Rhine Wall
+E | Which French prison was stormed on July 14, 1789? | The Bastille | The Conciergerie | Vincennes | The Temple
+M | Whose assassination in Sarajevo set off the First World War? | Archduke Franz Ferdinand | Kaiser Wilhelm | Tsar Nicholas II | King Peter
+M | Which French emperor was defeated at Waterloo in 1815? | Napoleon Bonaparte | Louis XVI | Charles X | Napoleon III
+M | Which leader used nonviolence to win Indian independence? | Mahatma Gandhi | Jawaharlal Nehru | Subhas Bose | Muhammad Jinnah
+M | In which year did India gain independence? | 1947 | 1930 | 1950 | 1962
+M | Which South African leader was freed in 1990 and later became president? | Nelson Mandela | Desmond Tutu | Steve Biko | Oliver Tambo
+M | What was South Africa's system of racial segregation called? | Apartheid | Jim Crow | Partition | Segregationism
+M | Which revolution began in France in 1789? | The French Revolution | The July Revolution | The Paris Commune | The Fronde
+M | Which British prime minister led through the Second World War? | Winston Churchill | Neville Chamberlain | Clement Attlee | Anthony Eden
+M | Which country did Germany invade to start the Second World War? | Poland | France | Belgium | Czechoslovakia
+H | Which 1917 letter promised Mexico American territory if it joined Germany? | The Zimmermann Telegram | The Balfour Declaration | The Sykes-Picot note | The Ems Dispatch
+H | Which battle in 1942 turned the war in the Pacific? | Midway | Guadalcanal | Coral Sea | Leyte Gulf
+H | Which German defeat in 1943 turned the war on the eastern front? | Stalingrad | Kursk | Moscow | Leningrad
+H | Which 1938 agreement handed Czech land to Germany? | The Munich Agreement | The Molotov-Ribbentrop Pact | The Anschluss | The Locarno Treaties
+H | Which conference in 1945 divided postwar Europe among the Allies? | Yalta | Potsdam | Tehran | Casablanca
+H | Which wall came down in the same year as the Velvet Revolution? | The Berlin Wall | The Warsaw barrier | The Prague gate | The Danube line
+H | In which year did the Soviet Union dissolve? | 1991 | 1989 | 1993 | 1985
+H | Which Chinese leader founded the People's Republic in 1949? | Mao Zedong | Chiang Kai-shek | Deng Xiaoping | Zhou Enlai
+H | Which Russian dynasty ended with Nicholas II in 1917? | The Romanovs | The Rurikids | The Godunovs | The Habsburgs
+H | Which empire collapsed at the end of the First World War in Anatolia? | The Ottoman Empire | The Persian Empire | The Mughal Empire | The Byzantine Empire
+H | Which 1815 congress redrew Europe after Napoleon? | The Congress of Vienna | The Congress of Berlin | The Peace of Westphalia | The Treaty of Utrecht
+H | Which Irish famine of the 1840s drove mass emigration to America? | The Great Famine | The Highland Clearances | The Enclosure Crisis | The Corn Law Famine
+H | Which strait did the Allies fail to force at Gallipoli in 1915? | The Dardanelles | The Bosporus | The Strait of Otranto | The Kerch Strait
+H | Which movement of the 1960s opposed the war in Vietnam on campuses? | The antiwar movement | The Beat movement | The Progressive movement | The Temperance movement
+H | Which German chancellor came to power in 1933? | Adolf Hitler | Paul von Hindenburg | Franz von Papen | Kurt von Schleicher
+H | Which 1936 civil war drew volunteers from across the world? | The Spanish Civil War | The Greek Civil War | The Russian Civil War | The Chinese Civil War
+
+# --- Symbols and documents ---
+
+E | Which country gave the Statue of Liberty to the United States? | France | Britain | Spain | Italy
+E | How many stars are on the American flag? | Fifty | Thirteen | Forty-eight | Fifty-two
+E | How many stripes are on the American flag? | Thirteen | Fifty | Twelve | Fifteen
+E | Which holiday marks American independence? | The Fourth of July | Memorial Day | Labor Day | Veterans Day
+E | Which words open the Constitution? | We the People | Four score and seven | All men are created equal | In Congress assembled
+E | In which city was the Declaration of Independence signed? | Philadelphia | Boston | New York | Washington
+E | What is the national anthem of the United States? | The Star-Spangled Banner | America the Beautiful | My Country, Tis of Thee | Yankee Doodle
+E | Which ship carried the Pilgrims to Plymouth in 1620? | The Mayflower | The Santa Maria | The Susan Constant | The Arbella
+E | In which building does Congress meet? | The Capitol | The White House | The Supreme Court | The Pentagon
+E | Which bird is the national symbol of the United States? | The bald eagle | The turkey | The cardinal | The falcon
+M | Who wrote the words of the Star-Spangled Banner? | Francis Scott Key | Julia Ward Howe | Samuel Francis Smith | Irving Berlin
+M | Which fort's bombardment inspired the national anthem? | Fort McHenry | Fort Sumter | Fort Ticonderoga | Fort Knox
+M | Which four presidents are carved at Mount Rushmore? | Washington, Jefferson, Roosevelt, Lincoln | Washington, Adams, Jefferson, Lincoln | Washington, Jefferson, Lincoln, Grant | Washington, Lincoln, Wilson, Roosevelt
+M | Which speech begins Four score and seven years ago? | The Gettysburg Address | The First Inaugural | The Emancipation Proclamation | The Farewell Address
+M | Which phrase appears in the Declaration after life and liberty? | The pursuit of happiness | Property and peace | Justice for all | Freedom from want
+M | How many amendments does the Constitution now have? | Twenty-seven | Twenty-six | Twenty-five | Thirty
+M | What is the supreme law of the United States? | The Constitution | The Declaration | Federal statute | Common law
+M | Which body has the power to declare war? | Congress | The president | The Supreme Court | The Joint Chiefs
+H | Which motto was adopted on American coinage during the Civil War? | In God We Trust | E Pluribus Unum | Novus Ordo Seclorum | Annuit Coeptis
+H | What does E Pluribus Unum mean? | Out of many, one | Liberty for all | God with us | Ever upward
+H | Which pledge was written in 1892 for a magazine? | The Pledge of Allegiance | The Oath of Office | The Scout Oath | The Gettysburg Pledge
+H | Which president's farewell address warned against permanent alliances? | George Washington's | Thomas Jefferson's | Dwight Eisenhower's | James Monroe's
+H | Which president's farewell warned of the military-industrial complex? | Dwight Eisenhower's | Harry Truman's | John F. Kennedy's | Franklin Roosevelt's
+H | Which state's capitol was the first to fly a state flag over a rebellion in 1861? | South Carolina | Virginia | Georgia | Alabama
+H | Which national park was the first in the world, founded in 1872? | Yellowstone | Yosemite | Sequoia | Acadia
+
+# --- More presidents ---
+
+E | Which president was in office when the Great Depression began? | Herbert Hoover | Franklin Roosevelt | Calvin Coolidge | Warren Harding
+E | Which president issued the order that ended slavery in rebel states? | Abraham Lincoln | Andrew Johnson | Ulysses Grant | James Buchanan
+E | Which president led the country during most of the Second World War? | Franklin Roosevelt | Harry Truman | Dwight Eisenhower | Woodrow Wilson
+E | Which president ordered the atomic bombings of Japan? | Harry Truman | Franklin Roosevelt | Dwight Eisenhower | Douglas MacArthur
+E | Which president had been a general in the Second World War? | Dwight Eisenhower | Harry Truman | John F. Kennedy | Lyndon Johnson
+E | Which president was a peanut farmer from Georgia? | Jimmy Carter | Bill Clinton | Lyndon Johnson | Harry Truman
+M | Which president succeeded Lincoln and was impeached? | Andrew Johnson | Ulysses Grant | Rutherford Hayes | James Buchanan
+M | Which president pardoned Richard Nixon? | Gerald Ford | Jimmy Carter | Ronald Reagan | Lyndon Johnson
+M | Which president took office after Kennedy's assassination? | Lyndon B. Johnson | Richard Nixon | Hubert Humphrey | Gerald Ford
+M | Which president said Speak softly and carry a big stick? | Theodore Roosevelt | Franklin Roosevelt | William Taft | Woodrow Wilson
+M | Which president pushed for the League of Nations? | Woodrow Wilson | Warren Harding | Theodore Roosevelt | Herbert Hoover
+M | Which president was in office when the Berlin Wall fell? | George H. W. Bush | Ronald Reagan | Bill Clinton | Jimmy Carter
+M | Which president's program was called the Great Society? | Lyndon B. Johnson | John F. Kennedy | Franklin Roosevelt | Harry Truman
+M | Which president's program was called the New Frontier? | John F. Kennedy | Lyndon Johnson | Franklin Roosevelt | Harry Truman
+M | Which president was a Rough Rider in Cuba before taking office? | Theodore Roosevelt | William McKinley | William Taft | Woodrow Wilson
+M | How many presidents have been assassinated in office? | Four | Two | Three | Five
+H | Which president was assassinated in 1881, months into his term? | James Garfield | William McKinley | Abraham Lincoln | Zachary Taylor
+H | Which president was assassinated in Buffalo in 1901? | William McKinley | James Garfield | Theodore Roosevelt | Grover Cleveland
+H | Which president signed the Panama Canal treaties in 1977? | Jimmy Carter | Richard Nixon | Gerald Ford | Ronald Reagan
+H | Which president oversaw the Louisiana Purchase's exploration and the embargo of 1807? | Thomas Jefferson | James Madison | John Adams | James Monroe
+H | Which president was in office during the War of 1812? | James Madison | Thomas Jefferson | James Monroe | John Quincy Adams
+H | Which president was the first born in the twentieth century? | John F. Kennedy | Richard Nixon | Lyndon Johnson | Dwight Eisenhower
+H | Which president had been a tailor before entering politics? | Andrew Johnson | Abraham Lincoln | Millard Fillmore | Andrew Jackson
+H | Which president was the only bachelor to serve a full term? | James Buchanan | Grover Cleveland | Chester Arthur | Franklin Pierce
+H | Which president appointed the first woman to the Supreme Court? | Ronald Reagan | Jimmy Carter | Gerald Ford | George H. W. Bush
+
+# --- Inventors, firsts and machines ---
+
+E | Who is credited with the first practical electric light bulb? | Thomas Edison | Nikola Tesla | Alexander Graham Bell | Michael Faraday
+E | Who is credited with inventing the telephone? | Alexander Graham Bell | Thomas Edison | Samuel Morse | Guglielmo Marconi
+E | Which brothers flew the first powered airplane? | The Wright brothers | The Montgolfier brothers | The Lumiere brothers | The Curtiss brothers
+E | In which state did the Wright brothers first fly? | North Carolina | Ohio | Virginia | Georgia
+E | Who was the first person in space? | Yuri Gagarin | Neil Armstrong | Alan Shepard | John Glenn
+E | Which country launched the first artificial satellite? | The Soviet Union | The United States | Britain | France
+E | Who founded the company that made the Model T? | Henry Ford | Ransom Olds | Walter Chrysler | Louis Chevrolet
+M | Who developed the telegraph and its code? | Samuel Morse | Alexander Graham Bell | Thomas Edison | Guglielmo Marconi
+M | Who invented the cotton gin in 1793? | Eli Whitney | Cyrus McCormick | John Deere | Robert Fulton
+M | Who built the first commercially successful steamboat? | Robert Fulton | James Watt | John Fitch | Cornelius Vanderbilt
+M | Who was the first woman in space? | Valentina Tereshkova | Sally Ride | Mae Jemison | Svetlana Savitskaya
+M | Who was the first American woman in space? | Sally Ride | Mae Jemison | Christa McAuliffe | Eileen Collins
+M | Which Scottish engineer improved the steam engine in the 1770s? | James Watt | Thomas Newcomen | George Stephenson | Richard Arkwright
+M | Which two scientists described the structure of DNA in 1953? | Watson and Crick | Mendel and Morgan | Pasteur and Koch | Darwin and Wallace
+M | Who discovered penicillin in 1928? | Alexander Fleming | Louis Pasteur | Jonas Salk | Robert Koch
+M | Who developed the first polio vaccine? | Jonas Salk | Alexander Fleming | Albert Sabin | Edward Jenner
+M | Which American inventor patented over a thousand devices at Menlo Park? | Thomas Edison | Nikola Tesla | George Westinghouse | Elisha Otis
+H | Which American scientist studied peanuts and soil at Tuskegee? | George Washington Carver | Booker T. Washington | Percy Julian | Charles Drew
+H | Who invented the mechanical reaper in 1831? | Cyrus McCormick | John Deere | Eli Whitney | Jethro Tull
+H | Who was the first American in space? | Alan Shepard | John Glenn | Gus Grissom | Neil Armstrong
+H | Which Apollo mission suffered an explosion but returned safely? | Apollo 13 | Apollo 11 | Apollo 1 | Apollo 8
+H | Which space shuttle broke apart shortly after launch in 1986? | Challenger | Columbia | Discovery | Atlantis
+H | Who developed the first practical assembly line for cars? | Henry Ford | Ransom Olds | Frederick Taylor | Alfred Sloan
+H | Which physicist led the Los Alamos laboratory during the war? | J. Robert Oppenheimer | Enrico Fermi | Niels Bohr | Leo Szilard
+H | Who invented dynamite and endowed a set of prizes? | Alfred Nobel | Alfred Krupp | Werner Siemens | Ernst Abbe
+
+# --- The world wars in more detail ---
+
+E | On which date did Japan attack Pearl Harbor? | December 7, 1941 | December 7, 1942 | November 11, 1941 | June 6, 1944
+E | Which city was struck by the first atomic bomb used in war? | Hiroshima | Nagasaki | Tokyo | Kyoto
+M | Which Japanese city was struck by the second atomic bomb? | Nagasaki | Hiroshima | Osaka | Kobe
+M | Which German air campaign against Britain failed in 1940? | The Battle of Britain | Operation Sea Lion | The Blitzkrieg | Operation Barbarossa
+M | Which code name was given to the German invasion of the Soviet Union? | Operation Barbarossa | Operation Overlord | Operation Torch | Operation Market Garden
+M | Which code name was given to the Normandy landings? | Operation Overlord | Operation Barbarossa | Operation Husky | Operation Dragoon
+M | Which general commanded Allied forces in Europe on D-Day? | Dwight Eisenhower | George Patton | Omar Bradley | Bernard Montgomery
+M | Which general famously returned to the Philippines in 1944? | Douglas MacArthur | Chester Nimitz | George Marshall | Mark Clark
+M | Which trench-bound front defined the First World War in France? | The Western Front | The Eastern Front | The Italian Front | The Balkan Front
+M | Which 1916 battle on the Somme cost Britain nearly sixty thousand men in a day? | The Battle of the Somme | Verdun | Passchendaele | Ypres
+M | Which 1944 German counterattack is called the Battle of the Bulge? | The Ardennes offensive | The Rhine crossing | The Falaise pocket | The Kasserine attack
+H | Which alliance did Germany, Austria-Hungary and Italy form before 1914? | The Triple Alliance | The Triple Entente | The Central Powers pact | The League of Three Emperors
+H | Which battle of 1916 was the largest naval clash of the First World War? | Jutland | Trafalgar | Coronel | Dogger Bank
+H | Which French fortress town held out through most of 1916? | Verdun | Sedan | Metz | Lille
+H | Which armistice ended the fighting of the First World War? | November 11, 1918 | June 28, 1919 | August 4, 1914 | May 7, 1915
+H | Which Japanese admiral planned the Pearl Harbor attack? | Isoroku Yamamoto | Chuichi Nagumo | Hideki Tojo | Tomoyuki Yamashita
+H | Which island battle of 1945 produced the famous flag-raising photograph? | Iwo Jima | Okinawa | Guadalcanal | Tarawa
+H | Which conference in 1943 first brought Roosevelt, Churchill and Stalin together? | Tehran | Yalta | Potsdam | Casablanca
+H | Which German field marshal was nicknamed the Desert Fox? | Erwin Rommel | Heinz Guderian | Gerd von Rundstedt | Friedrich Paulus
+H | Which country remained neutral through both world wars? | Switzerland | Belgium | Norway | Greece
+H | Which trials judged Nazi leaders after the war? | The Nuremberg trials | The Tokyo trials | The Hague trials | The Leipzig trials
+
+# --- Civil rights and American society ---
+
+E | Which movement sought equal rights for Black Americans in the 1950s and 1960s? | The civil rights movement | The suffrage movement | The temperance movement | The labor movement
+E | Which 1963 march ended at the Lincoln Memorial? | The March on Washington | The Selma march | The Poor People's March | The Silent Parade
+M | Which bridge in Selma was the site of Bloody Sunday in 1965? | The Edmund Pettus Bridge | The Tallahatchie Bridge | The Alabama River Bridge | The Montgomery Bridge
+M | Which sit-in movement began at a Woolworth counter in 1960? | Greensboro | Nashville | Atlanta | Jackson
+M | Which activist founded the National Farm Workers Association? | Cesar Chavez | Dolores Huerta | Luis Valdez | Reies Tijerina
+M | Which 1848 convention launched the American women's rights movement? | Seneca Falls | Niagara Falls | Rochester | Albany
+M | Which suffragist was arrested for voting in 1872? | Susan B. Anthony | Elizabeth Cady Stanton | Lucretia Mott | Alice Paul
+M | Which fire in 1911 spurred workplace safety laws in New York? | The Triangle Shirtwaist fire | The Iroquois Theater fire | The General Slocum fire | The Chicago fire
+M | Which island processed millions of immigrants arriving in New York? | Ellis Island | Angel Island | Governors Island | Liberty Island
+M | Which island in San Francisco Bay processed Pacific immigrants? | Angel Island | Alcatraz | Treasure Island | Yerba Buena
+H | Which organization did W. E. B. Du Bois help found in 1909? | The NAACP | The Urban League | SNCC | CORE
+H | Which 1967 ruling struck down bans on interracial marriage? | Loving v. Virginia | Brown v. Board | Griswold v. Connecticut | Bakke
+H | Which labor leader founded the United Farm Workers with Chavez? | Dolores Huerta | Rose Schneiderman | Mother Jones | Frances Perkins
+H | Which 1882 law barred a national group from immigrating? | The Chinese Exclusion Act | The Immigration Act of 1924 | The Alien Act | The Page Act
+H | Which order in 1942 sent Japanese Americans to internment camps? | Executive Order 9066 | Executive Order 8802 | The War Powers Act | The Smith Act
+H | Which first woman held a cabinet post, as Secretary of Labor? | Frances Perkins | Eleanor Roosevelt | Jeannette Rankin | Margaret Chase Smith
+H | Which woman was the first elected to Congress, in 1916? | Jeannette Rankin | Margaret Chase Smith | Shirley Chisholm | Hattie Caraway
+H | Which Black woman was the first elected to Congress, in 1968? | Shirley Chisholm | Barbara Jordan | Carol Moseley Braun | Maxine Waters
+H | Which strike of 1894 halted rail traffic across the country? | The Pullman Strike | The Homestead Strike | The Haymarket Strike | The Great Railroad Strike
+H | Which 1886 Chicago rally ended in a bombing and a labor trial? | Haymarket | Pullman | Homestead | Ludlow
+
+# --- More of the ancient and medieval world ---
+
+E | Which empire built roads and aqueducts across Europe? | The Roman Empire | The Greek Empire | The Persian Empire | The Egyptian Empire
+E | Which structure did the Egyptians build as royal tombs? | Pyramids | Ziggurats | Temples | Obelisks
+E | Which sea did Greek and Roman ships mostly sail? | The Mediterranean | The Baltic | The Black Sea | The Red Sea
+M | Which Mesopotamian towers were stepped temples? | Ziggurats | Pyramids | Pagodas | Stupas
+M | Which Athenian statesman expanded democracy in the fifth century BC? | Pericles | Solon | Cleisthenes | Themistocles
+M | Which Greek wrote the Iliad and the Odyssey? | Homer | Herodotus | Sophocles | Virgil
+M | Which Greek is called the father of history? | Herodotus | Thucydides | Plutarch | Xenophon
+M | Which Roman poet wrote the Aeneid? | Virgil | Ovid | Horace | Cicero
+M | Which war pitted Athens against Sparta? | The Peloponnesian War | The Persian Wars | The Trojan War | The Corinthian War
+M | Which Roman general crossed the Rubicon in 49 BC? | Julius Caesar | Pompey | Crassus | Sulla
+M | Which Chinese thinker taught duty and respect for elders? | Confucius | Laozi | Sun Tzu | Mencius
+M | Which Chinese general wrote The Art of War? | Sun Tzu | Confucius | Cao Cao | Zhuge Liang
+H | Which Byzantine emperor codified Roman law in the sixth century? | Justinian | Constantine | Basil II | Heraclius
+H | Which city was the capital of the Byzantine Empire? | Constantinople | Rome | Antioch | Alexandria
+H | Which Islamic dynasty ruled from Baghdad from 750? | The Abbasids | The Umayyads | The Fatimids | The Seljuks
+H | Which West African empire grew rich on gold and salt at Timbuktu? | Mali | Kush | Zimbabwe | Songhai
+H | Which Malian ruler made a famously lavish pilgrimage in 1324? | Mansa Musa | Sundiata | Askia Muhammad | Sunni Ali
+H | Which Japanese warrior class served the shoguns? | The samurai | The ronin | The daimyo | The ninja
+H | Which title did Japan's military rulers hold from 1192? | Shogun | Emperor | Daimyo | Regent
+H | Which survey of England was compiled in 1086? | The Domesday Book | Magna Carta | The Anglo-Saxon Chronicle | The Bayeux Tapestry
+H | Which embroidery tells the story of the Norman conquest? | The Bayeux Tapestry | The Cluny Tapestry | The Unicorn Tapestry | The Overlord Embroidery
+H | Which order of knights was dissolved in 1312? | The Knights Templar | The Hospitallers | The Teutonic Knights | The Knights of Malta
+H | Which Italian traveler described the court of Kublai Khan? | Marco Polo | Ibn Battuta | John Mandeville | Giovanni Carpini
+H | Which Moroccan traveler journeyed farther than Marco Polo? | Ibn Battuta | Al-Idrisi | Al-Biruni | Ibn Khaldun
+
+# --- More of the modern world ---
+
+E | Which country was ruled by Queen Victoria for over sixty years? | Britain | France | Spain | Russia
+E | Which two cities were the capitals of a divided Germany after 1949? | Bonn and East Berlin | Berlin and Munich | Hamburg and Dresden | Frankfurt and Leipzig
+E | Which canal opened in Egypt in 1869? | The Suez Canal | The Panama Canal | The Corinth Canal | The Kiel Canal
+M | Which century saw the Industrial Revolution begin in Britain? | The eighteenth | The sixteenth | The nineteenth | The seventeenth
+M | Which French king was executed in 1793? | Louis XVI | Louis XIV | Louis XV | Charles X
+M | Which document of 1789 proclaimed the rights of man in France? | The Declaration of the Rights of Man | The Civil Code | The Constitution of 1791 | The Tennis Court Oath
+M | Which Italian led the volunteers who helped unify Italy? | Giuseppe Garibaldi | Camillo Cavour | Victor Emmanuel | Giuseppe Mazzini
+M | Which German chancellor unified Germany in 1871? | Otto von Bismarck | Wilhelm I | Friedrich Ebert | Paul von Hindenburg
+M | Which 1917 declaration backed a Jewish homeland in Palestine? | The Balfour Declaration | The Sykes-Picot Agreement | The San Remo Resolution | The Hussein-McMahon letters
+M | Which country did the Soviet Union invade in 1979? | Afghanistan | Iran | Pakistan | Turkey
+M | Which two countries were partitioned from British India in 1947? | India and Pakistan | India and Bangladesh | Pakistan and Ceylon | India and Burma
+M | Which conflict split Korea along the 38th parallel? | The Korean War | The Sino-Japanese War | The Pacific War | The Manchurian crisis
+H | Which 1839 war forced China to open ports to British trade? | The First Opium War | The Boxer Rebellion | The Taiping Rebellion | The Sino-French War
+H | Which 1900 uprising in China targeted foreigners? | The Boxer Rebellion | The Taiping Rebellion | The White Lotus Rebellion | The Xinhai Revolution
+H | Which 1868 restoration ended the shogunate in Japan? | The Meiji Restoration | The Taisho Restoration | The Tokugawa Restoration | The Kenmu Restoration
+H | Which European conference of 1884 carved up Africa? | The Berlin Conference | The Congress of Vienna | The Congress of Berlin | The Hague Conference
+H | Which South African wars pitted Britain against Dutch settlers? | The Boer Wars | The Zulu Wars | The Ashanti Wars | The Mahdist Wars
+H | Which Mexican revolutionary led armies in the north after 1910? | Pancho Villa | Emiliano Zapata | Venustiano Carranza | Porfirio Diaz
+H | Which Mexican revolutionary demanded land and liberty in the south? | Emiliano Zapata | Pancho Villa | Francisco Madero | Alvaro Obregon
+H | Which liberator freed much of northern South America from Spain? | Simon Bolivar | Jose de San Martin | Bernardo O'Higgins | Antonio Sucre
+H | Which general freed Argentina and Chile from Spanish rule? | Jose de San Martin | Simon Bolivar | Miguel Hidalgo | Toussaint Louverture
+H | Which Caribbean colony won independence through a slave revolt in 1804? | Haiti | Cuba | Jamaica | Puerto Rico
+H | Which 1955 pact answered NATO in eastern Europe? | The Warsaw Pact | The Comecon Treaty | The Molotov Pact | The Brest Accord
+H | Which 1956 uprising against Soviet rule was crushed in Budapest? | The Hungarian Uprising | The Prague Spring | The Solidarity strikes | The Poznan revolt
+H | Which 1968 reform movement in Czechoslovakia was crushed by tanks? | The Prague Spring | The Velvet Revolution | The Hungarian Uprising | Solidarity
+
+# --- A last handful, for openers ---
+
+E | In which century was the American Civil War fought? | The nineteenth | The eighteenth | The twentieth | The seventeenth
+E | Who led Germany during the Second World War? | Adolf Hitler | Otto von Bismarck | Kaiser Wilhelm | Konrad Adenauer
+E | Who led the Soviet Union during the Second World War? | Joseph Stalin | Vladimir Lenin | Nikita Khrushchev | Leon Trotsky
+E | Which Italian dictator allied himself with Hitler? | Benito Mussolini | Francisco Franco | Antonio Salazar | Victor Emmanuel
+E | Which US president was nicknamed Honest Abe? | Abraham Lincoln | Andrew Jackson | Ulysses Grant | Theodore Roosevelt
+E | Which amendment protects freedom of speech? | The First | The Second | The Fifth | The Tenth
+E | Which liner struck an iceberg and sank in 1912? | The Titanic | The Lusitania | The Britannic | The Andrea Doria
+E | Which decade is called the Roaring Twenties? | The 1920s | The 1910s | The 1930s | The 1950s
+E | Which dust storms battered the Great Plains in the 1930s? | The Dust Bowl | The Great Blizzard | The Long Drought | The Sand Winds
+E | What did Prohibition ban? | Alcohol | Tobacco | Gambling | Firearms
+E | Which country did Napoleon rule? | France | Italy | Spain | Austria
+E | Which king ruled Britain during the American Revolution? | George III | George II | William IV | Charles II
+E | Which English queen reigned in Shakespeare's day? | Elizabeth I | Victoria | Mary I | Anne
+E | Which network helped enslaved people escape north? | The Underground Railroad | The Freedom Trail | The Liberty Line | The Northern Road
+E | Which people reached North America centuries before Columbus? | The Vikings | The Romans | The Phoenicians | The Moors
+E | Which explorer gave his name to two continents? | Amerigo Vespucci | Christopher Columbus | John Cabot | Leif Erikson
+E | Which ancient wonder of the world still stands today? | The Great Pyramid of Giza | The Hanging Gardens | The Colossus of Rhodes | The Lighthouse of Alexandria
+E | How many wonders of the ancient world were traditionally listed? | Seven | Five | Ten | Twelve
+E | In which country were the first modern Olympic Games held? | Greece | France | Britain | Italy
+E | In which year were the first modern Olympic Games held? | 1896 | 1900 | 1888 | 1912
+E | Which empire built the Colosseum? | The Roman Empire | The Greek Empire | The Byzantine Empire | The Ottoman Empire
+E | Which war did the United States fight against Britain starting in 1812? | The War of 1812 | The Revolutionary War | The French and Indian War | The Barbary War
+E | Which great fire destroyed much of a European capital in 1666? | The Great Fire of London | The Paris fire | The Rome fire | The Lisbon fire
+E | Which American city burned in a great fire in 1871? | Chicago | Boston | San Francisco | Baltimore
+E | Which earthquake and fire devastated an American city in 1906? | San Francisco | Los Angeles | Seattle | Portland
+E | Which conflict is also called the War Between the States? | The Civil War | The Revolutionary War | The War of 1812 | The Mexican War
+E | Which state was the Alamo fought over? | Texas | New Mexico | California | Arizona

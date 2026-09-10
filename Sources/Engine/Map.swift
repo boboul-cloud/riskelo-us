@@ -1,15 +1,15 @@
 //
 //  Map.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Le territoire, le continent, et ce qui touche quoi.
+//  The territory, the continent, and what touches what.
 //
-//  Deux choses sont séparées ici, et il faut qu'elles le restent : la carte
-//  au sens des règles — qui est voisin de qui, quel continent vaut combien —
-//  et le dessin du plateau. La première décide des coups permis ; la seconde
-//  n'est qu'une façon de la montrer. Le plateau d'essai est un damier
-//  d'hexagones ; le jour où une vraie carte du monde le remplacera, seule la
-//  seconde partie changera.
+//  Two things are kept apart here, and they must stay apart: the map in the
+//  sense of the rules — who neighbors whom, which continent is worth what —
+//  and the drawing of the board. The first decides which moves are legal;
+//  the second is only a way of showing it. The test board is a checkerboard
+//  of hexagons; the day a real world map replaces it, only the second half
+//  will change.
 //
 
 import Foundation
@@ -18,8 +18,8 @@ typealias TerritoryID = String
 typealias ContinentID = String
 typealias PlayerID = Int
 
-/// Un point du plateau, en coordonnées normalisées 0…1. Ni CGPoint ni SwiftUI :
-/// le moteur doit pouvoir tourner seul, hors de toute application.
+/// A point on the board, in normalized 0…1 coordinates. Neither CGPoint nor
+/// SwiftUI: the engine has to run on its own, outside any application.
 struct Point: Hashable, Codable {
     var x: Double
     var y: Double
@@ -29,29 +29,28 @@ struct Territory: Identifiable, Hashable {
     let id: TerritoryID
     let name: String
     let continent: ContinentID
-    /// Les territoires attaquables depuis celui-ci, et réciproquement.
+    /// The territories that can be attacked from this one, and vice versa.
     var neighbors: [TerritoryID]
 }
 
 struct Continent: Identifiable, Hashable {
     let id: ContinentID
     let name: String
-    /// Renfort supplémentaire par tour, pour qui le tient en entier.
+    /// Extra reinforcement per turn, for whoever holds it whole.
     let bonus: Int
     let territories: [TerritoryID]
-    /// Son rang sur le plateau, d'où la vue tire sa teinte. La couleur était
-    /// auparavant accrochée à la lettre du plan — cinq lettres connues, et
-    /// tous les continents d'un nouveau plateau se retrouvaient de la même
-    /// couleur.
+    /// Its rank on the board, which is where the view takes its tint from.
+    /// The color used to hang off the letter in the plan — five known
+    /// letters, and every continent on a new board came out the same color.
     let tint: Int
 }
 
-/// La carte au sens des règles.
+/// The map in the sense of the rules.
 struct GameMap {
     private(set) var territories: [TerritoryID: Territory]
     private(set) var continents: [ContinentID: Continent]
-    /// Ordre de parcours stable : un dictionnaire n'en a pas, et une partie
-    /// rejouée doit distribuer les territoires dans le même ordre.
+    /// A stable traversal order: a dictionary has none, and a replayed game
+    /// must deal out territories in the same order.
     private(set) var order: [TerritoryID]
 
     init(territories: [Territory], continents: [Continent]) {
@@ -72,13 +71,13 @@ struct GameMap {
         continents.values.sorted { $0.tint < $1.tint }
     }
 
-    /// Le rang du continent auquel appartient ce territoire.
+    /// The rank of the continent this territory belongs to.
     func tint(of id: TerritoryID) -> Int {
         territories[id].flatMap { continents[$0.continent]?.tint } ?? 0
     }
 
-    /// Toute la carte se tient-elle d'un seul tenant ? Un territoire isolé
-    /// serait imprenable, et la partie ne pourrait plus finir.
+    /// Does the whole map hold together in one piece? An isolated territory
+    /// would be unassailable, and the game could never end.
     var isConnected: Bool {
         guard let start = order.first else { return false }
         var seen: Set<TerritoryID> = [start]
@@ -92,9 +91,9 @@ struct GameMap {
         return seen.count == territories.count
     }
 
-    /// Les liens qui franchissent une frontière de continent. C'est par là que
-    /// passe toute la tension du plateau : trop nombreux, aucun continent ne se
-    /// défend ; trop rares, la partie s'enlise.
+    /// The links that cross a continental border. All the tension of the
+    /// board runs through them: too many and no continent can be defended;
+    /// too few and the game bogs down.
     var continentalGateways: [(TerritoryID, TerritoryID)] {
         var seen = Set<String>()
         var links: [(TerritoryID, TerritoryID)] = []
@@ -110,49 +109,47 @@ struct GameMap {
     }
 }
 
-/// Une traversée : deux territoires que la mer sépare et qu'une route relie.
+/// A crossing: two territories separated by sea and joined by a route.
 ///
-/// Sur un damier d'hexagones, seules les cases qui se touchent sont voisines.
-/// C'est ce qui met les voisinages à l'abri de la faute — mais cela interdit
-/// les îles et les détroits, donc toute carte qui ressemble au monde. Les
-/// traversées sont donc déclarées à la main, une poignée par plateau, et les
-/// tests vérifient qu'elles sont réciproques et qu'elles mènent quelque part.
-/// C'est ainsi que le Risk d'origine procède : Alaska–Kamtchatka,
-/// Brésil–Afrique du Nord.
+/// On a checkerboard of hexagons, only cells that touch are neighbors. That
+/// is what keeps adjacency safe from mistakes — but it rules out islands and
+/// straits, and therefore any map that looks like the world. Crossings are
+/// declared by hand instead, a handful per board, and the tests check that
+/// they are reciprocal and that they lead somewhere. This is how the
+/// original Risk does it: Alaska–Kamchatka, Brazil–North Africa.
 struct SeaRoute: Hashable {
     let from: TerritoryID
     let to: TerritoryID
 }
 
-/// Où poser chaque territoire à l'écran. Pure présentation.
+/// Where to place each territory on screen. Pure presentation.
 struct BoardLayout {
-    /// Centre de chaque territoire, en 0…1.
+    /// Center of each territory, in 0…1.
     var centers: [TerritoryID: Point]
-    /// Rayon du cercle circonscrit d'une case, dans les mêmes unités.
+    /// Circumradius of a cell, in the same units.
     var cellRadius: Double
-    /// Hauteur du plateau rapportée à sa largeur. Les centres sont normalisés
-    /// sur x seul : mettre x et y chacun sur 0…1 écraserait les hexagones dès
-    /// que la carte n'est pas carrée. C'est à la vue de réserver la bonne
-    /// hauteur, pas au plateau de se déformer.
+    /// Board height relative to its width. Centers are normalized on x
+    /// alone: putting both x and y on 0…1 would squash the hexagons as soon
+    /// as the map is not square. Reserving the right height is the view's
+    /// job, not something the board should distort itself for.
     var aspect: Double
-    /// Les arêtes de chaque case qui donnent sur un autre continent ou sur la
-    /// mer — celles qui font la frontière. Numérotées comme les sommets :
-    /// l'arête `k` joint le sommet `k` au suivant.
+    /// The edges of each cell that face another continent or the sea — the
+    /// ones that make the border. Numbered like the vertices: edge `k` joins
+    /// vertex `k` to the next.
     ///
-    /// Sans elles, un continent est invisible : les cases portent la couleur
-    /// de celui qui les tient, pas celle de la terre à laquelle elles
-    /// appartiennent, et le joueur ne peut pas voir ce qu'il lui reste à
-    /// prendre pour toucher le bonus.
+    /// Without them a continent is invisible: cells carry the color of
+    /// whoever holds them, not that of the land they belong to, and a player
+    /// cannot see what is left to take to earn the bonus.
     var frontierEdges: [TerritoryID: Set<Int>] = [:]
 
-    /// Les traversées, pour les tracer : une liaison qu'on ne voit pas est
-    /// une liaison qui n'existe pas, du point de vue du joueur.
+    /// The crossings, so they can be drawn: a link you cannot see is a link
+    /// that does not exist, from the player's point of view.
     var seaRoutes: [SeaRoute] = []
 
-    /// Sommets de la case, prêts à tracer.
+    /// The cell's vertices, ready to draw.
     func corners(of id: TerritoryID) -> [Point] {
         guard let c = centers[id] else { return [] }
-        // Hexagone « pointe en haut » : le premier sommet est plein nord.
+        // A "pointy-top" hexagon: the first vertex is due north.
         return (0..<6).map { i -> Point in
             let angle = Double(i) * .pi / 3 - .pi / 2
             return Point(x: c.x + cellRadius * cos(angle),
@@ -161,7 +158,7 @@ struct BoardLayout {
     }
 }
 
-/// Une carte et son dessin, livrés ensemble.
+/// A map and its drawing, delivered together.
 struct Board {
     var map: GameMap
     var layout: BoardLayout

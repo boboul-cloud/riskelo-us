@@ -1,57 +1,60 @@
-name: Riskelo
+name: RiskeloUS
 options:
   bundleIdPrefix: com.oulhen
   deploymentTarget:
     iOS: "17.0"
     macOS: "14.0"
   createIntermediateGroups: true
-  developmentLanguage: fr
+  developmentLanguage: en
 
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    # Le numéro qu'on lit sur l'App Store, et celui qui compte les envois.
-    # Le premier ne bouge qu'à une vraie version ; le second monte à chaque
-    # dépôt sur App Store Connect, qui refuse deux fois le même.
-    MARKETING_VERSION: "1.3"
-    CURRENT_PROJECT_VERSION: "6"
-    # Posée ici et non dans Xcode : « xcodegen generate » réécrit le projet,
-    # et une équipe renseignée à la main disparaîtrait à la régénération.
+    # The number people read on the App Store, and the one that counts
+    # uploads. The first moves only on a real release; the second climbs with
+    # every submission to App Store Connect, which refuses the same one twice.
+    #
+    # This is a new app record, not an update to the French one: it starts
+    # over at 1.0 / 1, whatever version the original has reached.
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    # Set here rather than in Xcode: "xcodegen generate" rewrites the project,
+    # and a team filled in by hand would vanish on the next regeneration.
     DEVELOPMENT_TEAM: 38DQ8FW23J
     CODE_SIGN_STYLE: Automatic
 
 targets:
-  Riskelo:
+  RiskeloUS:
     type: application
-    # Une seule cible pour les trois machines : le plateau est dessiné en
-    # coordonnées relatives, il n'a pas d'opinion sur la taille de l'écran.
+    # One target for all three machines: the board is drawn in relative
+    # coordinates, it has no opinion about screen size.
     supportedDestinations: [iOS, macOS]
     sources:
       - path: Sources
-      # Les questions sont des ressources et non du code : mille lignes de
-      # texte n'ont rien à faire dans un fichier Swift.
+      # Questions are resources, not code: a thousand lines of text have no
+      # business inside a Swift file.
       - path: Resources/Questions
-      # Le faux App Store, visible dans Xcode pour qu'on puisse en changer les
-      # prix — mais hors de toute phase de construction : il ne part pas dans
-      # le paquet, et n'a rien à y faire.
-      - path: Resources/Riskelo.storekit
+      # The fake App Store, visible in Xcode so prices can be changed — but
+      # kept out of every build phase: it does not ship inside the bundle,
+      # and has nothing to do there.
+      - path: Resources/RiskeloUS.storekit
         buildPhase: none
     info:
       path: Resources/Info.plist
       properties:
-        CFBundleDisplayName: Riskelo
-        # Les deux numéros renvoient aux réglages plus haut plutôt que d'être
-        # recopiés ici. XcodeGen réécrit ce plist, et ses valeurs par défaut
-        # sont « 1.0 » et « 1 » : sans ces deux lignes, monter le build dans
-        # les réglages ne changeait rien à ce que l'App Store recevait.
+        CFBundleDisplayName: Riskelo US
+        # Both numbers point back to the settings above rather than being
+        # copied here. XcodeGen rewrites this plist, and its defaults are
+        # "1.0" and "1": without these two lines, raising the build in the
+        # settings would change nothing in what the App Store received.
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
-        # Aucun chiffrement propre : la déclaration est posée ici une fois
-        # pour toutes plutôt que répondue à la main à chaque envoi.
+        # No encryption of our own: the declaration sits here once and for
+        # all rather than being answered by hand at every upload.
         ITSAppUsesNonExemptEncryption: false
         UIApplicationSupportsIndirectInputEvents: true
         UILaunchScreen: {}
-        # Un plateau se regarde dans les deux sens, sur les trois machines.
+        # A board is looked at both ways up, on all three machines.
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationLandscapeLeft
@@ -61,72 +64,79 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
-        # Le jeu à deux appareils passe par le réseau local. Sans ces deux
-        # entrées, le système le refuse en silence : les appareils ne se
-        # voient jamais et rien n'explique pourquoi.
+        # Two-device play goes over the local network. Without these two
+        # entries the system refuses it in silence: the devices never see
+        # each other and nothing explains why.
+        #
+        # The service name is "riskelo-us", not the French app's
+        # "riskelo-jeu" — deliberately. The two apps ship different question
+        # packs, so a French device and an American one must not find each
+        # other and sit down to a table they cannot both play.
         NSLocalNetworkUsageDescription: >-
-          Riskelo s'en sert pour trouver l'autre appareil et jouer la partie à deux.
+          Riskelo US uses it to find the other device and play a two-player game.
         NSBonjourServices:
-          - _riskelo-jeu._tcp
-          - _riskelo-jeu._udp
+          - _riskelo-us._tcp
+          - _riskelo-us._udp
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.riskelo
-        PRODUCT_NAME: Riskelo
+        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.riskelo.us
+        # No space in the product name — that is the executable's name. The
+        # space belongs in CFBundleDisplayName above, which is what people
+        # read under the icon.
+        PRODUCT_NAME: RiskeloUS
         GENERATE_INFOPLIST_FILE: NO
         ENABLE_PREVIEWS: YES
-        # L'icône est engendrée par « outils/icone.swift » — les onze images du
-        # catalogue ne sont pas retouchées à la main, elles se refont.
+        # The icon is generated by "outils/icone.swift" — the eleven images
+        # in the catalogue are not retouched by hand, they are remade.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         TARGETED_DEVICE_FAMILY: "1,2"
-        # Le bac à sable, pour le Mac seulement — iOS l'a déjà d'office, et
-        # ces clés-là n'y ont pas cours. Sans ce fichier, le Mac App Store
-        # refuse le dépôt ; avec lui mais sans ses deux clés de réseau, la
-        # liaison entre appareils se tairait. Voir
+        # The sandbox, for the Mac only — iOS already has it by default, and
+        # these keys do not apply there. Without this file the Mac App Store
+        # refuses the upload; with it but without its two network keys, the
+        # link between devices would go quiet. See
         # soumission/FICHE-DE-SOUMISSION.md, section 9.
-        CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: Resources/Riskelo-mac.entitlements
+        CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: Resources/RiskeloUS-mac.entitlements
 
-  RiskeloTests:
+  RiskeloUSTests:
     type: bundle.unit-test
     supportedDestinations: [iOS, macOS]
     sources:
       - path: Tests
     dependencies:
-      - target: Riskelo
+      - target: RiskeloUS
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.riskelo.tests
+        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.riskelo.us.tests
         GENERATE_INFOPLIST_FILE: YES
-      # Une cible pour deux systèmes, mais un paquet d'application n'a pas la
-      # même forme sur les deux : l'exécutable est à la racine sur iOS, dans
-      # « Contents/MacOS » sur Mac. Le chemin engendré est celui d'iOS, et les
-      # tests ne se lançaient donc jamais sur Mac — la seule machine où on
-      # puisse les lancer sans simulateur.
+      # One target for two systems, but an app bundle is not shaped the same
+      # on both: the executable sits at the root on iOS, under
+      # "Contents/MacOS" on the Mac. The generated path is the iOS one, so
+      # the tests never ran on the Mac — the one machine where they can run
+      # without a simulator.
       configs:
         Debug:
-          TEST_HOST[sdk=macosx*]: "$(BUILT_PRODUCTS_DIR)/Riskelo.app/Contents/MacOS/Riskelo"
+          TEST_HOST[sdk=macosx*]: "$(BUILT_PRODUCTS_DIR)/RiskeloUS.app/Contents/MacOS/RiskeloUS"
           BUNDLE_LOADER[sdk=macosx*]: "$(TEST_HOST)"
         Release:
-          TEST_HOST[sdk=macosx*]: "$(BUILT_PRODUCTS_DIR)/Riskelo.app/Contents/MacOS/Riskelo"
+          TEST_HOST[sdk=macosx*]: "$(BUILT_PRODUCTS_DIR)/RiskeloUS.app/Contents/MacOS/RiskeloUS"
           BUNDLE_LOADER[sdk=macosx*]: "$(TEST_HOST)"
 
 schemes:
-  Riskelo:
+  RiskeloUS:
     build:
       targets:
-        Riskelo: all
-        RiskeloTests: [test]
-    # L'App Store de bureau, attaché au schéma : on essaie les achats sans rien
-    # créer chez Apple, et rien n'est facturé.
+        RiskeloUS: all
+        RiskeloUSTests: [test]
+    # The desktop App Store, attached to the scheme: purchases can be tried
+    # without creating anything at Apple, and nothing is charged.
     #
-    # Le chemin est compté depuis « Riskelo.xcodeproj/xcshareddata », et non
-    # depuis le dossier des schémas : deux niveaux au-dessus, et l'on est à la
-    # racine du projet. XcodeGen ajoute ces deux niveaux lui-même, il ne faut
-    # donc rien mettre devant.
+    # The path is counted from "RiskeloUS.xcodeproj/xcshareddata", not from
+    # the schemes folder: two levels up and you are at the project root.
+    # XcodeGen adds those two levels itself, so nothing goes in front.
     #
-    # Un « ../ » de trop et Xcode cherche le fichier sur le Bureau, un cran
-    # au-dessus du projet — c'est ce qu'il disait mot pour mot.
+    # One "../" too many and Xcode looks for the file on the Desktop, one
+    # notch above the project — which is what it said, word for word.
     run:
-      storeKitConfiguration: Resources/Riskelo.storekit
+      storeKitConfiguration: Resources/RiskeloUS.storekit
     test:
-      targets: [RiskeloTests]
+      targets: [RiskeloUSTests]

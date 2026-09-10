@@ -1,197 +1,203 @@
 //
 //  Bot.swift
-//  Riskelo
+//  Riskelo US
 //
-//  L'adversaire de la machine.
+//  The machine opponent.
 //
-//  Il sert à deux choses : jouer seul, et surtout faire tourner mille parties
-//  en une seconde pour voir si la règle tient. Ses décisions sont donc des
-//  fonctions pures de l'état — aucune mémoire cachée, rien qui ne se rejoue.
+//  It serves two purposes: playing solo, and above all running a thousand
+//  games in a second to see whether a rule holds. Its decisions are therefore
+//  pure functions of the state — no hidden memory, nothing that fails to
+//  replay.
 //
-//  Sa « culture » est un nombre : la part de bonnes réponses qu'il donne sur
-//  une question moyenne, dans le temps plein. Le siège le presse comme il
-//  presserait un humain — moins de temps, moins de bonnes réponses.
+//  Its "knowledge" is a number: the share of correct answers it gives on an
+//  average question, at full time. The siege presses it as it would press a
+//  human — less time, fewer correct answers.
 //
 
 import Foundation
 
 enum Bot {
 
-    /// Comment la machine manœuvre. Rien à voir avec sa culture : on peut être
-    /// savant et jouer mal.
+    /// How the machine maneuvers. Nothing to do with its knowledge: you can
+    /// be learned and play badly.
     ///
-    /// Les trois niveaux se cumulent, chacun ajoutant un acquis au précédent —
-    /// et chacun a été mesuré contre celui d'en dessous, sans quoi ce ne
-    /// seraient que trois noms.
+    /// The three levels stack, each adding one skill to the one before — and
+    /// each was measured against the level below, or they would be nothing
+    /// but three names.
     enum Style: String, Equatable, Codable, CaseIterable {
-        /// Gourmande. Elle avance d'un pas sur toute cible où elle a un homme
-        /// de plus, et laisse le minimum derrière elle — d'où les garnisons
-        /// d'un homme semées en terre ennemie.
-        case facile
-        /// Elle tient ce qu'elle prend : après une conquête, elle laisse à sa
-        /// base ce qu'il lui faut et fait avancer tout le reste. Pour le
-        /// reste elle garde l'allant de la facile — et c'est voulu : la
-        /// prudence sans la concentration est **pire que rien**. Mesurée, une
-        /// machine qui retenait ses piles sans savoir où les porter perdait
-        /// quatre parties sur cinq contre la gourmande.
-        case moyenne
-        /// Elle joue au Risk : elle concentre ses renforts sur une seule
-        /// pointe, vise le continent le plus proche d'être complet, cherche à
-        /// briser celui de l'adversaire — et elle exploite le sablier, qui est
-        /// la particularité de ce jeu-ci : une place déjà pressée dans le tour
-        /// répond dans un temps plus court, donc on l'achève plutôt que d'en
-        /// ouvrir une autre.
-        case forte
+        /// Greedy. It steps forward onto any target where it has one troop
+        /// more, and leaves the minimum behind — hence the one-troop
+        /// garrisons scattered through enemy land.
+        case easy
+        /// It holds what it takes: after a conquest it leaves its base what
+        /// it needs and moves everything else forward. For the rest it keeps
+        /// the dash of the easy level — and that is deliberate: caution
+        /// without concentration is **worse than nothing**. Measured, a
+        /// machine that held its stacks back without knowing where to carry
+        /// them lost four games out of five against the greedy one.
+        case medium
+        /// It plays Risk: it concentrates its reinforcements on a single
+        /// spearhead, aims at the continent closest to complete, tries to
+        /// break the opponent's — and it exploits the clock, which is what is
+        /// peculiar to this game: a place already pressed this turn answers
+        /// in a shorter time, so you finish it off rather than open another.
+        case strong
 
         var label: String {
             switch self {
-            case .facile:  "Facile"
-            case .moyenne: "Moyenne"
-            case .forte:   "Forte"
+            case .easy:   "Easy"
+            case .medium: "Medium"
+            case .strong: "Strong"
             }
         }
 
         var detail: String {
             switch self {
-            case .facile:
-                "Elle avance au hasard et sème des garnisons d'un homme."
-            case .moyenne:
-                "Elle tient ce qu'elle prend et cherche vos points faibles."
-            case .forte:
-                "Elle concentre, vise un continent, et sait où vous frapper."
+            case .easy:
+                "It advances at random and scatters one-troop garrisons."
+            case .medium:
+                "It holds what it takes and looks for your weak spots."
+            case .strong:
+                "It concentrates, aims at a continent, and knows where to hit you."
             }
         }
 
-        /// Laisse-t-elle à sa base de quoi tenir, au lieu du strict minimum ?
-        var garnisonne: Bool { self != .facile }
-        /// Retient-elle ses piles épuisées ? Cette discipline ne paie qu'avec
-        /// la concentration : seule, elle rend la machine passive.
-        var retientSesPiles: Bool { self == .forte }
-        /// Verse-t-elle ses renforts sur une seule pointe ?
-        var concentre: Bool { self == .forte }
-        /// Vise-t-elle un continent, et cherche-t-elle à briser celui d'en face ?
-        var viseUnContinent: Bool { self == .forte }
-        /// Achève-t-elle une place déjà entamée plutôt que d'en ouvrir une
-        /// autre ? C'est la stratégie propre à ce jeu : le sablier du
-        /// défenseur se resserre à chaque question subie dans le tour.
-        var exploiteLeSablier: Bool { self == .forte }
+        /// Does it leave its base enough to hold, instead of the bare
+        /// minimum?
+        var garrisons: Bool { self != .easy }
+        /// Does it hold back its spent stacks? This discipline only pays with
+        /// concentration: on its own it makes the machine passive.
+        var holdsBackStacks: Bool { self == .strong }
+        /// Does it pour its reinforcements onto a single spearhead?
+        var concentrates: Bool { self == .strong }
+        /// Does it aim at a continent, and try to break the one across the
+        /// table?
+        var aimsForContinent: Bool { self == .strong }
+        /// Does it finish off a place already broken into rather than open
+        /// another? This is the strategy peculiar to this game: the
+        /// defender's clock tightens with every question faced within the
+        /// turn.
+        var exploitsTheClock: Bool { self == .strong }
 
-        /// Combien elle vise les faiblesses de l'adversaire en choisissant le
-        /// terrain de la question.
+        /// How far it aims at the opponent's weaknesses when choosing the
+        /// ground for the question.
         ///
-        /// C'est le levier décisif, et il a fallu le mesurer pour le voir : la
-        /// manœuvre ne départage les machines que sur un grand plateau, parce
-        /// qu'ailleurs la partie se règle en sept tours et que **c'est le quiz
-        /// qui décide**. Choisir le terrain est la seule adresse de
-        /// l'attaquant dans cette variante, et elle pèse sur chaque duel.
-        /// Zéro : elle tire au hasard sans regarder le dossier.
+        /// This is the decisive lever, and it took measuring to see it:
+        /// maneuvering only separates the machines on a large board, because
+        /// anywhere else the game settles in seven turns and **the quiz is
+        /// what decides**. Choosing the ground is the attacker's only skill
+        /// in this variant, and it weighs on every duel. Zero: it draws at
+        /// random without looking at the file.
         var flair: Double {
             switch self {
-            case .facile:  0
-            case .moyenne: 1.2
-            case .forte:   3.0
+            case .easy:   0
+            case .medium: 1.2
+            case .strong: 3.0
             }
         }
     }
 
-    // MARK: - Ce que la machine regarde
+    // MARK: - What the machine looks at
 
-    /// Ce qui presse une place : les hommes ennemis qui la touchent.
-    static func menace(_ g: GameState, _ id: TerritoryID) -> Int {
+    /// What presses a place: the enemy troops touching it.
+    static func threat(_ g: GameState, _ id: TerritoryID) -> Int {
         g.map.neighbors(of: id)
             .filter { g.owner[$0] != g.owner[id] }
             .reduce(0) { $0 + g.armies($1) }
     }
 
-    /// Ce qu'une place permet : le meilleur surnombre disponible depuis elle.
-    /// C'est la mesure d'une pointe d'attaque.
-    static func potentiel(_ g: GameState, _ id: TerritoryID) -> Int {
+    /// What a place makes possible: the best available advantage from it.
+    /// This is the measure of an attacking spearhead.
+    static func potential(_ g: GameState, _ id: TerritoryID) -> Int {
         g.targets(from: id).map { g.armies(id) - 1 - g.armies($0) }.max() ?? -99
     }
 
-    /// Le continent visé : le plus proche d'être complet, à bonus égal le plus
-    /// gros. Un continent déjà tenu reste l'objectif — le défendre vaut ce
-    /// qu'il rapporte.
-    static func continentVise(_ g: GameState, _ joueur: PlayerID) -> Continent? {
-        var meilleur: Continent?
-        var manquantsMin = Int.max
+    /// The continent aimed at: the one closest to complete, and at equal
+    /// bonus the largest. A continent already held stays the objective —
+    /// defending it is worth what it pays.
+    static func targetContinent(_ g: GameState, _ player: PlayerID) -> Continent? {
+        var best: Continent?
+        var fewestMissing = Int.max
         for c in g.map.continentsInOrder {
-            var manquants = 0
-            for id in c.territories where g.owner[id] != joueur { manquants += 1 }
-            if manquants < manquantsMin
-                || (manquants == manquantsMin && c.bonus > (meilleur?.bonus ?? 0)) {
-                manquantsMin = manquants
-                meilleur = c
+            var missing = 0
+            for id in c.territories where g.owner[id] != player { missing += 1 }
+            if missing < fewestMissing
+                || (missing == fewestMissing && c.bonus > (best?.bonus ?? 0)) {
+                fewestMissing = missing
+                best = c
             }
         }
-        return meilleur
+        return best
     }
 
-    /// La garnison qu'une place doit garder pour n'être pas reprise au
-    /// premier assaut. C'est tout le défaut de l'adversaire gourmand : il
-    /// laissait un homme et perdait la place au tour suivant.
-    static func garnison(_ g: GameState, _ id: TerritoryID) -> Int {
-        let m = menace(g, id)
+    /// The garrison a place must keep so as not to be retaken on the first
+    /// assault. This is the whole flaw of the greedy opponent: it left one
+    /// troop and lost the place next turn.
+    static func garrison(_ g: GameState, _ id: TerritoryID) -> Int {
+        let m = threat(g, id)
         if m == 0 { return 1 }
         return max(2, min(m / 2 + 1, 5))
     }
 
-    // MARK: - Répondre
+    // MARK: - Answering
 
-    /// Deux facteurs, et non un : savoir, et avoir le temps de le dire.
+    /// Two factors, not one: knowing, and having the time to say it.
     ///
-    /// Le second n'est pas une décoration de simulation — c'est lui qui porte
-    /// tout l'équilibre du jeu. Trois secondes s'en vont à lire l'énoncé et
-    /// les quatre propositions ; au-delà d'une douzaine de secondes utiles,
-    /// savoir davantage ne se traduit plus en réponses. En dessous, la
-    /// mémoire n'a plus le temps de remonter, et il reste le réflexe.
-    /// Ce qu'un joueur sait mieux, et moins bien.
+    /// The second is not simulation decoration — it is what carries the whole
+    /// balance of the game. Three seconds go to reading the prompt and the
+    /// four choices; beyond a dozen useful seconds, knowing more no longer
+    /// translates into answers. Below that, memory no longer has time to
+    /// surface, and what is left is reflex.
+
+    /// What a player knows better, and less well.
     ///
-    /// Personne n'est également fort partout, et c'est tout l'objet du choix
-    /// du terrain par l'attaquant. Sans ce relief, une machine simulée répond
-    /// aussi bien en géographie qu'en sport, le dossier de l'adversaire ne
-    /// contient que du bruit — et l'on ne peut pas mesurer si viser les
-    /// faiblesses sert à quelque chose. Le profil est déterministe : chacun
-    /// garde ses forces d'un bout à l'autre de la partie.
-    static func aptitude(_ joueur: PlayerID, _ categorie: Category) -> Double {
+    /// Nobody is equally strong everywhere, and that is the whole point of
+    /// the attacker choosing the ground. Without that relief, a simulated
+    /// machine answers geography as well as sports, the opponent's file
+    /// contains nothing but noise — and there is no way to measure whether
+    /// aiming at weaknesses is worth anything. The profile is deterministic:
+    /// each player keeps their strengths from one end of the game to the
+    /// other.
+    static func aptitude(_ player: PlayerID, _ category: Category) -> Double {
         let relief = [0.16, 0.09, 0.0, -0.09, -0.16, 0.0]
-        // Le rang venait de la place du thème dans l'enum. Un thème ajouté
-        // décalait le relief de tous ceux d'après : la machine changeait de
-        // forces parce qu'on avait déposé un fichier. Il se tire désormais du
-        // nom du thème, qui ne bouge pas quand ses voisins bougent.
-        let rang = Int(QuestionBank.empreinte(categorie.id) % UInt64(relief.count))
-        return relief[(rang + joueur * 2) % relief.count]
+        // The rank used to come from the theme's position in the enum. A
+        // theme added shifted the relief of every theme after it: the machine
+        // changed strengths because a file had been dropped in. It is now
+        // derived from the theme's name, which does not move when its
+        // neighbors move.
+        let rank = Int(QuestionBank.digest(category.id) % UInt64(relief.count))
+        return relief[(rank + player * 2) % relief.count]
     }
 
     static func probability(level: Double, difficulty: Difficulty,
                             allowance: TimeInterval, rules: Rules) -> Double {
         let knowledge: Double
         switch difficulty {
-        case .facile:    knowledge = level + 0.15
-        case .moyen:     knowledge = level
-        case .difficile: knowledge = level - 0.20
+        case .easy:   knowledge = level + 0.15
+        case .medium: knowledge = level
+        case .hard:   knowledge = level - 0.20
         }
         let time = min(1, max(0.35, (allowance - 3) / 12))
         return min(0.98, max(0.02, knowledge * time))
     }
 
-    /// La machine répond toujours quelque chose — bien ou mal, jamais rien.
+    /// The machine always answers something — right or wrong, never nothing.
     ///
-    /// Elle laissait auparavant passer le temps une fois sur sept quand elle
-    /// se trompait. Trois raisons de l'avoir retiré. Une machine qui manque de
-    /// temps n'est pas crédible. Surtout, l'écran n'avait rien à montrer : un
-    /// temps écoulé ne marque aucune proposition en rouge, on ne voyait donc
-    /// que la bonne réponse en vert pendant que le verdict annonçait un
-    /// silence — et l'on croyait l'application en train de compter une bonne
-    /// réponse comme une mauvaise. Enfin, cela ne servait à rien : pour le
-    /// moteur, un silence et une erreur ont la même conséquence exactement.
+    /// It used to let the time run out one in seven times when it was wrong.
+    /// Three reasons for removing that. A machine that runs out of time is
+    /// not believable. Above all, the screen had nothing to show: a timeout
+    /// marks no choice in red, so all you saw was the correct answer in green
+    /// while the verdict announced silence — and you thought the app was
+    /// counting a correct answer as a wrong one. Finally, it served no
+    /// purpose: to the engine, silence and a mistake have exactly the same
+    /// consequence.
     ///
-    /// Le temps écoulé reste ce qu'il doit être : le fait d'un humain qui n'a
-    /// pas répondu, et qui sait très bien pourquoi.
+    /// The timeout stays what it should be: the act of a human who did not
+    /// answer, and who knows perfectly well why.
     static func answer(to duel: Duel, level: Double, rules: Rules,
-                       joueur: PlayerID = 0,
+                       player: PlayerID = 0,
                        using rng: inout SeededRandom) -> Answer {
-        let p = probability(level: level + aptitude(joueur, duel.question.category),
+        let p = probability(level: level + aptitude(player, duel.question.category),
                             difficulty: duel.question.difficulty,
                             allowance: duel.allowance, rules: rules)
         let elapsed = Double.random(in: 0.25 ... 0.85, using: &rng) * duel.allowance
@@ -202,106 +208,108 @@ enum Bot {
         return .chosen(wrong.randomElement(using: &rng) ?? 0, elapsed: elapsed)
     }
 
-    /// Faut-il doubler l'enjeu ? Le seul pari du défenseur, en face à face.
+    /// Should the stake be doubled? The defender's only bet, in a showdown.
     ///
-    /// Il ne se gagne pas en sachant, il se gagne en sachant **ce que l'autre
-    /// ignore**. Doubler sur une question facile est un piège : l'attaquant la
-    /// sait aussi, et l'échange se joue alors au sablier — deux hommes à pile
-    /// ou face. La machine mise donc sur ce qu'elle tient *et* qui est rare.
-    static func relance(_ g: GameState, duel: Duel, level: Double,
-                        style: Style, joueur: PlayerID) -> Bool {
-        guard style != .facile else { return false }
-        let p = probability(level: level + aptitude(joueur, duel.question.category),
+    /// It is not won by knowing, it is won by knowing **what the other does
+    /// not**. Doubling on an easy question is a trap: the attacker knows it
+    /// too, and the exchange then comes down to the clock — two troops on a
+    /// coin toss. So the machine bets on what it holds *and* what is rare.
+    static func shouldRaise(_ g: GameState, duel: Duel, level: Double,
+                            style: Style, player: PlayerID) -> Bool {
+        guard style != .easy else { return false }
+        let p = probability(level: level + aptitude(player, duel.question.category),
                             difficulty: duel.question.difficulty,
                             allowance: duel.allowance, rules: g.rules)
         let rare: Double
         switch duel.question.difficulty {
-        case .facile:    rare = 0
-        case .moyen:     rare = 0.12
-        case .difficile: rare = 0.25
+        case .easy:   rare = 0
+        case .medium: rare = 0.12
+        case .hard:   rare = 0.25
         }
-        // Doubler n'est pas un coup de force, c'est un coup de hasard : cela
-        // multiplie l'écart sans déplacer l'espérance quand les deux savent —
-        // l'échange se joue alors au sablier, à pile ou face, pour deux
-        // hommes. Or le hasard sert celui qui est derrière et coûte à celui
-        // qui mène. Mesuré : à relancer dès qu'elle se sentait sûre, la forte
-        // doublait une fois sur quatre et **perdait son rang** contre la
-        // moyenne (39 à 49 % selon le plateau). Elle ne relance donc que
-        // lorsqu'elle sait *et* qu'elle a quelque chose à rattraper.
-        var mien = 0, meilleurAutre = 0
-        for j in g.players {
-            let n = g.owner.values.filter { $0 == j.id }.count
-            if j.id == joueur { mien = n } else { meilleurAutre = max(meilleurAutre, n) }
+        // Doubling is not a show of strength, it is a throw of the dice: it
+        // multiplies the swing without moving the expectation when both know
+        // — the exchange then comes down to the clock, a coin toss, for two
+        // troops. And chance serves whoever is behind and costs whoever
+        // leads. Measured: raising whenever it felt sure, the strong machine
+        // doubled one time in four and **lost its rank** against the medium
+        // one (39 to 49% depending on the board). So it raises only when it
+        // knows *and* has something to catch up.
+        var mine = 0, bestOther = 0
+        for other in g.players {
+            let n = g.owner.values.filter { $0 == other.id }.count
+            if other.id == player { mine = n } else { bestOther = max(bestOther, n) }
         }
-        let derriere = mien < meilleurAutre
-        let seuil: Double
-        switch (style, derriere) {
-        case (.forte, true):    seuil = 0.70
-        case (.forte, false):   seuil = 0.95
-        case (_, true):         seuil = 0.80
-        default:                seuil = 0.97
+        let behind = mine < bestOther
+        let threshold: Double
+        switch (style, behind) {
+        case (.strong, true):  threshold = 0.70
+        case (.strong, false): threshold = 0.95
+        case (_, true):        threshold = 0.80
+        default:               threshold = 0.97
         }
-        return p + rare > seuil
+        return p + rare > threshold
     }
 
-    // MARK: - Renforts
+    // MARK: - Reinforcements
 
-    /// Où poser un homme.
+    /// Where to lay a troop down.
     ///
-    /// Le gourmand pose sur la case la plus pressée, et recommence pour chaque
-    /// homme : il étale donc ses renforts sur tout le front. Le stratège fait
-    /// l'inverse — il colmate d'abord ce qui tombe au premier coup, puis il
-    /// verse tout le reste sur **une seule** pointe. C'est la première leçon du
-    /// Risk : une grosse pile bat cinq petites.
+    /// The greedy one lays it on the most pressed cell, and starts over for
+    /// each troop: it therefore spreads its reinforcements across the whole
+    /// front. The strategist does the opposite — it first plugs whatever
+    /// falls to the first blow, then pours all the rest onto **a single**
+    /// spearhead. This is Risk's first lesson: one big stack beats five small
+    /// ones.
     static func reinforcement(_ g: GameState) -> TerritoryID? {
-        let moi = g.currentPlayer.id
-        let mine = g.territories(of: moi)
+        let me = g.currentPlayer.id
+        let mine = g.territories(of: me)
         guard !mine.isEmpty else { return nil }
-        guard g.currentPlayer.style.concentre else {
-            return mine.max { a, b in pression(g, a) < pression(g, b) }
+        guard g.currentPlayer.style.concentrates else {
+            return mine.max { a, b in pressure(g, a) < pressure(g, b) }
         }
 
-        // 1. Une place à un homme que l'ennemi peut prendre d'un coup tombera :
-        //    elle vaut un renfort avant tout le reste.
-        let fragiles = mine.filter { g.armies($0) == 1 && menace(g, $0) >= 3 }
-        if let pire = fragiles.max(by: { menace(g, $0) < menace(g, $1) }) { return pire }
+        // 1. A one-troop place the enemy can take in a single blow will fall:
+        //    it is worth a reinforcement before anything else.
+        let fragile = mine.filter { g.armies($0) == 1 && threat(g, $0) >= 3 }
+        if let worst = fragile.max(by: { threat(g, $0) < threat(g, $1) }) { return worst }
 
-        // 2. Tout le reste sur la meilleure pointe.
-        return pointe(g, moi) ?? mine.max { a, b in menace(g, a) < menace(g, b) }
+        // 2. Everything else onto the best spearhead.
+        return spearhead(g, me) ?? mine.max { a, b in threat(g, a) < threat(g, b) }
     }
 
-    /// La place d'où partira l'offensive : celle qui touche l'ennemi, qui
-    /// promet le plus, et qui sert l'objectif.
-    static func pointe(_ g: GameState, _ joueur: PlayerID) -> TerritoryID? {
-        let vise = continentVise(g, joueur)
-        return g.territories(of: joueur)
+    /// The place the offensive will start from: the one that touches the
+    /// enemy, that promises the most, and that serves the objective.
+    static func spearhead(_ g: GameState, _ player: PlayerID) -> TerritoryID? {
+        let target = targetContinent(g, player)
+        return g.territories(of: player)
             .filter { !g.targets(from: $0).isEmpty }
-            .max { a, b in valeurDePointe(g, a, vise) < valeurDePointe(g, b, vise) }
+            .max { a, b in spearheadValue(g, a, target) < spearheadValue(g, b, target) }
     }
 
-    private static func valeurDePointe(_ g: GameState, _ id: TerritoryID,
-                                       _ vise: Continent?) -> Double {
-        var v = Double(g.armies(id)) * 0.6 + Double(potentiel(g, id)) * 0.8
-        // Une pointe qui ouvre sur le continent visé vaut mieux qu'une autre.
-        if let vise, g.targets(from: id).contains(where: {
-            g.map[$0]?.continent == vise.id && g.owner[$0] != g.currentPlayer.id
+    private static func spearheadValue(_ g: GameState, _ id: TerritoryID,
+                                       _ target: Continent?) -> Double {
+        var v = Double(g.armies(id)) * 0.6 + Double(potential(g, id)) * 0.8
+        // A spearhead opening onto the continent being aimed at is worth more
+        // than another.
+        if let target, g.targets(from: id).contains(where: {
+            g.map[$0]?.continent == target.id && g.owner[$0] != g.currentPlayer.id
         }) { v += 4 }
         return v
     }
 
-    /// L'ancienne mesure du gourmand, gardée pour lui.
-    private static func pression(_ g: GameState, _ id: TerritoryID) -> Double {
-        let ennemis = menace(g, id)
-        guard ennemis > 0 else { return -100 }
+    /// The greedy one's old measure, kept for it alone.
+    private static func pressure(_ g: GameState, _ id: TerritoryID) -> Double {
+        let enemies = threat(g, id)
+        guard enemies > 0 else { return -100 }
         let bonus = g.map.continentsInOrder.first { $0.id == g.map[id]?.continent }
             .map { c -> Double in
-                let tenus = c.territories.filter { g.owner[$0] == g.owner[id] }.count
-                return tenus >= c.territories.count - 1 ? 2 : 0
+                let held = c.territories.filter { g.owner[$0] == g.owner[id] }.count
+                return held >= c.territories.count - 1 ? 2 : 0
             } ?? 0
-        return Double(ennemis) - Double(g.armies(id)) + bonus
+        return Double(enemies) - Double(g.armies(id)) + bonus
     }
 
-    // MARK: - Attaquer
+    // MARK: - Attacking
 
     struct Plan: Equatable {
         let from: TerritoryID
@@ -310,91 +318,93 @@ enum Bot {
         let category: Category
     }
 
-    /// Le meilleur assaut du moment, s'il en vaut la peine.
+    /// The best assault available, if it is worth the trouble.
     ///
-    /// `boldness` fixe le surnombre exigé : 1 demande un homme de plus que la
-    /// place visée, 2 accepte le combat à forces égales. Le second n'est pas
-    /// une folie — l'usure du siège fait que la cinquième question d'un tour
-    /// se gagne trois fois sur quatre. C'est même indispensable : deux
-    /// machines qui exigent toutes deux le surnombre s'enterrent face à face
-    /// et la partie ne finit jamais.
+    /// `boldness` sets the advantage required: 1 asks for one troop more than
+    /// the place aimed at, 2 accepts a fight at even strength. The second is
+    /// not madness — the wear of the siege means the fifth question of a turn
+    /// is won three times out of four. It is in fact indispensable: two
+    /// machines that both demand the advantage dig in facing each other and
+    /// the game never ends.
     ///
-    /// Le stratège ajoute deux choses au gourmand. Il ne descend pas sa pile
-    /// au-dessous de trois hommes — une pile épuisée ne tient rien et ne prend
-    /// plus rien. Et il pèse ce que la place vaut : achever un continent,
-    /// briser celui de l'adversaire, ou n'être qu'une case de plus.
+    /// The strategist adds two things to the greedy one. It does not take its
+    /// stack below three troops — a spent stack holds nothing and takes
+    /// nothing more. And it weighs what the place is worth: completing a
+    /// continent, breaking the opponent's, or being one more cell.
     static func assault<G: RandomNumberGenerator>(_ g: GameState, boldness: Double = 1.0,
                                                   using rng: inout G) -> Plan? {
-        let moi = g.currentPlayer.id
+        let me = g.currentPlayer.id
         let style = g.currentPlayer.style
-        let strategique = style.viseUnContinent
-        let vise = strategique ? continentVise(g, moi) : nil
+        let strategic = style.aimsForContinent
+        let target = strategic ? targetContinent(g, me) : nil
         var best: (score: Double, plan: Plan)?
 
-        for from in g.territories(of: moi) where g.armies(from) >= 2 {
-            // Une pile réduite à deux hommes n'attaque plus : elle tient.
+        for from in g.territories(of: me) where g.armies(from) >= 2 {
+            // A stack down to two troops no longer attacks: it holds.
             //
-            // Cette ligne vaut cher, et je l'ai mesuré en la desserrant : la
-            // laisser ramasser une place sans défense fait tomber le stratège
-            // de 51 % à 32 % sur l'Europe. Prendre une case avec sa dernière
-            // paire d'hommes, c'est exactement le défaut qu'on corrige.
+            // This line is expensive, and I measured it by loosening it:
+            // letting the machine pick up an undefended place drops the
+            // strategist from 51% to 32% on Europe. Taking a cell with your
+            // last pair of troops is exactly the flaw being corrected.
             //
-            // Et en face à face, exactement l'inverse. C'est la seule règle du
-            // jeu qui change de signe d'un mode à l'autre : la retenir coûte à
-            // la forte 14 points contre la moyenne (44 % au lieu de 58 % sur
-            // l'Europe, 41 au lieu de 56 sur le Monde), là où le flair, la
-            // pointe et le continent ne bougent pas de deux points. La raison
-            // tient à ce que vaut un échange : en classique il coûte un homme
-            // et n'en prend qu'un, si bien qu'une pile de deux ne finit
-            // jamais rien ; en face à face, celui qui sait emporte l'échange
-            // sec, et la relance peut en prendre deux d'un coup. La dernière
-            // paire d'hommes peut donc achever une place — s'en priver, c'est
-            // abandonner des conquêtes réelles.
-            if style.retientSesPiles, g.rules.mode == .classique,
-               g.armies(from) <= 2, menace(g, from) > 0 { continue }
+            // And in a showdown, exactly the reverse. It is the one rule in
+            // the game that changes sign from one mode to the other: holding
+            // back costs the strong machine 14 points against the medium one
+            // (44% instead of 58% on Europe, 41 instead of 56 on the World),
+            // where flair, the spearhead and the continent do not move by two
+            // points. The reason lies in what an exchange is worth: in
+            // classic play it costs one troop and takes only one, so a stack
+            // of two never finishes anything; in a showdown, whoever knows
+            // wins the exchange outright, and a raise can take two at once.
+            // The last pair of troops can therefore finish off a place — and
+            // going without that is giving up real conquests.
+            if style.holdsBackStacks, g.rules.mode == .classic,
+               g.armies(from) <= 2, threat(g, from) > 0 { continue }
             for to in g.targets(from: from) {
                 let advantage = Double(g.armies(from) - 1 - g.armies(to))
-                // Une place déjà pressée ce tour-ci répond dans un sablier plus
-                // court : elle vaut mieux qu'une place fraîche à effectif égal.
-                // Le sablier se resserre à chaque question subie par une même
-                // place dans le tour : achever une place entamée coûte bien
-                // moins cher que d'en ouvrir une autre. C'est la stratégie
-                // propre à ce jeu, et la forte est la seule à s'en servir.
+                // A place already pressed this turn answers on a shorter
+                // clock: it is worth more than a fresh place at equal
+                // strength. The clock tightens with every question the same
+                // place faces within the turn: finishing off a place already
+                // broken into costs far less than opening another. This is
+                // the strategy peculiar to this game, and the strong machine
+                // is the only one that uses it.
                 //
-                // En face à face, ce levier perd son tranchant sans changer de
-                // sens. Le sablier raccourci s'applique aux deux, et quand
-                // personne ne sait la place tient : presser fabrique donc des
-                // égalités, qui appartiennent au défenseur — à p égal des deux
-                // côtés, l'attaquant l'emporte dans `p − p²/2` des échanges,
-                // soit 44 % à 0,65 mais 35 % à 0,45. J'ai voulu en tirer la
-                // conclusion et faire fuir les places entamées : c'était une
-                // faute. La machine cessait d'achever ce qu'elle avait ouvert,
-                // les parties passaient de 13 à 23 tours, treize sur trois
-                // cents ne finissaient plus. Une place fraîche n'est pas
-                // meilleure — elle est seulement neuve, et les hommes déjà
-                // dépensés sur l'autre sont perdus.
-                let usure = Double(g.siege[to] ?? 0) * (style.exploiteLeSablier ? 1.6 : 0.7)
-                guard advantage + usure >= 2 - boldness else { continue }
+                // In a showdown this lever loses its edge without changing
+                // direction. The shortened clock applies to both, and when
+                // nobody knows the place holds: pressing therefore
+                // manufactures ties, which belong to the defender — at equal
+                // p on both sides, the attacker wins `p − p²/2` of exchanges,
+                // that is 44% at 0.65 but 35% at 0.45. I tried to draw the
+                // conclusion and make it avoid places already broken into: it
+                // was a mistake. The machine stopped finishing what it had
+                // started, games went from 13 to 23 turns, thirteen out of
+                // three hundred no longer finished at all. A fresh place is
+                // not better — it is only new, and the troops already spent
+                // on the other one are lost.
+                let wear = Double(g.siege[to] ?? 0) * (style.exploitsTheClock ? 1.6 : 0.7)
+                guard advantage + wear >= 2 - boldness else { continue }
 
-                var score = advantage + usure
+                var score = advantage + wear
                 if let c = g.map.continentsInOrder.first(where: { $0.id == g.map[to]?.continent }) {
-                    // Achever un continent vaut mieux que grignoter.
-                    if c.territories.filter({ g.owner[$0] != moi }).count == 1 {
+                    // Completing a continent is worth more than nibbling.
+                    if c.territories.filter({ g.owner[$0] != me }).count == 1 {
                         score += Double(c.bonus) * 1.5
                     }
-                    if strategique {
-                        // Avancer dans le continent visé, et briser celui que
-                        // l'adversaire est sur le point de tenir.
-                        if c.id == vise?.id { score += 3 }
-                        let adverse = g.owner[to]
-                        if let adverse, c.territories.allSatisfy({ g.owner[$0] == adverse }) {
+                    if strategic {
+                        // Push into the continent being aimed at, and break
+                        // the one the opponent is about to hold.
+                        if c.id == target?.id { score += 3 }
+                        let opponent = g.owner[to]
+                        if let opponent, c.territories.allSatisfy({ g.owner[$0] == opponent }) {
                             score += Double(c.bonus)
                         }
                     }
                 }
-                if strategique {
-                    // Ne pas se jeter sur une place qu'on ne pourra pas garder.
-                    score -= Double(menace(g, to)) * 0.15
+                if strategic {
+                    // Do not throw yourself at a place you will not be able
+                    // to keep.
+                    score -= Double(threat(g, to)) * 0.15
                 }
                 let plan = Plan(from: from, to: to,
                                 questions: min(g.maxQuestions(from: from), advantage >= 2 ? 2 : 1),
@@ -405,85 +415,85 @@ enum Bot {
         return best?.plan
     }
 
-    /// Où frapper. C'est tout le métier de l'attaquant dans cette variante —
-    /// et c'est aussi là qu'une machine devient insupportable si on la laisse
-    /// faire au mieux.
+    /// Where to strike. This is the attacker's whole craft in this variant —
+    /// and it is also where a machine becomes unbearable if you let it play
+    /// at its best.
     ///
-    /// Viser à chaque fois la faiblesse exacte est le coup optimal, et le plus
-    /// mauvais de tous : on reçoit dix fois de suite le même sujet, la
-    /// catégorie s'épuise, et chaque duel ressemble au précédent. Un joueur
-    /// réel sonde. Le tirage est donc pondéré — ce qui est raté pèse lourd, ce
-    /// qui est réussi pèse peu, ce qu'on ignore encore garde sa chance — et le
-    /// même sujet deux fois d'affilée devient improbable sans être exclu.
+    /// Aiming every time at the exact weakness is the optimal move, and the
+    /// worst of all: you get the same subject ten times running, the category
+    /// runs dry, and every duel looks like the last. A real player probes. So
+    /// the draw is weighted — what is missed weighs heavily, what is answered
+    /// weighs little, what is still unknown keeps its chance — and the same
+    /// subject twice in a row becomes unlikely without being ruled out.
     static func category<G: RandomNumberGenerator>(_ g: GameState, against player: PlayerID,
                                                    using rng: inout G) -> Category {
         let style = g.currentPlayer.style
-        // Sans flair, elle ne regarde même pas le dossier.
-        // Un catalogue vide ne peut pas arriver — le jeu n'aurait aucune question
-        // — mais il ne doit pas pour autant faire tomber l'application.
+        // Without flair it does not even look at the file.
+        // An empty catalogue cannot happen — the game would have no questions
+        // at all — but it must not bring the app down either.
         guard style.flair > 0 else {
-            return g.themesEnJeu.randomElement(using: &rng) ?? Category("")
+            return g.themesInPlay.randomElement(using: &rng) ?? Category("")
         }
 
-        let precedente = style == .forte ? g.lastCategoryAgainst[player] : nil
-        let poids: [(Category, Double)] = g.themesEnJeu.map { c in
+        let previous = style == .strong ? g.lastCategoryAgainst[player] : nil
+        let weights: [(Category, Double)] = g.themesInPlay.map { c in
             let score = g.record(of: player, in: c)
-            // Sans échantillon, on prête à l'adversaire une réussite moyenne :
-            // ni redoutable ni offert, donc digne d'être sondé.
-            let leur = score.asked == 0 ? 0.5 : score.rate
+            // With no sample, we credit the opponent with an average success
+            // rate: neither fearsome nor a gift, and therefore worth probing.
+            let theirs = score.asked == 0 ? 0.5 : score.rate
             var p: Double
-            if g.rules.mode == .classique {
-                let echec = 1 - leur
-                p = 0.20 + echec * echec * style.flair
+            if g.rules.mode == .classic {
+                let failure = 1 - theirs
+                p = 0.20 + failure * failure * style.flair
             } else {
-                // En face à face, on répond aussi : ce qu'il faut chercher
-                // n'est plus la faiblesse d'en face, c'est **l'écart**.
-                // Choisir l'ignorance de l'autre en s'y jetant soi-même, c'est
-                // se piéger avec lui — et l'échange se règle alors sur une
-                // égalité, qui appartient au défenseur.
-                let mien = g.record(of: g.currentPlayer.id, in: c)
-                let ma = mien.asked == 0 ? 0.5 : mien.rate
-                let ecart = max(0, ma - leur)
-                p = 0.20 + ecart * ecart * style.flair
+                // In a showdown we answer too: what to look for is no longer
+                // the weakness across the table, it is the **gap**. Choosing
+                // the other's ignorance and throwing yourself into it is
+                // trapping yourself along with them — and the exchange then
+                // settles on a tie, which belongs to the defender.
+                let own = g.record(of: g.currentPlayer.id, in: c)
+                let myRate = own.asked == 0 ? 0.5 : own.rate
+                let gap = max(0, myRate - theirs)
+                p = 0.20 + gap * gap * style.flair
             }
-            if c == precedente { p *= 0.22 }
+            if c == previous { p *= 0.22 }
             return (c, p)
         }
-        let total = poids.reduce(0) { $0 + $1.1 }
-        var tirage = Double.random(in: 0 ..< total, using: &rng)
-        for (c, p) in poids {
-            tirage -= p
-            if tirage <= 0 { return c }
+        let total = weights.reduce(0) { $0 + $1.1 }
+        var draw = Double.random(in: 0 ..< total, using: &rng)
+        for (c, p) in weights {
+            draw -= p
+            if draw <= 0 { return c }
         }
-        return poids.last!.0
+        return weights.last!.0
     }
 
-    // MARK: - Occuper, déplacer
+    // MARK: - Occupying, moving
 
-    /// Combien d'hommes avancent dans la place conquise.
+    /// How many troops advance into the conquered place.
     ///
-    /// C'est ici que le gourmand semait ses garnisons d'un homme : dès que sa
-    /// base touchait encore un ennemi, il n'avançait que le minimum, et la
-    /// place reprise retombait au tour suivant. Le stratège fait le compte
-    /// inverse : il garde à la base ce qu'il lui faut pour tenir, et **tout le
-    /// reste avance**. Une place prise est une place à défendre.
+    /// This is where the greedy one sowed its one-troop garrisons: as soon as
+    /// its base still touched an enemy, it advanced only the minimum, and the
+    /// place it had taken fell again next turn. The strategist does the
+    /// opposite sum: it keeps at the base what it needs to hold, and **all
+    /// the rest advances**. A place taken is a place to defend.
     static func occupation(_ g: GameState) -> Int {
         guard case let .occupation(from, _, minimum, maximum) = g.phase else { return 1 }
-        guard g.currentPlayer.style.garnisonne else {
-            let exposee = g.map.neighbors(of: from).contains { g.owner[$0] != g.owner[from] }
-            return exposee ? minimum : maximum
+        guard g.currentPlayer.style.garrisons else {
+            let exposed = g.map.neighbors(of: from).contains { g.owner[$0] != g.owner[from] }
+            return exposed ? minimum : maximum
         }
-        // Ce qui reste derrière : de quoi tenir la base, pas davantage.
-        let reste = garnison(g, from)
-        let avance = g.armies(from) - reste
-        return min(maximum, max(minimum, avance))
+        // What stays behind: enough to hold the base, no more.
+        let left = garrison(g, from)
+        let advancing = g.armies(from) - left
+        return min(maximum, max(minimum, advancing))
     }
 
-    /// Ramener l'arrière vers le front.
+    /// Bringing the rear up to the front.
     ///
-    /// Le gourmand vise la case la plus pressée : il colmate. Le stratège
-    /// vise sa pointe : il prépare le tour suivant. Colmater partout, c'est
-    /// n'être fort nulle part.
+    /// The greedy one aims at the most pressed cell: it plugs holes. The
+    /// strategist aims at its spearhead: it prepares the next turn. Plugging
+    /// everywhere is being strong nowhere.
     static func fortification(_ g: GameState) -> (from: TerritoryID, to: TerritoryID, count: Int)? {
         let me = g.currentPlayer.id
         let mine = g.territories(of: me)
@@ -491,23 +501,24 @@ enum Bot {
         let rear = mine.filter { !front.contains($0) && g.armies($0) >= 2 }
         guard let source = rear.max(by: { g.armies($0) < g.armies($1) }) else { return nil }
 
-        let atteignables = front.filter { g.areLinked(source, $0, for: me) }
-        guard !atteignables.isEmpty else { return nil }
+        let reachable = front.filter { g.areLinked(source, $0, for: me) }
+        guard !reachable.isEmpty else { return nil }
 
-        let cible: TerritoryID?
-        if g.currentPlayer.style.concentre {
-            let vise = continentVise(g, me)
-            // Une place qui tombe au premier assaut passe avant la pointe :
-            // perdre un territoire coûte un renfort à chaque tour suivant.
-            let enPeril = atteignables.filter { g.armies($0) == 1 && menace(g, $0) >= 3 }
-            cible = enPeril.max(by: { menace(g, $0) < menace(g, $1) })
-                ?? atteignables.max(by: {
-                    valeurDePointe(g, $0, vise) < valeurDePointe(g, $1, vise)
+        let chosen: TerritoryID?
+        if g.currentPlayer.style.concentrates {
+            let aim = targetContinent(g, me)
+            // A place that falls to the first assault comes before the
+            // spearhead: losing a territory costs a reinforcement every turn
+            // after.
+            let atRisk = reachable.filter { g.armies($0) == 1 && threat(g, $0) >= 3 }
+            chosen = atRisk.max(by: { threat(g, $0) < threat(g, $1) })
+                ?? reachable.max(by: {
+                    spearheadValue(g, $0, aim) < spearheadValue(g, $1, aim)
                 })
         } else {
-            cible = atteignables.max(by: { pression(g, $0) < pression(g, $1) })
+            chosen = reachable.max(by: { pressure(g, $0) < pressure(g, $1) })
         }
-        guard let target = cible else { return nil }
+        guard let target = chosen else { return nil }
         return (source, target, g.armies(source) - 1)
     }
 }

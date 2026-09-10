@@ -1,272 +1,275 @@
 //
 //  SetupView.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Qui joue, et contre qui.
+//  Who plays, and against whom.
 //
-//  Le niveau de la machine n'est pas une difficulté abstraite : c'est sa part
-//  de bonnes réponses sur une question moyenne, dans le temps plein. On sait
-//  donc exactement ce qu'on affronte — et la simulation a montré que cinq
-//  points d'écart de culture suffisent à faire pencher deux parties sur trois.
+//  The machine's level is not an abstract difficulty: it is its share of
+//  correct answers on an average question, at full time. So you know exactly
+//  what you are up against — and the simulation showed that five points of
+//  difference in knowledge is enough to tip two games out of three.
 //
 
 import SwiftUI
 
 struct SetupView: View {
 
-    // Cet écran s'ouvre sur la partie rapide : « Réglages » n'est pas un
-    // autre jeu, c'est le même, ouvert. Les valeurs sont donc prises là où
-    // l'accueil les prend, et non recopiées ici.
-    @State private var count = PartieRapide.camps
-    @State private var humains = PartieRapide.humains
-    @State private var niveau = PartieRapide.niveau
-    @State private var manoeuvre: Bot.Style = PartieRapide.manoeuvre
-    /// Zéro retire la règle ; sinon, une bonne réponse sur tant vaut un homme.
-    @State private var erudition = PartieRapide.erudition
-    @State private var dosage: Rules.Dosage = PartieRapide.dosage
-    @State private var plateau: Boards = PartieRapide.plateau
-    @State private var cartes = PartieRapide.cartes
-    @State private var guerreTotale = PartieRapide.guerreTotale
-    @State private var objectifs = PartieRapide.objectifs
-    @State private var mode: Rules.Mode = PartieRapide.mode
-    /// Le son n'est pas une règle du jeu : il vaut pour l'application et se
-    /// garde d'une partie à l'autre. D'où les préférences du système plutôt
-    /// qu'un état de cette vue.
-    @AppStorage(Sons.cle) private var sons = true
-    /// Le nom de celui qui tient l'appareil. Comme le son, il vaut pour
-    /// l'application et non pour une partie.
-    @AppStorage(Pseudo.cle) private var pseudo = ""
-    /// Combien de questions différentes cet appareil a déjà vues. Lu une
-    /// fois à l'ouverture de l'écran : le fichier ne bouge pas pendant qu'on
-    /// règle une partie, sauf si l'on demande à tout oublier.
-    @State private var vues = MemoireDesQuestions.shared.combienDeVues()
-    /// Les mêmes réglages, ouverts depuis le salon d'une table à plusieurs
-    /// appareils. Ce qui n'a pas de sens là-bas disparaît : le nombre de
-    /// joueurs, c'est le salon qui le demande — un appareil par joueur — et
-    /// une partie en réseau n'a pas de machine, donc ni stratégie ni culture
-    /// à lui donner. Le bouton du bas ne lance rien : il rend les réglages au
-    /// salon, qui ouvrira la table avec.
-    var pourLeReseau = false
+    // This screen opens on the quick game: "Settings" is not another game, it
+    // is the same one, opened up. The values are therefore taken where the
+    // home screen takes them, and not copied out here.
+    @State private var count = QuickGame.sides
+    @State private var humans = QuickGame.humans
+    @State private var level = QuickGame.level
+    @State private var style: Bot.Style = QuickGame.style
+    /// Zero removes the rule; otherwise one correct answer in so many is
+    /// worth a troop.
+    @State private var scholarship = QuickGame.scholarship
+    @State private var mix: Rules.Mix = QuickGame.mix
+    @State private var board: Boards = QuickGame.board
+    @State private var cards = QuickGame.cards
+    @State private var totalWar = QuickGame.totalWar
+    @State private var objectives = QuickGame.objectives
+    @State private var mode: Rules.Mode = QuickGame.mode
+    /// Sound is not a rule of the game: it holds for the app and is kept from
+    /// one game to the next. Hence the system preferences rather than a state
+    /// of this view.
+    @AppStorage(Sounds.key) private var sounds = true
+    /// The name of whoever is holding the device. Like the sound, it holds
+    /// for the app and not for one game.
+    @AppStorage(Nickname.key) private var nickname = ""
+    /// How many different questions this device has already seen. Read once
+    /// when the screen opens: the file does not move while a game is being
+    /// set up, unless you ask to forget everything.
+    @State private var seen = QuestionMemory.shared.distinctSeen()
+    /// The same settings, opened from the lobby of a multi-device table. What
+    /// makes no sense there disappears: the number of players is what the
+    /// lobby asks for — one device per player — and a networked game has no
+    /// machine, so neither strategy nor knowledge to give it. The button at
+    /// the bottom launches nothing: it hands the settings back to the lobby,
+    /// which will open the table with them.
+    var forNetwork = false
     var onStart: ([Player], Rules, Boards) -> Void
     var onNetwork: (Rules, Boards) -> Void = { _, _ in }
-    /// Le mode d'emploi complet — il s'ouvre aussi depuis la partie.
-    var onManuel: () -> Void = { }
-    /// Proposé seulement s'il y a quelque chose sur les rayons.
+    /// The full manual — it opens from inside a game too.
+    var onManual: () -> Void = { }
+    /// Offered only if there is something on the shelves.
     var onArchives: (() -> Void)?
-    /// Le retour à l'accueil. La reprise d'une partie en cours s'y trouve
-    /// désormais : elle n'a rien à faire au milieu des curseurs.
-    var onRetour: () -> Void = { }
+    /// The way back to the home screen. Resuming a game in progress lives
+    /// there now: it has no business among the sliders.
+    var onBack: () -> Void = { }
 
-    /// Les réglages tels qu'ils sont déjà, quand on revient les changer.
+    /// The settings as they already are, when you come back to change them.
     ///
-    /// Sans cela, l'écran repartait des valeurs de la partie rapide : l'hôte
-    /// qui avait choisi le Monde en face à face, et qui rouvrait pour changer
-    /// une seule case, retrouvait l'Anneau en classique — et repartait avec,
-    /// sans le voir. Un écran de réglages doit montrer ce qui est, pas ce qui
-    /// était au premier lancement.
-    init(pourLeReseau: Bool = false,
-         depart: (regles: Rules, plateau: Boards)? = nil,
+    /// Without this, the screen started again from the quick game's values:
+    /// a host who had chosen the World in showdown mode, and reopened to
+    /// change a single box, found the Ring in classic mode — and left with it,
+    /// without noticing. A settings screen must show what is, not what was on
+    /// first launch.
+    init(forNetwork: Bool = false,
+         from start: (rules: Rules, board: Boards)? = nil,
          onStart: @escaping ([Player], Rules, Boards) -> Void,
          onNetwork: @escaping (Rules, Boards) -> Void = { _, _ in },
-         onManuel: @escaping () -> Void = { },
+         onManual: @escaping () -> Void = { },
          onArchives: (() -> Void)? = nil,
-         onRetour: @escaping () -> Void = { }) {
-        self.pourLeReseau = pourLeReseau
+         onBack: @escaping () -> Void = { }) {
+        self.forNetwork = forNetwork
         self.onStart = onStart
         self.onNetwork = onNetwork
-        self.onManuel = onManuel
+        self.onManual = onManual
         self.onArchives = onArchives
-        self.onRetour = onRetour
-        guard let depart else { return }
-        let r = depart.regles
-        _plateau = State(initialValue: depart.plateau)
+        self.onBack = onBack
+        guard let start else { return }
+        let r = start.rules
+        _board = State(initialValue: start.board)
         _mode = State(initialValue: r.mode)
-        _erudition = State(initialValue: r.answersPerBonusMan ?? 0)
-        _cartes = State(initialValue: r.territoryCards)
-        _guerreTotale = State(initialValue: r.dominationOverride == 0)
-        _objectifs = State(initialValue: r.objectifs)
-        // Le dosage ne se lit pas dans les règles : il s'y est fondu en poids
-        // de tirage. On le retrouve en comparant, faute de quoi il faudrait le
-        // garder deux fois — et deux copies finissent toujours par différer.
-        _dosage = State(initialValue: Rules.Dosage.allCases
-            .first { $0.poids == r.difficultyWeights } ?? PartieRapide.dosage)
+        _scholarship = State(initialValue: r.answersPerBonusMan ?? 0)
+        _cards = State(initialValue: r.territoryCards)
+        _totalWar = State(initialValue: r.dominationOverride == 0)
+        _objectives = State(initialValue: r.objectives)
+        // The mix cannot be read back from the rules: it has melted into draw
+        // weights there. We find it again by comparing, failing which it
+        // would have to be kept twice — and two copies always end up
+        // differing.
+        _mix = State(initialValue: Rules.Mix.allCases
+            .first { $0.weights == r.difficultyWeights } ?? QuickGame.mix)
     }
 
     var body: some View {
         ZStack {
             Palette.sea.ignoresSafeArea()
-            // Le contenu se centre dans la hauteur disponible plutôt que de
-            // coller en haut : sur un iPad ou un Mac, il flottait au sommet
-            // d'un écran vide. Le défilement ne sert que si l'écran est trop
-            // court — un iPhone en paysage.
+            // The content centers itself in the height available rather than
+            // sticking to the top: on an iPad or a Mac it floated at the top
+            // of an empty screen. Scrolling only serves if the screen is too
+            // short — an iPhone in landscape.
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 26) {
-                        Text(mode == .classique
-                             ? "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond."
-                             : "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte.")
+                        Text(mode == .classic
+                             ? "The die is replaced by a question.\nThe attacker picks the ground, the defender answers."
+                             : "The die is replaced by a question.\nBoth get it: the surer, or the quicker, wins.")
                             .font(.subheadline).foregroundStyle(Palette.dim)
                             .multilineTextAlignment(.center)
                             .padding(.top, 22)
 
-                        reglage("Mode de jeu") {
+                        section("Mode of play") {
                             Picker("", selection: $mode) {
                                 ForEach(Rules.Mode.allCases) { m in Text(m.label).tag(m) }
                             }
                             .pickerStyle(.segmented)
                             Text(mode.detail)
                                 .font(.caption2).foregroundStyle(Palette.dim)
-                            if mode == .faceAFace {
-                                Text("Les deux savent : le sablier tranche. Aucun des deux : la "
-                                     + "place tient, comme sur une égalité de dés.")
+                            if mode == .showdown {
+                                Text("Both know: the clock settles it. Neither of them: the "
+                                     + "place holds, as on a tie of dice.")
                                     .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
                             }
                         }
 
-                        reglage("Plateau") {
-                            Picker("", selection: $plateau) {
-                                ForEach(Boards.allCases) { p in Text(p.label).tag(p) }
+                        section("Board") {
+                            Picker("", selection: $board) {
+                                ForEach(Boards.allCases) { b in Text(b.label).tag(b) }
                             }
                             .pickerStyle(.segmented)
-                            Text(plateau.detail)
+                            Text(board.detail)
                                 .font(.caption2).foregroundStyle(Palette.dim)
                         }
 
-                        if !pourLeReseau {
-                        reglage("Joueurs") {
+                        if !forNetwork {
+                        section("Players") {
                             Picker("", selection: $count) {
                                 ForEach(2...4, id: \.self) { Text("\($0)").tag($0) }
                             }
                             .pickerStyle(.segmented)
-                            .onChange(of: count) { _, n in humains = min(humains, n) }
+                            .onChange(of: count) { _, n in humans = min(humans, n) }
                         }
 
-                        reglage("Sur cet appareil") {
-                            Picker("", selection: $humains) {
+                        section("On this device") {
+                            Picker("", selection: $humans) {
                                 ForEach(1...count, id: \.self) {
-                                    Text($0 == 1 ? "1 humain" : "\($0) humains").tag($0)
+                                    Text($0 == 1 ? "1 human" : "\($0) humans").tag($0)
                                 }
                             }
                             .pickerStyle(.segmented)
-                            if humains > 1 {
-                                Text("Chacun son tour : l'appareil se passe avant chaque question.")
+                            if humans > 1 {
+                                Text("Taking turns: the device is passed before each question.")
                                     .font(.caption2).foregroundStyle(Palette.dim)
                             }
                         }
 
-                        if humains < count {
-                            reglage("Stratégie de la machine") {
-                                Picker("", selection: $manoeuvre) {
+                        if humans < count {
+                            section("Machine strategy") {
+                                Picker("", selection: $style) {
                                     ForEach(Bot.Style.allCases, id: \.self) { st in
                                         Text(st.label).tag(st)
                                     }
                                 }
                                 .pickerStyle(.segmented)
-                                Text(manoeuvre.detail)
+                                Text(style.detail)
                                     .font(.caption2).foregroundStyle(Palette.dim)
                             }
 
-                            reglage("Culture de la machine") {
+                            section("Machine knowledge") {
                                 HStack {
-                                    Text(libelleNiveau).font(.subheadline.weight(.medium))
+                                    Text(levelLabel).font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
                                     Spacer()
-                                    Text("\(Int(niveau * 100)) % de bonnes réponses")
+                                    Text("\(Int(level * 100))% correct answers")
                                         .font(.caption.monospacedDigit()).foregroundStyle(Palette.dim)
                                 }
-                                Slider(value: $niveau, in: 0.35...0.90, step: 0.05)
-                                    .tint(Palette.camp(1))
+                                Slider(value: $level, in: 0.35...0.90, step: 0.05)
+                                    .tint(Palette.side(1))
                             }
                         }
 
                         }
 
-                        reglage("Questions") {
-                            Picker("", selection: $dosage) {
-                                ForEach(Rules.Dosage.allCases) { d in
+                        section("Questions") {
+                            Picker("", selection: $mix) {
+                                ForEach(Rules.Mix.allCases) { d in
                                     Text(d.label).tag(d)
                                 }
                             }
                             .pickerStyle(.segmented)
-                            Text(dosage.detail)
+                            Text(mix.detail)
                                 .font(.caption2).foregroundStyle(Palette.dim)
-                            suiviDesQuestions
+                            questionTally
                         }
 
-                        reglage("Renfort d'érudition") {
+                        section("Scholarship reinforcement") {
                             HStack {
-                                Text(erudition == 0 ? "Retiré" : "Un homme de plus")
+                                Text(scholarship == 0 ? "Off" : "One extra troop")
                                     .font(.subheadline.weight(.medium))
                                     .foregroundStyle(Palette.ink)
                                 Spacer()
-                                Text(erudition == 0 ? "—" : "toutes les \(erudition) bonnes réponses")
+                                Text(scholarship == 0 ? "—" : "every \(scholarship) correct answers")
                                     .font(.caption.monospacedDigit())
                                     .foregroundStyle(Palette.dim)
                             }
-                            Slider(value: Binding(get: { Double(erudition) },
-                                                  set: { erudition = Int($0.rounded()) }),
+                            Slider(value: Binding(get: { Double(scholarship) },
+                                                  set: { scholarship = Int($0.rounded()) }),
                                    in: 0...10, step: 1)
                                 .tint(Palette.held)
-                            Text(mode == .classique
-                                 ? "Seul le défenseur répond : ce renfort revient à qui tient sa "
-                                   + "place en sachant. Mesuré, il creuse un peu l'écart entre deux "
-                                   + "cultures inégales — nettement en dessous de quatre."
-                                 : "Les deux répondent : le renfort revient à qui sait, qu'il "
-                                   + "attaque ou qu'il défende.")
+                            Text(mode == .classic
+                                 ? "Only the defender answers: this reinforcement goes to whoever "
+                                   + "holds their place by knowing. Measured, it widens the gap a "
+                                   + "little between two unequal levels of knowledge — markedly so "
+                                   + "below four."
+                                 : "Both answer: the reinforcement goes to whoever knows, "
+                                   + "attacking or defending.")
                                 .font(.caption2).foregroundStyle(Palette.dim)
                         }
 
-                        reglage("Règles du jeu") {
-                            Toggle(isOn: $cartes) {
+                        section("Game rules") {
+                            Toggle(isOn: $cards) {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text("Cartes de territoire")
+                                    Text("Territory cards")
                                         .font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
-                                    Text("Une carte par tour où l'on prend une place. "
-                                         + "Trois assorties valent des hommes, et le barème monte.")
+                                    Text("One card per turn in which you take a place. "
+                                         + "Three matching are worth troops, and the scale climbs.")
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
                             .tint(Palette.held)
 
-                            Toggle(isOn: exclusif($guerreTotale, avec: $objectifs)) {
+                            Toggle(isOn: exclusive($totalWar, with: $objectives)) {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text("Guerre totale")
+                                    Text("Total war")
                                         .font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
-                                    Text("Il faut tous les territoires, sans exception. "
-                                         + "Compter environ deux fois plus de questions.")
+                                    Text("Every territory, no exceptions. "
+                                         + "Expect about twice as many questions.")
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
                             .tint(Palette.lost)
 
-                            Toggle(isOn: exclusif($objectifs, avec: $guerreTotale)) {
+                            Toggle(isOn: exclusive($objectives, with: $totalWar)) {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text("Conquêtes personnelles")
+                                    Text("Personal conquests")
                                         .font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
-                                    Text("Chacun reçoit au départ un objectif secret — deux "
-                                         + "continents, tant de places tenues, un camp à faire "
-                                         + "tomber — et le remplir gagne la partie. Le seuil de "
-                                         + "territoires se retire : la carte décide, ou personne. "
-                                         + "Le compte de la barre du haut ne dit alors plus rien "
-                                         + "de qui va gagner.")
+                                    Text("Everyone is dealt a secret objective at the start — two "
+                                         + "continents, so many places held, a side to bring down "
+                                         + "— and filling it wins the game. The territory "
+                                         + "threshold withdraws: the card decides, or nobody. The "
+                                         + "count in the top bar then says nothing at all about "
+                                         + "who is going to win.")
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
-                            .tint(Palette.camp(3))
+                            .tint(Palette.side(3))
 
-                            if guerreTotale || objectifs {
-                                Text("Ces deux-là ne vont pas ensemble : allumer l'une "
-                                     + "éteint l'autre. Prendre le monde entier, ou remplir "
-                                     + "sa conquête — il faut choisir la fin de la partie.")
+                            if totalWar || objectives {
+                                Text("These two do not go together: turning one on turns "
+                                     + "the other off. Take the whole world, or fill your "
+                                     + "conquest — you have to choose how the game ends.")
                                     .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
                             }
                         }
 
-                        reglage("Vous") {
-                            TextField("Sans nom", text: $pseudo)
+                        section("You") {
+                            TextField("No name", text: $nickname)
                                 .textFieldStyle(.plain)
                                 .autocorrectionDisabled()
                                 .font(.subheadline)
@@ -274,32 +277,32 @@ struct SetupView: View {
                                 .padding(.horizontal, 14).padding(.vertical, 10)
                                 .background(Color.white.opacity(0.06), in: Capsule())
                                 .overlay(Capsule().stroke(Palette.dim.opacity(0.3), lineWidth: 1))
-                                // Borné à la saisie et non à l'affichage : la
-                                // bande des camps tient sur une seule ligne, et
-                                // un nom à rallonge la ferait défiler pour rien.
-                                .onChange(of: pseudo) { _, saisi in
-                                    let court = String(saisi.prefix(Pseudo.maximum))
-                                    if court != saisi { pseudo = court }
+                                // Bounded on entry and not on display: the
+                                // strip of sides fits on a single line, and a
+                                // long name would set it scrolling for nothing.
+                                .onChange(of: nickname) { _, typed in
+                                    let short = String(typed.prefix(Nickname.maxLength))
+                                    if short != typed { nickname = short }
                                 }
-                            Text("Facultatif. Votre camp se lira « Bleu · "
-                                 + "\(Pseudo.actuel ?? "Robert") · moi » — la couleur, votre "
-                                 + "nom, et « moi » pour dire que c'est le vôtre. En réseau, "
-                                 + "il fait le voyage : les autres vous verront ainsi, et "
-                                 + "vous les verrez de même.")
+                            Text("Optional. Your side will read \"Blue · "
+                                 + "\(Nickname.current ?? "Alex") · me\" — the color, your "
+                                 + "name, and \"me\" to say it is yours. Over the network it "
+                                 + "travels: the others will see you that way, and you will "
+                                 + "see them the same.")
                                 .font(.caption2).foregroundStyle(Palette.dim)
                         }
 
-                        reglage("Son") {
-                            Toggle(isOn: $sons) {
+                        section("Sound") {
+                            Toggle(isOn: $sounds) {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text("Sons du jeu")
+                                    Text("Game sounds")
                                         .font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
-                                    Text("Une note brève à chaque homme posé, une autre à "
-                                         + "l'issue de chaque échange — montante quand il "
-                                         + "tourne pour vous, descendante sinon — et "
-                                         + "l'ouverture au lancement. Vaut pour toutes les "
-                                         + "parties, et non pour celle-ci seule.")
+                                    Text("A short note for every troop laid down, another at "
+                                         + "the outcome of every exchange — rising when it "
+                                         + "goes your way, falling otherwise — and the "
+                                         + "opening at launch. Holds for every game, not for "
+                                         + "this one alone.")
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
@@ -307,43 +310,43 @@ struct SetupView: View {
                         }
 
                         VStack(spacing: 4) {
-                            Text(resumeDeLaVictoire)
+                            Text(victorySummary)
                                 .font(.footnote).foregroundStyle(Palette.dim)
                                 .multilineTextAlignment(.center)
                             if compensation > 0 {
-                                Text("Celui qui ouvre part avec \(compensation) hommes de moins : "
-                                     + "ici, la défense l'emporte, et ouvrir se paie.")
+                                Text("Whoever opens starts \(compensation) troops down: "
+                                     + "here the defense wins, and opening costs.")
                                     .font(.caption2).foregroundStyle(Palette.dim)
                                     .multilineTextAlignment(.center)
                             }
                         }
 
-                        if pourLeReseau {
-                            Button { onNetwork(regles, plateau) } label: {
-                                Label("Ouvrir la table avec ces réglages",
+                        if forNetwork {
+                            Button { onNetwork(rules, board) } label: {
+                                Label("Open the table with these settings",
                                       systemImage: "checkmark.circle.fill")
                                     .font(.headline)
                                     .frame(maxWidth: .infinity).padding(.vertical, 14)
                             }
-                            .buttonStyle(.borderedProminent).tint(Palette.camp(4))
+                            .buttonStyle(.borderedProminent).tint(Palette.side(4))
                         } else {
-                        Button { onStart(joueurs, regles, plateau) } label: {
-                            Text("Commencer").font(.headline)
+                        Button { onStart(players, rules, board) } label: {
+                            Text("Start").font(.headline)
                                 .frame(maxWidth: .infinity).padding(.vertical, 14)
                         }
-                        .buttonStyle(.borderedProminent).tint(Palette.camp(0))
+                        .buttonStyle(.borderedProminent).tint(Palette.side(0))
 
                         if let onArchives {
                             Button(action: onArchives) {
-                                Label("Parties enregistrées", systemImage: "books.vertical")
+                                Label("Saved games", systemImage: "books.vertical")
                                     .font(.subheadline.weight(.medium))
                                     .frame(maxWidth: .infinity).padding(.vertical, 12)
                             }
                             .buttonStyle(.bordered).tint(Palette.dim)
                         }
 
-                        Button { onNetwork(regles, plateau) } label: {
-                            Label("Jouer à plusieurs appareils",
+                        Button { onNetwork(rules, board) } label: {
+                            Label("Play across devices",
                                   systemImage: "iphone.gen3.radiowaves.left.and.right")
                                 .font(.subheadline.weight(.medium))
                                 .frame(maxWidth: .infinity).padding(.vertical, 12)
@@ -351,19 +354,19 @@ struct SetupView: View {
                         .buttonStyle(.bordered).tint(Palette.dim)
                         }
 
-                        Button(action: onManuel) {
-                            Label("Mode d'emploi", systemImage: "book")
+                        Button(action: onManual) {
+                            Label("How to play", systemImage: "book")
                                 .font(.subheadline.weight(.medium))
                                 .frame(maxWidth: .infinity).padding(.vertical, 12)
                         }
                         .buttonStyle(.bordered).tint(Palette.dim)
 
-                        // Les textes légaux sont aussi dans le mode d'emploi,
-                        // mais personne ne cherche ses conditions d'utilisation
-                        // au chapitre quatorze d'un manuel : elles se veulent
-                        // là où l'on se demande à quoi l'on s'engage, avant de
-                        // commencer. Trois liens, en petit, sous tout le reste.
-                        piedDeMentions
+                        // The legal text is in the manual too, but nobody
+                        // hunts for their terms of use in chapter fourteen of
+                        // a handbook: it belongs where you wonder what you are
+                        // signing up for, before starting. Three links, small,
+                        // under everything else.
+                        legalFooter
                             .padding(.bottom, 30)
                     }
                     .frame(maxWidth: 460)
@@ -372,29 +375,29 @@ struct SetupView: View {
                 }
             }
         }
-        // La barre est posée en marge de sécurité plutôt qu'en tête du
-        // défilement : la page est longue, et un retour qui s'en va dès qu'on
-        // descend n'est plus un retour.
-        .safeAreaInset(edge: .top, spacing: 0) { entete }
+        // The bar sits in the safe-area inset rather than at the head of the
+        // scroll: the page is long, and a back button that leaves as soon as
+        // you scroll down is no longer a back button.
+        .safeAreaInset(edge: .top, spacing: 0) { header }
         .preferredColorScheme(.dark)
     }
 
-    private var entete: some View {
+    private var header: some View {
         HStack {
-            Button(action: onRetour) {
-                // On revient là d'où l'on vient, et l'on ne le promet pas de
-                // travers : depuis le salon d'une table, ce n'est pas
-                // l'accueil qui attend derrière.
-                Label(pourLeReseau ? "La table" : "Accueil", systemImage: "chevron.left")
+            Button(action: onBack) {
+                // You go back where you came from, and we do not promise it
+                // wrongly: from a table's lobby, it is not the home screen
+                // waiting behind.
+                Label(forNetwork ? "The table" : "Home", systemImage: "chevron.left")
                     .font(.subheadline.weight(.medium))
             }
             .buttonStyle(.plain).foregroundStyle(Palette.dim)
             Spacer(minLength: 12)
         }
-        // Le titre par-dessus plutôt qu'entre deux ressorts : il reste centré
-        // sur la barre quelle que soit la longueur du bouton de gauche.
+        // The title as an overlay rather than between two spacers: it stays
+        // centered on the bar whatever the length of the left-hand button.
         .overlay {
-            Text("Réglages").font(.headline).foregroundStyle(Palette.ink)
+            Text("Settings").font(.headline).foregroundStyle(Palette.ink)
         }
         .frame(maxWidth: 560)
         .padding(.horizontal, 16).padding(.vertical, 12)
@@ -402,56 +405,56 @@ struct SetupView: View {
         .background(Palette.panel)
     }
 
-    /// Confidentialité, conditions, site : les trois adresses publiques, en
-    /// bas de l'accueil. Elles sortent de l'application — le système ouvre le
-    /// navigateur — et sont donc écrites en gris, comme tout ce qui n'est pas
-    /// un coup à jouer.
-    private var piedDeMentions: some View {
+    /// Privacy, terms, website: the three public addresses, at the foot of
+    /// the home screen. They leave the app — the system opens the browser —
+    /// and so they are written in grey, like everything that is not a move to
+    /// play.
+    private var legalFooter: some View {
         HStack(spacing: 9) {
-            lien("Confidentialité", Manuel.confidentialiteURL)
-            separateur
-            lien("Conditions", Manuel.conditionsURL)
-            separateur
-            lien("Site", Manuel.siteURL)
+            link("Privacy", Manual.privacyURL)
+            separator
+            link("Terms", Manual.termsURL)
+            separator
+            link("Website", Manual.siteURL)
         }
         .font(.caption)
         .frame(maxWidth: .infinity)
     }
 
-    private var separateur: some View {
+    private var separator: some View {
         Text("·").font(.caption).foregroundStyle(Palette.dim.opacity(0.45))
     }
 
-    /// `SwiftUI.Link` en toutes lettres : dans ce module, `Link` tout court
-    /// désigne le fil entre deux appareils, et c'est lui qui gagne.
-    @ViewBuilder private func lien(_ titre: String, _ adresse: String) -> some View {
-        if let url = URL(string: adresse) {
-            SwiftUI.Link(titre, destination: url)
+    /// `SwiftUI.Link` spelled out: in this module, `Link` on its own means the
+    /// wire between two devices, and that one wins.
+    @ViewBuilder private func link(_ title: String, _ address: String) -> some View {
+        if let url = URL(string: address) {
+            SwiftUI.Link(title, destination: url)
                 .foregroundStyle(Palette.dim)
         }
     }
 
-    /// Ce que l'appareil a déjà vu passer, et de quoi tout oublier.
+    /// What the device has already seen go by, and how to forget it all.
     ///
-    /// Rien ne se règle ici : une question jamais sortie passe avant une
-    /// question déjà vue, et c'est tout. Mais cela se voit — sans quoi le
-    /// joueur ne saurait ni pourquoi ses questions cessent de revenir, ni
-    /// quoi faire le jour où il aura fait le tour de la banque.
-    private var suiviDesQuestions: some View {
+    /// Nothing is set here: a question never asked comes before a question
+    /// already seen, and that is all. But it shows — without it the player
+    /// would know neither why their questions stop coming back, nor what to
+    /// do the day they have been all the way through the bank.
+    private var questionTally: some View {
         HStack(alignment: .top, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Déjà posées sur cet appareil : \(vues) sur \(QuestionBank.francaises.count)")
+                Text("Already asked on this device: \(seen) of \(QuestionBank.all.count)")
                     .font(.caption.monospacedDigit()).foregroundStyle(Palette.ink)
-                Text("D'une partie à l'autre, une question jamais sortie passe avant "
-                     + "une question déjà vue.")
+                Text("From one game to the next, a question never asked comes before "
+                     + "a question already seen.")
                     .font(.caption2).foregroundStyle(Palette.dim)
                     .fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 0)
-            if vues > 0 {
-                Button("Oublier") {
-                    MemoireDesQuestions.shared.oublier()
-                    vues = 0
+            if seen > 0 {
+                Button("Forget") {
+                    QuestionMemory.shared.forget()
+                    seen = 0
                 }
                 .font(.caption.weight(.semibold))
                 .buttonStyle(.bordered).tint(Palette.dim)
@@ -459,66 +462,66 @@ struct SetupView: View {
         }
     }
 
-    private func reglage<C: View>(_ titre: String, @ViewBuilder _ contenu: () -> C) -> some View {
+    private func section<C: View>(_ title: String, @ViewBuilder _ content: () -> C) -> some View {
         VStack(alignment: .leading, spacing: 9) {
-            Text(titre.uppercased()).font(.caption.weight(.semibold))
+            Text(title.uppercased()).font(.caption.weight(.semibold))
                 .foregroundStyle(Palette.dim).kerning(0.6)
-            contenu()
+            content()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private var libelleNiveau: String { PartieRapide.niveauDit(niveau) }
+    private var levelLabel: String { QuickGame.levelNamed(level) }
 
-    /// Deux règles qui ne peuvent pas tenir ensemble : allumer celle-ci
-    /// éteint l'autre.
+    /// Two rules that cannot stand together: turning this one on turns the
+    /// other off.
     ///
-    /// Guerre totale demande tout le plateau, la conquête personnelle se
-    /// gagne souvent en trois continents : côte à côte, la seconde emporte
-    /// toujours la partie avant la première, et la première ne veut plus
-    /// rien dire. Le réglage tranche donc à la place du joueur, au lieu de
-    /// lui laisser composer une partie dont une moitié serait morte.
+    /// Total war demands the whole board, a personal conquest is often won in
+    /// three continents: side by side, the second always ends the game before
+    /// the first, and the first no longer means anything. So the setting
+    /// decides for the player, instead of letting them compose a game half of
+    /// which would be dead.
     ///
-    /// Elles se ressemblent davantage depuis que la conquête retire le seuil
-    /// — les deux se jouent sans compte à franchir — mais elles ne finissent
-    /// pas de la même façon : l'une demande le plateau, l'autre une carte.
-    private func exclusif(_ celle: Binding<Bool>, avec autre: Binding<Bool>) -> Binding<Bool> {
-        Binding(get: { celle.wrappedValue },
-                set: { allumee in
-                    celle.wrappedValue = allumee
-                    if allumee { autre.wrappedValue = false }
+    /// They resemble each other more since conquest withdrew the threshold —
+    /// both are played with no count to cross — but they do not end the same
+    /// way: one asks for the board, the other for a card.
+    private func exclusive(_ this: Binding<Bool>, with other: Binding<Bool>) -> Binding<Bool> {
+        Binding(get: { this.wrappedValue },
+                set: { on in
+                    this.wrappedValue = on
+                    if on { other.wrappedValue = false }
                 })
     }
 
-    private var seuil: Int {
-        Rules().dominationThreshold(territories: plateau.board.map.order.count,
+    private var threshold: Int {
+        Rules().dominationThreshold(territories: board.board.map.order.count,
                                     playerCount: count)
     }
 
-    /// Ce qu'il faut faire pour gagner, en une ligne, sous les réglages.
+    /// What has to be done to win, in one line, under the settings.
     ///
-    /// Les conquêtes personnelles retirent le seuil : annoncer un nombre de
-    /// territoires serait faux, et c'était le malentendu — on gagnait au
-    /// compte en croyant jouer sa carte.
-    private var resumeDeLaVictoire: String {
-        let total = plateau.board.map.order.count
-        if objectifs {
-            return "Victoire à sa conquête personnelle, et à rien d'autre"
+    /// Personal conquests withdraw the threshold: announcing a number of
+    /// territories would be false, and that was the misunderstanding — you
+    /// won on count while believing you were playing your card.
+    private var victorySummary: String {
+        let total = board.board.map.order.count
+        if objectives {
+            return "Victory by personal conquest, and nothing else"
         }
-        return guerreTotale
-            ? "Victoire à la conquête intégrale des \(total) territoires"
-            : "Victoire à \(seuil) territoires sur \(total)"
+        return totalWar
+            ? "Victory by taking all \(total) territories"
+            : "Victory at \(threshold) territories out of \(total)"
     }
 
     private var compensation: Int { Rules().compensation(playerCount: count) }
 
-    private var regles: Rules {
-        PartieRapide.regles(erudition: erudition, dosage: dosage, cartes: cartes,
-                            mode: mode, guerreTotale: guerreTotale, objectifs: objectifs)
+    private var rules: Rules {
+        QuickGame.rules(scholarship: scholarship, mix: mix, cards: cards,
+                        mode: mode, totalWar: totalWar, objectives: objectives)
     }
 
-    private var joueurs: [Player] {
-        PartieRapide.joueurs(nombre: count, humains: humains,
-                             niveau: niveau, manoeuvre: manoeuvre)
+    private var players: [Player] {
+        QuickGame.players(count: count, humans: humans,
+                          level: level, style: style)
     }
 }

@@ -1,0 +1,253 @@
+# History — Grade 8 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# The eighth-grade United States history course: Native nations and
+# colonization, the road to revolution, the Constitution, the early
+# republic, expansion, the Civil War and Reconstruction.
+#
+# Two hundred questions, and no prompt duplicates one in any other file —
+# including the free History deck, which covers much of the same ground
+# more lightly.
+
+! id      | history-8
+! name    | History — Grade 8
+! detail  | United States history from the colonies to Reconstruction.
+! icon    | flag
+! tint    | 0.70 0.35 0.30
+! rank    | 15
+! product | com.oulhen.riskelo.us.pack.history8
+
+
+# --- Before and at contact ---
+
+E | Which people lived in North America before Europeans arrived? | Native Americans | Vikings only | Spanish settlers | Polynesians
+M | Which Native confederacy of the Northeast joined five nations under one council? | The Iroquois Confederacy | The Powhatan Confederacy | The Creek Confederacy | The Wabanaki Confederacy
+M | Which Southwest peoples built cliff dwellings at Mesa Verde? | The Ancestral Puebloans | The Apache | The Comanche | The Navajo
+M | Which Mississippi valley city was the largest north of Mexico before 1492? | Cahokia | Moundville | Poverty Point | Etowah
+M | Which crop trio anchored many Native farming systems? | Corn, beans and squash | Wheat, rye and oats | Rice, millet and yams | Potatoes, peas and barley
+M | Which Native people of the Plains followed the buffalo herds? | The Lakota | The Cherokee | The Iroquois | The Pueblo
+H | Which land bridge is thought to have carried the first Americans? | Beringia | The Isthmus of Panama | The Aleutian causeway | The Greenland shelf
+H | Which Native structure of earth marks sites across the Ohio valley? | Burial mounds | Stone circles | Adobe towers | Longhouse forts
+H | Which Native building of the Northeast housed several families? | The longhouse | The tipi | The hogan | The wigwam only
+H | Which Native leader's daughter is linked in legend with the Jamestown colony? | Powhatan | Massasoit | Squanto | Metacom
+
+# --- Colonizing North America ---
+
+E | Which was the first permanent English colony in North America? | Jamestown | Plymouth | Roanoke | Boston
+E | In which year did the Pilgrims land at Plymouth? | 1620 | 1607 | 1630 | 1492
+M | Which English colony vanished and is called the lost colony? | Roanoke | Jamestown | Plymouth | New Haven
+M | Which crop saved the Jamestown colony economically? | Tobacco | Cotton | Rice | Indigo
+M | Which religious group founded the Massachusetts Bay Colony? | The Puritans | The Quakers | The Catholics | The Anglicans
+M | Which colony was founded by Quakers as a haven of tolerance? | Pennsylvania | Maryland | Rhode Island | Connecticut
+M | Which colony was founded as a refuge for English Catholics? | Maryland | Pennsylvania | Delaware | Virginia
+M | Which colony was founded by Roger Williams after he was banished? | Rhode Island | Connecticut | New Hampshire | Maine
+M | Which colony began as a Dutch settlement called New Netherland? | New York | New Jersey | Delaware | Connecticut
+M | Which colony was founded as a place for debtors and a buffer to Spain? | Georgia | South Carolina | North Carolina | Florida
+M | Which three regions are the thirteen colonies usually grouped into? | New England, Middle, Southern | North, Central, South | Coastal, Piedmont, Frontier | Royal, Proprietary, Charter
+M | Which labor system bound workers for years in exchange for passage? | Indentured servitude | Chattel slavery | Apprenticeship | Tenancy
+H | In which year were the first recorded Africans brought to Virginia? | 1619 | 1607 | 1650 | 1676
+H | Which body was the first elected assembly in the English colonies? | The Virginia House of Burgesses | The Massachusetts General Court | The Maryland Assembly | The Carolina Council
+H | Which religious revival swept the colonies in the 1730s and 1740s? | The Great Awakening | The Second Great Awakening | The Enlightenment | The Halfway Covenant
+H | Which 1735 trial helped establish freedom of the press in the colonies? | The Zenger trial | The Boston Massacre trial | The Salem trials | The Preston trial
+H | Which Massachusetts town held witchcraft trials in 1692? | Salem | Plymouth | Concord | Andover
+H | Which 1675 conflict pitted New England colonists against Native nations? | King Philip's War | The Pequot War | Bacon's Rebellion | The Yamasee War
+H | Which 1676 Virginia uprising turned frontier settlers against the governor? | Bacon's Rebellion | Shays' Rebellion | The Regulator movement | The Paxton uprising
+H | Which trade route carried enslaved Africans across the Atlantic? | The Middle Passage | The Northwest Passage | The Windward Route | The Carrying Trade
+
+# --- The road to revolution ---
+
+E | Which war between Britain and France was fought in America from 1754? | The French and Indian War | The Revolutionary War | The War of 1812 | King George's War
+E | Which 1770 clash in Boston left five colonists dead? | The Boston Massacre | The Boston Tea Party | Lexington | The Powder Alarm
+M | Which 1763 proclamation barred colonial settlement west of the Appalachians? | The Proclamation of 1763 | The Quebec Act | The Quartering Act | The Currency Act
+M | Which slogan summed up colonial objections to British taxes? | No taxation without representation | Give me liberty or give me death | Don't tread on me | Join or die
+M | Which 1767 acts taxed glass, paint, paper and tea? | The Townshend Acts | The Stamp Act | The Sugar Act | The Tea Act
+M | Which 1773 act gave a company a monopoly and triggered a protest? | The Tea Act | The Stamp Act | The Quartering Act | The Declaratory Act
+M | Which laws did colonists call the Intolerable Acts? | The Coercive Acts | The Navigation Acts | The Townshend Acts | The Sugar and Stamp Acts
+M | Which body of colonial delegates first met in Philadelphia in 1774? | The First Continental Congress | The Second Continental Congress | The Stamp Act Congress | The Albany Congress
+M | Which group of colonists organized protests and intimidation against tax collectors? | The Sons of Liberty | The Minutemen | The Regulators | The Green Mountain Boys
+M | Which colonial militia could be ready at a moment's notice? | The Minutemen | The Continentals | The Rangers | The Rifles
+M | Which silversmith rode to warn that British troops were coming? | Paul Revere | John Hancock | Samuel Adams | Joseph Warren
+H | Which 1765 act required a tax stamp on paper goods and enraged colonists? | The Stamp Act | The Sugar Act | The Molasses Act | The Quartering Act
+H | Which 1766 act asserted Parliament's right to legislate for the colonies? | The Declaratory Act | The Coercive Act | The Prohibitory Act | The Restraining Act
+H | Which lawyer defended the British soldiers after the Boston Massacre? | John Adams | Samuel Adams | James Otis | Josiah Quincy
+H | Which 1754 plan proposed uniting the colonies for defense? | The Albany Plan of Union | The Articles of Confederation | The Continental Association | The Plan of 1774
+H | Which cartoon urged colonial unity with a severed snake? | Join, or Die | Don't Tread on Me | The Bloody Massacre | The Able Doctor
+H | Which laws restricted colonial trade to British ships and ports? | The Navigation Acts | The Intolerable Acts | The Townshend Acts | The Currency Acts
+H | Which policy of loose enforcement preceded the tax crisis? | Salutary neglect | Mercantile discipline | Direct rule | Crown supervision
+
+# --- Revolution and independence ---
+
+E | Which two Massachusetts towns saw the war's first fighting in 1775? | Lexington and Concord | Boston and Salem | Cambridge and Charlestown | Worcester and Springfield
+E | Who commanded the Continental Army? | George Washington | Nathanael Greene | Horatio Gates | Benedict Arnold
+M | Which 1775 battle near Boston was actually fought on Breed's Hill? | Bunker Hill | Lexington | Dorchester Heights | Long Island
+M | Which crossing on Christmas night 1776 led to a victory at Trenton? | The crossing of the Delaware | The crossing of the Hudson | The crossing of the Schuylkill | The crossing of the Raritan
+M | Which victory in 1777 convinced France to join the American side? | Saratoga | Brandywine | Germantown | Monmouth
+M | Which Prussian officer drilled the army at Valley Forge? | Baron von Steuben | The Marquis de Lafayette | Casimir Pulaski | Johann de Kalb
+M | Which young French officer became a trusted Washington aide? | The Marquis de Lafayette | Baron von Steuben | Comte de Rochambeau | Admiral de Grasse
+M | Which American general betrayed West Point to the British? | Benedict Arnold | Charles Lee | Horatio Gates | Israel Putnam
+M | Which naval captain said he had not yet begun to fight? | John Paul Jones | Esek Hopkins | John Barry | Nicholas Biddle
+M | Which Virginia orator demanded liberty or death? | Patrick Henry | Richard Henry Lee | George Mason | Thomas Jefferson
+H | Which French fleet sealed the British at Yorktown? | The fleet of Admiral de Grasse | The fleet of Admiral d'Estaing | The fleet of Admiral Suffren | The fleet of Admiral Guichen
+H | Which spy was hanged saying he regretted having but one life to give? | Nathan Hale | John Andre | Benjamin Tallmadge | Enoch Crosby
+H | Which woman is said to have carried water to gunners at Monmouth? | Molly Pitcher | Deborah Sampson | Betsy Ross | Abigail Adams
+H | Which woman disguised herself as a man to serve in the Continental Army? | Deborah Sampson | Molly Pitcher | Sybil Ludington | Lydia Darragh
+H | Which enslaved poet published verse in Boston before independence? | Phillis Wheatley | Jupiter Hammon | Lucy Terry | Olaudah Equiano
+H | Which state's constitution of 1780 is the oldest still in effect? | Massachusetts | Virginia | Pennsylvania | Connecticut
+H | Which Southern campaign wore down Cornwallis before Yorktown? | The Carolinas campaign | The Hudson campaign | The Canada campaign | The Chesapeake raid
+H | Which American general used hit-and-run tactics in the Carolinas? | Francis Marion | Horatio Gates | Anthony Wayne | Daniel Morgan
+H | Which 1781 battle in South Carolina saw Morgan defeat Tarleton? | Cowpens | Camden | Guilford Courthouse | Kings Mountain
+
+# --- Making a government ---
+
+E | Which document sets out the structure of the United States government? | The Constitution | The Declaration of Independence | The Bill of Rights | The Articles of Confederation
+E | How many branches does the federal government have? | Three | Two | Four | Five
+E | Which branch makes the laws? | The legislative branch | The executive branch | The judicial branch | The administrative branch
+E | Which branch enforces the laws? | The executive branch | The legislative branch | The judicial branch | The federal branch
+E | Which branch interprets the laws? | The judicial branch | The legislative branch | The executive branch | The advisory branch
+M | Which weakness of the Articles of Confederation left Congress unable to raise money? | It could not levy taxes | It could not declare war | It had no president | It had no courts at all
+M | Which 1786 uprising in Massachusetts exposed those weaknesses? | Shays' Rebellion | The Whiskey Rebellion | Bacon's Rebellion | The Dorr Rebellion
+M | Which compromise created a House based on population and a Senate with two per state? | The Great Compromise | The Three-Fifths Compromise | The Commerce Compromise | The Missouri Compromise
+M | Which compromise counted part of the enslaved population for representation? | The Three-Fifths Compromise | The Great Compromise | The Slave Trade Compromise | The Electoral Compromise
+M | Which system lets each branch limit the others? | Checks and balances | Federalism | Popular sovereignty | Judicial review
+M | Which principle divides power between national and state governments? | Federalism | Separation of powers | Checks and balances | Popular sovereignty
+M | Which group opposed ratifying the Constitution without a bill of rights? | The Anti-Federalists | The Federalists | The Whigs | The Democratic-Republicans
+M | How many amendments make up the Bill of Rights? | Ten | Twelve | Five | Fifteen
+M | Which amendment protects the right to a speedy trial? | The Sixth | The Fourth | The Eighth | The Fifth
+M | Which amendment protects against unreasonable searches? | The Fourth | The Fifth | The Sixth | The Third
+M | Which amendment reserves powers to the states and the people? | The Tenth | The Ninth | The Eighth | The Seventh
+H | Which 1787 ordinance organized territory north of the Ohio and barred slavery there? | The Northwest Ordinance | The Land Ordinance of 1785 | The Ordinance of Nullification | The Missouri Compromise
+H | Which three men wrote most of the Federalist Papers? | Hamilton, Madison and Jay | Hamilton, Adams and Jay | Madison, Jefferson and Jay | Hamilton, Madison and Franklin
+H | Which Virginian's plan proposed representation based on population? | The Virginia Plan | The New Jersey Plan | The Connecticut Plan | The Pinckney Plan
+H | Which plan proposed equal representation for every state? | The New Jersey Plan | The Virginia Plan | The Hamilton Plan | The Randolph Plan
+H | Which 1803 case established the Supreme Court's power to strike down laws? | Marbury v. Madison | McCulloch v. Maryland | Gibbons v. Ogden | Fletcher v. Peck
+H | Which power did Marbury v. Madison establish? | Judicial review | Executive privilege | Implied powers | The commerce power
+H | Which Chief Justice led the Court through those landmark rulings? | John Marshall | John Jay | Roger Taney | Oliver Ellsworth
+H | Which clause lets Congress make laws needed to carry out its powers? | The necessary and proper clause | The supremacy clause | The commerce clause | The full faith clause
+H | Which clause makes federal law superior to conflicting state law? | The supremacy clause | The necessary and proper clause | The privileges clause | The takings clause
+
+# --- The early republic ---
+
+M | Which two parties formed in the 1790s around Hamilton and Jefferson? | Federalists and Democratic-Republicans | Whigs and Tories | Democrats and Republicans | Federalists and Whigs
+M | Which financial plan created a national bank and assumed state debts? | Hamilton's financial plan | Jefferson's plan | Gallatin's plan | The Report on Manufactures only
+M | Which 1794 tax revolt did Washington answer with militia? | The Whiskey Rebellion | Shays' Rebellion | The Fries Rebellion | The Regulator revolt
+M | Which 1798 laws let the president deport foreigners and punish criticism? | The Alien and Sedition Acts | The Judiciary Acts | The Naturalization Acts only | The Embargo Acts
+M | Which 1803 purchase doubled the size of the United States? | The Louisiana Purchase | The Gadsden Purchase | The Florida Purchase | The Oregon settlement
+M | Which 1807 law banned American ships from foreign trade? | The Embargo Act | The Non-Intercourse Act | The Macon Bill | The Tariff of 1807
+M | Which practice of seizing American sailors helped cause the War of 1812? | Impressment | Blockade running | Privateering | Embargo
+M | Which national anthem was written during the War of 1812? | The Star-Spangled Banner | America the Beautiful | Hail Columbia | Yankee Doodle
+M | Which battle was fought after the War of 1812 had officially ended? | New Orleans | Baltimore | Plattsburgh | Lundy's Lane
+M | Which 1823 policy warned Europe against new colonies in the Americas? | The Monroe Doctrine | The Adams-Onis Treaty | The Rush-Bagot Agreement | The Open Door Policy
+H | Which 1794 treaty settled disputes with Britain and angered many Americans? | Jay's Treaty | Pinckney's Treaty | The Treaty of Greenville | The Treaty of Ghent
+H | Which 1795 treaty opened the Mississippi to American shipping? | Pinckney's Treaty | Jay's Treaty | The Treaty of San Ildefonso | The Treaty of Paris
+H | Which 1814 treaty ended the War of 1812? | The Treaty of Ghent | The Treaty of Paris | The Treaty of Ryswick | The Convention of 1818
+H | Which New England convention discussed leaving the Union in 1814? | The Hartford Convention | The Albany Congress | The Annapolis Convention | The Providence Assembly
+H | Which era of one-party rule is called the Era of Good Feelings? | The Monroe years | The Jefferson years | The Jackson years | The Adams years
+H | Which 1820 agreement admitted Missouri and Maine together? | The Missouri Compromise | The Compromise of 1850 | The Kansas-Nebraska Act | The Wilmot Proviso
+H | Which line did the Missouri Compromise draw for slavery in the territories? | Thirty-six degrees thirty minutes | The Mason-Dixon Line | The Ohio River | The forty-second parallel
+H | Which 1832 crisis saw South Carolina reject a federal tariff? | The Nullification Crisis | The Bank War | The Panic of 1837 | The Force Bill crisis
+H | Which bank did Andrew Jackson refuse to recharter? | The Second Bank of the United States | The First Bank | The Bank of New York | The Bank of Pennsylvania
+H | Which 1830 act forced Native nations to move west of the Mississippi? | The Indian Removal Act | The Dawes Act | The Homestead Act | The Land Act
+
+# --- Expansion and division ---
+
+E | Which idea claimed the nation was meant to stretch to the Pacific? | Manifest Destiny | The Monroe Doctrine | Nullification | Popular Sovereignty
+M | Which 1836 battle in Texas ended with all the defenders killed? | The Alamo | San Jacinto | Goliad | Gonzales
+M | Which 1836 battle won Texas its independence? | San Jacinto | The Alamo | Palo Alto | Buena Vista
+M | Which trail carried thousands of settlers to the Willamette Valley? | The Oregon Trail | The Santa Fe Trail | The Mormon Trail | The Chisholm Trail
+M | Which religious group settled the Great Salt Lake valley in 1847? | The Mormons | The Quakers | The Shakers | The Amish
+M | Which 1848 discovery drew a rush of migrants to California? | Gold at Sutter's Mill | Silver at the Comstock | Oil at Spindletop | Copper at Bisbee
+M | Which invention made short-staple cotton profitable and expanded slavery? | The cotton gin | The spinning jenny | The power loom | The steam press
+M | Which system of Northern factories used young women workers in Massachusetts? | The Lowell system | The Waltham plan only | The Slater system | The Pawtucket plan
+M | Which canal of 1825 linked the Hudson River to Lake Erie? | The Erie Canal | The Chesapeake and Ohio Canal | The Illinois and Michigan Canal | The Wabash Canal
+M | Which 1850 law required citizens to help return escaped slaves? | The Fugitive Slave Act | The Kansas-Nebraska Act | The Dred Scott ruling | The Personal Liberty Law
+H | Which 1846 proposal would have barred slavery from lands won from Mexico? | The Wilmot Proviso | The Crittenden Compromise | The Omnibus Bill | The Clayton Compromise
+H | Which idea let territorial settlers vote on whether to allow slavery? | Popular sovereignty | Nullification | Free soil | Squatter exclusion
+H | Which territory earned the nickname Bleeding for its violence in the 1850s? | Kansas | Missouri | Nebraska | Arkansas
+H | Which 1858 debates over slavery made Lincoln nationally known? | The Lincoln-Douglas debates | The Webster-Hayne debate | The Seward debates | The Sumner debates
+H | Which senator was beaten with a cane on the Senate floor in 1856? | Charles Sumner | Stephen Douglas | Henry Clay | John Calhoun
+H | Which party formed in 1854 to oppose slavery's expansion? | The Republican Party | The Whig Party | The Know-Nothing Party | The Free Soil Party
+H | Which Kentucky senator earned the name the Great Compromiser? | Henry Clay | Daniel Webster | John Calhoun | Thomas Benton
+H | Which 1850 package admitted California free and toughened fugitive slave law? | The Compromise of 1850 | The Missouri Compromise | The Omnibus Act | The Clay Resolutions
+H | Which 1857 ruling said Congress could not bar slavery from territories? | The Dred Scott decision | Plessy v. Ferguson | Prigg v. Pennsylvania | Ableman v. Booth
+
+# --- Civil War and Reconstruction ---
+
+E | Which states left the Union to form the Confederacy? | Eleven Southern states | All slave states | Seven Northern states | The border states
+M | Which state seceded first, in December 1860? | South Carolina | Virginia | Georgia | Mississippi
+M | Which slave states stayed in the Union? | The border states | The Deep South states | The Gulf states | The Upper South states
+M | Which Union strategy aimed to blockade the coast and split the Confederacy? | The Anaconda Plan | The Peninsula Plan | The Overland Plan | The Total War Plan
+M | Which advantage did the North hold in factories and railroads? | Industrial capacity | Better generals | More cotton | Foreign recognition
+M | Which Black regiment led the assault on Fort Wagner in 1863? | The 54th Massachusetts | The 1st South Carolina | The 5th Cavalry | The 20th Maine
+M | Which Union regiment held Little Round Top at Gettysburg? | The 20th Maine | The 54th Massachusetts | The Iron Brigade | The 1st Minnesota
+M | Which Confederate general was accidentally shot by his own men in 1863? | Stonewall Jackson | James Longstreet | J. E. B. Stuart | A. P. Hill
+M | Which period after the war aimed to rebuild the South and secure rights? | Reconstruction | Redemption | The Gilded Age | Restoration
+M | Which agency helped formerly enslaved people with schools and contracts? | The Freedmen's Bureau | The Homestead Office | The Reconstruction Commission | The Southern Relief Board
+H | Which Confederate victory in 1862 preceded Lee's first invasion of the North? | Second Bull Run | Fredericksburg | Chancellorsville | Antietam
+H | Which battle gave Lincoln the moment to announce emancipation? | Antietam | Gettysburg | Shiloh | Bull Run
+H | Which 1863 draft protest turned into riots in a Northern city? | The New York City draft riots | The Boston bread riots | The Philadelphia riots | The Baltimore riots
+H | Which Confederate prison camp in Georgia became notorious? | Andersonville | Libby | Belle Isle | Salisbury
+H | Which general took command of all Union armies in 1864? | Ulysses S. Grant | George Meade | Henry Halleck | William Rosecrans
+H | Which Union campaign burned a path through Georgia in late 1864? | Sherman's March to the Sea | The Overland Campaign | The Shenandoah Campaign | The Vicksburg Campaign
+H | Which laws did Southern states pass to restrict freedpeople after the war? | Black Codes | Jim Crow statutes only | Enforcement Acts | Reconstruction Acts
+H | Which president was impeached for defying Congress over Reconstruction? | Andrew Johnson | Ulysses Grant | Abraham Lincoln | Rutherford Hayes
+H | Which farming arrangement kept many freedpeople in debt after the war? | Sharecropping | Homesteading | Tenant ownership | Wage labor
+H | Which 1877 bargain ended Reconstruction by withdrawing federal troops? | The Compromise of 1877 | The Compromise of 1850 | The Wormley agreement only | The Hayes accord
+H | Which secret group used terror against freedpeople and their allies? | The Ku Klux Klan | The Knights of Labor | The Grangers | The Molly Maguires
+H | Which amendments of Reconstruction are called the Civil War amendments? | The Thirteenth, Fourteenth and Fifteenth | The Twelfth through Fourteenth | The Fourteenth through Sixteenth | The Eleventh through Thirteenth
+H | Which clause of the Fourteenth Amendment promises fair treatment under law? | Equal protection | Full faith and credit | Privileges and immunities only | Due course
+H | Which Reconstruction-era Black senator represented Mississippi first? | Hiram Revels | Blanche Bruce | Robert Elliott | Joseph Rainey
+
+# --- Openers ---
+
+E | Which ocean did the thirteen colonies border? | The Atlantic | The Pacific | The Gulf of Mexico | The Arctic
+E | Which country ruled the thirteen colonies before independence? | Britain | France | Spain | The Netherlands
+E | Which city hosted the Continental Congress? | Philadelphia | Boston | New York | Baltimore
+E | Which document announced the colonies' separation from Britain? | The Declaration of Independence | The Constitution | The Articles of Confederation | The Bill of Rights
+E | Which war ended with the Treaty of Paris in 1783? | The Revolutionary War | The French and Indian War | The War of 1812 | The Civil War
+E | Which president served two terms and then stepped down? | George Washington | John Adams | Thomas Jefferson | James Madison
+E | Which region of the colonies relied most on large plantations? | The Southern colonies | The New England colonies | The Middle colonies | The frontier
+E | Which region of the colonies built shipping and small farms on rocky soil? | The New England colonies | The Southern colonies | The Middle colonies | The backcountry
+E | Which colonies were known as the breadbasket for their grain? | The Middle colonies | The New England colonies | The Southern colonies | The Carolinas
+E | Which river was the great highway of the American interior? | The Mississippi | The Hudson | The Potomac | The Delaware
+E | Which mountains formed the western edge of colonial settlement? | The Appalachians | The Rockies | The Ozarks | The Adirondacks
+E | Which two sides fought the Civil War? | The Union and the Confederacy | The Federalists and Anti-Federalists | The North and Britain | The states and the territories
+E | Which president led the Union during the Civil War? | Abraham Lincoln | Andrew Johnson | James Buchanan | Ulysses Grant
+E | Which city was the Confederate capital? | Richmond | Atlanta | Charleston | Montgomery
+E | Which invention sped up communication in the 1840s? | The telegraph | The telephone | The radio | The typewriter
+E | Which machine let boats travel upstream against a current? | The steamboat | The clipper ship | The barge | The ferry raft
+E | Which form of transport tied the country together with iron rails? | The railroad | The canal boat | The stagecoach | The wagon train
+M | Which Northern movement worked to abolish slavery? | Abolitionism | Nativism | Temperance | Populism
+M | Which movement campaigned against alcohol in the same decades? | Temperance | Abolition | Suffrage | Nativism
+M | Which movement campaigned for women's right to vote? | The suffrage movement | The temperance movement | The abolition movement | The labor movement
+
+E | Which crop dominated the colonial Chesapeake economy? | Tobacco | Wheat | Corn | Sugar
+E | Which crop dominated the Deep South before the Civil War? | Cotton | Tobacco | Rice | Wheat
+E | Which body writes federal laws in the United States? | Congress | The Cabinet | The Supreme Court | The Electoral College
+E | Which two chambers make up Congress? | The House and the Senate | The House and the Cabinet | The Senate and the Court | The Assembly and the Council
+E | How many senators does each state send to Congress? | Two | One | Three | It depends on population
+E | What decides how many representatives a state sends to the House? | Its population | Its area | Its wealth | Its age as a state
+E | Which court is the highest in the United States? | The Supreme Court | The Court of Appeals | The District Court | The Federal Circuit
+E | Which official leads the executive branch? | The president | The speaker | The chief justice | The vice president alone
+E | Which amendment protects freedom of religion, speech and the press? | The First | The Second | The Fourth | The Tenth
+E | Which document lists rights the government may not take away? | The Bill of Rights | The Constitution's preamble | The Articles of Confederation | The Northwest Ordinance
+E | Which war did the United States fight against Mexico in the 1840s? | The Mexican-American War | The Spanish-American War | The Texas Revolution | The Civil War
+E | Which state joined the Union in 1845 after being an independent republic? | Texas | California | Oregon | Florida
+E | Which territory did the United States and Britain divide in 1846? | Oregon | Louisiana | Florida | Maine
+E | Which fort's shelling began the Civil War? | Fort Sumter | Fort Pickens | Fort Monroe | Fort Henry
+E | Which side won the Civil War? | The Union | The Confederacy | Neither, it was a draw | Britain intervened
+E | Which speech did Lincoln give at a battlefield cemetery in 1863? | The Gettysburg Address | The Second Inaugural | The House Divided speech | The Cooper Union speech
+E | Which building in Washington houses Congress? | The Capitol | The White House | The Supreme Court building | The Treasury
+E | Which city became the permanent national capital in 1800? | Washington | Philadelphia | New York | Baltimore
+M | Which term describes the practice of dividing power between levels of government? | Federalism as a system | Confederation only | Unitary rule | Devolution
+M | Which term describes a formal change to the Constitution? | An amendment | A statute | An ordinance | A proclamation
+M | Which fraction of Congress must propose an amendment? | Two thirds | One half | Three fourths | Three fifths
+M | Which fraction of the states must ratify an amendment? | Three fourths | Two thirds | One half | Nine of thirteen
+M | Which body formally elects the president? | The Electoral College | The Senate | The House alone | The state legislatures
+M | Which term describes the president's rejection of a bill? | A veto | A filibuster | A pocket amendment | A recall
+M | Which vote in Congress can override a presidential veto? | Two thirds of both chambers | A simple majority | Three fourths of the Senate | A unanimous House

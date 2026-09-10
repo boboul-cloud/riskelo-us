@@ -1,93 +1,93 @@
 //
 //  PacksView.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Les packs : ce qu'on joue, et ce qu'on achète.
+//  The packs: what you play, and what you buy.
 //
-//  Le choix des thèmes vivait dans « Réglages de la partie », et il n'y
-//  marchait qu'à moitié — pour une raison de fond. Cet écran-là ne règle pas
-//  l'application : il met en place **une** partie, et son bouton de départ est
-//  le seul à lire ce qu'on y a coché. Une partie rapide lancée depuis
-//  l'accueil, une partie reprise, une table ouverte en réseau partaient toutes
-//  des valeurs d'usine. On décochait un thème, et il revenait.
+//  Choosing themes used to live in "Game settings", and it only half worked
+//  there — for a fundamental reason. That screen does not configure the app:
+//  it sets up **one** game, and its start button is the only thing that reads
+//  what was ticked. A quick game launched from the home screen, a resumed
+//  game, a table opened over the network all started from factory values. You
+//  unticked a theme, and it came back.
 //
-//  Un pack n'est pas un réglage de partie. C'est quelque chose qu'on possède,
-//  qui se garde, et qui vaut pour toutes les parties tant qu'on n'en décide
-//  pas autrement. D'où cette page à part, et son accès depuis l'accueil.
+//  A pack is not a game setting. It is something you own, that is kept, and
+//  that holds for every game until you decide otherwise. Hence this separate
+//  page, and its door on the home screen.
 //
-//  Ce qu'on y choisit part malgré tout **avec** la partie, dans ses règles :
-//  celui qui rejoint une table joue les thèmes de l'hôte, sans quoi les deux
-//  appareils ne poseraient pas les mêmes questions.
+//  What is chosen here nevertheless leaves **with** the game, in its rules:
+//  whoever joins a table plays the host's themes, or the two devices would
+//  not ask the same questions.
 //
 
 import SwiftUI
 import StoreKit
 
-// MARK: - Ce que l'appareil garde
+// MARK: - What the device keeps
 
-/// Le choix des packs, gardé d'une partie à l'autre.
+/// The pack choice, kept from one game to the next.
 ///
-/// Dans les préférences du système et non dans une vue : il vaut pour
-/// l'application entière, comme le son et le pseudonyme, et non pour la
-/// partie qu'on est en train de mettre en place.
+/// In the system preferences and not in a view: it holds for the whole app,
+/// like the sound and the nickname, and not for the game currently being set
+/// up.
 enum Packs {
 
-    static let cleChoisis = "riskelo.packs.choisis"
-    static let cleAvecBase = "riskelo.packs.base"
+    static let keyChosen = "riskelo.us.packs.chosen"
+    static let keyWithBase = "riskelo.us.packs.base"
 
-    /// Les packs cochés, par identifiant de thème.
-    static var choisis: Set<String> {
-        get { Set(UserDefaults.standard.stringArray(forKey: cleChoisis) ?? []) }
-        set { UserDefaults.standard.set(Array(newValue).sorted(), forKey: cleChoisis) }
+    /// The packs ticked, by theme identifier.
+    static var chosen: Set<String> {
+        get { Set(UserDefaults.standard.stringArray(forKey: keyChosen) ?? []) }
+        set { UserDefaults.standard.set(Array(newValue).sorted(), forKey: keyChosen) }
     }
 
-    /// Joue-t-on aussi les six thèmes de culture générale ?
-    static var avecBase: Bool {
-        get { UserDefaults.standard.object(forKey: cleAvecBase) as? Bool ?? true }
-        set { UserDefaults.standard.set(newValue, forKey: cleAvecBase) }
+    /// Do we also play the six general-knowledge themes?
+    static var withBase: Bool {
+        get { UserDefaults.standard.object(forKey: keyWithBase) as? Bool ?? true }
+        set { UserDefaults.standard.set(newValue, forKey: keyWithBase) }
     }
 
-    /// Les thèmes que les parties doivent utiliser.
+    /// The themes games must use.
     ///
-    /// Jamais vide : tout décocher rendrait le jeu injouable, et une partie
-    /// sans question ne se distingue pas d'une panne. À défaut de tout, le
-    /// jeu de base — celui que tout le monde possède.
-    static var enJeu: Set<String> {
-        var ids = avecBase ? Set(Themes.base.map(\.id)) : []
-        ids.formUnion(choisis)
+    /// Never empty: unticking everything would make the game unplayable, and
+    /// a game without a question is indistinguishable from a breakdown.
+    /// Failing everything, the base game — the one everyone owns.
+    static var inPlay: Set<String> {
+        var ids = withBase ? Set(Themes.base.map(\.id)) : []
+        ids.formUnion(chosen)
         return ids.isEmpty ? Set(Themes.base.map(\.id)) : ids
     }
 
-    /// Écarte ce qui n'est plus possédé — un remboursement, un appareil neuf.
-    static func oublierCeQuOnNaPlus(_ possedes: Set<String>) {
-        let valides = choisis.filter { id in
-            guard let produit = Themes.connu(Category(id))?.produit else { return false }
-            return possedes.contains(produit)
+    /// Sets aside what is no longer owned — a refund, a new device.
+    static func forgetWhatWeNoLongerOwn(_ owned: Set<String>) {
+        let valid = chosen.filter { id in
+            guard let product = Themes.known(Category(id))?.product else { return false }
+            return owned.contains(product)
         }
-        if valides != choisis { choisis = Set(valides) }
+        if valid != chosen { chosen = Set(valid) }
     }
 }
 
-// MARK: - L'écran
+// MARK: - The screen
 
 struct PacksView: View {
 
     var onClose: () -> Void
 
-    @State private var boutique = Boutique.shared
-    @State private var choisis = Packs.choisis
-    @State private var avecBase = Packs.avecBase
+    @State private var shop = Shop.shared
+    @State private var chosen = Packs.chosen
+    @State private var withBase = Packs.withBase
 
     var body: some View {
         VStack(spacing: 0) {
-            entete
+            header
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    presentation
-                    jeuDeBase
-                    ForEach(Themes.packs) { pack in ligne(pack) }
-                    restauration
-                    resume
+                    intro
+                    baseGame
+                    ForEach(Themes.packs) { pack in row(pack) }
+                    restoreSection
+                    summary
                 }
                 .padding(18)
                 .frame(maxWidth: 620)
@@ -97,59 +97,58 @@ struct PacksView: View {
         .background(Palette.sea)
         .preferredColorScheme(.dark)
         .task {
-            await boutique.ouvrir()
-            Packs.oublierCeQuOnNaPlus(boutique.possedes)
-            choisis = Packs.choisis
+            await shop.open()
+            Packs.forgetWhatWeNoLongerOwn(shop.owned)
+            chosen = Packs.chosen
         }
     }
 
-    private var entete: some View {
+    private var header: some View {
         HStack {
             Button(action: onClose) {
-                Label("Accueil", systemImage: "chevron.left").font(.subheadline)
+                Label("Home", systemImage: "chevron.left").font(.subheadline)
             }
             .buttonStyle(.plain).foregroundStyle(Palette.dim)
             Spacer()
             Text("Packs").font(.headline).foregroundStyle(Palette.ink)
             Spacer()
-            // Un vide de la largeur du bouton, pour que le titre soit centré
-            // sur l'écran et non sur ce qui reste.
-            Label("Accueil", systemImage: "chevron.left").font(.subheadline).hidden()
+            // A gap the width of the button, so the title is centered on the
+            // screen and not on what is left of it.
+            Label("Home", systemImage: "chevron.left").font(.subheadline).hidden()
         }
         .padding(.horizontal, 16).padding(.vertical, 12)
         .background(Palette.panel)
     }
 
-    private var presentation: some View {
-        Text("Un pack est un jeu de questions qui s'ajoute au vôtre. Cochez ceux "
-             + "que vous voulez jouer — un seul, ou plusieurs mêlés. Le choix vaut "
-             + "pour toutes vos parties, et c'est celui qui ouvre la table qui "
-             + "décide pour tout le monde.")
+    private var intro: some View {
+        Text("A pack is a set of questions added to yours. Tick the ones you want "
+             + "to play — one, or several mixed together. The choice holds for all "
+             + "your games, and whoever opens the table decides for everyone.")
             .font(.caption).foregroundStyle(Palette.dim)
     }
 
-    // MARK: - Le jeu de base
+    // MARK: - The base game
 
-    private var jeuDeBase: some View {
+    private var baseGame: some View {
         VStack(alignment: .leading, spacing: 0) {
             Button {
-                // On ne peut pas tout retirer : sans thème, pas de question.
-                guard !avecBase || !choisis.isEmpty else { return }
-                avecBase.toggle()
-                Packs.avecBase = avecBase
+                // You cannot remove everything: with no theme, no question.
+                guard !withBase || !chosen.isEmpty else { return }
+                withBase.toggle()
+                Packs.withBase = withBase
             } label: {
                 HStack(spacing: 12) {
-                    Image(systemName: "globe.europe.africa")
+                    Image(systemName: "globe.americas")
                         .font(.system(size: 17)).frame(width: 24)
-                        .foregroundStyle(avecBase ? Palette.camp(0) : Palette.dim)
+                        .foregroundStyle(withBase ? Palette.side(0) : Palette.dim)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Culture générale").font(.subheadline.weight(.semibold))
-                            .foregroundStyle(avecBase ? Palette.ink : Palette.dim)
-                        Text("Les six thèmes du jeu — \(compte(Themes.base)) questions.")
+                        Text("General knowledge").font(.subheadline.weight(.semibold))
+                            .foregroundStyle(withBase ? Palette.ink : Palette.dim)
+                        Text("The six themes that ship with the game — \(count(Themes.base)) questions.")
                             .font(.caption2).foregroundStyle(Palette.dim)
                     }
                     Spacer()
-                    coche(avecBase, teinte: Palette.camp(0))
+                    check(withBase, tint: Palette.side(0))
                 }
                 .padding(14).contentShape(Rectangle())
             }
@@ -158,103 +157,103 @@ struct PacksView: View {
         }
     }
 
-    // MARK: - Un pack
+    // MARK: - One pack
 
-    @ViewBuilder private func ligne(_ pack: Category) -> some View {
-        let possede = boutique.possede(pack)
-        let coche = possede && choisis.contains(pack.id)
-        let teinte = Palette.category(pack)
+    @ViewBuilder private func row(_ pack: Category) -> some View {
+        let owned = shop.owns(pack)
+        let ticked = owned && chosen.contains(pack.id)
+        let tint = Palette.category(pack)
 
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 12) {
                 Image(systemName: pack.symbol)
                     .font(.system(size: 17)).frame(width: 24)
-                    .foregroundStyle(coche ? teinte : Palette.dim)
+                    .foregroundStyle(ticked ? tint : Palette.dim)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(pack.label).font(.subheadline.weight(.semibold))
-                        .foregroundStyle(coche ? Palette.ink : Palette.dim)
-                    Text(Themes.connu(pack)?.detail ?? "")
+                        .foregroundStyle(ticked ? Palette.ink : Palette.dim)
+                    Text(Themes.known(pack)?.detail ?? "")
                         .font(.caption2).foregroundStyle(Palette.dim)
-                    Text("\(compte([pack])) questions")
+                    Text("\(count([pack])) questions")
                         .font(.caption2.monospacedDigit()).foregroundStyle(Palette.dim)
                 }
                 Spacer()
-                if possede {
+                if owned {
                     Button {
-                        // Le dernier thème coché ne se décoche pas.
-                        if coche {
-                            guard avecBase || choisis.count > 1 else { return }
-                            choisis.remove(pack.id)
+                        // The last theme ticked cannot be unticked.
+                        if ticked {
+                            guard withBase || chosen.count > 1 else { return }
+                            chosen.remove(pack.id)
                         } else {
-                            choisis.insert(pack.id)
+                            chosen.insert(pack.id)
                         }
-                        Packs.choisis = choisis
+                        Packs.chosen = chosen
                     } label: {
-                        self.coche(coche, teinte: teinte)
+                        check(ticked, tint: tint)
                     }
                     .buttonStyle(.plain)
                 } else {
-                    boutonDAchat(pack, teinte: teinte)
+                    purchaseButton(pack, tint: tint)
                 }
             }
         }
         .padding(14)
         .background(Palette.panel, in: RoundedRectangle(cornerRadius: 12))
         .overlay(RoundedRectangle(cornerRadius: 12)
-            .stroke(coche ? teinte.opacity(0.45) : .clear, lineWidth: 1))
+            .stroke(ticked ? tint.opacity(0.45) : .clear, lineWidth: 1))
     }
 
-    @ViewBuilder private func boutonDAchat(_ pack: Category, teinte: Color) -> some View {
-        if boutique.enCours == pack.produit {
+    @ViewBuilder private func purchaseButton(_ pack: Category, tint: Color) -> some View {
+        if shop.pending == pack.product {
             ProgressView().controlSize(.small)
-        } else if let prix = boutique.prix(pack) {
-            Button(prix) { Task { await boutique.acheter(pack) } }
-                .buttonStyle(.borderedProminent).tint(teinte)
+        } else if let price = shop.price(pack) {
+            Button(price) { Task { await shop.buy(pack) } }
+                .buttonStyle(.borderedProminent).tint(tint)
                 .font(.subheadline.weight(.semibold))
-        } else if boutique.ouverte {
-            // L'article existe dans le jeu mais pas dans l'App Store : c'est
-            // une faute de configuration, et mieux vaut la dire que d'afficher
-            // un bouton qui ne fait rien.
-            Text("indisponible").font(.caption2).foregroundStyle(Palette.dim)
+        } else if shop.hasOpened {
+            // The item exists in the game but not in the App Store: that is a
+            // configuration mistake, and better said than shown as a button
+            // that does nothing.
+            Text("unavailable").font(.caption2).foregroundStyle(Palette.dim)
         } else {
             ProgressView().controlSize(.small)
         }
     }
 
-    // MARK: - Le bas de page
+    // MARK: - The foot of the page
 
-    private var restauration: some View {
+    private var restoreSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            if let panne = boutique.panne {
-                Text(panne).font(.caption).foregroundStyle(Palette.lostVif)
+            if let failure = shop.failure {
+                Text(failure).font(.caption).foregroundStyle(Palette.lostBright)
             }
-            Button("Restaurer mes achats") { Task { await boutique.restaurer() } }
+            Button("Restore my purchases") { Task { await shop.restore() } }
                 .buttonStyle(.bordered).tint(Palette.dim)
                 .font(.subheadline)
-            Text("Un pack acheté vous suit sur vos appareils. Celui qui rejoint votre "
-                 + "table joue vos packs sans avoir à les acheter.")
+            Text("A pack you buy follows you across your devices. Whoever joins your "
+                 + "table plays your packs without having to buy them.")
                 .font(.caption2).foregroundStyle(Palette.dim)
         }
     }
 
-    private var resume: some View {
-        let enJeu = Themes.tous.filter { Packs.enJeu.contains($0.id) }
-        return Text("\(enJeu.count) thème\(enJeu.count > 1 ? "s" : "") en jeu — "
-                    + "\(compte(enJeu)) questions.")
+    private var summary: some View {
+        let inPlay = Themes.all.filter { Packs.inPlay.contains($0.id) }
+        return Text("\(inPlay.count) theme\(inPlay.count > 1 ? "s" : "") in play — "
+                    + "\(count(inPlay)) questions.")
             .font(.caption.weight(.medium)).foregroundStyle(Palette.ink)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    // MARK: - Le détail
+    // MARK: - The details
 
-    private func coche(_ actif: Bool, teinte: Color) -> some View {
-        Image(systemName: actif ? "checkmark.circle.fill" : "circle")
+    private func check(_ on: Bool, tint: Color) -> some View {
+        Image(systemName: on ? "checkmark.circle.fill" : "circle")
             .font(.system(size: 20))
-            .foregroundStyle(actif ? teinte : Palette.dim.opacity(0.5))
+            .foregroundStyle(on ? tint : Palette.dim.opacity(0.5))
     }
 
-    private func compte(_ themes: [Category]) -> Int {
+    private func count(_ themes: [Category]) -> Int {
         let ids = Set(themes.map(\.id))
-        return QuestionBank.francaises.filter { ids.contains($0.category.id) }.count
+        return QuestionBank.all.filter { ids.contains($0.category.id) }.count
     }
 }

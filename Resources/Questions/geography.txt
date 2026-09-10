@@ -1,0 +1,469 @@
+# Geography — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Half the file is the United States, half is the rest of the world. That
+# is what a general-knowledge deck looks like on this side of the Atlantic:
+# a player who cannot place Wyoming has no business being asked about
+# Burkina Faso first.
+
+# What this theme declares — readable name, icon, color, and its
+# place in the grid. These lines are not comments: without
+# them the theme has no name.
+
+! id      | geography
+! name    | Geography
+! icon    | globe.americas
+! tint    | 0.26 0.55 0.80
+! rank    | 0
+
+
+# --- The fifty states: capitals ---
+
+E | What is the capital of California? | Sacramento | Los Angeles | San Francisco | San Diego
+E | What is the capital of New York State? | Albany | New York City | Buffalo | Rochester
+E | What is the capital of Texas? | Austin | Houston | Dallas | San Antonio
+E | What is the capital of Florida? | Tallahassee | Miami | Orlando | Jacksonville
+E | What is the capital of Illinois? | Springfield | Chicago | Peoria | Rockford
+E | What is the capital of Arizona? | Phoenix | Tucson | Mesa | Flagstaff
+E | What is the capital of Colorado? | Denver | Boulder | Colorado Springs | Aspen
+E | What is the capital of Massachusetts? | Boston | Worcester | Cambridge | Salem
+E | What is the capital of Georgia? | Atlanta | Savannah | Augusta | Macon
+E | What is the capital of Hawaii? | Honolulu | Hilo | Kailua | Maui
+M | What is the capital of Pennsylvania? | Harrisburg | Philadelphia | Pittsburgh | Erie
+M | What is the capital of Washington State? | Olympia | Seattle | Spokane | Tacoma
+M | What is the capital of Oregon? | Salem | Portland | Eugene | Bend
+M | What is the capital of Nevada? | Carson City | Las Vegas | Reno | Henderson
+M | What is the capital of Missouri? | Jefferson City | St. Louis | Kansas City | Springfield
+M | What is the capital of Michigan? | Lansing | Detroit | Grand Rapids | Ann Arbor
+M | What is the capital of Ohio? | Columbus | Cleveland | Cincinnati | Toledo
+M | What is the capital of Tennessee? | Nashville | Memphis | Knoxville | Chattanooga
+M | What is the capital of Louisiana? | Baton Rouge | New Orleans | Shreveport | Lafayette
+M | What is the capital of Minnesota? | Saint Paul | Minneapolis | Duluth | Rochester
+M | What is the capital of Maryland? | Annapolis | Baltimore | Rockville | Frederick
+M | What is the capital of Virginia? | Richmond | Norfolk | Arlington | Charlottesville
+M | What is the capital of Alaska? | Juneau | Anchorage | Fairbanks | Nome
+M | What is the capital of New Mexico? | Santa Fe | Albuquerque | Las Cruces | Roswell
+M | What is the capital of Utah? | Salt Lake City | Provo | Ogden | Moab
+M | What is the capital of Wisconsin? | Madison | Milwaukee | Green Bay | Racine
+M | What is the capital of Indiana? | Indianapolis | Fort Wayne | Gary | Bloomington
+M | What is the capital of Oklahoma? | Oklahoma City | Tulsa | Norman | Lawton
+H | What is the capital of Kentucky? | Frankfort | Louisville | Lexington | Bowling Green
+H | What is the capital of Alabama? | Montgomery | Birmingham | Mobile | Huntsville
+H | What is the capital of South Carolina? | Columbia | Charleston | Greenville | Myrtle Beach
+H | What is the capital of North Carolina? | Raleigh | Charlotte | Greensboro | Durham
+H | What is the capital of Connecticut? | Hartford | New Haven | Bridgeport | Stamford
+H | What is the capital of New Jersey? | Trenton | Newark | Jersey City | Atlantic City
+H | What is the capital of Delaware? | Dover | Wilmington | Newark | Rehoboth Beach
+H | What is the capital of Maine? | Augusta | Portland | Bangor | Lewiston
+H | What is the capital of Vermont? | Montpelier | Burlington | Rutland | Stowe
+H | What is the capital of New Hampshire? | Concord | Manchester | Nashua | Portsmouth
+H | What is the capital of Rhode Island? | Providence | Newport | Warwick | Pawtucket
+H | What is the capital of Kansas? | Topeka | Wichita | Overland Park | Lawrence
+H | What is the capital of Nebraska? | Lincoln | Omaha | Bellevue | Grand Island
+H | What is the capital of Iowa? | Des Moines | Cedar Rapids | Davenport | Iowa City
+H | What is the capital of Montana? | Helena | Billings | Missoula | Bozeman
+H | What is the capital of Wyoming? | Cheyenne | Casper | Jackson | Laramie
+H | What is the capital of South Dakota? | Pierre | Sioux Falls | Rapid City | Deadwood
+H | What is the capital of North Dakota? | Bismarck | Fargo | Grand Forks | Minot
+H | What is the capital of Idaho? | Boise | Idaho Falls | Pocatello | Coeur d'Alene
+H | What is the capital of Arkansas? | Little Rock | Fayetteville | Fort Smith | Hot Springs
+H | What is the capital of Mississippi? | Jackson | Biloxi | Gulfport | Hattiesburg
+H | What is the capital of West Virginia? | Charleston | Huntington | Morgantown | Wheeling
+
+# --- The fifty states: size, borders and nicknames ---
+
+E | Which is the largest state by area? | Alaska | Texas | California | Montana
+E | Which is the smallest state by area? | Rhode Island | Delaware | Connecticut | Vermont
+E | Which state is known as the Sunshine State? | Florida | California | Arizona | Hawaii
+E | Which state is nicknamed the Lone Star State? | Texas | Oklahoma | Arizona | Nevada
+E | Which state is nicknamed the Golden State? | California | Colorado | Nevada | Alaska
+E | Which two states do not border any other state? | Alaska and Hawaii | Maine and Alaska | Hawaii and Florida | Alaska and Washington
+M | Which state is nicknamed the Empire State? | New York | Pennsylvania | Illinois | Ohio
+M | Which state is nicknamed the Show Me State? | Missouri | Kansas | Arkansas | Iowa
+M | Which state is nicknamed the Garden State? | New Jersey | Vermont | Oregon | Delaware
+M | Which state is nicknamed the Bay State? | Massachusetts | Maryland | Rhode Island | Virginia
+M | Which state is nicknamed the Peach State? | Georgia | South Carolina | Alabama | Florida
+M | Which state is nicknamed the Beehive State? | Utah | Nevada | Idaho | Wyoming
+M | Which state is nicknamed the Grand Canyon State? | Arizona | Utah | Nevada | Colorado
+M | Which state borders only one other state? | Maine | Florida | Washington | Michigan
+M | Which state has the longest coastline? | Alaska | Florida | California | Maine
+M | Which four states meet at a single point? | Utah, Colorado, Arizona, New Mexico | Idaho, Utah, Wyoming, Montana | Kansas, Missouri, Iowa, Nebraska | Kentucky, Ohio, Indiana, Illinois
+M | Which state was the last admitted to the Union? | Hawaii | Alaska | Arizona | New Mexico
+M | Which state was the first to ratify the Constitution? | Delaware | Virginia | Massachusetts | Pennsylvania
+H | Which state is nicknamed the Keystone State? | Pennsylvania | Kentucky | Virginia | Ohio
+H | Which state is nicknamed the Hoosier State? | Indiana | Iowa | Illinois | Ohio
+H | Which state is nicknamed the Buckeye State? | Ohio | Indiana | Michigan | Kentucky
+H | Which state is nicknamed the Tar Heel State? | North Carolina | South Carolina | Georgia | Virginia
+H | Which state is nicknamed the Gem State? | Idaho | Montana | Colorado | Arkansas
+H | Which state is nicknamed the Old Dominion? | Virginia | Maryland | Delaware | Kentucky
+H | Which state is nicknamed the Constitution State? | Connecticut | Pennsylvania | Delaware | Rhode Island
+H | Which state is nicknamed the Aloha State? | Hawaii | California | Florida | Alaska
+H | Which US state flag is not a rectangle? | Ohio | Maryland | Alaska | Texas
+H | Which state borders the most other states? | Tennessee | Texas | Kentucky | Colorado
+H | Which state is entirely north of the 45th parallel? | Alaska | Maine | Montana | Minnesota
+H | Which state has the northernmost point in the United States? | Alaska | Maine | Minnesota | Washington
+
+# --- Rivers, mountains and lakes of the United States ---
+
+E | Which river carved the Grand Canyon? | The Colorado River | The Rio Grande | The Snake River | The Gila River
+E | Which is the largest of the Great Lakes? | Lake Superior | Lake Michigan | Lake Huron | Lake Erie
+E | On which river does St. Louis stand? | The Mississippi | The Ohio | The Missouri | The Illinois
+E | Which mountain range runs down the American West? | The Rocky Mountains | The Appalachians | The Cascades | The Ozarks
+E | Which mountain range runs down the eastern United States? | The Appalachians | The Rockies | The Sierra Nevada | The Cascades
+M | Which is the longest river in the United States? | The Missouri | The Mississippi | The Colorado | The Rio Grande
+M | Which is the highest mountain in North America? | Denali | Mount Whitney | Mount Rainier | Mount Elbert
+M | Which is the highest peak in the contiguous United States? | Mount Whitney | Denali | Mount Rainier | Pikes Peak
+M | Which Great Lake lies entirely within the United States? | Lake Michigan | Lake Superior | Lake Huron | Lake Ontario
+M | Which is the deepest lake in the United States? | Crater Lake | Lake Tahoe | Lake Superior | Lake Michigan
+M | Which river forms much of the border between Texas and Mexico? | The Rio Grande | The Colorado | The Pecos | The Brazos
+M | In which state is Death Valley mostly found? | California | Nevada | Arizona | Utah
+M | Which desert covers much of southern Nevada and California? | The Mojave | The Sonoran | The Chihuahuan | The Great Basin
+M | Which state contains most of Yellowstone National Park? | Wyoming | Montana | Idaho | Colorado
+M | In which state is Mount Rushmore carved? | South Dakota | North Dakota | Wyoming | Montana
+M | Which strait separates Alaska from Russia? | The Bering Strait | The Denmark Strait | The Davis Strait | The Cook Inlet
+H | Which is the highest peak in the Appalachian Mountains? | Mount Mitchell | Mount Washington | Clingmans Dome | Mount Marcy
+H | Which volcano in Washington erupted in 1980? | Mount St. Helens | Mount Rainier | Mount Adams | Mount Baker
+H | Which is the largest natural lake west of the Mississippi? | The Great Salt Lake | Lake Tahoe | Crater Lake | Flathead Lake
+H | Which range does the Continental Divide mainly follow? | The Rocky Mountains | The Appalachians | The Sierra Nevada | The Cascades
+H | Which river flows through the Grand Tetons and into the Columbia? | The Snake River | The Yellowstone | The Green River | The Salmon River
+H | Which bay is the largest estuary in the United States? | Chesapeake Bay | San Francisco Bay | Puget Sound | Mobile Bay
+H | Which sound lies between Seattle and the Olympic Peninsula? | Puget Sound | Long Island Sound | Prince William Sound | Nantucket Sound
+H | Which river joins the Mississippi at Cairo, Illinois? | The Ohio | The Missouri | The Tennessee | The Arkansas
+H | Which is the lowest point in North America? | Badwater Basin | The Salton Sea | Death Valley Junction | The Bonneville Flats
+H | Which mountains rise in Arkansas and Missouri? | The Ozarks | The Appalachians | The Black Hills | The Alleghenies
+H | In which state are the Finger Lakes? | New York | Michigan | Minnesota | Wisconsin
+H | Which national park in Florida protects a vast wetland? | Everglades | Biscayne | Dry Tortugas | Big Cypress
+
+# --- American cities and landmarks ---
+
+E | In which city is the Statue of Liberty? | New York | Boston | Philadelphia | Baltimore
+E | In which city is the Golden Gate Bridge? | San Francisco | Los Angeles | Seattle | San Diego
+E | In which city is the Space Needle? | Seattle | Portland | Vancouver | Spokane
+E | In which city is the Liberty Bell? | Philadelphia | Boston | Washington | New York
+E | In which city is the Gateway Arch? | St. Louis | Kansas City | Memphis | Chicago
+E | The White House stands in which city? | Washington | Philadelphia | New York | Richmond
+M | In which city is the French Quarter? | New Orleans | Charleston | Savannah | Mobile
+M | In which city is the Alamo? | San Antonio | Austin | Houston | El Paso
+M | Which city is known as the Motor City? | Detroit | Cleveland | Pittsburgh | Flint
+M | Which city is known as the Windy City? | Chicago | Boston | Buffalo | Cleveland
+M | Which city is known as Beantown? | Boston | Baltimore | Providence | Hartford
+M | Which city sits on Lake Michigan? | Chicago | Cleveland | Buffalo | Detroit
+M | In which city is Hollywood a neighborhood? | Los Angeles | San Francisco | Las Vegas | Burbank
+M | In which city is Fenway Park? | Boston | New York | Chicago | Philadelphia
+M | Which American city has the largest population? | New York | Los Angeles | Chicago | Houston
+H | Which city is known as the Mile High City? | Denver | Salt Lake City | Albuquerque | Cheyenne
+H | Which city is known as the Big Easy? | New Orleans | Miami | Nashville | Memphis
+H | Which city is known as Music City? | Nashville | Memphis | Austin | New Orleans
+H | Which city is known as the Steel City? | Pittsburgh | Cleveland | Birmingham | Gary
+H | Which city is known as the Emerald City? | Seattle | Portland | Boise | Eugene
+H | Which US city lies farthest west? | Anchorage | Honolulu | Seattle | San Diego
+H | Which is the oldest continuously inhabited city in the United States? | St. Augustine | Jamestown | Santa Fe | Plymouth
+H | Which city hosted the 1904 World's Fair? | St. Louis | Chicago | Philadelphia | Buffalo
+
+# --- World capitals ---
+
+E | What is the capital of France? | Paris | Lyon | Marseille | Nice
+E | What is the capital of Japan? | Tokyo | Osaka | Kyoto | Nagoya
+E | What is the capital of the United Kingdom? | London | Manchester | Edinburgh | Birmingham
+E | What is the capital of Italy? | Rome | Milan | Naples | Florence
+E | What is the capital of Germany? | Berlin | Munich | Hamburg | Frankfurt
+E | What is the capital of Spain? | Madrid | Barcelona | Seville | Valencia
+E | What is the capital of Russia? | Moscow | St. Petersburg | Kazan | Novosibirsk
+E | What is the capital of China? | Beijing | Shanghai | Hong Kong | Guangzhou
+E | What is the capital of Egypt? | Cairo | Alexandria | Giza | Luxor
+E | What is the capital of Mexico? | Mexico City | Guadalajara | Monterrey | Cancun
+M | What is the capital of Canada? | Ottawa | Toronto | Montreal | Vancouver
+M | What is the capital of Australia? | Canberra | Sydney | Melbourne | Perth
+M | What is the capital of Brazil? | Brasilia | Rio de Janeiro | Sao Paulo | Salvador
+M | What is the capital of India? | New Delhi | Mumbai | Kolkata | Bangalore
+M | What is the capital of Turkey? | Ankara | Istanbul | Izmir | Antalya
+M | What is the capital of Switzerland? | Bern | Zurich | Geneva | Basel
+M | What is the capital of the Netherlands? | Amsterdam | The Hague | Rotterdam | Utrecht
+M | What is the capital of Greece? | Athens | Thessaloniki | Patras | Sparta
+M | What is the capital of Portugal? | Lisbon | Porto | Coimbra | Faro
+M | What is the capital of Poland? | Warsaw | Krakow | Gdansk | Wroclaw
+M | What is the capital of Argentina? | Buenos Aires | Cordoba | Rosario | Mendoza
+M | What is the capital of South Korea? | Seoul | Busan | Incheon | Daegu
+M | What is the capital of Norway? | Oslo | Bergen | Trondheim | Stavanger
+M | What is the capital of Sweden? | Stockholm | Gothenburg | Malmo | Uppsala
+M | What is the capital of Ireland? | Dublin | Cork | Galway | Belfast
+M | What is the capital of Austria? | Vienna | Salzburg | Graz | Innsbruck
+M | What is the capital of Belgium? | Brussels | Antwerp | Ghent | Bruges
+M | What is the capital of Denmark? | Copenhagen | Aarhus | Odense | Aalborg
+H | What is the capital of New Zealand? | Wellington | Auckland | Christchurch | Dunedin
+H | What is the capital of Morocco? | Rabat | Casablanca | Marrakesh | Fez
+H | What is the capital of Nigeria? | Abuja | Lagos | Kano | Ibadan
+H | What is the capital of Kenya? | Nairobi | Mombasa | Kisumu | Nakuru
+H | What is the capital of Vietnam? | Hanoi | Ho Chi Minh City | Da Nang | Hue
+H | What is the capital of Thailand? | Bangkok | Chiang Mai | Phuket | Pattaya
+H | What is the capital of Indonesia? | Jakarta | Surabaya | Bali | Medan
+H | What is the capital of Pakistan? | Islamabad | Karachi | Lahore | Peshawar
+H | What is the capital of Czechia? | Prague | Brno | Ostrava | Plzen
+H | What is the capital of Hungary? | Budapest | Debrecen | Szeged | Pecs
+H | What is the capital of Finland? | Helsinki | Turku | Tampere | Espoo
+H | What is the capital of Iceland? | Reykjavik | Akureyri | Kopavogur | Hafnarfjordur
+H | What is the capital of Peru? | Lima | Cusco | Arequipa | Trujillo
+H | What is the capital of Chile? | Santiago | Valparaiso | Concepcion | Antofagasta
+H | What is the capital of Colombia? | Bogota | Medellin | Cali | Cartagena
+H | What is the capital of Cuba? | Havana | Santiago de Cuba | Camaguey | Holguin
+H | What is the capital of Ukraine? | Kyiv | Lviv | Odesa | Kharkiv
+H | What is the capital of Romania? | Bucharest | Cluj | Timisoara | Constanta
+H | What is the capital of Saudi Arabia? | Riyadh | Jeddah | Mecca | Medina
+H | Which city is the seat of South Africa's executive branch? | Pretoria | Cape Town | Johannesburg | Durban
+H | Which city is the constitutional capital of Bolivia? | Sucre | La Paz | Santa Cruz | Cochabamba
+
+# --- Rivers and mountains of the world ---
+
+E | Which river flows through Paris? | The Seine | The Loire | The Rhone | The Rhine
+E | Which river flows through London? | The Thames | The Severn | The Mersey | The Clyde
+E | Which is the highest mountain in the world? | Mount Everest | K2 | Kangchenjunga | Denali
+E | Which river flows through Cairo? | The Nile | The Euphrates | The Jordan | The Niger
+E | Which is the longest river in South America? | The Amazon | The Parana | The Orinoco | The Magdalena
+M | Which river flows through Vienna and Budapest? | The Danube | The Rhine | The Elbe | The Oder
+M | Which is the highest mountain in Africa? | Kilimanjaro | Mount Kenya | Mount Elgon | The Atlas
+M | Which is the highest mountain in South America? | Aconcagua | Chimborazo | Huascaran | Cotopaxi
+M | Which is the highest peak in the Alps? | Mont Blanc | The Matterhorn | Monte Rosa | The Eiger
+M | Which mountain range separates France from Spain? | The Pyrenees | The Alps | The Apennines | The Carpathians
+M | Which river flows through Rome? | The Tiber | The Po | The Arno | The Adige
+M | Which is the longest mountain range on land? | The Andes | The Rockies | The Himalayas | The Urals
+M | Which river flows through Baghdad? | The Tigris | The Euphrates | The Jordan | The Orontes
+M | Which mountains are traditionally taken as the boundary of Europe and Asia? | The Urals | The Caucasus | The Carpathians | The Altai
+H | Which is the second highest mountain in the world? | K2 | Kangchenjunga | Lhotse | Makalu
+H | Which river flows through Berlin? | The Spree | The Elbe | The Rhine | The Oder
+H | Which is the longest river in Asia? | The Yangtze | The Yellow River | The Mekong | The Ganges
+H | Which river forms much of the border between Germany and France? | The Rhine | The Danube | The Moselle | The Meuse
+H | Which is the highest waterfall in the world? | Angel Falls | Victoria Falls | Niagara Falls | Iguazu Falls
+H | Which mountain sits on the border of Nepal and Tibet? | Mount Everest | Annapurna | Nanga Parbat | Dhaulagiri
+H | Which river empties into the Bay of Bengal at Kolkata? | The Ganges | The Indus | The Brahmaputra | The Godavari
+H | Which is the longest river in western Europe? | The Loire | The Rhine | The Seine | The Ebro
+H | Which volcano near Naples destroyed Pompeii? | Vesuvius | Etna | Stromboli | Vulcano
+H | Which is the highest active volcano in Europe? | Mount Etna | Vesuvius | Hekla | Stromboli
+
+# --- Deserts, oceans and seas ---
+
+E | Which is the largest ocean? | The Pacific | The Atlantic | The Indian | The Arctic
+E | Which is the largest hot desert in the world? | The Sahara | The Gobi | The Kalahari | The Arabian
+E | Which ocean lies between America and Europe? | The Atlantic | The Pacific | The Indian | The Arctic
+E | Which sea lies between Italy and Greece? | The Mediterranean | The Black Sea | The Baltic | The North Sea
+M | Which is the deepest point in the ocean? | The Mariana Trench | The Puerto Rico Trench | The Java Trench | The Tonga Trench
+M | Which desert stretches across Mongolia and northern China? | The Gobi | The Taklamakan | The Thar | The Karakum
+M | Which is the driest desert on Earth? | The Atacama | The Sahara | The Gobi | The Namib
+M | Which desert covers much of southern Africa? | The Kalahari | The Sahara | The Namib | The Danakil
+M | Which sea lies between Europe and Africa at Gibraltar? | The Mediterranean | The Red Sea | The Adriatic | The Aegean
+M | Which sea is bordered by Turkey, Ukraine and Georgia? | The Black Sea | The Caspian Sea | The Aegean | The Sea of Azov
+M | Which canal links the Mediterranean to the Red Sea? | The Suez Canal | The Panama Canal | The Kiel Canal | The Corinth Canal
+M | Which canal links the Atlantic to the Pacific? | The Panama Canal | The Suez Canal | The Erie Canal | The Kiel Canal
+H | Which is the largest lake in the world by area? | The Caspian Sea | Lake Superior | Lake Victoria | The Aral Sea
+H | Which is the deepest lake in the world? | Lake Baikal | The Caspian Sea | Lake Tanganyika | Crater Lake
+H | Which is the largest lake in Africa by area? | Lake Victoria | Lake Tanganyika | Lake Malawi | Lake Chad
+H | Which body of water has the lowest shoreline on Earth? | The Dead Sea | The Caspian Sea | The Salton Sea | Lake Assal
+H | Which sea is famous for being almost entirely salt flats now? | The Aral Sea | The Dead Sea | The Caspian Sea | The Black Sea
+H | Which strait separates Europe from Asia at Istanbul? | The Bosporus | The Dardanelles | The Strait of Hormuz | The Strait of Malacca
+H | Which strait separates Spain from Morocco? | The Strait of Gibraltar | The Bosporus | The Dardanelles | The English Channel
+H | Which sea lies between Sweden and Finland? | The Baltic Sea | The North Sea | The Barents Sea | The White Sea
+H | Which desert lies mostly in India and Pakistan? | The Thar | The Gobi | The Karakum | The Registan
+H | Which current warms the coast of northwestern Europe? | The Gulf Stream | The Humboldt Current | The Canary Current | The Labrador Current
+
+# --- Countries and continents ---
+
+E | How many continents are usually counted? | Seven | Five | Six | Eight
+E | Which is the largest country by area? | Russia | Canada | China | The United States
+E | Which two countries border the United States? | Canada and Mexico | Canada and Cuba | Mexico and Guatemala | Canada and Greenland
+E | On which continent is Egypt? | Africa | Asia | Europe | Oceania
+E | On which continent is Brazil? | South America | North America | Africa | Australia
+E | Which continent has no permanent human population? | Antarctica | Australia | South America | Africa
+M | Which is the smallest country in the world? | Vatican City | Monaco | San Marino | Liechtenstein
+M | Which continent has the most countries? | Africa | Asia | Europe | South America
+M | Which is the smallest continent by land area? | Australia | Europe | Antarctica | South America
+M | Which country is entirely surrounded by South Africa? | Lesotho | Eswatini | Botswana | Namibia
+M | Which two countries make up the Iberian Peninsula? | Spain and Portugal | France and Spain | Italy and Greece | Spain and Morocco
+M | Which country lies both in Europe and in Asia at the Bosporus? | Turkey | Greece | Georgia | Cyprus
+M | Which three countries form the Benelux? | Belgium, Netherlands, Luxembourg | Belgium, Netherlands, Denmark | Netherlands, Luxembourg, Germany | Belgium, France, Netherlands
+M | How many countries make up the United Kingdom? | Four | Three | Two | Five
+M | Which country has the longest land border with the United States? | Canada | Mexico | Russia | Cuba
+H | How many time zones does Russia span? | Eleven | Nine | Seven | Fifteen
+H | Which two South American countries are landlocked? | Bolivia and Paraguay | Bolivia and Ecuador | Paraguay and Uruguay | Peru and Bolivia
+H | Which two countries border the most other countries? | China and Russia | Russia and Brazil | China and India | Brazil and Germany
+H | Which country is entirely surrounded by Italian territory? | San Marino | Monaco | Andorra | Liechtenstein
+H | Which country lies between France and Spain in the Pyrenees? | Andorra | Monaco | San Marino | Luxembourg
+H | Which African country was never formally colonized by Europe? | Ethiopia | Kenya | Ghana | Senegal
+H | Which country is the only one to occupy an entire continent? | Australia | Antarctica | Greenland | Canada
+H | Which country has the most islands? | Sweden | Indonesia | Canada | The Philippines
+H | Which line of latitude runs through Ecuador, Kenya and Indonesia? | The Equator | The Tropic of Cancer | The Tropic of Capricorn | The Arctic Circle
+H | Which line of longitude passes through Greenwich? | The Prime Meridian | The International Date Line | The Equator | The Tropic of Cancer
+
+# --- Islands, flags and currencies ---
+
+E | Which is the largest island in the world? | Greenland | Australia | New Guinea | Borneo
+E | Which country's flag bears a maple leaf? | Canada | Lebanon | Norway | Ireland
+E | Which currency is used in Japan? | The yen | The won | The yuan | The rupee
+E | Which currency do most European Union countries use? | The euro | The pound | The franc | The mark
+M | To which country does Greenland belong? | Denmark | Norway | Iceland | Canada
+M | Which is the largest island in the Mediterranean? | Sicily | Sardinia | Cyprus | Crete
+M | Which is the largest island in the Caribbean? | Cuba | Hispaniola | Jamaica | Puerto Rico
+M | Which country's currency is the rupee? | India | Thailand | Vietnam | Indonesia
+M | Which language is official in Brazil? | Portuguese | Spanish | French | Italian
+M | Which island lies off the southeast coast of Africa? | Madagascar | Sri Lanka | Zanzibar | Mauritius
+M | Which country's currency is the peso? | Mexico | Brazil | Peru | Venezuela
+M | Which country's flag is a red circle on a white field? | Japan | South Korea | Bangladesh | Turkey
+H | Which is the only national flag that is not a rectangle? | Nepal | Switzerland | Vatican City | Bhutan
+H | To which country do the Galapagos Islands belong? | Ecuador | Peru | Chile | Colombia
+H | To which country does Easter Island belong? | Chile | Peru | Argentina | Ecuador
+H | Which three countries share the island of Borneo? | Indonesia, Malaysia, Brunei | Indonesia, Malaysia, Singapore | Malaysia, Brunei, Philippines | Indonesia, Brunei, Thailand
+H | Which country's flag bears a cedar tree? | Lebanon | Israel | Cyprus | Jordan
+H | Which country uses the won as its currency? | South Korea | Japan | Vietnam | Mongolia
+H | Which is the largest island of Hawaii? | Hawaii | Maui | Oahu | Kauai
+H | Which country's currency is the real? | Brazil | Portugal | Argentina | Spain
+H | Which two islands make up the main body of New Zealand? | North Island and South Island | East Island and West Island | Auckland and Otago | Tasmania and Stewart
+H | Which country's flag shows a dragon? | Bhutan | Wales | Vietnam | China
+H | Which language has the most native speakers worldwide? | Mandarin Chinese | English | Spanish | Hindi
+H | Which ocean surrounds the Maldives? | The Indian Ocean | The Pacific | The Atlantic | The Arabian Sea
+
+# --- Map reading and physical geography ---
+
+E | Which direction does a compass needle point? | North | South | East | West
+E | What do the lines on a topographic map that join equal heights show? | Elevation | Temperature | Rainfall | Population
+E | What is the imaginary line halfway between the poles called? | The Equator | The Prime Meridian | The Tropic of Cancer | The Arctic Circle
+M | What is a narrow strip of land joining two larger landmasses called? | An isthmus | A peninsula | A strait | A delta
+M | What is a body of land surrounded by water on three sides called? | A peninsula | An isthmus | An archipelago | A cape
+M | What is the fan of land where a river meets the sea called? | A delta | An estuary | A fjord | A lagoon
+M | What is a chain of islands called? | An archipelago | A peninsula | An atoll | A reef
+M | What is a deep, narrow inlet carved by a glacier called? | A fjord | A bay | A canyon | A gulf
+M | What does latitude measure? | Distance north or south of the Equator | Distance east or west of Greenwich | Height above sea level | Depth below the sea
+M | What is the boundary between two tectonic plates that slide past each other? | A transform fault | A subduction zone | A rift valley | A hot spot
+H | What is the name for a ring-shaped coral island? | An atoll | An archipelago | A cay | A shoal
+H | What is a dry riverbed in a desert called? | A wadi | A canyon | An arroyo | A gully
+H | What is the line where the date changes as you cross the Pacific? | The International Date Line | The Prime Meridian | The Equator | The Tropic of Capricorn
+H | What is a region's long-term pattern of weather called? | Climate | Season | Front | Biome
+H | What is the flat, treeless plain of the far north called? | Tundra | Taiga | Steppe | Savanna
+H | What is the northern coniferous forest belt called? | Taiga | Tundra | Chaparral | Pampas
+H | What is the grassland of Argentina called? | The Pampas | The Steppe | The Savanna | The Prairie
+H | What is the tropical grassland of Africa called? | Savanna | Steppe | Tundra | Chaparral
+H | What is the term for the rain-poor side of a mountain range? | The rain shadow | The leeward reef | The dry front | The high plain
+H | Which projection famously enlarges land near the poles? | The Mercator projection | The Robinson projection | The Peters projection | The Mollweide projection
+
+# --- World landmarks ---
+
+E | In which city is the Eiffel Tower? | Paris | Rome | Vienna | Brussels
+E | In which country are the Pyramids of Giza? | Egypt | Sudan | Mexico | Iraq
+E | In which city is the Colosseum? | Rome | Athens | Naples | Verona
+E | In which country is the Taj Mahal? | India | Pakistan | Iran | Nepal
+E | In which country is the Great Wall? | China | Japan | Mongolia | Korea
+E | In which city is Big Ben? | London | Dublin | Edinburgh | Cardiff
+E | In which country is Machu Picchu? | Peru | Bolivia | Ecuador | Chile
+M | In which city is the Acropolis? | Athens | Rome | Istanbul | Cairo
+M | In which city stands Christ the Redeemer? | Rio de Janeiro | Sao Paulo | Lisbon | Buenos Aires
+M | In which country is Stonehenge? | England | Ireland | Scotland | France
+M | In which city is the Sagrada Familia? | Barcelona | Madrid | Valencia | Seville
+M | In which city is the Kremlin? | Moscow | St. Petersburg | Kyiv | Minsk
+M | In which country is Angkor Wat? | Cambodia | Thailand | Vietnam | Laos
+M | In which Italian city is the Leaning Tower? | Pisa | Florence | Siena | Bologna
+H | In which country is the ancient city of Petra? | Jordan | Egypt | Syria | Israel
+H | On the border of which two countries is Victoria Falls? | Zambia and Zimbabwe | Kenya and Tanzania | Congo and Angola | Uganda and Rwanda
+H | In which country is the Matterhorn mostly climbed from? | Switzerland | Austria | France | Italy
+H | In which country are the Nazca Lines? | Peru | Mexico | Chile | Bolivia
+H | In which country is the Blue Mosque? | Turkey | Iran | Morocco | Egypt
+H | In which desert do the Pyramids of Meroe stand? | The Sahara | The Arabian | The Kalahari | The Negev
+
+# --- More world geography ---
+
+E | Which is the largest continent? | Asia | Africa | North America | Europe
+E | Which country is shaped like a boot? | Italy | Spain | Greece | Norway
+E | Which ocean lies west of California? | The Pacific | The Atlantic | The Indian | The Arctic
+E | Which is the coldest continent? | Antarctica | Asia | Europe | South America
+E | Which mountain range lies in Nepal and Tibet? | The Himalayas | The Andes | The Alps | The Urals
+E | Which is the largest country in South America? | Brazil | Argentina | Peru | Colombia
+E | Which country is home to the kangaroo? | Australia | New Zealand | South Africa | Argentina
+E | Which country lies directly south of the United States? | Mexico | Cuba | Guatemala | Panama
+E | Which country lies directly north of the United States? | Canada | Greenland | Russia | Iceland
+M | Which is the largest city in Australia? | Sydney | Melbourne | Brisbane | Canberra
+M | Which is the largest city in Canada? | Toronto | Montreal | Vancouver | Ottawa
+M | Which is the largest country in Africa by area? | Algeria | Sudan | Libya | Egypt
+M | In which lake can swimmers float without effort because of the salt? | The Dead Sea | The Caspian Sea | The Black Sea | Lake Baikal
+M | Which country has the most people living in it? | India | China | The United States | Indonesia
+M | Which country is made up of more than seventeen thousand islands? | Indonesia | The Philippines | Japan | Greece
+M | Which peninsula holds Norway and Sweden? | Scandinavia | Iberia | The Balkans | Jutland
+M | Which country is nicknamed the Land of the Rising Sun? | Japan | China | Thailand | South Korea
+M | Which region of Europe includes Serbia, Bulgaria and Albania? | The Balkans | Scandinavia | Iberia | The Baltics
+M | Which three countries are the Baltic states? | Estonia, Latvia, Lithuania | Finland, Estonia, Latvia | Latvia, Lithuania, Poland | Estonia, Sweden, Latvia
+M | Which sea does the Volga River flow into? | The Caspian Sea | The Black Sea | The Baltic Sea | The Arctic Ocean
+H | Which country is the world's largest producer of coffee? | Brazil | Colombia | Vietnam | Ethiopia
+H | Which African country lies on both sides of the Equator and the Congo River? | The Democratic Republic of the Congo | Kenya | Uganda | Gabon
+H | Which country was formerly known as Siam? | Thailand | Cambodia | Myanmar | Laos
+H | Which country was formerly known as Persia? | Iran | Iraq | Turkey | Afghanistan
+H | Which strait lies between Malaysia and Sumatra? | The Strait of Malacca | The Strait of Hormuz | The Sunda Strait | The Torres Strait
+
+# --- More American geography ---
+
+E | Which ocean lies east of Florida? | The Atlantic | The Pacific | The Indian | The Arctic
+E | Which US state is closest to Russia? | Alaska | Washington | Hawaii | Maine
+E | Which US state grows the most oranges? | Florida | California | Texas | Georgia
+E | Which US state is famous for its potatoes? | Idaho | Iowa | Maine | Nebraska
+E | Which US state has the most people? | California | Texas | Florida | New York
+E | Which US state is entirely made of islands? | Hawaii | Alaska | Rhode Island | Florida
+E | Which river runs from Minnesota to the Gulf of Mexico? | The Mississippi | The Missouri | The Ohio | The Colorado
+E | Which mountain range crosses Colorado? | The Rockies | The Appalachians | The Sierra Nevada | The Ozarks
+E | Which time zone covers New York and Miami? | Eastern | Central | Mountain | Pacific
+E | Which US state is directly north of Texas? | Oklahoma | Kansas | Arkansas | New Mexico
+E | Which US state lies directly south of Georgia? | Florida | Alabama | South Carolina | Tennessee
+E | Which US city hosts the Kentucky Derby? | Louisville | Lexington | Frankfort | Cincinnati
+M | Which six states make up New England? | Maine, NH, VT, MA, RI, CT | Maine, NH, VT, MA, NY, CT | NH, VT, MA, RI, CT, NJ | Maine, NY, MA, RI, CT, VT
+M | How many time zones cover the contiguous United States? | Four | Three | Five | Six
+M | Which river separates Ohio from Kentucky? | The Ohio | The Mississippi | The Wabash | The Tennessee
+M | Which US state produces the most oil? | Texas | Alaska | California | North Dakota
+M | Which region is called the Pacific Northwest? | Washington and Oregon | California and Nevada | Alaska and Washington | Oregon and Idaho
+M | Which flat inland region stretches from Texas to North Dakota? | The Great Plains | The Great Basin | The Piedmont | The Gulf Coast
+M | Which US state is nicknamed the Cornhusker State? | Nebraska | Iowa | Kansas | Illinois
+M | Which US state is nicknamed the Land of Enchantment? | New Mexico | Arizona | Nevada | Colorado
+M | Which US state is nicknamed the Volunteer State? | Tennessee | Kentucky | Virginia | Missouri
+M | Which US state is nicknamed the Evergreen State? | Washington | Oregon | Maine | Vermont
+M | Which US state is nicknamed the Pelican State? | Louisiana | Mississippi | Florida | Alabama
+M | Which US state is nicknamed the Sooner State? | Oklahoma | Kansas | Texas | Nebraska
+M | Which mountain is the highest in Washington State? | Mount Rainier | Mount Baker | Mount Adams | Mount Olympus
+M | Which US state contains the Mojave and the Sierra Nevada? | California | Nevada | Arizona | Utah
+M | Which bay lies between Maryland and Virginia? | Chesapeake Bay | Delaware Bay | Mobile Bay | Tampa Bay
+H | Which US state is nicknamed the Old Line State? | Maryland | Virginia | Delaware | Pennsylvania
+H | Which US state is nicknamed the Magnolia State? | Mississippi | Louisiana | Alabama | Georgia
+H | Which US state is nicknamed the Granite State? | New Hampshire | Vermont | Maine | Massachusetts
+H | Which US state is nicknamed the Silver State? | Nevada | Colorado | Montana | Idaho
+H | Which US state is nicknamed the Badger State? | Wisconsin | Michigan | Minnesota | Illinois
+H | Which US state is nicknamed the Palmetto State? | South Carolina | Georgia | Florida | North Carolina
+H | Which US state is nicknamed the Green Mountain State? | Vermont | New Hampshire | Colorado | West Virginia
+H | Which US state is nicknamed the First State? | Delaware | Virginia | Massachusetts | Pennsylvania
+H | Which range separates California's Central Valley from Nevada? | The Sierra Nevada | The Cascades | The Coast Ranges | The Rockies
+H | Which plateau covers much of Arizona and Utah? | The Colorado Plateau | The Columbia Plateau | The Ozark Plateau | The Edwards Plateau
+H | Which US territory lies in the Caribbean? | Puerto Rico | Guam | American Samoa | The Northern Marianas
+H | Which US territory lies in the western Pacific? | Guam | Puerto Rico | The Virgin Islands | Bermuda
+
+# --- Weather and the seasons ---
+
+E | Which season begins in the Northern Hemisphere in December? | Winter | Summer | Spring | Fall
+E | What is a violent, funnel-shaped windstorm called? | A tornado | A hurricane | A monsoon | A blizzard
+M | What is a hurricane called in the western Pacific? | A typhoon | A cyclone | A monsoon | A willy-willy
+M | Which scale rates the strength of a tornado? | The Enhanced Fujita scale | The Richter scale | The Beaufort scale | The Saffir scale
+M | Which scale rates the strength of a hurricane? | The Saffir-Simpson scale | The Fujita scale | The Richter scale | The Mercalli scale
+M | Which region of the United States is called Tornado Alley? | The central Plains | The Gulf Coast | The Southwest | New England
+M | What seasonal wind brings heavy summer rain to South Asia? | The monsoon | The trade wind | The chinook | The sirocco
+H | Which Pacific warming pattern shifts weather worldwide? | El Nino | The Gulf Stream | The jet stream | The monsoon
+H | What is the belt of calm near the Equator called? | The doldrums | The horse latitudes | The trade winds | The roaring forties
+H | What warm, dry wind falls down the eastern Rockies in winter? | The chinook | The sirocco | The mistral | The harmattan
+
+# --- A last handful, for openers ---
+
+E | Which country lies across the English Channel from England? | France | Belgium | The Netherlands | Ireland
+E | Which country is home to the Great Barrier Reef? | Australia | New Zealand | Indonesia | Fiji
+E | Which is Earth's largest rainforest? | The Amazon | The Congo | The Daintree | The Taiga
+E | On which continent is India? | Asia | Africa | Europe | Oceania
+E | On which continent is Mexico? | North America | South America | Central America | Asia
+E | Which is the smallest ocean? | The Arctic | The Indian | The Atlantic | The Southern
+E | About how much of Earth's surface is covered by water? | Seventy percent | Fifty percent | Ninety percent | Thirty percent
+E | Which US state lies between California and Utah? | Nevada | Arizona | Oregon | Idaho
+E | Which country is known for windmills and tulips? | The Netherlands | Belgium | Denmark | Switzerland
+E | Which sea lies between Great Britain and Norway? | The North Sea | The Baltic Sea | The Irish Sea | The Celtic Sea
+E | Which US state is nicknamed Big Sky Country? | Montana | Wyoming | Idaho | North Dakota

@@ -1,482 +1,469 @@
-# Rock 70-80 — une question par ligne.
+# Rock 70-80 — one question per line.
 #
-# niveau | énoncé ? | bonne réponse | leurre | leurre | leurre
-# F facile · M moyen · D difficile
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
 #
-# Les propositions sont mêlées au tirage : l'ordre n'a aucune importance.
-# Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
-# une question, il fait une question à trois propositions.
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
 #
-# Les groupes et les voix des années 1970 et 1980, ici et ailleurs : qui
-# chantait, qui tenait quel instrument, d'où venait le groupe, et qui a signé
-# quel titre. La chanson française de la même époque complète le tableau.
+# The bands and the voices of the 1970s and 1980s, American and British:
+# who sang, who played what, where the band came from, and who wrote which
+# record.
 #
-# Deux pièges de forme, propres à ce thème. L'énoncé ne porte qu'un seul point
-# d'interrogation : on ne cite donc jamais un titre qui en contient un. Et le
-# nom d'un groupe tient dans quarante-six signes — ce qui va de soi, sauf pour
-# les formations à rallonge, qu'on désigne alors par leur nom d'usage.
+# Two traps peculiar to this theme. A prompt carries exactly one question
+# mark, so a song title containing one is never quoted. And a band name has
+# to fit in forty-six characters — which goes without saying, except for the
+# long-winded ones, named here by what people actually call them.
+
+# What this theme declares — readable name, icon, color, and its
+# place in the grid. These lines are not comments: without
+# them the theme has no name.
 
 ! id      | rock-70-80
-! nom     | Rock 70-80
-! de      | de Rock 70-80
-! detail  | Les groupes, les voix et les rôles, en France et ailleurs.
-! icone   | guitars
-! teinte  | 0.86 0.34 0.52
-! rang   | 6
-! produit | com.oulhen.riskelo.pack.rock7080
+! name    | Rock 70-80
+! detail  | The bands, the voices and the roles, in America and beyond.
+! icon    | guitars
+! tint    | 0.86 0.34 0.52
+! rank    | 6
+! product | com.oulhen.riskelo.us.pack.rock7080
 
 
-# --- Les groupes britanniques : les voix ---
+# --- British bands: the voices ---
 
-F | Qui chantait dans Queen ? | Freddie Mercury | Brian May | Roger Taylor | John Deacon
-F | Qui chantait dans les Rolling Stones ? | Mick Jagger | Keith Richards | Charlie Watts | Bill Wyman
-F | Qui chantait dans Led Zeppelin ? | Robert Plant | Jimmy Page | John Bonham | John Paul Jones
-F | Qui chantait dans The Who ? | Roger Daltrey | Pete Townshend | John Entwistle | Keith Moon
-F | Qui chantait dans Deep Purple sur « Smoke on the Water » ? | Ian Gillan | Ritchie Blackmore | Jon Lord | Roger Glover
-F | Qui chantait dans Black Sabbath à ses débuts ? | Ozzy Osbourne | Tony Iommi | Geezer Butler | Bill Ward
-F | Qui chantait dans The Police ? | Sting | Andy Summers | Stewart Copeland | Henry Padovani
-F | Qui chante dans U2 ? | Bono | The Edge | Adam Clayton | Larry Mullen Jr
-F | Qui chantait dans Dire Straits ? | Mark Knopfler | David Knopfler | John Illsley | Pick Withers
-F | Qui chante dans The Cure ? | Robert Smith | Simon Gallup | Lol Tolhurst | Porl Thompson
-F | Qui chante dans Depeche Mode ? | Dave Gahan | Martin Gore | Andy Fletcher | Vince Clarke
-M | Qui chantait dans Duran Duran ? | Simon Le Bon | Nick Rhodes | John Taylor | Andy Taylor
-M | Qui chante dans Iron Maiden depuis 1981 ? | Bruce Dickinson | Steve Harris | Dave Murray | Paul Di'Anno
-M | Qui chantait dans Judas Priest ? | Rob Halford | Glenn Tipton | K.K. Downing | Ian Hill
-M | Qui chante dans Def Leppard ? | Joe Elliott | Phil Collen | Rick Savage | Rick Allen
-M | Qui chantait dans The Clash ? | Joe Strummer | Mick Jones | Paul Simonon | Topper Headon
-M | Qui chantait dans les Sex Pistols ? | Johnny Rotten | Sid Vicious | Steve Jones | Paul Cook
-D | Qui chantait dans Yes à ses grandes heures ? | Jon Anderson | Chris Squire | Steve Howe | Rick Wakeman
-M | Qui chantait dans Genesis avant Phil Collins ? | Peter Gabriel | Tony Banks | Mike Rutherford | Steve Hackett
-D | Qui chantait dans Supertramp avec Rick Davies ? | Roger Hodgson | John Helliwell | Dougie Thomson | Bob Siebenberg
+E | Who sang lead for Queen? | Freddie Mercury | Brian May | Roger Taylor | John Deacon
+E | Who sang lead for Led Zeppelin? | Robert Plant | Jimmy Page | John Paul Jones | John Bonham
+E | Who sang lead for The Rolling Stones? | Mick Jagger | Keith Richards | Charlie Watts | Ronnie Wood
+E | Who sang lead for The Who? | Roger Daltrey | Pete Townshend | John Entwistle | Keith Moon
+E | Who sang lead for Black Sabbath in the 1970s? | Ozzy Osbourne | Tony Iommi | Geezer Butler | Ronnie James Dio
+M | Who sang and played bass for The Police? | Sting | Andy Summers | Stewart Copeland | Henry Padovani
+M | Who sang and played guitar for Dire Straits? | Mark Knopfler | David Knopfler | John Illsley | Pick Withers
+M | Who replaced Peter Gabriel as the singer of Genesis? | Phil Collins | Mike Rutherford | Tony Banks | Steve Hackett
+M | Who sang lead for Deep Purple on Smoke on the Water? | Ian Gillan | Ritchie Blackmore | Jon Lord | Roger Glover
+M | Who sang lead for The Clash? | Joe Strummer | Mick Jones | Paul Simonon | Topper Headon
+M | Who sang lead for the Sex Pistols? | Johnny Rotten | Sid Vicious | Steve Jones | Paul Cook
+M | Which two members of Pink Floyd sang most of the band's lead vocals? | Roger Waters and David Gilmour | Nick Mason and Richard Wright | Syd Barrett and Nick Mason | David Gilmour and Nick Mason
+M | Who sang lead for U2? | Bono | The Edge | Adam Clayton | Larry Mullen Jr.
+H | Who sang lead for Iron Maiden from 1981? | Bruce Dickinson | Paul Di'Anno | Steve Harris | Dave Murray
+H | Who sang lead for Judas Priest? | Rob Halford | Glenn Tipton | K. K. Downing | Ian Hill
+H | Who sang lead for Def Leppard? | Joe Elliott | Phil Collen | Rick Savage | Rick Allen
+H | Who sang lead for Motorhead? | Lemmy Kilmister | Fast Eddie Clarke | Phil Taylor | Brian Robertson
+H | Who sang lead for Roxy Music? | Bryan Ferry | Brian Eno | Phil Manzanera | Andy Mackay
+H | Who sang lead for The Jam? | Paul Weller | Bruce Foxton | Rick Buckler | Steve Brookes
+H | Who sang lead for Yes on most of its 1970s records? | Jon Anderson | Chris Squire | Rick Wakeman | Steve Howe
+H | Who sang lead for Thin Lizzy? | Phil Lynott | Scott Gorham | Brian Downey | Eric Bell
+H | Who sang lead for The Kinks? | Ray Davies | Dave Davies | Pete Quaife | Mick Avory
 
+# --- British bands: who played what ---
 
-# --- Les groupes britanniques : les instruments ---
+M | Who played lead guitar for Queen? | Brian May | Freddie Mercury | John Deacon | Roger Taylor
+M | Who played lead guitar for Led Zeppelin? | Jimmy Page | Robert Plant | John Paul Jones | John Bonham
+M | Who played drums for Led Zeppelin? | John Bonham | John Paul Jones | Jimmy Page | Cozy Powell
+M | Who played drums for The Who? | Keith Moon | Roger Daltrey | John Entwistle | Kenney Jones
+M | Who played bass for The Who? | John Entwistle | Pete Townshend | Roger Daltrey | Keith Moon
+M | Who played guitar for The Who? | Pete Townshend | Roger Daltrey | John Entwistle | Keith Moon
+M | Who played drums for The Rolling Stones for decades? | Charlie Watts | Bill Wyman | Ronnie Wood | Mick Taylor
+M | Who played guitar for Black Sabbath? | Tony Iommi | Ozzy Osbourne | Geezer Butler | Bill Ward
+M | Who played guitar for Pink Floyd from 1968? | David Gilmour | Roger Waters | Nick Mason | Richard Wright
+M | Who played drums for The Police? | Stewart Copeland | Sting | Andy Summers | Henry Padovani
+H | Who played bass for Queen? | John Deacon | Roger Taylor | Brian May | Freddie Mercury
+H | Who played drums for Queen? | Roger Taylor | John Deacon | Brian May | Freddie Mercury
+H | Who played keyboards and bass for Led Zeppelin? | John Paul Jones | Jimmy Page | Robert Plant | John Bonham
+H | Who played bass for The Rolling Stones until 1993? | Bill Wyman | Ronnie Wood | Keith Richards | Mick Taylor
+H | Who played guitar for The Rolling Stones from 1975? | Ronnie Wood | Mick Taylor | Brian Jones | Bill Wyman
+H | Who played bass for Black Sabbath? | Geezer Butler | Bill Ward | Tony Iommi | Ozzy Osbourne
+H | Who played bass and sang for Pink Floyd until 1985? | Roger Waters | David Gilmour | Nick Mason | Richard Wright
+H | Who played keyboards for Pink Floyd? | Richard Wright | Roger Waters | Nick Mason | David Gilmour
+H | Who played drums for Pink Floyd? | Nick Mason | Richard Wright | Roger Waters | David Gilmour
+H | Who played guitar for The Police? | Andy Summers | Sting | Stewart Copeland | Mike Howlett
+H | Who played guitar for Iron Maiden alongside Adrian Smith? | Dave Murray | Steve Harris | Nicko McBrain | Janick Gers
+H | Who played bass and founded Iron Maiden? | Steve Harris | Bruce Dickinson | Dave Murray | Clive Burr
+H | Who played guitar for Dire Straits alongside Mark Knopfler at the start? | David Knopfler | John Illsley | Pick Withers | Alan Clark
+H | Who played guitar for U2? | The Edge | Bono | Adam Clayton | Larry Mullen Jr.
+H | Who played bass for U2? | Adam Clayton | Larry Mullen Jr. | The Edge | Bono
+H | Who played drums for U2? | Larry Mullen Jr. | Adam Clayton | The Edge | Bono
 
-F | Quel instrument Brian May tient-il dans Queen ? | La guitare | La batterie | La basse | Les claviers
-F | Quel instrument Keith Richards tient-il chez les Rolling Stones ? | La guitare | La batterie | La basse | Le piano
-F | Quel instrument Charlie Watts tenait-il chez les Rolling Stones ? | La batterie | La guitare | La basse | L'harmonica
-M | Quel instrument Bill Wyman tenait-il chez les Rolling Stones ? | La basse | La batterie | La guitare | Le saxophone
-F | Quel instrument Jimmy Page tenait-il dans Led Zeppelin ? | La guitare | La batterie | La basse | Les claviers
-F | Quel instrument John Bonham tenait-il dans Led Zeppelin ? | La batterie | La guitare | La basse | Le violon
-D | Quels instruments John Paul Jones tenait-il dans Led Zeppelin ? | La basse et les claviers | La batterie | La guitare solo | Le saxophone
-F | Quel instrument John Deacon tenait-il dans Queen ? | La basse | La batterie | La guitare | Le piano
-F | Quel instrument Roger Taylor tient-il dans Queen ? | La batterie | La basse | La guitare | Les claviers
-F | Quel instrument Pete Townshend tenait-il chez The Who ? | La guitare | La batterie | La basse | Le piano
-M | Quel instrument John Entwistle tenait-il chez The Who ? | La basse | La batterie | La guitare | Le trombone seul
-F | Quel instrument Keith Moon tenait-il chez The Who ? | La batterie | La basse | La guitare | Le clavier
-M | Quel instrument Jon Lord tenait-il dans Deep Purple ? | L'orgue Hammond | La guitare | La basse | La batterie
-D | Quel instrument Ian Paice tient-il dans Deep Purple ? | La batterie | La guitare | La basse | Les claviers
-F | Quel instrument Tony Iommi tient-il dans Black Sabbath ? | La guitare | La batterie | La basse | Le clavier
-M | Quel instrument Geezer Butler tient-il dans Black Sabbath ? | La basse | La batterie | La guitare | Le clavier
-F | Quel instrument Sting tenait-il dans The Police, en plus de chanter ? | La basse | La guitare | La batterie | Le saxophone
-M | Quel instrument Stewart Copeland tenait-il dans The Police ? | La batterie | La basse | La guitare | Le clavier
-M | Quel instrument Andy Summers tenait-il dans The Police ? | La guitare | La basse | La batterie | Le clavier
-F | Quel instrument The Edge tient-il dans U2 ? | La guitare | La batterie | La basse | Les claviers
-F | Quel instrument Adam Clayton tient-il dans U2 ? | La basse | La batterie | La guitare | Le piano
-F | Quel instrument Larry Mullen Jr tient-il dans U2 ? | La batterie | La basse | La guitare | Le clavier
-M | Quel instrument Steve Harris tient-il dans Iron Maiden ? | La basse | La batterie | La guitare | Le clavier
-D | Quelle particularité a le batteur de Def Leppard depuis 1985 ? | Il joue avec un seul bras | Il joue debout | Il joue sans cymbales | Il joue avec les mains
-D | Quel instrument Rick Wakeman tenait-il dans Yes ? | Les claviers | La guitare | La basse | La batterie
-M | Quel instrument Phil Collins tenait-il dans Genesis avant de chanter ? | La batterie | La basse | La guitare | Les claviers
-D | Quel instrument Mike Rutherford tient-il dans Genesis ? | La basse et la guitare | La batterie | Les claviers | Le saxophone
-D | Quel instrument Tony Banks tient-il dans Genesis ? | Les claviers | La guitare | La basse | La batterie
+# --- American bands: the voices ---
 
+E | Who sang lead for Aerosmith? | Steven Tyler | Joe Perry | Tom Hamilton | Joey Kramer
+E | Who sang lead for Van Halen through 1985? | David Lee Roth | Eddie Van Halen | Sammy Hagar | Michael Anthony
+M | Who replaced David Lee Roth as the singer of Van Halen? | Sammy Hagar | Gary Cherone | Michael Anthony | Eddie Van Halen
+M | Who sang lead for Journey through the 1980s? | Steve Perry | Neal Schon | Jonathan Cain | Gregg Rolie
+M | Who sang lead for Lynyrd Skynyrd until 1977? | Ronnie Van Zant | Gary Rossington | Allen Collins | Johnny Van Zant
+M | Which two sisters fronted Heart? | Ann and Nancy Wilson | Ann and Nancy Watson | Anne and Nina Wilson | Ann and Nancy Weston
+M | Who sang lead for Bon Jovi? | Jon Bon Jovi | Richie Sambora | David Bryan | Tico Torres
+M | Who sang lead for Guns N' Roses? | Axl Rose | Slash | Duff McKagan | Izzy Stradlin
+M | Who sang lead for Talking Heads? | David Byrne | Chris Frantz | Tina Weymouth | Jerry Harrison
+M | Who fronted Blondie? | Debbie Harry | Chris Stein | Clem Burke | Jimmy Destri
+M | Who sang lead for the Ramones? | Joey Ramone | Johnny Ramone | Dee Dee Ramone | Tommy Ramone
+M | Who sang lead for The Cars? | Ric Ocasek | Benjamin Orr | Elliot Easton | Greg Hawkes
+M | Who sang lead for R.E.M.? | Michael Stipe | Peter Buck | Mike Mills | Bill Berry
+H | Who sang lead for Boston? | Brad Delp | Tom Scholz | Barry Goudreau | Sib Hashian
+H | Who sang lead for Foreigner? | Lou Gramm | Mick Jones | Ian McDonald | Rick Wills
+H | Who sang lead for Styx alongside Tommy Shaw? | Dennis DeYoung | James Young | Chuck Panozzo | John Panozzo
+H | Who sang lead for REO Speedwagon? | Kevin Cronin | Gary Richrath | Neal Doughty | Bruce Hall
+H | Which two singers shared the front of Kiss? | Paul Stanley and Gene Simmons | Ace Frehley and Peter Criss | Gene Simmons and Peter Criss | Paul Stanley and Ace Frehley
+H | Who sang lead for Grand Funk Railroad? | Mark Farner | Don Brewer | Mel Schacher | Craig Frost
+H | Who sang lead for The Doobie Brothers after 1975? | Michael McDonald | Tom Johnston | Patrick Simmons | Jeff Baxter
+H | Who sang lead for Chicago on many of its ballads? | Peter Cetera | Robert Lamm | Terry Kath | James Pankow
+H | Who sang lead for Cheap Trick? | Robin Zander | Rick Nielsen | Tom Petersson | Bun E. Carlos
 
-# --- D'où viennent les groupes ---
+# --- American bands: who played what ---
 
-F | De quel pays vient le groupe AC/DC ? | L'Australie | Le Royaume-Uni | Les États-Unis | Le Canada
-F | De quel pays vient le groupe ABBA ? | La Suède | La Norvège | Le Danemark | La Finlande
-F | De quel pays vient le groupe U2 ? | L'Irlande | Le Royaume-Uni | Les États-Unis | L'Australie
-F | De quel pays vient le groupe Scorpions ? | L'Allemagne | L'Autriche | La Suisse | Les Pays-Bas
-F | De quel pays vient le groupe Kraftwerk ? | L'Allemagne | La Belgique | Les Pays-Bas | La Suède
-F | De quel pays vient le groupe Rush ? | Le Canada | Les États-Unis | Le Royaume-Uni | L'Australie
-F | De quel pays vient le groupe a-ha ? | La Norvège | La Suède | Le Danemark | L'Islande
-M | De quel pays vient le groupe Europe ? | La Suède | L'Allemagne | Les Pays-Bas | La Norvège
-M | De quel pays vient le groupe Thin Lizzy ? | L'Irlande | L'Écosse | Le pays de Galles | L'Angleterre
-F | De quel pays vient le groupe INXS ? | L'Australie | La Nouvelle-Zélande | Les États-Unis | Le Canada
-M | De quel pays vient le groupe Golden Earring ? | Les Pays-Bas | La Belgique | L'Allemagne | Le Danemark
-M | De quel pays vient le groupe Men at Work ? | L'Australie | Le Royaume-Uni | Le Canada | L'Irlande
-D | De quel pays vient le groupe Midnight Oil ? | L'Australie | Les États-Unis | Le Royaume-Uni | L'Afrique du Sud
-M | De quelle ville britannique vient le groupe Black Sabbath ? | Birmingham | Liverpool | Manchester | Londres
-M | De quelle ville britannique vient le groupe Duran Duran ? | Birmingham | Londres | Sheffield | Glasgow
-M | De quelle ville britannique vient le groupe Def Leppard ? | Sheffield | Birmingham | Liverpool | Bristol
-M | De quelle ville américaine vient le groupe Aerosmith ? | Boston | New York | Los Angeles | Chicago
-F | De quel État américain vient le groupe ZZ Top ? | Le Texas | La Californie | New York | La Floride
-M | De quel quartier de New York viennent les Ramones ? | Le Queens | Le Bronx | Brooklyn | Manhattan
-F | De quel État américain vient Bruce Springsteen ? | Le New Jersey | La Californie | Le Texas | l'Ohio
-F | De quelle ville américaine vient Prince ? | Minneapolis | Detroit | Memphis | Nashville
-D | Quel groupe américain doit son nom à la ville dont il vient ? | Boston | Chicago | Kansas | Les trois
-D | De quel pays sont nés les frères Van Halen avant d'émigrer ? | Les Pays-Bas | L'Allemagne | La Belgique | Le Danemark
-M | De quel pays sont nés les frères Young d'AC/DC avant d'émigrer ? | L'Écosse | L'Irlande | Le pays de Galles | L'Angleterre
-D | Quel groupe de Fleetwood Mac mêlait Britanniques et Américains ? | Fleetwood Mac lui-même | Les Eagles | Les Doobie Brothers | Journey
+M | Who played lead guitar for Van Halen? | Eddie Van Halen | David Lee Roth | Michael Anthony | Alex Van Halen
+M | Who played drums for Van Halen? | Alex Van Halen | Eddie Van Halen | Michael Anthony | Sammy Hagar
+M | Who played lead guitar for Guns N' Roses? | Slash | Axl Rose | Izzy Stradlin | Duff McKagan
+M | Who played lead guitar for Aerosmith? | Joe Perry | Steven Tyler | Brad Whitford | Tom Hamilton
+M | Who played lead guitar for Bon Jovi? | Richie Sambora | Jon Bon Jovi | David Bryan | Alec John Such
+M | Who played guitar for Journey? | Neal Schon | Steve Perry | Jonathan Cain | Ross Valory
+M | Who played guitar for R.E.M.? | Peter Buck | Michael Stipe | Mike Mills | Bill Berry
+M | Who played saxophone in Bruce Springsteen's E Street Band? | Clarence Clemons | Danny Federici | Garry Tallent | Nils Lofgren
+M | Who played keyboards in the E Street Band? | Roy Bittan | Clarence Clemons | Garry Tallent | Max Weinberg
+M | Who played drums in the E Street Band? | Max Weinberg | Roy Bittan | Danny Federici | Steven Van Zandt
+H | Who wrote and played most instruments on the first Boston album? | Tom Scholz | Brad Delp | Barry Goudreau | Fran Sheehan
+H | Who played bass for Talking Heads? | Tina Weymouth | Chris Frantz | Jerry Harrison | David Byrne
+H | Who played drums for Talking Heads? | Chris Frantz | Tina Weymouth | Jerry Harrison | David Byrne
+H | Who played guitar for Kiss in the 1970s? | Ace Frehley | Paul Stanley | Gene Simmons | Peter Criss
+H | Who played drums for Kiss in the 1970s? | Peter Criss | Ace Frehley | Gene Simmons | Eric Carr
+H | Who played bass and sang for Kiss? | Gene Simmons | Paul Stanley | Ace Frehley | Peter Criss
+H | Who played guitar for Tom Petty's Heartbreakers? | Mike Campbell | Benmont Tench | Ron Blair | Stan Lynch
+H | Who played keyboards for Tom Petty's Heartbreakers? | Benmont Tench | Mike Campbell | Howie Epstein | Stan Lynch
+H | Who played slide guitar for The Allman Brothers Band until 1971? | Duane Allman | Dickey Betts | Gregg Allman | Berry Oakley
+H | Who sang and played organ for The Allman Brothers Band? | Gregg Allman | Duane Allman | Dickey Betts | Butch Trucks
+H | Who played guitar for ZZ Top? | Billy Gibbons | Dusty Hill | Frank Beard | Joe Ely
+H | Who played bass for The Eagles at the start? | Randy Meisner | Timothy Schmit | Glenn Frey | Bernie Leadon
+H | Which Eagle sang lead and played drums? | Don Henley | Glenn Frey | Joe Walsh | Don Felder
+H | Which guitarist joined The Eagles in 1975 from his own solo career? | Joe Walsh | Don Felder | Bernie Leadon | Timothy Schmit
 
+# --- Where they came from ---
 
-# --- Les groupes américains et australiens ---
+E | Which country did AC/DC form in? | Australia | Britain | The United States | Canada
+E | Which country did ABBA come from? | Sweden | Norway | Denmark | Finland
+E | Which country did U2 come from? | Ireland | Scotland | England | Wales
+M | Which Canadian trio recorded Tom Sawyer and Limelight? | Rush | Triumph | April Wine | Loverboy
+M | Which city did The Beatles and later Echo and the Bunnymen come from? | Liverpool | Manchester | Birmingham | Leeds
+M | Which English city produced Def Leppard and the Human League? | Sheffield | Manchester | Bristol | Newcastle
+M | Which English city produced Black Sabbath and Judas Priest? | Birmingham | Sheffield | Liverpool | Leeds
+M | Which American city produced Motown and later the techno scene? | Detroit | Chicago | Philadelphia | Cleveland
+M | Which American city produced the Ramones, Blondie and Talking Heads? | New York | Los Angeles | Boston | Philadelphia
+M | Which American state gave rise to Lynyrd Skynyrd and southern rock? | Florida | Alabama | Georgia | Tennessee
+M | Which Georgia town produced R.E.M. and the B-52's? | Athens | Macon | Savannah | Augusta
+M | Which New Jersey singer formed the E Street Band? | Bruce Springsteen | Jon Bon Jovi | Southside Johnny | Patti Smyth
+H | Which Californian scene produced the Eagles and Jackson Browne? | Laurel Canyon | Haight-Ashbury | The Sunset Strip only | Topanga only
+H | Which London club scene produced the Sex Pistols and The Clash? | The punk scene of 1976 | The mod scene | The rave scene | The skiffle scene
+H | Which New York club gave American punk its home from 1974? | CBGB | The Fillmore East | Max's only | The Bottom Line
+H | Which Manchester band recorded Love Will Tear Us Apart? | Joy Division | The Smiths | New Order | The Fall
+H | Which Manchester band followed Joy Division with Blue Monday? | New Order | The Smiths | Happy Mondays | James
+H | Which Manchester band paired Morrissey and Johnny Marr? | The Smiths | New Order | The Stone Roses | The Chameleons
+H | Which Scottish band recorded Don't You Forget About Me? | Simple Minds | Big Country | The Waterboys | Deacon Blue
+H | Which Irish singer-songwriter recorded Brown Eyed Girl and Moondance? | Van Morrison | Rory Gallagher | Chris de Burgh | Gilbert O'Sullivan
+H | Which Australian band recorded Down Under? | Men at Work | INXS | Midnight Oil | Cold Chisel
+H | Which Australian band's singer was Michael Hutchence? | INXS | Men at Work | Midnight Oil | Icehouse
 
-F | Qui chantait dans AC/DC avant 1980 ? | Bon Scott | Brian Johnson | Angus Young | Malcolm Young
-F | Qui a remplacé Bon Scott au chant dans AC/DC ? | Brian Johnson | Angus Young | Cliff Williams | Phil Rudd
-F | Quel instrument Angus Young tient-il dans AC/DC ? | La guitare solo | La batterie | La basse | Le clavier
-M | Quel instrument Malcolm Young tenait-il dans AC/DC ? | La guitare rythmique | La batterie | La basse | Le chant
-M | Quelle tenue de scène Angus Young porte-t-il ? | Un uniforme d'écolier | Un smoking | Une cape | Une combinaison
-F | Qui chantait dans Aerosmith ? | Steven Tyler | Joe Perry | Tom Hamilton | Joey Kramer
-M | Quel guitariste accompagne Steven Tyler dans Aerosmith ? | Joe Perry | Brad Whitford | Tom Hamilton | Joey Kramer
-F | Quel instrument Gene Simmons tient-il dans Kiss ? | La basse | La guitare solo | La batterie | Le clavier
-M | Qui partage le chant avec Gene Simmons dans Kiss ? | Paul Stanley | Ace Frehley | Peter Criss | Vinnie Vincent
-D | Quel maquillage Gene Simmons porte-t-il sur scène ? | Le démon | Le chat | L'homme de l'espace | La star
-F | Quel guitariste virtuose menait Van Halen ? | Eddie Van Halen | Alex Van Halen | Michael Anthony | David Lee Roth
-F | Qui chantait dans Van Halen avant Sammy Hagar ? | David Lee Roth | Michael Anthony | Alex Van Halen | Gary Cherone
-F | Qui chantait dans Bon Jovi ? | Jon Bon Jovi | Richie Sambora | David Bryan | Tico Torres
-M | Quel guitariste accompagnait Jon Bon Jovi ? | Richie Sambora | David Bryan | Alec John Such | Tico Torres
-F | Qui chantait dans Blondie ? | Debbie Harry | Chris Stein | Clem Burke | Jimmy Destri
-M | Qui chantait dans Talking Heads ? | David Byrne | Tina Weymouth | Chris Frantz | Jerry Harrison
-M | Quel instrument Tina Weymouth tenait-elle dans Talking Heads ? | La basse | La batterie | La guitare | Les claviers
-M | Qui chantait dans Journey dans les années 1980 ? | Steve Perry | Neal Schon | Jonathan Cain | Ross Valory
-M | Qui chantait dans Toto sur « Africa » ? | Bobby Kimball | Steve Lukather | David Paich | Jeff Porcaro
-D | Quel batteur de Toto était très demandé en studio ? | Jeff Porcaro | Steve Lukather | David Hungate | Bobby Kimball
-F | Qui chantait dans les Eagles sur « Hotel California » ? | Don Henley | Glenn Frey | Joe Walsh | Don Felder
-M | Quel instrument Don Henley tenait-il dans les Eagles en chantant ? | La batterie | La guitare | La basse | Le piano
-F | Qui chante dans Rush ? | Geddy Lee | Alex Lifeson | Neil Peart | Personne
-M | Quel instrument Geddy Lee tient-il en plus de chanter ? | La basse | La guitare | La batterie | Le saxophone
-D | Quel batteur de Rush écrivait aussi les textes ? | Neil Peart | Geddy Lee | Alex Lifeson | John Rutsey
-M | Qui chantait dans INXS ? | Michael Hutchence | Andrew Farriss | Tim Farriss | Garry Beers
-M | Qui chantait dans Thin Lizzy ? | Phil Lynott | Scott Gorham | Brian Downey | Eric Bell
-D | Quel instrument Phil Lynott tenait-il en chantant ? | La basse | La guitare | La batterie | Le clavier
-D | Qui chantait dans Midnight Oil ? | Peter Garrett | Jim Moginie | Rob Hirst | Martin Rotsey
-M | Qui chante dans Scorpions ? | Klaus Meine | Rudolf Schenker | Matthias Jabs | Herman Rarebell
+# --- The songs ---
 
+E | Which band recorded Immigrant Song? | Led Zeppelin | Deep Purple | Uriah Heep | Black Sabbath
+E | Which band recorded We Will Rock You? | Queen | Slade | Sweet | Mott the Hoople
+E | Which band recorded Desperado? | The Eagles | Poco | America | Firefall
+E | Which band recorded Smoke on the Water? | Deep Purple | Led Zeppelin | Black Sabbath | Uriah Heep
+E | Which band recorded Another Brick in the Wall? | Pink Floyd | Genesis | Yes | King Crimson
+E | Which band recorded Sweet Home Alabama? | Lynyrd Skynyrd | The Allman Brothers | Marshall Tucker Band | .38 Special
+E | Which band recorded Free Bird? | Lynyrd Skynyrd | The Allman Brothers | Molly Hatchet | Blackfoot
+E | Which band recorded Back in Black? | AC/DC | Def Leppard | Judas Priest | Iron Maiden
+E | Which band recorded Highway to Hell? | AC/DC | Motorhead | Van Halen | Scorpions
+E | Which band recorded Don't Stop Believin'? | Journey | Foreigner | Survivor | Toto
+M | Which band recorded Paranoid? | Black Sabbath | Deep Purple | Blue Oyster Cult | Uriah Heep
+M | Which band recorded Baba O'Riley? | The Who | The Kinks | Small Faces | The Yardbirds
+M | Which band recorded Won't Get Fooled Again? | The Who | The Rolling Stones | The Faces | Free
+M | Which band recorded Comfortably Numb? | Pink Floyd | Genesis | Camel | Gentle Giant
+M | Which band recorded Every Breath You Take? | The Police | The Cars | Squeeze | The Pretenders
+M | Which band recorded Roxanne? | The Police | The Clash | The Jam | The Stranglers
+M | Which band recorded Sultans of Swing? | Dire Straits | The Pretenders | Squeeze | Nick Lowe's band
+M | Which band recorded Sweet Child o' Mine? | Guns N' Roses | Motley Crue | Poison | Ratt
+M | Which band recorded Livin' on a Prayer? | Bon Jovi | Def Leppard | Whitesnake | Europe
+M | Which band recorded Jump in 1984? | Van Halen | Ratt | Quiet Riot | Twisted Sister
+M | Which band recorded Carry On Wayward Son? | Kansas | Styx | Boston | Journey
+M | Which band recorded More Than a Feeling? | Boston | Kansas | Foreigner | Styx
+M | Which band recorded Come Sail Away? | Styx | Kansas | REO Speedwagon | Journey
+M | Which band recorded Barracuda? | Heart | Pat Benatar's band | Blondie | The Runaways
+M | Which band recorded Walk This Way? | Aerosmith | Kiss | Ted Nugent's band | Bad Company
+M | Which band recorded Rock and Roll All Nite? | Kiss | Alice Cooper's band | Slade | Sweet
+M | Which band recorded Sharp Dressed Man? | ZZ Top | Foghat | Bad Company | Bachman-Turner Overdrive
+M | Which band recorded Ramblin' Man? | The Allman Brothers Band | Lynyrd Skynyrd | The Outlaws | The Charlie Daniels Band
+M | Which band recorded Psycho Killer? | Talking Heads | Devo | The B-52's | Television
+M | Which band recorded Heart of Glass? | Blondie | The Pretenders | Berlin | Missing Persons
+M | Which band recorded Blitzkrieg Bop? | The Ramones | The Dead Boys | The Damned | The Buzzcocks
+M | Which band recorded London Calling? | The Clash | The Jam | The Sex Pistols | Stiff Little Fingers
+M | Which band recorded Losing My Religion? | R.E.M. | The Replacements | Camper Van Beethoven | Hüsker Dü
+H | Which band recorded Tom Sawyer? | Rush | Triumph | Max Webster | Saga
+H | Which band recorded Whole Lotta Love? | Led Zeppelin | Free | Bad Company | Humble Pie
+H | Which band recorded Kashmir? | Led Zeppelin | Rainbow | Deep Purple | Wishbone Ash
+H | Which band recorded Money in 1973? | Pink Floyd | Emerson, Lake and Palmer | Jethro Tull | Traffic
+H | Which band recorded Wish You Were Here? | Pink Floyd | Genesis | Barclay James Harvest | Camel
+H | Which band recorded Aqualung? | Jethro Tull | Yes | Genesis | Gentle Giant
+H | Which band recorded Roundabout? | Yes | Genesis | Renaissance | Caravan
+H | Which band recorded Owner of a Lonely Heart? | Yes | Asia | Genesis | Marillion
+H | Which band recorded The Boys Are Back in Town? | Thin Lizzy | Bad Company | Free | Nazareth
+H | Which band recorded Ace of Spades? | Motorhead | Venom | Saxon | Girlschool
+H | Which band recorded Run to the Hills? | Iron Maiden | Judas Priest | Saxon | Diamond Head
+H | Which band recorded Breaking the Law? | Judas Priest | Iron Maiden | Accept | Raven
+H | Which band recorded Pour Some Sugar on Me? | Def Leppard | Whitesnake | Cinderella | Great White
+H | Which band recorded Rock You Like a Hurricane? | Scorpions | Accept | Krokus | Dokken
+H | Which band recorded Africa in 1982? | Toto | Journey | Chicago | Ambrosia
+H | Which band recorded Take It Easy? | The Eagles | Poco | America | The Byrds
+H | Which band recorded Life in the Fast Lane? | The Eagles | Steely Dan | Little Feat | The Doobie Brothers
+H | Which band recorded Reelin' In the Years? | Steely Dan | The Doobie Brothers | Boz Scaggs' band | Ambrosia
+H | Which band recorded Go Your Own Way? | Fleetwood Mac | The Eagles | Heart | Jefferson Starship
+H | Which band recorded Landslide? | Fleetwood Mac | The Eagles | America | Poco
+H | Which band recorded I Love Rock 'n Roll in 1982? | Joan Jett and the Blackhearts | The Runaways | The Go-Go's | The Pretenders
+H | Which band recorded We Got the Beat? | The Go-Go's | The Bangles | The Motels | Berlin
+H | Which band recorded Just Like Heaven? | The Cure | Echo and the Bunnymen | The Church | The Psychedelic Furs
 
-# --- Qui chante quoi ---
+# --- The albums ---
 
-F | Quel groupe a enregistré « Bohemian Rhapsody » ? | Queen | Led Zeppelin | Pink Floyd | The Who
-F | Quel groupe a enregistré « Stairway to Heaven » ? | Led Zeppelin | Deep Purple | Black Sabbath | Queen
-F | Quel groupe a enregistré « Smoke on the Water » ? | Deep Purple | Led Zeppelin | Black Sabbath | Rainbow
-F | Quel groupe a enregistré « Hotel California » ? | Les Eagles | Fleetwood Mac | Journey | Boston
-F | Quel groupe a enregistré « Another Brick in the Wall » ? | Pink Floyd | Genesis | Yes | King Crimson
-F | Quel groupe a enregistré « Highway to Hell » ? | AC/DC | Judas Priest | Iron Maiden | Motörhead
-F | Quel groupe a enregistré « Back in Black » ? | AC/DC | Black Sabbath | Deep Purple | Whitesnake
-F | Quel groupe a enregistré « Sultans of Swing » ? | Dire Straits | The Police | Supertramp | Genesis
-F | Quel groupe a enregistré « Money for Nothing » ? | Dire Straits | Toto | Journey | Foreigner
-F | Quel groupe a enregistré « Every Breath You Take » ? | The Police | The Cure | Duran Duran | Simple Minds
-F | Quel groupe a enregistré « Roxanne » ? | The Police | The Clash | The Jam | The Cure
-F | Quel groupe a enregistré « London Calling » ? | The Clash | Sex Pistols | The Jam | The Damned
-M | Quel groupe a enregistré « Anarchy in the U.K. » ? | Les Sex Pistols | The Clash | The Damned | Buzzcocks
-F | Quel groupe a enregistré « Africa » ? | Toto | Journey | Foreigner | Chicago
-F | Quel groupe a enregistré « The Final Countdown » ? | Europe | Scorpions | Bon Jovi | Van Halen
-F | Quel groupe a enregistré « Take on Me » ? | a-ha | Duran Duran | Wham! | Spandau Ballet
-M | Quel groupe a enregistré « Sweet Home Alabama » ? | Lynyrd Skynyrd | The Allman Brothers | ZZ Top | The Doobie Brothers
-M | Quel groupe a enregistré « Radar Love » ? | Golden Earring | Status Quo | Nazareth | Uriah Heep
-M | Quel groupe a enregistré « Down Under » ? | Men at Work | INXS | Midnight Oil | Crowded House
-F | Quel groupe a enregistré « Wind of Change » ? | Scorpions | Europe | Bon Jovi | Whitesnake
-F | Quel groupe a enregistré « Dancing Queen » ? | ABBA | Boney M | The Bee Gees | Chic
-F | Quel groupe a enregistré « Stayin' Alive » ? | Les Bee Gees | ABBA | Chic | Village People
-M | Quel groupe a enregistré « Rock the Casbah » ? | The Clash | The Police | Talking Heads | Blondie
-D | Quel groupe a enregistré « Call Me » pour un film de 1980 ? | Blondie | The Pretenders | The B-52's | Devo
-M | Quel groupe a enregistré « Psycho Killer » ? | Talking Heads | Television | Blondie | The Ramones
-M | Quel groupe a enregistré « Blitzkrieg Bop » ? | Les Ramones | The Clash | The Damned | New York Dolls
-D | Quel groupe a enregistré « The Boys Are Back in Town » ? | Thin Lizzy | Status Quo | Bad Company | Free
-D | Quel groupe a enregistré « Owner of a Lonely Heart » ? | Yes | Genesis | Asia | Rush
-D | Quel groupe a enregistré « Tom Sawyer » ? | Rush | Yes | Kansas | Styx
-D | Quel groupe a enregistré « The Logical Song » ? | Supertramp | 10cc | Electric Light Orchestra | Genesis
-M | Quel groupe a enregistré « Don't Stop Believin' » ? | Journey | Foreigner | Boston | Survivor
-M | Quel groupe a enregistré « Eye of the Tiger » ? | Survivor | Journey | Foreigner | Toto
-D | Quel groupe a enregistré « Beds Are Burning » ? | Midnight Oil | INXS | Men at Work | Crowded House
-M | Quel groupe a enregistré « Need You Tonight » ? | INXS | Duran Duran | Simple Minds | Tears for Fears
-M | Quel groupe a enregistré « Don't You Forget About Me » ? | Simple Minds | The Cure | Tears for Fears | Ultravox
+E | Which band released The Dark Side of the Moon in 1973? | Pink Floyd | Led Zeppelin | Genesis | Yes
+E | Which band released The Wall in 1979? | Pink Floyd | The Who | Genesis | Rush
+M | Which band released Rumours in 1977? | Fleetwood Mac | The Eagles | Steely Dan | Crosby, Stills and Nash
+M | Which band released Led Zeppelin IV in 1971? | Led Zeppelin | Deep Purple | Free | Bad Company
+M | Which band released Who's Next in 1971? | The Who | The Kinks | The Faces | Mott the Hoople
+M | Which band released A Night at the Opera in 1975? | Queen | Sparks | 10cc | Supertramp
+M | Which band released Rust Never Sleeps in 1979? | Neil Young and Crazy Horse | The Band | Buffalo Springfield | Poco
+M | Which band released Appetite for Destruction in 1987? | Guns N' Roses | Motley Crue | Skid Row | Faster Pussycat
+M | Which band released The Joshua Tree in 1987? | U2 | Simple Minds | Big Country | The Alarm
+M | Which band released Slippery When Wet in 1986? | Bon Jovi | Def Leppard | Cinderella | Europe
+M | Which band released Hysteria in 1987? | Def Leppard | Whitesnake | Poison | Dokken
+M | Which band released 1984 in that same year? | Van Halen | Ratt | Quiet Riot | Autograph
+H | Which band released Physical Graffiti in 1975? | Led Zeppelin | Bad Company | Free | The Firm
+H | Which band released Machine Head in 1972? | Deep Purple | Uriah Heep | Black Sabbath | Nazareth
+H | Which band released Paranoid in 1970? | Black Sabbath | Deep Purple | Budgie | Atomic Rooster
+H | Which band released Close to the Edge in 1972? | Yes | Genesis | King Crimson | Emerson, Lake and Palmer
+H | Which band released Selling England by the Pound in 1973? | Genesis | Yes | Gentle Giant | Van der Graaf Generator
+H | Which band released Moving Pictures in 1981? | Rush | Triumph | Saga | Max Webster
+H | Which band released Boston in 1976? | Boston | Kansas | Styx | Foreigner
+H | Which band released Hotel California in 1976? | The Eagles | Fleetwood Mac | Steely Dan | Firefall
+H | Which band released Aja in 1977? | Steely Dan | The Doobie Brothers | Toto | Little Feat
+H | Which band released Remain in Light in 1980? | Talking Heads | Devo | The B-52's | Gang of Four
+H | Which band released Parallel Lines in 1978? | Blondie | The Pretenders | The Cars | The Knack
+H | Which band released London Calling in 1979? | The Clash | The Jam | The Damned | The Ruts
+H | Which band released Never Mind the Bollocks in 1977? | The Sex Pistols | The Clash | The Damned | Buzzcocks
+H | Which band released Synchronicity in 1983? | The Police | The Fixx | Men at Work | The Cars
+H | Which band released Brothers in Arms in 1985? | Dire Straits | Simple Minds | Tears for Fears | The Style Council
+H | Which band released Purple Rain as a film and album in 1984? | Prince and the Revolution | The Time | Sheila E's band | Ready for the World
+H | Which band released Songs from the Big Chair in 1985? | Tears for Fears | Simple Minds | Talk Talk | Ultravox
 
+# --- Solo artists ---
 
-# --- Les artistes solo ---
+E | Which singer recorded Rocket Man and Your Song? | Elton John | Billy Joel | Rod Stewart | Cat Stevens
+E | Which singer recorded Piano Man? | Billy Joel | Elton John | Barry Manilow | Harry Chapin
+E | Which singer recorded Born to Run and Thunder Road? | Bruce Springsteen | Bob Seger | John Mellencamp | Tom Petty
+E | Which singer recorded Space Oddity and Let's Dance? | David Bowie | Bryan Ferry | Peter Gabriel | Marc Bolan
+E | Which singer recorded Billie Jean and Beat It? | Michael Jackson | Prince | Lionel Richie | Rick James
+E | Which singer recorded Like a Virgin and Material Girl? | Madonna | Cyndi Lauper | Sheena Easton | Belinda Carlisle
+M | Which singer recorded Girls Just Want to Have Fun? | Cyndi Lauper | Madonna | Pat Benatar | Kim Wilde
+M | Which singer recorded Maggie May and Do Ya Think I'm Sexy? | Rod Stewart | Elton John | Robert Palmer | Bryan Ferry
+M | Which singer recorded Night Moves and Old Time Rock and Roll? | Bob Seger | Bruce Springsteen | John Mellencamp | Tom Petty
+M | Which singer recorded Jack and Diane? | John Mellencamp | Bob Seger | Bryan Adams | John Cafferty
+M | Which singer recorded Summer of '69 and Run to You? | Bryan Adams | Bon Jovi | Rick Springfield | Corey Hart
+M | Which singer recorded Free Fallin' and American Girl? | Tom Petty | Bob Seger | John Fogerty | Del Shannon
+M | Which singer recorded What's Love Got to Do with It? | Tina Turner | Diana Ross | Chaka Khan | Donna Summer
+M | Which singer recorded In the Air Tonight? | Phil Collins | Peter Gabriel | Sting | Robert Palmer
+M | Which singer recorded Sledgehammer in 1986? | Peter Gabriel | Phil Collins | Sting | Howard Jones
+M | Which singer recorded Hit Me with Your Best Shot? | Pat Benatar | Joan Jett | Ann Wilson | Chrissie Hynde
+M | Which singer recorded Hungry Heart and Dancing in the Dark? | Bruce Springsteen | Southside Johnny | John Mellencamp | Eddie Money
+H | Which singer recorded Heroes in 1977? | David Bowie | Iggy Pop | Lou Reed | Brian Eno
+H | Which singer recorded Walk on the Wild Side? | Lou Reed | Iggy Pop | David Bowie | Bryan Ferry
+H | Which singer recorded Lust for Life? | Iggy Pop | Lou Reed | David Bowie | Marc Bolan
+H | Which singer recorded Tiny Dancer and Bennie and the Jets? | Elton John | Billy Joel | Leon Russell | Gilbert O'Sullivan
+H | Which singer recorded Only the Good Die Young? | Billy Joel | Elton John | Bruce Springsteen | Southside Johnny
+H | Which singer recorded Rikki Don't Lose That Number as part of a duo band? | Donald Fagen with Steely Dan | Michael McDonald | Boz Scaggs | Kenny Loggins
+H | Which singer recorded Lowdown and Lido Shuffle? | Boz Scaggs | Michael McDonald | Robert Palmer | Hall of Hall and Oates
+H | Which duo recorded Rich Girl and Maneater? | Hall and Oates | Ashford and Simpson | Air Supply | England Dan and John Ford Coley
+H | Which singer recorded Bette Davis Eyes? | Kim Carnes | Pat Benatar | Juice Newton | Sheena Easton
+H | Which singer recorded Karma Chameleon with his band? | Boy George | Simon Le Bon | Nick Rhodes | Martin Fry
+H | Which singer recorded Addicted to Love? | Robert Palmer | Bryan Ferry | Steve Winwood | Paul Young
+H | Which singer recorded Higher Love and Roll with It? | Steve Winwood | Robert Palmer | Joe Cocker | Boz Scaggs
+H | Which singer recorded I Will Survive? | Gloria Gaynor | Donna Summer | Thelma Houston | Anita Ward
 
-F | Quel chanteur britannique a créé le personnage de Ziggy Stardust ? | David Bowie | Elton John | Rod Stewart | Bryan Ferry
-F | Quel chanteur américain est surnommé « The Boss » ? | Bruce Springsteen | Billy Joel | Bob Seger | Tom Petty
-F | Quel chanteur américain a publié l'album « Thriller » ? | Michael Jackson | Prince | Lionel Richie | Stevie Wonder
-F | De quel groupe familial Michael Jackson venait-il ? | Les Jackson Five | Les Osmonds | Les Bee Gees | Les Isley Brothers
-F | Quel artiste américain a publié « Purple Rain » ? | Prince | Michael Jackson | Rick James | Lionel Richie
-F | Quel chanteur britannique s'est fait connaître au piano avec des lunettes voyantes ? | Elton John | Billy Joel | Rick Wakeman | Freddie Mercury
-M | Quel chanteur britannique venait du groupe The Faces ? | Rod Stewart | Robert Plant | Roger Daltrey | Steve Marriott
-F | Quel chanteur a quitté Genesis pour une carrière solo en 1975 ? | Peter Gabriel | Phil Collins | Tony Banks | Mike Rutherford
-F | Quel batteur de Genesis a réussi une grande carrière solo ? | Phil Collins | Peter Gabriel | Chester Thompson | Bill Bruford
-F | Quel chanteur a quitté The Police pour une carrière solo ? | Sting | Andy Summers | Stewart Copeland | Henry Padovani
-F | Quelle chanteuse américaine a triomphé avec « Private Dancer » ? | Tina Turner | Diana Ross | Donna Summer | Gladys Knight
-M | Quelle chanteuse britannique a chanté « Wuthering Heights » ? | Kate Bush | Annie Lennox | Siouxsie Sioux | Sade
-F | Quelle chanteuse américaine a lancé « Like a Virgin » en 1984 ? | Madonna | Cyndi Lauper | Whitney Houston | Pat Benatar
-M | Quelle chanteuse américaine a chanté « Girls Just Want to Have Fun » ? | Cyndi Lauper | Madonna | Debbie Harry | Belinda Carlisle
-M | Quel chanteur britannique venait du groupe Generation X ? | Billy Idol | Adam Ant | Boy George | Gary Numan
-D | Quel chanteur menait le groupe Culture Club ? | Boy George | Marilyn | Adam Ant | Steve Strange
-M | Quel duo britannique réunissait Annie Lennox et Dave Stewart ? | Eurythmics | Yazoo | Soft Cell | Pet Shop Boys
-M | Quel duo britannique réunissait George Michael et Andrew Ridgeley ? | Wham! | Erasure | Tears for Fears | Bros
-M | Quel chanteur menait Roxy Music ? | Bryan Ferry | Brian Eno | Phil Manzanera | Andy Mackay
-D | Quel musicien a quitté Roxy Music pour explorer la musique ambiante ? | Brian Eno | Bryan Ferry | Phil Manzanera | Paul Thompson
-M | Quel chanteur américain a mené le groupe The Doors jusqu'en 1971 ? | Jim Morrison | Ray Manzarek | Robby Krieger | John Densmore
-M | Quel guitariste américain est mort en 1970 après Woodstock ? | Jimi Hendrix | Duane Allman | Terry Kath | Danny Whitten
-M | Quelle chanteuse américaine est morte en 1970, voix du blues rock ? | Janis Joplin | Grace Slick | Mama Cass | Karen Carpenter
+# --- Disco, soul and funk ---
 
+E | Which brothers made up the Bee Gees? | Barry, Robin and Maurice Gibb | Barry, Andy and Robin Gibb | Robin, Maurice and Andy Gibb | Barry, Robin and Colin Gibb
+E | Which 1977 film soundtrack was dominated by the Bee Gees? | Saturday Night Fever | Grease | Fame | Flashdance
+M | Which singer was called the Queen of Disco? | Donna Summer | Gloria Gaynor | Diana Ross | Chaka Khan
+M | Which band recorded Le Freak and Good Times? | Chic | Kool and the Gang | Earth, Wind and Fire | The Trammps
+M | Which band recorded September and Boogie Wonderland? | Earth, Wind and Fire | Kool and the Gang | The Commodores | Rufus
+M | Which band recorded Celebration? | Kool and the Gang | Earth, Wind and Fire | The Gap Band | Cameo
+M | Which band recorded Brick House and Easy? | The Commodores | The Isley Brothers | The Ohio Players | Con Funk Shun
+M | Which bassist and bandleader recorded Give Up the Funk with two bands? | George Clinton | Bootsy Collins | Sly Stone | Larry Graham
+M | Which band did George Clinton lead alongside Parliament? | Funkadelic | The Bar-Kays | The Meters | War
+H | Which band recorded Super Freak? | Rick James' band | The Gap Band | Cameo | Zapp
+H | Which band recorded Play That Funky Music? | Wild Cherry | KC and the Sunshine Band | Average White Band | Tower of Power
+H | Which Scottish band recorded Pick Up the Pieces? | Average White Band | Nazareth | Simple Minds | The Sensational Alex Harvey Band
+H | Which band recorded Low Rider? | War | Santana | El Chicano | Malo
+H | Which guitarist recorded Black Magic Woman and Oye Como Va? | Carlos Santana | Jose Feliciano | Jorge Santana | Ritchie Valens
+H | Which 1979 record is credited with taking hip-hop onto the radio? | Rapper's Delight | The Message | Planet Rock | Rock Box
+H | Which group recorded The Message in 1982? | Grandmaster Flash and the Furious Five | The Sugarhill Gang | Kurtis Blow's crew | Afrika Bambaataa's crew
+H | Which group recorded Walk This Way with Aerosmith in 1986? | Run-DMC | The Beastie Boys | LL Cool J's crew | Whodini
+H | Which group recorded Fight for Your Right in 1986? | The Beastie Boys | Run-DMC | 2 Live Crew | The Fat Boys
 
-# --- Les albums et les dates ---
+# --- New wave and the eighties ---
 
-F | Quel album de Pink Floyd est paru en 1973 avec un prisme sur la pochette ? | The Dark Side of the Moon | The Wall | Wish You Were Here | Animals
-M | Quel album de Pink Floyd est paru en 1979 et raconte un mur ? | The Wall | Animals | Meddle | The Final Cut
-F | Quel album d'AC/DC de 1980 est le premier avec Brian Johnson ? | Back in Black | Highway to Hell | For Those About to Rock | Flick of the Switch
-M | Quel album de Dire Straits de 1985 s'est vendu par millions ? | Brothers in Arms | Making Movies | Love Over Gold | Communiqué
-F | Quel album de Michael Jackson de 1982 est le plus vendu de l'histoire ? | Thriller | Bad | Off the Wall | Dangerous
-F | Quel album de Bruce Springsteen de 1984 porte un drapeau américain ? | Born in the U.S.A. | Nebraska | The River | Born to Run
-F | Quel album de Prince de 1984 accompagnait un film ? | Purple Rain | 1999 | Sign o' the Times | Controversy
-F | Quel album de Queen de 1975 contient « Bohemian Rhapsody » ? | A Night at the Opera | News of the World | A Day at the Races | Jazz
-M | Quel album de Fleetwood Mac de 1977 est un des plus vendus ? | Rumours | Tusk | Mirage | Tango in the Night
-M | Quel album des Eagles de 1976 porte le nom d'un hôtel ? | Hotel California | Desperado | On the Border | The Long Run
-D | Quel album de Led Zeppelin n'a pas de titre officiel ? | Le quatrième | Le premier | Le deuxième | Le cinquième
-D | Quel symbole figure sur la pochette du quatrième album de Led Zeppelin ? | Un vieil homme portant du bois | Un dirigeable | Un prisme | Une pomme
-D | Quel album de Bowie de 1977 a été enregistré à Berlin ? | Heroes | Let's Dance | Hunky Dory | Aladdin Sane
-M | Quel album de Bowie de 1983 l'a rendu populaire au grand public ? | Let's Dance | Low | Station to Station | Scary Monsters
-M | Quel album de The Clash de 1979 porte le nom d'une capitale ? | London Calling | Combat Rock | Sandinista | Give 'Em Enough Rope
-M | Quel album de Supertramp de 1979 évoque le petit-déjeuner ? | Breakfast in America | Crime of the Century | Crisis, What Crisis | Even in the Quietest Moments
-D | Quel album de Genesis de 1974 raconte l'histoire de Rael ? | The Lamb Lies Down on Broadway | Foxtrot | Selling England by the Pound | Trespass
-M | Quel album d'Iron Maiden de 1982 a une bête pour titre ? | The Number of the Beast | Killers | Powerslave | Piece of Mind
-D | Quel album de Metallica de 1986 précède la mort de son bassiste ? | Master of Puppets | Kill 'Em All | Ride the Lightning | And Justice for All
-D | Quel bassiste de Metallica est mort dans un accident en 1986 ? | Cliff Burton | Jason Newsted | Ron McGovney | Robert Trujillo
+E | Which channel began in 1981 with a video about radio stars? | MTV | VH1 | BET | HBO
+E | Which band recorded Video Killed the Radio Star? | The Buggles | The Vapors | The Motors | The Records
+M | Which band recorded Sweet Dreams in 1983? | Eurythmics | Yazoo | Soft Cell | Depeche Mode
+M | Which band recorded Tainted Love in 1981? | Soft Cell | Depeche Mode | The Human League | Heaven 17
+M | Which band recorded Don't You Want Me in 1981? | The Human League | Soft Cell | ABC | Ultravox
+M | Which band recorded Take On Me in 1985? | a-ha | Wham | Duran Duran | Spandau Ballet
+M | Which band recorded Hungry Like the Wolf? | Duran Duran | Spandau Ballet | Kajagoogoo | A Flock of Seagulls
+M | Which band recorded True in 1983? | Spandau Ballet | Duran Duran | ABC | The Style Council
+M | Which band recorded Whip It in 1980? | Devo | The Cars | The Knack | Missing Persons
+M | Which band recorded Rock Lobster? | The B-52's | Devo | The Waitresses | Talking Heads
+M | Which band recorded 99 Luftballons? | Nena | Trio | Alphaville | Falco's band
+M | Which band recorded Der Kommissar in German first? | Falco | Nena | Alphaville | Kraftwerk
+H | Which band recorded Enjoy the Silence in 1990 after a 1980s run? | Depeche Mode | New Order | The Cure | Erasure
+H | Which band recorded Bizarre Love Triangle? | New Order | Depeche Mode | Pet Shop Boys | OMD
+H | Which duo recorded West End Girls? | Pet Shop Boys | Erasure | Yazoo | Bronski Beat
+H | Which band recorded Boys Don't Cry and Friday I'm in Love? | The Cure | The Smiths | Echo and the Bunnymen | The Jesus and Mary Chain
+H | Which band recorded How Soon Is Now? | The Smiths | The Cure | Echo and the Bunnymen | Lloyd Cole's band
+H | Which band recorded Cars in 1979 with synthesizers to the front? | Gary Numan's band | The Human League | Ultravox | Visage
+H | Which band recorded Once in a Lifetime? | Talking Heads | Devo | Gang of Four | Wire
+H | Which band recorded Under Pressure with David Bowie? | Queen | The Rolling Stones | The Police | Roxy Music
+H | Which band recorded Don't Stop Til You Get Enough as a solo turn in 1979? | Michael Jackson | The Jacksons | Rick James' band | The Gap Band
 
+# --- Moments ---
 
-# --- Les grands moments ---
+M | Which 1985 concert raised money for famine relief across two continents? | Live Aid | Farm Aid | The Concert for Bangladesh | Band Aid only
+M | Which 1985 American benefit concert supported farmers? | Farm Aid | Live Aid | Hands Across America | No Nukes
+M | Which 1971 concert organized by George Harrison was an early charity show? | The Concert for Bangladesh | The Isle of Wight | Woodstock | Watkins Glen
+M | Which 1979 concert series protested nuclear power? | No Nukes | Live Aid | Farm Aid | Rock Against Racism
+M | Which 1969 California festival ended in violence at a Rolling Stones set? | Altamont | Monterey Pop | Woodstock | The Big Sur Folk Festival
+M | Which 1970 album by The Beatles was their last released? | Let It Be | Abbey Road | The White Album | Yellow Submarine
+H | Which Led Zeppelin drummer died in 1980, ending the band? | John Bonham | John Paul Jones | Jimmy Page | Peter Grant
+H | Which Lynyrd Skynyrd members died in a 1977 plane crash? | Ronnie Van Zant and Steve Gaines | Gary Rossington and Allen Collins | Billy Powell and Leon Wilkeson | Artimus Pyle and Ed King
+H | Which Who drummer died in 1978? | Keith Moon | John Entwistle | Roger Daltrey | Kenney Jones
+H | Which AC/DC singer died in 1980 and was replaced by Brian Johnson? | Bon Scott | Angus Young | Malcolm Young | Cliff Williams
+H | Which Beatle was killed outside his New York apartment in 1980? | John Lennon | George Harrison | Ringo Starr | Paul McCartney
+H | Which Queen singer's last studio album with the band was released in 1991? | Freddie Mercury | Brian May | Roger Taylor | John Deacon
+H | Which 1976 tour film documented The Band's farewell concert? | The Last Waltz | Rust Never Sleeps | The Song Remains the Same | Stop Making Sense
+H | Which 1984 concert film captured Talking Heads in performance? | Stop Making Sense | The Last Waltz | Rattle and Hum | Sign o' the Times
+H | Which 1970 documentary captured a festival on a New York farm? | Woodstock | Gimme Shelter | Monterey Pop | Message to Love
+H | Which 1970 documentary followed the Rolling Stones to Altamont? | Gimme Shelter | Woodstock | Cocksucker Blues | Ladies and Gentlemen
 
-F | Quel grand concert de charité a eu lieu en juillet 1985 ? | Le Live Aid | Woodstock | Monterey | L'Isle of Wight
-F | Dans quelles deux villes le Live Aid s'est-il tenu ? | Londres et Philadelphie | Paris et New York | Berlin et Chicago | Rome et Boston
-F | Quel groupe a marqué les esprits par sa prestation au Live Aid ? | Queen | Led Zeppelin | Pink Floyd | The Rolling Stones
-M | Quel chanteur a lancé Band Aid en 1984 ? | Bob Geldof | Sting | Phil Collins | Midge Ure
-M | Avec quel musicien Bob Geldof a-t-il écrit le titre de Band Aid ? | Midge Ure | Sting | Phil Collins | George Michael
-F | Quel collectif américain a répondu à Band Aid en 1985 ? | USA for Africa | Live Aid | Farm Aid | Artists United
-F | Quel titre ce collectif américain a-t-il enregistré ? | We Are the World | Feed the World | Give Peace a Chance | Hands Across America
-M | Quels deux auteurs ont écrit ce titre américain ? | Michael Jackson et Lionel Richie | Quincy Jones et Prince | Stevie Wonder et Ray Charles | Bruce Springsteen et Bob Dylan
-M | Quel batteur a joué à Londres puis à Philadelphie le même jour du Live Aid ? | Phil Collins | Roger Taylor | Charlie Watts | Nick Mason
-F | Quel festival américain de 1969 reste le symbole d'une génération ? | Woodstock | Altamont | Monterey | Newport
-D | Quel concert des Rolling Stones de 1969 a mal tourné en Californie ? | Altamont | Woodstock | Hyde Park | Monterey
-F | Quelle chaîne musicale a été lancée aux États-Unis en 1981 ? | MTV | VH1 | BET | CNN
-D | Quel clip a ouvert les programmes de MTV en 1981 ? | Video Killed the Radio Star | Thriller | Take on Me | Money for Nothing
-D | Quel groupe interprétait ce premier clip diffusé par MTV ? | The Buggles | The Police | Duran Duran | Blondie
-F | Quel long clip de Michael Jackson de 1983 ressemble à un film ? | Thriller | Beat It | Bad | Smooth Criminal
-M | Quel guitariste de rock joue le solo de « Beat It » ? | Eddie Van Halen | Steve Lukather | Slash | Joe Perry
-M | Quel duo Queen et David Bowie ont-ils enregistré en 1981 ? | Under Pressure | Heroes | Let's Dance | Modern Love
-D | À quel âge Freddie Mercury est-il mort en 1991 ? | Quarante-cinq ans | Cinquante-cinq ans | Trente-cinq ans | Soixante ans
-M | Quel batteur de Led Zeppelin est mort en 1980, entraînant la fin du groupe ? | John Bonham | John Paul Jones | Jimmy Page | Robert Plant
-M | Quel ancien Beatle a été assassiné à New York en 1980 ? | John Lennon | George Harrison | Ringo Starr | Paul McCartney
+# --- Openers: the song and the band ---
 
+E | Which band recorded Another One Bites the Dust? | Queen | The Police | Blondie | Chic
+E | Which band recorded We Are the Champions? | Queen | Kiss | Journey | Boston
+E | Which band recorded Rock and Roll? | Led Zeppelin | The Rolling Stones | The Who | Grand Funk Railroad
+E | Which band recorded Black Dog? | Led Zeppelin | Deep Purple | Black Sabbath | Free
+E | Which band recorded Start Me Up? | The Rolling Stones | The Faces | Aerosmith | Bad Company
+E | Which band recorded Brown Sugar? | The Rolling Stones | The Faces | Humble Pie | Free
+E | Which band recorded Pinball Wizard? | The Who | The Kinks | The Small Faces | The Move
+E | Which band recorded Iron Man? | Black Sabbath | Deep Purple | Blue Oyster Cult | Judas Priest
+E | Which band recorded War Pigs? | Black Sabbath | Deep Purple | Rainbow | Uriah Heep
+E | Which band recorded Wish You Were Here as the title track? | Pink Floyd | Genesis | Yes | Supertramp
+E | Which band recorded Message in a Bottle? | The Police | The Cars | Squeeze | The Pretenders
+E | Which band recorded Don't Stand So Close to Me? | The Police | The Jam | The Clash | Squeeze
+E | Which band recorded Money for Nothing? | Dire Straits | ZZ Top | Huey Lewis and the News | Bryan Adams' band
+E | Which band recorded Walk of Life? | Dire Straits | Huey Lewis and the News | The Hooters | Mr. Mister
+E | Which band recorded With or Without You? | U2 | Simple Minds | The Alarm | Big Country
+E | Which band recorded Sunday Bloody Sunday? | U2 | The Alarm | Simple Minds | Big Country
+E | Which band recorded Dream On? | Aerosmith | Boston | Kansas | Styx
+E | Which band recorded Sweet Emotion? | Aerosmith | Bad Company | Ted Nugent's band | Foghat
+E | Which band recorded Panama? | Van Halen | Ratt | Dokken | Quiet Riot
+E | Which band recorded Runnin' with the Devil? | Van Halen | Montrose | Ratt | Y and T
+E | Which band recorded Separate Ways? | Journey | Survivor | Foreigner | Loverboy
+E | Which band recorded Open Arms? | Journey | REO Speedwagon | Foreigner | Chicago
+E | Which band recorded Eye of the Tiger? | Survivor | Journey | Loverboy | Night Ranger
+E | Which band recorded Cold as Ice? | Foreigner | Boston | Kansas | Styx
+E | Which band recorded Juke Box Hero? | Foreigner | Journey | Survivor | Loverboy
+E | Which band recorded Dust in the Wind? | Kansas | Boston | Styx | Ambrosia
+E | Which band recorded Peace of Mind? | Boston | Kansas | Journey | Styx
+E | Which band recorded Mr. Roboto? | Styx | Kansas | Asia | Toto
+E | Which band recorded Keep On Loving You? | REO Speedwagon | Journey | Foreigner | Chicago
+E | Which band recorded Crazy Little Thing Called Love? | Queen | Wham | The Stray Cats | Squeeze
+E | Which band recorded Legs? | ZZ Top | Foghat | Bad Company | The Georgia Satellites
+E | Which band recorded Gimme Three Steps? | Lynyrd Skynyrd | The Outlaws | Molly Hatchet | .38 Special
+E | Which band recorded Midnight Rider? | The Allman Brothers Band | Lynyrd Skynyrd | The Marshall Tucker Band | Wet Willie
+E | Which band recorded Burning Down the House? | Talking Heads | Devo | The B-52's | The Cars
+E | Which band recorded Call Me? | Blondie | The Pretenders | The Go-Go's | Berlin
+E | Which band recorded One Way or Another? | Blondie | The Runaways | The Motels | Missing Persons
+E | Which band recorded I Wanna Be Sedated? | The Ramones | The Dead Boys | The Damned | The Vibrators
+E | Which band recorded Should I Stay or Should I Go? | The Clash | The Jam | Buzzcocks | The Undertones
+E | Which band recorded Rock the Casbah? | The Clash | The Jam | Big Audio Dynamite | The Specials
+E | Which band recorded Anarchy in the UK? | The Sex Pistols | The Damned | The Clash | Sham 69
+E | Which band recorded Just What I Needed? | The Cars | The Knack | The Romantics | The Motels
+E | Which band recorded Drive in 1984? | The Cars | Mr. Mister | Berlin | The Fixx
+E | Which band recorded The One I Love? | R.E.M. | The Replacements | The dB's | Let's Active
+E | Which band recorded Welcome to the Jungle? | Guns N' Roses | Motley Crue | Skid Row | L.A. Guns
+E | Which band recorded Paradise City? | Guns N' Roses | Poison | Warrant | Faster Pussycat
+E | Which band recorded Wanted Dead or Alive? | Bon Jovi | Def Leppard | Cinderella | Britny Fox
+E | Which band recorded You Give Love a Bad Name? | Bon Jovi | Europe | White Lion | Winger
+E | Which band recorded The Final Countdown? | Europe | Bon Jovi | Whitesnake | Dokken
+E | Which band recorded Here I Go Again? | Whitesnake | Def Leppard | Great White | Dokken
+E | Which band recorded Photograph in 1983? | Def Leppard | Ratt | Krokus | Autograph
+E | Which band recorded Detroit Rock City? | Kiss | Alice Cooper's band | Grand Funk Railroad | Ted Nugent's band
+E | Which band recorded Beth? | Kiss | Styx | Boston | Journey
+E | Which band recorded Surrender? | Cheap Trick | The Knack | The Romantics | The Cars
+E | Which band recorded I Want You to Want Me? | Cheap Trick | The Raspberries | Badfinger | The Records
+E | Which band recorded Long Train Runnin'? | The Doobie Brothers | The Eagles | Little Feat | Steely Dan
+E | Which band recorded China Grove? | The Doobie Brothers | The Allman Brothers Band | ZZ Top | The Marshall Tucker Band
+E | Which band recorded Dreams in 1977? | Fleetwood Mac | The Eagles | Heart | Linda Ronstadt's band
+E | Which band recorded Magic Man? | Heart | Fleetwood Mac | Pat Benatar's band | Blondie
+E | Which band recorded Crazy on You? | Heart | The Runaways | Fanny | Vixen
 
-# --- Le rock français ---
+# --- Openers: who and where ---
 
-F | Qui chantait dans le groupe Téléphone ? | Jean-Louis Aubert | Louis Bertignac | Richard Kolinka | Corine Marienneau
-F | Quel guitariste accompagnait Jean-Louis Aubert dans Téléphone ? | Louis Bertignac | Richard Kolinka | Corine Marienneau | Nono Krief
-M | Quelle musicienne tenait la basse dans Téléphone ? | Corine Marienneau | Catherine Ringer | Muriel Moreno | Elli Medeiros
-M | Qui tenait la batterie dans Téléphone ? | Richard Kolinka | Louis Bertignac | Jean-Louis Aubert | Nono Krief
-M | En quelle année le groupe Téléphone s'est-il séparé ? | 1986 | 1981 | 1990 | 1978
-F | Quel titre de Téléphone parle d'un conte détourné ? | Cendrillon | Ça c'est vraiment toi | New York avec toi | Un autre monde
-M | Quel titre de Téléphone évoque une grande ville américaine ? | New York avec toi | Cendrillon | La Bombe humaine | Argent trop cher
-M | Qui chantait dans le groupe Trust ? | Bernie Bonvoisin | Nono Krief | Yves Brusco | Vivi Lalanne
-M | Quel guitariste menait Trust avec Bernie Bonvoisin ? | Nono Krief | Louis Bertignac | Yves Brusco | Farid Medjane
-M | Quel titre de Trust de 1980 est devenu un hymne ? | Antisocial | Au nom de la race | Repression | Le Mitard
-F | Qui chante dans le groupe Indochine ? | Nicola Sirkis | Dominique Nicolas | Dimitri Bodianski | Stéphane Sirkis
-F | Quel titre a lancé Indochine en 1982 ? | L'Aventurier | Trois nuits par semaine | Canary Bay | Tes yeux noirs
-M | Quel titre d'Indochine de 1985 parle des nuits de la semaine ? | Trois nuits par semaine | L'Aventurier | Canary Bay | Miss Paramount
-M | Quel duo formait Les Rita Mitsouko ? | Catherine Ringer et Fred Chichin | Muriel Moreno et Daniel Chenevez | Elli et Jacno | Lio et Jacques Duvall
-M | Quel titre des Rita Mitsouko de 1985 porte un prénom ? | Marcia Baila | Andy | C'est comme ça | Les Histoires d'A
-D | À qui « Marcia Baila » rendait-il hommage ? | Une danseuse et chorégraphe | Une actrice | Une peintre | Une romancière
-M | Quel duo formait le groupe Niagara ? | Muriel Moreno et Daniel Chenevez | Catherine Ringer et Fred Chichin | Elli et Jacno | Corynne et Bernard
-D | Quel titre de Niagara évoque un pistolet et un homme ? | Tchiki boum | Marcia Baila | Cargo | Voyage voyage
-M | Quel groupe de rock français des années 1970 venait de Lyon ? | Starshooter | Téléphone | Trust | Bijou
-D | Quel groupe français de rock progressif portait un nom d'un seul mot court ? | Ange | Magma | Gong | Atoll
-D | Quel groupe français a inventé une langue imaginaire pour ses textes ? | Magma | Ange | Téléphone | Trust
-M | Quel batteur a fondé le groupe Magma ? | Christian Vander | Richard Kolinka | Farid Medjane | Manu Katché
-D | Quel groupe de new wave française menait Daniel Darc ? | Taxi Girl | Marquis de Sade | Kas Product | Jacno
-D | Quel musicien français a signé l'instrumental « Rectangle » en 1979 ? | Jacno | Jean-Michel Jarre | Richard Pinhas | Bernard Szajner
-F | Quel musicien français a triomphé avec l'album « Oxygène » en 1976 ? | Jean-Michel Jarre | Vangelis | Cerrone | Space
-D | Quel musicien français de disco a signé « Supernature » en 1977 ? | Cerrone | Patrick Juvet | Alec Costandinos | Marc Cerrone seul
-
-
-# --- La chanson française des années 70 ---
-
-F | Quel chanteur français est surnommé « l'idole des jeunes » ? | Johnny Hallyday | Eddy Mitchell | Claude François | Dick Rivers
-M | De quel groupe Eddy Mitchell venait-il ? | Les Chaussettes noires | Les Chats sauvages | Les Pirates | Les Vautours
-M | De quel groupe Dick Rivers venait-il ? | Les Chats sauvages | Les Chaussettes noires | Les Pirates | Les Missiles
-M | Quel chanteur français a écrit « Lettre à France » en 1977 ? | Michel Polnareff | Michel Berger | Julien Clerc | Alain Souchon
-M | Quelle particularité visuelle Michel Polnareff a-t-il rendue célèbre ? | Ses lunettes blanches | Son chapeau | Sa canne | Sa cape
-M | Quel chanteur a enregistré « Aux armes et cætera » en version reggae ? | Serge Gainsbourg | Jacques Dutronc | Alain Bashung | Bernard Lavilliers
-M | Dans quel pays Gainsbourg a-t-il enregistré cet album reggae ? | La Jamaïque | Les États-Unis | Le Royaume-Uni | Le Brésil
-F | Quel chanteur français a interprété « Il est cinq heures, Paris s'éveille » ? | Jacques Dutronc | Michel Polnareff | Alain Souchon | Julien Clerc
-M | Quel duo d'auteurs unissait Alain Souchon et un compositeur ? | Laurent Voulzy | Michel Berger | Jean-Jacques Goldman | Didier Barbelivien
-M | Quel titre de Laurent Voulzy de 1977 énumère des souvenirs musicaux ? | Rockollection | Le Cœur grenadine | Belle-Île-en-Mer | Bopper en larmes
-M | Quel compositeur a écrit pour France Gall et signé « Starmania » avec Plamondon ? | Michel Berger | Julien Clerc | Michel Fugain | Alain Souchon
-M | En quelle année l'opéra rock « Starmania » a-t-il été créé ? | 1979 | 1975 | 1983 | 1986
-M | Qui a écrit les paroles de « Starmania » avec Michel Berger ? | Luc Plamondon | Étienne Roda-Gil | Pierre Delanoë | Jean-Loup Dabadie
-M | Quelle chanteuse française était l'épouse de Michel Berger ? | France Gall | Véronique Sanson | Catherine Lara | Jeanne Mas
-M | Quelle chanteuse française a chanté « Amoureuse » en 1972 ? | Véronique Sanson | France Gall | Michèle Torr | Nicoletta
-M | Quel chanteur français a interprété « Une belle histoire » en 1972 ? | Michel Fugain | Julien Clerc | Gérard Lenorman | Yves Duteil
-M | Quel groupe accompagnait Michel Fugain dans les années 1970 ? | Le Big Bazar | Le Grand Orchestre | La Bande à Basile | Les Charlots
-M | Quel groupe français a chanté « J'ai encore rêvé d'elle » en 1976 ? | Il était une fois | Martin Circus | Les Poppys | Gold
-F | Quel chanteur français est mort en 1978 dans sa salle de bains ? | Claude François | Joe Dassin | Michel Berger | Daniel Balavoine
-M | Quel titre de Claude François est sorti l'année de sa mort ? | Alexandrie Alexandra | Cette année-là | Comme d'habitude | Le Téléphone pleure
-M | Quelle chanson de Claude François est devenue « My Way » en anglais ? | Comme d'habitude | Alexandrie Alexandra | Belles belles belles | Le Lundi au soleil
-M | Quel chanteur français d'origine américaine est mort en 1980 ? | Joe Dassin | Claude François | Mike Brant | Daniel Balavoine
-M | Quelle chanteuse est morte en 1987 après une longue carrière ? | Dalida | Barbara | Nicoletta | Sheila
-M | Quel titre de Dalida de 1974 raconte une histoire d'amour italienne ? | Gigi l'amoroso | Paroles paroles | Salma ya salama | Laissez-moi danser
-F | Quel chanteur français a écrit « Les Lacs du Connemara » ? | Michel Sardou | Julien Clerc | Gérard Lenorman | Hervé Vilard
-D | Qui a composé la musique des « Lacs du Connemara » ? | Jacques Revaux | Michel Berger | Didier Barbelivien | Pierre Delanoë
-F | Quel chanteur français a écrit « Je l'aime à mourir » en 1979 ? | Francis Cabrel | Jean-Jacques Goldman | Yves Duteil | Alain Souchon
-M | Quel chanteur français a écrit « Prendre un enfant » en 1977 ? | Yves Duteil | Francis Cabrel | Maxime Le Forestier | Gérard Lenorman
-M | Quel chanteur français a écrit « San Francisco » en 1972 ? | Maxime Le Forestier | Yves Duteil | Michel Fugain | Alain Souchon
-
-
-# --- La variété française des années 80 ---
-
-F | Quel chanteur français a écrit « Quand la musique est bonne » ? | Jean-Jacques Goldman | Daniel Balavoine | Michel Berger | Étienne Daho
-M | Avec qui Jean-Jacques Goldman a-t-il chanté « Je te donne » en 1985 ? | Michael Jones | Michel Berger | Carole Fredericks | Sirima
-M | Quel trio Jean-Jacques Goldman a-t-il formé plus tard ? | Fredericks Goldman Jones | Les Enfoirés | Les Restos | Gold
-F | Quel chanteur français est mort dans un accident d'hélicoptère en 1986 ? | Daniel Balavoine | Michel Berger | Claude François | Joe Dassin
-M | Lors de quelle épreuve Daniel Balavoine est-il mort ? | Le Paris-Dakar | Le Tour de France | Les 24 Heures du Mans | Le Vendée Globe
-M | Quel titre de Daniel Balavoine de 1978 parle de son métier ? | Le Chanteur | Mon fils ma bataille | L'Aziza | Vivre ou survivre
-M | Quel titre de Daniel Balavoine évoque une bataille pour son enfant ? | Mon fils ma bataille | Le Chanteur | Sauver l'amour | Tous les cris les SOS
-F | Quel chanteur français a écrit « Mistral gagnant » en 1985 ? | Renaud | Alain Souchon | Francis Cabrel | Yves Duteil
-M | Quel chanteur français chantait avec un bandana et un blouson ? | Renaud | Bernard Lavilliers | Alain Bashung | Jacques Higelin
-M | Quel titre de Renaud est une chanson d'amour pour sa fille ? | Mistral gagnant | Morgane de toi | Hexagone | Dès que le vent soufflera
-M | Quel chanteur français a interprété « Gaby oh Gaby » en 1980 ? | Alain Bashung | Renaud | Étienne Daho | Jacques Higelin
-M | Quel titre d'Alain Bashung de 1981 parle d'un vertige ? | Vertige de l'amour | Gaby oh Gaby | Osez Joséphine | Madame rêve
-M | Quel chanteur français a lancé « Week-end à Rome » en 1984 ? | Étienne Daho | Alain Bashung | Marc Lavoine | Jean-Louis Murat
-M | Quel chanteur français a chanté « Elle a les yeux revolver » ? | Marc Lavoine | Étienne Daho | Axel Bauer | Jean-Pierre Mader
-M | Quel titre d'Axel Bauer de 1983 a marqué les débuts du clip en France ? | Cargo | Voyage voyage | Macumba | Boule de flipper
-M | Quelle chanteuse a lancé « Voyage voyage » en 1986 ? | Desireless | Jeanne Mas | Elsa | Julie Pietri
-M | Quelle coiffure Desireless avait-elle rendue célèbre ? | Une coupe très courte | Une longue tresse | Un carré blond | Des cheveux rouges
-M | Quel chanteur français a chanté « Macumba » en 1984 ? | Jean-Pierre Mader | Marc Lavoine | Cookie Dingler | Axel Bauer
-M | Quel titre de Cookie Dingler de 1984 parle d'une femme ? | Femme libérée | Macumba | Cargo | Boule de flipper
-M | Quel groupe français a chanté « Un peu plus près des étoiles » ? | Gold | Images | Émile et Images | Partenaire Particulier
-M | Quel groupe français a chanté « Les Démons de minuit » en 1986 ? | Images | Gold | Début de Soirée | Partenaire Particulier
-M | Quel groupe français a chanté « Nuit de folie » en 1988 ? | Début de Soirée | Images | Gold | Les Avions
-M | Quelle chanteuse a chanté « Toute première fois » en 1984 ? | Jeanne Mas | Elsa | Desireless | Julie Pietri
-M | Quelle jeune chanteuse a chanté « T'en va pas » en 1986 ? | Elsa | Vanessa Paradis | Jeanne Mas | Lio
-M | Quelle jeune chanteuse a chanté « Joe le taxi » en 1987 ? | Vanessa Paradis | Elsa | Lio | Corynne Charby
-M | Quelle chanteuse belge a chanté « Banana Split » en 1979 ? | Lio | Plastic Bertrand | Viktor Lazlo | Sandra Kim
-M | Quel chanteur belge a chanté « Ça plane pour moi » en 1977 ? | Plastic Bertrand | Lio | Jacques Brel | Adamo
-D | Quelle chanteuse a chanté « Ève lève-toi » en 1986 ? | Julie Pietri | Jeanne Mas | Desireless | Caroline Loeb
-D | Quelle chanteuse a chanté « C'est la ouate » en 1986 ? | Caroline Loeb | Julie Pietri | Corynne Charby | Elli Medeiros
-D | Quelle chanteuse a chanté « Boule de flipper » en 1986 ? | Corynne Charby | Caroline Loeb | Jeanne Mas | Julie Pietri
-D | Quelle chanteuse a chanté « Toi mon toit » en 1986 ? | Elli Medeiros | Lio | Corynne Charby | Jakie Quartz
-D | De quel groupe punk Elli Medeiros venait-elle ? | Stinky Toys | Taxi Girl | Marquis de Sade | Bijou
-D | Quelle chanteuse a chanté « Africa » en 1982, sans lien avec Toto ? | Rose Laurens | Julie Pietri | Jeanne Mas | Desireless
-D | Quel chanteur a chanté « Pour le plaisir » en 1981 ? | Herbert Léonard | Michel Delpech | Gérard Lenorman | Frédéric François
-D | Quelle chanteuse monégasque a chanté « Ouragan » en 1986 ? | Stéphanie de Monaco | Jeanne Mas | Elsa | Lio
-D | Quel chanteur italo-français a chanté « Question de feeling » en duo ? | Richard Cocciante | Julien Clerc | Herbert Léonard | Frédéric François
-D | Avec quelle chanteuse Richard Cocciante a-t-il chanté ce duo ? | Fabienne Thibeault | France Gall | Véronique Sanson | Catherine Lara
-D | Quelle chanteuse violoniste a chanté « Nuit magique » en 1986 ? | Catherine Lara | Véronique Sanson | Jeanne Mas | Julie Pietri
-M | Quel chanteur français a chanté « On the Road Again » en 1988 ? | Bernard Lavilliers | Renaud | Alain Bashung | Jacques Higelin
-D | Quel chanteur français a chanté « Tombé du ciel » en 1988 ? | Jacques Higelin | Bernard Lavilliers | Alain Bashung | Michel Jonasz
-M | Quel chanteur français a chanté « Les vacances au bord de la mer » ? | Michel Jonasz | Michel Delpech | Michel Fugain | Michel Berger
-M | Quel chanteur français a chanté « Le Loir-et-Cher » en 1977 ? | Michel Delpech | Michel Jonasz | Yves Duteil | Gérard Lenorman
-
-
-# --- Les rôles et les surnoms ---
-
-M | Quel surnom porte le guitariste d'AC/DC en uniforme d'écolier ? | Angus | Malcolm | Bon | Phil
-M | Quel surnom porte Bruce Dickinson, chanteur d'Iron Maiden ? | La sirène à air | Le rossignol | Le tonnerre | La foudre
-M | Quelle mascotte accompagne Iron Maiden sur ses pochettes ? | Eddie | Vic | Snaggletooth | Hellboy
-D | Quelle mascotte de Motörhead figure sur ses pochettes ? | Snaggletooth | Eddie | Vic Rattlehead | Le Diable
-M | Qui menait Motörhead à la basse et au chant ? | Lemmy Kilmister | Phil Taylor | Fast Eddie Clarke | Brian Robertson
-F | Quel groupe Ozzy Osbourne a-t-il quitté en 1979 ? | Black Sabbath | Deep Purple | Judas Priest | Uriah Heep
-D | Quel guitariste a accompagné Ozzy Osbourne en solo avant sa mort en 1982 ? | Randy Rhoads | Zakk Wylde | Jake E. Lee | Tony Iommi
-M | Quel groupe Ritchie Blackmore a-t-il fondé après Deep Purple ? | Rainbow | Whitesnake | Gillan | Black Sabbath
-M | Quel groupe David Coverdale a-t-il fondé après Deep Purple ? | Whitesnake | Rainbow | Gillan | Foreigner
-D | Quel chanteur de Deep Purple a précédé Ian Gillan ? | Rod Evans | David Coverdale | Glenn Hughes | Joe Lynn Turner
-M | Quel groupe Peter Frampton a-t-il quitté pour une carrière solo ? | Humble Pie | Bad Company | Free | Foreigner
-D | Quel chanteur de Free a ensuite mené Bad Company ? | Paul Rodgers | Paul Kossoff | Andy Fraser | Simon Kirke
-M | Quel guitariste de Queen a été aussi astrophysicien ? | Brian May | Roger Taylor | John Deacon | Freddie Mercury
-D | De quoi la guitare de Brian May est-elle en partie faite ? | Une cheminée ancienne | Un vieux banc | Une porte | Un piano
-D | Quel objet Freddie Mercury tenait-il souvent sur scène ? | Un demi-pied de micro | Une cape | Une canne | Un tambourin
-M | Quel chanteur des Rolling Stones joue aussi de l'harmonica ? | Mick Jagger | Keith Richards | Ronnie Wood | Charlie Watts
-M | En quelle année Ronnie Wood a-t-il rejoint les Rolling Stones ? | 1975 | 1969 | 1980 | 1962
-M | Quel guitariste fondateur des Rolling Stones est mort en 1969 ? | Brian Jones | Mick Taylor | Ronnie Wood | Ian Stewart
-D | Quel guitariste a joué chez les Rolling Stones entre 1969 et 1974 ? | Mick Taylor | Ronnie Wood | Brian Jones | Bill Wyman
-M | Quel groupe Sting a-t-il quitté pour jouer du jazz rock en solo ? | The Police | The Jam | Squeeze | The Clash
-D | Quel batteur de jazz a accompagné Sting sur son premier album solo ? | Omar Hakim | Stewart Copeland | Manu Katché | Vinnie Colaiuta
-D | Quel batteur français a joué avec Sting et Peter Gabriel ? | Manu Katché | Richard Kolinka | Farid Medjane | André Ceccarelli
-M | Quel chanteur a mené Simple Minds ? | Jim Kerr | Charlie Burchill | Derek Forbes | Mel Gaynor
-M | Quel duo formait Tears for Fears ? | Roland Orzabal et Curt Smith | Andy Bell et Vince Clarke | Neil Tennant et Chris Lowe | Marc Almond et Dave Ball
-M | Quel duo formait les Pet Shop Boys ? | Neil Tennant et Chris Lowe | Roland Orzabal et Curt Smith | Andy Bell et Vince Clarke | Ali et Robin Campbell
-D | Quel duo formait Erasure ? | Andy Bell et Vince Clarke | Neil Tennant et Chris Lowe | Marc Almond et Dave Ball | Alison Moyet et Vince Clarke
-D | Quel musicien a quitté Depeche Mode puis fondé Yazoo et Erasure ? | Vince Clarke | Martin Gore | Alan Wilder | Andy Fletcher
-
-
-# --- Compléments : les grandes voix et les instruments ---
-
-F | Quel instrument est le plus associé au rock ? | La guitare électrique | Le violon | La harpe | L'accordéon
-F | Comment appelle-t-on le musicien qui tient le rythme derrière la batterie ? | Le batteur | Le bassiste | Le guitariste | Le claviériste
-F | Comment appelle-t-on le musicien qui tient les notes graves ? | Le bassiste | Le batteur | Le chanteur | Le violoniste
-M | Quel duo d'instruments forme la « section rythmique » d'un groupe ? | La basse et la batterie | La guitare et le chant | Les claviers et le saxophone | Les cuivres
-M | Comment appelle-t-on le passage instrumental mis en avant dans un morceau ? | Un solo | Un refrain | Un couplet | Un pont
-M | Comment appelle-t-on la partie qui revient à l'identique dans une chanson ? | Le refrain | Le couplet | Le pont | L'intro
-M | Comment appelle-t-on le passage qui relie deux parties d'une chanson ? | Le pont | Le refrain | Le couplet | La coda
-D | Comment appelle-t-on l'effet qui sature le son d'une guitare électrique ? | La distorsion | La réverbération | Le chorus | Le délai
-D | Comment appelle-t-on l'écho répété appliqué à une guitare ? | Le délai | La distorsion | Le chorus | La compression
-D | Quel guitariste de U2 a fait du délai sa signature sonore ? | The Edge | Bono | Adam Clayton | Larry Mullen Jr
-D | Quel instrument électronique a marqué la musique des années 1980 ? | Le synthétiseur | Le clavecin | La mandoline | Le banjo
-D | Quelle boîte à rythmes japonaise a marqué les années 1980 ? | La Roland TR-808 | La Yamaha DX7 | Le Moog | Le Mellotron
-M | Quel synthétiseur japonais de 1983 a inondé les tubes des années 1980 ? | Le Yamaha DX7 | Le Moog modulaire | Le Mellotron | Le Theremin
-D | Quel instrument à bandes magnétiques a servi au rock progressif ? | Le Mellotron | Le vocodeur | La wah-wah | Le Theremin
-D | Quel effet vocal robotique Kraftwerk a-t-il popularisé ? | Le vocodeur | La wah-wah | La fuzz | Le flanger
-
-
-# --- Compléments : les soixante dernières ---
-
-F | Quel groupe britannique s'est séparé en 1970 après une décennie ? | Les Beatles | Les Rolling Stones | The Who | Pink Floyd
-F | Quel Beatle a chanté « Imagine » en 1971 ? | John Lennon | Paul McCartney | George Harrison | Ringo Starr
-M | Quel groupe Paul McCartney a-t-il fondé après les Beatles ? | Wings | Traveling Wilburys | Bad Company | Free
-D | Quel supergroupe George Harrison a-t-il rejoint en 1988 ? | Les Traveling Wilburys | Wings | Cream | Blind Faith
-F | Quel guitariste britannique est surnommé « Slowhand » ? | Eric Clapton | Jeff Beck | Jimmy Page | Peter Green
-M | Quel trio Eric Clapton formait-il avec Jack Bruce et Ginger Baker ? | Cream | Free | Blind Faith | Derek and the Dominos
-D | Sous quel nom de groupe Clapton a-t-il enregistré « Layla » ? | Derek and the Dominos | Cream | Blind Faith | The Yardbirds
-D | Quel groupe a lancé Clapton, Beck et Page à ses débuts ? | The Yardbirds | The Animals | The Kinks | The Hollies
-M | Quel groupe britannique a chanté « You Really Got Me » puis « Lola » ? | The Kinks | The Who | The Animals | The Hollies
-M | Quels frères menaient The Kinks ? | Ray et Dave Davies | Angus et Malcolm Young | Alex et Eddie Van Halen | Noel et Liam Gallagher
-F | Quel chanteur de soul américain est surnommé le « Parrain de la soul » ? | James Brown | Otis Redding | Marvin Gaye | Sam Cooke
-F | Quel chanteur aveugle a signé « Superstition » en 1972 ? | Stevie Wonder | Ray Charles | José Feliciano | Al Green
-M | Quel chanteur a signé « What's Going On » en 1971 ? | Marvin Gaye | Stevie Wonder | Curtis Mayfield | Al Green
-M | Quel label de Detroit a produit la soul des années 1960 et 1970 ? | Motown | Stax | Atlantic | Chess
-F | Quelle chanteuse est surnommée la « reine de la soul » ? | Aretha Franklin | Diana Ross | Tina Turner | Gladys Knight
-M | Quel groupe disco américain a chanté « Le Freak » en 1978 ? | Chic | Kool and the Gang | Earth Wind and Fire | The Trammps
-D | Quel guitariste de Chic a produit Bowie et Madonna dans les années 1980 ? | Nile Rodgers | Bernard Edwards | Tony Thompson | Luther Vandross
-M | Quel groupe américain a chanté « September » en 1978 ? | Earth Wind and Fire | Kool and the Gang | Chic | The Commodores
-D | De quel groupe Lionel Richie venait-il ? | Les Commodores | Kool and the Gang | Earth Wind and Fire | The Temptations
-M | Quel groupe allemand de disco a chanté « Rasputin » ? | Boney M | Silver Convention | Arabesque | Amanda Lear
-D | Quel producteur allemand a créé Boney M ? | Frank Farian | Giorgio Moroder | Dieter Bohlen | Michael Cretu
-M | Quel producteur italo-allemand a inventé le disco électronique ? | Giorgio Moroder | Frank Farian | Vangelis | Jean-Michel Jarre
-M | Quelle chanteuse américaine Giorgio Moroder a-t-il produite ? | Donna Summer | Diana Ross | Gloria Gaynor | Grace Jones
-F | Quelle chanteuse a chanté « I Will Survive » en 1978 ? | Gloria Gaynor | Donna Summer | Diana Ross | Chaka Khan
-F | Quel groupe américain déguisé a chanté « Y.M.C.A. » ? | Village People | The Trammps | Chic | Kool and the Gang
-M | Quel groupe suédois a gagné l'Eurovision en 1974 ? | ABBA | Europe | Roxette | Ace of Base
-M | Avec quel titre ABBA a-t-il gagné l'Eurovision ? | Waterloo | Mamma Mia | S.O.S. | Ring Ring
-M | Quelles deux chanteuses composaient ABBA ? | Agnetha et Anni-Frid | Agnetha et Benny | Anni-Frid et Björn | Frida et Marie
-M | Quels deux musiciens composaient les chansons d'ABBA ? | Björn et Benny | Agnetha et Anni-Frid | Björn et Agnetha | Benny et Frida
-M | Quel groupe britannique a chanté « Video Killed the Radio Star » ? | The Buggles | The Vapors | The Korgis | Ultravox
-M | Quel groupe britannique a chanté « Vienna » en 1981 ? | Ultravox | Japan | Visage | Spandau Ballet
-D | Quel chanteur menait Ultravox à partir de 1979 ? | Midge Ure | John Foxx | Steve Strange | Billy Currie
-M | Quel groupe britannique a chanté « True » en 1983 ? | Spandau Ballet | Duran Duran | ABC | Culture Club
-D | Quels frères menaient Spandau Ballet ? | Gary et Martin Kemp | Ray et Dave Davies | Ali et Robin Campbell | Charlie et Craig Reid
-M | Quel groupe britannique de reggae a chanté « Red Red Wine » ? | UB40 | The Specials | Madness | The Beat
-M | Quel groupe britannique a chanté « Our House » en 1982 ? | Madness | The Specials | UB40 | The Jam
-D | Quel courant musical britannique mêlait ska et punk vers 1979 ? | Le 2 Tone | Le glam | Le shoegaze | La new wave seule
-F | Quel groupe jamaïcain a fait connaître le reggae dans le monde ? | Bob Marley and the Wailers | Toots and the Maytals | Steel Pulse | Black Uhuru
-M | Quel album de Bob Marley de 1977 porte le nom d'un exil ? | Exodus | Kaya | Uprising | Survival
-M | En quelle année Bob Marley est-il mort ? | 1981 | 1977 | 1985 | 1973
-F | Quel groupe irlandais a chanté « With or Without You » en 1987 ? | U2 | The Cranberries | Thin Lizzy | The Pogues
-M | Quel album de U2 de 1987 porte un nom d'arbre ? | The Joshua Tree | War | Boy | Achtung Baby
-D | Quel groupe irlandais mêlait punk et musique traditionnelle ? | The Pogues | Thin Lizzy | U2 | The Undertones
-M | Quel groupe britannique a chanté « How Soon Is Now » ? | The Smiths | The Cure | Joy Division | Echo and the Bunnymen
-M | Qui chantait dans The Smiths ? | Morrissey | Johnny Marr | Andy Rourke | Mike Joyce
-D | Quel guitariste accompagnait Morrissey dans The Smiths ? | Johnny Marr | Andy Rourke | Mike Joyce | Craig Gannon
-M | Quel groupe est devenu New Order après la mort de son chanteur ? | Joy Division | The Smiths | The Cure | Bauhaus
-M | Comment s'appelait le chanteur de Joy Division mort en 1980 ? | Ian Curtis | Bernard Sumner | Peter Hook | Stephen Morris
-M | Quel groupe britannique a chanté « Boys Don't Cry » ? | The Cure | The Smiths | Joy Division | Siouxsie and the Banshees
-M | Quelle chanteuse menait Siouxsie and the Banshees ? | Siouxsie Sioux | Debbie Harry | Chrissie Hynde | Poly Styrene
-D | Quelle chanteuse américaine menait The Pretenders en Angleterre ? | Chrissie Hynde | Debbie Harry | Patti Smith | Joan Jett
-D | Quelle chanteuse américaine a chanté « Because the Night » ? | Patti Smith | Chrissie Hynde | Joan Jett | Pat Benatar
-D | Qui a coécrit ce titre avec Patti Smith ? | Bruce Springsteen | Bob Dylan | Lou Reed | Tom Verlaine
-M | Quel groupe new-yorkais Lou Reed a-t-il mené avant sa carrière solo ? | Le Velvet Underground | Television | Blondie | The Ramones
-M | Quel titre de Lou Reed de 1972 parle d'un côté sauvage ? | Walk on the Wild Side | Perfect Day | Sweet Jane | Vicious
-D | Quel artiste a produit ce disque de Lou Reed ? | David Bowie | Brian Eno | Andy Warhol | Iggy Pop
-D | Quel chanteur américain Bowie a-t-il produit et surnommé l'iguane ? | Iggy Pop | Lou Reed | Alice Cooper | Marc Bolan
-D | Quel groupe glam britannique Marc Bolan menait-il ? | T. Rex | Slade | Sweet | Mud
-D | Quel groupe britannique a chanté « Ballroom Blitz » ? | Sweet | Slade | T. Rex | Mud
-F | Quel groupe britannique a chanté « We Will Rock You » ? | Queen | The Who | Slade | Status Quo
+E | Which instrument did Eddie Van Halen play? | The guitar | The bass | The drums | The keyboard
+E | Which instrument did John Bonham play? | The drums | The guitar | The bass | The keyboard
+E | Which instrument did Keith Moon play? | The drums | The guitar | The bass | The saxophone
+E | Which instrument did Sting play alongside singing? | The bass | The guitar | The drums | The piano
+E | Which instrument did Freddie Mercury play on many Queen songs? | The piano | The guitar | The bass | The drums
+E | Which instrument did Slash play? | The guitar | The bass | The drums | The keyboard
+E | Which instrument did Flea's contemporary Geddy Lee play while singing? | The bass | The guitar | The drums | The keyboard
+E | Which instrument did Clarence Clemons play? | The saxophone | The trumpet | The guitar | The harmonica
+E | Which decade did MTV launch in? | The 1980s | The 1970s | The 1990s | The 1960s
+E | Which decade did punk break out in Britain? | The 1970s | The 1960s | The 1980s | The 1990s
+E | Which decade did disco dominate American dance floors? | The 1970s | The 1960s | The 1980s | The 1950s
+E | Which country did Def Leppard come from? | England | The United States | Australia | Canada
+E | Which country did Rush come from? | Canada | The United States | England | Australia
+E | Which country did Scorpions come from? | Germany | Sweden | The Netherlands | Austria
+E | Which country did The Police come from? | England | Ireland | Scotland | Wales
+E | Which country did Journey come from? | The United States | England | Canada | Australia
+E | Which country did Van Halen form in? | The United States | The Netherlands | Germany | Canada
+E | Which country did Blondie come from? | The United States | England | Canada | Australia
+E | Which country did The Clash come from? | England | Ireland | The United States | Scotland
+E | Which American city did Aerosmith form in? | Boston | New York | Detroit | Cleveland
+E | Which American city did Kiss form in? | New York | Los Angeles | Detroit | Chicago
+E | Which American city did Guns N' Roses form in? | Los Angeles | New York | Seattle | Detroit
+E | Which American city did Journey form in? | San Francisco | Los Angeles | Chicago | Detroit
+E | Which American city did Talking Heads form around? | New York | Boston | Providence | Philadelphia
+M | Which band took its name from a Kurt Vonnegut phrase and formed in Ohio? | Devo | Pere Ubu | The Pretenders | The Raspberries
+M | Which band's members all took the same surname on stage? | The Ramones | The Damned | The Cars | The Knack
+M | Which band was named after a piece of farm machinery in a Bob Dylan lyric? | Judas Priest | Deep Purple | Uriah Heep | Black Sabbath
+M | Which band took its name from a Hermann Hesse novel? | Steppenwolf | Uriah Heep | Jethro Tull | Deep Purple
+M | Which band changed its name from The New Yardbirds? | Led Zeppelin | Deep Purple | Free | Bad Company
+M | Which band changed its name from Earth in 1969? | Black Sabbath | Deep Purple | Uriah Heep | Budgie
+M | Which band changed its name from Smile when Freddie Mercury joined? | Queen | Sweet | Slade | Mott the Hoople
+M | Which band changed its name from Feedback and then The Hype? | U2 | Simple Minds | The Alarm | Big Country
+M | Which band took its name from a gym teacher at their high school? | Lynyrd Skynyrd | The Allman Brothers Band | Molly Hatchet | .38 Special
+M | Which band took its name from a Cincinnati fire engine? | REO Speedwagon | Foreigner | Survivor | Head East
+M | Which band took its name from a Mexican town in a Beach Boys lyric? | Kansas | Boston | Chicago | Toto
+M | Which band took its name from the city its members came from? | Boston | Kansas | Asia | Europe
+M | Which band took its name from a dog in a film? | Toto | Asia | Europe | Journey
+M | Which band took its name from a Charles Dickens character? | Uriah Heep | Steppenwolf | Jethro Tull | Wishbone Ash
+M | Which band's logo features a lightning bolt through the name? | AC/DC | Kiss | Van Halen | Def Leppard
+M | Which band's members wore face paint and platform boots? | Kiss | Slade | Sweet | Alice Cooper's band
+M | Which band's stage show included a giant inflatable pig? | Pink Floyd | Genesis | Yes | Emerson, Lake and Palmer
+M | Which band's stage show included a wall built across the stage? | Pink Floyd | The Who | Genesis | Rush
+M | Which guitarist was known for smashing guitars on stage? | Pete Townshend | Jimmy Page | Eric Clapton | Jeff Beck
+M | Which guitarist played a double-necked guitar on stage in the 1970s? | Jimmy Page | Pete Townshend | Ritchie Blackmore | Tony Iommi
+M | Which guitarist built his own guitar with his father? | Brian May | Eddie Van Halen | Jimmy Page | Tony Iommi
+M | Which guitarist lost fingertips in a factory accident and played on? | Tony Iommi | Jerry Garcia | Django Reinhardt only | Rick Allen
+M | Which drummer kept playing after losing an arm? | Rick Allen | Phil Collins | Neil Peart | Alex Van Halen
+M | Which singer wore a cape and a crown on stage in the 1980s? | Freddie Mercury | David Bowie | Elton John | Rob Halford
+M | Which singer rode a motorcycle onto the stage? | Rob Halford | Ozzy Osbourne | Bruce Dickinson | Lemmy
+M | Which singer's stage character was named Ziggy Stardust? | David Bowie | Bryan Ferry | Marc Bolan | Peter Gabriel
+M | Which singer wore elaborate costumes fronting Genesis before 1975? | Peter Gabriel | Phil Collins | Tony Banks | Steve Hackett
+M | Which band famously refused to lip-sync and played live on television? | The Who | The Kinks | The Rolling Stones | Slade
+M | Which band was the first to have a video played on MTV after the Buggles? | Pat Benatar's band | Rod Stewart's band | The Who | Styx
+H | Which studio in London did The Beatles make famous and Pink Floyd use? | Abbey Road | Olympic | Trident | Air
+H | Which Welsh studio hosted many rock albums in the 1970s? | Rockfield | Abbey Road | Olympic | Ridge Farm

@@ -1,18 +1,18 @@
 //
 //  Cards.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Les cartes de territoire, comme dans la boîte.
+//  Territory cards, the way the box has them.
 //
-//  Une carte par territoire, plus deux jokers. On en tire une à la fin d'un
-//  tour où l'on a pris au moins une place — c'est ce qui récompense l'audace
-//  plutôt que l'attente. Trois cartes assorties s'échangent contre des hommes,
-//  et le barème monte à chaque échange de la partie : quatre, six, huit, dix,
-//  douze, quinze, puis cinq de plus à chaque fois. C'est ce qui empêche une
-//  partie de s'enliser — plus elle dure, plus les échanges pèsent.
+//  One card per territory, plus two wild cards. You draw one at the end of a
+//  turn in which you took at least one place — which is what rewards nerve
+//  rather than waiting. Three matching cards trade for troops, and the scale
+//  climbs with every exchange in the game: four, six, eight, ten, twelve,
+//  fifteen, then five more each time. That is what keeps a game from bogging
+//  down — the longer it runs, the heavier the exchanges weigh.
 //
-//  La règle est une option : elle change l'économie des renforts, et le
-//  plateau se joue très bien sans elle.
+//  The rule is optional: it changes the economics of reinforcement, and the
+//  board plays perfectly well without it.
 //
 
 import Foundation
@@ -20,79 +20,79 @@ import Foundation
 struct Card: Codable, Equatable, Hashable, Identifiable {
 
     enum Symbol: Int, Codable, CaseIterable {
-        case infanterie, cavalerie, artillerie
+        case infantry, cavalry, artillery
 
         var label: String {
             switch self {
-            case .infanterie: "Infanterie"
-            case .cavalerie:  "Cavalerie"
-            case .artillerie: "Artillerie"
+            case .infantry:  "Infantry"
+            case .cavalry:   "Cavalry"
+            case .artillery: "Artillery"
             }
         }
 
-        var icone: String {
+        var icon: String {
             switch self {
-            case .infanterie: "figure.walk"
-            case .cavalerie:  "hare.fill"
-            case .artillerie: "burst.fill"
+            case .infantry:  "figure.walk"
+            case .cavalry:   "hare.fill"
+            case .artillery: "burst.fill"
             }
         }
     }
 
     let id: Int
-    /// Le territoire qu'elle porte. Absent, c'est un joker.
+    /// The territory it carries. Absent, it is a wild card.
     let territory: TerritoryID?
     let symbol: Symbol
 
-    var estJoker: Bool { territory == nil }
+    var isWild: Bool { territory == nil }
 }
 
 enum Deck {
 
-    /// Le paquet d'un plateau : une carte par territoire, deux jokers.
-    /// Les symboles sont distribués en tournant, pour qu'aucun ne manque.
+    /// A board's deck: one card per territory, two wild cards. Symbols are
+    /// dealt round-robin, so that none is missing.
     static func build(for map: GameMap) -> [Card] {
-        var cartes = map.order.enumerated().map { rang, id in
-            Card(id: rang, territory: id,
-                 symbol: Card.Symbol.allCases[rang % Card.Symbol.allCases.count])
+        var cards = map.order.enumerated().map { rank, id in
+            Card(id: rank, territory: id,
+                 symbol: Card.Symbol.allCases[rank % Card.Symbol.allCases.count])
         }
-        cartes.append(Card(id: cartes.count, territory: nil, symbol: .infanterie))
-        cartes.append(Card(id: cartes.count, territory: nil, symbol: .infanterie))
-        return cartes
+        cards.append(Card(id: cards.count, territory: nil, symbol: .infantry))
+        cards.append(Card(id: cards.count, territory: nil, symbol: .infantry))
+        return cards
     }
 
-    /// Trois cartes forment-elles une combinaison ?
+    /// Do three cards make a set?
     ///
-    /// Trois symboles identiques, ou trois différents. Un joker remplace
-    /// n'importe quoi — avec un joker, deux cartes quelconques suffisent
-    /// toujours à compléter l'un ou l'autre cas.
-    static func estUneCombinaison(_ cartes: [Card]) -> Bool {
-        guard cartes.count == 3, Set(cartes.map(\.id)).count == 3 else { return false }
-        let vraies = cartes.filter { !$0.estJoker }.map(\.symbol)
-        if vraies.count < 3 { return true }
-        return Set(vraies).count == 1 || Set(vraies).count == 3
+    /// Three identical symbols, or three different ones. A wild card stands
+    /// in for anything — with one wild card, any two cards are always enough
+    /// to complete one case or the other.
+    static func isASet(_ cards: [Card]) -> Bool {
+        guard cards.count == 3, Set(cards.map(\.id)).count == 3 else { return false }
+        let real = cards.filter { !$0.isWild }.map(\.symbol)
+        if real.count < 3 { return true }
+        return Set(real).count == 1 || Set(real).count == 3
     }
 
-    /// La première combinaison trouvée dans une main, s'il y en a une.
-    static func premiereCombinaison(dans main: [Card]) -> [Card]? {
-        guard main.count >= 3 else { return nil }
-        for i in main.indices {
-            for j in main.indices where j > i {
-                for k in main.indices where k > j {
-                    let trio = [main[i], main[j], main[k]]
-                    if estUneCombinaison(trio) { return trio }
+    /// The first set found in a hand, if there is one.
+    static func firstSet(in hand: [Card]) -> [Card]? {
+        guard hand.count >= 3 else { return nil }
+        for i in hand.indices {
+            for j in hand.indices where j > i {
+                for k in hand.indices where k > j {
+                    let trio = [hand[i], hand[j], hand[k]]
+                    if isASet(trio) { return trio }
                 }
             }
         }
         return nil
     }
 
-    /// Le barème du Risk : 4, 6, 8, 10, 12, 15, puis cinq de plus à chaque
-    /// échange. `rang` est le numéro de l'échange dans la partie, à partir de 1.
-    static func valeur(echangeNumero rang: Int) -> Int {
-        let bareme = [4, 6, 8, 10, 12, 15]
-        guard rang >= 1 else { return bareme[0] }
-        if rang <= bareme.count { return bareme[rang - 1] }
-        return 15 + 5 * (rang - bareme.count)
+    /// The Risk scale: 4, 6, 8, 10, 12, 15, then five more at every exchange.
+    /// `rank` is the number of the exchange within the game, starting at 1.
+    static func value(forExchange rank: Int) -> Int {
+        let scale = [4, 6, 8, 10, 12, 15]
+        guard rank >= 1 else { return scale[0] }
+        if rank <= scale.count { return scale[rank - 1] }
+        return 15 + 5 * (rank - scale.count)
     }
 }

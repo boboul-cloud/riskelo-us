@@ -5,7 +5,7 @@
 # qui est la seule source de vérité. Le versionner reviendrait à suivre un
 # fichier réécrit à chaque commande — et à laisser deux descriptions du même
 # projet diverger en silence.
-Riskelo.xcodeproj/
+RiskeloUS.xcodeproj/
 
 # Xcode
 build/

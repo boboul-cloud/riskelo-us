@@ -1,47 +1,48 @@
 //
 //  GameScreen.swift
-//  Riskelo
+//  Riskelo US
 //
-//  L'écran de jeu : une barre qui dit où l'on en est, le plateau, et une
-//  barre qui dit ce qu'on peut faire.
+//  The game screen: a bar that says where you stand, the board, and a bar
+//  that says what you can do.
 //
-//  La règle de composition est celle des jeux de plateau : on ne demande
-//  jamais au joueur de deviner de quoi c'est le tour. La phase est écrite en
-//  toutes lettres, ce qui reste à faire aussi, et les cases jouables sont les
-//  seules qui ne soient pas dans l'ombre.
+//  The composition rule is the one board games use: you never ask the player
+//  to guess whose turn it is, or of what. The phase is spelled out, so is
+//  what is left to do, and the playable cells are the only ones not in
+//  shadow.
 //
 
 import SwiftUI
 
-/// L'espace de l'écran de jeu. Le plateau et les panneaux qui le couvrent s'y
-/// mesurent l'un l'autre.
-enum Espace { static let ecran = "ecran" }
+/// The game screen's coordinate space. The board and the panels that cover it
+/// measure each other in it.
+enum Space { static let screen = "screen" }
 
-/// Où commence ce qui couvre le bas de l'écran : la feuille du duel, le
-/// panneau d'assaut, celui du déplacement.
+/// Where whatever covers the bottom of the screen begins: the duel sheet, the
+/// assault panel, the move panel.
 ///
-/// La part couverte était estimée, en dixièmes de plateau — « le panneau
-/// d'assaut couvre les six dixièmes de la carte sur un iPhone ». Mesurée sur
-/// un grand téléphone, elle est fausse sur un petit : une feuille a une
-/// hauteur en points, pas en dixièmes d'écran. Sur un iPhone SE, celle qui
-/// demande combien d'hommes avancent couvre plus de huit dixièmes du plateau.
-/// Le recadrage amenait donc les deux places dans une bande qu'il croyait
-/// libre et qui ne l'était pas — on ne voyait plus où l'on se battait, au
-/// moment précis où il fallait en décider.
-struct HautCouvert: PreferenceKey {
+/// The covered share used to be estimated, in tenths of the board — "the
+/// assault panel covers six tenths of the map on an iPhone". Measured on a
+/// large phone, it is wrong on a small one: a sheet has a height in points,
+/// not in tenths of a screen. On an iPhone SE, the one asking how many troops
+/// advance covers more than eight tenths of the board. So the reframing
+/// brought the two places into a band it believed free and which was not —
+/// you could no longer see where you were fighting, at the very moment you
+/// had to decide about it.
+struct PanelTop: PreferenceKey {
     static let defaultValue: CGFloat? = nil
     static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
-        guard let suivant = nextValue() else { return }
-        value = min(value ?? .infinity, suivant)
+        guard let next = nextValue() else { return }
+        value = min(value ?? .infinity, next)
     }
 }
 
 extension View {
-    /// Déclare que cette vue couvre le bas de l'écran, et dit où elle commence.
-    func couvreLeBas() -> some View {
+    /// Declares that this view covers the bottom of the screen, and says
+    /// where it starts.
+    func coversBottom() -> some View {
         background(GeometryReader { geo in
-            Color.clear.preference(key: HautCouvert.self,
-                                   value: geo.frame(in: .named(Espace.ecran)).minY)
+            Color.clear.preference(key: PanelTop.self,
+                                   value: geo.frame(in: .named(Space.screen)).minY)
         })
     }
 }
@@ -50,28 +51,29 @@ struct GameScreen: View {
 
     let session: GameSession
     var onQuit: () -> Void
-    /// Le mode d'emploi se pose par-dessus la partie sans rien interrompre :
-    /// on l'ouvre au milieu d'un tour pour vérifier une règle, on le referme,
-    /// et le tour attend.
-    @State private var manuelOuvert = false
-    /// Le haut du panneau qui couvre le bas, mesuré à chaque disposition. Le
-    /// plateau s'en sert pour savoir ce qui lui reste vraiment.
-    @State private var hautCouvert: CGFloat?
+    /// The manual lays itself over the game without interrupting anything:
+    /// you open it in the middle of a turn to check a rule, you close it, and
+    /// the turn waits.
+    @State private var manualOpen = false
+    /// The top of the panel covering the bottom, measured at every layout.
+    /// The board uses it to know what it really has left.
+    @State private var panelTop: CGFloat?
 
     var body: some View {
         ZStack {
             Palette.sea.ignoresSafeArea()
             VStack(spacing: 0) {
-                // L'état de la partie en haut, ce qu'on peut en faire en bas.
-                // Les deux se suivaient sous la carte, et le bas de l'écran
-                // portait quatre lignes : qui joue, les continents, la
-                // consigne et le bouton. On lisait le compte des terres à
-                // l'endroit même où l'on cherchait le prochain geste.
+                // The state of the game at the top, what you can do about it
+                // at the bottom. The two used to follow each other under the
+                // map, and the bottom of the screen carried four lines: who
+                // is playing, the continents, the hint and the button. You
+                // read the count of lands in the very place you were looking
+                // for your next move.
                 StandingsBar(session: session)
-                BoardView(session: session, hautCouvert: hautCouvert)
+                BoardView(session: session, panelTop: panelTop)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 6)
-                    .overlay { AnnonceDePhase(session: session) }
+                    .overlay { PhaseBanner(session: session) }
                 BottomBar(session: session)
             }
             if session.target != nil, case .attack = session.game.phase {
@@ -81,64 +83,63 @@ struct GameScreen: View {
                 FortifyPanel(session: session).transition(.move(edge: .bottom).combined(with: .opacity))
             }
             DuelOverlay(session: session)
-            // Pas dès que le moteur a tranché : la dernière question va au
-            // bout d'abord — sa bonne réponse, la place qui tombe, le nom du
-            // vainqueur sur le plateau — et l'écran de victoire ferme la
-            // marche. Il recouvrait tout cela.
-            if session.victoireMontree, case let .finished(vainqueur) = session.game.phase {
-                VictoryOverlay(session: session, winner: vainqueur, onQuit: onQuit)
+            // Not as soon as the engine has decided: the last question runs
+            // to its end first — its correct answer, the place falling, the
+            // winner's name on the board — and the victory screen brings up
+            // the rear. It used to cover all of that.
+            if session.victoryShown, case let .finished(winner) = session.game.phase {
+                VictoryOverlay(session: session, winner: winner, onQuit: onQuit)
                     .transition(.opacity)
             }
         }
-        .coordinateSpace(name: Espace.ecran)
-        .onPreferenceChange(HautCouvert.self) { haut in hautCouvert = haut }
-        // La barre du haut est posée en marge de sécurité, et non dans la
-        // pile : dans la pile, la feuille du duel passait par-dessus elle. Or
-        // cette feuille porte le geste « touchez pour continuer » sur toute sa
-        // surface — et elle avalait donc le bouton « quitter » pendant tout le
-        // tour de la machine. En marge, la barre reste au-dessus de tout et
-        // répond toujours.
+        .coordinateSpace(name: Space.screen)
+        .onPreferenceChange(PanelTop.self) { top in panelTop = top }
+        // The top bar sits in the safe-area inset, and not in the stack: in
+        // the stack, the duel sheet went over it. And that sheet carries the
+        // "tap to continue" gesture across its whole surface — so it
+        // swallowed the "quit" button for the machine's entire turn. In the
+        // inset, the bar stays above everything and always answers.
         .safeAreaInset(edge: .top, spacing: 0) {
-            TopBar(session: session, onQuit: onQuit, onManuel: { manuelOuvert = true })
+            TopBar(session: session, onQuit: onQuit, onManual: { manualOpen = true })
         }
-        // Resserré : ce ne sont pas des latences, mais elles s'ajoutaient au
-        // retard du double-appui et le jeu paraissait mou. Le panneau d'assaut
-        // suit le doigt de près ; seule la feuille du duel, qui vient de plus
-        // loin, garde de quoi se voir monter.
+        // Tightened up: these are not latencies, but they were adding to the
+        // double-tap delay and the game felt sluggish. The assault panel
+        // follows the finger closely; only the duel sheet, which comes from
+        // further away, keeps enough to be seen rising.
         .animation(.snappy(duration: 0.15), value: session.target)
         .animation(.snappy(duration: 0.22), value: session.stage)
-        .animation(.spring(response: 0.26, dampingFraction: 0.72), value: session.annonce)
-        .animation(.easeOut(duration: 0.4), value: session.victoireMontree)
+        .animation(.spring(response: 0.26, dampingFraction: 0.72), value: session.announcement)
+        .animation(.easeOut(duration: 0.4), value: session.victoryShown)
         .sheet(isPresented: Binding(get: { session.journalOpen },
                                     set: { session.journalOpen = $0 })) {
             JournalSheet(session: session)
         }
-        .sheet(isPresented: Binding(get: { session.dossierOpen },
-                                    set: { session.dossierOpen = $0 })) {
-            DossierSheet(session: session)
+        .sheet(isPresented: Binding(get: { session.fileOpen },
+                                    set: { session.fileOpen = $0 })) {
+            FileSheet(session: session)
         }
-        .sheet(isPresented: Binding(get: { session.cartesOpen },
-                                    set: { session.cartesOpen = $0 })) {
-            CartesSheet(session: session)
+        .sheet(isPresented: Binding(get: { session.cardsOpen },
+                                    set: { session.cardsOpen = $0 })) {
+            CardsSheet(session: session)
         }
-        .sheet(isPresented: Binding(get: { session.objectifOpen },
-                                    set: { session.objectifOpen = $0 })) {
-            ObjectifSheet(session: session)
+        .sheet(isPresented: Binding(get: { session.objectiveOpen },
+                                    set: { session.objectiveOpen = $0 })) {
+            ObjectiveSheet(session: session)
         }
-        .sheet(isPresented: $manuelOuvert) {
-            ManuelView(onClose: { manuelOuvert = false })
+        .sheet(isPresented: $manualOpen) {
+            ManualView(onClose: { manualOpen = false })
         }
         .preferredColorScheme(.dark)
     }
 }
 
-// MARK: - Barre du haut
+// MARK: - Top bar
 
 private struct TopBar: View {
-    @State private var marque = false
+    @State private var marked = false
     let session: GameSession
     var onQuit: () -> Void
-    var onManuel: () -> Void
+    var onManual: () -> Void
 
     var body: some View {
         let g = session.game
@@ -148,33 +149,33 @@ private struct TopBar: View {
             }
             .buttonStyle(.plain).foregroundStyle(Palette.dim)
 
-            Circle().fill(Palette.camp(g.currentPlayer.id)).frame(width: 12, height: 12)
-            // La phase était écrite ici en toutes lettres. Le fil du bas la
-            // montre désormais, et en la situant dans les trois étapes du
-            // tour : la dire deux fois à deux endroits n'apprenait rien.
-            Text(session.nomAffiche(g.currentPlayer, avecMoi: false))
+            Circle().fill(Palette.side(g.currentPlayer.id)).frame(width: 12, height: 12)
+            // The phase used to be spelled out here. The feed at the bottom
+            // shows it now, and places it among the three steps of the turn:
+            // saying the same thing twice in two places taught nothing.
+            Text(session.displayName(g.currentPlayer, withMe: false))
                 .font(.subheadline.weight(.semibold)).foregroundStyle(Palette.ink)
-                // Un nom long ne pousse ni le tour ni les cinq boutons qui
-                // suivent : il se resserre, et se rogne s'il le faut.
+                // A long name pushes neither the turn nor the five buttons
+                // that follow: it tightens up, and gets clipped if it must.
                 .lineLimit(1).minimumScaleFactor(0.75)
             Spacer()
             VStack(alignment: .trailing, spacing: 1) {
-                Text("Tour \(g.turn)").font(.caption).foregroundStyle(Palette.dim)
+                Text("Turn \(g.turn)").font(.caption).foregroundStyle(Palette.dim)
                 Text("\(g.territories(of: g.currentPlayer.id).count)/\(g.dominationThreshold)")
                     .font(.subheadline.weight(.semibold).monospacedDigit())
                     .foregroundStyle(Palette.ink)
             }
-            // La conquête personnelle se consulte à tout moment : on l'oublie
-            // au bout de trois tours, et la relire ne coûte rien à personne
-            // puisqu'elle ne montre que la sienne.
-            if session.objectifMontre != nil {
-                Button { session.objectifOpen = true } label: {
+            // The personal conquest can be consulted at any time: you forget
+            // it after three turns, and rereading it costs nobody anything
+            // since it only shows your own.
+            if session.objectiveShown != nil {
+                Button { session.objectiveOpen = true } label: {
                     Image(systemName: "target")
                 }
                 .buttonStyle(.plain).foregroundStyle(Palette.dim)
             }
-            if g.rules.territoryCards, session.aMoiDeJouer {
-                Button { session.cartesOpen = true } label: {
+            if g.rules.territoryCards, session.myTurnToPlay {
+                Button { session.cardsOpen = true } label: {
                     ZStack(alignment: .topTrailing) {
                         Image(systemName: "rectangle.stack")
                         let n = g.hand(of: g.currentPlayer.id).count
@@ -182,37 +183,37 @@ private struct TopBar: View {
                             Text("\(n)")
                                 .font(.system(size: 9, weight: .bold))
                                 .padding(3)
-                                .background(g.doitEchanger(g.currentPlayer.id)
-                                            ? Palette.lost : Palette.camp(g.currentPlayer.id),
+                                .background(g.mustExchange(g.currentPlayer.id)
+                                            ? Palette.lost : Palette.side(g.currentPlayer.id),
                                             in: Circle())
                                 .offset(x: 8, y: -7)
                         }
                     }
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(g.doitEchanger(g.currentPlayer.id) ? Palette.lostVif : Palette.dim)
+                .foregroundStyle(g.mustExchange(g.currentPlayer.id) ? Palette.lostBright : Palette.dim)
             }
             Button {
-                session.marquer()
-                marque = true
+                session.mark()
+                marked = true
             } label: {
-                Image(systemName: marque ? "bookmark.fill" : "bookmark")
+                Image(systemName: marked ? "bookmark.fill" : "bookmark")
             }
-            .buttonStyle(.plain).foregroundStyle(marque ? Palette.held : Palette.dim)
-            .task(id: marque) {
-                guard marque else { return }
+            .buttonStyle(.plain).foregroundStyle(marked ? Palette.held : Palette.dim)
+            .task(id: marked) {
+                guard marked else { return }
                 try? await Task.sleep(for: .seconds(1.6))
-                marque = false
+                marked = false
             }
-            Button { session.dossierOpen = true } label: {
+            Button { session.fileOpen = true } label: {
                 Image(systemName: "person.text.rectangle")
             }.buttonStyle(.plain).foregroundStyle(Palette.dim)
             Button { session.journalOpen = true } label: {
                 Image(systemName: "list.bullet.rectangle")
             }.buttonStyle(.plain).foregroundStyle(Palette.dim)
-            // La règle d'un jeu de plateau se consulte pendant la partie, pas
-            // avant : c'est au moment où l'on hésite qu'on la cherche.
-            Button(action: onManuel) {
+            // A board game's rules are consulted during the game, not before:
+            // it is when you hesitate that you go looking for them.
+            Button(action: onManual) {
                 Image(systemName: "questionmark.circle")
             }.buttonStyle(.plain).foregroundStyle(Palette.dim)
         }
@@ -221,39 +222,38 @@ private struct TopBar: View {
     }
 }
 
-// MARK: - L'annonce d'une étape
+// MARK: - Announcing a step
 
-/// « Bleu, c'est à vous ! », « À l'attaque ! » — le temps d'un battement, en
-/// travers du plateau.
+/// "Blue, your turn!", "Attack!" — for a beat, across the board.
 ///
-/// Elle ne décide de rien et ne se touche pas. Elle sert à ce qu'on sache
-/// qu'on vient de changer d'étape sans avoir à lire la barre du haut : un jeu
-/// se suit du coin de l'œil.
-private struct AnnonceDePhase: View {
+/// It decides nothing and cannot be touched. It is there so you know you have
+/// just changed step without having to read the top bar: a game is followed
+/// out of the corner of your eye.
+private struct PhaseBanner: View {
     let session: GameSession
 
     var body: some View {
-        if let a = session.annonce {
+        if let a = session.announcement {
             VStack(spacing: 4) {
-                Text(a.titre)
+                Text(a.title)
                     .font(.system(size: 30, weight: .heavy, design: .rounded))
                     .foregroundStyle(.white)
-                    .shadow(color: Palette.camp(a.camp).opacity(0.9), radius: 12)
+                    .shadow(color: Palette.side(a.side).opacity(0.9), radius: 12)
                     .shadow(color: .black.opacity(0.6), radius: 3, y: 2)
-                if let sous = a.sous {
-                    Text(sous.uppercased())
+                if let sub = a.sub {
+                    Text(sub.uppercased())
                         .font(.caption.weight(.bold)).kerning(2)
-                        .foregroundStyle(Palette.camp(a.camp))
+                        .foregroundStyle(Palette.side(a.side))
                 }
             }
             .multilineTextAlignment(.center)
             .padding(.horizontal, 22).padding(.vertical, 14)
             .background(Palette.sea.opacity(0.72), in: Capsule())
-            .overlay(Capsule().strokeBorder(Palette.camp(a.camp).opacity(0.7), lineWidth: 2))
+            .overlay(Capsule().strokeBorder(Palette.side(a.side).opacity(0.7), lineWidth: 2))
             .allowsHitTesting(false)
             .id(a.id)
-            // Elle arrive en grand et se rétracte, elle repart en s'ouvrant :
-            // c'est ce qui lui donne du claquant.
+            // It arrives large and pulls in, it leaves by opening out: that
+            // is what gives it its snap.
             .transition(.asymmetric(
                 insertion: .scale(scale: 1.55).combined(with: .opacity),
                 removal: .scale(scale: 1.25).combined(with: .opacity)))
@@ -261,69 +261,68 @@ private struct AnnonceDePhase: View {
     }
 }
 
-// MARK: - État des forces
+// MARK: - The balance of forces
 
-/// Qui tient quoi. Sur un plateau de Risk, cette information se lit d'un coup
-/// d'œil aux couleurs ; sur un écran de téléphone, les cases sont trop petites
-/// pour qu'on les compte. On l'écrit donc.
+/// Who holds what. On a Risk board this reads at a glance from the colors; on
+/// a phone screen the cells are too small to count. So we write it down.
 private struct StandingsBar: View {
     let session: GameSession
 
     var body: some View {
         let g = session.game
         VStack(spacing: 7) {
-            // Chaque camp nommé, et un drapeau à celui qui a la main. La
-            // pastille seule ne suffisait pas : elle disait la couleur, pas
-            // qui c'était, et « qui joue » se lisait à une nuance d'opacité.
+            // Each side named, and a flag on whoever has the turn. The dot
+            // alone was not enough: it gave the color, not who it was, and
+            // "who is playing" read as a shade of opacity.
             //
-            // C'était une grille, et elle se repliait en deux lignes dès trois
-            // joueurs sur un téléphone : deux lignes prises au plateau, qui
-            // est ce qu'on est venu regarder. Elle défile donc, comme la bande
-            // des continents juste en dessous.
+            // It used to be a grid, and it folded onto two lines as soon as
+            // there were three players on a phone: two lines taken from the
+            // board, which is what you came to look at. So it scrolls, like
+            // the strip of continents just below.
             //
-            // L'objection à la bande qui défile tenait, et elle tient encore :
-            // un joueur qu'on ne voit pas n'existe pas. Elle est levée non par
-            // la grille mais par le défilement lui-même — celui qui a la main
-            // est ramené sous les yeux à chaque changement de tour, et c'est
-            // le seul qu'on ait vraiment besoin de voir à cet instant.
-            camps(g)
+            // The objection to a scrolling strip held, and still holds: a
+            // player you cannot see does not exist. It is answered not by the
+            // grid but by the scrolling itself — whoever has the turn is
+            // brought back under your eyes at every change of turn, and they
+            // are the only one you really need to see at that instant.
+            sides(g)
 
-            // Défilement horizontal : « Îles Britanniques » et « Europe
-            // centrale » ne tiennent pas côte à côte sur un téléphone, et
-            // repliés dans leur pastille ils devenaient illisibles.
+            // Horizontal scrolling: "British Isles" and "Central Europe" do
+            // not fit side by side on a phone, and folded into their pill
+            // they became unreadable.
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 6) {
-                    // La pastille garde la couleur du continent, tenu ou non.
-                    // Elle passait entièrement à la couleur de son maître, et
-                    // la bande cessait alors de renvoyer à la carte : les
-                    // Îles Britanniques étaient cerclées de jaune sur le
-                    // plateau et bleues ici. Or c'est bien la couleur qui
-                    // relie les deux — c'est à cela qu'elle sert.
+                    // The pill keeps the continent's color, held or not. It
+                    // used to switch entirely to its owner's color, and the
+                    // strip then stopped pointing back to the map: the
+                    // British Isles were ringed in yellow on the board and
+                    // blue here. Yet the color is exactly what ties the two
+                    // together — that is what it is for.
                     //
-                    // Qui le tient se dit donc autrement, et dans les termes
-                    // de la ligne du dessus : la pastille du camp et le
-                    // liseré à sa couleur, ceux-là mêmes qui marquent le
-                    // joueur à la main. Le fond se fait un peu plus franc,
-                    // pour qu'un continent tenu se repère sans lire.
+                    // Who holds it is therefore said differently, and in the
+                    // terms of the line above: the side's dot and an outline
+                    // in its color, the very ones that mark the player with
+                    // the turn. The ground goes a little stronger, so a
+                    // continent held can be spotted without reading.
                     ForEach(g.map.continentsInOrder) { c in
-                        let maitre = tenu(c)
-                        let teinte = Palette.continent(rang: c.tint)
+                        let owner = heldBy(c)
+                        let tint = Palette.continent(rank: c.tint)
                         HStack(spacing: 3) {
-                            if let maitre {
+                            if let owner {
                                 Image(systemName: "circle.fill")
                                     .font(.system(size: 7))
-                                    .foregroundStyle(Palette.campVif(maitre))
+                                    .foregroundStyle(Palette.brightSide(owner))
                             }
                             Text(c.name).font(.system(size: 10, weight: .medium))
                             Text("+\(c.bonus)").font(.system(size: 10, weight: .bold))
                         }
                         .fixedSize()
                         .padding(.horizontal, 7).padding(.vertical, 4)
-                        .background(teinte.opacity(maitre != nil ? 0.30 : 0.16), in: Capsule())
+                        .background(tint.opacity(owner != nil ? 0.30 : 0.16), in: Capsule())
                         .overlay(Capsule().strokeBorder(
-                            maitre.map { Palette.campVif($0).opacity(0.9) } ?? .clear,
+                            owner.map { Palette.brightSide($0).opacity(0.9) } ?? .clear,
                             lineWidth: 1.2))
-                        .foregroundStyle(teinte)
+                        .foregroundStyle(tint)
                     }
                 }
                 .padding(.vertical, 1)
@@ -332,219 +331,220 @@ private struct StandingsBar: View {
         .padding(.horizontal, 14).padding(.vertical, 8)
     }
 
-    /// Les camps sur une seule ligne, ramenée sur celui qui joue.
+    /// The sides on a single line, brought back to whoever is playing.
     ///
-    /// `ScrollViewReader` plutôt qu'un ordre figé : les camps gardent leur
-    /// rang de table — on les cherche toujours à la même place — et c'est la
-    /// vue qui se déplace, non eux.
-    private func camps(_ g: GameState) -> some View {
-        ScrollViewReader { lecteur in
+    /// `ScrollViewReader` rather than a fixed order: the sides keep their
+    /// seat at the table — you always look for them in the same place — and
+    /// it is the view that moves, not them.
+    private func sides(_ g: GameState) -> some View {
+        ScrollViewReader { reader in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(g.players) { j in camp(j).fixedSize().id(j.id) }
+                    ForEach(g.players) { p in sideChip(p).fixedSize().id(p.id) }
                 }
                 .padding(.vertical, 1)
-                // De quoi respirer aux deux bouts : sans cela, la dernière
-                // pastille colle au bord et l'on ne sait plus si la bande est
-                // finie ou seulement coupée.
+                // Room to breathe at both ends: without it the last pill
+                // sticks to the edge and you no longer know whether the strip
+                // has finished or has merely been cut off.
                 .padding(.horizontal, 2)
             }
-            .onChange(of: g.currentPlayer.id) { _, qui in
+            .onChange(of: g.currentPlayer.id) { _, who in
                 withAnimation(.snappy(duration: 0.35)) {
-                    lecteur.scrollTo(qui, anchor: .center)
+                    reader.scrollTo(who, anchor: .center)
                 }
             }
-            .onAppear { lecteur.scrollTo(g.currentPlayer.id, anchor: .center) }
+            .onAppear { reader.scrollTo(g.currentPlayer.id, anchor: .center) }
         }
     }
 
-    private func camp(_ j: Player) -> some View {
+    private func sideChip(_ p: Player) -> some View {
         let g = session.game
-        let aLaMain = j.id == g.currentPlayer.id && !g.isOver
-        let terres = g.territories(of: j.id).count
-        let hommes = g.territories(of: j.id).reduce(0) { $0 + g.armies($1) }
+        let hasTurn = p.id == g.currentPlayer.id && !g.isOver
+        let lands = g.territories(of: p.id).count
+        let troops = g.territories(of: p.id).reduce(0) { $0 + g.armies($1) }
         return HStack(spacing: 4) {
-            Image(systemName: aLaMain ? "flag.fill" : "circle.fill")
-                .font(.system(size: aLaMain ? 11 : 8))
-                .foregroundStyle(Palette.campVif(j.id))
-            Text(session.nomAffiche(j))
-                .font(.caption.weight(aLaMain ? .bold : .medium))
+            Image(systemName: hasTurn ? "flag.fill" : "circle.fill")
+                .font(.system(size: hasTurn ? 11 : 8))
+                .foregroundStyle(Palette.brightSide(p.id))
+            Text(session.displayName(p))
+                .font(.caption.weight(hasTurn ? .bold : .medium))
                 .foregroundStyle(Palette.ink)
-                .strikethrough(j.eliminated, color: Palette.dim)
+                .strikethrough(p.eliminated, color: Palette.dim)
                 .fixedSize()
             Image(systemName: "hexagon.fill")
                 .font(.system(size: 7)).foregroundStyle(Palette.dim)
-            Text("\(terres)")
+            Text("\(lands)")
                 .font(.caption.weight(.semibold).monospacedDigit())
                 .foregroundStyle(Palette.ink)
             Image(systemName: "person.fill")
                 .font(.system(size: 8)).foregroundStyle(Palette.dim)
-            Text("\(hommes)")
+            Text("\(troops)")
                 .font(.caption.monospacedDigit()).foregroundStyle(Palette.dim)
         }
         .padding(.horizontal, 9).padding(.vertical, 5)
-        .background(aLaMain ? Palette.camp(j.id).opacity(0.22) : Color.white.opacity(0.04),
+        .background(hasTurn ? Palette.side(p.id).opacity(0.22) : Color.white.opacity(0.04),
                     in: Capsule())
-        .overlay(Capsule().strokeBorder(aLaMain ? Palette.campVif(j.id).opacity(0.9) : .clear,
+        .overlay(Capsule().strokeBorder(hasTurn ? Palette.brightSide(p.id).opacity(0.9) : .clear,
                                         lineWidth: 1.3))
-        .opacity(j.eliminated ? 0.4 : 1)
-        .animation(.snappy(duration: 0.25), value: aLaMain)
+        .opacity(p.eliminated ? 0.4 : 1)
+        .animation(.snappy(duration: 0.25), value: hasTurn)
     }
 
-    private func tenu(_ c: Continent) -> PlayerID? {
+    private func heldBy(_ c: Continent) -> PlayerID? {
         let g = session.game
-        guard let premier = g.owner[c.territories[0]],
-              c.territories.allSatisfy({ g.owner[$0] == premier }) else { return nil }
-        return premier
+        guard let first = g.owner[c.territories[0]],
+              c.territories.allSatisfy({ g.owner[$0] == first }) else { return nil }
+        return first
     }
 }
 
-// MARK: - Barre du bas
+// MARK: - Bottom bar
 
 private struct BottomBar: View {
     let session: GameSession
 
-    /// Le déplacement ne se dédit pas : une fois l'attaque close, on n'y
-    /// revient plus du tour. Le bouton se trouve pourtant sous le pouce, à
-    /// l'endroit où l'on appuie sans lire — d'où cette question posée avant.
-    @State private var quitterLAttaque = false
+    /// Moving cannot be taken back: once the attack is closed, you do not
+    /// return to it that turn. Yet the button sits under the thumb, in the
+    /// place you press without reading — hence this question asked first.
+    @State private var leavingAttack = false
 
     var body: some View {
         let g = session.game
         VStack(spacing: 8) {
             if session.stage == .announcing, let a = session.assault {
-                annonce(a)
+                announcement(a)
             } else {
-                consigneEnCapsule
+                hintCapsule
             }
 
             HStack(spacing: 8) {
-                if session.aMoiDeJouer {
-                    FilDuTour(session: session)
+                if session.myTurnToPlay {
+                    TurnFeed(session: session)
                     Spacer(minLength: 6)
                     switch g.phase {
-                    case .reinforcement(let reste):
-                        action("À l'attaque", "arrow.right.circle.fill",
-                               enabled: reste == 0
-                                   && !g.doitEchanger(g.currentPlayer.id)) { session.endPhase() }
+                    case .reinforcement(let left):
+                        action("Attack", "arrow.right.circle.fill",
+                               enabled: left == 0
+                                   && !g.mustExchange(g.currentPlayer.id)) { session.endPhase() }
                     case .attack:
-                        action("Au déplacement", "figure.walk",
-                               enabled: session.assault == nil) { quitterLAttaque = true }
+                        action("Move", "figure.walk",
+                               enabled: session.assault == nil) { leavingAttack = true }
                     case .fortify:
-                        action("Fin du tour", "checkmark.circle.fill") { session.endTurn() }
+                        action("End turn", "checkmark.circle.fill") { session.endTurn() }
                     default:
                         EmptyView()
                     }
                 } else if !g.isOver {
-                    // Pas de bouton pendant le tour d'en face : le fil prend
-                    // toute la place, et montre où la machine en est du sien.
-                    FilDuTour(session: session).frame(maxWidth: .infinity)
+                    // No button during the other player's turn: the feed
+                    // takes the whole width, and shows how far the machine
+                    // has got in theirs.
+                    TurnFeed(session: session).frame(maxWidth: .infinity)
                 }
             }
         }
-        // Serré à dix points plutôt que quatorze : chaque point gagné ici est
-        // un point de plus pour le mot de l'étape en cours, qui sinon
-        // disparaît sur un iPhone au profit des seuls jalons numérotés.
+        // Tight at ten points rather than fourteen: every point gained here
+        // is one more for the word naming the current step, which otherwise
+        // disappears on an iPhone in favor of the numbered milestones alone.
         .padding(.horizontal, 10).padding(.top, 10).padding(.bottom, 12)
         .background(Palette.panel)
-        // Une alerte et non une feuille de choix : sur un iPhone, la feuille se
-        // rend en bulle accrochée au bouton, et n'y montre que « Oui » — on
-        // annulait en touchant à côté, sans que rien ne le dise. Une alerte
-        // porte ses deux réponses, sur les trois machines.
-        .alert("Avez-vous fini d'attaquer ?", isPresented: $quitterLAttaque) {
-            // « Oui » sans le rôle destructeur : ce n'est pas une perte,
-            // seulement une porte qui se ferme. Le refus prend le rôle
-            // d'annulation, donc la place du geste qui échappe.
-            Button("Oui, au déplacement") {
-                // La phase a pu tourner pendant que la question était posée.
+        // An alert and not a confirmation dialog: on an iPhone the dialog
+        // renders as a bubble hooked to the button, and shows only "Yes"
+        // there — you cancelled by touching beside it, with nothing saying
+        // so. An alert carries both its answers, on all three machines.
+        .alert("Have you finished attacking?", isPresented: $leavingAttack) {
+            // "Yes" without the destructive role: this is not a loss, only a
+            // door closing. The refusal takes the cancel role, and therefore
+            // the place of the gesture that slips.
+            Button("Yes, on to the move") {
+                // The phase may have turned while the question was up.
                 if case .attack = session.game.phase { session.endPhase() }
             }
-            Button("Non, je continue d'attaquer", role: .cancel) { }
+            Button("No, I'm still attacking", role: .cancel) { }
         } message: {
-            Text(avertissementDeplacement)
+            Text(moveWarning)
         }
     }
 
-    /// Ce qu'on risque en passant. La seconde phrase n'apparaît que si elle a
-    /// lieu d'être : rien de conquis ce tour, donc pas de carte à la fin — et
-    /// c'est précisément le regret qu'on veut éviter au joueur pressé.
-    private var avertissementDeplacement: String {
+    /// What you risk by moving on. The second sentence only appears if it has
+    /// cause to: nothing conquered this turn, so no card at the end — and
+    /// that is exactly the regret we want to spare the hurried player.
+    private var moveWarning: String {
         let g = session.game
-        let base = "On ne revient pas à l'attaque une fois le déplacement commencé."
+        let base = "You cannot go back to attacking once the move has started."
         guard g.rules.territoryCards, !g.conqueredThisTurn else { return base }
-        return base + " Et sans une seule conquête ce tour, vous ne piochez pas de carte."
+        return base + " And without a single conquest this turn, you draw no card."
     }
 
-    /// La consigne a la forme du bouton — même capsule, même largeur — mais
-    /// pas son habit : fond mat, texte éteint, pas de couleur de camp. Elle
-    /// gagne ainsi le poids qui lui manquait sans promettre un appui qu'elle
-    /// ne tient pas. La nuance compte ici plus qu'ailleurs : cette même place
-    /// **est** cliquable pendant l'annonce d'un assaut, et deux voisins qui se
-    /// ressemblent, dont l'un seul répond, se paient cher.
-    @ViewBuilder private var consigneEnCapsule: some View {
-        let texte = consigne
-        let (teinte, icone) = tonDeLaConsigne
-        if !texte.isEmpty {
+    /// The hint has the shape of the button — same capsule, same width — but
+    /// not its clothes: matte ground, dimmed text, no side color. It gains
+    /// the weight it was missing without promising a tap it cannot honor. The
+    /// distinction matters more here than elsewhere: that same place **is**
+    /// tappable while an assault is being announced, and two neighbors that
+    /// look alike, only one of which answers, cost dearly.
+    @ViewBuilder private var hintCapsule: some View {
+        let text = hint
+        let (tint, icon) = hintTone
+        if !text.isEmpty {
             HStack(spacing: 8) {
-                Image(systemName: icone)
+                Image(systemName: icon)
                     .font(.footnote.weight(.semibold))
-                    .foregroundStyle(teinte)
-                Text(texte)
+                    .foregroundStyle(tint)
+                Text(text)
                     .font(.footnote)
                     .foregroundStyle(Palette.ink)
                     .multilineTextAlignment(.leading)
-                    // Sans cela, « Cinq cartes en main : il faut en échanger
-                    // trois avant de poser » se fait rogner sur un iPhone.
+                    // Without this, "Five cards in hand: three have to be
+                    // traded before laying any down" gets clipped on an
+                    // iPhone.
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 14).padding(.vertical, 9)
-            .background(teinte.opacity(0.13), in: Capsule())
-            .overlay(Capsule().stroke(teinte.opacity(0.8), lineWidth: 1.2))
+            .background(tint.opacity(0.13), in: Capsule())
+            .overlay(Capsule().stroke(tint.opacity(0.8), lineWidth: 1.2))
         }
     }
 
-    /// La couleur et le signe de la consigne.
+    /// The hint's color and its sign.
     ///
-    /// Elle était grise sur fond mat — assez sobre pour ne pas passer pour un
-    /// bouton, mais au point de ne plus se voir du tout. Elle reprend donc
-    /// couleur, sans reprendre l'habit du bouton : celui-ci est plein et son
-    /// texte est blanc et gras, celle-là est un voile teinté cerné d'un filet,
-    /// et son texte reste de l'encre ordinaire.
+    /// It used to be grey on a matte ground — restrained enough not to pass
+    /// for a button, but to the point of not being seen at all. So it takes
+    /// color back, without taking the button's clothes: the button is solid
+    /// and its text is white and bold, the hint is a tinted veil ringed with
+    /// a hairline, and its text stays ordinary ink.
     ///
-    /// Trois tons, parce que la consigne dit trois choses différentes : ce
-    /// qu'on attend de vous, ce qui vous bloque, et que ce n'est pas à vous
-    /// de jouer.
-    private var tonDeLaConsigne: (Color, String) {
+    /// Three tones, because the hint says three different things: what is
+    /// expected of you, what is blocking you, and that it is not your turn.
+    private var hintTone: (Color, String) {
         let g = session.game
-        // La teinte vive, et non celle du plateau : ici elle ne remplit rien,
-        // elle cerne d'un filet et dessine un signe de la taille d'un mot.
-        if !session.aMoiDeJouer && !g.isOver {
-            return (Palette.campVif(g.currentPlayer.id), "ellipsis.bubble.fill")
+        // The bright hue, and not the board's: here it fills nothing, it
+        // rings a hairline and draws a sign the size of a word.
+        if !session.myTurnToPlay && !g.isOver {
+            return (Palette.brightSide(g.currentPlayer.id), "ellipsis.bubble.fill")
         }
-        if g.doitEchanger(g.currentPlayer.id), case .reinforcement = g.phase {
-            return (Palette.lostVif, "exclamationmark.triangle.fill")
+        if g.mustExchange(g.currentPlayer.id), case .reinforcement = g.phase {
+            return (Palette.lostBright, "exclamationmark.triangle.fill")
         }
-        return (Palette.campVif(g.currentPlayer.id), "hand.tap.fill")
+        return (Palette.brightSide(g.currentPlayer.id), "hand.tap.fill")
     }
 
-    /// Ce que la machine s'apprête à faire. Dit ici, sous la carte, et non
-    /// par-dessus : les deux places concernées sont souvent celles du haut du
-    /// plateau, et un bandeau flottant les aurait justement cachées.
+    /// What the machine is about to do. Said here, under the map, and not
+    /// over it: the two places concerned are often at the top of the board,
+    /// and a floating banner would have hidden exactly those.
     @ViewBuilder
-    private func annonce(_ a: Assault) -> some View {
+    private func announcement(_ a: Assault) -> some View {
         let g = session.game
         Button { session.skipAhead() } label: {
             VStack(spacing: 3) {
                 HStack(spacing: 6) {
-                    Circle().fill(Palette.campVif(a.attacker)).frame(width: 8, height: 8)
-                    Text("\(session.player(a.attacker)?.name ?? "?") attaque")
+                    Circle().fill(Palette.brightSide(a.attacker)).frame(width: 8, height: 8)
+                    Text("\(session.player(a.attacker)?.name ?? "?") attacks")
                         .font(.caption).foregroundStyle(Palette.dim)
                 }
                 Text("\(g.name(a.from)) → \(g.name(a.to))")
                     .font(.headline).foregroundStyle(Palette.ink)
                 Label("\(a.volley) question\(a.volley > 1 ? "s" : "") "
-                      + "\(a.category?.apresDe ?? "au hasard")",
+                      + "\(a.category.map { "on \($0.label)" } ?? "at random")",
                       systemImage: a.category?.symbol ?? "dice")
                     .font(.caption2)
                     .foregroundStyle(a.category.map(Palette.category) ?? Palette.dim)
@@ -555,197 +555,199 @@ private struct BottomBar: View {
         .transition(.opacity)
     }
 
-    /// Le bouton ne tient plus toute la largeur — il laisse la place au fil
-    /// du tour. Sa **hauteur**, elle, ne bouge pas : quarante-quatre points,
-    /// le plancher de ce qui se touche sans rater, et c'est le bouton le plus
-    /// tapé de la partie.
-    private func action(_ titre: String, _ icone: String, enabled: Bool = true,
-                        _ geste: @escaping () -> Void) -> some View {
-        Button(action: geste) {
-            Label(titre, systemImage: icone)
+    /// The button no longer takes the whole width — it makes room for the
+    /// turn feed. Its **height** does not move: forty-four points, the floor
+    /// for what can be touched without missing, and it is the most tapped
+    /// button in the game.
+    private func action(_ title: String, _ icon: String, enabled: Bool = true,
+                        _ tap: @escaping () -> Void) -> some View {
+        Button(action: tap) {
+            Label(title, systemImage: icon)
                 .font(.subheadline.weight(.semibold))
                 .lineLimit(1)
                 .padding(.horizontal, 14).padding(.vertical, 12)
         }
         .buttonStyle(.borderedProminent)
-        .tint(Palette.camp(session.game.currentPlayer.id))
+        .tint(Palette.side(session.game.currentPlayer.id))
         .disabled(!enabled)
-        // Le bouton se sert le premier et ne se comprime pas : « Passer au
-        // déplace… » s'affichait sur un iPhone. C'est au fil de se replier
-        // quand la ligne est courte, jamais au bouton de se faire rogner.
+        // The button serves itself first and does not compress: "On to the
+        // mo…" was showing on an iPhone. It is the feed's job to fold when
+        // the line is short, never the button's to get clipped.
         .fixedSize()
         .layoutPriority(1)
     }
 
-    private var consigne: String {
+    private var hint: String {
         let g = session.game
-        if !session.aMoiDeJouer && !g.isOver {
-            return session.enReseau ? "À \(g.currentPlayer.name) de jouer, sur l'autre appareil…"
-                                    : "\(g.currentPlayer.name) joue…"
+        if !session.myTurnToPlay && !g.isOver {
+            return session.networked ? "\(g.currentPlayer.name) to play, on the other device…"
+                                     : "\(g.currentPlayer.name) is playing…"
         }
         switch g.phase {
         case .reinforcement(let n):
-            if g.doitEchanger(g.currentPlayer.id) {
-                return "Cinq cartes en main : il faut en échanger trois avant de poser."
+            if g.mustExchange(g.currentPlayer.id) {
+                return "Five cards in hand: three have to be traded before laying any down."
             }
-            return n > 0 ? "Touchez vos territoires pour y poser vos \(n) renforts."
-                         : "Tous les renforts sont posés."
+            return n > 0 ? "Touch your territories to lay down your \(n) reinforcements."
+                         : "All the reinforcements are laid down."
         case .attack:
             if let base = session.selected {
-                return "Depuis \(g.name(base)) — touchez un voisin ennemi à attaquer."
+                return "From \(g.name(base)) — touch an enemy neighbor to attack."
             }
-            return "Touchez un de vos territoires d'au moins deux hommes pour partir de là."
+            return "Touch one of your territories with at least two troops to set out from it."
         case .occupation:
-            return "Choisissez combien d'hommes avancent."
+            return "Choose how many troops advance."
         case .fortify:
             if let base = session.selected {
-                return "Depuis \(g.name(base)) — touchez un de vos territoires reliés."
+                return "From \(g.name(base)) — touch one of your linked territories."
             }
-            return "Un seul déplacement, puis le tour passe. Ou terminez directement."
+            return "One move only, then the turn passes. Or end it right away."
         case .finished:
             return ""
         }
     }
 }
 
-// MARK: - Le fil du tour
+// MARK: - The turn feed
 
-/// Les trois temps d'un tour, et où l'on en est.
+/// The three beats of a turn, and where you stand.
 ///
-/// Un tour se joue en trois étapes — poser ses renforts, attaquer, déplacer —
-/// et rien ne le disait. La barre du haut nommait la phase en cours, ce qui
-/// répond à « où suis-je » mais jamais à « qu'est-ce qui vient après », qui
-/// est la question de celui qui découvre le jeu. Elle ne la nomme plus : la
-/// même chose dite à deux endroits n'apprenait rien de plus.
+/// A turn is played in three steps — lay down your reinforcements, attack,
+/// move — and nothing said so. The top bar named the current phase, which
+/// answers "where am I" but never "what comes next", which is the question of
+/// someone discovering the game. It no longer names it: the same thing said
+/// in two places taught nothing more.
 ///
-/// L'occupation d'une place conquise n'est pas une quatrième étape — c'est un
-/// moment de l'attaque, et le jalon y reste.
+/// Occupying a conquered place is not a fourth step — it is a moment of the
+/// attack, and the milestone stays there.
 ///
-/// Le fil sert aussi quand ce n'est pas votre tour : il n'y a alors pas de
-/// bouton, et il montre où la machine en est du sien.
-private struct FilDuTour: View {
+/// The feed also serves when it is not your turn: there is no button then,
+/// and it shows how far the machine has got in theirs.
+private struct TurnFeed: View {
     let session: GameSession
 
-    private enum Etape: Int, CaseIterable {
-        case renforts, attaque, deplacement
+    private enum Step: Int, CaseIterable {
+        case reinforce, attack, move
 
         var label: String {
             switch self {
-            case .renforts:    "Renforts"
-            case .attaque:     "Attaque"
-            case .deplacement: "Déplacement"
+            case .reinforce: "Reinforce"
+            case .attack:    "Attack"
+            case .move:      "Move"
             }
         }
     }
 
-    private var courante: Etape? {
+    private var current: Step? {
         switch session.game.phase {
-        case .reinforcement:       .renforts
-        case .attack, .occupation: .attaque
-        case .fortify:             .deplacement
+        case .reinforcement:       .reinforce
+        case .attack, .occupation: .attack
+        case .fortify:             .move
         case .finished:            nil
         }
     }
 
     var body: some View {
-        if let courante {
-            // Les trois mots si la ligne les porte, sinon celui de l'étape en
-            // cours seul : sur un iPhone, trois libellés plus le bouton ne
-            // tiennent pas côte à côte.
-            // Trois replis, du plus disert au plus sobre. Le dernier — trois
-            // jalons nus — tient sur n'importe quelle largeur : `ViewThatFits`
-            // retient sa dernière proposition même si elle déborde, elle doit
-            // donc être celle qui ne déborde jamais.
+        if let current {
+            // The three words if the line can carry them, otherwise the
+            // current step's word alone: on an iPhone, three labels plus the
+            // button do not fit side by side.
+            //
+            // Three fallbacks, from the most talkative to the plainest. The
+            // last — three bare milestones — fits any width: `ViewThatFits`
+            // keeps its last proposal even if it overflows, so that has to be
+            // the one that never overflows.
             ViewThatFits(in: .horizontal) {
-                fil(courante, mots: .toutes)
-                fil(courante, mots: .celleEnCours)
-                fil(courante, mots: .aucune)
+                feed(current, words: .all)
+                feed(current, words: .currentOnly)
+                feed(current, words: .none)
             }
         }
     }
 
-    private enum Mots { case toutes, celleEnCours, aucune }
+    private enum Words { case all, currentOnly, none }
 
-    private func fil(_ courante: Etape, mots: Mots) -> some View {
-        let camp = Palette.camp(session.game.currentPlayer.id)
-        // Le fil n'est fait que de traits de deux points et de cercles de
-        // dix-huit : c'est le vif qu'il lui faut. Seul le jalon en cours reste
-        // plein de la couleur sombre — il porte un chiffre blanc.
-        let vif = Palette.campVif(session.game.currentPlayer.id)
+    private func feed(_ current: Step, words: Words) -> some View {
+        let side = Palette.side(session.game.currentPlayer.id)
+        // The feed is made of nothing but two-point lines and
+        // eighteen-point circles: it needs the bright hue. Only the current
+        // milestone stays filled with the dark color — it carries a white
+        // number.
+        let bright = Palette.brightSide(session.game.currentPlayer.id)
         return HStack(spacing: 5) {
-            ForEach(Array(Etape.allCases.enumerated()), id: \.element) { rang, etape in
-                if rang > 0 {
+            ForEach(Array(Step.allCases.enumerated()), id: \.element) { rank, step in
+                if rank > 0 {
                     Capsule()
-                        .fill(etape.rawValue <= courante.rawValue
-                              ? vif.opacity(0.8) : Palette.dim.opacity(0.3))
+                        .fill(step.rawValue <= current.rawValue
+                              ? bright.opacity(0.8) : Palette.dim.opacity(0.3))
                         .frame(width: 9, height: 2)
                 }
-                jalon(etape, courante: courante, camp: camp, vif: vif,
-                      mot: mots == .toutes || (mots == .celleEnCours && etape == courante))
+                milestone(step, current: current, side: side, bright: bright,
+                          word: words == .all || (words == .currentOnly && step == current))
             }
         }
-        // Sans cela, le mot se faisait rogner en « … » au lieu de laisser le
-        // repli suivant prendre la main.
+        // Without this, the word got clipped to "…" instead of letting the
+        // next fallback take over.
         .fixedSize()
     }
 
-    private func jalon(_ etape: Etape, courante: Etape, camp: Color, vif: Color,
-                       mot: Bool) -> some View {
-        let passee = etape.rawValue < courante.rawValue
-        let ici = etape == courante
+    private func milestone(_ step: Step, current: Step, side: Color, bright: Color,
+                           word: Bool) -> some View {
+        let past = step.rawValue < current.rawValue
+        let here = step == current
         return HStack(spacing: 5) {
             ZStack {
                 Circle()
-                    .fill(ici ? camp : Color.clear)
-                    // L'étape en cours porte un anneau vif par-dessus son
-                    // fond sombre : elle s'allume sans que son chiffre blanc
-                    // ait à perdre en lisibilité.
+                    .fill(here ? side : Color.clear)
+                    // The current step carries a bright ring over its dark
+                    // ground: it lights up without its white number having to
+                    // lose legibility.
                     .overlay(
-                        Circle().stroke(ici ? vif
-                                             : (passee ? vif.opacity(0.8)
-                                                       : Palette.dim.opacity(0.45)),
+                        Circle().stroke(here ? bright
+                                             : (past ? bright.opacity(0.8)
+                                                     : Palette.dim.opacity(0.45)),
                                         lineWidth: 1.5)
                     )
                     .frame(width: 18, height: 18)
-                if passee {
+                if past {
                     Image(systemName: "checkmark")
                         .font(.system(size: 9, weight: .bold))
-                        .foregroundStyle(vif)
+                        .foregroundStyle(bright)
                 } else {
-                    Text("\(etape.rawValue + 1)")
+                    Text("\(step.rawValue + 1)")
                         .font(.system(size: 10, weight: .semibold))
-                        .foregroundStyle(ici ? Palette.ink : Palette.dim)
+                        .foregroundStyle(here ? Palette.ink : Palette.dim)
                 }
             }
-            if mot {
-                Text(etape.label)
-                    .font(.caption2.weight(ici ? .semibold : .regular))
+            if word {
+                Text(step.label)
+                    .font(.caption2.weight(here ? .semibold : .regular))
                     .lineLimit(1)
-                    .foregroundStyle(ici ? Palette.ink
-                                         : Palette.dim.opacity(passee ? 0.85 : 0.6))
+                    .foregroundStyle(here ? Palette.ink
+                                          : Palette.dim.opacity(past ? 0.85 : 0.6))
             }
         }
     }
 }
 
-// MARK: - Déclaration d'assaut
+// MARK: - Declaring an assault
 
 private struct AssaultPanel: View {
     let session: GameSession
 
     var body: some View {
         let g = session.game
-        if let base = session.selected, let cible = session.target,
-           let defenseur = g.owner[cible] {
-            let attaquant = g.owner[base] ?? g.currentPlayer.id
+        if let base = session.selected, let target = session.target,
+           let defender = g.owner[target] {
+            let attacker = g.owner[base] ?? g.currentPlayer.id
             VStack(spacing: 0) {
                 Spacer()
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("\(g.name(base)) → \(g.name(cible))")
+                            Text("\(g.name(base)) → \(g.name(target))")
                                 .font(.headline).foregroundStyle(Palette.ink)
-                            Text("\(g.armies(base)) hommes contre \(g.armies(cible))")
+                            Text("\(g.armies(base)) troops against \(g.armies(target))")
                                 .font(.caption).foregroundStyle(Palette.dim)
                         }
                         Spacer()
@@ -755,42 +757,42 @@ private struct AssaultPanel: View {
                     }
 
                     VStack(alignment: .leading, spacing: 7) {
-                        Text(g.rules.mode == .classique
-                             ? "Vous posez la question — choisissez le terrain"
-                             : "Vous choisissez le terrain — mais vous y répondez aussi")
+                        Text(g.rules.mode == .classic
+                             ? "You ask the question — choose the ground"
+                             : "You choose the ground — but you answer on it too")
                             .font(.caption.weight(.medium)).foregroundStyle(Palette.dim)
-                        Text(g.rules.mode == .classique
-                             ? "Le score est le sien : vert, il y répond bien ; rouge, il y "
-                               + "trébuche. La lunette marque son point faible."
-                             : "Le score est le sien : vert, il y répond bien ; rouge, il y "
-                               + "trébuche. Attention — un thème où il trébuche ne vous sert "
-                               + "que si vous, vous tenez debout.")
+                        Text(g.rules.mode == .classic
+                             ? "The score is theirs: green, they answer it well; red, they "
+                               + "stumble on it. The scope marks their weak spot."
+                             : "The score is theirs: green, they answer it well; red, they "
+                               + "stumble on it. Careful — a theme they stumble on only helps "
+                               + "you if you stay on your feet.")
                             .font(.system(size: 10)).foregroundStyle(Palette.dim.opacity(0.8))
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 7),
                                                  count: 3), spacing: 7) {
-                            ForEach(session.game.themesEnJeu) { c in
-                                categorie(c, contre: defenseur)
+                            ForEach(session.game.themesInPlay) { c in
+                                categoryTile(c, against: defender)
                             }
                         }
-                        auHasard
+                        atRandom
                     }
 
                     VStack(alignment: .leading, spacing: 7) {
-                        Text("Combien de questions — vos dés")
+                        Text("How many questions — your dice")
                             .font(.caption.weight(.medium)).foregroundStyle(Palette.dim)
                         Picker("", selection: Binding(get: { session.draftQuestions },
                                                       set: { session.draftQuestions = $0 })) {
                             ForEach(1...max(1, g.maxQuestions(from: base)), id: \.self) { n in
-                                Text(n == 1 ? "Une question" : "Deux questions").tag(n)
+                                Text(n == 1 ? "One question" : "Two questions").tag(n)
                             }
                         }
                         .pickerStyle(.segmented)
-                        Text(legendeDesDes(g))
+                        Text(diceLegend(g))
                             .font(.caption2).foregroundStyle(Palette.dim)
                     }
 
                     Button { withAnimation { session.declare() } } label: {
-                        Label("Lancer l'assaut", systemImage: "flame.fill")
+                        Label("Launch the assault", systemImage: "flame.fill")
                             .font(.headline).frame(maxWidth: .infinity).padding(.vertical, 12)
                     }
                     .buttonStyle(.borderedProminent)
@@ -798,114 +800,114 @@ private struct AssaultPanel: View {
                 }
                 .padding(18)
                 .background(Palette.panel, in: RoundedRectangle(cornerRadius: 20))
-                // Le panneau prend la couleur de celui qui attaque, en liseré
-                // seulement : le fond reste mat, sinon les six camemberts
-                // posés dessus deviendraient illisibles. Assez pour rappeler,
-                // à deux sur le même écran, qui tient le doigt sur le bouton.
+                // The panel takes the attacker's color, as an outline only:
+                // the ground stays matte, or the six theme tiles laid on it
+                // would become unreadable. Enough to remind you, with two
+                // players on one screen, whose finger is on the button.
                 .overlay(RoundedRectangle(cornerRadius: 20)
-                    .strokeBorder(Palette.campVif(attaquant).opacity(0.7), lineWidth: 3))
+                    .strokeBorder(Palette.brightSide(attacker).opacity(0.7), lineWidth: 3))
                 .padding(10)
                 .frame(maxWidth: 560)
-                .couvreLeBas()
+                .coversBottom()
             }
         }
     }
 
-    /// Chaque camembert porte ce que l'adversaire y a montré : c'est toute
-    /// l'adresse de l'attaquant dans cette variante.
-    ///
-    /// La couleur dit le niveau **de celui à qui appartient le score**, ici
-    /// comme dans son dossier : vert, il y répond bien ; rouge, il y trébuche.
-    /// Elle disait auparavant l'intérêt de l'attaquant — donc vert sur « 2/2 »
-    /// parce qu'il fallait éviter ce terrain — et le même chiffre paraissait
-    /// vert d'un côté, rouge de l'autre. On croyait l'application confuse sur
-    /// ce qui est juste et ce qui ne l'est pas.
-    ///
-    /// Où frapper se dit autrement : la lunette marque le point faible.
-    /// Ce que coûte la salve annoncée. Quatre cas : une ou deux questions, en
-    /// classique ou en face à face — où le défenseur peut encore doubler.
-    private func legendeDesDes(_ g: GameState) -> String {
-        let une = session.draftQuestions == 1
-        if g.rules.mode == .classique {
-            return une
-                ? "Un duel : au plus un homme perdu de chaque côté."
-                : "Deux duels de suite. Le sablier se resserre au second — mais deux bonnes "
-                    + "réponses vous coûtent deux hommes."
+    /// What the declared volley costs. Four cases: one or two questions, in
+    /// classic play or in a showdown — where the defender can still double.
+    private func diceLegend(_ g: GameState) -> String {
+        let one = session.draftQuestions == 1
+        if g.rules.mode == .classic {
+            return one
+                ? "One duel: at most one troop lost on each side."
+                : "Two duels in a row. The clock tightens on the second — but two correct "
+                    + "answers cost you two troops."
         }
-        return une
-            ? "Un duel, la même question pour vous deux. S'il double la mise, il vaudra "
-                + "deux hommes."
-            : "Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier "
-                + "se resserre au second, et il peut doubler la mise sur chacun."
+        return one
+            ? "One duel, the same question for both of you. If they double the stake, it "
+                + "will be worth two troops."
+            : "Two duels in a row, the same question each time for both of you. The clock "
+                + "tightens on the second, and they can double the stake on each."
     }
 
-    /// Le septième terrain : celui qu'on ne choisit pas.
+    /// The seventh ground: the one you do not choose.
     ///
-    /// Il tient toute la ligne sous les six camemberts, et non une case parmi
-    /// eux : ce n'est pas un thème de plus, c'est le refus d'en choisir un.
-    /// Sans couleur non plus — les six en ont une chacun, celui-ci n'en a
-    /// aucune, et c'est ce qu'il annonce.
+    /// It takes the whole line under the six theme tiles, and not a cell
+    /// among them: this is not one more theme, it is the refusal to choose
+    /// one. No color either — the six each have one, this one has none, and
+    /// that is what it announces.
     ///
-    /// Il sert deux joueurs. Celui qui trouve fastidieux de peser six scores
-    /// à chaque assaut, et celui qui joue en face à face, où choisir le
-    /// terrain revient à se le choisir aussi à soi-même.
-    private var auHasard: some View {
-        let choisi = session.draftCategory == nil
+    /// It serves two players. The one who finds it tedious to weigh six
+    /// scores at every assault, and the one playing a showdown, where
+    /// choosing the ground amounts to choosing it for yourself as well.
+    private var atRandom: some View {
+        let chosen = session.draftCategory == nil
         return Button { session.chooseCategory(nil) } label: {
             HStack(spacing: 7) {
                 Image(systemName: "dice").font(.system(size: 14))
-                Text("Au hasard").font(.caption2.weight(.semibold))
+                Text("At random").font(.caption2.weight(.semibold))
                 Spacer(minLength: 4)
-                Text("toutes catégories mêlées")
+                Text("all categories mixed")
                     .font(.system(size: 10)).lineLimit(1).minimumScaleFactor(0.7)
                     .foregroundStyle(Palette.dim)
             }
             .frame(maxWidth: .infinity).padding(.horizontal, 10).padding(.vertical, 8)
-            .background(choisi ? Color.white.opacity(0.14) : Color.white.opacity(0.05),
+            .background(chosen ? Color.white.opacity(0.14) : Color.white.opacity(0.05),
                         in: RoundedRectangle(cornerRadius: 10))
             .overlay(RoundedRectangle(cornerRadius: 10)
-                .strokeBorder(choisi ? Palette.ink.opacity(0.75) : .clear, lineWidth: 1.5))
-            .foregroundStyle(choisi ? Palette.ink : Palette.ink.opacity(0.8))
+                .strokeBorder(chosen ? Palette.ink.opacity(0.75) : .clear, lineWidth: 1.5))
+            .foregroundStyle(chosen ? Palette.ink : Palette.ink.opacity(0.8))
         }
         .buttonStyle(.plain)
-        // Sans cela, la ligne se lit en deux morceaux — « Au hasard », puis
-        // « toutes catégories mêlées » — et c'est le premier morceau, non le
-        // bouton, qui reçoit l'appui : rien ne se passe.
+        // Without this, the line reads as two pieces — "At random", then "all
+        // categories mixed" — and it is the first piece, not the button, that
+        // takes the tap: nothing happens.
         .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(choisi ? [.isButton, .isSelected] : .isButton)
+        .accessibilityAddTraits(chosen ? [.isButton, .isSelected] : .isButton)
     }
 
-    private func categorie(_ c: Category, contre defenseur: PlayerID) -> some View {
-        let score = session.game.record(of: defenseur, in: c)
-        let choisie = session.draftCategory == c
-        let pointFaible = session.game.weakness(of: defenseur) == c
+    /// Each theme tile carries what the opponent has shown on it: that is the
+    /// attacker's whole skill in this variant.
+    ///
+    /// The color says the level **of whoever owns the score**, here as in
+    /// their file: green, they answer it well; red, they stumble on it. It
+    /// used to say the attacker's interest — so green on "2/2" because that
+    /// ground was to be avoided — and the same number looked green on one
+    /// side and red on the other. You thought the app was confused about what
+    /// is right and what is not.
+    ///
+    /// Where to strike is said differently: the scope marks the weak spot.
+    private func categoryTile(_ c: Category, against defender: PlayerID) -> some View {
+        let score = session.game.record(of: defender, in: c)
+        let chosen = session.draftCategory == c
+        let weakSpot = session.game.weakness(of: defender) == c
         return Button { session.chooseCategory(c) } label: {
             VStack(spacing: 3) {
                 Image(systemName: c.symbol).font(.system(size: 15))
                 Text(c.label).font(.caption2).lineLimit(1).minimumScaleFactor(0.7)
                 HStack(spacing: 3) {
-                    if pointFaible {
+                    if weakSpot {
                         Image(systemName: "scope").font(.system(size: 9))
-                            .foregroundStyle(Palette.lostVif)
+                            .foregroundStyle(Palette.lostBright)
                     }
                     Text(score.asked == 0 ? "—" : "\(score.correct)/\(score.asked)")
                         .font(.caption2.weight(.semibold).monospacedDigit())
                         .foregroundStyle(score.asked == 0 ? Palette.dim
-                                         : (score.rate < 0.5 ? Palette.lostVif : Palette.held))
+                                         : (score.rate < 0.5 ? Palette.lostBright : Palette.held))
                 }
             }
             .frame(maxWidth: .infinity).padding(.vertical, 9)
-            .background(choisie ? Palette.category(c).opacity(0.32) : Color.white.opacity(0.05),
+            .background(chosen ? Palette.category(c).opacity(0.32) : Color.white.opacity(0.05),
                         in: RoundedRectangle(cornerRadius: 10))
             .overlay(RoundedRectangle(cornerRadius: 10)
-                .strokeBorder(choisie ? Palette.category(c) : .clear, lineWidth: 1.5))
-            .foregroundStyle(choisie ? Palette.category(c) : Palette.ink.opacity(0.8))
+                .strokeBorder(chosen ? Palette.category(c) : .clear, lineWidth: 1.5))
+            .foregroundStyle(chosen ? Palette.category(c) : Palette.ink.opacity(0.8))
         }
         .buttonStyle(.plain)
     }
 }
 
-// MARK: - Déplacement
+// MARK: - Moving
 
 private struct FortifyPanel: View {
     let session: GameSession
@@ -913,39 +915,39 @@ private struct FortifyPanel: View {
 
     var body: some View {
         let g = session.game
-        if let base = session.selected, let cible = session.target {
+        if let base = session.selected, let target = session.target {
             let maximum = max(1, g.armies(base) - 1)
             VStack {
                 Spacer()
                 VStack(spacing: 14) {
-                    Text("\(g.name(base)) → \(g.name(cible))")
+                    Text("\(g.name(base)) → \(g.name(target))")
                         .font(.headline).foregroundStyle(Palette.ink)
                     Stepper(value: $count, in: 1...maximum) {
-                        Text("\(count) homme\(count > 1 ? "s" : "") sur \(maximum)")
+                        Text("\(count) troop\(count > 1 ? "s" : "") of \(maximum)")
                             .font(.subheadline.monospacedDigit()).foregroundStyle(Palette.ink)
                     }
                     HStack(spacing: 10) {
-                        Button("Annuler") { session.cancelDraft() }
+                        Button("Cancel") { session.cancelDraft() }
                             .buttonStyle(.bordered)
                         Button { session.fortify(count) } label: {
-                            Text("Déplacer et finir le tour").frame(maxWidth: .infinity)
+                            Text("Move and end the turn").frame(maxWidth: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
-                        .tint(Palette.camp(g.currentPlayer.id))
+                        .tint(Palette.side(g.currentPlayer.id))
                     }
                 }
                 .padding(18)
                 .background(Palette.panel, in: RoundedRectangle(cornerRadius: 20))
                 .padding(10)
                 .frame(maxWidth: 460)
-                .couvreLeBas()
+                .coversBottom()
             }
             .onAppear { count = 1 }
         }
     }
 }
 
-// MARK: - Victoire
+// MARK: - Victory
 
 private struct VictoryOverlay: View {
     let session: GameSession
@@ -957,43 +959,43 @@ private struct VictoryOverlay: View {
             Palette.sea.opacity(0.96).ignoresSafeArea()
             VStack(spacing: 20) {
                 Image(systemName: "crown.fill")
-                    .font(.system(size: 54)).foregroundStyle(Palette.camp(winner))
-                Text("\(session.player(winner)?.name ?? "?") l'emporte")
+                    .font(.system(size: 54)).foregroundStyle(Palette.side(winner))
+                Text("\(session.player(winner)?.name ?? "?") wins")
                     .font(.title2.weight(.bold)).foregroundStyle(Palette.ink)
-                Text("\(session.game.territories(of: winner).count) territoires sur \(session.game.map.order.count), en \(session.game.turn) tours.")
+                Text("\(session.game.territories(of: winner).count) territories out of \(session.game.map.order.count), in \(session.game.turn) turns.")
                     .font(.subheadline).foregroundStyle(Palette.dim)
-                // Par quelle porte. Sans cette ligne, celui qui gagne au seuil
-                // lit sa conquête juste en dessous, non remplie, et conclut
-                // que la règle n'a pas compté — ce qui est faux, mais rien à
-                // l'écran ne le détrompait.
-                Text(session.game.porteDite(winner))
+                // Through which gate. Without this line, whoever wins on the
+                // threshold reads their conquest just below, unmet, and
+                // concludes that the rule did not count — which is false, but
+                // nothing on screen set them right.
+                Text(session.game.victoryGateText(winner))
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(Palette.ink.opacity(0.9))
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal, 24)
-                // Les cartes se retournent à la fin, comme au Risk : c'est là
-                // qu'on comprend ce que l'autre cherchait, et pourquoi il
-                // s'acharnait sur ce continent-là.
-                if session.game.rules.objectifs {
+                // The cards turn over at the end, as in Risk: that is when
+                // you understand what the other player was after, and why
+                // they kept going at that one continent.
+                if session.game.rules.objectives {
                     VStack(spacing: 8) {
-                        Text("Ce que chacun cherchait")
+                        Text("What each player was after")
                             .font(.caption.weight(.semibold)).foregroundStyle(Palette.dim)
-                        ForEach(session.game.players) { joueur in
-                            if let carte = session.game.objectif(de: joueur.id) {
-                                let remplie = session.game.objectifAccompli(joueur.id)
+                        ForEach(session.game.players) { player in
+                            if let card = session.game.objective(of: player.id) {
+                                let met = session.game.objectiveAchieved(player.id)
                                 HStack(alignment: .top, spacing: 8) {
-                                    Circle().fill(Palette.campVif(joueur.id))
+                                    Circle().fill(Palette.brightSide(player.id))
                                         .frame(width: 8, height: 8).padding(.top, 5)
-                                    Text("**\(joueur.name)** — \(session.game.texte(carte))"
-                                         + (remplie ? " *Remplie.*" : ""))
+                                    Text("**\(player.name)** — \(session.game.text(card))"
+                                         + (met ? " *Met.*" : ""))
                                         .font(.caption)
                                         .fixedSize(horizontal: false, vertical: true)
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                    // Où en était chacun : le compte manquait,
-                                    // et c'est lui qui dit si la carte était
-                                    // une course ou une lettre morte.
-                                    Text(session.game.avancement(carte, pour: joueur.id))
+                                    // Where each of them stood: the count was
+                                    // missing, and it is what says whether the
+                                    // card was a race or a dead letter.
+                                    Text(session.game.progress(card, for: player.id))
                                         .font(.caption2.monospacedDigit())
                                         .foregroundStyle(Palette.dim)
                                         .fixedSize(horizontal: false, vertical: true)
@@ -1009,16 +1011,16 @@ private struct VictoryOverlay: View {
                     .padding(.horizontal, 18)
                 }
                 Button(action: onQuit) {
-                    Text("Nouvelle partie").font(.headline)
+                    Text("New game").font(.headline)
                         .frame(maxWidth: 260).padding(.vertical, 13)
                 }
-                .buttonStyle(.borderedProminent).tint(Palette.camp(winner))
+                .buttonStyle(.borderedProminent).tint(Palette.side(winner))
             }
         }
     }
 }
 
-// MARK: - Journal et dossier
+// MARK: - Log and file
 
 private struct JournalSheet: View {
     let session: GameSession
@@ -1028,10 +1030,10 @@ private struct JournalSheet: View {
                 ForEach(session.game.journal.reversed()) { e in
                     HStack(alignment: .top, spacing: 8) {
                         Circle()
-                            .fill(e.player.map { Palette.camp($0) } ?? Palette.dim)
+                            .fill(e.player.map { Palette.side($0) } ?? Palette.dim)
                             .frame(width: 7, height: 7).padding(.top, 6)
                         Text(e.text).font(.footnote)
-                            .foregroundStyle(e.kind == .tour ? Palette.ink : Palette.dim)
+                            .foregroundStyle(e.kind == .turn ? Palette.ink : Palette.dim)
                     }
                 }
             }
@@ -1043,75 +1045,68 @@ private struct JournalSheet: View {
     }
 }
 
-/// La main de cartes, et l'échange.
+/// The personal conquest, that of whoever is holding the device.
 ///
-/// Trois cartes assorties — trois symboles identiques ou trois différents, le
-/// joker remplaçant n'importe lequel — valent des hommes. Le barème monte à
-/// chaque échange de la partie : garder ses cartes ne les fait pas prendre de
-/// la valeur, cela laisse seulement la valeur monter pour l'adversaire.
-/// La conquête personnelle, celle de qui tient l'appareil.
-///
-/// Elle ne montre jamais celle d'un autre — c'est toute la règle. Sur un
-/// appareil partagé, elle montre celle de qui joue : à deux autour d'une
-/// table, on ne regarde pas la carte du voisin, et l'application ne fait pas
-/// mieux qu'un carton posé face cachée.
-private struct ObjectifSheet: View {
+/// It never shows anyone else's — that is the whole rule. On a shared device
+/// it shows the conquest of whoever is playing: with two people around a
+/// table you do not look at your neighbor's card, and the app does no better
+/// than a piece of cardboard laid face down.
+private struct ObjectiveSheet: View {
     let session: GameSession
 
     var body: some View {
         let g = session.game
         ScrollView {
-            if let (joueur, carte) = session.objectifMontre {
+            if let (player, card) = session.objectiveShown {
                 VStack(alignment: .leading, spacing: 18) {
                     HStack(spacing: 8) {
-                        Circle().fill(Palette.campVif(joueur)).frame(width: 10, height: 10)
-                        Text("La conquête de \(g.playerName(joueur))")
+                        Circle().fill(Palette.brightSide(player)).frame(width: 10, height: 10)
+                        Text("\(g.playerName(player))'s conquest")
                             .font(.headline).foregroundStyle(Palette.ink)
                     }
 
                     VStack(alignment: .leading, spacing: 10) {
                         Image(systemName: "target")
-                            .font(.system(size: 30)).foregroundStyle(Palette.campVif(joueur))
-                        Text(g.texte(carte))
+                            .font(.system(size: 30)).foregroundStyle(Palette.brightSide(player))
+                        Text(g.text(card))
                             .font(.title3.weight(.semibold)).foregroundStyle(Palette.ink)
                             .fixedSize(horizontal: false, vertical: true)
-                        Text(g.avancement(carte, pour: joueur))
+                        Text(g.progress(card, for: player))
                             .font(.subheadline.monospacedDigit()).foregroundStyle(Palette.dim)
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(16)
-                    .background(Palette.campVif(joueur).opacity(0.10),
+                    .background(Palette.brightSide(player).opacity(0.10),
                                 in: RoundedRectangle(cornerRadius: 18))
                     .overlay(RoundedRectangle(cornerRadius: 18)
-                        .strokeBorder(Palette.campVif(joueur).opacity(0.6), lineWidth: 1.5))
+                        .strokeBorder(Palette.brightSide(player).opacity(0.6), lineWidth: 1.5))
 
-                    // La fiche porte la règle en entier, y compris ce qui
-                    // arrive à une carte morte : c'est le seul endroit où le
-                    // joueur peut l'apprendre avant que ça lui tombe dessus.
+                    // The sheet carries the rule in full, including what
+                    // happens to a dead card: it is the only place the player
+                    // can learn it before it lands on them.
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("La remplir gagne la partie, sur-le-champ. Il n'y a pas d'autre "
-                             + "porte : aucun nombre de territoires ne gagne la partie.")
-                        if case .eliminer = carte {
-                            Text("Si un autre fait tomber ce camp avant vous, votre carte se "
-                                 + "retourne et devient « tenir "
-                                 + "\(Objectif.repli(g.board).nombreDemande ?? 0) territoires » — "
-                                 + "quatre places sur cinq du plateau.")
-                        } else if g.conqueteRetournee(de: joueur) {
-                            Text("Ce n'est pas la carte que vous aviez tirée : le camp qu'on "
-                                 + "vous demandait d'abattre est tombé sous d'autres coups. "
-                                 + "Elle s'est retournée en ce repli, pour que vous puissiez "
-                                 + "encore gagner.")
+                        Text("Filling it wins the game, on the spot. There is no other "
+                             + "gate: no number of territories wins the game.")
+                        if case .eliminate = card {
+                            Text("If somebody else brings that side down before you, your card "
+                                 + "turns over and becomes \"hold "
+                                 + "\(Objective.fallback(g.board).countRequired ?? 0) territories\" — "
+                                 + "four places out of five on the board.")
+                        } else if g.conquestTurnedOver(of: player) {
+                            Text("This is not the card you drew: the side you were asked to "
+                                 + "bring down fell to somebody else's blows. It turned over "
+                                 + "into this fallback, so you can still win.")
                         }
-                        Text(session.enReseau
-                             ? "Les autres appareils ne montrent que la leur."
-                             : "Sur un appareil partagé, cet écran montre celle de qui joue.")
+                        Text(session.networked
+                             ? "The other devices show only their own."
+                             : "On a shared device, this screen shows the conquest of whoever is playing.")
                     }
                     .font(.caption).foregroundStyle(Palette.dim)
                     .fixedSize(horizontal: false, vertical: true)
 
-                    Button { session.objectifOpen = false } label: {
-                        Text("Fermer").font(.headline)
+                    Button { session.objectiveOpen = false } label: {
+                        Text("Close").font(.headline)
                             .frame(maxWidth: .infinity).padding(.vertical, 13)
                     }
                     .buttonStyle(.bordered).tint(Palette.dim)
@@ -1124,37 +1119,43 @@ private struct ObjectifSheet: View {
     }
 }
 
-private struct CartesSheet: View {
+/// The hand of cards, and the trade.
+///
+/// Three matching cards — three identical symbols or three different ones,
+/// the wild card standing in for any of them — are worth troops. The scale
+/// climbs with every exchange in the game: holding your cards does not make
+/// them gain value, it only lets the value climb for your opponent.
+private struct CardsSheet: View {
     let session: GameSession
 
     var body: some View {
         let g = session.game
-        let main = g.hand(of: g.currentPlayer.id)
+        let hand = g.hand(of: g.currentPlayer.id)
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Vos cartes").font(.headline).foregroundStyle(Palette.ink)
-                    Text(main.isEmpty
-                         ? "Une carte se gagne en prenant au moins une place dans le tour."
-                         : "Trois symboles identiques, ou trois différents. "
-                           + "Le prochain échange vaut \(g.prochainEchange) hommes.")
+                    Text("Your cards").font(.headline).foregroundStyle(Palette.ink)
+                    Text(hand.isEmpty
+                         ? "A card is earned by taking at least one place during the turn."
+                         : "Three identical symbols, or three different ones. "
+                           + "The next trade is worth \(g.nextExchangeValue) troops.")
                         .font(.caption).foregroundStyle(Palette.dim)
-                    if g.doitEchanger(g.currentPlayer.id) {
-                        Text("Cinq cartes en main : l'échange est obligatoire.")
-                            .font(.caption.weight(.semibold)).foregroundStyle(Palette.lostVif)
+                    if g.mustExchange(g.currentPlayer.id) {
+                        Text("Five cards in hand: the trade is compulsory.")
+                            .font(.caption.weight(.semibold)).foregroundStyle(Palette.lostBright)
                     }
                 }
 
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 96), spacing: 10)], spacing: 10) {
-                    ForEach(main) { carte in carteVue(carte) }
+                    ForEach(hand) { card in cardTile(card) }
                 }
 
-                Button { session.echanger(); session.cartesOpen = false } label: {
-                    Label("Échanger contre \(g.prochainEchange) hommes", systemImage: "arrow.2.squarepath")
+                Button { session.exchange(); session.cardsOpen = false } label: {
+                    Label("Trade for \(g.nextExchangeValue) troops", systemImage: "arrow.2.squarepath")
                         .font(.headline).frame(maxWidth: .infinity).padding(.vertical, 13)
                 }
                 .buttonStyle(.borderedProminent).tint(Palette.held)
-                .disabled(!session.combinaisonPrete)
+                .disabled(!session.setReady)
             }
             .padding(18)
         }
@@ -1162,50 +1163,50 @@ private struct CartesSheet: View {
         .preferredColorScheme(.dark)
     }
 
-    private func carteVue(_ carte: Card) -> some View {
-        let retenue = session.cartesChoisies.contains(carte.id)
-        let nom = carte.territory.map { session.game.name($0) } ?? "Joker"
-        return Button { session.basculerCarte(carte.id) } label: {
+    private func cardTile(_ card: Card) -> some View {
+        let held = session.chosenCards.contains(card.id)
+        let name = card.territory.map { session.game.name($0) } ?? "Wild"
+        return Button { session.toggleCard(card.id) } label: {
             VStack(spacing: 6) {
-                Image(systemName: carte.estJoker ? "star.fill" : carte.symbol.icone)
+                Image(systemName: card.isWild ? "star.fill" : card.symbol.icon)
                     .font(.system(size: 20))
-                Text(nom).font(.caption2).lineLimit(2)
+                Text(name).font(.caption2).lineLimit(2)
                     .multilineTextAlignment(.center).minimumScaleFactor(0.7)
-                Text(carte.estJoker ? "tous symboles" : carte.symbol.label)
+                Text(card.isWild ? "any symbol" : card.symbol.label)
                     .font(.system(size: 9)).foregroundStyle(Palette.dim)
             }
             .frame(maxWidth: .infinity).frame(height: 92)
-            .background(retenue ? Palette.held.opacity(0.25) : Color.white.opacity(0.05),
+            .background(held ? Palette.held.opacity(0.25) : Color.white.opacity(0.05),
                         in: RoundedRectangle(cornerRadius: 12))
             .overlay(RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(retenue ? Palette.held : .clear, lineWidth: 2))
+                .strokeBorder(held ? Palette.held : .clear, lineWidth: 2))
             .foregroundStyle(Palette.ink)
         }
         .buttonStyle(.plain)
     }
 }
 
-/// Ce que chacun a montré savoir. Le tableau se remplit tout seul, question
-/// après question — et c'est lui qu'on consulte avant de choisir son terrain.
-private struct DossierSheet: View {
+/// What each player has shown they know. The table fills itself in, question
+/// after question — and it is what you consult before choosing your ground.
+private struct FileSheet: View {
     let session: GameSession
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                Text("Ce que chacun a montré savoir")
+                Text("What each player has shown they know")
                     .font(.headline).foregroundStyle(Palette.ink)
-                ForEach(session.game.players) { j in
+                ForEach(session.game.players) { p in
                     VStack(alignment: .leading, spacing: 6) {
                         HStack(spacing: 7) {
-                            Circle().fill(Palette.camp(j.id)).frame(width: 9, height: 9)
-                            Text(session.nomAffiche(j)).font(.subheadline.weight(.semibold))
+                            Circle().fill(Palette.side(p.id)).frame(width: 9, height: 9)
+                            Text(session.displayName(p)).font(.subheadline.weight(.semibold))
                                 .foregroundStyle(Palette.ink)
-                            if j.eliminated {
-                                Text("éliminé").font(.caption).foregroundStyle(Palette.dim)
+                            if p.eliminated {
+                                Text("eliminated").font(.caption).foregroundStyle(Palette.dim)
                             }
                         }
-                        ForEach(session.game.themesEnJeu) { c in
-                            let s = session.game.record(of: j.id, in: c)
+                        ForEach(session.game.themesInPlay) { c in
+                            let s = session.game.record(of: p.id, in: c)
                             HStack {
                                 Label(c.label, systemImage: c.symbol)
                                     .font(.caption).foregroundStyle(Palette.dim)
@@ -1213,7 +1214,7 @@ private struct DossierSheet: View {
                                 Text(s.asked == 0 ? "—" : "\(s.correct)/\(s.asked)")
                                     .font(.caption.monospacedDigit())
                                     .foregroundStyle(s.asked == 0 ? Palette.dim
-                                                     : (s.rate < 0.5 ? Palette.lostVif : Palette.held))
+                                                     : (s.rate < 0.5 ? Palette.lostBright : Palette.held))
                             }
                         }
                     }

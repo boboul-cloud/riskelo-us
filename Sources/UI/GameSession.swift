@@ -1,14 +1,14 @@
 //
 //  GameSession.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Ce qui relie le moteur à l'écran : le temps qui passe, l'adversaire qui
-//  réfléchit, et l'ordre dans lequel les choses se montrent.
+//  What ties the engine to the screen: time passing, the opponent thinking,
+//  and the order in which things are shown.
 //
-//  Le moteur, lui, ne connaît ni l'un ni l'autre : il reçoit une réponse et
-//  rend un compte rendu. Tout ce qui suit — le sablier, la seconde d'attente
-//  avant que la machine ne réponde, le temps qu'on laisse pour lire le
-//  résultat — est du théâtre, et le théâtre est ici.
+//  The engine knows nothing of either: it receives an answer and returns a
+//  report. Everything that follows — the hourglass, the second of waiting
+//  before the machine answers, the time left to read the result — is theater,
+//  and the theater is here.
 //
 
 import Foundation
@@ -19,91 +19,92 @@ import SwiftUI
 @MainActor
 final class GameSession {
 
-    /// Où en est le duel à l'écran. Le moteur n'a pas ces états : pour lui,
-    /// une question est posée ou elle ne l'est pas.
+    /// Where the duel stands on screen. The engine has none of these states:
+    /// to it, a question is either asked or it is not.
     enum Stage: Equatable {
-        /// La carte, le temps de voir d'où part l'assaut et où il tombe.
-        /// Sans elle, l'écran de duel recouvrait tout dès la déclaration et
-        /// l'on ne savait jamais ce que la machine était en train de faire.
+        /// The map, long enough to see where the assault leaves from and
+        /// where it lands. Without it, the duel screen covered everything as
+        /// soon as it was declared and you never knew what the machine was
+        /// doing.
         case announcing
-        /// « Passez l'appareil », ou « prêt ? » : le sablier ne part pas sans
-        /// que celui qui répond ait dit qu'il l'était.
+        /// "Pass the device", or "ready?": the hourglass does not start
+        /// before whoever is answering has said they were.
         case handover
-        /// Face à face : l'autre répond, et la question ne doit pas encore
-        /// paraître. Elle paraissait, et l'on voyait donc l'énoncé, puis un
-        /// écran « prêt ? », puis le même énoncé — deux écrans pour une seule
-        /// question, et l'impression que le jeu bégayait.
-        case adversaireRepond
+        /// Showdown: the other player is answering, and the question must not
+        /// appear yet. It did appear, so you saw the prompt, then a "ready?"
+        /// screen, then the same prompt — two screens for one question, and
+        /// the feeling that the game was stuttering.
+        case opponentAnswering
         case asking
         case revealed
-        /// L'assaut est fini : ce qu'il a coûté, et ce qu'il a pris.
+        /// The assault is over: what it cost, and what it took.
         case summary
     }
 
-    /// L'identité de cette partie dans la bibliothèque.
+    /// This game's identity in the library.
     ///
-    /// Elle survit à une reprise — rouvrir l'application ne doit pas ouvrir
-    /// une seconde partie — mais **pas** à un retour en arrière : revenir à
-    /// un instant archivé ouvre une nouvelle branche, sans quoi rejouer la
-    /// fin d'une partie effacerait la fin qu'on voulait justement garder.
-    let partieID: UUID
+    /// It survives a resume — reopening the app must not open a second game —
+    /// but **not** a step back: going back to a shelved moment opens a new
+    /// branch, or replaying the end of a game would erase the very ending you
+    /// meant to keep.
+    let gameID: UUID
 
-    /// Range l'instant présent dans la bibliothèque.
+    /// Shelves the present moment in the library.
     ///
-    /// Hors du fil principal : ranger un instant relit tout l'index, encode la
-    /// partie et écrit deux fichiers. C'était fait au beau milieu de l'appui
-    /// sur « Fin du tour », qui marquait donc un temps.
+    /// Off the main thread: shelving a moment rereads the whole index,
+    /// encodes the game and writes two files. It was being done in the middle
+    /// of the tap on "End turn", which therefore stuttered.
     ///
-    /// Les rangements se suivent à la queue leu leu — chacun attend le
-    /// précédent — parce que `ranger` lit l'index, le modifie et le réécrit :
-    /// deux à la fois s'écraseraient l'un l'autre.
-    private func archiver(_ etiquette: String, marque: Bool = false) {
-        let partie = game, id = partieID
-        let precedent = rangement
-        rangement = Task.detached(priority: .utility) {
-            await precedent?.value
-            Archives.shared.ranger(partie, partie: id, etiquette: etiquette, marque: marque)
+    /// The shelvings queue up behind each other — each waits for the last —
+    /// because `store` reads the index, changes it and rewrites it: two at
+    /// once would overwrite each other.
+    private func shelve(_ label: String, marked: Bool = false) {
+        let snapshot = game, id = gameID
+        let previous = shelving
+        shelving = Task.detached(priority: .utility) {
+            await previous?.value
+            Archives.shared.store(snapshot, game: id, label: label, marked: marked)
         }
     }
 
-    private var rangement: Task<Void, Never>?
+    private var shelving: Task<Void, Never>?
 
-    /// Le joueur pose un signet sur la position. Le tour qui passe en pose un
-    /// tout seul ; celui-ci sert à retenir un moment au milieu d'un tour.
-    func marquer() {
-        archiver("Position marquée", marque: true)
+    /// The player puts a bookmark on the position. The passing turn lays one
+    /// down by itself; this one is for holding on to a moment in the middle
+    /// of a turn.
+    func mark() {
+        shelve("Position marked", marked: true)
     }
 
-    /// Toute mutation de la partie déclenche son enregistrement — c'est le
-    /// seul endroit d'où il part, et il n'y a donc aucun coup qui puisse
-    /// l'oublier. L'écriture est différée d'une demi-seconde : pendant le tour
-    /// de la machine, les coups s'enchaînent plusieurs fois par seconde, et
-    /// seul le dernier compte.
+    /// Every mutation of the game triggers its save — it is the only place it
+    /// leaves from, so there is no move that can forget it. The write is
+    /// deferred by half a second: during the machine's turn, moves follow
+    /// several times a second, and only the last one counts.
     private(set) var game: GameState {
         didSet {
             scheduleSave()
-            noterChangementDePhase(depuis: oldValue)
+            notePhaseChange(from: oldValue)
         }
     }
 
-    /// La part du bas de l'écran que prend la feuille du duel. Le plateau s'en
-    /// sert pour recadrer : le combat doit rester visible AU-DESSUS d'elle, et
-    /// non sous elle.
-    var partCouverte: Double {
+    /// The share of the bottom of the screen the duel sheet takes. The board
+    /// uses it to reframe: the fight has to stay visible ABOVE it, not under
+    /// it.
+    var coveredFraction: Double {
         switch stage {
         case .handover, .asking, .revealed, .summary: return 0.55
-        case .adversaireRepond: return 0.4
+        case .opponentAnswering: return 0.4
         default: break
         }
-        // Les deux panneaux de préparation prennent le bas de l'écran comme le
-        // fait la feuille du duel, et le plateau doit leur céder autant de
-        // place : on choisissait son terrain sans plus voir ce qu'on attaque.
-        // Celui de l'assaut est haut — six terrains, le nombre de questions,
-        // le bouton ; celui du déplacement tient en trois lignes.
+        // The two setup panels take the bottom of the screen the way the duel
+        // sheet does, and the board has to give them as much room: you chose
+        // your ground without being able to see what you were attacking any
+        // more. The assault one is tall — six grounds, the number of
+        // questions, the button; the move one fits in three lines.
         guard target != nil else { return 0 }
-        // Mesurées sur l'écran plutôt que déduites : le panneau d'assaut
-        // couvre les six dixièmes de la carte sur un iPhone, celui du
-        // déplacement à peine plus d'un dixième.
+        // Measured on screen rather than deduced: the assault panel covers
+        // six tenths of the map on an iPhone, the move one barely more than a
+        // tenth.
         switch game.phase {
         case .attack:  return 0.60
         case .fortify: return 0.12
@@ -111,89 +112,89 @@ final class GameSession {
         }
     }
 
-    /// Repère les changements d'étape et les annonce. Passe par le `didSet` de
-    /// la partie : c'est le seul endroit d'où elle peut changer, donc aucun
-    /// changement ne peut échapper.
-    private func noterChangementDePhase(depuis avant: GameState) {
+    /// Spots changes of step and announces them. Goes through the game's
+    /// `didSet`: it is the only place the game can change from, so no change
+    /// can escape.
+    private func notePhaseChange(from before: GameState) {
         guard !game.isOver else {
-            // Le vainqueur ne s'annonce pas ici. La partie se décide au milieu
-            // d'une question — la dernière place tombe sur une réponse — et
-            // l'annoncer sur-le-champ recouvrait la réponse qu'on était en
-            // train de lire. C'est `annoncerLaVictoire` qui s'en charge, une
-            // fois la feuille du duel refermée. Le rangement, lui, ne se voit
-            // pas et peut partir tout de suite.
-            if case .finished = game.phase, !avant.isOver { archiver("Fin de partie") }
+            // The winner is not announced here. The game is decided in the
+            // middle of a question — the last place falls on an answer — and
+            // announcing it on the spot covered the answer you were reading.
+            // `announceVictory` takes care of it, once the duel sheet has
+            // closed. The shelving, which is invisible, can leave right away.
+            if case .finished = game.phase, !before.isOver { shelve("End of game") }
             return
         }
-        let nouveauTour = avant.current != game.current
-        if nouveauTour {
-            // Un instant par tour, posé sans qu'on le demande : c'est après
-            // coup qu'on sait lequel comptait.
-            archiver("Tour \(game.turn) — \(game.currentPlayer.name)")
-            let nom = game.currentPlayer.name
-            let aMoi = !enReseau || game.currentPlayer.id == monRang
-            montrer(Annonce(titre: aMoi ? "\(nom), c'est à vous !" : "Au tour de \(nom)",
-                            sous: "Renforts", camp: game.currentPlayer.id))
+        let newTurn = before.current != game.current
+        if newTurn {
+            // One moment per turn, laid down unasked: it is afterwards that
+            // you know which one counted.
+            shelve("Turn \(game.turn) — \(game.currentPlayer.name)")
+            let name = game.currentPlayer.name
+            let mine = !networked || game.currentPlayer.id == mySeat
+            show(Announcement(title: mine ? "\(name), your turn!" : "\(name)'s turn",
+                              sub: "Reinforcements", side: game.currentPlayer.id))
             return
         }
-        switch (avant.phase, game.phase) {
+        switch (before.phase, game.phase) {
         case (.reinforcement, .attack):
-            montrer(Annonce(titre: "À l'attaque !", sous: nil, camp: game.currentPlayer.id))
+            show(Announcement(title: "Attack!", sub: nil, side: game.currentPlayer.id))
         case (.attack, .fortify), (.occupation, .fortify):
-            montrer(Annonce(titre: "Déplacement", sous: "Un seul, puis le tour passe",
-                            camp: game.currentPlayer.id))
+            show(Announcement(title: "Move", sub: "One only, then the turn passes",
+                              side: game.currentPlayer.id))
         case (_, .occupation):
-            montrer(Annonce(titre: "Place prise !", sous: nil, camp: game.currentPlayer.id))
+            show(Announcement(title: "Place taken!", sub: nil, side: game.currentPlayer.id))
         default:
             break
         }
     }
 
-    /// L'ouverture. Elle ne passe pas par le `didSet` — la partie est posée
-    /// dans l'initialiseur, et une propriété qu'on installe ne se surveille
-    /// pas elle-même. Le premier tour restait donc muet.
-    private func annoncerOuverture() {
+    /// The opening. It does not go through the `didSet` — the game is laid
+    /// down in the initializer, and a property being installed does not watch
+    /// itself. So the first turn stayed silent.
+    private func announceOpening() {
         guard !game.isOver else { return }
-        let nom = game.currentPlayer.name
-        let aMoi = !enReseau || game.currentPlayer.id == monRang
-        montrer(Annonce(titre: aMoi ? "\(nom), c'est à vous !" : "Au tour de \(nom)",
-                        sous: "Renforts", camp: game.currentPlayer.id))
+        let name = game.currentPlayer.name
+        let mine = !networked || game.currentPlayer.id == mySeat
+        show(Announcement(title: mine ? "\(name), your turn!" : "\(name)'s turn",
+                          sub: "Reinforcements", side: game.currentPlayer.id))
     }
 
-    private func montrer(_ a: Annonce) {
-        annonce = a
-        annonceWork?.cancel()
-        annonceWork = Task { @MainActor [weak self] in
+    private func show(_ a: Announcement) {
+        announcement = a
+        announcementWork?.cancel()
+        announcementWork = Task { @MainActor [weak self] in
             try? await Task.sleep(for: .milliseconds(1_400))
             guard let self, !Task.isCancelled else { return }
-            self.annonce = nil
+            self.announcement = nil
         }
     }
-    /// Ce qui s'annonce à l'écran, le temps d'un battement : « Bleu, c'est à
-    /// vous ! », « À l'attaque ! ». Rien qui décide de quoi que ce soit — mais
-    /// sans cela, on ne sait pas qu'on vient de changer d'étape.
-    struct Annonce: Equatable, Identifiable {
+
+    /// What is announced on screen for a beat: "Blue, your turn!", "Attack!".
+    /// Nothing that decides anything — but without it, you do not know you
+    /// have just changed step.
+    struct Announcement: Equatable, Identifiable {
         let id = UUID()
-        let titre: String
-        let sous: String?
-        let camp: PlayerID
-        static func == (a: Annonce, b: Annonce) -> Bool { a.id == b.id }
+        let title: String
+        let sub: String?
+        let side: PlayerID
+        static func == (a: Announcement, b: Announcement) -> Bool { a.id == b.id }
     }
 
-    private(set) var annonce: Annonce?
-    private var annonceWork: Task<Void, Never>?
+    private(set) var announcement: Announcement?
+    private var announcementWork: Task<Void, Never>?
 
     private(set) var stage: Stage?
 
-    /// L'écran de victoire est-il dû ?
+    /// Is the victory screen due?
     ///
-    /// Le moteur tranche à l'instant où la dernière place tombe, c'est-à-dire
-    /// au beau milieu d'une question : l'écran de victoire se posait donc
-    /// par-dessus la réponse en cours, et l'on ne voyait jamais si l'on avait
-    /// eu juste, ni la place tomber. On finit l'action, on annonce le
-    /// vainqueur sur le plateau, et l'écran de victoire vient en dernier.
-    private(set) var victoireMontree = false
-    private var victoireAnnoncee = false
+    /// The engine decides the instant the last place falls, which is to say
+    /// in the middle of a question: the victory screen therefore landed on
+    /// top of the answer in progress, and you never saw whether you had been
+    /// right, nor the place fall. We finish the action, announce the winner
+    /// on the board, and the victory screen comes last.
+    private(set) var victoryShown = false
+    private var victoryAnnounced = false
 
     private(set) var report: DuelReport?
     private(set) var remaining: TimeInterval = 0
@@ -201,20 +202,21 @@ final class GameSession {
 
     var selected: TerritoryID?
     var target: TerritoryID?
-    /// Le terrain de l'assaut en préparation. Vide, c'est « au hasard » :
-    /// l'attaquant renonce à choisir, et la question se tire dans toute la
-    /// banque.
-    /// Le thème proposé d'entrée : le premier de la grille. Il était nommé —
-    /// « la géographie » — et un thème nommé dans le code est un thème qu'on
-    /// ne peut plus retirer de son dossier sans casser la compilation. Il est
-    /// ramené dans ce que la table autorise dès qu'une cible est désignée.
-    private(set) var draftCategory: Category? = Themes.tous.first
+    /// The ground of the assault being prepared. Empty means "at random": the
+    /// attacker gives up choosing, and the question is drawn from the whole
+    /// bank.
+    ///
+    /// The theme offered up front is the first in the grid. It used to be
+    /// named — "geography" — and a theme named in the code is a theme you can
+    /// no longer take out of its folder without breaking the build. It is
+    /// brought back into what the table allows as soon as a target is picked.
+    private(set) var draftCategory: Category? = Themes.all.first
     var draftQuestions = 1
-    /// Le joueur a-t-il déjà choisi un terrain lui-même ? Tant que non,
-    /// l'application lui suggère la faiblesse de l'adversaire — une fois, pour
-    /// montrer à quoi sert ce choix. Ensuite elle se tait : re-suggérer à
-    /// chaque assaut, c'est le pousser à marteler la même catégorie, et une
-    /// catégorie martelée s'épuise.
+    /// Has the player yet chosen a ground themselves? While they have not,
+    /// the app suggests the opponent's weakness — once, to show what that
+    /// choice is for. Afterwards it says nothing: suggesting again at every
+    /// assault pushes them to hammer the same category, and a hammered
+    /// category runs dry.
     private var categoryChosen = false
 
     func chooseCategory(_ c: Category?) {
@@ -222,112 +224,116 @@ final class GameSession {
         categoryChosen = true
     }
     var journalOpen = false
-    var dossierOpen = false
-    var cartesOpen = false
-    var objectifOpen = false
+    var fileOpen = false
+    var cardsOpen = false
+    var objectiveOpen = false
 
-    /// L'objectif à montrer sur **cet** appareil, et à qui il appartient.
+    /// The objective to show on **this** device, and whose it is.
     ///
-    /// En réseau, le vôtre et jamais un autre : chacun tient son appareil, et
-    /// l'état complet qu'il reçoit ne se lit qu'à travers cet écran-ci.
+    /// Over the network, yours and never anyone else's: each player holds
+    /// their own device, and the complete state they receive is only read
+    /// through this screen.
     ///
-    /// Sur un seul appareil, celui de qui joue — c'est lui qui l'a en main, et
-    /// c'est la règle du Risk à plusieurs autour d'une table : on ne montre
-    /// pas sa carte. Pendant le tour de la machine, celui du premier humain,
-    /// pour qu'on puisse le relire en attendant son tour.
-    var objectifMontre: (joueur: PlayerID, carte: Objectif)? {
-        guard game.rules.objectifs else { return nil }
-        let qui: PlayerID
-        if enReseau {
-            qui = monRang
+    /// On a single device, that of whoever is playing — they are the one
+    /// holding it, and it is Risk's rule around a table: you do not show your
+    /// card. During the machine's turn, the first human's, so it can be
+    /// reread while waiting for your turn.
+    var objectiveShown: (player: PlayerID, card: Objective)? {
+        guard game.rules.objectives else { return nil }
+        let who: PlayerID
+        if networked {
+            who = mySeat
         } else if !game.currentPlayer.isBot {
-            qui = game.currentPlayer.id
-        } else if let humain = game.players.first(where: { !$0.isBot }) {
-            qui = humain.id
+            who = game.currentPlayer.id
+        } else if let human = game.players.first(where: { !$0.isBot }) {
+            who = human.id
         } else {
             return nil
         }
-        guard let carte = game.objectif(de: qui) else { return nil }
-        return (qui, carte)
-    }
-    /// Les cartes retenues dans la main, en attente d'échange.
-    var cartesChoisies: Set<Int> = []
-
-    func basculerCarte(_ id: Int) {
-        if cartesChoisies.contains(id) { cartesChoisies.remove(id) }
-        else if cartesChoisies.count < 3 { cartesChoisies.insert(id) }
+        guard let card = game.objective(of: who) else { return nil }
+        return (who, card)
     }
 
-    /// Les trois cartes retenues forment-elles une combinaison ?
-    var combinaisonPrete: Bool {
-        let main = game.hand(of: game.currentPlayer.id)
-        let trio = main.filter { cartesChoisies.contains($0.id) }
-        return Deck.estUneCombinaison(trio)
+    /// The cards held in hand, waiting to be traded.
+    var chosenCards: Set<Int> = []
+
+    func toggleCard(_ id: Int) {
+        if chosenCards.contains(id) { chosenCards.remove(id) }
+        else if chosenCards.count < 3 { chosenCards.insert(id) }
     }
 
-    func echanger() {
-        guard combinaisonPrete else { return }
-        jouer(.exchangeCards(Array(cartesChoisies)))
-        cartesChoisies = []
+    /// Do the three cards held make a set?
+    var setReady: Bool {
+        let hand = game.hand(of: game.currentPlayer.id)
+        let trio = hand.filter { chosenCards.contains($0.id) }
+        return Deck.isASet(trio)
+    }
+
+    func exchange() {
+        guard setReady else { return }
+        play(.exchangeCards(Array(chosenCards)))
+        chosenCards = []
         resume()
     }
 
-    /// Le tempo de l'écran. Rien ici ne touche aux règles : c'est le temps
-    /// qu'on laisse à l'œil, et lui seul.
+    /// The screen's tempo. Nothing here touches the rules: this is the time
+    /// left for the eye, and that alone.
     ///
-    /// Une question posée à la machine se réglait en trois secondes — le temps
-    /// de la voir passer, pas de la lire. Or c'est le moment le plus vivant du
-    /// jeu pour l'attaquant : il a choisi le terrain, il connaît la question,
-    /// et il y répond dans sa tête avant l'adversaire. Il faut lui en laisser
-    /// le temps. Mais soixante questions dans une partie font soixante
-    /// attentes : chacune se coupe d'une touche.
+    /// A question put to the machine used to be settled in three seconds —
+    /// time to watch it go by, not to read it. Yet it is the liveliest moment
+    /// of the game for the attacker: they chose the ground, they know the
+    /// question, and they answer it in their head before their opponent. They
+    /// have to be given the time. But sixty questions in a game make sixty
+    /// waits: each one is cut short by a tap.
     private enum Tempo {
-        /// Plancher et plafond du temps de lecture, selon la longueur du texte.
-        static let lectureMin: Double = 4.0
-        static let lectureMax: Double = 9.0
-        /// Signes lus par seconde, lecture attentive.
-        static let signesParSeconde: Double = 17
-        /// Le temps laissé sur le résultat : la bonne réponse, les dés, et qui
-        /// perd un homme. C'est trois choses à lire.
+        /// Floor and ceiling of the reading time, by length of text.
+        static let readingMin: Double = 4.0
+        static let readingMax: Double = 9.0
+        /// Characters read per second, reading attentively.
+        static let charsPerSecond: Double = 17
+        /// The time left on the result: the correct answer, the dice, and who
+        /// loses a troop. That is three things to read.
         static let verdict: Double = 4.5
-        /// En face à face, il y a deux réponses et deux temps à lire en plus
-        /// de la bonne réponse : le même moment ne suffit plus.
-        static let verdictCroise: Double = 9.5
-        /// Le bilan d'un assaut que l'on a subi : ce qu'il a coûté, et ce
-        /// qu'il a pris. Quand on attaque soi-même, il attend un appui ; quand
-        /// on le subit, il passe seul pour ne pas hacher le tour d'en face.
-        static let bilan: Double = 5.5
-        /// Le temps passé sur la carte avant un assaut de la machine : de quoi
-        /// suivre la flèche et reconnaître les deux places. Cinq secondes, et
-        /// non trois et demie : sur un grand plateau la vue se déplace d'abord
-        /// vers le combat, et il faut laisser le temps d'arriver puis de
-        /// regarder.
-        static let annonce: Double = 5.0
-        /// Face à face : le temps que la machine a l'air de chercher, quand sa
-        /// réponse ne sera pas montrée.
-        static let reflexion: Double = 2.2
+        /// In a showdown there are two answers and two times to read on top
+        /// of the correct answer: the same moment is no longer enough.
+        static let verdictShowdown: Double = 9.5
+        /// The summary of an assault you have been subjected to: what it
+        /// cost, and what it took. When you attack yourself it waits for a
+        /// tap; when you are on the receiving end it passes on its own so as
+        /// not to chop up the other player's turn.
+        static let summary: Double = 5.5
+        /// The time spent on the map before an assault by the machine: enough
+        /// to follow the arrow and recognize the two places. Five seconds,
+        /// and not three and a half: on a large board the view first moves
+        /// toward the fight, and you have to be given time to arrive and then
+        /// to look.
+        static let announcement: Double = 5.0
+        /// Showdown: how long the machine appears to think, when its answer
+        /// will not be shown.
+        static let thinking: Double = 2.2
     }
 
-    /// Le temps laissé sur le résultat, selon ce qu'il y a à y lire.
-    private var tempsDeVerdict: Double {
-        game.rules.mode == .faceAFace ? Tempo.verdictCroise : Tempo.verdict
+    /// The time left on the result, by how much there is to read in it.
+    private var verdictTime: Double {
+        game.rules.mode == .showdown ? Tempo.verdictShowdown : Tempo.verdict
     }
 
-    /// Ce qui reste du moment en cours, de 1 à 0. La barre du haut s'en sert
-    /// quand c'est la machine qui défend — un humain, lui, a son vrai sablier.
+    /// What is left of the current moment, from 1 to 0. The top bar uses it
+    /// when it is the machine defending — a human has their real hourglass.
     ///
-    /// Une seule descente par question, lecture et verdict compris. La
-    /// première version en faisait deux : la barre se vidait pendant la
-    /// lecture, se remplissait, et se vidait à nouveau pendant le verdict. On
-    /// croyait à un second compte à rebours pour la même question.
+    /// One descent per question, reading and verdict included. The first
+    /// version made two: the bar emptied during the reading, filled again,
+    /// and emptied again during the verdict. You thought there was a second
+    /// countdown for the same question.
     private(set) var waitPart: Double = 1
-    /// Une touche pendant une attente : on passe à la suite.
+    /// A tap during a wait: we move on.
     private var skipped = false
 
-    /// Y a-t-il quelque chose à écourter ?
-    /// Le moment se laisse écourter — mais pas dans sa première seconde. Un
-    /// appui parti trop tôt, ou le second d'un double appui, emportait le
-    /// verdict avant qu'on ait pu le lire.
+    /// Is there anything to cut short?
+    ///
+    /// The moment lets itself be cut short — but not in its first second. A
+    /// tap that left too early, or the second of a double tap, carried off
+    /// the verdict before it could be read.
     var canSkip: Bool {
         (thinking || stage == .revealed || stage == .announcing || stage == .summary)
             && waitPart < 0.85
@@ -339,121 +345,122 @@ final class GameSession {
     private var ticker: Timer?
     private var saveWork: Task<Void, Never>?
 
-    // MARK: - Le second appareil
+    // MARK: - The second device
 
     private(set) var link: Link?
-    /// Lequel des joueurs est celui qui tient cet appareil.
-    private(set) var monRang: PlayerID = 0
-    private var jHeberge = false
-    /// Combien de coups ont été joués depuis le début. Sert d'ordre : un coup
-    /// déjà vu se reconnaît, un coup manquant se voit.
-    private var compteur = 0
-    /// Le rang de chaque appareil relié, pour savoir à qui renvoyer quoi.
-    private var rangs: [Pair: PlayerID] = [:]
+    /// Which of the players is the one holding this device.
+    private(set) var mySeat: PlayerID = 0
+    private var hosting = false
+    /// How many moves have been played since the start. Serves as an order: a
+    /// move already seen is recognized, a missing move shows.
+    private var counter = 0
+    /// Each linked device's seat, so we know who to send what back to.
+    private var seats: [Pair: PlayerID] = [:]
 
-    var enReseau: Bool { link != nil }
+    var networked: Bool { link != nil }
 
-    /// À moi d'agir ? Hors réseau, cela veut dire « pas à la machine ».
-    var aMoiDeJouer: Bool {
+    /// My turn to act? Off the network, that means "not the machine's".
+    var myTurnToPlay: Bool {
         guard !game.isOver else { return false }
-        guard enReseau else { return !game.currentPlayer.isBot }
-        return game.currentPlayer.id == monRang
+        guard networked else { return !game.currentPlayer.isBot }
+        return game.currentPlayer.id == mySeat
     }
 
-    /// À moi de répondre ? En classique c'est toujours le défenseur ; en
-    /// face à face, le défenseur puis l'attaquant.
-    var aMoiDeRepondre: Bool {
+    /// My turn to answer? In classic play it is always the defender; in a
+    /// showdown, the defender then the attacker.
+    var myTurnToAnswer: Bool {
         guard game.assault != nil else { return false }
-        guard enReseau else { return repondeurEstHumain }
-        return repondeur == monRang
+        guard networked else { return responderIsHuman }
+        return responder == mySeat
     }
 
-    /// Le seul point par lequel une partie change, et donc le seul d'où un
-    /// coup part vers l'autre appareil. Aucun coup ne peut être oublié : il
-    /// n'y a pas d'autre porte.
+    /// The one point through which a game changes, and therefore the only one
+    /// a move leaves from toward the other device. No move can be forgotten:
+    /// there is no other door.
     @discardableResult
-    private func jouer(_ action: Action) -> DuelReport? {
-        let rapport = game.apply(action)
+    private func play(_ action: Action) -> DuelReport? {
+        let duelReport = game.apply(action)
         if let link {
-            compteur += 1
-            if let data = Message.coup(action, numero: compteur, empreinte: game.digest).data {
-                link.envoyer(data)
+            counter += 1
+            if let data = Message.move(action, number: counter, digest: game.digest).data {
+                link.send(data)
             }
         }
-        return rapport
+        return duelReport
     }
 
-    /// Ce qui arrive d'un autre appareil.
-    private func recu(_ data: Data, de pair: Pair) {
-        // Un paquet qu'on ne sait pas lire en cours de partie ne peut plus
-        // être un désaccord de version — la poignée de main l'aurait dit — et
-        // il n'y a donc rien de mieux à faire que de l'ignorer. `Message.lire`
-        // laisse une trace dans la console pour les deux cas.
-        guard case let .message(message) = Message.lire(data) else { return }
+    /// What arrives from another device.
+    private func received(_ data: Data, from pair: Pair) {
+        // A packet we cannot read mid-game can no longer be a version
+        // disagreement — the handshake would have said so — and so there is
+        // nothing better to do than ignore it. `Message.read` leaves a trace
+        // in the console for both cases.
+        guard case let .message(message) = Message.read(data) else { return }
         switch message {
-        case let .partie(etat, votreRang, numero):
-            monRang = votreRang
-            compteur = numero
-            game = etat
+        case let .game(state, yourSeat, number):
+            mySeat = yourSeat
+            counter = number
+            game = state
             report = nil
             stage = nil
-            annoncerOuverture()
+            announceOpening()
             resume()
 
-        case .bonjour:
-            // Un salut arrivé après le lancement : les noms sont fixés depuis
-            // que la partie est partie, il n'y a plus rien à en faire. Le
-            // taire plutôt que de le compter pour un défaut.
+        case .hello:
+            // A greeting arriving after the launch: the names have been fixed
+            // since the game left, so there is nothing left to do with it.
+            // Better to pass over it than to count it as a fault.
             break
 
-        case let .coup(action, numero, empreinte):
-            // Déjà joué : à quatre, l'hôte relaie, et le coup peut arriver
-            // deux fois. On le reconnaît à son numéro.
-            guard numero > compteur else { return }
-            // Il en manque un : reprendre ici jouerait une autre partie.
-            guard numero == compteur + 1 else { redemanderLaPartie(); return }
+        case let .move(action, number, digest):
+            // Already played: with four devices the host relays, and a move
+            // can arrive twice. We recognize it by its number.
+            guard number > counter else { return }
+            // One is missing: picking up here would play a different game.
+            guard number == counter + 1 else { requestGameAgain(); return }
 
-            compteur = numero
-            let rapport = game.apply(action)
-            guard game.digest == empreinte else {
-                // Les parties ont divergé. Chacune reste cohérente de son côté
-                // — c'est bien le danger — donc on ne continue pas.
-                redemanderLaPartie()
+            counter = number
+            let duelReport = game.apply(action)
+            guard game.digest == digest else {
+                // The games have drifted apart. Each stays coherent on its
+                // own side — which is precisely the danger — so we do not go
+                // on.
+                requestGameAgain()
                 return
             }
-            // L'hôte fait suivre aux autres : rien ne garantit que deux
-            // invités se voient directement.
-            if jHeberge, let link { link.envoyer(data, saufA: pair) }
+            // The host passes it on to the others: nothing guarantees that
+            // two guests can see each other directly.
+            if hosting, let link { link.send(data, except: pair) }
 
             pump?.cancel()
             pump = Task { @MainActor [weak self] in
-                await self?.apresCoupDistant(action, rapport)
+                await self?.afterRemoteMove(action, duelReport)
             }
 
-        case .perdu:
-            guard jHeberge, let link, let rang = rangs[pair],
-                  let data = Message.partie(game, votreRang: rang, numero: compteur).data
+        case .lost:
+            guard hosting, let link, let seat = seats[pair],
+                  let data = Message.game(game, yourSeat: seat, number: counter).data
             else { return }
-            link.envoyer(data, a: pair)
+            link.send(data, to: pair)
         }
     }
 
-    private func redemanderLaPartie() {
-        guard let data = Message.perdu.data else { return }
-        link?.envoyer(data)
+    private func requestGameAgain() {
+        guard let data = Message.lost.data else { return }
+        link?.send(data)
     }
 
-    /// Ce que l'écran doit montrer d'un coup joué en face.
-    private func apresCoupDistant(_ action: Action, _ rapport: DuelReport?) async {
+    /// What the screen has to show of a move played across the table.
+    private func afterRemoteMove(_ action: Action, _ duelReport: DuelReport?) async {
         switch action {
         case .declareAssault:
             stage = .announcing
-            await pause(Tempo.annonce)
+            await pause(Tempo.announcement)
             if Task.isCancelled { return }
         case .answer:
-            // En face à face, la première des deux réponses ne tranche rien :
-            // il n'y a pas de rapport, donc rien à montrer ni à sonner.
-            if let rapport { devoiler(rapport) } else { report = nil; stage = .revealed }
+            // In a showdown, the first of the two answers settles nothing:
+            // there is no report, so nothing to show and nothing to sound.
+            if let duelReport { reveal(duelReport) } else { report = nil; stage = .revealed }
             await pause(Tempo.verdict)
             if Task.isCancelled { return }
             report = nil
@@ -464,46 +471,44 @@ final class GameSession {
         resume()
     }
 
+    // MARK: - The drawer
 
-    // MARK: - Le tiroir
-
-    /// Enregistre tout de suite. À appeler quand l'application passe à
-    /// l'arrière-plan : elle peut être arrêtée sans autre préavis.
+    /// Saves right away. To be called when the app goes to the background: it
+    /// can be stopped without further notice.
     func saveNow() {
         saveWork?.cancel()
-        retenirLesQuestions()
+        rememberQuestions()
         if game.isOver { GameStore.shared.discard() } else { GameStore.shared.save(game) }
     }
 
-    /// Ce que la partie a posé rejoint la mémoire de l'appareil, pour que la
-    /// suivante l'évite.
+    /// What this game has asked joins the device's memory, so the next one
+    /// avoids it.
     ///
-    /// Le compte se recalcule entier à chaque fois — il ne s'incrémente pas —
-    /// et l'enregistrer deux fois ne compte donc jamais deux fois. On ne
-    /// réécrit tout de même le fichier que lorsqu'une question de plus a été
-    /// posée : il y a une sauvegarde par coup, et la plupart n'en posent
-    /// aucune.
-    private func retenirLesQuestions() {
-        guard game.bank.alreadyServed != poseesEnregistrees else { return }
-        poseesEnregistrees = game.bank.alreadyServed
-        MemoireDesQuestions.shared.enregistrer(
-            game.bank.vuesAJour(depuis: memoireAuDepart, sauf: poseesALOuverture))
+    /// The count is recomputed whole every time — it does not increment — and
+    /// saving it twice therefore never counts twice. We still only rewrite
+    /// the file when one more question has been asked: there is one save per
+    /// move, and most of them ask none.
+    private func rememberQuestions() {
+        guard game.bank.alreadyServed != servedSaved else { return }
+        servedSaved = game.bank.alreadyServed
+        QuestionMemory.shared.save(
+            game.bank.seenUpToDate(from: memoryAtStart, excluding: servedAtOpening))
     }
 
-    private var poseesEnregistrees: Set<String> = []
+    private var servedSaved: Set<String> = []
 
-    /// Ce que **cet** appareil savait en ouvrant la partie.
+    /// What **this** device knew when the game opened.
     ///
-    /// La mémoire s'écrit à partir de là, et non à partir de celle qui voyage
-    /// avec la partie : celui qui rejoint joue avec la banque de l'hôte — il
-    /// le faut, sans quoi les deux écrans poseraient deux questions
-    /// différentes — mais il n'ajoute à la sienne que ce qui a été posé ici.
-    private let memoireAuDepart = MemoireDesQuestions.shared.charger()
+    /// The memory is written from there, and not from the one that travels
+    /// with the game: whoever joins plays with the host's bank — they have to,
+    /// or the two screens would ask two different questions — but they add to
+    /// their own only what was asked here.
+    private let memoryAtStart = QuestionMemory.shared.load()
 
-    /// Ce que la partie avait déjà posé quand on l'a ouverte. C'est compté
-    /// depuis longtemps dans la mémoire : une partie reprise trois fois ne
-    /// doit pas compter trois fois ses premières questions.
-    private var poseesALOuverture: Set<String> = []
+    /// What the game had already asked when we opened it. That has been
+    /// counted in the memory for a long time: a game resumed three times must
+    /// not count its first questions three times.
+    private var servedAtOpening: Set<String> = []
 
     private func scheduleSave() {
         saveWork?.cancel()
@@ -514,170 +519,171 @@ final class GameSession {
         }
     }
 
-    init(players: [Player], rules: Rules = Rules(), board: Boards = .anneau,
+    init(players: [Player], rules: Rules = Rules(), board: Boards = .ring,
          seed: UInt64 = UInt64.random(in: .min ... .max)) {
-        // La partie s'ouvre en sachant ce que l'appareil a déjà vu passer :
-        // c'est ce qui empêche la deuxième soirée de reposer les questions de
-        // la première.
+        // The game opens knowing what the device has already seen go by: that
+        // is what keeps the second evening from asking the first one's
+        // questions again.
         game = GameState.start(board: board, players: players, rules: rules,
-                               bank: QuestionBank(vues: MemoireDesQuestions.shared.charger()),
+                               bank: QuestionBank(seen: QuestionMemory.shared.load()),
                                seed: seed)
-        partieID = UUID()
-        poseesALOuverture = game.bank.alreadyServed
-        GameStore.shared.saveID(partieID)
+        gameID = UUID()
+        servedAtOpening = game.bank.alreadyServed
+        GameStore.shared.saveID(gameID)
         saveNow()
-        archiver("Ouverture")
-        annoncerOuverture()
+        shelve("Opening")
+        announceOpening()
         resume()
     }
 
-    /// Ouvre une partie sur deux appareils. Celui qui héberge crée la partie
-    /// et l'envoie ; celui qui rejoint la reçoit avant d'afficher quoi que ce
-    /// soit.
-    init(link: Link, heberge: Bool, game partie: GameState, monRang rang: PlayerID,
-         rangs: [Pair: PlayerID] = [:], compteur: Int = 0) {
-        game = partie
-        partieID = UUID()
+    /// Opens a game across two devices. Whoever hosts creates the game and
+    /// sends it; whoever joins receives it before showing anything at all.
+    init(link: Link, hosting: Bool, game newGame: GameState, mySeat seat: PlayerID,
+         seats: [Pair: PlayerID] = [:], counter: Int = 0) {
+        game = newGame
+        gameID = UUID()
         self.link = link
-        self.jHeberge = heberge
-        self.monRang = rang
-        self.rangs = rangs
-        self.compteur = compteur
-        poseesALOuverture = game.bank.alreadyServed
-        link.onReceive = { [weak self] data, pair in self?.recu(data, de: pair) }
-        annoncerOuverture()
+        self.hosting = hosting
+        self.mySeat = seat
+        self.seats = seats
+        self.counter = counter
+        servedAtOpening = game.bank.alreadyServed
+        link.onReceive = { [weak self] data, pair in self?.received(data, from: pair) }
+        announceOpening()
         resume()
     }
 
-    /// Reprend une partie enregistrée. Un duel en attente d'un humain
-    /// repassera de lui-même par « prêt ? » : le sablier ne doit pas courir
-    /// pendant qu'on rallume l'appareil.
+    /// Resumes a saved game. A duel waiting on a human will go back through
+    /// "ready?" by itself: the hourglass must not run while you turn the
+    /// device back on.
     ///
-    /// `partie` n'est donné que par la bibliothèque, qui ouvre alors une
-    /// branche neuve ; la reprise ordinaire retrouve l'identité laissée à
-    /// côté de la sauvegarde.
-    init(resuming saved: GameState, partie: UUID? = nil) {
+    /// `branch` is only given by the library, which then opens a fresh
+    /// branch; an ordinary resume finds again the identity left beside the
+    /// save.
+    init(resuming saved: GameState, branch: UUID? = nil) {
         game = saved
-        partieID = partie ?? GameStore.shared.loadID() ?? UUID()
-        poseesALOuverture = game.bank.alreadyServed
-        GameStore.shared.saveID(partieID)
-        if partie != nil { archiver("Repris ici") }
-        annoncerOuverture()
+        gameID = branch ?? GameStore.shared.loadID() ?? UUID()
+        servedAtOpening = game.bank.alreadyServed
+        GameStore.shared.saveID(gameID)
+        if branch != nil { shelve("Resumed here") }
+        announceOpening()
         resume()
     }
 
-    // MARK: - Ce que l'écran demande
+    // MARK: - What the screen asks for
 
     var duel: Duel? { game.assault?.current }
     var assault: Assault? { game.assault }
 
-    /// Qui doit répondre — ou, la question une fois résolue, qui vient de le
-    /// faire : la feuille du verdict s'affiche après que le moteur a rangé la
-    /// question, et elle a encore besoin de nommer quelqu'un.
-    /// Le verdict paraît, et sonne. Passer par ici plutôt que d'affecter le
-    /// rapport à la main : c'est le seul endroit d'où le son part, donc aucun
-    /// verdict ne peut l'oublier — la même règle que pour l'enregistrement.
-    private func devoiler(_ rapport: DuelReport) {
-        report = rapport
+    /// The verdict appears, and sounds. Going through here rather than
+    /// assigning the report by hand: it is the only place the sound leaves
+    /// from, so no verdict can forget it — the same rule as for saving.
+    private func reveal(_ duelReport: DuelReport) {
+        report = duelReport
         stage = .revealed
-        guard let a = game.assault, let cote = monCote(a) else { return }
-        let gagne = rapport.outcome == .attackerBreaks ? cote == a.attacker
-                                                       : cote == a.defender
-        Sons.shared.jouer(gagne ? .gagne : .perdu)
+        guard let a = game.assault, let side = sideOfMine(in: a) else { return }
+        let won = duelReport.outcome == .attackerBreaks ? side == a.attacker
+                                                        : side == a.defender
+        Sounds.shared.play(won ? .won : .lost)
     }
 
-    /// De quel côté de l'assaut se tient celui qui a l'appareil en main.
+    /// Which side of the assault whoever is holding the device stands on.
     ///
-    /// En réseau, mon rang — et rien si l'assaut ne me concerne pas. Sinon
-    /// l'humain qui répond, puisque c'est lui qui tient l'appareil au moment
-    /// du verdict, et à défaut l'humain qui attaque. Deux machines qui
-    /// s'affrontent ne sonnent pas : « gagné » et « perdu » ne veulent rien
-    /// dire pour qui regarde sans jouer.
-    private func monCote(_ a: Assault) -> PlayerID? {
-        if enReseau {
-            return a.attacker == monRang || a.defender == monRang ? monRang : nil
+    /// Over the network, my seat — and nothing if the assault does not
+    /// concern me. Otherwise the human answering, since they are the one
+    /// holding the device at verdict time, and failing that the human
+    /// attacking. Two machines fighting each other do not sound: "won" and
+    /// "lost" mean nothing to someone watching without playing.
+    private func sideOfMine(in a: Assault) -> PlayerID? {
+        if networked {
+            return a.attacker == mySeat || a.defender == mySeat ? mySeat : nil
         }
         if !(player(a.defender)?.isBot ?? true) { return a.defender }
         if !(player(a.attacker)?.isBot ?? true) { return a.attacker }
         return nil
     }
 
-    /// Le camp de celui qui tient l'appareil, s'il en tient un.
+    /// The side of whoever is holding the device, if they hold one.
     ///
-    /// En réseau, mon rang. Hors réseau, le premier humain de la table : à
-    /// deux humains sur un même appareil, c'est celui qui l'a ouvert.
-    var monCamp: PlayerID? {
-        enReseau ? monRang : game.players.first { !$0.isBot }?.id
+    /// Over the network, my seat. Off the network, the first human at the
+    /// table: with two humans on one device, that is whoever opened it.
+    var mySide: PlayerID? {
+        networked ? mySeat : game.players.first { !$0.isBot }?.id
     }
 
-    /// Le nom d'un camp tel qu'il s'affiche.
+    /// A side's name as it is displayed.
     ///
-    /// Trois éléments au plus, du plus durable au plus personnel :
+    /// Three parts at most, from the most lasting to the most personal:
     ///
-    ///     Rouge · Marie · moi
-    ///     └ le camp   └ qui  └ c'est mon camp
+    ///     Red · Marie · me
+    ///     └ the side  └ who  └ this side is mine
     ///
-    /// La couleur d'abord, parce que c'est elle qui relie le nom au plateau.
-    /// Le nom ensuite, quand il y en a un. Et « moi » en dernier, pour le
-    /// camp de celui qui tient l'appareil : en réseau, chacun voit les mêmes
-    /// noms sur les quatre écrans, et plus rien ne dirait sans cela lequel
-    /// est le sien. C'est ce que l'ancien « (vous) » disait, en moins bien —
-    /// il ne pouvait pas cohabiter avec un nom.
+    /// The color first, because it is what ties the name to the board. The
+    /// name next, when there is one. And "me" last, for the side of whoever
+    /// is holding the device: over the network everyone sees the same names
+    /// on all four screens, and without it nothing would say which one is
+    /// theirs. That is what the old "(you)" said, less well — it could not
+    /// live alongside a name.
     ///
-    /// `avecMoi` est faux pour la barre du haut : elle ne montre qu'un camp,
-    /// celui qui a la main, et le reste de l'écran dit déjà que c'est à vous.
-    /// Le « moi » n'y apprenait rien et faisait passer le nom sur deux
-    /// lignes — la barre grandissait d'autant, aux dépens du plateau.
-    func nomAffiche(_ j: Player, avecMoi: Bool = true) -> String {
-        // Un nom déjà composé arrive tel quel de l'autre appareil : l'hôte l'a
-        // posé au lancement, et y ajouter le pseudo d'ici lui collerait le
-        // mien. On ne compose donc soi-même que ce qui n'a pas été composé.
-        var nom = j.name
-        if nom == Boards.nomDeCamp(j.id), j.id == monCamp, let pseudo = Pseudo.actuel {
-            nom += " · \(pseudo)"
+    /// `withMe` is false for the top bar: it shows only one side, the one
+    /// with the turn, and the rest of the screen already says it is yours.
+    /// The "me" taught nothing there and pushed the name onto two lines — the
+    /// bar grew by as much, at the board's expense.
+    func displayName(_ p: Player, withMe: Bool = true) -> String {
+        // A name already composed arrives as it is from the other device: the
+        // host laid it down at launch, and adding this device's nickname to
+        // it would stick mine on them. So we only compose ourselves what has
+        // not been composed.
+        var name = p.name
+        if name == Boards.sideName(p.id), p.id == mySide, let nickname = Nickname.current {
+            name += " · \(nickname)"
         }
-        return avecMoi && j.id == monCamp ? nom + " · moi" : nom
+        return withMe && p.id == mySide ? name + " · me" : name
     }
 
-    var repondeur: PlayerID? { game.quiRepond ?? game.assault?.defender }
+    /// Who has to answer — or, once the question is resolved, who has just
+    /// done so: the verdict sheet appears after the engine has filed the
+    /// question away, and it still needs to name someone.
+    var responder: PlayerID? { game.whoAnswers ?? game.assault?.defender }
 
-    var repondeurEstHumain: Bool {
-        guard let qui = repondeur else { return false }
-        return !(player(qui)?.isBot ?? true)
+    var responderIsHuman: Bool {
+        guard let who = responder else { return false }
+        return !(player(who)?.isBot ?? true)
     }
 
-    /// Le défenseur peut-il doubler, et est-ce à moi de le décider ?
-    var puisJeRelancer: Bool {
-        game.peutRelancer && aMoiDeRepondre && stage == .asking && report == nil
+    /// Can the defender double, and is it mine to decide?
+    var canIRaise: Bool {
+        game.canRaise && myTurnToAnswer && stage == .asking && report == nil
     }
 
-    func relancer() {
-        guard puisJeRelancer else { return }
-        jouer(.relancer)
+    func raise() {
+        guard canIRaise else { return }
+        play(.raise)
     }
 
     func player(_ id: PlayerID) -> Player? { game.players.first { $0.id == id } }
 
-    /// Le territoire touché du doigt. Ce qu'il déclenche dépend de la phase :
-    /// c'est le seul endroit où le plateau se pilote.
+    /// The territory touched by a finger. What it triggers depends on the
+    /// phase: this is the only place the board is driven from.
     func tap(_ id: TerritoryID) {
-        guard stage == nil, aMoiDeJouer else { return }
-        let moi = game.currentPlayer.id
+        guard stage == nil, myTurnToPlay else { return }
+        let me = game.currentPlayer.id
         switch game.phase {
         case .reinforcement:
-            if game.owner[id] == moi {
-                // La note ne tombe que si l'homme est vraiment posé : le coup
-                // peut être refusé — plus de renforts en réserve, ou cinq
-                // cartes en main qu'il faut échanger d'abord — et un son qui
-                // sonne quand rien ne se passe apprend à ne plus l'écouter.
-                let avant = game.armies(id)
-                jouer(.place(id))
-                if game.armies(id) > avant { Sons.shared.jouer(.pose) }
+            if game.owner[id] == me {
+                // The note only lands if the troop is really laid down: the
+                // move can be refused — no reinforcements left in reserve, or
+                // five cards in hand that have to be traded first — and a
+                // sound that sounds when nothing happens teaches you to stop
+                // listening to it.
+                let before = game.armies(id)
+                play(.place(id))
+                if game.armies(id) > before { Sounds.shared.play(.place) }
             }
             if case .attack = game.phase { selected = nil }
 
         case .attack:
-            if game.owner[id] == moi {
+            if game.owner[id] == me {
                 selected = (selected == id) ? nil : (game.canLaunch(from: id) ? id : nil)
                 target = nil
             } else if let base = selected, game.map.areAdjacent(base, id) {
@@ -686,18 +692,18 @@ final class GameSession {
                 if !categoryChosen {
                     draftCategory = game.weakness(of: game.owner[id] ?? -1) ?? draftCategory
                 }
-                // Le thème proposé doit être un thème de la table. Sans ce
-                // rappel, une partie qui écarte le premier thème de la grille
-                // ouvrirait sur un bouton que la grille ne montre pas : rien
-                // ne paraîtrait choisi, et le joueur ne saurait pas pourquoi.
-                if let c = draftCategory, !game.themesEnJeu.contains(c) {
-                    draftCategory = game.themesEnJeu.first
+                // The theme offered has to be one of the table's. Without
+                // this reminder, a game that excludes the first theme in the
+                // grid would open on a button the grid does not show: nothing
+                // would appear chosen, and the player would not know why.
+                if let c = draftCategory, !game.themesInPlay.contains(c) {
+                    draftCategory = game.themesInPlay.first
                 }
             }
 
         case .fortify:
-            if game.owner[id] == moi {
-                if let base = selected, base != id, game.areLinked(base, id, for: moi),
+            if game.owner[id] == me {
+                if let base = selected, base != id, game.areLinked(base, id, for: me),
                    game.armies(base) >= 2 {
                     target = id
                 } else {
@@ -713,20 +719,20 @@ final class GameSession {
 
     func cancelDraft() { target = nil }
 
-    // MARK: - L'assaut
+    // MARK: - The assault
 
     func declare() {
-        guard let base = selected, let cible = target else { return }
-        guard game.canDeclare(from: base, to: cible, questions: draftQuestions) else { return }
-        jouer(.declareAssault(from: base, to: cible,
-                              questions: draftQuestions, category: draftCategory))
+        guard let base = selected, let aim = target else { return }
+        guard game.canDeclare(from: base, to: aim, questions: draftQuestions) else { return }
+        play(.declareAssault(from: base, to: aim,
+                             questions: draftQuestions, category: draftCategory))
         target = nil
         resume()
     }
 
-    /// Celui qui répond dit qu'il est prêt : le sablier part à cet instant,
-    /// et pas avant. Sans cela, un joueur qui passe l'appareil à un autre lui
-    /// offre trois secondes de moins.
+    /// Whoever is answering says they are ready: the hourglass starts at that
+    /// instant, and not before. Without it, a player handing the device to
+    /// another gives them three seconds less.
     func beginAnswering() {
         guard let duel else { return }
         stage = .asking
@@ -737,26 +743,26 @@ final class GameSession {
         guard let duel, stage == .asking else { return }
         stopCountdown()
         let elapsed = max(0, duel.allowance - remaining)
-        let rapport = jouer(.answer(index.map { .chosen($0, elapsed: elapsed) } ?? .timeout))
-        // Face à face : la première des deux réponses ne montre rien. La
-        // dévoiler donnerait la solution à celui qui doit encore répondre.
-        guard let rapport else {
-            // Face à face : votre réponse est prise, mais elle ne tranche
-            // rien tant que l'autre n'a pas répondu. Refermer la feuille ici
-            // était le pire des choix — l'écran revenait sur la même
-            // question, l'appui semblait perdu, et l'on tapait une seconde
-            // fois. Ce second appui tombait alors sur le verdict et
-            // l'escamotait : les deux défauts n'en faisaient qu'un.
+        let duelReport = play(.answer(index.map { .chosen($0, elapsed: elapsed) } ?? .timeout))
+        // Showdown: the first of the two answers shows nothing. Revealing it
+        // would hand the solution to whoever still has to answer.
+        guard let duelReport else {
+            // Showdown: your answer is taken, but it settles nothing until
+            // the other player has answered. Closing the sheet here was the
+            // worst of choices — the screen came back to the same question,
+            // the tap seemed lost, and you tapped a second time. That second
+            // tap then landed on the verdict and whisked it away: the two
+            // faults were really one.
             report = nil
-            stage = .adversaireRepond
+            stage = .opponentAnswering
             resume()
             return
         }
-        devoiler(rapport)
+        reveal(duelReport)
         pump?.cancel()
         pump = Task { @MainActor [weak self] in
             guard let self else { return }
-            await self.pause(self.tempsDeVerdict)
+            await self.pause(self.verdictTime)
             guard !Task.isCancelled else { return }
             self.report = nil
             self.stage = nil
@@ -764,9 +770,9 @@ final class GameSession {
         }
     }
 
-    /// Après un assaut terminé : ranger, et reprendre la main.
+    /// After a finished assault: file it away, and take back control.
     func closeAssault() {
-        jouer(.dismissAssault)
+        play(.dismissAssault)
         report = nil
         stage = nil
         selected = nil
@@ -774,56 +780,56 @@ final class GameSession {
     }
 
     func occupy(_ count: Int) {
-        jouer(.occupy(count))
+        play(.occupy(count))
         report = nil
         stage = nil
         selected = nil
         resume()
     }
 
-    // MARK: - Le tour
+    // MARK: - The turn
 
     func endPhase() {
-        guard aMoiDeJouer else { return }
-        jouer(.advance)
+        guard myTurnToPlay else { return }
+        play(.advance)
         selected = nil
         target = nil
         resume()
     }
 
     func fortify(_ count: Int) {
-        guard let base = selected, let cible = target else { return }
-        jouer(.fortify(from: base, to: cible, count: count))
+        guard let base = selected, let aim = target else { return }
+        play(.fortify(from: base, to: aim, count: count))
         selected = nil
         target = nil
         resume()
     }
 
     func endTurn() {
-        jouer(.endTurn)
+        play(.endTurn)
         selected = nil
         target = nil
         resume()
     }
 
-    // MARK: - Le sablier
+    // MARK: - The hourglass
 
     private func startCountdown(_ allowance: TimeInterval) {
         remaining = allowance
         ticker?.invalidate()
-        // Le minuteur ne retient pas la partie : si elle a disparu, il se
-        // débranche lui-même. Un `deinit` ne peut pas le faire — il n'est pas
-        // sur l'acteur principal, et le minuteur, lui, y vit.
-        let t = Timer(timeInterval: 0.1, repeats: true) { [weak self] minuteur in
+        // The timer does not hold on to the session: if it has gone, the
+        // timer unplugs itself. A `deinit` cannot do it — it is not on the
+        // main actor, and the timer lives there.
+        let t = Timer(timeInterval: 0.1, repeats: true) { [weak self] timer in
             Task { @MainActor in
-                guard let self else { minuteur.invalidate(); return }
+                guard let self else { timer.invalidate(); return }
                 guard self.stage == .asking else { return }
                 self.remaining = max(0, self.remaining - 0.1)
                 if self.remaining <= 0 { self.answer(nil) }
             }
         }
-        // Mode « common » : le sablier ne doit pas s'arrêter parce qu'on fait
-        // défiler le journal d'une main pendant qu'on réfléchit de l'autre.
+        // "common" mode: the hourglass must not stop because you scroll the
+        // log with one hand while thinking with the other.
         RunLoop.main.add(t, forMode: .common)
         ticker = t
     }
@@ -833,34 +839,34 @@ final class GameSession {
         ticker = nil
     }
 
-    /// Une attente que l'on peut écourter, et dont on voit la fin venir.
+    /// A wait you can cut short, and whose end you can see coming.
     ///
-    /// `de` et `à` disent où la barre se trouve au début et où elle doit
-    /// arriver : deux attentes qui se suivent peuvent ainsi n'en dessiner
-    /// qu'une seule, continue.
-    private func pause(_ seconds: Double, de debut: Double = 1, a fin: Double = 0) async {
+    /// `from` and `to` say where the bar stands at the start and where it has
+    /// to arrive: two waits in a row can therefore draw a single continuous
+    /// one.
+    private func pause(_ seconds: Double, from start: Double = 1, to end: Double = 0) async {
         skipped = false
-        waitPart = debut
-        let depart = Date()
+        waitPart = start
+        let began = Date()
         while !skipped {
-            let passe = min(1, Date().timeIntervalSince(depart) / seconds)
-            waitPart = debut + (fin - debut) * passe
-            if passe >= 1 { break }
+            let elapsed = min(1, Date().timeIntervalSince(began) / seconds)
+            waitPart = start + (end - start) * elapsed
+            if elapsed >= 1 { break }
             try? await Task.sleep(for: .milliseconds(50))
             if Task.isCancelled { return }
         }
         skipped = false
-        waitPart = fin
+        waitPart = end
     }
 
-    /// Le temps de lire l'énoncé et ses quatre propositions.
+    /// The time it takes to read the prompt and its four choices.
     private func readingTime(_ q: AskedQuestion) -> Double {
-        let signes = q.prompt.count + q.choices.reduce(0) { $0 + $1.count }
-        return min(Tempo.lectureMax,
-                   max(Tempo.lectureMin, Double(signes) / Tempo.signesParSeconde))
+        let chars = q.prompt.count + q.choices.reduce(0) { $0 + $1.count }
+        return min(Tempo.readingMax,
+                   max(Tempo.readingMin, Double(chars) / Tempo.charsPerSecond))
     }
 
-    // MARK: - Le fil des machines
+    // MARK: - The machines' thread
 
     private func resume() {
         pump?.cancel()
@@ -869,76 +875,79 @@ final class GameSession {
 
     private func loop() async {
         while !game.isOver {
-            // 1. Une question attend une réponse.
+            // 1. A question is waiting for an answer.
             if let a = game.assault, let duel = a.current {
                 report = nil
-                // En réseau, personne ne « réfléchit » ici : ou bien c'est à
-                // moi de répondre, ou bien j'attends le coup d'en face.
-                if enReseau {
-                    if aMoiDeRepondre {
+                // Over the network nobody "thinks" here: either it is my turn
+                // to answer, or I am waiting for the move across the table.
+                if networked {
+                    if myTurnToAnswer {
                         stage = .handover
                     } else {
-                        stage = game.rules.mode == .faceAFace ? .adversaireRepond : .asking
+                        stage = game.rules.mode == .showdown ? .opponentAnswering : .asking
                     }
-                    thinking = !aMoiDeRepondre
+                    thinking = !myTurnToAnswer
                     return
                 }
-                guard let qui = game.quiRepond, let repondeur = player(qui) else { return }
-                guard case let .machine(niveau, style) = repondeur.kind else {
-                    stage = .handover        // à un humain de dire « prêt »
+                guard let who = game.whoAnswers, let answerer = player(who) else { return }
+                guard case let .machine(level, style) = answerer.kind else {
+                    stage = .handover        // for a human to say "ready"
                     return
                 }
-                // Face à face : la machine qui défend décide d'abord si elle
-                // double la mise, avant de répondre — après, ce ne serait plus
-                // un pari.
-                if game.peutRelancer, qui == a.defender,
-                   Bot.relance(game, duel: duel, level: niveau,
-                               style: style, joueur: qui) {
-                    game.relancer()
+                // Showdown: the defending machine first decides whether to
+                // double the stake, before answering — afterwards it would no
+                // longer be a bet.
+                if game.canRaise, who == a.defender,
+                   Bot.shouldRaise(game, duel: duel, level: level,
+                                   style: style, player: who) {
+                    game.raise()
                 }
-                // La première des deux réponses ne révèle rien : pas de
-                // verdict à lire, juste le temps de la voir réfléchir.
-                // En face à face, la question ne reparaît jamais pendant
-                // qu'un autre y répond : celui qui regarde l'a déjà lue, et
-                // souvent déjà tranchée.
-                let croise = game.rules.mode == .faceAFace
-                let muette = croise && a.defenderAnswer == nil
-                stage = croise ? .adversaireRepond : .asking
+                // The first of the two answers reveals nothing: no verdict to
+                // read, just time to watch it think.
+                //
+                // In a showdown the question never reappears while someone
+                // else is answering it: whoever is watching has already read
+                // it, and often already settled it.
+                let showdown = game.rules.mode == .showdown
+                let mute = showdown && a.defenderAnswer == nil
+                stage = showdown ? .opponentAnswering : .asking
                 thinking = true
-                // Lecture puis verdict ne font qu'un seul moment, et donc une
-                // seule descente de la barre : on lit la question et l'on y
-                // répond dans sa tête, puis on voit ce qu'elle a donné.
-                let lecture = croise ? Tempo.reflexion : readingTime(duel.question)
-                let charniere = muette ? 0 : tempsDeVerdict / (lecture + tempsDeVerdict)
-                await pause(lecture, de: 1, a: charniere)
+                // Reading then verdict make one single moment, and therefore
+                // one single descent of the bar: you read the question and
+                // answer it in your head, then you see what it gave.
+                let reading = showdown ? Tempo.thinking : readingTime(duel.question)
+                let hinge = mute ? 0 : verdictTime / (reading + verdictTime)
+                await pause(reading, from: 1, to: hinge)
                 if Task.isCancelled { return }
                 thinking = false
-                let rapport = game.answer(Bot.answer(to: duel, level: niveau,
-                                                     rules: game.rules, joueur: qui,
-                                                     using: &game.rng))
-                guard let rapport else { stage = nil; continue }
-                devoiler(rapport)
-                await pause(tempsDeVerdict, de: charniere, a: 0)
+                let duelReport = game.answer(Bot.answer(to: duel, level: level,
+                                                        rules: game.rules, player: who,
+                                                        using: &game.rng))
+                guard let duelReport else { stage = nil; continue }
+                reveal(duelReport)
+                await pause(verdictTime, from: hinge, to: 0)
                 if Task.isCancelled { return }
                 report = nil
                 stage = nil
                 continue
             }
 
-            // 2. Un assaut terminé. La machine range seule ; l'humain veut voir.
+            // 2. A finished assault. The machine files it away on its own;
+            //    the human wants to look.
             if let a = game.assault, a.isOver {
                 if game.currentPlayer.isBot {
-                    // Un assaut que l'on subit mérite son bilan lui aussi.
-                    // Sans lui, la place tombait et la machine enchaînait :
-                    // on n'avait pas le temps de voir ce qu'on venait de
-                    // perdre. Il passe seul, pour ne pas hacher son tour.
-                    let jySuisPour = enReseau
-                        ? a.defender == monRang
+                    // An assault you have been subjected to deserves its
+                    // summary too. Without it, the place fell and the machine
+                    // carried straight on: you had no time to see what you
+                    // had just lost. It passes on its own, so as not to chop
+                    // up its turn.
+                    let concernsMe = networked
+                        ? a.defender == mySeat
                         : !(player(a.defender)?.isBot ?? true)
-                    if jySuisPour {
+                    if concernsMe {
                         report = nil
                         stage = .summary
-                        await pause(Tempo.bilan)
+                        await pause(Tempo.summary)
                         if Task.isCancelled { return }
                         stage = nil
                     }
@@ -949,68 +958,70 @@ final class GameSession {
                 }
             }
 
-            // 3. Sinon : à la machine de jouer, ou à l'humain de décider.
+            // 3. Otherwise: the machine's turn to play, or the human's to
+            //    decide.
             guard game.currentPlayer.isBot else { stage = nil; return }
-            let avant = game.phase
-            let pas = BotRunner.step(&game)
-            if pas == .idle, avant == game.phase, case .fortify = game.phase {
+            let before = game.phase
+            let step = BotRunner.step(&game)
+            if step == .idle, before == game.phase, case .fortify = game.phase {
                 game.endTurn()
             }
-            // La machine vient de déclarer : on reste sur la carte le temps de
-            // voir d'où part l'assaut et où il tombe.
-            if case .declared = pas {
+            // The machine has just declared: we stay on the map long enough
+            // to see where the assault leaves from and where it lands.
+            if case .declared = step {
                 stage = .announcing
-                await pause(Tempo.annonce)
+                await pause(Tempo.announcement)
                 if Task.isCancelled { return }
                 stage = nil
                 continue
             }
-            try? await Task.sleep(for: .milliseconds(pas == .idle ? 120 : 380))
+            try? await Task.sleep(for: .milliseconds(step == .idle ? 120 : 380))
             if Task.isCancelled { return }
         }
         stage = nil
         thinking = false
-        await annoncerLaVictoire()
+        await announceVictory()
     }
 
-    /// La fin, dans son ordre : la feuille du duel s'est refermée, le plateau
-    /// montre la dernière place prise, on nomme le vainqueur — et c'est là que
-    /// le son tombe, avec le nom — puis seulement l'écran de victoire se pose.
+    /// The ending, in its order: the duel sheet has closed, the board shows
+    /// the last place taken, the winner is named — and that is where the
+    /// sound lands, along with the name — and only then does the victory
+    /// screen settle in.
     ///
-    /// Le son est posé ici et non sur l'écran de victoire : sur l'écran, la
-    /// musique et l'ouverture de la feuille se marcheraient dessus. Ici il a le
-    /// plateau pour lui, et le dernier verdict du duel a fini de sonner depuis
-    /// plusieurs secondes — `Tempo.bilan` en vaut cinq et demie, et un son en
-    /// interrompt un autre.
-    private func annoncerLaVictoire() async {
-        guard case let .finished(gagnant) = game.phase else { return }
-        if !victoireAnnoncee {
-            victoireAnnoncee = true
-            Sons.shared.jouer(sonDeFin(gagnant))
-            montrer(Annonce(titre: "\(game.playerName(gagnant)) l'emporte !",
-                            sous: nil, camp: gagnant))
-            // Une attente qui se laisse interrompre : la boucle est relancée
-            // à chaque coup, et un écran de victoire qui n'arrive jamais
-            // serait pire que celui qui arrive trop tôt.
+    /// The sound is put here and not on the victory screen: on the screen,
+    /// the music and the sheet opening would tread on each other. Here it has
+    /// the board to itself, and the duel's last verdict finished sounding
+    /// seconds ago — `Tempo.summary` is worth five and a half, and one sound
+    /// interrupts another.
+    private func announceVictory() async {
+        guard case let .finished(winner) = game.phase else { return }
+        if !victoryAnnounced {
+            victoryAnnounced = true
+            Sounds.shared.play(endSound(winner))
+            show(Announcement(title: "\(game.playerName(winner)) wins!",
+                              sub: nil, side: winner))
+            // A wait that lets itself be interrupted: the loop is restarted
+            // at every move, and a victory screen that never arrives would be
+            // worse than one that arrives too early.
             try? await Task.sleep(for: .milliseconds(1_700))
         }
-        victoireMontree = true
+        victoryShown = true
     }
 
-    /// Le son de la fin, selon qui la vit.
+    /// The sound of the ending, according to who is living it.
     ///
-    /// Deux sons ne valent que si l'appareil sait pour qui il sonne. En réseau
-    /// il le sait : mon rang est le mien, et l'autre écran sonnera l'inverse.
-    /// Seul contre la machine aussi — il n'y a qu'un humain, et c'est celui
-    /// qui regarde.
+    /// Two sounds are only worth it if the device knows who it is sounding
+    /// for. Over the network it knows: my seat is mine, and the other screen
+    /// will sound the opposite. Alone against the machine too — there is only
+    /// one human, and it is the one watching.
     ///
-    /// Mais à deux humains sur un même téléphone, « mon camp » est celui qui
-    /// l'a ouvert et non celui qui vient de gagner : on sonnerait la défaite au
-    /// vainqueur une fois sur deux. Là, la fanfare pour tout le monde — la
-    /// partie a été gagnée par quelqu'un qui est dans la pièce.
-    private func sonDeFin(_ gagnant: PlayerID) -> Sons.Signal {
-        let humains = game.players.filter { !$0.isBot }.count
-        guard enReseau || humains == 1 else { return .victoire }
-        return gagnant == monCamp ? .victoire : .defaite
+    /// But with two humans on one phone, "my side" is whoever opened it and
+    /// not whoever has just won: we would sound defeat at the winner half the
+    /// time. There, the fanfare for everyone — the game was won by somebody
+    /// in the room.
+    private func endSound(_ winner: PlayerID) -> Sounds.Signal {
+        let humans = game.players.filter { !$0.isBot }.count
+        guard networked || humans == 1 else { return .victory }
+        return winner == mySide ? .victory : .defeat
     }
 }

@@ -1,0 +1,256 @@
+# History — Grade 6 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# The sixth-grade world history course as most American schools run it:
+# early humans and farming, Mesopotamia, Egypt, the Indus, ancient China
+# and India, Greece, and Rome to its fall.
+#
+# Two hundred questions. A theme of two hundred lasts two evenings of solo
+# play before questions start coming back — that measurement is what set
+# the number.
+#
+# No prompt duplicates one in any other question file: a pack that repeats
+# the free bank is a pack you feel you have already paid for.
+
+! id      | history-6
+! name    | History — Grade 6
+! detail  | Ancient civilizations: Mesopotamia, Egypt, Greece and Rome.
+! icon    | pyramid
+! tint    | 0.78 0.62 0.38
+! rank    | 7
+! product | com.oulhen.riskelo.us.pack.history6
+
+
+# --- Before cities ---
+
+E | What did the earliest humans do for food before farming? | Hunted and gathered | Farmed grain | Herded cattle | Traded in markets
+E | Which age is named for the first use of chipped stone tools? | The Paleolithic | The Neolithic | The Bronze Age | The Iron Age
+E | Which age is named for polished stone tools and early farming? | The Neolithic | The Paleolithic | The Bronze Age | The Iron Age
+M | What do we call the change from hunting to farming? | The Neolithic Revolution | The Industrial Revolution | The Urban Revolution | The Bronze Revolution
+M | Which invention allowed early people to work metal harder than copper? | Bronze, an alloy of copper and tin | Iron smelting | Steel casting | Brass working
+M | What do we call people who move with their herds rather than settle? | Nomads | Artisans | Scribes | Serfs
+M | Which development allowed early societies to store surplus food? | Pottery and granaries | Writing | Coinage | Wheeled carts
+M | What do we call the taming of wild animals for human use? | Domestication | Migration | Cultivation | Irrigation
+H | Which French cave is famous for its Paleolithic paintings? | Lascaux | Chauvet only | Altamira | Pech Merle
+H | Which Turkish site is one of the oldest known towns, from about 7000 BC? | Catalhoyuk | Jericho | Ur | Uruk
+H | Which town in the Jordan Valley is among the oldest continuously settled? | Jericho | Damascus | Byblos | Aleppo
+H | Which invention around 3500 BC transformed transport and pottery? | The wheel | The plow | The sail | The lever
+H | What do we call the study of past peoples through what they left behind? | Archaeology | History | Anthropology only | Paleontology
+
+# --- Mesopotamia ---
+
+E | Which two rivers bounded Mesopotamia? | The Tigris and the Euphrates | The Nile and the Jordan | The Indus and the Ganges | The Yellow and the Yangtze
+E | Which arc of good farmland stretched from the Persian Gulf to Egypt? | The Fertile Crescent | The Sahel | The Levant only | The Anatolian Plain
+M | Which people built the first cities of southern Mesopotamia? | The Sumerians | The Assyrians | The Hittites | The Phoenicians
+M | What were the stepped temple towers of Mesopotamia called? | Ziggurats | Pyramids | Pagodas | Stupas
+M | Which Sumerian city is among the oldest known in the world? | Uruk | Thebes | Memphis | Mohenjo-Daro
+M | Which Babylonian king's law code is carved on a black stone pillar? | Hammurabi | Sargon | Nebuchadnezzar | Ashurbanipal
+M | Which principle runs through Hammurabi's code? | An eye for an eye | Trial by jury | Innocent until proven guilty | Equality before the law
+M | Which Akkadian ruler built the first known empire around 2334 BC? | Sargon | Hammurabi | Gilgamesh | Ur-Nammu
+M | Which Mesopotamian epic tells of a king's search for eternal life? | The Epic of Gilgamesh | The Iliad | The Rig Veda | The Book of the Dead
+M | What tool did Mesopotamian scribes press into clay to write? | A reed stylus | A brush | A chisel | A quill
+H | Which empire built a famous library at Nineveh? | The Assyrian Empire | The Babylonian Empire | The Persian Empire | The Hittite Empire
+H | Which Assyrian king assembled that library of clay tablets? | Ashurbanipal | Sennacherib | Tiglath-Pileser | Sargon II
+H | Which Babylonian king is credited with the hanging gardens? | Nebuchadnezzar II | Hammurabi | Marduk-apla-iddina | Nabonidus
+H | Which Persian king allowed exiled peoples to return home after 539 BC? | Cyrus the Great | Darius I | Xerxes | Cambyses
+H | Which Persian king built the Royal Road across his empire? | Darius I | Cyrus the Great | Xerxes | Artaxerxes
+H | Which Mesopotamian invention divided the circle into 360 degrees? | The base-sixty number system | Decimal counting | The abacus | The zero
+H | Which people of the Levant spread an alphabet through trade? | The Phoenicians | The Hittites | The Sumerians | The Medes
+H | Which Anatolian people were among the first to work iron widely? | The Hittites | The Phoenicians | The Lydians | The Elamites
+H | Which kingdom is credited with the first coined money, in Anatolia? | Lydia | Phoenicia | Assyria | Persia
+
+# --- Ancient Egypt ---
+
+E | Which direction does the Nile River flow? | North | South | East | West
+E | What did Egyptians build as tombs for their pharaohs? | Pyramids | Ziggurats | Temples only | Catacombs
+E | What was the Egyptian writing system called? | Hieroglyphs | Cuneiform | Sanskrit | Linear A
+E | What plant did Egyptians use to make an early kind of paper? | Papyrus | Bamboo | Flax | Palm bark
+E | What did Egyptians do to preserve bodies for the afterlife? | Mummified them | Cremated them | Buried them at sea | Left them in caves
+M | Which yearly event enriched Egyptian farmland with silt? | The Nile flood | The monsoon | The harmattan | The spring thaw
+M | Which pharaoh's tomb was found nearly untouched in the Valley of the Kings? | Tutankhamun | Ramses II | Khufu | Thutmose III
+M | Which pyramid at Giza is the largest? | The Great Pyramid of Khufu | The Pyramid of Khafre | The Pyramid of Menkaure | The Step Pyramid
+M | Which stone bore the same text in three scripts and unlocked hieroglyphs? | The Rosetta Stone | The Narmer Palette | The Palermo Stone | The Merneptah Stele
+M | Which pharaoh ruled as a woman and is shown with a false beard? | Hatshepsut | Nefertiti | Cleopatra | Ankhesenamun
+M | Which pharaoh built many temples and reigned for over sixty years? | Ramses II | Khufu | Akhenaten | Amenhotep III
+M | Which pharaoh tried to replace Egypt's many gods with one sun disk? | Akhenaten | Ramses II | Tutankhamun | Seti I
+M | Which creature with a lion's body and a human head guards Giza? | The Sphinx | The Griffin | The Chimera | The Manticore
+M | Which two lands did the pharaoh's double crown represent? | Upper and Lower Egypt | Egypt and Nubia | Egypt and Kush | The Delta and the Oases
+H | Which Egyptian official could read and write and kept records? | The scribe | The vizier | The nomarch | The priest
+H | Which vizier was second only to the pharaoh in government? | The vizier | The nomarch | The high priest | The general
+H | Which kingdom to the south of Egypt later ruled it as a dynasty? | Kush | Punt | Libya | Canaan
+H | Which Kushite capital was famous for its own steep pyramids? | Meroe | Napata only | Kerma | Axum
+H | Which text guided the dead through the afterlife in Egyptian belief? | The Book of the Dead | The Pyramid Texts only | The Instruction of Ptahhotep | The Coffin Codex
+H | Which period of Egyptian history built the great pyramids at Giza? | The Old Kingdom | The Middle Kingdom | The New Kingdom | The Late Period
+H | Which period of Egyptian history saw the empire at its widest? | The New Kingdom | The Old Kingdom | The Middle Kingdom | The First Intermediate Period
+H | Which foreign rulers took over Egypt with chariots around 1650 BC? | The Hyksos | The Sea Peoples | The Nubians | The Assyrians
+
+# --- The Indus and ancient India ---
+
+M | Along which river did South Asia's first cities grow? | The Indus | The Ganges | The Brahmaputra | The Godavari
+M | Which Indus city is known for its Great Bath and grid streets? | Mohenjo-Daro | Harappa only | Lothal | Dholavira
+M | Which feature of Indus cities shows careful planning? | Streets laid out on a grid | Stone pyramids | City walls of iron | Wheeled roads
+M | Which people entered northern India after the Indus cities declined? | The Aryans | The Persians | The Greeks | The Huns
+M | Which collection of hymns is the oldest sacred text of India? | The Rig Veda | The Upanishads | The Bhagavad Gita | The Mahabharata
+M | Which Indian social system divided people into fixed groups by birth? | The caste system | Feudalism | Serfdom | Guild ranking
+M | Which prince gave up wealth and became the Buddha? | Siddhartha Gautama | Ashoka | Chandragupta | Mahavira
+M | Which emperor spread Buddhism after regretting a bloody war? | Ashoka | Chandragupta Maurya | Samudragupta | Harsha
+H | Which empire did Chandragupta Maurya found around 321 BC? | The Maurya Empire | The Gupta Empire | The Kushan Empire | The Chola Empire
+H | Which Indian empire is called a golden age for math and art? | The Gupta Empire | The Maurya Empire | The Mughal Empire | The Delhi Sultanate
+H | Which mathematical idea did Indian mathematicians develop and pass on? | The concept of zero | The decimal point only | Negative numbers only | The abacus
+H | Which pillars carry Ashoka's edicts across his empire? | The Pillars of Ashoka | The Iron Pillars | The Victory Columns | The Stambha Steles
+H | Which script is the ancient language of Hindu scripture written in? | Sanskrit | Pali only | Prakrit | Tamil
+H | Which two epics are the great long poems of ancient India? | The Mahabharata and the Ramayana | The Vedas and the Puranas | The Gita and the Upanishads | The Jatakas and the Sutras
+
+# --- Ancient China ---
+
+M | Along which two rivers did Chinese civilization first grow? | The Yellow and the Yangtze | The Mekong and the Red | The Amur and the Ussuri | The Indus and the Ganges
+M | Which Chinese dynasty left the earliest written records on oracle bones? | The Shang | The Zhou | The Qin | The Han
+M | Which idea said heaven granted a ruler the right to rule? | The Mandate of Heaven | The Divine Right | The Rule of Law | The Way of the Sage
+M | Which ruler unified China in 221 BC and took the title first emperor? | Qin Shi Huang | Liu Bang | Wu Di | Sun Tzu
+M | Which army of clay figures guards that first emperor's tomb? | The Terracotta Army | The Jade Guard | The Bronze Legion | The Stone Sentinels
+M | Which dynasty followed the Qin and lasted four centuries? | The Han | The Zhou | The Tang | The Sui
+M | Which trade route carried Chinese silk toward the Mediterranean? | The Silk Road | The Spice Route | The Amber Road | The Tea Horse Road
+M | Which Chinese thinker taught respect for elders and social duty? | Confucius | Laozi | Han Feizi | Mozi
+M | Which Chinese teaching urges harmony with the natural way? | Daoism | Legalism | Confucianism | Mohism
+M | Which Chinese school of thought argued for strict laws and harsh punishment? | Legalism | Daoism | Confucianism | Mohism
+H | Which Chinese invention allowed writing on a cheap flexible surface? | Paper | Silk | Bamboo strips | Parchment
+H | Which Chinese invention helped sailors find direction at sea? | The compass | The astrolabe | The sextant | The quadrant
+H | Which Chinese dynasty began building the earliest walls in the north? | The Qin | The Han | The Ming | The Tang
+H | Which exam system chose Chinese officials by merit? | The civil service examination | The lottery of ranks | The noble selection | The military levy
+H | Which Han emperor expanded the empire and opened the Silk Road west? | Wu Di | Liu Bang | Gaozu | Wang Mang
+H | Which Chinese classic on strategy is still read today? | The Art of War | The Analects | The Book of Changes | The Book of Rites
+H | Which collection records the sayings of Confucius? | The Analects | The Art of War | The Dao De Jing | The Book of Songs
+
+# --- Ancient Greece ---
+
+E | What do we call the independent Greek cities with their own governments? | City-states | Provinces | Colonies | Kingdoms
+E | Which Greek city-state is remembered for its democracy? | Athens | Sparta | Corinth | Thebes
+E | Which Greek city-state raised boys to be soldiers from the age of seven? | Sparta | Athens | Corinth | Argos
+M | What was the Greek word for a city-state? | Polis | Agora | Acropolis | Demos
+M | What was the marketplace and meeting place of a Greek city called? | The agora | The acropolis | The stoa | The gymnasium
+M | What was the fortified hilltop of a Greek city called? | The acropolis | The agora | The polis | The necropolis
+M | Which sea battle in 480 BC destroyed the Persian fleet? | Salamis | Marathon | Plataea | Mycale
+M | Which pass did three hundred Spartans hold against the Persians? | Thermopylae | Marathon | Plataea | Salamis
+M | Which Athenian leader led the city at the height of its power? | Pericles | Solon | Cleisthenes | Themistocles
+M | Which war between Athens and Sparta lasted twenty-seven years? | The Peloponnesian War | The Persian Wars | The Corinthian War | The Sacred War
+M | Which Athenian philosopher was condemned to drink hemlock? | Socrates | Plato | Aristotle | Diogenes
+M | Which philosopher wrote The Republic and founded the Academy? | Plato | Socrates | Aristotle | Epicurus
+M | Which philosopher studied living things and tutored Alexander? | Aristotle | Plato | Socrates | Thales
+M | Which Greek is called the father of medicine? | Hippocrates | Galen | Herophilus | Asclepius
+M | Which Macedonian king conquered Persia by the age of thirty? | Alexander the Great | Philip II | Antigonus | Seleucus
+H | Which Athenian reformer canceled debts and eased the laws around 594 BC? | Solon | Draco | Cleisthenes | Pisistratus
+H | Which Athenian lawgiver's harsh code gave English an adjective? | Draco | Solon | Cleisthenes | Pericles
+H | Which Athenian is credited with organizing the democracy in 508 BC? | Cleisthenes | Solon | Pericles | Themistocles
+H | Which Athenian practice exiled a citizen by vote for ten years? | Ostracism | Conscription | Proscription | Banishment by lot
+H | Which temple to Athena crowns the Athenian acropolis? | The Parthenon | The Erechtheion | The Temple of Hephaestus | The Propylaea
+H | Which Greek mathematician proved theorems about right triangles? | Pythagoras | Euclid | Archimedes | Thales
+H | Which Greek wrote the Elements, a textbook of geometry? | Euclid | Pythagoras | Archimedes | Apollonius
+H | Which Greek shouted a discovery while stepping into a bath? | Archimedes | Euclid | Eratosthenes | Hero
+H | Which Greek measured the Earth's circumference with shadows? | Eratosthenes | Archimedes | Aristarchus | Hipparchus
+H | Which period followed Alexander and blended Greek and eastern culture? | The Hellenistic period | The Archaic period | The Classical period | The Mycenaean period
+H | Which Egyptian city founded by Alexander became a center of learning? | Alexandria | Antioch | Pergamon | Cyrene
+H | Which two kinds of play did Greek theaters stage? | Tragedy and comedy | Opera and ballet | Mystery and morality | Farce and masque
+H | Which Greek wrote tragedies including Oedipus Rex? | Sophocles | Aristophanes | Euripides | Aeschylus
+H | Which Greek civilization on Crete came before the Mycenaeans? | The Minoans | The Dorians | The Ionians | The Hittites
+
+# --- Ancient Rome ---
+
+E | Which two brothers does legend name as founders of Rome? | Romulus and Remus | Castor and Pollux | Aeneas and Ascanius | Cain and Abel
+E | Which river runs through Rome? | The Tiber | The Po | The Arno | The Rubicon
+E | What were Roman fighters who fought in arenas called? | Gladiators | Legionaries | Centurions | Praetorians
+E | Which Roman structure carried water into cities? | The aqueduct | The forum | The basilica | The insula
+M | Which body of wealthy Romans advised the leaders of the Republic? | The Senate | The Assembly | The Tribunate | The Consulate
+M | Which two officials headed the Roman Republic each year? | The consuls | The tribunes | The censors | The praetors
+M | Which class of ordinary Roman citizens won the right to their own officials? | The plebeians | The patricians | The equites | The clients
+M | Which wealthy landowning class dominated the early Republic? | The patricians | The plebeians | The freedmen | The provincials
+M | Which official protected the plebeians and could veto laws? | The tribune | The consul | The censor | The aedile
+M | Which three wars did Rome fight against Carthage? | The Punic Wars | The Servile Wars | The Social Wars | The Macedonian Wars
+M | Which Carthaginian general crossed the Alps to attack Italy? | Hannibal | Hamilcar | Hasdrubal | Mago
+M | Which Roman general finally defeated Hannibal in Africa? | Scipio Africanus | Fabius Maximus | Marcellus | Flamininus
+M | Which Roman crossed the Rubicon and began a civil war? | Julius Caesar | Pompey | Crassus | Sulla
+M | Which title did Octavian take as Rome's first emperor? | Augustus | Caesar only | Imperator only | Princeps only
+M | Which long peace followed Augustus for about two centuries? | The Pax Romana | The Pax Deorum | The Concordia | The Saeculum
+M | Which Roman amphitheater held fifty thousand spectators? | The Colosseum | The Circus Maximus | The Pantheon | The Baths of Caracalla
+M | Which Roman arena hosted chariot races? | The Circus Maximus | The Colosseum | The Forum | The Campus Martius
+H | Which enslaved gladiator led a great revolt against Rome in 73 BC? | Spartacus | Crixus | Vercingetorix | Arminius
+H | Which Gallic chieftain surrendered to Caesar at Alesia? | Vercingetorix | Ambiorix | Arminius | Boudicca
+H | Which British queen led a revolt against Roman rule? | Boudicca | Cartimandua | Livia | Zenobia
+H | Which German leader destroyed three legions in the Teutoburg Forest? | Arminius | Vercingetorix | Alaric | Odoacer
+H | Which Roman set of laws was posted on twelve bronze tablets? | The Twelve Tables | The Justinian Code | The Lex Julia | The Edict of Prices
+H | Which emperor built a wall across northern Britain? | Hadrian | Trajan | Antoninus Pius | Septimius Severus
+H | Which emperor expanded Rome to its greatest extent? | Trajan | Hadrian | Augustus | Marcus Aurelius
+H | Which emperor wrote a book of Stoic reflections? | Marcus Aurelius | Trajan | Nero | Vespasian
+H | Which emperor divided the empire into east and west administration? | Diocletian | Constantine | Theodosius | Valentinian
+H | Which emperor moved the capital to a city on the Bosporus? | Constantine | Diocletian | Justinian | Theodosius
+H | Which emperor made Christianity the empire's official religion in 380? | Theodosius | Constantine | Justinian | Valens
+H | Which Germanic leader deposed the last western Roman emperor in 476? | Odoacer | Alaric | Attila | Theodoric
+H | Which people sacked Rome in 410? | The Visigoths | The Vandals | The Ostrogoths | The Huns
+H | Which people sacked Rome again in 455? | The Vandals | The Visigoths | The Franks | The Lombards
+H | Which leader of the Huns threatened Rome in the fifth century? | Attila | Bleda | Genseric | Alaric
+H | Which Roman roads' most famous example ran south from Rome to Brindisi? | The Appian Way | The Flaminian Way | The Aurelian Way | The Salt Road
+H | Which Roman building has a huge concrete dome with an open eye? | The Pantheon | The Colosseum | The Basilica Julia | The Curia
+H | Which volcanic eruption preserved a Roman town in 79 AD? | The eruption of Vesuvius | The eruption of Etna | The eruption of Stromboli | The eruption of Thera
+H | Which Roman town beside Pompeii was buried by the same eruption? | Herculaneum | Ostia | Capua | Cumae
+H | Which Roman numeral stands for one thousand? | M | D | C | L
+H | Which Roman numeral stands for five hundred? | D | M | C | L
+H | Which Roman numeral stands for fifty? | L | C | D | X
+
+# --- Early Americas and Africa ---
+
+M | Which people are called the mother culture of Mesoamerica? | The Olmec | The Maya | The Aztec | The Zapotec
+M | Which giant carved objects are the Olmec best known for? | Colossal stone heads | Feathered masks | Jade pyramids | Gold discs
+M | Which Mesoamerican people developed a precise calendar and writing? | The Maya | The Aztec | The Inca | The Olmec
+M | Which crop was the staple of Mesoamerican farming? | Maize | Rice | Wheat | Potatoes
+H | Which Andean crop was first domesticated high in the mountains? | The potato | Maize | Cassava | Quinoa only
+H | Which African kingdom on the Nile traded gold and ivory with Egypt? | Kush | Mali | Axum | Benin
+H | Which East African kingdom adopted Christianity in the fourth century? | Axum | Kush | Nubia only | Zimbabwe
+H | Which Saharan trade carried salt south and gold north? | The trans-Saharan trade | The Indian Ocean trade | The Nile trade | The Red Sea trade
+
+# --- Openers ---
+
+E | Which continent was ancient Egypt on? | Africa | Asia | Europe | Oceania
+E | Which sea did ancient Greek ships sail most? | The Mediterranean | The Baltic | The Caspian | The Red Sea
+E | What did ancient Romans use as their language? | Latin | Greek | Etruscan | Aramaic
+E | Which alphabet do English letters descend from? | The Latin alphabet | The Greek alphabet only | Cuneiform | Hieroglyphs
+E | What do we call a system of government ruled by the people? | Democracy | Monarchy | Oligarchy | Theocracy
+E | What do we call a government ruled by a king or queen? | Monarchy | Democracy | Republic | Oligarchy
+E | What do we call a government where citizens elect representatives? | A republic | A monarchy | An empire | A theocracy
+E | What do we call a group of lands ruled by one government? | An empire | A city-state | A colony | A province
+E | Which metal gave its name to the age after stone? | Bronze | Iron | Copper | Gold
+E | Which metal gave its name to the age after bronze? | Iron | Steel | Copper | Silver
+E | What do we call belief in many gods? | Polytheism | Monotheism | Atheism | Animism
+E | What do we call belief in one god? | Monotheism | Polytheism | Pantheism | Deism
+E | What do we call the study of written records of the past? | History | Archaeology | Geology | Mythology
+E | What do we call the time before writing was invented? | Prehistory | Antiquity | The Dark Ages | The Middle Ages
+E | Which building material did Mesopotamians use most, lacking stone? | Mud brick | Marble | Granite | Timber
+M | Which system of watering fields made farming possible in dry lands? | Irrigation | Terracing | Crop rotation | Fallowing
+M | What do we call a person who makes goods by hand as a trade? | An artisan | A merchant | A scribe | A peasant
+M | What do we call exchanging goods without money? | Barter | Credit | Tribute | Tariff
+M | What do we call a payment made by a weaker state to a stronger one? | Tribute | Tax | Tithe | Toll
+M | What do we call the spread of ideas from one culture to another? | Cultural diffusion | Assimilation | Migration | Colonization
+
+E | Which ancient people are credited with the first written laws on a pillar? | The Babylonians | The Greeks | The Romans | The Egyptians
+E | Which Egyptian ruler is the most famous woman pharaoh of the New Kingdom? | Hatshepsut | Cleopatra | Nefertari | Tiye
+E | Which animal did Hannibal famously bring across the Alps? | Elephants | Camels | Horses only | Oxen
+E | Which people invented cuneiform writing? | The Sumerians | The Egyptians | The Greeks | The Chinese
+E | Which large wall did Chinese rulers build to keep out northern raiders? | The Great Wall | Hadrian's Wall | The Long Walls | The Wall of Babylon
+E | Which Greek games were held every four years in honor of Zeus? | The Olympic Games | The Pythian Games | The Isthmian Games | The Nemean Games
+E | Which Greek hero fought at Troy according to Homer? | Achilles | Theseus | Perseus | Jason
+E | Which city did the Greeks besiege for ten years in legend? | Troy | Sparta | Thebes | Corinth
+E | Which Roman leader was stabbed on the Ides of March? | Julius Caesar | Augustus | Nero | Caligula
+E | Which language did ancient Greeks speak? | Greek | Latin | Aramaic | Coptic
+E | Which body of water lay at the center of the Roman world? | The Mediterranean Sea | The Black Sea | The Red Sea | The Atlantic Ocean
+E | Which Egyptian god was often shown with a jackal head in tomb paintings? | Anubis | Osiris | Isis | Ra
+E | Which Egyptian sun god was chief among the gods? | Ra | Anubis | Set | Thoth
+E | Which material did Mesopotamians write on? | Clay tablets | Papyrus | Parchment | Silk
+E | Which structure in Athens was dedicated to the goddess Athena? | The Parthenon | The Colosseum | The Pantheon | The Oracle
+E | Which empire did Alexander the Great defeat? | The Persian Empire | The Roman Empire | The Egyptian Empire | The Chinese Empire
+E | Which Roman soldiers made up the basic unit of the army? | Legionaries | Hoplites | Janissaries | Hussars
+E | Which city was the capital of the Roman Empire? | Rome | Athens | Carthage | Alexandria
+E | Which Chinese teacher's ideas shaped government for two thousand years? | Confucius | Laozi | Sun Tzu | Buddha

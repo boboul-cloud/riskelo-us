@@ -1,0 +1,242 @@
+# Geography — Grade 8 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Eighth grade, the year the history course spends at home: the fifty
+# states and their capitals, the rivers and mountains, the weather that
+# comes with each region, the cities, the parks and what the ground gives.
+
+! id      | geography-8
+! name    | Geography — Grade 8
+! detail  | The United States: states, capitals, landforms, weather and cities.
+! icon    | mappin.and.ellipse
+! tint    | 0.24 0.44 0.72
+! rank    | 16
+! product | com.oulhen.riskelo.us.pack.geography8
+
+
+# --- The nation and its regions ---
+
+E | How many states make up the United States? | Fifty | Forty-eight | Fifty-two | Forty-nine
+E | Which state covers the most square miles? | Alaska | Texas | California | Montana
+E | Which state covers the fewest square miles? | Rhode Island | Delaware | Connecticut | New Jersey
+E | Which state has the largest population? | California | Texas | Florida | New York
+E | Which two states touch no other state? | Alaska and Hawaii | Alaska and Maine | Hawaii and Florida | Maine and Washington
+E | Which ocean borders the East Coast? | The Atlantic | The Pacific | The Arctic | The Gulf of Mexico
+E | Which region includes Maine, Vermont and Massachusetts? | New England | The Mid-Atlantic | The Midwest | The South
+E | Which state joined the Union most recently? | Hawaii | Alaska | Arizona | New Mexico
+E | Which territory did the United States buy from Russia in 1867? | Alaska | Hawaii | The Virgin Islands | Guam
+M | How many states make up New England? | Six | Four | Five | Eight
+M | Which region is called the Corn Belt? | The Midwest | The South | The Southwest | The Northwest
+M | Which group of states is known as the Sun Belt? | The South and Southwest | The Northeast | The Upper Midwest | The Pacific Northwest
+M | Which region lost factories and gained the name Rust Belt? | The Great Lakes and Ohio valley | The Deep South | The Southwest | New England
+M | Which belt of southern states is named for its churches? | The Bible Belt | The Cotton Belt | The Black Belt | The Sun Belt
+M | Which four states touch at the corner monument out west? | Utah, Colorado, Arizona, New Mexico | Idaho, Montana, Wyoming, Utah | Kansas, Missouri, Iowa, Nebraska | Kentucky, Tennessee, Virginia, Ohio
+M | Which state ratified the Constitution ahead of all the others? | Delaware | Pennsylvania | Virginia | Massachusetts
+M | Which district holds the national capital? | The District of Columbia | Prince George's County | Arlington County | The Federal Territory
+H | Which state's nickname is said to come from George Washington? | New York | California | Texas | Illinois
+H | Which state took its nickname from a gold rush? | California | Colorado | Nevada | Alaska
+H | Which state flies a single star on its flag and in its nickname? | Texas | Oklahoma | Arizona | New Mexico
+H | Which state is nicknamed the Sunshine State? | Florida | California | Arizona | Hawaii
+H | Which state calls itself the Land of Lincoln? | Illinois | Kentucky | Indiana | Ohio
+H | Which state besides Virginia, Pennsylvania and Massachusetts is a commonwealth? | Kentucky | Ohio | Maryland | Delaware
+H | Which line historically divided free states from slave states? | The Mason-Dixon Line | The 49th parallel | The Continental Divide | The Ohio boundary
+H | Which purchase of 1803 doubled the size of the country? | The Louisiana Purchase | The Gadsden Purchase | The Alaska Purchase | The Florida cession
+
+# --- States and capitals ---
+
+E | Which city is the capital of the United States? | Washington | New York | Philadelphia | Boston
+E | Which city is the capital of California? | Sacramento | Los Angeles | San Francisco | San Diego
+E | Which city is the capital of Texas? | Austin | Houston | Dallas | San Antonio
+E | Which city is the capital of New York State? | Albany | New York City | Buffalo | Rochester
+E | Which city is the capital of Florida? | Tallahassee | Miami | Orlando | Jacksonville
+E | Which city is the capital of Illinois? | Springfield | Chicago | Peoria | Rockford
+E | Which city is the capital of Pennsylvania? | Harrisburg | Philadelphia | Pittsburgh | Erie
+E | Which city is the capital of Ohio? | Columbus | Cleveland | Cincinnati | Toledo
+E | Which city is the capital of Georgia? | Atlanta | Savannah | Augusta | Macon
+E | Which city is the capital of Colorado? | Denver | Boulder | Colorado Springs | Aurora
+E | Which city is the capital of Arizona? | Phoenix | Tucson | Mesa | Flagstaff
+E | Which city is the capital of Massachusetts? | Boston | Worcester | Springfield | Cambridge
+E | Which city is the capital of Tennessee? | Nashville | Memphis | Knoxville | Chattanooga
+E | Which city is the capital of Hawaii? | Honolulu | Hilo | Kailua | Lahaina
+E | Which city is the capital of Indiana? | Indianapolis | Fort Wayne | Evansville | South Bend
+M | Which city is the capital of Michigan? | Lansing | Detroit | Grand Rapids | Ann Arbor
+M | Which city is the capital of Washington State? | Olympia | Seattle | Spokane | Tacoma
+M | Which city is the capital of Oregon? | Salem | Portland | Eugene | Bend
+M | Which city is the capital of Nevada? | Carson City | Las Vegas | Reno | Henderson
+M | Which city is the capital of Louisiana? | Baton Rouge | New Orleans | Shreveport | Lafayette
+M | Which city is the capital of Missouri? | Jefferson City | St. Louis | Kansas City | Columbia
+M | Which city is the capital of Kentucky? | Frankfort | Louisville | Lexington | Bowling Green
+M | Which city is the capital of Alaska? | Juneau | Anchorage | Fairbanks | Nome
+M | Which city is the capital of Minnesota? | Saint Paul | Minneapolis | Duluth | Rochester
+M | Which city is the capital of Wisconsin? | Madison | Milwaukee | Green Bay | Kenosha
+M | Which city is the capital of Virginia? | Richmond | Virginia Beach | Norfolk | Alexandria
+M | Which city is the capital of North Carolina? | Raleigh | Charlotte | Greensboro | Durham
+M | Which city is the capital of Maryland? | Annapolis | Baltimore | Rockville | Frederick
+H | Which city is the capital of New Jersey? | Trenton | Newark | Jersey City | Atlantic City
+H | Which city is the capital of Connecticut? | Hartford | New Haven | Bridgeport | Stamford
+H | Which city is the capital of Maine? | Augusta | Portland | Bangor | Lewiston
+H | Which city is the capital of Vermont? | Montpelier | Burlington | Rutland | Stowe
+H | Which city is the capital of New Hampshire? | Concord | Manchester | Nashua | Portsmouth
+H | Which city is the capital of Delaware? | Dover | Wilmington | Newark | Rehoboth
+H | Which city is the capital of Alabama? | Montgomery | Birmingham | Mobile | Huntsville
+H | Which city is the capital of South Carolina? | Columbia | Charleston | Greenville | Myrtle Beach
+H | Which city is the capital of Oklahoma? | Oklahoma City | Tulsa | Norman | Lawton
+H | Which city is the capital of Utah? | Salt Lake City | Provo | Ogden | St. George
+H | Which city is the capital of New Mexico? | Santa Fe | Albuquerque | Las Cruces | Roswell
+
+# --- Rivers and lakes ---
+
+E | Which is the longest river system in the United States? | The Mississippi and Missouri | The Colorado and Green | The Ohio and Tennessee | The Columbia and Snake
+E | Which river runs through the Grand Canyon? | The Colorado | The Rio Grande | The Snake | The Gila
+E | Which of the Great Lakes is the largest? | Lake Superior | Lake Michigan | Lake Huron | Lake Erie
+E | Which of the Great Lakes touches no Canadian shore? | Lake Michigan | Lake Erie | Lake Ontario | Lake Huron
+M | Which river joins the Mississippi at St. Louis? | The Missouri | The Ohio | The Arkansas | The Illinois
+M | Which river meets the Mississippi at the southern tip of Illinois? | The Ohio | The Missouri | The Wabash | The Tennessee
+M | Which river forms the border between Oregon and Washington? | The Columbia | The Snake | The Willamette | The Klamath
+M | Which river flows through Nashville and Chattanooga? | The Tennessee | The Cumberland | The Ohio | The Green
+M | Which two rivers meet at Pittsburgh to form the Ohio? | The Allegheny and Monongahela | The Susquehanna and Juniata | The Delaware and Lehigh | The Genesee and Chemung
+M | Which river flows past Washington into Chesapeake Bay? | The Potomac | The James | The Susquehanna | The Rappahannock
+M | Which bay between Maryland and Virginia is the country's largest estuary? | Chesapeake Bay | Delaware Bay | San Francisco Bay | Mobile Bay
+M | Which deep lake straddles the California and Nevada line? | Lake Tahoe | Mono Lake | Pyramid Lake | Klamath Lake
+M | Which Utah lake is too salty for fish? | The Great Salt Lake | Utah Lake | Bear Lake | Sevier Lake
+M | Which reservoir was formed by Hoover Dam? | Lake Mead | Lake Powell | Lake Havasu | Lake Mohave
+M | Which reservoir was formed by Glen Canyon Dam? | Lake Powell | Lake Mead | Lake Havasu | Lake Shasta
+M | Which river reaches the Gulf through a bird-foot delta? | The Mississippi | The Rio Grande | The Sabine | The Brazos
+H | Which canal joined the Hudson River to Lake Erie in 1825? | The Erie Canal | The Chesapeake and Ohio | The Illinois and Michigan | The Champlain Canal
+H | Which seaway lets ocean ships reach the Great Lakes? | The Saint Lawrence Seaway | The Erie corridor | The Welland cut | The Hudson passage
+H | Which canal carries ships around Niagara Falls? | The Welland Canal | The Erie Canal | The Trent Canal | The Rideau Canal
+H | Which Nevada river vanishes into the sands of the Great Basin? | The Humboldt | The Truckee | The Carson | The Owens
+H | Which river of the Northwest was dammed at Grand Coulee? | The Columbia | The Snake | The Fraser | The Yakima
+H | Which North Carolina barrier islands shelter Pamlico Sound? | The Outer Banks | The Sea Islands | The Barrier Cays | The Cape Fear chain
+H | Which underground aquifer waters the Great Plains? | The Ogallala Aquifer | The Floridan Aquifer | The Edwards Aquifer | The Snake Plain Aquifer
+H | Which Florida wetland is nicknamed the river of grass? | The Everglades | The Big Cypress swamp | The Okefenokee | The Green Swamp
+
+# --- Mountains and landforms ---
+
+E | Which is the highest mountain in the United States? | Denali | Mount Whitney | Mount Rainier | Mount Elbert
+E | Which mountain range runs through Colorado and Wyoming? | The Rockies | The Appalachians | The Cascades | The Ozarks
+E | Which mountain range rises along California's eastern edge? | The Sierra Nevada | The Cascades | The Coast Ranges | The Klamath Mountains
+M | Which is the highest peak in the lower forty-eight states? | Mount Whitney | Mount Elbert | Mount Rainier | Mount Shasta
+M | Which Cascade volcano blew its top off in May 1980? | Mount St. Helens | Mount Rainier | Mount Hood | Mount Baker
+M | Which volcano is the highest peak in Washington State? | Mount Rainier | Mount Adams | Mount Baker | Glacier Peak
+M | Which Appalachian range runs through Virginia and North Carolina? | The Blue Ridge | The Green Mountains | The Berkshires | The Catskills
+M | Which mountains rise in Vermont? | The Green Mountains | The White Mountains | The Berkshires | The Adirondacks
+M | Which mountains rise in New Hampshire? | The White Mountains | The Green Mountains | The Taconics | The Litchfield Hills
+M | Which New York range lies north of the Mohawk valley? | The Adirondacks | The Catskills | The Poconos | The Alleghenies
+M | Which highland region covers Missouri and Arkansas? | The Ozarks | The Ouachitas | The Cumberland Plateau | The Driftless Area
+M | Which valley holds the lowest point in North America? | Death Valley | The Salton Sink | The Imperial Valley | The Coachella Valley
+M | Which flat land runs along the Atlantic and Gulf shores? | The Coastal Plain | The Piedmont | The Great Valley | The Fall Line belt
+M | Which rolling upland lies between the Coastal Plain and the Blue Ridge? | The Piedmont | The Great Valley | The Cumberland Plateau | The Tidewater
+M | Which divide separates Atlantic drainage from Pacific drainage? | The Continental Divide | The Texas Divide | The Mississippi crest | The Rocky rim
+H | Which line marks where rivers drop from the Piedmont to the plain? | The Fall Line | The Mason-Dixon Line | The Cumberland Gap | The Tidewater edge
+H | Which pass through the Appalachians opened Kentucky to settlers? | The Cumberland Gap | The Delaware Water Gap | South Pass | Donner Pass
+H | Which Wyoming pass carried wagon trains over the Rockies? | South Pass | Donner Pass | Raton Pass | Independence Pass
+H | Which Sierra pass is remembered for a trapped wagon party? | Donner Pass | Tioga Pass | Sonora Pass | Echo Summit
+H | Which broad dry grassland covers the middle of the country? | The Great Plains | The Central Lowland | The Coastal Plain | The Columbia Plateau
+H | Which plateau of layered rock holds Utah's canyon parks? | The Colorado Plateau | The Columbia Plateau | The Edwards Plateau | The Ozark Plateau
+H | Which lava plateau covers eastern Washington and Oregon? | The Columbia Plateau | The Colorado Plateau | The Snake River Plain | The Modoc Plateau
+H | Which Wisconsin region escaped the last glaciers? | The Driftless Area | The Kettle Moraine | The Door Peninsula | The Central Sands
+H | Which chain of Alaskan volcanic islands curves toward Asia? | The Aleutians | The Pribilofs | The Kodiak group | The Kenai chain
+H | Which Hawaiian volcano is the world's largest by volume? | Mauna Loa | Mauna Kea | Kilauea | Haleakala
+H | Which Hawaiian volcano has erupted almost without pause since 1983? | Kilauea | Mauna Loa | Mauna Kea | Hualalai
+
+# --- Climate and hazards ---
+
+E | Which state is famous for hurricanes striking its long peninsula? | Florida | Ohio | Idaho | Vermont
+E | Which region is called Tornado Alley? | The central Great Plains | The Pacific Northwest | New England | The Florida Gulf coast
+M | Which California fault threatens the state with earthquakes? | The San Andreas Fault | The Hayward Fault | The Wasatch Fault | The Ramapo Fault
+M | Which Midwestern fault zone shook hard in 1811 and 1812? | The New Madrid zone | The San Andreas zone | The Wasatch zone | The Meers zone
+M | Which 1930s disaster stripped topsoil from the southern Plains? | The Dust Bowl | The Great Flood | The Big Blow | The Long Drought
+M | Which 2005 hurricane flooded New Orleans? | Katrina | Andrew | Sandy | Rita
+M | Which 2012 storm devastated the New Jersey shore? | Sandy | Katrina | Irene | Michael
+M | Which state records the most tornadoes in a typical year? | Texas | Oregon | Maine | Nevada
+M | Which climate covers most of the Southwest? | Arid and semiarid | Humid continental | Marine west coast | Humid subtropical
+M | Which climate gives the Southeast hot muggy summers? | Humid subtropical | Mediterranean | Semiarid | Subarctic
+M | Which climate gives Seattle its mild wet winters? | Marine west coast | Mediterranean | Humid continental | Subarctic
+M | Which climate gives coastal California dry summers and wet winters? | Mediterranean | Marine west coast | Humid subtropical | Semiarid
+M | Which state has the coldest winters on average? | Alaska | Minnesota | Maine | Montana
+H | Which Great Lakes effect buries downwind cities in snow? | Lake effect snow | Alberta clipper snow | Orographic squalls | Nor'easter bands
+H | Which storms sweep the Northeast with coastal snow and wind? | Nor'easters | Chinooks | Derechos | Haboobs
+H | Which warm dry wind rushes down the eastern Rockies in winter? | The chinook | The mistral | The sirocco | The Santa Ana
+H | Which hot dry wind fans wildfires in Southern California? | The Santa Ana winds | The chinook winds | The Diablo winds | The Sundowner winds
+H | Which scale rates tornado damage? | The Enhanced Fujita scale | The Saffir-Simpson scale | The Beaufort scale | The Mercalli scale
+H | Which scale rates hurricane wind strength? | The Saffir-Simpson scale | The Enhanced Fujita scale | The Beaufort scale | The Torro scale
+H | Which state records the most lightning strikes each year? | Florida | Alaska | Maine | Oregon
+
+# --- Cities and people ---
+
+E | Which is the largest city in the United States? | New York | Los Angeles | Chicago | Houston
+E | Which city is nicknamed the Windy City? | Chicago | Cleveland | Buffalo | Detroit
+E | Which city is nicknamed the Big Apple? | New York | Boston | Philadelphia | Baltimore
+E | Which California city is home to Hollywood? | Los Angeles | San Francisco | San Diego | Sacramento
+E | Which Nevada city is famous for its desert casinos? | Las Vegas | Reno | Carson City | Henderson
+E | Which is the second largest city in the United States? | Los Angeles | Chicago | Houston | Phoenix
+E | Which Texas city is the largest? | Houston | Dallas | San Antonio | Austin
+E | Which city is known as Motor City? | Detroit | Cleveland | Flint | Toledo
+E | Which Louisiana city is famous for Mardi Gras? | New Orleans | Baton Rouge | Lafayette | Shreveport
+M | Which city sits a mile above sea level and says so? | Denver | Salt Lake City | Albuquerque | Cheyenne
+M | Which city is called the Gateway to the West for its arch? | St. Louis | Kansas City | Omaha | Memphis
+M | Which rainy Northwest city is called the Emerald City? | Seattle | Portland | Vancouver | Eugene
+M | Which city is nicknamed Beantown? | Boston | Providence | Hartford | Portland
+M | Which city is called the City of Brotherly Love? | Philadelphia | Baltimore | Pittsburgh | Wilmington
+M | Which city hosts the Kentucky Derby? | Louisville | Lexington | Frankfort | Bowling Green
+M | Which city anchors Silicon Valley? | San Jose | Sacramento | Fresno | Oakland
+M | Which Florida city is the largest by population? | Jacksonville | Miami | Tampa | Orlando
+M | Which city grew fastest in the Southwest desert after 1950? | Phoenix | Santa Fe | Tucson | El Paso
+M | Which two cities are called the Twin Cities? | Minneapolis and Saint Paul | Dallas and Fort Worth | Kansas City and Omaha | Tampa and St. Petersburg
+M | Which Texas pair is called the Metroplex? | Dallas and Fort Worth | Houston and Galveston | Austin and San Antonio | El Paso and Lubbock
+H | Which movement carried millions of Black Americans north after 1915? | The Great Migration | The Trail of Tears | The Dust Bowl exodus | The Second Middle Passage
+H | Which 1930s migration carried Plains farmers to California? | The Dust Bowl exodus | The Great Migration | The Gold Rush | The Homestead wave
+H | Which island in New York harbor processed millions of immigrants? | Ellis Island | Liberty Island | Governors Island | Angel Island
+H | Which bay island screened immigrants arriving from across the Pacific? | Angel Island | Alcatraz | Treasure Island | Yerba Buena
+H | Which term names the built-up stretch from Boston to Washington? | The Northeast megalopolis | The Piedmont crescent | The Atlantic seaboard belt | The Acela corridor
+H | Which count is taken every ten years to reapportion the House? | The decennial census | The annual survey | The economic census | The agricultural census
+H | Which western state has grown fastest in percentage terms? | Nevada | Ohio | West Virginia | Vermont
+H | Which state has the smallest population? | Wyoming | Vermont | Alaska | North Dakota
+H | Which large city is the most densely populated in the country? | New York | Los Angeles | Chicago | Houston
+H | Which Alaskan city is the state's largest? | Anchorage | Juneau | Fairbanks | Ketchikan
+
+# --- Parks, landmarks and resources ---
+
+E | Which was the first national park in the world? | Yellowstone | Yosemite | Sequoia | Acadia
+E | Which California national park is famous for granite cliffs? | Yosemite | Joshua Tree | Redwood | Pinnacles
+E | Which statue stands in New York harbor? | The Statue of Liberty | The Colossus of Rhodes | The Christ of the Andes | The Goddess of Democracy
+E | Which monument carries four presidents' faces in South Dakota? | Mount Rushmore | Crazy Horse Memorial | Stone Mountain | The Badlands wall
+E | Which bridge spans the entrance to San Francisco Bay? | The Golden Gate Bridge | The Bay Bridge | The Brooklyn Bridge | The Verrazzano Bridge
+E | Which Yellowstone geyser erupts on a rough schedule? | Old Faithful | Steamboat Geyser | Grand Geyser | Castle Geyser
+E | Which Arizona national park holds a mile-deep gorge? | Grand Canyon | Petrified Forest | Saguaro | Canyon de Chelly
+E | Which state produces the most oil? | Texas | Alaska | California | Oklahoma
+E | Which state produces the most corn? | Iowa | Kansas | Texas | Ohio
+E | Which state produces the most potatoes? | Idaho | Maine | Wisconsin | Colorado
+M | Which Utah park is famous for its stone arches? | Arches | Zion | Bryce Canyon | Canyonlands
+M | Which Utah park is famous for orange spires called hoodoos? | Bryce Canyon | Arches | Capitol Reef | Zion
+M | Which national park straddles Tennessee and North Carolina? | Great Smoky Mountains | Shenandoah | Congaree | Mammoth Cave
+M | Which Kentucky park protects the longest cave system on Earth? | Mammoth Cave | Carlsbad Caverns | Wind Cave | Jewel Cave
+M | Which Washington park surrounds a glaciated volcano? | Mount Rainier | North Cascades | Olympic | Crater Lake
+M | Which Oregon park holds the deepest lake in the country? | Crater Lake | Klamath | Newberry | Diamond Lake
+M | Which California park protects the tallest trees on Earth? | Redwood | Sequoia | Yosemite | Big Basin
+M | Which California park protects the largest trees by volume? | Sequoia | Redwood | Kings Canyon | Muir Woods
+M | Which California desert park is named for a spiky plant? | Joshua Tree | Saguaro | Organ Pipe | Death Valley
+M | Which Wyoming park is famous for a jagged mountain front? | Grand Teton | Yellowstone | Wind River | Bighorn
+M | Which dam on the Colorado created Lake Mead? | Hoover Dam | Glen Canyon Dam | Davis Dam | Parker Dam
+M | Which state produces the most dairy? | California | Wisconsin | New York | Idaho
+M | Which state produces the most oranges by volume? | Florida | California | Texas | Arizona
+H | Which national park draws the most visitors each year? | Great Smoky Mountains | Grand Canyon | Yosemite | Zion
+H | Which state holds the most national parks? | California | Alaska | Utah | Colorado
+H | Which long trail runs from Georgia to Maine? | The Appalachian Trail | The Pacific Crest Trail | The Continental Divide Trail | The Long Trail
+H | Which long trail runs from Mexico to Canada along the West Coast? | The Pacific Crest Trail | The Appalachian Trail | The John Muir Trail | The Oregon Trail
+H | Which naturalist's writing helped create Yosemite National Park? | John Muir | Henry Thoreau | Aldo Leopold | Gifford Pinchot
+H | Which agency manages the national parks? | The National Park Service | The Forest Service | The Bureau of Land Management | The Fish and Wildlife Service
+H | Which state leads the country in wind power generation? | Texas | Vermont | Louisiana | Alabama
+H | Which state generates the most hydroelectric power? | Washington | Nevada | Florida | Kansas
+H | Which Appalachian resource fueled the country's early industry? | Coal | Copper | Bauxite | Nickel
+H | Which northern range supplied iron ore to Great Lakes steel mills? | The Mesabi Range | The Cuyuna Range | The Marquette Range | The Gogebic Range
+H | Which 1848 discovery drew crowds to California? | Gold at Sutter's Mill | Silver at the Comstock | Oil at Spindletop | Copper at Bisbee
+H | Which 1901 Texas gusher opened the American oil age? | Spindletop | Signal Hill | Teapot Dome | Prudhoe Bay
+H | Which 1859 Nevada strike produced a fortune in silver? | The Comstock Lode | The Mother Lode | The Cripple Creek vein | The Tonopah strike

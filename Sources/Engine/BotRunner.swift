@@ -1,13 +1,13 @@
 //
 //  BotRunner.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Le tour de la machine, joué un geste à la fois.
+//  The machine's turn, played one gesture at a time.
 //
-//  Un geste par appel, et non tout le tour d'un bloc : l'interface a besoin
-//  de respirer entre deux coups pour qu'on voie ce qui se passe, et la
-//  simulation, elle, n'a qu'à boucler. Le même code sert aux deux — c'est la
-//  seule façon d'être sûr que ce qu'on simule est ce qu'on joue.
+//  One gesture per call, and not the whole turn in a block: the interface
+//  needs to breathe between two moves so you can see what is happening, while
+//  the simulation only has to loop. The same code serves both — it is the
+//  only way to be sure that what we simulate is what we play.
 //
 
 import Foundation
@@ -19,15 +19,15 @@ enum BotRunner {
         case placed(TerritoryID)
         case declared(from: TerritoryID, to: TerritoryID)
         case answered(correct: Bool)
-        /// Face à face : la première des deux réponses. Elle ne tranche rien,
-        /// elle attend l'autre.
+        /// Showdown: the first of the two answers. It settles nothing, it
+        /// waits for the other.
         case pending
         case occupied(Int)
         case fortified
         case endedTurn
-        /// Un humain doit répondre : la machine s'arrête et rend la main.
+        /// A human has to answer: the machine stops and hands back control.
         case waitingForHuman
-        /// Plus rien à faire (partie finie, ou ce n'est pas son tour).
+        /// Nothing left to do (game over, or not its turn).
         case idle
     }
 
@@ -35,19 +35,20 @@ enum BotRunner {
     static func step(_ g: inout GameState, boldness: Double = 1.0) -> Step {
         guard !g.isOver else { return .idle }
 
-        // Un duel en cours prime sur tout : quelqu'un doit répondre.
+        // A duel in progress takes priority over everything: somebody has to
+        // answer.
         if let a = g.assault, let duel = a.current {
-            // En face à face, ce n'est plus forcément le défenseur : les deux
-            // répondent, chacun son tour, et le moteur dit lequel.
-            guard let qui = g.quiRepond,
-                  let repondeur = g.players.first(where: { $0.id == qui }) else { return .idle }
-            guard case let .machine(niveau, style) = repondeur.kind else { return .waitingForHuman }
-            if g.peutRelancer, qui == a.defender,
-               Bot.relance(g, duel: duel, level: niveau, style: style, joueur: qui) {
-                g.relancer()
+            // In a showdown it is no longer necessarily the defender: both
+            // answer, each in turn, and the engine says which.
+            guard let who = g.whoAnswers,
+                  let responder = g.players.first(where: { $0.id == who }) else { return .idle }
+            guard case let .machine(level, style) = responder.kind else { return .waitingForHuman }
+            if g.canRaise, who == a.defender,
+               Bot.shouldRaise(g, duel: duel, level: level, style: style, player: who) {
+                g.raise()
             }
-            let answer = Bot.answer(to: duel, level: niveau, rules: g.rules,
-                                     joueur: qui, using: &g.rng)
+            let answer = Bot.answer(to: duel, level: level, rules: g.rules,
+                                    player: who, using: &g.rng)
             guard let report = g.answer(answer) else { return .pending }
             return .answered(correct: report.correct)
         }
@@ -59,14 +60,13 @@ enum BotRunner {
 
         switch g.phase {
         case .reinforcement(let remaining):
-            // Une combinaison en main part tout de suite : le barème monte
-            // avec les échanges de la partie, garder ses cartes ne les fait
-            // pas prendre de la valeur — cela laisse seulement la valeur monter
-            // pour l'adversaire.
+            // A set in hand goes out at once: the scale climbs with the
+            // game's exchanges, so holding cards does not make them gain
+            // value — it only lets the value climb for the opponent.
             if g.rules.territoryCards,
-               let trio = Deck.premiereCombinaison(dans: g.hand(of: g.currentPlayer.id)) {
-                let valeur = g.prochainEchange
-                if g.exchange(trio.map(\.id)) { return .exchanged(valeur) }
+               let trio = Deck.firstSet(in: g.hand(of: g.currentPlayer.id)) {
+                let value = g.nextExchangeValue
+                if g.exchange(trio.map(\.id)) { return .exchanged(value) }
             }
             guard remaining > 0 else { g.advance(); return .idle }
             guard let id = Bot.reinforcement(g) else { g.advance(); return .idle }
@@ -74,19 +74,19 @@ enum BotRunner {
             return .placed(id)
 
         case .attack:
-            // Le tirage est sorti de la partie, puis rendu aussitôt : on ne
-            // peut pas passer `g` par valeur et `&g.rng` dans le même appel.
-            // Il doit être rendu AVANT `declareAssault`, qui s'en sert à son
-            // tour pour tirer la question — le confier à un `defer` écraserait
-            // l'avancement que celui-ci vient de faire, et les tirages
-            // suivants se répéteraient.
+            // The generator is taken out of the game, then handed straight
+            // back: you cannot pass `g` by value and `&g.rng` in the same
+            // call. It has to be handed back BEFORE `declareAssault`, which
+            // uses it in turn to draw the question — leaving it to a `defer`
+            // would overwrite the progress that call had just made, and the
+            // following draws would repeat.
             var rng = g.rng
-            // À défaut d'un assaut avantageux, un assaut à forces égales —
-            // sans quoi deux prudents ne se rencontrent jamais.
-            let choix = Bot.assault(g, boldness: boldness, using: &rng)
+            // Failing an advantageous assault, an assault at even strength —
+            // otherwise two cautious machines never meet.
+            let choice = Bot.assault(g, boldness: boldness, using: &rng)
                 ?? Bot.assault(g, boldness: boldness + 1, using: &rng)
             g.rng = rng
-            guard let plan = choix else {
+            guard let plan = choice else {
                 g.advance()
                 return .idle
             }
@@ -115,8 +115,8 @@ enum BotRunner {
         }
     }
 
-    /// Déroule le tour complet de la machine. Rend la main dès qu'un humain
-    /// doit répondre, ou quand le tour est passé.
+    /// Runs the machine's full turn. Hands back control as soon as a human
+    /// has to answer, or when the turn has passed.
     @discardableResult
     static func runTurn(_ g: inout GameState, boldness: Double = 1.0, limit: Int = 4000) -> Step {
         let startedTurn = g.turn

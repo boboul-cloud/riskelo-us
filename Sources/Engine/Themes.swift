@@ -1,40 +1,40 @@
 //
 //  Themes.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Le thème d'une question, et la liste de ceux que l'appareil connaît.
+//  A question's theme, and the list of the ones this device knows.
 //
-//  C'était un enum à six cas, et le nom, l'icône et la couleur de chacun
-//  étaient écrits dans trois `switch` répartis dans le code. Un enum ne
-//  grandit pas après la compilation : tant qu'il en était un, ajouter un
-//  thème voulait dire rouvrir quatre fichiers et recompiler le jeu.
+//  It used to be an enum with six cases, and each one's name, icon and color
+//  were written across three `switch` statements scattered through the code.
+//  An enum does not grow after compilation: while it stayed one, adding a
+//  theme meant reopening four files and rebuilding the game.
 //
-//  Un thème est désormais une **valeur qui se déclare**, en tête de son
-//  propre fichier de questions. Ajouter un thème, c'est déposer un fichier.
-//  C'est ce qui rend possible un jour un thème vendu à part — mais le gain
-//  est déjà là sans rien vendre : le nom d'un thème se corrige là où sont ses
-//  questions, et non trois fichiers plus loin.
+//  A theme is now a **value that declares itself**, at the head of its own
+//  question file. Adding a theme means dropping in a file. That is what makes
+//  a theme sold separately possible one day — but the gain is already there
+//  without selling anything: a theme's name is corrected where its questions
+//  are, not three files away.
 //
-//  Ce que le thème garde en propre est réduit à son identifiant. Le nom, la
-//  couleur, l'icône ne sont pas dans la partie : ils sont dans le catalogue,
-//  et la partie n'emporte que le nom court. Une partie enregistrée reste donc
-//  aussi petite qu'avant, et un thème renommé se relit sans conversion.
+//  What the theme keeps of its own is reduced to its identifier. The name,
+//  the color, the icon are not in the game: they are in the catalogue, and
+//  the game carries only the short name. A saved game therefore stays as
+//  small as before, and a renamed theme reads back without conversion.
 //
 
 import Foundation
 
-// MARK: - Le thème d'une question
+// MARK: - A question's theme
 
-/// Le thème, réduit à son identifiant — « histoire », « histoire-4e ».
+/// The theme, reduced to its identifier — "history", "history-8".
 ///
-/// Il s'encode comme un simple texte, exactement comme le faisait l'enum à
-/// valeur texte qu'il remplace : les parties enregistrées se relisent, et la
-/// forme des messages du réseau ne bouge pas d'un octet.
+/// It encodes as plain text, exactly as the string-valued enum it replaces
+/// did: saved games read back, and the shape of network messages does not
+/// move by a single byte.
 ///
-/// Il gagne au passage de ne plus jamais refuser une valeur qu'il ne connaît
-/// pas. L'enum, lui, jetait une erreur sur un thème inconnu — et comme il
-/// était au milieu de l'état de la partie, c'est la partie entière qui
-/// devenait illisible, en silence.
+/// It gains along the way that it never again refuses a value it does not
+/// know. The enum threw an error on an unknown theme — and since it sat in
+/// the middle of the game state, it was the whole game that became
+/// unreadable, in silence.
 struct Category: Hashable, Identifiable, Codable {
 
     let id: String
@@ -50,93 +50,91 @@ struct Category: Hashable, Identifiable, Codable {
         try c.encode(id)
     }
 
-    /// Le nom lisible. À défaut de catalogue — un thème reçu d'un appareil qui
-    /// en sait plus — l'identifiant lui-même : illisible, mais jamais vide.
-    var label: String { Themes.connu(self)?.nom ?? id }
+    /// The readable name. Failing a catalogue entry — a theme received from a
+    /// device that knows more — the identifier itself: unreadable, but never
+    /// empty.
+    var label: String { Themes.known(self)?.name ?? id }
 
-    /// Le nom précédé de « de », élidé quand il le faut : « de Géographie »
-    /// mais « d'Histoire ». Le français élide devant une voyelle, et devant
-    /// l'h muet d'« histoire » — une règle qu'aucun calcul ne devine, et que
-    /// le thème déclare donc lui-même.
-    var apresDe: String { Themes.connu(self)?.de ?? "de \(label)" }
+    /// The name as it appears in front of the word "question": "History
+    /// question", "Science question". English needs no article here, where
+    /// French had to declare its own elision.
+    var asQuestion: String { "\(label) question" }
 
-    /// Le nom du camembert, pour l'œil : la vue y accroche sa couleur.
-    var symbol: String { Themes.connu(self)?.icone ?? "questionmark.circle" }
+    /// The pie-slice name, for the eye: the view hangs its color on it.
+    var symbol: String { Themes.known(self)?.icon ?? "questionmark.circle" }
 
-    /// Sa couleur, en trois valeurs de 0 à 1. Le moteur ne connaît pas
-    /// SwiftUI, et n'a pas à le connaître pour porter une teinte.
-    var teinte: Theme.Teinte { Themes.connu(self)?.teinte ?? Theme.Teinte(r: 0.5, v: 0.5, b: 0.5) }
+    /// Its color, as three values from 0 to 1. The engine does not know
+    /// SwiftUI, and does not need to in order to carry a hue.
+    var tint: Theme.Tint { Themes.known(self)?.tint ?? Theme.Tint(r: 0.5, g: 0.5, b: 0.5) }
 
-    /// L'article qui l'ouvre, s'il se vend.
-    var produit: String? { Themes.connu(self)?.produit }
+    /// The item that unlocks it, if it is for sale.
+    var product: String? { Themes.known(self)?.product }
 }
 
-// MARK: - Ce qu'un thème déclare
+// MARK: - What a theme declares
 
-/// La carte d'identité d'un thème, lue en tête de son fichier de questions.
+/// A theme's identity card, read at the head of its question file.
 struct Theme: Hashable, Identifiable, Codable {
 
-    /// Une couleur, hors de toute bibliothèque d'affichage.
-    struct Teinte: Hashable, Codable {
-        let r: Double, v: Double, b: Double
+    /// A color, outside any display library.
+    struct Tint: Hashable, Codable {
+        let r: Double, g: Double, b: Double
     }
 
     let id: String
-    let nom: String
-    /// La forme élidée : « d'Histoire », « de Géographie ».
-    let de: String
-    let icone: String
-    let teinte: Teinte
-    /// Une phrase, pour la page des packs. Vide pour les thèmes du jeu : on
-    /// n'explique pas « Histoire », on explique « Histoire — 3e ».
+    let name: String
+    let icon: String
+    let tint: Tint
+    /// One sentence, for the packs page. Empty for the themes that ship with
+    /// the game: you do not explain "History", you explain "History — 8th".
     let detail: String
-    /// L'article de l'App Store qui l'ouvre.
+    /// The App Store item that unlocks it.
     ///
-    /// Absent, le thème est dans le jeu et appartient à tout le monde. Présent,
-    /// il faut l'avoir acheté pour le **choisir** — mais son fichier est sur
-    /// tous les appareils, ce qui permet à celui qui rejoint une table de jouer
-    /// le pack de l'hôte sans l'avoir acheté.
-    let produit: String?
-    /// Sa place dans la grille des thèmes. Deux thèmes de même rang se
-    /// départagent par leur identifiant : l'ordre affiché ne doit jamais
-    /// dépendre de l'ordre dans lequel le système a rendu les fichiers.
-    let rang: Int
+    /// Absent, the theme is in the game and belongs to everyone. Present, you
+    /// have to own it to **choose** it — but its file is on every device,
+    /// which lets someone joining a table play the host's pack without having
+    /// bought it.
+    let product: String?
+    /// Its place in the grid of themes. Two themes of the same rank are
+    /// separated by their identifier: the displayed order must never depend
+    /// on the order in which the system happened to return the files.
+    let rank: Int
 
     var category: Category { Category(id) }
 }
 
-// MARK: - Le catalogue
+// MARK: - The catalogue
 
-/// Les thèmes que cet appareil connaît.
+/// The themes this device knows.
 ///
-/// Construit une fois, à la première demande, en lisant les fichiers du
-/// paquet. Il ne change pas ensuite : un thème qui apparaîtrait au milieu
-/// d'une partie changerait le tirage sous les pieds des joueurs.
+/// Built once, on first request, by reading the files in the bundle. It does
+/// not change afterwards: a theme appearing in the middle of a game would
+/// shift the draw under the players' feet.
 ///
-/// Tous les thèmes livrés sont présents sur tous les appareils d'une même
-/// version — c'est ce qui permet à deux appareils de tirer la même question
-/// sans jamais s'envoyer une banque. Le jour où un thème se vendra, ce sera
-/// le **choix** du thème qui sera réservé à l'acheteur, pas sa présence :
-/// celui qui rejoint pourra jouer le thème de l'hôte sans l'avoir acheté.
+/// Every theme that ships is present on every device of the same version —
+/// that is what lets two devices draw the same question without ever sending
+/// each other a bank. The day a theme is sold, it will be the **choice** of
+/// the theme that is reserved to the buyer, not its presence: whoever joins
+/// will be able to play the host's theme without having bought it.
 enum Themes {
 
     private static let catalogue: [String: Theme] = {
-        Dictionary(uniqueKeysWithValues: QuestionBank.tousLesThemes.map { ($0.theme.id, $0.theme) })
+        Dictionary(uniqueKeysWithValues: QuestionBank.allThemes.map { ($0.theme.id, $0.theme) })
     }()
 
-    /// Les thèmes dans l'ordre où ils s'affichent.
-    static let tous: [Category] = catalogue.values
-        .sorted { $0.rang != $1.rang ? $0.rang < $1.rang : $0.id < $1.id }
+    /// The themes in the order they are displayed.
+    static let all: [Category] = catalogue.values
+        .sorted { $0.rank != $1.rank ? $0.rank < $1.rank : $0.id < $1.id }
         .map(\.category)
 
-    static func connu(_ c: Category) -> Theme? { catalogue[c.id] }
+    static func known(_ c: Category) -> Theme? { catalogue[c.id] }
 
-    /// Les thèmes du jeu — ceux qui n'ont pas de prix.
-    static let base: [Category] = tous.filter { connu($0)?.produit == nil }
+    /// The themes that ship with the game — the ones with no price.
+    static let base: [Category] = all.filter { known($0)?.product == nil }
 
-    /// Les packs, ceux qui s'achètent.
-    static let packs: [Category] = tous.filter { connu($0)?.produit != nil }
+    /// The packs, the ones that are bought.
+    static let packs: [Category] = all.filter { known($0)?.product != nil }
 
-    /// Le thème nommé, s'il existe. Sert aux tests et aux outils.
-    static func parNom(_ id: String) -> Category? { catalogue[id].map(\.category) }
+    /// The named theme, if it exists. Used by tests and tools.
+    static func named(_ id: String) -> Category? { catalogue[id].map(\.category) }
 }

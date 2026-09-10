@@ -1,69 +1,75 @@
 //
 //  DeclarationsTests.swift
-//  RiskeloTests
+//  RiskeloUSTests
 //
-//  Ce que l'application déclare au système.
+//  What the app declares to the system.
 //
-//  Le jeu à plusieurs appareils ne dépend pas que du code : sans deux entrées
-//  dans l'Info.plist, iOS refuse le réseau local, et il le refuse **en
-//  silence**. Les appareils continuent de se voir — la découverte passe par le
-//  Bluetooth — mais la liaison ne s'établit jamais. Rien dans le code ne peut
-//  s'en apercevoir, et aucune compilation n'échoue.
+//  Playing across devices does not depend on the code alone: without two
+//  entries in the Info.plist, iOS refuses the local network, and it refuses
+//  it **in silence**. The devices still see each other — discovery goes over
+//  Bluetooth — but the link never establishes. Nothing in the code can notice,
+//  and no build fails.
 //
-//  Ce fichier est là parce que la panne est arrivée : deux dossiers de
-//  compilation coexistaient, et l'un contenait une version bâtie sans ces
-//  entrées. Un test qui interroge le paquet lui-même l'aurait dit tout de
-//  suite.
+//  This file exists because the failure happened: two build folders coexisted,
+//  and one held a version made without those entries. A test that questions
+//  the bundle itself would have said so at once.
 //
 
 import Foundation
 import Testing
-@testable import Riskelo
+@testable import RiskeloUS
 
 struct DeclarationsTests {
 
-    private var paquet: Bundle { Bundle(for: Link.self) }
+    private var bundle: Bundle { Bundle(for: Link.self) }
 
-    @Test func leReseauLocalEstDeclare() {
-        let raison = paquet.object(forInfoDictionaryKey: "NSLocalNetworkUsageDescription")
-        // Sans NSLocalNetworkUsageDescription, iOS ne demande jamais
-        // l'autorisation et la liaison échoue sans rien dire.
-        #expect(raison is String)
+    @Test func localNetworkIsDeclared() {
+        let reason = bundle.object(forInfoDictionaryKey: "NSLocalNetworkUsageDescription")
+        // Without NSLocalNetworkUsageDescription, iOS never asks for
+        // permission and the link fails without a word.
+        #expect(reason is String)
 
-        let services = paquet.object(forInfoDictionaryKey: "NSBonjourServices") as? [String]
-        #expect(services != nil, "NSBonjourServices manque à l'Info.plist")
-        // Le nom du service et sa déclaration doivent aller ensemble : les
-        // séparer est une panne muette de plus, et rien ne les relie sinon.
+        let services = bundle.object(forInfoDictionaryKey: "NSBonjourServices") as? [String]
+        #expect(services != nil, "NSBonjourServices is missing from the Info.plist")
+        // The service name and its declaration have to travel together:
+        // separating them is one more silent failure, and nothing else links
+        // them.
         #expect(services?.contains("_\(Link.service)._tcp") == true)
         #expect(services?.contains("_\(Link.service)._udp") == true)
     }
 
-    /// Bonjour n'accepte pas n'importe quel nom : quinze caractères au plus,
-    /// minuscules, chiffres et tirets. Un nom invalide fait échouer la
-    /// recherche au démarrage, sans autre signe qu'un rappel qu'on n'écoutait
-    /// pas jusqu'ici.
-    @Test func leNomDuServiceEstValide() {
-        let nom = Link.service
-        #expect(!nom.isEmpty && nom.count <= 15)
-        let permis = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz0123456789-")
-        let valide = nom.unicodeScalars.allSatisfy { permis.contains($0) }
-        #expect(valide, "ce n'est pas un nom de service Bonjour valide")
-        #expect(!nom.hasPrefix("-") && !nom.hasSuffix("-"))
+    /// Bonjour will not take any name: fifteen characters at most, lowercase,
+    /// digits and hyphens. An invalid name makes browsing fail at startup,
+    /// with no sign beyond a callback nobody was listening to.
+    @Test func serviceNameIsValid() {
+        let name = Link.service
+        #expect(!name.isEmpty && name.count <= 15)
+        let allowed = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz0123456789-")
+        let valid = name.unicodeScalars.allSatisfy { allowed.contains($0) }
+        #expect(valid, "this is not a valid Bonjour service name")
+        #expect(!name.hasPrefix("-") && !name.hasSuffix("-"))
+    }
+
+    /// Riskelo US must not share a wire with the French app: the two ship
+    /// different question packs, and two devices that found each other would
+    /// sit down to a table neither could play.
+    @Test func serviceNameIsNotTheFrenchAppsOne() {
+        #expect(Link.service != "riskelo-jeu")
     }
 }
 
-/// L'identité de l'appareil sur le fil.
+/// The device's identity on the wire.
 @MainActor
-struct IdentiteTests {
+struct IdentityTests {
 
-    /// Elle doit survivre au lancement suivant. Une identité refaite à chaque
-    /// démarrage laisse le système avec des identités périmées pour le même
-    /// appareil : la liaison marche une fois, puis plus jamais.
-    @Test func lIdentiteNeChangePasDUnAppelALAutre() {
-        let a = Link.identite()
-        let b = Link.identite()
-        #expect(a == b, "deux appels doivent rendre la même identité")
-        #expect(a.nom == b.nom)
-        #expect(!a.nom.isEmpty)
+    /// It has to survive the next launch. An identity remade at every start
+    /// leaves the system with stale identities for the same device: the link
+    /// works once, then never again.
+    @Test func identityDoesNotChangeBetweenCalls() {
+        let a = Link.identity()
+        let b = Link.identity()
+        #expect(a == b, "two calls must return the same identity")
+        #expect(a.name == b.name)
+        #expect(!a.name.isEmpty)
     }
 }

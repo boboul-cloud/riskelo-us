@@ -1,0 +1,245 @@
+# Geography — Grade 6 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Sixth grade: the tools of geography, then the physical world, then the
+# regions the ancient history course walks through — Africa, Southwest
+# Asia, South and Central Asia, East and Southeast Asia.
+
+! id      | geography-6
+! name    | Geography — Grade 6
+! detail  | Map skills, landforms and climate, then Africa and Asia region by region.
+! icon    | map
+! tint    | 0.30 0.62 0.68
+! rank    | 8
+! product | com.oulhen.riskelo.us.pack.geography6
+
+
+# --- Maps and the Earth ---
+
+E | Which line of latitude circles the Earth at zero degrees? | The equator | The prime meridian | The tropic of Cancer | The Arctic Circle
+E | Which line of longitude is numbered zero degrees? | The prime meridian | The equator | The international date line | The tropic of Capricorn
+E | Which instrument points toward magnetic north? | A compass | A sextant | An altimeter | A barometer
+E | Which part of a map explains what its symbols mean? | The legend | The scale | The grid | The inset
+E | Which part of a map tells you how paper distance matches the ground? | The scale | The legend | The compass rose | The title
+E | Which imaginary lines run east and west around the globe? | Lines of latitude | Lines of longitude | Meridians | Great circles
+E | Which imaginary lines run from pole to pole? | Lines of longitude | Lines of latitude | Parallels | Contour lines
+E | Which map feature shows you which way is north? | The compass rose | The scale bar | The legend | The graticule
+E | Which kind of map shows elevation and landforms? | A physical map | A political map | A road map | A climate map
+E | Which kind of map shows countries and their borders? | A political map | A physical map | A topographic map | A thematic map
+M | Which map lines connect points of equal elevation? | Contour lines | Isobars | Isotherms | Rhumb lines
+M | Which projection stretches the polar regions badly out of size? | Mercator | Robinson | Mollweide | Gnomonic
+M | Which measurement tells you how far north or south a place lies? | Its latitude | Its longitude | Its altitude | Its azimuth
+M | Which line marks the northern edge of the tropics? | The tropic of Cancer | The tropic of Capricorn | The Arctic Circle | The equator
+M | Which line marks the southern edge of the tropics? | The tropic of Capricorn | The tropic of Cancer | The Antarctic Circle | The equator
+M | Roughly how many time zones does the world use? | About 24 | About 12 | About 40 | About 60
+M | Which line in the Pacific marks where the date changes? | The international date line | The prime meridian | The equator | The Greenwich line
+H | Which English observatory gives its name to the prime meridian? | Greenwich | Cambridge | Edinburgh | Oxford
+H | Which latitude marks the Arctic Circle? | About 66 degrees north | About 60 degrees north | About 45 degrees north | About 80 degrees north
+H | Which term names the exact spot where two coordinates meet? | Absolute location | Relative location | Site | Situation
+H | Which term describes where a place sits in relation to other places? | Relative location | Absolute location | Region | Scale
+H | Which five themes organize the study of geography? | Location, place, region, movement, interaction | Land, sea, air, life, people | Map, globe, chart, atlas, key | Physical, human, urban, rural, wild
+H | Which model of the Earth is truest in both shape and size? | A globe | A Mercator map | A Robinson map | A topographic map
+H | Which technology fixes a position on Earth using satellites? | GPS | Radar | Sonar | Lidar
+H | Which computer system stores and layers map data? | GIS | GPS | CAD | SQL
+H | Which images of the Earth are taken from satellites or aircraft? | Remote sensing images | Contour surveys | Plane tables | Cadastral plats
+H | Which word names the shape of the land in an area? | Topography | Hydrography | Cartography | Demography
+H | Which word names the making of maps? | Cartography | Geodesy | Topology | Chorography
+H | Which map projection keeps areas true but distorts shape? | An equal-area projection | A conformal projection | A gnomonic projection | An azimuthal projection
+H | Which measurement of a place is given in degrees, minutes and seconds? | Its coordinates | Its bearing | Its elevation | Its declination
+
+# --- Continents and oceans ---
+
+E | How many continents does the standard list name? | Seven | Five | Six | Eight
+E | Which is the largest continent by area? | Asia | Africa | North America | Europe
+E | Which is the largest ocean on Earth? | The Pacific | The Atlantic | The Indian | The Arctic
+E | Which continent is home only to visiting researchers? | Antarctica | Australia | South America | Europe
+E | Which ocean lies between Africa and Australia? | The Indian Ocean | The Pacific Ocean | The Atlantic Ocean | The Southern Ocean
+E | Which is the second largest continent by area? | Africa | North America | South America | Antarctica
+E | Which is the smallest continent by area? | Australia | Europe | Antarctica | South America
+E | Which two continents share a single landmass? | Europe and Asia | Africa and Asia | North and South America | Australia and Asia
+E | Which ocean surrounds Antarctica? | The Southern Ocean | The Arctic Ocean | The Indian Ocean | The Pacific Ocean
+E | Which continent lies farthest south? | Antarctica | Australia | South America | Africa
+M | Which ocean is the smallest and shallowest? | The Arctic | The Indian | The Southern | The Atlantic
+M | Which mountains are usually taken to divide Europe from Asia? | The Urals | The Alps | The Caucasus | The Carpathians
+M | Which narrow strip of land joins North and South America? | The Isthmus of Panama | The Isthmus of Suez | The Isthmus of Kra | The Isthmus of Corinth
+M | Which canal separates Africa from Asia? | The Suez Canal | The Panama Canal | The Kiel Canal | The Grand Canal
+M | Which continent is crossed by the equator and both tropics? | Africa | Asia | South America | Australia
+H | Which supercontinent held all the land 250 million years ago? | Pangaea | Gondwana | Laurasia | Rodinia
+H | Which southern supercontinent broke into Africa, South America and India? | Gondwana | Laurasia | Pangaea | Baltica
+H | Which theory explains how continents move over time? | Plate tectonics | Isostasy | Uniformitarianism | Orogeny
+H | Which continent holds the most countries? | Africa | Asia | Europe | South America
+H | Which strait separates Asia from North America? | The Bering Strait | The Strait of Malacca | The Davis Strait | The Denmark Strait
+
+# --- Landforms and water ---
+
+E | Which landform is a large area of high, flat ground? | A plateau | A valley | A delta | A basin
+E | Which landform is land almost surrounded by water? | A peninsula | An island | An isthmus | A cape
+E | Which body of water is completely surrounded by land? | A lake | A bay | A gulf | A strait
+E | Which word names a river mouth that fans into many channels? | A delta | An estuary | A fjord | A sound
+E | Which narrow channel joins two larger bodies of water? | A strait | A bay | A sound | A lagoon
+E | Which smaller river flows into a larger one? | A tributary | A distributary | An estuary | A canal
+E | Which sudden shaking comes from movement along a fault? | An earthquake | A landslide | A tsunami | A sinkhole
+E | Which opening lets molten rock reach the surface? | A volcano | A geyser | A fumarole | A sinkhole
+M | Which landform is a ring of coral around a lagoon? | An atoll | A reef | A cay | A shoal
+M | Which deep coastal inlet was carved by a glacier? | A fjord | A ria | A bight | A cove
+M | Which word names all the land drained by a river and its branches? | A watershed | A floodplain | A delta | An aquifer
+M | Which flat land beside a river floods after heavy rain? | The floodplain | The watershed | The levee | The terrace
+M | Which underground layer of rock holds water? | An aquifer | A moraine | A caldera | A batholith
+M | Which landform is a steep drop where a river plunges? | A waterfall | A rapid | A cataract shelf | A gorge
+M | Which word names a long narrow valley cut deep by a river? | A canyon | A basin | A col | A cirque
+M | Which mountains form where two plates push into each other? | Fold mountains | Volcanic cones | Fault blocks | Dome mountains
+H | Which ring of volcanoes and quakes circles the Pacific? | The Ring of Fire | The Alpine belt | The Mid-Atlantic Ridge | The Pacific Rise
+H | Which scale reports the energy released by an earthquake? | The moment magnitude scale | The Mercalli scale | The Beaufort scale | The Saffir-Simpson scale
+H | Which wave is raised by an undersea earthquake? | A tsunami | A tidal bore | A seiche | A rogue wave
+H | Which process wears rock away and carries the pieces off? | Erosion | Weathering | Deposition | Subduction
+H | Which process breaks rock down in place without moving it? | Weathering | Erosion | Deposition | Abrasion
+H | Which slow-moving river of ice carves U-shaped valleys? | A glacier | A snowfield | An ice floe | A firn field
+H | Which ridge runs down the middle of the Atlantic seafloor? | The Mid-Atlantic Ridge | The East Pacific Rise | The Ninety East Ridge | The Walvis Ridge
+H | Which flat expanses cover most of the deep ocean floor? | Abyssal plains | Continental shelves | Guyots | Seamount chains
+
+# --- Climate and biomes ---
+
+E | Which climate zone lies between the tropics and stays hot all year? | The tropical zone | The polar zone | The temperate zone | The arid zone
+E | Which biome is hot, dry and gets very little rain? | Desert | Tundra | Taiga | Savanna
+E | Which biome is a cold treeless plain near the Arctic? | Tundra | Savanna | Steppe | Chaparral
+E | Which biome is a warm grassland dotted with scattered trees? | Savanna | Tundra | Taiga | Prairie
+E | Which seasonal wind brings heavy summer rain to South Asia? | The monsoon | The chinook | The sirocco | The harmattan
+E | Which instrument measures air pressure? | A barometer | A thermometer | A hygrometer | An anemometer
+M | Which forest of cone-bearing trees rings the northern hemisphere? | The taiga | The rainforest | The chaparral | The mangrove
+M | Which climate has warm dry summers and mild wet winters? | Mediterranean | Continental | Monsoon | Maritime
+M | Which factor makes the air cooler as you climb a mountain? | Altitude | Latitude | Longitude | Humidity
+M | Which side of a mountain range gets the driest air? | The leeward side | The windward side | The northern side | The southern side
+M | Which dry area behind a mountain range is starved of rain? | A rain shadow | A dust bowl | A dry belt | A salt flat
+M | Which ocean current warms the coast of western Europe? | The Gulf Stream | The Canary Current | The Labrador Current | The Benguela Current
+M | Which line sits at the upper limit of tree growth on a mountain? | The tree line | The snow line | The frost line | The timber edge
+M | Which storm is called a typhoon in the western Pacific? | A tropical cyclone | A tornado | A blizzard | A derecho
+H | Which climate classification uses codes such as Af and BWh? | The Koppen system | The Thornthwaite system | The Trewartha grid | The Holdridge scheme
+H | Which Pacific warming pattern shifts weather worldwide every few years? | El Nino | The polar vortex | The Madden cycle | The monsoon trough
+H | Which cold current runs north along the coast of Peru? | The Humboldt Current | The Kuroshio | The Agulhas | The Brazil Current
+H | Which process turns fertile drylands into desert? | Desertification | Salinization | Eutrophication | Deforestation
+H | Which African wind carries Sahara dust out toward the Atlantic? | The harmattan | The sirocco | The mistral | The bora
+H | Which word names the average weather of a place over decades? | Climate | Weather | Season | Front
+H | Which greenhouse gas is released most by burning fossil fuels? | Carbon dioxide | Methane | Ozone | Nitrous oxide
+H | Which belt of calm equatorial air did sailors call the doldrums? | The intertropical convergence zone | The horse latitudes | The trade wind belt | The subtropical ridge
+
+# --- Africa ---
+
+E | Which desert covers much of northern Africa? | The Sahara | The Kalahari | The Namib | The Gobi
+E | Which river flows north through Egypt to the Mediterranean? | The Nile | The Congo | The Niger | The Zambezi
+E | Which African country covers the most square miles? | Algeria | Sudan | Libya | Egypt
+E | Which African country has the largest population? | Nigeria | Egypt | Ethiopia | South Africa
+E | Which is Africa's highest mountain? | Kilimanjaro | Mount Kenya | Mount Elgon | Ras Dashen
+M | Which African lake is the largest by surface area? | Lake Victoria | Lake Tanganyika | Lake Chad | Lake Malawi
+M | Which African lake is the deepest? | Lake Tanganyika | Lake Victoria | Lake Malawi | Lake Turkana
+M | Which African river carries the second largest flow in the world? | The Congo | The Nile | The Niger | The Orange
+M | Which waterfall on the Zambezi is called the smoke that thunders? | Victoria Falls | Tugela Falls | Murchison Falls | Blue Nile Falls
+M | Which valley system splits East Africa from north to south? | The Great Rift Valley | The Jordan Valley | The Danakil Trough | The Luangwa Trench
+M | Which African desert lies mainly in Botswana and Namibia? | The Kalahari | The Sahara | The Danakil | The Sahel
+M | Which dry belt lies between the Sahara and the savanna? | The Sahel | The Maghreb | The Karoo | The Horn
+M | Which three countries make up the Maghreb? | Morocco, Algeria and Tunisia | Egypt, Libya and Sudan | Mali, Niger and Chad | Senegal, Gambia and Guinea
+M | Which country gives the Horn of Africa its outline? | Somalia | Egypt | Angola | Ghana
+M | Which large island nation lies off Africa's southeast coast? | Madagascar | Sri Lanka | Mauritius | Zanzibar
+M | Which strait separates Africa from Europe at its narrowest? | The Strait of Gibraltar | The Bosporus | The Strait of Sicily | The Strait of Otranto
+H | Which African country is entirely surrounded by South Africa? | Lesotho | Eswatini | Botswana | Zimbabwe
+H | Which African dam created Lake Nasser? | The Aswan High Dam | The Kariba Dam | The Akosombo Dam | The Merowe Dam
+H | Which lake on the Sahara's edge has shrunk drastically since 1960? | Lake Chad | Lake Turkana | Lake Albert | Lake Tana
+H | Which two rivers meet at Khartoum? | The Blue and White Nile | The Nile and Atbara | The Congo and Kasai | The Niger and Benue
+H | Which cape marks the southwestern tip of Africa? | The Cape of Good Hope | Cape Agulhas | Cape Verde | Cape Guardafui
+H | Which African country has the most official languages? | South Africa | Nigeria | Kenya | Cameroon
+H | Which country holds the source of the Blue Nile? | Ethiopia | Uganda | Sudan | Rwanda
+H | Which highland country is often called the roof of Africa? | Ethiopia | Lesotho | Rwanda | Kenya
+H | Which Saharan mountain range rises in southern Algeria? | The Hoggar | The Atlas | The Tibesti | The Air
+H | Which African river reaches the Gulf of Guinea through a huge delta? | The Niger | The Congo | The Volta | The Senegal
+
+# --- Southwest Asia ---
+
+E | Which two rivers gave Mesopotamia its name? | The Tigris and Euphrates | The Nile and Jordan | The Indus and Ganges | The Amu and Syr
+E | Which sea is so salty that swimmers float easily? | The Dead Sea | The Red Sea | The Caspian Sea | The Aral Sea
+E | Which resource has made the Persian Gulf states wealthy? | Oil | Coal | Timber | Iron
+M | Which peninsula holds Saudi Arabia and its neighbors? | The Arabian Peninsula | The Anatolian Peninsula | The Sinai Peninsula | The Balkan Peninsula
+M | Which strait carries most of the oil leaving the Persian Gulf? | The Strait of Hormuz | The Bab el-Mandeb | The Bosporus | The Strait of Malacca
+M | Which sea separates Africa from the Arabian Peninsula? | The Red Sea | The Persian Gulf | The Black Sea | The Arabian Sea
+M | Which country occupies the Anatolian Peninsula? | Turkey | Iran | Syria | Georgia
+M | Which strait divides Istanbul between two continents? | The Bosporus | The Dardanelles | The Kerch Strait | The Strait of Messina
+M | Which is the largest inland body of water on Earth? | The Caspian Sea | Lake Superior | The Black Sea | The Aral Sea
+M | Which inland sea shrank after its feeder rivers were diverted? | The Aral Sea | The Dead Sea | The Caspian Sea | Lake Urmia
+M | Which sand sea covers the empty quarter of Arabia? | The Rub al Khali | The Negev | The Dasht-e Kavir | The Nefud
+M | Which river forms part of the border between Israel and Jordan? | The Jordan | The Litani | The Orontes | The Yarmuk
+M | Which mountains run along Iran's western edge? | The Zagros | The Elburz | The Taurus | The Pontic range
+M | Which mountain range rises along Turkey's southern coast? | The Taurus | The Zagros | The Caucasus | The Balkan range
+M | Which mountains divide Russia from Georgia and Azerbaijan? | The Caucasus | The Urals | The Carpathians | The Pamirs
+H | Which arc of fertile land curves from the Persian Gulf to the Levant? | The Fertile Crescent | The Levantine belt | The Anatolian arc | The Nile corridor
+H | Which method of watering fields made Mesopotamian farming possible? | Irrigation | Terracing | Dry farming | Flood recession
+H | Which underground channels have long carried water across Iran? | Qanats | Wadis | Aqueducts | Cisterns
+H | Which dry riverbed fills only after rain in desert regions? | A wadi | A playa | A sabkha | A bajada
+H | Which sea lies at the lowest land elevation on Earth? | The Dead Sea | The Caspian Sea | The Salton Sea | Lake Assal
+H | Which country holds the world's largest proven oil reserves? | Venezuela | Saudi Arabia | Iran | Iraq
+H | Which organization of oil exporting states was founded in 1960? | OPEC | The IEA | The WTO | The Arab League
+H | Which Turkish city stands on two continents at once? | Istanbul | Ankara | Izmir | Bursa
+H | Which sea lies between Turkey and Ukraine? | The Black Sea | The Caspian Sea | The Aegean Sea | The Sea of Azov
+
+# --- South and Central Asia ---
+
+E | Which mountain range holds the world's highest peaks? | The Himalaya | The Andes | The Rockies | The Alps
+E | Which is the most populous country in South Asia? | India | Pakistan | Bangladesh | Nepal
+E | Which is the largest country in Central Asia by area? | Kazakhstan | Uzbekistan | Turkmenistan | Kyrgyzstan
+M | Which river is sacred to Hindus and crosses northern India? | The Ganges | The Indus | The Brahmaputra | The Narmada
+M | Which river waters the plains of Pakistan and named a civilization? | The Indus | The Ganges | The Sutlej | The Kabul
+M | Which small Himalayan kingdom measures gross national happiness? | Bhutan | Nepal | Sikkim | Ladakh
+M | Which desert stretches across the India-Pakistan border? | The Thar | The Karakum | The Kyzylkum | The Registan
+M | Which delta do the Ganges and Brahmaputra build together? | The Bengal delta | The Indus delta | The Irrawaddy delta | The Mekong delta
+M | Which island nation lies off India's southern tip? | Sri Lanka | Maldives | Mauritius | Seychelles
+M | Which chain of low coral islands lies southwest of India? | The Maldives | The Andamans | The Nicobars | The Sunda islands
+M | Which plateau covers most of peninsular India? | The Deccan | The Chota Nagpur | The Malwa | The Tibetan plateau
+M | Which high plateau north of the Himalaya is called the roof of the world? | Tibet | The Pamirs | The Altai | The Ordos
+M | Which pass has long linked Afghanistan and Pakistan? | The Khyber Pass | The Bolan Pass | The Karakoram Pass | The Nathu La
+H | Which peak on the China-Pakistan border stands second only to Everest? | K2 | Kangchenjunga | Lhotse | Makalu
+H | Which range holds K2 on the China-Pakistan border? | The Karakoram | The Hindu Kush | The Pamirs | The Kunlun
+H | Which mountains run through Afghanistan from the Pamirs? | The Hindu Kush | The Elburz | The Sulaiman range | The Kopet Dag
+H | Which country contains the wettest inhabited places on Earth? | India | Indonesia | Colombia | Cameroon
+H | Which two rivers feed most of Central Asia's irrigation? | The Amu Darya and Syr Darya | The Ural and Emba | The Ili and Chu | The Tarim and Zeravshan
+H | Which desert covers most of Turkmenistan? | The Karakum | The Kyzylkum | The Taklamakan | The Gobi
+H | Which strait separates Sri Lanka from India? | The Palk Strait | The Gulf of Mannar | The Ten Degree Channel | The Duncan Passage
+
+# --- East and Southeast Asia ---
+
+E | Which is the most populous country in East Asia? | China | Japan | South Korea | North Korea
+E | Which desert spreads across Mongolia and northern China? | The Gobi | The Thar | The Taklamakan | The Ordos
+E | Which island nation lies east of the Korean Peninsula? | Japan | Taiwan | The Philippines | Indonesia
+E | Which mountain is Japan's highest and most famous? | Mount Fuji | Mount Aso | Mount Hakusan | Mount Ontake
+E | Which is the longest river in China? | The Yangtze | The Yellow River | The Pearl River | The Mekong
+E | Which country is made of more than seventeen thousand islands? | Indonesia | The Philippines | Japan | Malaysia
+M | Which Chinese river is nicknamed the river of sorrow for its floods? | The Yellow River | The Yangtze | The Huai | The Liao
+M | Which dam on the Yangtze is the world's largest by capacity? | The Three Gorges Dam | The Gezhouba Dam | The Xiluodu Dam | The Itaipu Dam
+M | Which Chinese region holds the Taklamakan Desert? | Xinjiang | Tibet | Inner Mongolia | Gansu
+M | Which sea lies between China and the Korean Peninsula? | The Yellow Sea | The East China Sea | The Sea of Japan | The South China Sea
+M | Which strait separates Taiwan from mainland China? | The Taiwan Strait | The Korea Strait | The Luzon Strait | The Bashi Channel
+M | Which Southeast Asian river crosses six countries to a great delta? | The Mekong | The Irrawaddy | The Chao Phraya | The Salween
+M | Which mainland Southeast Asian country was never colonized? | Thailand | Vietnam | Myanmar | Cambodia
+M | Which city-state sits at the southern tip of the Malay Peninsula? | Singapore | Kuala Lumpur | Jakarta | Manila
+M | Which strait carries much of the trade between Asia and Europe? | The Strait of Malacca | The Sunda Strait | The Makassar Strait | The Lombok Strait
+M | Which four islands are the largest in Japan? | Honshu, Hokkaido, Kyushu, Shikoku | Honshu, Okinawa, Sado, Awaji | Kyushu, Tsushima, Iki, Oki | Hokkaido, Kunashir, Etorofu, Sakhalin
+M | Which Chinese city has the largest population? | Shanghai | Beijing | Guangzhou | Shenzhen
+M | Which capital city anchors the largest urban area in the world? | Tokyo | Delhi | Shanghai | Sao Paulo
+M | Which peninsula is divided between two countries at the 38th parallel? | The Korean Peninsula | The Malay Peninsula | The Indochinese Peninsula | The Kamchatka Peninsula
+M | Which country between China and Russia is mostly open steppe? | Mongolia | Kazakhstan | Kyrgyzstan | North Korea
+H | Which plateau is the highest and largest in the world? | The Tibetan Plateau | The Loess Plateau | The Yunnan Plateau | The Mongolian Plateau
+H | Which fine wind-blown soil covers a plateau in northern China? | Loess | Laterite | Chernozem | Podzol
+H | Which Chinese waterway has linked north and south since ancient times? | The Grand Canal | The Suzhou Cut | The Yellow Channel | The Hangzhou Loop
+H | Which two Chinese cities are special administrative regions? | Hong Kong and Macau | Shenzhen and Zhuhai | Taipei and Kaohsiung | Shanghai and Tianjin
+H | Which Indonesian island holds more than half the country's people? | Java | Sumatra | Borneo | Sulawesi
+H | Which island is shared by Indonesia, Malaysia and Brunei? | Borneo | Sumatra | New Guinea | Timor
+H | Which island is divided between Indonesia and Papua New Guinea? | New Guinea | Borneo | Timor | Halmahera
+H | Which 1883 eruption in the Sunda Strait was heard thousands of miles away? | Krakatoa | Tambora | Pinatubo | Merapi
+H | Which 1815 Indonesian eruption caused a year without a summer? | Tambora | Krakatoa | Toba | Kelud
+H | Which Philippine volcano erupted massively in 1991? | Pinatubo | Mayon | Taal | Apo
+H | Which sea is claimed in part by several states for its reefs and lanes? | The South China Sea | The Andaman Sea | The Celebes Sea | The Timor Sea
+H | Which cold current keeps northern Japan's winters severe? | The Oyashio | The Kuroshio | The Tsushima Current | The Liman Current
+H | Which Chinese autonomous region borders Mongolia and shares its name? | Inner Mongolia | Xinjiang | Ningxia | Gansu
+H | Which strait separates Japan's Honshu from Hokkaido? | The Tsugaru Strait | The Korea Strait | The Kanmon Strait | The Soya Strait

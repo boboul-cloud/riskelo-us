@@ -1,193 +1,192 @@
 //
 //  Archives.swift
-//  Riskelo
+//  Riskelo US
 //
-//  La bibliothèque des parties : y revenir, et pas seulement les finir.
+//  The library of games: going back to them, not just finishing them.
 //
-//  Il y avait déjà une sauvegarde — celle qui rend la partie en cours d'un
-//  lancement sur l'autre. Elle ne garde qu'un état, le dernier, et l'écrase à
-//  chaque coup. C'est ce qu'il faut pour reprendre, et c'est exactement ce
-//  qu'il ne faut pas pour revenir : au moment où l'on se dit « c'est là que
-//  j'ai tout perdu », l'instant en question a été effacé depuis longtemps.
+//  There was already a save — the one that hands back the game in progress
+//  from one launch to the next. It keeps a single state, the last one, and
+//  overwrites it at every move. That is what resuming needs, and it is
+//  exactly what going back must not have: by the moment you think "that is
+//  where I lost it all", the instant in question was wiped long ago.
 //
-//  D'où trois choix de fabrication :
+//  Hence three build decisions:
 //
-//  On enregistre **à chaque tour**, sans qu'on le demande. Un instant
-//  stratégique ne se reconnaît qu'après coup : demander au joueur de penser à
-//  sauvegarder avant de commettre l'erreur, c'est ne rien lui offrir du tout.
-//  Le bouton « marquer » existe aussi, mais il n'est qu'un supplément.
+//  We save **every turn**, without being asked. A strategic moment is only
+//  recognized afterwards: asking the player to remember to save before making
+//  the mistake is offering them nothing at all. The "mark" button exists too,
+//  but it is only an extra.
 //
-//  Un fichier par instant, et non un gros fichier par partie. Une partie de
-//  vingt tours réécrite vingt fois coûte vingt fois plus qu'écrite une fois
-//  par tour, et une écriture interrompue n'emporterait pas les dix-neuf
-//  autres avec elle.
+//  One file per moment, not one big file per game. A twenty-turn game
+//  rewritten twenty times costs twenty times more than one written once per
+//  turn, and an interrupted write would not take the other nineteen with it.
 //
-//  Un index séparé, léger, pour la liste. Ouvrir vingt parties entières pour
-//  afficher vingt lignes serait absurde : l'index porte les noms, les dates
-//  et le compte des territoires, et les états dorment jusqu'à ce qu'on les
-//  demande.
+//  A separate, light index for the list. Opening twenty whole games to show
+//  twenty rows would be absurd: the index carries the names, the dates and
+//  the territory counts, and the states sleep until they are asked for.
 //
 
 import Foundation
 
-/// Une partie rangée, telle que la liste la montre.
-struct PartieArchivee: Codable, Identifiable, Equatable {
+/// A shelved game, as the list shows it.
+struct ArchivedGame: Codable, Identifiable, Equatable {
 
-    /// Un instant de cette partie, auquel on peut revenir.
+    /// A moment of this game, one you can come back to.
     struct Moment: Codable, Identifiable, Equatable {
         var id = UUID()
-        var tour: Int
-        /// Le rang dont c'était le tour. `tour` compte les tours de **table**,
-        /// pas les tours de joueur : sans le camp, une partie à deux ne
-        /// garderait qu'un instant sur deux, et à quatre un sur quatre.
-        var camp: Int
+        var turn: Int
+        /// The side whose turn it was. `turn` counts rounds of the **table**,
+        /// not player turns: without the side, a two-player game would keep
+        /// only every other moment, and a four-player game one in four.
+        var side: Int
         var date: Date
-        var etiquette: String
-        /// Le nombre de territoires par rang, au moment même. Il est ici et
-        /// non dans l'état pour que la liste sache dessiner le rapport de
-        /// forces sans ouvrir un seul fichier.
-        var territoires: [Int]
-        var fichier: String
-        /// Marqué à la main par le joueur, ou posé par le tour qui passe.
-        var marque = false
+        var label: String
+        /// The number of territories per side, at that very moment. It is
+        /// here and not in the state so the list can draw the balance of
+        /// power without opening a single file.
+        var territories: [Int]
+        var file: String
+        /// Marked by hand by the player, or laid down by the passing turn.
+        var marked = false
     }
 
     var id = UUID()
-    var debut: Date
-    var derniere: Date
-    var plateau: Boards
+    var started: Date
+    var last: Date
+    var board: Boards
     var mode: Rules.Mode
-    var joueurs: [String]
-    /// Les rangs tenus par la machine : de quoi dire contre qui l'on jouait.
-    var machines: [Int]
+    var players: [String]
+    /// The seats held by the machine: enough to say who you were playing
+    /// against.
+    var bots: [Int]
     var moments: [Moment] = []
-    /// Le rang du vainqueur, si la partie est allée à son terme.
-    var vainqueur: Int?
+    /// The winner's seat, if the game ran to its end.
+    var winner: Int?
 
-    var estTerminee: Bool { vainqueur != nil }
+    var isFinished: Bool { winner != nil }
 }
 
-/// Le rayonnage.
+/// The shelving.
 ///
-/// Toutes les écritures sont atomiques et aucune n'interrompt la partie : une
-/// archive qu'on ne peut pas écrire est une archive qu'on n'aura pas, ce n'est
-/// pas une raison pour arrêter de jouer.
+/// Every write is atomic and none of them interrupts the game: an archive you
+/// cannot write is an archive you will not have, and that is no reason to
+/// stop playing.
 struct Archives {
 
     static let shared = Archives()
 
-    /// Combien de parties on garde. Au-delà, la plus ancienne s'en va.
-    static let partiesGardees = 12
-    /// Combien d'instants par partie. Les parties mesurées en font quatre à
-    /// vingt-trois ; quatre-vingts est une digue, pas un plafond utile.
-    static let momentsGardes = 80
+    /// How many games are kept. Beyond that, the oldest goes.
+    static let gamesKept = 12
+    /// How many moments per game. Measured games run to four or twenty-three
+    /// of them; eighty is a levee, not a useful ceiling.
+    static let momentsKept = 80
 
-    private let dossier: URL
+    private let folder: URL
 
-    /// Le rayon se laisse déplacer : les tests écrivent dans un dossier à eux
-    /// plutôt que dans les parties du joueur.
-    init(dossier: URL? = nil) {
-        let d = dossier ?? {
+    /// The shelf can be moved: the tests write into a folder of their own
+    /// rather than into the player's games.
+    init(folder: URL? = nil) {
+        let d = folder ?? {
             let base = (try? FileManager.default.url(for: .applicationSupportDirectory,
                                                      in: .userDomainMask,
                                                      appropriateFor: nil, create: true))
                 ?? URL(fileURLWithPath: NSTemporaryDirectory())
-            return base.appendingPathComponent("Riskelo/Parties", isDirectory: true)
+            return base.appendingPathComponent("RiskeloUS/Games", isDirectory: true)
         }()
         try? FileManager.default.createDirectory(at: d, withIntermediateDirectories: true)
-        self.dossier = d
+        self.folder = d
     }
 
-    private var indexURL: URL { dossier.appendingPathComponent("index.json") }
+    private var indexURL: URL { folder.appendingPathComponent("index.json") }
 
-    // MARK: - Lire
+    // MARK: - Reading
 
-    func liste() -> [PartieArchivee] {
+    func list() -> [ArchivedGame] {
         guard let data = try? Data(contentsOf: indexURL),
-              let l = try? JSONDecoder().decode([PartieArchivee].self, from: data)
+              let l = try? JSONDecoder().decode([ArchivedGame].self, from: data)
         else { return [] }
-        return l.sorted { $0.derniere > $1.derniere }
+        return l.sorted { $0.last > $1.last }
     }
 
-    func charger(_ moment: PartieArchivee.Moment) -> GameState? {
-        let url = dossier.appendingPathComponent(moment.fichier)
+    func load(_ moment: ArchivedGame.Moment) -> GameState? {
+        let url = folder.appendingPathComponent(moment.file)
         guard let data = try? Data(contentsOf: url) else { return nil }
         do {
             return try JSONDecoder().decode(GameState.self, from: data)
         } catch {
-            // Un plan de plateau retouché depuis : mieux vaut refuser que
-            // restaurer une partie de travers.
-            print("Riskelo — instant illisible : \(error.localizedDescription)")
+            // A board plan reworked since: better to refuse than to restore a
+            // game that no longer lines up.
+            print("Riskelo US — unreadable moment: \(error.localizedDescription)")
             return nil
         }
     }
 
-    // MARK: - Écrire
+    // MARK: - Writing
 
-    /// Range un instant de la partie. Sans effet si le tour est déjà rangé et
-    /// que ce n'est pas une marque du joueur : on garde un instant par tour,
-    /// et non un par coup.
-    func ranger(_ g: GameState, partie: UUID, etiquette: String, marque: Bool = false) {
-        var toutes = liste()
-        var p: PartieArchivee
-        if let i = toutes.firstIndex(where: { $0.id == partie }) {
-            p = toutes.remove(at: i)
+    /// Shelves one moment of the game. No effect if the turn is already
+    /// shelved and this is not a mark from the player: we keep one moment per
+    /// turn, not one per move.
+    func store(_ g: GameState, game: UUID, label: String, marked: Bool = false) {
+        var all = list()
+        var p: ArchivedGame
+        if let i = all.firstIndex(where: { $0.id == game }) {
+            p = all.remove(at: i)
         } else {
-            p = PartieArchivee(id: partie, debut: Date(), derniere: Date(),
-                               plateau: g.boardKind, mode: g.rules.mode,
-                               joueurs: g.players.map(\.name),
-                               machines: g.players.filter(\.isBot).map(\.id))
+            p = ArchivedGame(id: game, started: Date(), last: Date(),
+                             board: g.boardKind, mode: g.rules.mode,
+                             players: g.players.map(\.name),
+                             bots: g.players.filter(\.isBot).map(\.id))
         }
-        if !marque, p.moments.contains(where: {
-            $0.tour == g.turn && $0.camp == g.current && !$0.marque
+        if !marked, p.moments.contains(where: {
+            $0.turn == g.turn && $0.side == g.current && !$0.marked
         }) {
-            toutes.append(p)
-            ecrire(toutes)
+            all.append(p)
+            write(all)
             return
         }
-        guard marque || p.moments.count < Archives.momentsGardes else {
-            toutes.append(p); ecrire(toutes); return
+        guard marked || p.moments.count < Archives.momentsKept else {
+            all.append(p); write(all); return
         }
 
-        let compte = g.players.map { j in g.owner.values.filter { $0 == j.id }.count }
-        let nom = "\(partie.uuidString)-\(p.moments.count).json"
+        let counts = g.players.map { p in g.owner.values.filter { $0 == p.id }.count }
+        let name = "\(game.uuidString)-\(p.moments.count).json"
         do {
             let data = try JSONEncoder().encode(g)
-            try data.write(to: dossier.appendingPathComponent(nom), options: .atomic)
+            try data.write(to: folder.appendingPathComponent(name), options: .atomic)
         } catch {
-            print("Riskelo — instant non rangé : \(error)")
-            toutes.append(p); ecrire(toutes); return
+            print("Riskelo US — moment not shelved: \(error)")
+            all.append(p); write(all); return
         }
 
-        p.moments.append(.init(tour: g.turn, camp: g.current, date: Date(),
-                               etiquette: etiquette, territoires: compte,
-                               fichier: nom, marque: marque))
-        p.derniere = Date()
-        if case let .finished(w) = g.phase { p.vainqueur = w }
-        toutes.append(p)
-        ecrire(toutes)
+        p.moments.append(.init(turn: g.turn, side: g.current, date: Date(),
+                               label: label, territories: counts,
+                               file: name, marked: marked))
+        p.last = Date()
+        if case let .finished(w) = g.phase { p.winner = w }
+        all.append(p)
+        write(all)
     }
 
-    func supprimer(_ id: UUID) {
-        var toutes = liste()
-        guard let i = toutes.firstIndex(where: { $0.id == id }) else { return }
-        for m in toutes[i].moments {
-            try? FileManager.default.removeItem(at: dossier.appendingPathComponent(m.fichier))
+    func delete(_ id: UUID) {
+        var all = list()
+        guard let i = all.firstIndex(where: { $0.id == id }) else { return }
+        for m in all[i].moments {
+            try? FileManager.default.removeItem(at: folder.appendingPathComponent(m.file))
         }
-        toutes.remove(at: i)
-        ecrire(toutes)
+        all.remove(at: i)
+        write(all)
     }
 
-    /// Écrit l'index, et fait le ménage : les parties en trop s'en vont avec
-    /// leurs fichiers, sans quoi le dossier grossirait sans fin.
-    private func ecrire(_ liste: [PartieArchivee]) {
-        var l = liste.sorted { $0.derniere > $1.derniere }
-        // Une partie sans aucun instant n'a rien à faire dans la liste.
+    /// Writes the index, and tidies up: games over the limit leave with their
+    /// files, or the folder would grow without end.
+    private func write(_ list: [ArchivedGame]) {
+        var l = list.sorted { $0.last > $1.last }
+        // A game with no moments at all has no business in the list.
         l.removeAll { $0.moments.isEmpty }
-        while l.count > Archives.partiesGardees {
-            let vieille = l.removeLast()
-            for m in vieille.moments {
-                try? FileManager.default.removeItem(at: dossier.appendingPathComponent(m.fichier))
+        while l.count > Archives.gamesKept {
+            let oldest = l.removeLast()
+            for m in oldest.moments {
+                try? FileManager.default.removeItem(at: folder.appendingPathComponent(m.file))
             }
         }
         guard let data = try? JSONEncoder().encode(l) else { return }

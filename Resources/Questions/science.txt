@@ -1,0 +1,481 @@
+# Science & Nature — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Nothing here is a live figure. Records fall and instruments improve, and a
+# quiz that quotes the tallest, fastest or newest anything is a quiz that
+# goes wrong quietly. Constants, structures and settled findings only.
+
+# What this theme declares — readable name, icon, color, and its
+# place in the grid. These lines are not comments: without
+# them the theme has no name.
+
+! id      | science
+! name    | Science & Nature
+! icon    | leaf
+! tint    | 0.34 0.65 0.42
+! rank    | 2
+
+
+# --- The human body ---
+
+E | How many bones are in an adult human body? | 206 | 186 | 226 | 306
+E | Which organ pumps blood around the body? | The heart | The liver | The lungs | The kidneys
+E | Which is the largest organ of the human body? | The skin | The liver | The brain | The lungs
+E | How many chambers does the human heart have? | Four | Two | Three | Six
+E | Which organ do we use to breathe? | The lungs | The heart | The stomach | The liver
+E | What carries oxygen in the blood? | Red blood cells | White blood cells | Platelets | Plasma
+E | How many teeth does a typical adult have? | 32 | 28 | 36 | 30
+M | Which is the largest internal organ? | The liver | The heart | The lungs | The kidneys
+M | Which is the smallest bone in the human body? | The stapes | The femur | The hyoid | The coccyx
+M | Which is the longest bone in the human body? | The femur | The tibia | The humerus | The spine
+M | Which protein in red blood cells binds oxygen? | Hemoglobin | Insulin | Keratin | Collagen
+M | Which organ filters waste from the blood? | The kidneys | The liver | The spleen | The pancreas
+M | How many pairs of ribs does a typical adult have? | Twelve | Ten | Fourteen | Eleven
+M | Which part of the brain controls balance and coordination? | The cerebellum | The cerebrum | The medulla | The thalamus
+M | Which blood type is called the universal donor? | O negative | AB positive | A positive | B negative
+M | Which system includes the bones and joints? | The skeletal system | The muscular system | The nervous system | The endocrine system
+M | Which vitamin does the skin make from sunlight? | Vitamin D | Vitamin C | Vitamin A | Vitamin K
+H | Which organ produces insulin? | The pancreas | The liver | The thyroid | The adrenal gland
+H | Which is the largest artery in the body? | The aorta | The carotid | The femoral | The pulmonary artery
+H | How many chromosomes does a typical human cell contain? | 46 | 23 | 48 | 44
+H | Which part of the eye controls how much light enters? | The iris | The retina | The cornea | The lens
+H | Which fluid-filled canals in the ear help with balance? | The semicircular canals | The cochlea | The eustachian tube | The ossicles
+H | Which muscle separates the chest from the abdomen? | The diaphragm | The pectoralis | The oblique | The intercostal
+H | Which cells in the blood fight infection? | White blood cells | Red blood cells | Platelets | Stem cells
+H | Which gland is called the master gland? | The pituitary | The thyroid | The adrenal | The pineal
+H | Which part of the neuron carries signals away from the cell body? | The axon | The dendrite | The synapse | The myelin
+H | How many lobes does the right lung have? | Three | Two | Four | Five
+
+# --- Animals ---
+
+E | Which is the largest animal on Earth? | The blue whale | The African elephant | The giraffe | The whale shark
+E | Which is the fastest land animal? | The cheetah | The lion | The pronghorn | The horse
+E | How many legs does a spider have? | Eight | Six | Ten | Four
+E | How many legs does an insect have? | Six | Eight | Four | Ten
+E | Which mammal can truly fly? | The bat | The flying squirrel | The colugo | The sugar glider
+E | What is a baby kangaroo called? | A joey | A cub | A kit | A calf
+E | Which bird is the tallest? | The ostrich | The emu | The crane | The condor
+E | Which sea creature has eight arms? | The octopus | The squid | The jellyfish | The starfish
+E | What do we call an animal that eats only plants? | A herbivore | A carnivore | An omnivore | A scavenger
+M | How many hearts does an octopus have? | Three | One | Two | Four
+M | Which is the largest living land animal? | The African elephant | The white rhinoceros | The hippopotamus | The giraffe
+M | Which bird reaches the highest speed in a dive? | The peregrine falcon | The golden eagle | The swift | The albatross
+M | Which is the only mammal that lays eggs alongside the echidna? | The platypus | The opossum | The pangolin | The armadillo
+M | Which animals are the closest living relatives of birds? | Crocodiles | Lizards | Turtles | Snakes
+M | What is a group of lions called? | A pride | A pack | A herd | A troop
+M | What is a group of crows called? | A murder | A flock | A gaggle | A parliament
+M | Which whale has a long spiral tusk? | The narwhal | The beluga | The sperm whale | The orca
+M | Which class of animals do frogs belong to? | Amphibians | Reptiles | Fish | Mammals
+M | Which sense do bats use most to navigate at night? | Hearing | Sight | Smell | Touch
+M | What is the process by which a caterpillar becomes a butterfly? | Metamorphosis | Mitosis | Migration | Molting
+H | How many stomach compartments does a cow have? | Four | Two | Three | One
+H | Which is the largest species of shark? | The whale shark | The great white | The basking shark | The tiger shark
+H | Which animal has the longest recorded lifespan? | The Greenland shark | The blue whale | The elephant | The tortoise
+H | Which bird lays the largest egg? | The ostrich | The emu | The albatross | The condor
+H | Which insect order includes beetles? | Coleoptera | Diptera | Hymenoptera | Lepidoptera
+H | What is a group of jellyfish called? | A smack | A school | A shoal | A pod
+H | Which animal's blood is blue because of copper? | The horseshoe crab | The octopus | The lobster | The squid
+H | Which mammal has the longest migration? | The gray whale | The caribou | The wildebeest | The elephant seal
+H | Which venomous snake is the longest in the world? | The king cobra | The black mamba | The taipan | The bushmaster
+H | Which term describes an animal active at twilight? | Crepuscular | Nocturnal | Diurnal | Fossorial
+
+# --- Plants and living things ---
+
+E | What gas do plants take in for photosynthesis? | Carbon dioxide | Oxygen | Nitrogen | Hydrogen
+E | What gas do plants release during photosynthesis? | Oxygen | Carbon dioxide | Methane | Nitrogen
+E | Which part of a plant absorbs water from the soil? | The roots | The leaves | The stem | The flower
+E | What is the green pigment in leaves called? | Chlorophyll | Carotene | Melanin | Keratin
+E | Which tree is the tallest species in the world? | The coast redwood | The Douglas fir | The giant sequoia | The eucalyptus
+M | Which process turns pollen into seed after transfer? | Fertilization | Germination | Photosynthesis | Transpiration
+M | What is the loss of water vapor through leaves called? | Transpiration | Respiration | Condensation | Precipitation
+M | Which kingdom do mushrooms belong to? | Fungi | Plants | Bacteria | Protists
+M | Which plant family includes wheat, rice and corn? | Grasses | Legumes | Nightshades | Composites
+M | Which nutrient do legumes add to soil with the help of bacteria? | Nitrogen | Phosphorus | Potassium | Calcium
+M | What do we call a plant that lives for only one growing season? | An annual | A perennial | A biennial | A succulent
+M | Which trees keep their leaves all year? | Evergreens | Deciduous trees | Hardwoods | Softwoods
+H | Which structure in a plant cell carries out photosynthesis? | The chloroplast | The mitochondrion | The nucleus | The ribosome
+H | Which tissue carries water up a plant stem? | Xylem | Phloem | Cambium | Cortex
+H | Which tissue carries sugars around a plant? | Phloem | Xylem | Epidermis | Pith
+H | Which tree species is the oldest known individual? | The bristlecone pine | The baobab | The yew | The olive
+H | Which pores on a leaf open to exchange gases? | Stomata | Cuticles | Veins | Nodes
+H | What do we call the study of fungi? | Mycology | Botany | Entomology | Herpetology
+H | Which desert plant family includes the saguaro? | The cactus family | The agave family | The yucca family | The euphorbia family
+H | Which plant hormone drives growth toward light? | Auxin | Ethylene | Gibberellin | Cytokinin
+
+# --- Chemistry ---
+
+E | What is the chemical formula of water? | H2O | CO2 | NaCl | O2
+E | Which gas do humans need to breathe? | Oxygen | Carbon dioxide | Nitrogen | Helium
+E | What is the chemical symbol for gold? | Au | Go | Gd | Ag
+E | What is the chemical symbol for oxygen? | O | Ox | O2 | Om
+E | What is table salt made of? | Sodium and chlorine | Sodium and carbon | Potassium and chlorine | Calcium and sodium
+E | Which gas makes up most of the air we breathe? | Nitrogen | Oxygen | Carbon dioxide | Argon
+M | What is the chemical symbol for iron? | Fe | Ir | In | I
+M | What is the chemical symbol for silver? | Ag | Si | Sv | Au
+M | What is the chemical symbol for sodium? | Na | So | Sd | S
+M | What is the chemical symbol for potassium? | K | P | Po | Pt
+M | Which element has the atomic number one? | Hydrogen | Helium | Oxygen | Carbon
+M | What pH value is neutral? | 7 | 0 | 14 | 5
+M | Which gas is released when baking soda meets vinegar? | Carbon dioxide | Oxygen | Hydrogen | Methane
+M | Which particle carries a negative charge in an atom? | The electron | The proton | The neutron | The nucleus
+M | Which particle in the nucleus has no charge? | The neutron | The proton | The electron | The positron
+M | What is the lightest element? | Hydrogen | Helium | Lithium | Carbon
+M | Which family of elements does helium belong to? | The noble gases | The halogens | The alkali metals | The metalloids
+H | What is the chemical symbol for tin? | Sn | Ti | Tn | T
+H | What is the chemical symbol for lead? | Pb | Ld | Le | Pl
+H | What is the chemical symbol for tungsten? | W | Tu | Tg | Ts
+H | Which element is the most abundant in the universe? | Hydrogen | Helium | Oxygen | Carbon
+H | Which element is the most abundant in Earth's crust? | Oxygen | Silicon | Iron | Aluminum
+H | Which scientist arranged the first widely used periodic table? | Dmitri Mendeleev | Antoine Lavoisier | John Dalton | Robert Boyle
+H | What do we call a substance that speeds a reaction without being used up? | A catalyst | A reagent | A solvent | An inhibitor
+H | Which acid is found in the human stomach? | Hydrochloric acid | Sulfuric acid | Acetic acid | Citric acid
+H | Which bond forms when atoms share electrons? | A covalent bond | An ionic bond | A metallic bond | A hydrogen bond
+H | How many naturally occurring elements are there roughly? | Ninety-four | Sixty | One hundred eighteen | One hundred fifty
+H | Which state of matter has a definite volume but no definite shape? | Liquid | Solid | Gas | Plasma
+
+# --- Physics and forces ---
+
+E | Which force pulls objects toward the Earth? | Gravity | Magnetism | Friction | Tension
+E | Which travels faster, light or sound? | Light | Sound | They travel the same | It depends on color
+E | What form of energy does a moving object have? | Kinetic energy | Potential energy | Thermal energy | Chemical energy
+E | Which simple machine is a ramp? | An inclined plane | A lever | A pulley | A wedge
+E | What do we call the force that slows a sliding object? | Friction | Gravity | Inertia | Momentum
+M | Roughly how fast does light travel in a vacuum? | 186,000 miles per second | 186,000 miles per hour | 1,860 miles per second | 18,600 miles per second
+M | Which scientist described three laws of motion? | Isaac Newton | Albert Einstein | Galileo Galilei | Niels Bohr
+M | What unit measures electric current? | The ampere | The volt | The watt | The ohm
+M | What unit measures electrical resistance? | The ohm | The volt | The watt | The joule
+M | What unit measures force in the metric system? | The newton | The joule | The pascal | The watt
+M | Which kind of energy is stored by position or height? | Potential energy | Kinetic energy | Nuclear energy | Sound energy
+M | Through what does sound travel fastest? | Steel | Air | Water | A vacuum
+M | Which color of visible light has the shortest wavelength? | Violet | Red | Green | Yellow
+M | What happens to light when it passes from air into water? | It refracts | It stops | It reflects entirely | It turns to heat
+M | Which law says that for every action there is an equal and opposite reaction? | Newton's third law | Newton's first law | Newton's second law | Boyle's law
+H | What unit measures power? | The watt | The joule | The newton | The ampere
+H | What unit measures frequency? | The hertz | The decibel | The lumen | The tesla
+H | Which particle carries the electromagnetic force? | The photon | The electron | The gluon | The neutrino
+H | Which scientist proposed the theory of general relativity? | Albert Einstein | Isaac Newton | Max Planck | Werner Heisenberg
+H | What is the temperature of absolute zero in Celsius? | Minus 273 degrees | Minus 100 degrees | Minus 460 degrees | Zero degrees
+H | Which law states that energy cannot be created or destroyed? | The conservation of energy | The second law of thermodynamics | Ohm's law | Hooke's law
+H | Which effect explains the change in pitch of a passing siren? | The Doppler effect | The Coriolis effect | The photoelectric effect | The Hall effect
+H | Which type of radiation has the greatest penetrating power? | Gamma | Alpha | Beta | Ultraviolet
+H | What does a transformer change in an electrical circuit? | The voltage | The frequency | The resistance | The power
+H | Which scientist first measured the acceleration of falling bodies? | Galileo Galilei | Isaac Newton | Johannes Kepler | Blaise Pascal
+
+# --- Space ---
+
+E | How many planets orbit the Sun? | Eight | Nine | Seven | Ten
+E | Which planet is known as the red planet? | Mars | Venus | Jupiter | Mercury
+E | Which is the largest planet in the solar system? | Jupiter | Saturn | Neptune | Earth
+E | Which planet is closest to the Sun? | Mercury | Venus | Earth | Mars
+E | Which planet is famous for its rings? | Saturn | Jupiter | Uranus | Neptune
+E | What is the Sun? | A star | A planet | A comet | A galaxy
+E | What is our galaxy called? | The Milky Way | Andromeda | The Local Group | Orion
+E | Which body orbits the Earth? | The Moon | The Sun | Mars | Venus
+M | Which planet is hottest at its surface? | Venus | Mercury | Mars | Jupiter
+M | How long does light from the Sun take to reach Earth? | About eight minutes | About eight seconds | About eight hours | About one minute
+M | What does a light-year measure? | Distance | Time | Brightness | Mass
+M | Which planet has the most moons among the giants? | Saturn | Jupiter | Uranus | Neptune
+M | Which planet spins on its side? | Uranus | Neptune | Venus | Saturn
+M | Which planet rotates backwards compared with most others? | Venus | Mars | Jupiter | Mercury
+M | What is the name of the belt of rocks between Mars and Jupiter? | The asteroid belt | The Kuiper belt | The Oort cloud | The Van Allen belt
+M | What causes the phases of the Moon? | Its position relative to Earth and Sun | Earth's shadow | Clouds in space | Its own rotation only
+M | What is a solar eclipse? | The Moon passing in front of the Sun | Earth passing in front of the Sun | The Sun going dark | The Moon entering Earth's shadow
+M | Which force keeps planets in orbit? | Gravity | Magnetism | Inertia alone | Centrifugal force
+H | Which is the smallest planet in the solar system? | Mercury | Mars | Venus | Pluto
+H | Which planet has the shortest day? | Jupiter | Mercury | Earth | Mars
+H | What is the name of the cloud of icy bodies far beyond Neptune? | The Oort cloud | The Kuiper belt | The asteroid belt | The heliosphere
+H | Which telescope was launched into orbit in 1990? | Hubble | Kepler | Spitzer | Chandra
+H | Which is the closest star system to the Sun? | Alpha Centauri | Sirius | Barnard's Star | Vega
+H | What do we call a star that suddenly brightens as it explodes? | A supernova | A quasar | A pulsar | A nebula
+H | What is a rapidly spinning neutron star called? | A pulsar | A quasar | A magnetar | A white dwarf
+H | Which layer of the Sun do we normally see? | The photosphere | The corona | The chromosphere | The core
+H | What will the Sun most likely become at the end of its life? | A white dwarf | A black hole | A neutron star | A supernova remnant
+H | Which spacecraft first flew past Pluto, in 2015? | New Horizons | Voyager 1 | Cassini | Galileo
+H | Which two Voyager probes left the solar system's edge? | Voyager 1 and 2 | Pioneer 1 and 2 | Mariner 1 and 2 | Viking 1 and 2
+
+# --- The Earth ---
+
+E | What are the three layers of the Earth called? | Crust, mantle, core | Crust, magma, core | Surface, middle, base | Shell, mantle, center
+E | What is molten rock beneath the surface called? | Magma | Lava | Basalt | Obsidian
+E | What is molten rock that reaches the surface called? | Lava | Magma | Granite | Ash
+E | What does a seismograph measure? | Earthquakes | Wind speed | Air pressure | Rainfall
+E | What is the hardest natural mineral? | Diamond | Quartz | Corundum | Topaz
+M | What are the three main kinds of rock? | Igneous, sedimentary, metamorphic | Volcanic, sandy, hard | Basalt, granite, marble | Mineral, crystal, fossil
+M | Which scale rates mineral hardness? | The Mohs scale | The Richter scale | The Beaufort scale | The Kelvin scale
+M | What are the large moving pieces of Earth's outer shell called? | Tectonic plates | Continental shelves | Crust blocks | Basins
+M | Which rock forms from cooled magma? | Igneous rock | Sedimentary rock | Metamorphic rock | Fossil rock
+M | Which rock forms from layers of pressed sediment? | Sedimentary rock | Igneous rock | Metamorphic rock | Volcanic rock
+M | Which process changes water from liquid to gas? | Evaporation | Condensation | Precipitation | Sublimation
+M | Which process changes water vapor into liquid? | Condensation | Evaporation | Precipitation | Infiltration
+M | What is the ring of volcanoes around the Pacific called? | The Ring of Fire | The Pacific Belt | The Volcano Arc | The Andes Chain
+M | Which layer of the atmosphere holds most weather? | The troposphere | The stratosphere | The mesosphere | The thermosphere
+M | Which layer of the atmosphere contains the ozone layer? | The stratosphere | The troposphere | The mesosphere | The exosphere
+H | What is the point on the surface above an earthquake's origin called? | The epicenter | The focus | The fault line | The rift
+H | What is the underground origin point of an earthquake called? | The focus | The epicenter | The hypocenter zone | The fault plane
+H | Which gas makes up most of Earth's atmosphere? | Nitrogen | Oxygen | Argon | Carbon dioxide
+H | What is the boundary between two plates pulling apart called? | A divergent boundary | A convergent boundary | A transform boundary | A subduction zone
+H | Which limestone landscape features caves and sinkholes? | Karst | Tundra | Moraine | Loess
+H | Which rock is limestone changed into by heat and pressure? | Marble | Slate | Granite | Basalt
+H | Which rock is shale changed into by heat and pressure? | Slate | Marble | Quartzite | Gneiss
+H | Which era are we living in now? | The Cenozoic | The Mesozoic | The Paleozoic | The Precambrian
+H | Which period saw the last of the non-bird dinosaurs? | The Cretaceous | The Jurassic | The Triassic | The Permian
+H | What is the supercontinent that broke apart called? | Pangaea | Gondwana | Laurasia | Rodinia
+
+# --- Scientists and discoveries ---
+
+E | Who proposed the theory of evolution by natural selection? | Charles Darwin | Gregor Mendel | Louis Pasteur | Carl Linnaeus
+E | Who is famous for the equation relating energy and mass? | Albert Einstein | Isaac Newton | Stephen Hawking | Niels Bohr
+M | Who founded the study of heredity with pea plants? | Gregor Mendel | Charles Darwin | Thomas Morgan | Rosalind Franklin
+M | Who developed the system of naming species with two Latin names? | Carl Linnaeus | Charles Darwin | Georges Cuvier | Jean-Baptiste Lamarck
+M | Who showed that germs cause disease and gave his name to a process? | Louis Pasteur | Robert Koch | Joseph Lister | Edward Jenner
+M | Which scientist won Nobel Prizes in two different sciences? | Marie Curie | Albert Einstein | Linus Pauling | Ernest Rutherford
+M | Who first described the circulation of blood in 1628? | William Harvey | Andreas Vesalius | Galen | Marcello Malpighi
+H | Whose X-ray images were key to finding the shape of DNA? | Rosalind Franklin | Barbara McClintock | Dorothy Hodgkin | Lise Meitner
+H | Who developed the first vaccine, against smallpox? | Edward Jenner | Louis Pasteur | Jonas Salk | Robert Koch
+H | Which physicist described the structure of the atom with a small nucleus? | Ernest Rutherford | J. J. Thomson | Niels Bohr | James Chadwick
+H | Who discovered the electron in 1897? | J. J. Thomson | Ernest Rutherford | Robert Millikan | James Chadwick
+H | Who discovered the neutron in 1932? | James Chadwick | Ernest Rutherford | Niels Bohr | Enrico Fermi
+H | Which astronomer showed that the universe is expanding? | Edwin Hubble | Carl Sagan | Georges Lemaitre | Fred Hoyle
+H | Which biologist first observed cells in cork? | Robert Hooke | Antonie van Leeuwenhoek | Louis Pasteur | Matthias Schleiden
+H | Who first saw microorganisms through a homemade microscope? | Antonie van Leeuwenhoek | Robert Hooke | Louis Pasteur | Robert Koch
+H | Which chemist is called the father of modern chemistry for naming oxygen? | Antoine Lavoisier | Robert Boyle | John Dalton | Joseph Priestley
+
+# --- Measurement and everyday science ---
+
+E | At what temperature does water freeze in Fahrenheit? | 32 degrees | 0 degrees | 100 degrees | 212 degrees
+E | At what temperature does water boil in Fahrenheit at sea level? | 212 degrees | 100 degrees | 180 degrees | 220 degrees
+E | At what temperature does water boil in Celsius at sea level? | 100 degrees | 212 degrees | 90 degrees | 0 degrees
+E | How many inches are in a foot? | Twelve | Ten | Sixteen | Fourteen
+E | How many feet are in a mile? | 5,280 | 1,000 | 3,600 | 5,000
+E | What instrument measures temperature? | A thermometer | A barometer | A hygrometer | An anemometer
+M | What instrument measures air pressure? | A barometer | A thermometer | An anemometer | A hygrometer
+M | What instrument measures wind speed? | An anemometer | A barometer | A weather vane | A rain gauge
+M | How many ounces are in a pound? | Sixteen | Twelve | Twenty | Ten
+M | How many centimeters are in a meter? | One hundred | Ten | One thousand | Fifty
+M | What does the SI unit kilogram measure? | Mass | Weight in pounds | Volume | Density
+M | Which scale of temperature starts at absolute zero? | Kelvin | Celsius | Fahrenheit | Rankine
+H | How many liters are in a cubic meter? | One thousand | One hundred | Ten thousand | Ten
+H | What does a hygrometer measure? | Humidity | Pressure | Rainfall | Sunlight
+H | How many yards are in a mile? | 1,760 | 1,000 | 2,000 | 1,500
+H | Which prefix means one billionth? | Nano | Micro | Milli | Pico
+H | Which prefix means one millionth? | Micro | Nano | Milli | Centi
+H | What does a Geiger counter detect? | Radiation | Sound | Magnetism | Heat
+
+# --- Ecology and food chains ---
+
+E | What do we call an animal that hunts other animals for food? | A predator | A prey | A scavenger | A parasite
+E | What is at the base of almost every food chain? | Plants | Insects | Predators | Fungi
+E | What do we call all the living things in one area and their surroundings? | An ecosystem | A population | A species | A biome
+M | What do we call an animal that eats both plants and meat? | An omnivore | A herbivore | A carnivore | A detritivore
+M | Which organisms break down dead matter and return nutrients to soil? | Decomposers | Producers | Consumers | Predators
+M | What do we call a relationship where both species benefit? | Mutualism | Parasitism | Commensalism | Competition
+M | What do we call a relationship where one benefits and the other is harmed? | Parasitism | Mutualism | Commensalism | Predation
+M | Which term describes a species found in only one place on Earth? | Endemic | Invasive | Migratory | Extinct
+M | What do we call a species brought in that harms local wildlife? | An invasive species | An endemic species | A keystone species | An indicator species
+M | Roughly how much energy passes to the next level of a food chain? | About ten percent | About fifty percent | About ninety percent | All of it
+H | What do we call a species whose loss would reshape its whole ecosystem? | A keystone species | An umbrella species | A pioneer species | A flagship species
+H | What do we call the gradual return of life to a cleared area? | Succession | Migration | Adaptation | Speciation
+H | Which cycle moves nitrogen between air, soil and living things? | The nitrogen cycle | The carbon cycle | The water cycle | The rock cycle
+H | Which biome is defined by permanently frozen subsoil? | Tundra | Taiga | Desert | Grassland
+H | What do we call the role a species plays in its ecosystem? | Its niche | Its habitat | Its range | Its territory
+H | Which term describes animals that sleep through the winter? | Hibernation | Estivation | Migration | Torpor
+H | Which term describes animals that sleep through hot, dry periods? | Estivation | Hibernation | Diapause | Brumation
+H | Which layer of the rainforest receives the most sunlight? | The emergent layer | The canopy | The understory | The forest floor
+
+# --- Cells and genetics ---
+
+E | What is the basic unit of all living things? | The cell | The atom | The molecule | The organ
+E | What molecule carries genetic instructions? | DNA | RNA | ATP | Protein
+M | What is the control center of a cell called? | The nucleus | The cytoplasm | The membrane | The vacuole
+M | Which part of the cell releases energy from food? | The mitochondrion | The nucleus | The ribosome | The lysosome
+M | Which shape describes the DNA molecule? | A double helix | A single spiral | A ladder loop | A branched chain
+M | Which process divides one cell into two identical cells? | Mitosis | Meiosis | Fertilization | Osmosis
+M | Which process makes sex cells with half the chromosomes? | Meiosis | Mitosis | Binary fission | Budding
+M | Which cells have no nucleus? | Bacteria | Plant cells | Animal cells | Fungal cells
+M | Which part of the cell makes proteins? | The ribosome | The nucleus | The vacuole | The chloroplast
+M | What do we call different versions of the same gene? | Alleles | Chromosomes | Genomes | Codons
+H | How many bases make up the genetic code of DNA? | Four | Two | Twenty | Sixty-four
+H | Which base pairs with adenine in DNA? | Thymine | Guanine | Cytosine | Uracil
+H | Which base replaces thymine in RNA? | Uracil | Cytosine | Guanine | Adenine
+H | What do we call an organism's full set of genetic material? | Its genome | Its phenotype | Its karyotype | Its proteome
+H | What do we call an organism's observable traits? | Its phenotype | Its genotype | Its genome | Its allele set
+H | Which chromosome pair determines sex in humans? | The twenty-third | The first | The twenty-second | The twentieth
+H | Which molecule carries the genetic message out of the nucleus? | Messenger RNA | Transfer RNA | DNA polymerase | ATP
+H | What do we call a permanent change in a DNA sequence? | A mutation | A translation | A transcription | A replication
+H | Which membrane process moves water across a barrier? | Osmosis | Diffusion | Active transport | Filtration
+H | Which term describes cells that can become many different types? | Stem cells | Somatic cells | Germ cells | Gametes
+
+# --- Light, sound and waves ---
+
+E | What do we call the bouncing of light off a mirror? | Reflection | Refraction | Diffraction | Absorption
+E | How many colors are usually named in a rainbow? | Seven | Five | Six | Eight
+E | Which color of light is bent least by a prism? | Red | Violet | Blue | Green
+M | What do we call the bending of light as it changes medium? | Refraction | Reflection | Diffusion | Dispersion
+M | Which instrument uses lenses to see distant objects? | A telescope | A microscope | A periscope | A kaleidoscope
+M | Which unit measures the loudness of sound? | The decibel | The hertz | The watt | The lumen
+M | What does the frequency of a sound wave determine? | Its pitch | Its loudness | Its speed | Its direction
+M | Can sound travel through a vacuum? | No, it needs a medium | Yes, like light | Only at high volume | Only at low pitch
+M | Which kind of wave is sound? | A longitudinal wave | A transverse wave | An electromagnetic wave | A standing wave
+M | Which kind of wave is light? | An electromagnetic wave | A longitudinal wave | A sound wave | A mechanical wave
+H | Which part of the electromagnetic spectrum has the longest wavelength? | Radio waves | Gamma rays | X-rays | Ultraviolet
+H | Which invisible light causes sunburn? | Ultraviolet | Infrared | Radio | Microwave
+H | Which invisible light do we feel as heat from a fire? | Infrared | Ultraviolet | X-rays | Gamma rays
+H | What do we call the splitting of white light into colors? | Dispersion | Reflection | Diffraction | Polarization
+H | What is the highest point of a wave called? | The crest | The trough | The node | The amplitude
+H | What is the distance between two wave crests called? | The wavelength | The amplitude | The frequency | The period
+H | What do we call the bending of waves around an obstacle? | Diffraction | Refraction | Reflection | Interference
+H | Why does a straw look bent in a glass of water? | Light refracts at the surface | The glass magnifies it | Water absorbs light | The straw actually bends
+H | What do we call sound above the range of human hearing? | Ultrasound | Infrasound | Supersound | Hypersound
+H | Roughly how fast does sound travel in air? | About 767 miles per hour | About 186,000 miles per hour | About 100 miles per hour | About 3,000 miles per hour
+
+# --- Electricity and magnetism ---
+
+E | Which material lets electricity flow easily? | Copper | Rubber | Glass | Wood
+E | Which material blocks the flow of electricity? | Rubber | Copper | Silver | Aluminum
+E | What are the two poles of a magnet called? | North and south | Positive and negative | Plus and minus | Left and right
+E | What happens when two north poles of magnets are brought together? | They repel | They attract | Nothing happens | They stick briefly
+M | What does a battery store? | Chemical energy | Electrical charge alone | Heat | Light
+M | What do we call a complete path that electricity can flow around? | A circuit | A conductor | A current | A capacitor
+M | In which circuit do all parts share a single path? | A series circuit | A parallel circuit | A closed loop | A short circuit
+M | What is the flow of electric charge called? | Current | Voltage | Resistance | Power
+M | Which unit measures electric potential difference? | The volt | The ampere | The ohm | The coulomb
+M | What device turns electrical energy into motion? | A motor | A generator | A transformer | A resistor
+M | What device turns motion into electrical energy? | A generator | A motor | A battery | A capacitor
+H | Which law relates voltage, current and resistance? | Ohm's law | Faraday's law | Coulomb's law | Lenz's law
+H | Which scientist gave his name to the unit of electric current? | Andre-Marie Ampere | Alessandro Volta | Georg Ohm | Michael Faraday
+H | Which scientist showed that a changing magnetic field creates current? | Michael Faraday | James Maxwell | Nikola Tesla | Heinrich Hertz
+H | Which metal is most commonly used in household wiring? | Copper | Iron | Steel | Zinc
+H | What surrounds the Earth and deflects charged particles from the Sun? | The magnetosphere | The ionosphere | The ozone layer | The exosphere
+H | Which display in polar skies is caused by solar particles? | The aurora | The zodiacal light | Airglow | The green flash
+H | Which type of current reverses direction many times a second? | Alternating current | Direct current | Static current | Induced current
+H | What does a fuse do in a circuit? | It breaks the circuit if current is too high | It stores charge | It boosts voltage | It reduces resistance
+H | Which particle's flow makes up current in a metal wire? | Electrons | Protons | Neutrons | Ions
+
+# --- Fossils and deep time ---
+
+E | What do we call the preserved remains of ancient life in rock? | Fossils | Minerals | Crystals | Sediments
+E | Which giant reptiles died out about sixty-six million years ago? | The dinosaurs | The mammoths | The trilobites | The pterosaurs
+E | Which dinosaur is known for its huge skull and small arms? | Tyrannosaurus rex | Stegosaurus | Triceratops | Brachiosaurus
+M | Which dinosaur had three horns and a bony frill? | Triceratops | Stegosaurus | Ankylosaurus | Allosaurus
+M | Which dinosaur had plates along its back and spikes on its tail? | Stegosaurus | Triceratops | Iguanodon | Diplodocus
+M | What is the study of fossils called? | Paleontology | Archaeology | Geology | Anthropology
+M | Which flying reptiles lived alongside the dinosaurs? | Pterosaurs | Pteranodons only | Archaeopteryx | Ichthyosaurs
+M | What most likely ended the age of dinosaurs? | An asteroid impact | An ice age | A pandemic | A supernova
+H | Which early bird-like fossil links dinosaurs and birds? | Archaeopteryx | Velociraptor | Compsognathus | Deinonychus
+H | Which extinct sea creatures are common fossils of the Paleozoic? | Trilobites | Ammonites | Belemnites | Crinoids
+H | Which method dates organic remains up to about fifty thousand years? | Carbon dating | Potassium dating | Uranium dating | Tree ring dating
+H | Which epoch is known as the last great ice age? | The Pleistocene | The Holocene | The Miocene | The Eocene
+H | Which fossil hominin skeleton found in Ethiopia is called Lucy? | Australopithecus afarensis | Homo habilis | Homo erectus | Neanderthal
+H | Which extinct elephant relative roamed the ice age north? | The woolly mammoth | The mastodon only | The gomphothere | The deinotherium
+H | Which sticky tree resin preserves insects as fossils? | Amber | Tar | Resinite | Copal glass
+H | Which California site preserves ice age animals in tar? | La Brea | Dinosaur Ridge | Ghost Ranch | Como Bluff
+
+# --- Water and the ocean ---
+
+E | What are the two gases that make up water? | Hydrogen and oxygen | Hydrogen and nitrogen | Oxygen and carbon | Helium and oxygen
+E | What do we call the rise and fall of the sea each day? | Tides | Currents | Waves | Swells
+M | What causes the tides? | The Moon's gravity | The wind | Earth's rotation alone | Ocean currents
+M | What do we call the coral structures built by tiny animals? | Coral reefs | Atolls only | Sea gardens | Kelp beds
+M | Which zone of the ocean receives enough light for photosynthesis? | The sunlight zone | The twilight zone | The midnight zone | The abyss
+M | What do we call water that has little or no salt? | Fresh water | Brackish water | Brine | Hard water
+M | Roughly what share of Earth's water is fresh? | About three percent | About thirty percent | About ten percent | About half
+M | Which state of water is less dense than its liquid form? | Ice | Steam | Brine | Vapor at depth
+H | What do we call the mixing zone where a river meets the sea? | An estuary | A delta | A lagoon | A fjord
+H | Which large forests of algae grow in cold coastal waters? | Kelp forests | Mangroves | Seagrass meadows | Coral gardens
+H | Which layer of the ocean shows a sharp temperature drop with depth? | The thermocline | The halocline | The pycnocline | The euphotic zone
+H | What do we call the process by which oceans absorb carbon dioxide and grow more acidic? | Ocean acidification | Eutrophication | Desalination | Stratification
+H | Which trees grow in salt water along tropical coasts? | Mangroves | Willows | Cypresses | Baobabs
+H | What do we call an underwater mountain that does not reach the surface? | A seamount | An atoll | A guyot ridge | A shelf break
+H | Which ridge marks where new ocean floor is created? | The mid-ocean ridge | The continental shelf | The abyssal plain | The trench wall
+H | Which process removes salt to make seawater drinkable? | Desalination | Filtration | Distillation only | Chlorination
+
+# --- The sky ---
+
+E | Which clouds are tall and bring thunderstorms? | Cumulonimbus | Cirrus | Stratus | Altocumulus
+E | What causes thunder? | Rapidly expanding air heated by lightning | Clouds colliding | Rain hitting the ground | Wind in the trees
+E | Which wispy clouds form highest in the sky? | Cirrus | Stratus | Cumulus | Nimbostratus
+M | What do we call frozen rain that falls as pellets? | Sleet | Hail | Snow | Graupel
+M | What are the balls of ice thrown up and down inside a storm cloud? | Hail | Sleet | Snow pellets | Frost
+M | Which instrument measures rainfall? | A rain gauge | A barometer | A hygrometer | An anemometer
+M | What do we call the boundary between two air masses? | A front | A ridge | A trough | An isobar
+M | Which lines on a weather map join points of equal pressure? | Isobars | Isotherms | Contours | Meridians
+M | What do we call the layer of gases held around Earth by gravity? | The atmosphere | The biosphere | The hydrosphere | The lithosphere
+H | Which cloud type forms a low, flat, grey sheet? | Stratus | Cirrus | Cumulus | Cumulonimbus
+H | Which effect deflects winds because the Earth rotates? | The Coriolis effect | The Doppler effect | The Venturi effect | The Bernoulli effect
+H | Which winds blow steadily toward the Equator from the east? | The trade winds | The westerlies | The polar easterlies | The jet stream
+H | Which fast, high river of air steers storms across America? | The jet stream | The Gulf Stream | The trade winds | The monsoon
+H | What do we call the temperature at which air becomes saturated? | The dew point | The freezing point | The lapse rate | The flash point
+H | Which gas layer high above the ground blocks much ultraviolet light? | The ozone layer | The ionosphere | The mesosphere | The exosphere
+H | What do we call a spinning column of air over water? | A waterspout | A tornado | A dust devil | A microburst
+
+# --- Health and medicine ---
+
+E | Which vitamin do we get most from citrus fruit? | Vitamin C | Vitamin D | Vitamin B12 | Vitamin K
+E | Which mineral builds strong bones and teeth? | Calcium | Iron | Zinc | Sodium
+E | Which food group is the body's main source of quick energy? | Carbohydrates | Fats | Proteins | Vitamins
+M | Which mineral does hemoglobin need to carry oxygen? | Iron | Calcium | Magnesium | Zinc
+M | Which vitamin deficiency causes scurvy? | Vitamin C | Vitamin A | Vitamin D | Vitamin B1
+M | Which vitamin deficiency causes rickets in children? | Vitamin D | Vitamin C | Vitamin E | Vitamin B12
+M | What do we call medicines that kill or stop bacteria? | Antibiotics | Antivirals | Analgesics | Antihistamines
+M | Do antibiotics work against viruses? | No, only against bacteria | Yes, against both | Only against strong viruses | Only in children
+M | Which organ is affected by hepatitis? | The liver | The lungs | The kidneys | The heart
+M | Which disease is caused by too little insulin activity? | Diabetes | Anemia | Asthma | Arthritis
+H | Which blood cells help clotting? | Platelets | Red blood cells | White blood cells | Plasma cells
+H | Which imaging technique uses magnetic fields and radio waves? | MRI | X-ray | Ultrasound | CT
+H | Which imaging technique uses sound waves to see inside the body? | Ultrasound | MRI | X-ray | PET
+H | Which measurement compares weight to height in adults? | Body mass index | Basal metabolic rate | Resting heart rate | Blood pressure
+H | What do the two numbers of a blood pressure reading measure? | Systolic and diastolic pressure | Pulse and pressure | Volume and rate | Upper and lower pulse
+H | Which system defends the body against infection? | The immune system | The lymphatic system alone | The endocrine system | The digestive system
+H | Which organ stores bile made by the liver? | The gallbladder | The pancreas | The spleen | The appendix
+H | Which part of the digestive tract absorbs most nutrients? | The small intestine | The stomach | The large intestine | The esophagus
+
+# --- Materials and more elements ---
+
+E | Which metal is liquid at room temperature? | Mercury | Lead | Tin | Zinc
+E | Which gas fills party balloons that float? | Helium | Hydrogen | Oxygen | Neon
+E | Which metal is the best everyday conductor of electricity? | Silver | Iron | Lead | Tin
+M | Which alloy is made of copper and tin? | Bronze | Brass | Steel | Pewter
+M | Which alloy is made of copper and zinc? | Brass | Bronze | Steel | Nickel silver
+M | Which alloy is made of iron and carbon? | Steel | Brass | Bronze | Solder
+M | Which element is used in pencil leads? | Carbon | Lead | Zinc | Graphite ore only
+M | Which gas gives soda its fizz? | Carbon dioxide | Oxygen | Nitrogen | Helium
+M | Which element do nuclear reactors most often use as fuel? | Uranium | Plutonium | Thorium | Radium
+H | Which two elements are named after Marie Curie's homeland and herself? | Polonium and curium | Radium and francium | Curium and radium | Polonium and radium
+H | Which element has the highest melting point? | Tungsten | Iron | Platinum | Titanium
+H | Which noble gas glows orange-red in a discharge tube? | Neon | Argon | Krypton | Xenon
+H | Which element makes up almost all of a diamond? | Carbon | Silicon | Boron | Quartz
+H | Which acid is used in car batteries? | Sulfuric acid | Hydrochloric acid | Nitric acid | Acetic acid
+H | Which substance has the chemical formula CH4? | Methane | Ethane | Propane | Butane
+H | Which everyday material is made mostly of silicon dioxide? | Glass | Plastic | Rubber | Ceramic clay
+H | Which process joins small molecules into long chains? | Polymerization | Distillation | Oxidation | Neutralization
+H | Which metal is added to iron to make it stainless? | Chromium | Nickel only | Zinc | Manganese
+
+# --- A last handful of creatures ---
+
+E | Which animal is known for changing color to match its surroundings? | The chameleon | The gecko | The iguana | The skink
+E | Which insect makes honey? | The honeybee | The wasp | The hornet | The bumblebee only
+E | Which bird cannot fly but swims very well? | The penguin | The ostrich | The kiwi | The rhea
+E | Which animal has the longest neck? | The giraffe | The camel | The ostrich | The llama
+M | Which animal is the largest big cat? | The tiger | The lion | The jaguar | The leopard
+M | Which shark must keep moving to breathe? | The great white | The nurse shark | The wobbegong | The angel shark
+M | Which mammal has the strongest bite force? | The hippopotamus | The lion | The grizzly bear | The wolf
+M | Which animal sleeps standing up and can lock its knees? | The horse | The cow | The elephant | The camel
+M | Which creature can regrow lost arms? | The starfish | The crab | The jellyfish | The clam
+M | Which amphibian can regrow limbs throughout its life? | The axolotl | The bullfrog | The toad | The newt only
+H | Which bird migrates farthest each year? | The arctic tern | The bar-tailed godwit | The albatross | The swallow
+H | Which mammal lives at the greatest depth? | The sperm whale | The elephant seal | The narwhal | The beaked whale
+H | Which animal has the largest eyes of any creature? | The colossal squid | The blue whale | The ostrich | The giant octopus
+H | Which insect order includes butterflies and moths? | Lepidoptera | Coleoptera | Odonata | Orthoptera
+H | Which term describes an animal with a backbone? | Vertebrate | Invertebrate | Arthropod | Mollusk
+H | Which group of animals includes crabs, spiders and insects? | Arthropods | Mollusks | Annelids | Echinoderms
+
+E | What do bees turn into honey? | Nectar | Sap | Pollen | Dew
+E | How many legs does a crab have? | Ten | Eight | Six | Twelve
+E | Which gas do we breathe out more of than we breathe in? | Carbon dioxide | Oxygen | Nitrogen | Argon
+E | What do we call animals that are active at night? | Nocturnal | Diurnal | Migratory | Dormant

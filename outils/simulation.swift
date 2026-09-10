@@ -1,16 +1,16 @@
 //
 //  simulation.swift
-//  Riskelo — outil, hors application
+//  Riskelo US — tool, outside the app
 //
-//  Mille parties en une seconde, machine contre machine.
+//  A thousand games in a second, machine against machine.
 //
-//  Aucun réglage de ce jeu n'a été choisi à vue : le sablier, l'écart de
-//  victoire, la compensation de rang, l'audace de l'adversaire sortent tous
-//  de ce banc d'essai. Il est ici pour qu'on puisse le refaire — changer une
-//  manette dans Rules.swift et savoir en dix secondes ce qu'elle coûte.
+//  Not one setting in this game was chosen by eye: the clock, the victory
+//  gap, the turn-order compensation, the opponent's boldness all come out of
+//  this test bench. It is here so it can be done again — change one lever in
+//  Rules.swift and know in ten seconds what it costs.
 //
-//  Ce fichier ne fait pas partie de la cible : le moteur étant du Swift pur,
-//  il se compile seul.
+//  This file is not part of the target: the engine being pure Swift, it
+//  compiles on its own.
 //
 //      swiftc -O -parse-as-library -o /tmp/sim \
 //          Sources/Engine/*.swift outils/simulation.swift && /tmp/sim
@@ -18,71 +18,71 @@
 
 import Foundation
 
-func partie(seed: UInt64, niveaux: [Double], rules: Rules, maxTours: Int = 400,
-            styles: [Bot.Style] = [])
--> (winner: Int?, tours: Int, duels: Int) {
-    let joueurs = niveaux.enumerated().map { i, n in
-        Player(id: i, name: "J\(i)",
-               kind: .machine(niveau: n,
-                              style: i < styles.count ? styles[i] : .forte))
+func runGame(seed: UInt64, levels: [Double], rules: Rules, board: Boards = .ring,
+             maxTurns: Int = 400, styles: [Bot.Style] = [])
+-> (winner: Int?, turns: Int, duels: Int) {
+    let players = levels.enumerated().map { i, n in
+        Player(id: i, name: "P\(i)",
+               kind: .machine(level: n,
+                              style: i < styles.count ? styles[i] : .strong))
     }
-    var g = GameState.start(players: joueurs, rules: rules, seed: seed)
-    var duels = 0, garde = 0
-    while !g.isOver && g.turn <= maxTours && garde < 500_000 {
-        garde += 1
-        let pas = BotRunner.step(&g)
-        if case .answered = pas { duels += 1 }
-        // Un tour qui ne bouge plus se solde : la machine a fini de jouer.
-        if pas == .idle, g.phase == .fortify { g.endTurn() }
+    var g = GameState.start(board: board, players: players, rules: rules, seed: seed)
+    var duels = 0, safety = 0
+    while !g.isOver && g.turn <= maxTurns && safety < 500_000 {
+        safety += 1
+        let step = BotRunner.step(&g)
+        if case .answered = step { duels += 1 }
+        // A turn that stops moving gets settled: the machine has finished
+        // playing.
+        if step == .idle, g.phase == .fortify { g.endTurn() }
     }
     if case let .finished(w) = g.phase { return (w, g.turn, duels) }
     return (nil, g.turn, duels)
 }
 
 @discardableResult
-func campagne(_ titre: String, niveaux: [Double], n: Int, rules: Rules = Rules(),
-              styles: [Bot.Style] = []) -> [Int] {
-    var victoires = [Int: Int](), inacheves = 0, toursTotal = 0, duelsTotal = 0
+func campaign(_ title: String, levels: [Double], n: Int, rules: Rules = Rules(),
+              board: Boards = .ring, styles: [Bot.Style] = []) -> [Int] {
+    var wins = [Int: Int](), unfinished = 0, totalTurns = 0, totalDuels = 0
     for i in 0 ..< n {
-        let r = partie(seed: UInt64(i &* 2_654_435_761 &+ 12_345), niveaux: niveaux,
-                       rules: rules, styles: styles)
-        if let w = r.winner { victoires[w, default: 0] += 1 } else { inacheves += 1 }
-        toursTotal += r.tours
-        duelsTotal += r.duels
+        let r = runGame(seed: UInt64(i &* 2_654_435_761 &+ 12_345), levels: levels,
+                        rules: rules, board: board, styles: styles)
+        if let w = r.winner { wins[w, default: 0] += 1 } else { unfinished += 1 }
+        totalTurns += r.turns
+        totalDuels += r.duels
     }
-    let parts = niveaux.indices.map {
-        "J\($0) \(Int(100.0 * Double(victoires[$0] ?? 0) / Double(n)))%"
+    let shares = levels.indices.map {
+        "P\($0) \(Int(100.0 * Double(wins[$0] ?? 0) / Double(n)))%"
     }
-    print("\(titre.padding(toLength: 26, withPad: " ", startingAt: 0)) \(parts.joined(separator: " | "))"
-          + "   inachevées \(inacheves)   tours ~\(toursTotal / n)   questions ~\(duelsTotal / n)")
-    return niveaux.indices.map { victoires[$0] ?? 0 }
+    print("\(title.padding(toLength: 26, withPad: " ", startingAt: 0)) \(shares.joined(separator: " | "))"
+          + "   unfinished \(unfinished)   turns ~\(totalTurns / n)   questions ~\(totalDuels / n)")
+    return levels.indices.map { wins[$0] ?? 0 }
 }
 
 @main
 struct Simulation {
     static func main() {
-        // MARK: - Le plateau et la banque
+        // MARK: - The board and the bank
 
-
-        let plateau = TestBoard.board
-        print("PLATEAU — \(plateau.map.order.count) territoires, "
-              + "\(plateau.map.continentsInOrder.count) continents, "
-              + "d'un seul tenant : \(plateau.map.isConnected)")
-        for c in plateau.map.continentsInOrder {
-            let portes = Set(c.territories.filter { id in
-                plateau.map.neighbors(of: id).contains { plateau.map[$0]?.continent != c.id }
+        let board = TestBoard.board
+        print("BOARD — \(board.map.order.count) territories, "
+              + "\(board.map.continentsInOrder.count) continents, "
+              + "in one piece: \(board.map.isConnected)")
+        for c in board.map.continentsInOrder {
+            let doors = Set(c.territories.filter { id in
+                board.map.neighbors(of: id).contains { board.map[$0]?.continent != c.id }
             })
-            print("   \(c.name) — \(c.territories.count) territoires, bonus \(c.bonus), \(portes.count) portes")
+            print("   \(c.name) — \(c.territories.count) territories, bonus \(c.bonus), \(doors.count) doors")
         }
-        print("BANQUE — \(QuestionBank().count) questions : "
-              + Themes.tous.map { "\($0.label.prefix(4)) \(QuestionBank().count(in: $0))" }
+        print("BANK — \(QuestionBank().count) questions: "
+              + Themes.all.map { "\($0.label.prefix(4)) \(QuestionBank().count(in: $0))" }
                 .joined(separator: ", "))
 
-        // MARK: - Le duel
+        // MARK: - The duel
 
-        print("\nSABLIER —", (0..<6).map { String(format: "%.1f s", Rules().answerTime(siege: $0)) }
+        print("\nCLOCK —", (0..<6).map { String(format: "%.1f s", Rules().answerTime(siege: $0)) }
             .joined(separator: " → "))
-        print("LE DÉFENSEUR TIENT (culture 0,70) —",
+        print("THE DEFENDER HOLDS (knowledge 0.70) —",
               (0..<6).map { s -> String in
                   let t = Rules().answerTime(siege: s)
                   let p = Difficulty.allCases.map {
@@ -92,32 +92,31 @@ struct Simulation {
               }.joined(separator: " → "))
 
         for n in 2...5 {
-            print("   \(n) joueurs : départ \(plateau.map.order.count / n) territoires, "
-                  + "victoire à \(Rules().dominationThreshold(territories: plateau.map.order.count, playerCount: n)), "
-                  + "compensation +\(Rules().compensation(playerCount: n)) par rang")
+            print("   \(n) players: start \(board.map.order.count / n) territories, "
+                  + "victory at \(Rules().dominationThreshold(territories: board.map.order.count, playerCount: n)), "
+                  + "compensation +\(Rules().compensation(playerCount: n)) per seat")
         }
 
-        // MARK: - Le stratège contre le gourmand
+        // MARK: - The strategist against the greedy machine
 
-        print("\n=== LE STRATÈGE CONTRE LE GOURMAND, À CULTURE ÉGALE ===")
-        print("   (J0 = stratège, J1 = gourmand — puis l'inverse, pour ôter l'avantage du rang)")
-        for plateau in Boards.allCases {
+        print("\n=== THE STRATEGIST AGAINST THE GREEDY MACHINE, AT EQUAL KNOWLEDGE ===")
+        print("   (P0 = strategist, P1 = greedy — then the reverse, to remove the seat advantage)")
+        for kind in Boards.allCases {
             var r = Rules()
-            _ = plateau
-            for (nom, styles) in [("stratège en premier", [Bot.Style.forte, .facile]),
-                                  ("gourmand en premier", [Bot.Style.facile, .forte])] {
-                campagne("\(plateau.label) — \(nom)", niveaux: [0.70, 0.70], n: 400,
-                         rules: r, styles: styles)
+            for (name, styles) in [("strategist first", [Bot.Style.strong, .easy]),
+                                   ("greedy first", [Bot.Style.easy, .strong])] {
+                campaign("\(kind.label) — \(name)", levels: [0.70, 0.70], n: 400,
+                         rules: r, board: kind, styles: styles)
             }
             r.territoryCards = true
-            campagne("\(plateau.label) — avec cartes", niveaux: [0.70, 0.70], n: 300,
-                     rules: r, styles: [.forte, .facile])
+            campaign("\(kind.label) — with cards", levels: [0.70, 0.70], n: 300,
+                     rules: r, board: kind, styles: [.strong, .easy])
         }
 
-        print("\n=== ET LE STRATÈGE CONTRE LUI-MÊME (l'équilibre doit tenir) ===")
-        campagne("2 j. culture égale", niveaux: [0.70, 0.70], n: 500)
-        campagne("2 j. 0,75 / 0,70", niveaux: [0.75, 0.70], n: 500)
-        campagne("3 j. culture égale", niveaux: [0.70, 0.70, 0.70], n: 300)
-        campagne("4 j. culture égale", niveaux: [0.70, 0.70, 0.70, 0.70], n: 250)
+        print("\n=== AND THE STRATEGIST AGAINST ITSELF (the balance has to hold) ===")
+        campaign("2 p. equal knowledge", levels: [0.70, 0.70], n: 500)
+        campaign("2 p. 0.75 / 0.70", levels: [0.75, 0.70], n: 500)
+        campaign("3 p. equal knowledge", levels: [0.70, 0.70, 0.70], n: 300)
+        campaign("4 p. equal knowledge", levels: [0.70, 0.70, 0.70, 0.70], n: 250)
     }
 }

@@ -1,18 +1,17 @@
 //
 //  ArchivesView.swift
-//  Riskelo
+//  Riskelo US
 //
-//  La bibliothèque : les parties passées, et les instants où l'on peut y
-//  revenir.
+//  The library: past games, and the moments you can go back to.
 //
-//  Deux niveaux, et non un seul. La liste des parties se lit comme un rayon —
-//  le plateau, le mode, la date, contre qui — et l'on n'ouvre les instants
-//  d'une partie que lorsqu'on a choisi laquelle. Tout tenir à plat aurait
-//  donné cinq cents lignes indiscernables.
+//  Two levels, not one. The list of games reads like a shelf — the board, the
+//  mode, the date, against whom — and you only open a game's moments once you
+//  have chosen which game. Laying it all out flat would have given five
+//  hundred indistinguishable rows.
 //
-//  Chaque instant montre le rapport de forces qu'il avait, en couleurs de
-//  camp. C'est ce qui permet de retrouver « le moment où j'ai basculé » sans
-//  ouvrir les positions une à une.
+//  Each moment shows the balance of power it had, in side colors. That is
+//  what lets you find "the moment it turned" without opening the positions
+//  one by one.
 //
 
 import SwiftUI
@@ -22,58 +21,58 @@ struct ArchivesView: View {
     var onOpen: (GameState) -> Void
     var onClose: () -> Void
 
-    @State private var parties: [PartieArchivee] = []
-    @State private var ouverte: PartieArchivee?
-    @State private var illisible = false
+    @State private var games: [ArchivedGame] = []
+    @State private var opened: ArchivedGame?
+    @State private var unreadable = false
 
     var body: some View {
-        // La barre est posée en marge de sécurité plutôt qu'empilée : c'est
-        // ce qu'attend le système, et le contenu défile dessous proprement.
+        // The bar sits in the safe-area inset rather than stacked: that is
+        // what the system expects, and the content scrolls under it cleanly.
         //
-        // Le contenu se borne en largeur — sinon il s'étalerait sur un Mac —
-        // quand la barre, elle, tient tout l'écran.
-        contenu
+        // The content is bounded in width — otherwise it would spread out on
+        // a Mac — while the bar takes the whole screen.
+        content
             .frame(maxWidth: 560)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .safeAreaInset(edge: .top, spacing: 0) { entete }
+            .safeAreaInset(edge: .top, spacing: 0) { header }
             .background(Palette.sea)
-        .onAppear { parties = Archives.shared.liste() }
-        .alert("Cet instant ne se relit plus",
-               isPresented: $illisible) {
-            Button("Bien") { }
+        .onAppear { games = Archives.shared.list() }
+        .alert("This moment will no longer read back",
+               isPresented: $unreadable) {
+            Button("OK") { }
         } message: {
-            Text("Il a été enregistré sur un plateau qui a changé de dessin depuis.")
+            Text("It was saved on a board whose drawing has changed since.")
         }
     }
 
-    @ViewBuilder private var contenu: some View {
-        if parties.isEmpty {
-            vide
-        } else if let p = ouverte {
-            moments(de: p)
+    @ViewBuilder private var content: some View {
+        if games.isEmpty {
+            empty
+        } else if let p = opened {
+            moments(of: p)
         } else {
-            rayon
+            shelf
         }
     }
 
-    // MARK: - En-tête
+    // MARK: - Header
 
-    private var entete: some View {
+    private var header: some View {
         HStack {
             Button {
-                if ouverte != nil { withAnimation { ouverte = nil } } else { onClose() }
+                if opened != nil { withAnimation { opened = nil } } else { onClose() }
             } label: {
-                Label(ouverte == nil ? "Fermer" : "Toutes les parties",
+                Label(opened == nil ? "Close" : "All games",
                       systemImage: "chevron.left")
                     .font(.subheadline.weight(.medium))
             }
             .buttonStyle(.plain).foregroundStyle(Palette.dim)
             Spacer(minLength: 12)
         }
-        // Le titre par-dessus plutôt qu'entre deux ressorts : il reste centré
-        // sur la barre quelle que soit la longueur du bouton de gauche.
+        // The title as an overlay rather than between two spacers: it stays
+        // centered on the bar whatever the length of the left-hand button.
         .overlay {
-            Text(ouverte == nil ? "Parties enregistrées" : "Revenir à un instant")
+            Text(opened == nil ? "Saved games" : "Go back to a moment")
                 .font(.headline).foregroundStyle(Palette.ink)
         }
         .frame(maxWidth: 560)
@@ -82,13 +81,13 @@ struct ArchivesView: View {
         .background(Palette.panel)
     }
 
-    private var vide: some View {
+    private var empty: some View {
         VStack(spacing: 10) {
             Image(systemName: "books.vertical")
                 .font(.system(size: 40)).foregroundStyle(Palette.dim)
-            Text("Aucune partie rangée pour l'instant.")
+            Text("No games shelved yet.")
                 .font(.headline).foregroundStyle(Palette.ink)
-            Text("Chaque tour joué dépose un instant ici, tout seul.")
+            Text("Every turn played drops a moment here, on its own.")
                 .font(.footnote).foregroundStyle(Palette.dim)
         }
         .multilineTextAlignment(.center)
@@ -96,13 +95,13 @@ struct ArchivesView: View {
         .padding(30)
     }
 
-    // MARK: - Le rayon
+    // MARK: - The shelf
 
-    private var rayon: some View {
+    private var shelf: some View {
         ScrollView {
             VStack(spacing: 10) {
-                ForEach(parties) { p in
-                    Button { withAnimation { ouverte = p } } label: { ligne(p) }
+                ForEach(games) { p in
+                    Button { withAnimation { opened = p } } label: { row(p) }
                         .buttonStyle(.plain)
                 }
             }
@@ -110,32 +109,32 @@ struct ArchivesView: View {
         }
     }
 
-    private func ligne(_ p: PartieArchivee) -> some View {
+    private func row(_ p: ArchivedGame) -> some View {
         HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 6) {
-                    Text(p.plateau.label).font(.headline).foregroundStyle(Palette.ink)
+                    Text(p.board.label).font(.headline).foregroundStyle(Palette.ink)
                     Text("· \(p.mode.label)").font(.caption).foregroundStyle(Palette.dim)
                 }
                 HStack(spacing: 6) {
-                    ForEach(Array(p.joueurs.enumerated()), id: \.offset) { i, nom in
-                        Text(nom + (p.machines.contains(i) ? " ⌘" : ""))
+                    ForEach(Array(p.players.enumerated()), id: \.offset) { i, name in
+                        Text(name + (p.bots.contains(i) ? " ⌘" : ""))
                             .font(.caption2.weight(.medium))
                             .padding(.horizontal, 7).padding(.vertical, 3)
-                            .background(Palette.camp(i).opacity(0.28), in: Capsule())
-                            .foregroundStyle(Palette.camp(i))
+                            .background(Palette.side(i).opacity(0.28), in: Capsule())
+                            .foregroundStyle(Palette.side(i))
                     }
                 }
-                Text(etat(p)).font(.caption).foregroundStyle(Palette.dim)
+                Text(status(p)).font(.caption).foregroundStyle(Palette.dim)
             }
             Spacer(minLength: 0)
             VStack(alignment: .trailing, spacing: 8) {
-                Text(p.derniere.formatted(.dateTime.day().month(.abbreviated)
-                                              .hour().minute()))
+                Text(p.last.formatted(.dateTime.day().month(.abbreviated)
+                                          .hour().minute()))
                     .font(.caption2).foregroundStyle(Palette.dim)
                 Button {
-                    Archives.shared.supprimer(p.id)
-                    withAnimation { parties = Archives.shared.liste() }
+                    Archives.shared.delete(p.id)
+                    withAnimation { games = Archives.shared.list() }
                 } label: {
                     Image(systemName: "trash").font(.caption)
                 }
@@ -146,30 +145,30 @@ struct ArchivesView: View {
         .background(Palette.panel, in: RoundedRectangle(cornerRadius: 14))
     }
 
-    private func etat(_ p: PartieArchivee) -> String {
+    private func status(_ p: ArchivedGame) -> String {
         let n = p.moments.count
-        let instants = "\(n) instant\(n > 1 ? "s" : "")"
-        if let v = p.vainqueur, v < p.joueurs.count {
-            return "\(p.joueurs[v]) l'a emporté · \(instants)"
+        let moments = "\(n) moment\(n > 1 ? "s" : "")"
+        if let w = p.winner, w < p.players.count {
+            return "\(p.players[w]) won · \(moments)"
         }
-        return "Interrompue au tour \(p.moments.last?.tour ?? 1) · \(instants)"
+        return "Broken off on turn \(p.moments.last?.turn ?? 1) · \(moments)"
     }
 
-    // MARK: - Les instants d'une partie
+    // MARK: - The moments of one game
 
-    private func moments(de p: PartieArchivee) -> some View {
+    private func moments(of p: ArchivedGame) -> some View {
         ScrollView {
             VStack(spacing: 8) {
-                Text("Choisir un instant reprend la partie à partir de là, sans "
-                     + "effacer celle-ci : la suite que vous jouerez sera rangée à part.")
+                Text("Choosing a moment resumes the game from there without "
+                     + "erasing this one: what you play next is shelved separately.")
                     .font(.caption).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 6)
 
                 ForEach(p.moments.reversed()) { m in
                     Button {
-                        if let g = Archives.shared.charger(m) { onOpen(g) } else { illisible = true }
-                    } label: { instant(m, de: p) }
+                        if let g = Archives.shared.load(m) { onOpen(g) } else { unreadable = true }
+                    } label: { moment(m, of: p) }
                     .buttonStyle(.plain)
                 }
             }
@@ -177,29 +176,29 @@ struct ArchivesView: View {
         }
     }
 
-    private func instant(_ m: PartieArchivee.Moment, de p: PartieArchivee) -> some View {
-        let total = max(1, m.territoires.reduce(0, +))
+    private func moment(_ m: ArchivedGame.Moment, of p: ArchivedGame) -> some View {
+        let total = max(1, m.territories.reduce(0, +))
         return VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
-                if m.marque {
+                if m.marked {
                     Image(systemName: "bookmark.fill")
                         .font(.caption2).foregroundStyle(Palette.held)
                 } else {
-                    Circle().fill(Palette.camp(m.camp)).frame(width: 8, height: 8)
+                    Circle().fill(Palette.side(m.side)).frame(width: 8, height: 8)
                 }
-                Text(m.etiquette).font(.subheadline.weight(.medium))
+                Text(m.label).font(.subheadline.weight(.medium))
                     .foregroundStyle(Palette.ink)
                 Spacer()
                 Text(m.date.formatted(.dateTime.hour().minute()))
                     .font(.caption2).foregroundStyle(Palette.dim)
             }
-            // Le rapport de forces, en une barre : c'est lui qui fait
-            // reconnaître le moment qu'on cherche.
+            // The balance of power, in one bar: that is what makes you
+            // recognize the moment you are looking for.
             GeometryReader { g in
                 HStack(spacing: 2) {
-                    ForEach(Array(m.territoires.enumerated()), id: \.offset) { i, n in
+                    ForEach(Array(m.territories.enumerated()), id: \.offset) { i, n in
                         if n > 0 {
-                            Capsule().fill(Palette.camp(i))
+                            Capsule().fill(Palette.side(i))
                                 .frame(width: max(3, g.size.width * Double(n) / Double(total)))
                         }
                     }
@@ -207,10 +206,10 @@ struct ArchivesView: View {
             }
             .frame(height: 6)
             HStack(spacing: 8) {
-                ForEach(Array(m.territoires.enumerated()), id: \.offset) { i, n in
-                    Text("\(p.joueurs.indices.contains(i) ? p.joueurs[i] : "?") \(n)")
+                ForEach(Array(m.territories.enumerated()), id: \.offset) { i, n in
+                    Text("\(p.players.indices.contains(i) ? p.players[i] : "?") \(n)")
                         .font(.caption2.monospacedDigit())
-                        .foregroundStyle(Palette.camp(i))
+                        .foregroundStyle(Palette.side(i))
                 }
             }
         }
@@ -218,5 +217,3 @@ struct ArchivesView: View {
         .background(Palette.panel, in: RoundedRectangle(cornerRadius: 12))
     }
 }
-
-

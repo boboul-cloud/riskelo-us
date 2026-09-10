@@ -1,0 +1,242 @@
+# Earth Science — Grade 6 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Sixth grade science looks down and up: the inside of the planet, the
+# plates, the rocks, the soil, the water and the air, then the solar
+# system and the four and a half billion years behind us.
+
+! id      | science-6
+! name    | Science — Grade 6
+! detail  | Earth science: plates, rocks, water, weather, space and deep time.
+! icon    | cloud.sun
+! tint    | 0.36 0.58 0.66
+! rank    | 10
+! product | com.oulhen.riskelo.us.pack.science6
+
+
+# --- Inside the Earth ---
+
+E | Which layer of the Earth do we live on? | The crust | The mantle | The outer core | The inner core
+E | Which layer lies just beneath the crust? | The mantle | The outer core | The inner core | The lithosphere
+E | Which part of the Earth's core is liquid? | The outer core | The inner core | The mantle | The crust
+E | Which two metals make up most of the Earth's core? | Iron and nickel | Silicon and oxygen | Aluminum and magnesium | Copper and zinc
+E | Which theory says the surface is broken into moving plates? | Plate tectonics | Continental drift | Isostasy | Uniformitarianism
+E | Which boundary has two plates moving apart? | A divergent boundary | A convergent boundary | A transform boundary | A subduction zone
+E | Which boundary has two plates pushing together? | A convergent boundary | A divergent boundary | A transform boundary | A rift valley
+M | Which rigid outer shell includes the crust and upper mantle? | The lithosphere | The asthenosphere | The mesosphere | The hydrosphere
+M | Which soft layer do the plates slide over? | The asthenosphere | The lithosphere | The outer core | The Moho
+M | Which boundary has two plates sliding past each other? | A transform boundary | A convergent boundary | A divergent boundary | A hot spot
+M | Which process pulls one plate down beneath another? | Subduction | Rifting | Faulting | Uplift
+M | Which feature forms where new seafloor is made? | A mid-ocean ridge | A deep-sea trench | A volcanic arc | An abyssal plain
+M | Which feature forms where a plate dives back down? | A deep-sea trench | A mid-ocean ridge | A guyot | A seamount
+M | Which scientist proposed continental drift in 1912? | Alfred Wegener | Charles Lyell | James Hutton | Harry Hess
+M | Which volcanic spot stays put while a plate moves over it? | A hot spot | A rift zone | A subduction zone | A transform fault
+M | Which island chain formed over such a spot in the Pacific? | The Hawaiian Islands | The Aleutians | The Marianas | The Japanese islands
+M | Which instrument records the shaking of an earthquake? | A seismograph | A barometer | A hygrometer | A magnetometer
+H | Which boundary between crust and mantle is named for a scientist? | The Moho | The Gutenberg discontinuity | The Lehmann boundary | The Conrad layer
+H | Which slow motion carries heat and drags the plates along? | Convection | Conduction | Radiation | Reflection
+H | Which crust is thinner and denser, oceanic or continental? | Oceanic crust | Continental crust | They are the same | It changes with season
+H | Which evidence first supported continental drift? | Matching coastlines and fossils | Satellite photographs | Deep sea drilling | Seismic tomography
+H | Which seismic waves arrive first at a station? | P waves | S waves | Surface waves | Love waves
+H | Which seismic waves cannot travel through liquid? | S waves | P waves | Sound waves | Radio waves
+H | Which discovery came from S waves being blocked deep down? | The outer core is liquid | The inner core is liquid | The mantle is molten | The crust is thin
+H | Which point underground is where an earthquake starts? | The focus | The epicenter | The fault trace | The rupture front
+H | Which point on the surface lies directly above it? | The epicenter | The focus | The nodal point | The strike line
+H | How many seismograph stations are needed to locate a quake? | Three | One | Two | Five
+H | Which crack in rock lets blocks slip past each other? | A fault | A joint | A fold | A dike
+
+# --- Minerals and rocks ---
+
+E | Which three groups do all rocks fall into? | Igneous, sedimentary, metamorphic | Hard, soft and medium | Volcanic, oceanic, glacial | Crystal, glass and clay
+E | Which rocks form when molten rock cools? | Igneous rocks | Sedimentary rocks | Metamorphic rocks | Clastic rocks
+E | Which rocks form from layers pressed together? | Sedimentary rocks | Igneous rocks | Metamorphic rocks | Plutonic rocks
+E | Which rocks are changed by heat and pressure? | Metamorphic rocks | Igneous rocks | Sedimentary rocks | Extrusive rocks
+E | Which molten rock is called lava once it reaches the surface? | Magma | Tephra | Pumice | Obsidian
+E | Which igneous rock cools slowly underground with large crystals? | Granite | Basalt | Obsidian | Pumice
+E | Which metamorphic rock comes from limestone? | Marble | Slate | Gneiss | Quartzite
+E | Which scale measures a mineral's hardness? | The Mohs scale | The Richter scale | The Beaufort scale | The Rockwell scale
+E | Which mineral is the hardest on that scale? | Diamond | Corundum | Quartz | Topaz
+M | Which igneous rock cools fast at the surface with tiny crystals? | Basalt | Granite | Diorite | Gabbro
+M | Which sedimentary rock is made of cemented sand grains? | Sandstone | Limestone | Shale | Conglomerate
+M | Which sedimentary rock is made mostly of calcium carbonate? | Limestone | Sandstone | Shale | Chert
+M | Which sedimentary rock is made of hardened mud? | Shale | Sandstone | Limestone | Breccia
+M | Which metamorphic rock comes from shale? | Slate | Marble | Quartzite | Schist
+M | Which metamorphic rock comes from sandstone? | Quartzite | Marble | Slate | Gneiss
+M | Which cycle describes rocks changing from one type to another? | The rock cycle | The carbon cycle | The water cycle | The nitrogen cycle
+H | Which igneous rock is a natural glass with no crystals? | Obsidian | Granite | Basalt | Rhyolite
+H | Which igneous rock is full of gas holes and floats on water? | Pumice | Obsidian | Basalt | Scoria
+H | Which sedimentary rock is made of rounded pebbles cemented together? | Conglomerate | Breccia | Sandstone | Siltstone
+H | Which metamorphic rock comes from granite under great pressure? | Gneiss | Marble | Slate | Quartzite
+H | Which mineral is the softest on the hardness scale? | Talc | Gypsum | Calcite | Fluorite
+H | Which test rubs a mineral to see the color of its powder? | The streak test | The cleavage test | The luster test | The fracture test
+H | Which property describes how a mineral reflects light? | Luster | Streak | Cleavage | Density
+H | Which property describes a mineral breaking along flat planes? | Cleavage | Fracture | Streak | Hardness
+H | Which mineral fizzes when weak acid is dropped on it? | Calcite | Quartz | Feldspar | Mica
+H | Which mineral group is the most common in the Earth's crust? | The feldspars | The micas | The carbonates | The sulfides
+
+# --- Weathering, erosion and soil ---
+
+E | Which process breaks rock into smaller pieces where it lies? | Weathering | Erosion | Deposition | Compaction
+E | Which process carries broken rock away? | Erosion | Weathering | Cementation | Lithification
+E | Which process drops carried material in a new place? | Deposition | Erosion | Weathering | Abrasion
+E | Which agent of erosion moves the most material worldwide? | Running water | Wind | Ice | Waves
+E | Which kind of erosion carves U-shaped valleys? | Glacial erosion | River erosion | Wind erosion | Wave erosion
+M | Which weathering splits rock as water freezes in its cracks? | Frost wedging | Oxidation | Carbonation | Hydrolysis
+M | Which weathering rusts the iron inside rock? | Oxidation | Frost wedging | Exfoliation | Abrasion
+M | Which kind of erosion carves V-shaped valleys? | River erosion | Glacial erosion | Wind erosion | Coastal erosion
+M | Which sand-blasting process wears rock down in deserts? | Abrasion by wind | Oxidation | Carbonation | Hydration
+M | Which layer of soil is richest in decayed material? | The topsoil | The subsoil | The parent rock | The bedrock
+M | Which dark material in soil comes from decayed plants? | Humus | Clay | Silt | Loam
+M | Which soil mixes sand, silt and clay in good proportion? | Loam | Gravel | Hardpan | Caliche
+H | Which weathering dissolves limestone with slightly acid rain? | Carbonation | Oxidation | Frost wedging | Root prying
+H | Which weathering peels rock in sheets as pressure is released? | Exfoliation | Frost wedging | Hydrolysis | Deflation
+H | Which soil particle is the smallest? | Clay | Silt | Sand | Gravel
+H | Which farming practice slows soil loss on a slope? | Contour plowing and terracing | Plowing straight downhill | Clearing all cover | Burning the stubble
+H | Which trees planted in rows slow wind erosion? | Shelterbelts | Orchards | Coppices | Groves
+H | Which grains settle first as a river slows down? | The largest ones | The smallest ones | They settle together | Nothing settles
+H | Which pair of processes turns loose sediment into solid rock? | Compaction and cementation | Melting and cooling | Heat and pressure | Oxidation and rusting
+
+# --- Water and the oceans ---
+
+E | Which share of the Earth's surface is covered by water? | About 71 percent | About 50 percent | About 30 percent | About 90 percent
+E | Which share of the Earth's water is fresh? | Under 3 percent | About 25 percent | About 50 percent | About 10 percent
+E | Which process turns liquid water into vapor? | Evaporation | Condensation | Precipitation | Infiltration
+E | Which process turns vapor back into liquid droplets? | Condensation | Evaporation | Sublimation | Transpiration
+E | Which cycle moves water between ocean, air and land? | The water cycle | The rock cycle | The carbon cycle | The nitrogen cycle
+E | Which force causes the ocean tides? | The pull of the Moon and Sun | The stress of the wind | The spin of the Earth | The ocean currents
+M | Which process releases water vapor from plant leaves? | Transpiration | Respiration | Condensation | Infiltration
+M | Which process soaks water down into the ground? | Infiltration | Runoff | Evaporation | Precipitation
+M | Which water flows over the surface into streams? | Runoff | Groundwater | Vapor | Ice
+M | Which reservoir holds most of the Earth's fresh water? | Ice caps and glaciers | Rivers | Lakes | The atmosphere
+M | Which salt is most abundant in seawater? | Sodium chloride | Calcium carbonate | Magnesium sulfate | Potassium nitrate
+M | How many high tides does most of a coast get each day? | Two | One | Three | Four
+M | Which tide is highest, at new and full moon? | The spring tide | The neap tide | The ebb tide | The slack tide
+M | Which tide is smallest, at the quarter moons? | The neap tide | The spring tide | The flood tide | The king tide
+M | Which force drives most surface ocean currents? | Wind | Tides | Earthquakes | Salinity
+M | Which shallow shelf borders a continent under the sea? | The continental shelf | The continental slope | The abyssal plain | The trench
+H | Which term names how much salt seawater holds? | Salinity | Density | Turbidity | Alkalinity
+H | Which effect bends currents and winds because the Earth spins? | The Coriolis effect | The Bernoulli effect | The Ekman drift | The Doppler effect
+H | Which underwater mountain never breaks the surface? | A seamount | An island | An atoll | A cay
+H | Which slow current is driven by differences in heat and salt? | The thermohaline circulation | The gyre system | The Ekman spiral | The tidal bore
+H | Which huge circle of currents fills each ocean basin? | A gyre | An eddy | A jet | A front
+H | Which ocean zone gets enough light for photosynthesis? | The sunlit zone | The twilight zone | The midnight zone | The abyss
+H | Which instrument measures ocean depth with sound? | Sonar | Radar | Lidar | A seismograph
+H | Which term names water held in rock beneath the surface? | Groundwater | Surface water | Meltwater | Brine
+H | Which line marks the top of the saturated zone underground? | The water table | The aquiclude | The vadose line | The capillary fringe
+H | Which underground rock lets water pass through easily? | A permeable rock | An impermeable rock | A cap rock | A confining bed
+
+# --- The air and the weather ---
+
+E | Which gas makes up most of the air? | Nitrogen | Oxygen | Carbon dioxide | Argon
+E | Which gas makes up about a fifth of the air? | Oxygen | Nitrogen | Water vapor | Helium
+E | Which layer of the atmosphere holds our weather? | The troposphere | The stratosphere | The mesosphere | The thermosphere
+E | Which layer holds the ozone that blocks ultraviolet light? | The stratosphere | The troposphere | The mesosphere | The exosphere
+E | Which instrument measures temperature? | A thermometer | A barometer | An anemometer | A hygrometer
+E | Which instrument measures wind speed? | An anemometer | A barometer | A thermometer | A rain gauge
+E | Which clouds are high, thin and wispy? | Cirrus clouds | Cumulus clouds | Stratus clouds | Nimbostratus clouds
+E | Which clouds are puffy with flat bottoms? | Cumulus clouds | Cirrus clouds | Stratus clouds | Altostratus clouds
+M | Which instrument measures humidity? | A hygrometer | A barometer | An anemometer | A thermometer
+M | Which instrument shows the wind direction? | A wind vane | An anemometer | A barometer | A hygrometer
+M | Which pressure system usually brings clear calm weather? | High pressure | Low pressure | A cold front | A trough
+M | Which pressure system usually brings clouds and storms? | Low pressure | High pressure | A ridge | An anticyclone
+M | Which front lifts air fast and brings sharp storms? | A cold front | A warm front | A stationary front | An occluded front
+M | Which front brings a long slow rain as air rides up? | A warm front | A cold front | A dry line | A squall line
+M | Which clouds spread in a gray sheet over the whole sky? | Stratus clouds | Cumulus clouds | Cirrus clouds | Lenticular clouds
+M | Which cloud towers upward and brings thunderstorms? | Cumulonimbus | Cirrostratus | Altocumulus | Stratocumulus
+M | Which precipitation forms as ice pellets in a storm updraft? | Hail | Sleet | Graupel | Rime
+M | Which precipitation is rain that freezes as it falls? | Sleet | Hail | Freezing fog | Snow grains
+H | Which layer burns up most meteors? | The mesosphere | The troposphere | The stratosphere | The exosphere
+H | Which layer holds the aurora and the space station? | The thermosphere | The troposphere | The stratosphere | The mesosphere
+H | Which term names the temperature at which air becomes saturated? | The dew point | The lapse rate | The freezing point | The wet bulb minimum
+H | Which measure compares actual moisture to the maximum possible? | Relative humidity | Absolute humidity | Vapor pressure | Specific heat
+H | Which fast ribbon of high wind steers storms across a continent? | The jet stream | The trade winds | The polar easterlies | The doldrums
+H | Which winds blow steadily toward the equator from both sides? | The trade winds | The westerlies | The polar easterlies | The monsoons
+H | Which winds carry weather across the middle latitudes? | The prevailing westerlies | The trade winds | The polar easterlies | The land breezes
+H | Which circulation cell lies nearest the equator? | The Hadley cell | The Ferrel cell | The polar cell | The Walker cell
+H | Which rate describes air cooling as it rises? | The lapse rate | The dew point | The albedo | The specific heat
+H | Which breeze blows from sea to land on a warm afternoon? | A sea breeze | A land breeze | A katabatic wind | A valley wind
+H | Which measure describes how much sunlight a surface reflects? | Albedo | Emissivity | Insolation | Irradiance
+H | Which greenhouse gas is the most abundant in the atmosphere? | Water vapor | Carbon dioxide | Methane | Nitrous oxide
+
+# --- Space ---
+
+E | Which star sits at the center of our solar system? | The Sun | Sirius | Polaris | Alpha Centauri
+E | How many planets does the modern list give the solar system? | Eight | Nine | Seven | Ten
+E | Which planet orbits nearest the Sun? | Mercury | Venus | Earth | Mars
+E | Which planet is the largest? | Jupiter | Saturn | Neptune | Earth
+E | Which planet is known for its bright rings? | Saturn | Jupiter | Uranus | Neptune
+E | Which planet is called the red planet? | Mars | Venus | Mercury | Jupiter
+E | Which planet is the hottest? | Venus | Mercury | Mars | Jupiter
+E | Which body orbits the Earth as its natural satellite? | The Moon | Phobos | Titan | Ceres
+E | Which galaxy do we live in? | The Milky Way | Andromeda | Triangulum | The Whirlpool
+E | Which planet rolls along its orbit with its axis tipped over? | Uranus | Neptune | Saturn | Venus
+E | Which motion of the Earth gives us day and night? | Its rotation | Its revolution | Its precession | Its wobble
+E | Which feature of the Earth causes the seasons? | The tilt of its axis | Its distance from the Sun | Its rotation speed | Its magnetic field
+M | Which four planets are small and rocky? | Mercury, Venus, Earth, Mars | Jupiter, Saturn, Uranus, Neptune | Earth, Mars, Jupiter, Saturn | Mercury, Mars, Ceres, Pluto
+M | Which four planets are gas or ice giants? | Jupiter, Saturn, Uranus, Neptune | Mercury, Venus, Earth, Mars | Saturn, Uranus, Neptune, Pluto | Jupiter, Saturn, Earth, Mars
+M | Which belt of rocky bodies lies between Mars and Jupiter? | The asteroid belt | The Kuiper belt | The Oort cloud | The zodiacal band
+M | Which ring of icy bodies lies beyond Neptune? | The Kuiper belt | The asteroid belt | The Oort cloud | The heliopause
+M | Which category was Pluto moved into in 2006? | Dwarf planet | Asteroid | Comet | Moon
+M | Which planet spins backward compared with most of the others? | Venus | Mars | Jupiter | Neptune
+M | Which planet has the largest volcano in the solar system? | Mars | Venus | Earth | Mercury
+M | Which storm on Jupiter has raged for centuries? | The Great Red Spot | The Great Dark Spot | The Hexagon | The Cassini Division
+M | Which moon of Saturn has a thick atmosphere? | Titan | Enceladus | Rhea | Mimas
+M | Which motion of the Earth gives us the year? | Its revolution around the Sun | Its rotation on its axis | Its tilt | Its orbit around the Moon
+M | Which day has the most daylight in the northern hemisphere? | The June solstice | The December solstice | The March equinox | The September equinox
+M | Which day has nearly equal daylight and darkness everywhere? | An equinox | A solstice | A perihelion | An aphelion
+M | Which eclipse happens when the Moon passes between Earth and Sun? | A solar eclipse | A lunar eclipse | A transit | An occultation
+M | Which eclipse happens when the Earth's shadow falls on the Moon? | A lunar eclipse | A solar eclipse | A partial transit | A conjunction
+M | Which phase shows the Moon fully lit from the Earth? | Full moon | New moon | First quarter | Waning crescent
+M | Which phase shows none of the lit side from the Earth? | New moon | Full moon | Last quarter | Gibbous
+H | Which moon of Jupiter is the most volcanic body known? | Io | Europa | Ganymede | Callisto
+H | Which moon of Jupiter likely hides an ocean under its ice? | Europa | Io | Callisto | Amalthea
+H | Which four moons of Jupiter did Galileo discover? | Io, Europa, Ganymede, Callisto | Titan, Rhea, Dione, Tethys | Phobos, Deimos, Io, Europa | Miranda, Ariel, Umbriel, Titania
+H | Which force holds the planets in their orbits? | Gravity | Magnetism | Friction | The strong force
+H | Which law says planets sweep equal areas in equal times? | Kepler's second law | Newton's first law | Kepler's third law | Hooke's law
+H | Which shape describes a planet's orbit? | An ellipse | A perfect circle | A parabola | A spiral
+H | Which point of an orbit lies nearest the Sun? | Perihelion | Aphelion | Apogee | Perigee
+H | Which unit measures the average Earth-Sun distance? | The astronomical unit | The light-year | The parsec | The nautical league
+H | Which unit measures the distance light travels in a year? | The light-year | The astronomical unit | The parsec | The megameter
+H | Which layer of the Sun do we see as its surface? | The photosphere | The chromosphere | The corona | The core
+H | Which process powers the Sun? | Nuclear fusion | Nuclear fission | Combustion | Radioactive decay
+H | Which cloud of gas and dust is where stars are born? | A nebula | A quasar | A pulsar | A black hole
+H | Which theory explains an expanding universe from a hot dense start? | The Big Bang | The steady state | The oscillating cosmos | The plasma model
+
+# --- Deep time ---
+
+E | Which preserved remains tell us about ancient life? | Fossils | Minerals | Meteorites | Crystals
+E | Which rock type most often holds fossils? | Sedimentary rock | Igneous rock | Metamorphic rock | Volcanic glass
+E | Which animals died out about 66 million years ago? | The dinosaurs | The mammoths | The trilobites | The dodos
+E | Which era is called the age of dinosaurs? | The Mesozoic | The Paleozoic | The Cenozoic | The Precambrian
+E | Which geologic era began after the dinosaurs died out? | The Cenozoic | The Mesozoic | The Paleozoic | The Archean
+M | Which era saw the first fish, land plants and amphibians? | The Paleozoic | The Mesozoic | The Cenozoic | The Hadean
+M | Which three periods make up the Mesozoic? | Triassic, Jurassic, Cretaceous | Cambrian, Ordovician, Silurian | Paleogene, Neogene, Quaternary | Permian, Triassic, Jurassic
+M | Which period saw a burst of new animal groups in the sea? | The Cambrian | The Jurassic | The Quaternary | The Permian
+M | Which extinction was the largest in the Earth's history? | The end of the Permian | The end of the Cretaceous | The end of the Triassic | The end of the Ordovician
+M | Which event is thought to have ended the Cretaceous? | An asteroid impact | A supernova | A gamma burst | A magnetic reversal
+M | Which crater in Mexico is linked to that impact? | Chicxulub | Barringer | Vredefort | Sudbury
+M | About how old is the Earth? | About 4.6 billion years | About 4.6 million years | About 600 million years | About 14 billion years
+M | Which principle says the lowest layer of rock is the oldest? | Superposition | Cross-cutting | Faunal succession | Original horizontality
+M | Which gap in the rock record marks missing time? | An unconformity | A fault | A dike | A sill
+M | Which fossil records a footprint or a burrow rather than a body? | A trace fossil | A body fossil | An index fossil | A cast
+M | Which sticky tree resin can preserve insects whole? | Amber | Tar | Sap sugar | Latex
+H | Which principle says a fault is younger than the rock it cuts? | Cross-cutting relationships | Superposition | Uniformitarianism | Inclusions
+H | Which principle says sediment is first laid down flat? | Original horizontality | Superposition | Lateral continuity | Cross-cutting
+H | Which fossil is useful because its species lived briefly and widely? | An index fossil | A trace fossil | A cast fossil | A mold fossil
+H | Which idea says the processes at work today also shaped the past? | Uniformitarianism | Catastrophism | Neptunism | Vitalism
+H | Which dating method uses the decay of radioactive elements? | Radiometric dating | Relative dating | Varve counting | Dendrochronology
+H | Which term names the time for half a sample to decay? | The half-life | The decay constant | The mean life | The activity
+H | Which isotope dates recent organic remains? | Carbon-14 | Uranium-238 | Potassium-40 | Rubidium-87
+H | Which isotope dates very old rocks? | Uranium-238 | Carbon-14 | Tritium | Iodine-129
+H | Which dating method counts tree rings? | Dendrochronology | Varve chronology | Thermoluminescence | Palynology
+H | Which span covers the first four billion years of the Earth? | The Precambrian | The Phanerozoic | The Cenozoic | The Mesozoic
+H | Which early organisms first added oxygen to the atmosphere? | Cyanobacteria | Trilobites | Ferns | Diatoms
+H | Which layered fossil structures were built by those microbes? | Stromatolites | Corals | Sponges | Crinoids
+H | Which supercontinent began breaking up about 200 million years ago? | Pangaea | Rodinia | Columbia | Vaalbara
+H | Which record of magnetic flips is stored in seafloor rock? | Magnetic striping | Isotope layering | Varve banding | Cross bedding

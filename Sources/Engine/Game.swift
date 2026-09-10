@@ -1,50 +1,49 @@
 //
 //  Game.swift
-//  Riskelo
+//  Riskelo US
 //
-//  La partie : l'état complet, et les seuls coups qui peuvent le changer.
+//  The game: the complete state, and the only moves that can change it.
 //
-//  Tout est ici une valeur — y compris le tirage au sort, y compris la banque
-//  de questions. Une partie est donc copiable, rejouable et comparable : on
-//  peut en faire tourner mille dans un test pour voir si l'attaquant l'emporte
-//  trop souvent, ce qu'aucune règle écrite au fil de l'interface ne permet.
+//  Everything here is a value — including the random draw, including the
+//  question bank. A game is therefore copyable, replayable and comparable:
+//  you can run a thousand of them in a test to see whether the attacker wins
+//  too often, which no rule written along the way inside the interface allows.
 //
-//  L'enchaînement d'un tour, comme au Risk : renforts, attaques, déplacement.
+//  The sequence of a turn, as in Risk: reinforcements, attacks, move.
 //
 
 import Foundation
 
 struct Player: Identifiable, Equatable, Codable {
     enum Kind: Equatable, Codable {
-        case humain
-        /// L'adversaire de la machine : sa culture — la part de bonnes
-        /// réponses qu'il donne sur une question moyenne — et sa façon de
-        /// jouer, qui n'a rien à voir avec elle. On peut être savant et
-        /// manœuvrer mal.
-        case machine(niveau: Double, style: Bot.Style)
+        case human
+        /// The machine opponent: its knowledge — the share of correct answers
+        /// it gives on an average question — and its way of playing, which
+        /// has nothing to do with it. You can be learned and maneuver badly.
+        case machine(level: Double, style: Bot.Style)
     }
     let id: PlayerID
     var name: String
-    var kind: Kind = .humain
+    var kind: Kind = .human
     var eliminated = false
     var isBot: Bool { if case .machine = kind { return true } else { return false } }
 
     var style: Bot.Style {
-        if case let .machine(_, style) = kind { return style } else { return .forte }
+        if case let .machine(_, style) = kind { return style } else { return .strong }
     }
 }
 
 enum Phase: Equatable, Codable {
     case reinforcement(remaining: Int)
     case attack
-    /// Place prise : combien d'hommes avancent.
+    /// Place taken: how many troops advance.
     case occupation(from: TerritoryID, to: TerritoryID, minimum: Int, maximum: Int)
     case fortify
     case finished(winner: PlayerID)
 }
 
 struct Entry: Identifiable, Equatable, Codable {
-    enum Kind: Equatable, Codable { case tour, renfort, duel, conquete, elimination, fin }
+    enum Kind: Equatable, Codable { case turn, reinforcement, duel, conquest, elimination, end }
     let id = UUID()
     let turn: Int
     let player: PlayerID?
@@ -52,11 +51,11 @@ struct Entry: Identifiable, Equatable, Codable {
     let text: String
     static func == (a: Entry, b: Entry) -> Bool { a.id == b.id }
 
-    /// L'identifiant ne sert qu'à l'affichage : il se refait à la lecture.
+    /// The identifier serves display only: it is remade on reading.
     private enum CodingKeys: String, CodingKey { case turn, player, kind, text }
 }
 
-/// Ce qu'un joueur a réussi dans une catégorie.
+/// What a player has managed in one category.
 struct Score: Equatable, Codable {
     var asked = 0
     var correct = 0
@@ -65,8 +64,8 @@ struct Score: Equatable, Codable {
 
 struct GameState {
 
-    /// Le plateau, et lequel c'est : le second sert à le retrouver au chargement
-    /// d'une partie, le premier évite de le rechercher à chaque coup d'œil.
+    /// The board, and which one it is: the second is used to find it again
+    /// when loading a game, the first saves looking it up at every glance.
     let boardKind: Boards
     let board: Board
     var rules: Rules
@@ -76,41 +75,44 @@ struct GameState {
     private(set) var current: Int = 0
     private(set) var phase: Phase = .attack
     private(set) var assault: Assault?
-    /// Ce que chaque joueur a montré savoir, catégorie par catégorie. C'est
-    /// la contrepartie de la règle « l'attaquant pose la question » : celui
-    /// qui attaque choisit le terrain, encore faut-il qu'il sache où frapper.
+    /// What each player has shown they know, category by category. This is
+    /// the counterpart to the rule "the attacker asks the question": whoever
+    /// attacks chooses the ground, but they still have to know where to
+    /// strike.
     private(set) var knowledge: [PlayerID: [Category: Score]] = [:]
-    /// Ce qui a déjà été payé en renfort d'érudition, pour ne pas le payer
-    /// deux fois : le compte des bonnes réponses, lui, ne redescend jamais.
+    /// What has already been paid out in scholarship reinforcement, so as not
+    /// to pay it twice: the count of correct answers itself never goes back
+    /// down.
     private(set) var bonusPaid: [PlayerID: Int] = [:]
 
-    // MARK: - Les cartes de territoire
+    // MARK: - Territory cards
 
-    /// Le paquet, la défausse, et la main de chacun.
+    /// The deck, the discard pile, and each player's hand.
     private(set) var deck: [Card] = []
     private(set) var discard: [Card] = []
     private(set) var hands: [PlayerID: [Card]] = [:]
-    /// Combien d'échanges ont eu lieu dans la partie : le barème monte avec.
+    /// How many exchanges have taken place in the game: the scale climbs with
+    /// them.
     private(set) var exchanges = 0
-    /// A-t-on pris une place dans ce tour ? Une carte ne se gagne qu'ainsi.
+    /// Has a place been taken this turn? A card is only earned that way.
     private(set) var conqueredThisTurn = false
-    /// La dernière catégorie posée à chaque joueur. Sert à ne pas le
-    /// travailler deux fois de suite sur le même sujet — ce qui épuise la
-    /// catégorie et rend l'assaillant prévisible.
+    /// The last category put to each player. Used to avoid working them twice
+    /// running on the same subject — which exhausts the category and makes
+    /// the attacker predictable.
     private(set) var lastCategoryAgainst: [PlayerID: Category] = [:]
-    /// Questions déjà subies par territoire, remis à zéro à chaque tour :
-    /// c'est la mémoire du siège, et donc du temps qui se raccourcit.
+    /// Questions already faced per territory, reset every turn: this is the
+    /// memory of the siege, and therefore of the shortening clock.
     private(set) var siege: [TerritoryID: Int] = [:]
     private(set) var turn = 1
     private(set) var journal: [Entry] = []
-    /// Ce que chacun cherche en secret, quand la règle est en jeu. L'état les
-    /// porte tous — il faut bien qu'ils voyagent avec la partie et survivent
-    /// à une reprise — et c'est l'écran qui n'en montre qu'un : le vôtre.
-    private(set) var objectifs: [PlayerID: Objectif] = [:]
-    /// Qui a fait tomber qui. Un camp éliminé par un tiers ne compte pas pour
-    /// celui à qui l'on avait demandé de le faire tomber : sa carte se
-    /// retourne alors, comme au Risk.
-    private(set) var elimines: [PlayerID: PlayerID] = [:]
+    /// What each player is secretly after, when the rule is in play. The
+    /// state carries them all — they have to travel with the game and survive
+    /// a resumption — and it is the screen that shows only one: yours.
+    private(set) var objectives: [PlayerID: Objective] = [:]
+    /// Who brought down whom. A side eliminated by a third party does not
+    /// count for the player who was asked to bring them down: their card
+    /// turns over instead, as in Risk.
+    private(set) var eliminated: [PlayerID: PlayerID] = [:]
 
     var bank: QuestionBank
     var rng: SeededRandom
@@ -118,12 +120,12 @@ struct GameState {
     var map: GameMap { board.map }
     var currentPlayer: Player { players[current] }
 
-    // MARK: - Mise en place
+    // MARK: - Setting up
 
-    /// Le noyau : le plateau, les règles, les joueurs, la banque et le
-    /// tirage. Tout le reste se pose ensuite — par `start` pour une partie
-    /// neuve, par `init(restoring:)` pour une partie reprise. Il est écrit à
-    /// la main parce que déclarer un initialiseur supprime celui que Swift écrivait seul.
+    /// The core: the board, the rules, the players, the bank and the draw.
+    /// Everything else is laid down afterwards — by `start` for a new game,
+    /// by `init(restoring:)` for a resumed one. It is written by hand because
+    /// declaring an initializer removes the one Swift wrote on its own.
     private init(boardKind: Boards, rules: Rules, players: [Player],
                  bank: QuestionBank, rng: SeededRandom) {
         self.boardKind = boardKind
@@ -134,7 +136,7 @@ struct GameState {
         self.rng = rng
     }
 
-    static func start(board: Boards = .anneau,
+    static func start(board: Boards = .ring,
                       players: [Player],
                       rules: Rules = Rules(),
                       bank: QuestionBank = QuestionBank(),
@@ -142,8 +144,8 @@ struct GameState {
         var g = GameState(boardKind: board, rules: rules, players: players,
                           bank: bank, rng: SeededRandom(seed: seed))
 
-        // Les territoires sont distribués au sort, un par un, comme on donne
-        // les cartes : personne ne choisit sa position de départ.
+        // Territories are dealt at random, one at a time, the way cards are
+        // dealt: nobody picks their starting position.
         var ids = g.map.order
         ids.shuffle(using: &g.rng)
         for (i, id) in ids.enumerated() {
@@ -152,7 +154,7 @@ struct GameState {
             g.armies[id] = 1
         }
 
-        // Puis le reste des armées, réparti au hasard sur ses propres terres.
+        // Then the rest of the armies, spread at random over their own lands.
         for (rank, player) in players.enumerated() {
             let stock = rules.startingArmies + rank * rules.compensation(playerCount: players.count)
             let mine = g.territories(of: player.id)
@@ -167,20 +169,20 @@ struct GameState {
             g.deck = Deck.build(for: g.map)
             g.deck.shuffle(using: &g.rng)
         }
-        if rules.objectifs {
-            g.objectifs = Objectif.distribuer(pour: g.board, joueurs: players.count,
-                                              using: &g.rng)
+        if rules.objectives {
+            g.objectives = Objective.deal(for: g.board, players: players.count,
+                                          using: &g.rng)
         }
         g.phase = .reinforcement(remaining: g.reinforcements(for: g.currentPlayer.id))
-        g.note(.tour, "Tour \(g.turn) — à \(g.currentPlayer.name) de jouer.")
+        g.note(.turn, "Turn \(g.turn) — \(g.currentPlayer.name) to play.")
         return g
     }
 
-    /// Reconstruit une partie telle qu'elle a été enregistrée.
+    /// Rebuilds a game exactly as it was saved.
     ///
-    /// Même esprit que `seize` : la porte est nommée, elle est unique, et la
-    /// partie normale ne passe jamais par là. Tout ce qui est en lecture seule
-    /// depuis l'extérieur se repose ici, et nulle part ailleurs.
+    /// Same spirit as `seize`: the door is named, it is the only one, and an
+    /// ordinary game never goes through it. Everything that is read-only from
+    /// the outside is set back here, and nowhere else.
     init(restoring board: Boards, rules: Rules, players: [Player],
          bank: QuestionBank, rng: SeededRandom,
          owner: [TerritoryID: PlayerID], armies: [TerritoryID: Int],
@@ -189,7 +191,7 @@ struct GameState {
          lastCategoryAgainst: [PlayerID: Category], bonusPaid: [PlayerID: Int],
          deck: [Card], discard: [Card], hands: [PlayerID: [Card]],
          exchanges: Int, conqueredThisTurn: Bool,
-         objectifs: [PlayerID: Objectif], elimines: [PlayerID: PlayerID],
+         objectives: [PlayerID: Objective], eliminated: [PlayerID: PlayerID],
          turn: Int, journal: [Entry]) {
         self.init(boardKind: board, rules: rules, players: players, bank: bank, rng: rng)
         self.owner = owner
@@ -206,64 +208,65 @@ struct GameState {
         self.hands = hands
         self.exchanges = exchanges
         self.conqueredThisTurn = conqueredThisTurn
-        self.objectifs = objectifs
-        self.elimines = elimines
+        self.objectives = objectives
+        self.eliminated = eliminated
         self.turn = turn
         self.journal = journal
     }
 
-    // MARK: - Les cartes
+    // MARK: - The cards
 
     func hand(of player: PlayerID) -> [Card] { hands[player] ?? [] }
 
-    /// La valeur du prochain échange, pour l'annoncer avant de le faire.
-    var prochainEchange: Int { Deck.valeur(echangeNumero: exchanges + 1) }
+    /// The value of the next exchange, so it can be announced before it is
+    /// made.
+    var nextExchangeValue: Int { Deck.value(forExchange: exchanges + 1) }
 
-    /// Le Risk oblige à échanger dès cinq cartes en main : sans cela on
-    /// accumulerait sans jamais rendre la partie plus vive, ce qui est tout
-    /// l'objet du barème qui monte.
-    func doitEchanger(_ player: PlayerID) -> Bool {
+    /// Risk forces an exchange as soon as you hold five cards: without that
+    /// you would pile them up without ever making the game livelier, which is
+    /// the whole point of the climbing scale.
+    func mustExchange(_ player: PlayerID) -> Bool {
         rules.territoryCards && hand(of: player).count >= 5
-            && Deck.premiereCombinaison(dans: hand(of: player)) != nil
+            && Deck.firstSet(in: hand(of: player)) != nil
     }
 
-    /// Échange trois cartes contre des hommes, ajoutés aux renforts en cours.
+    /// Trades three cards for troops, added to the reinforcements in hand.
     @discardableResult
     mutating func exchange(_ ids: [Int]) -> Bool {
-        guard rules.territoryCards, case let .reinforcement(reste) = phase else { return false }
-        let joueur = currentPlayer.id
-        let main = hand(of: joueur)
-        let trio = ids.compactMap { id in main.first { $0.id == id } }
-        guard trio.count == 3, Deck.estUneCombinaison(trio) else { return false }
+        guard rules.territoryCards, case let .reinforcement(remaining) = phase else { return false }
+        let player = currentPlayer.id
+        let hand = hand(of: player)
+        let trio = ids.compactMap { id in hand.first { $0.id == id } }
+        guard trio.count == 3, Deck.isASet(trio) else { return false }
 
-        var valeur = Deck.valeur(echangeNumero: exchanges + 1)
-        // Le supplément du Risk : une carte qui porte une de vos places vaut
-        // deux hommes de plus. Ils vont au tas commun plutôt que sur la case,
-        // pour ne pas ajouter une étape de placement à part.
-        if trio.contains(where: { carte in carte.territory.map { owner[$0] == joueur } ?? false }) {
-            valeur += 2
+        var value = Deck.value(forExchange: exchanges + 1)
+        // Risk's bonus: a card carrying one of your own places is worth two
+        // extra troops. They go to the common pool rather than onto the cell,
+        // so as not to add a separate placement step.
+        if trio.contains(where: { card in card.territory.map { owner[$0] == player } ?? false }) {
+            value += 2
         }
         exchanges += 1
-        hands[joueur] = main.filter { !ids.contains($0.id) }
+        hands[player] = hand.filter { !ids.contains($0.id) }
         discard.append(contentsOf: trio)
-        phase = .reinforcement(remaining: reste + valeur)
-        note(.renfort, "\(currentPlayer.name) échange trois cartes : \(valeur) hommes.")
+        phase = .reinforcement(remaining: remaining + value)
+        note(.reinforcement, "\(currentPlayer.name) trades three cards: \(value) troops.")
         return true
     }
 
-    /// Tire une carte, en remélangeant la défausse si le paquet est vide.
-    private mutating func piocher(_ player: PlayerID) {
+    /// Draws a card, reshuffling the discard pile if the deck is empty.
+    private mutating func drawCard(_ player: PlayerID) {
         if deck.isEmpty {
             deck = discard
             discard = []
             deck.shuffle(using: &rng)
         }
-        guard let carte = deck.popLast() else { return }
-        hands[player, default: []].append(carte)
-        note(.renfort, "\(players.first { $0.id == player }?.name ?? "?") gagne une carte.")
+        guard let card = deck.popLast() else { return }
+        hands[player, default: []].append(card)
+        note(.reinforcement, "\(players.first { $0.id == player }?.name ?? "?") earns a card.")
     }
 
-    // MARK: - Lecture
+    // MARK: - Reading
 
     func territories(of player: PlayerID) -> [TerritoryID] {
         map.order.filter { owner[$0] == player }
@@ -278,31 +281,31 @@ struct GameState {
     func reinforcements(for player: PlayerID) -> Int {
         rules.reinforcements(territories: territories(of: player).count,
                              continentBonus: continentsHeld(by: player).reduce(0) { $0 + $1.bonus })
-            + eruditionOwed(player)
+            + scholarshipOwed(player)
     }
 
-    /// Le total gagné depuis le début, tous thèmes confondus.
-    func eruditionEarned(_ player: PlayerID) -> Int {
-        guard let seuil = rules.answersPerBonusMan, seuil > 0 else { return 0 }
-        return themesEnJeu.reduce(0) { $0 + record(of: player, in: $1).correct / seuil }
+    /// The total earned since the start, across all themes.
+    func scholarshipEarned(_ player: PlayerID) -> Int {
+        guard let threshold = rules.answersPerBonusMan, threshold > 0 else { return 0 }
+        return themesInPlay.reduce(0) { $0 + record(of: player, in: $1).correct / threshold }
     }
 
-    /// Ce qui lui revient et ne lui a pas encore été versé.
-    func eruditionOwed(_ player: PlayerID) -> Int {
-        max(0, eruditionEarned(player) - (bonusPaid[player] ?? 0))
+    /// What is owed to them and has not yet been paid out.
+    func scholarshipOwed(_ player: PlayerID) -> Int {
+        max(0, scholarshipEarned(player) - (bonusPaid[player] ?? 0))
     }
 
-    /// Solde le renfort d'érudition au moment où il est versé.
-    private mutating func settleErudition(_ player: PlayerID) {
-        let du = eruditionOwed(player)
-        guard du > 0 else { return }
-        bonusPaid[player] = eruditionEarned(player)
-        note(.renfort, "\(du) homme\(du > 1 ? "s" : "") de plus pour "
-             + "\(players.first { $0.id == player }?.name ?? "?") : ses bonnes réponses.")
+    /// Settles the scholarship reinforcement at the moment it is paid.
+    private mutating func settleScholarship(_ player: PlayerID) {
+        let owed = scholarshipOwed(player)
+        guard owed > 0 else { return }
+        bonusPaid[player] = scholarshipEarned(player)
+        note(.reinforcement, "\(troops(owed)) more for "
+             + "\(players.first { $0.id == player }?.name ?? "?"): their correct answers.")
     }
 
-    /// D'où peut-on attaquer : ses propres terres, à plus d'un homme, qui
-    /// touchent un voisin ennemi.
+    /// Where you can attack from: your own lands, with more than one troop,
+    /// touching an enemy neighbor.
     func canLaunch(from id: TerritoryID) -> Bool {
         owner[id] == currentPlayer.id && armies(id) >= 2 && !targets(from: id).isEmpty
     }
@@ -311,13 +314,14 @@ struct GameState {
         map.neighbors(of: id).filter { owner[$0] != owner[id] }
     }
 
-    /// Le nombre de questions possibles : un dé par homme au-delà du premier,
-    /// dans la limite de la règle. Il faut toujours laisser une garnison.
+    /// The number of possible questions: one die per troop beyond the first,
+    /// within the limit set by the rules. A garrison must always be left
+    /// behind.
     func maxQuestions(from id: TerritoryID) -> Int {
         max(0, min(rules.maxQuestions, armies(id) - 1))
     }
 
-    /// Deux territoires amis reliés par une chaîne de territoires amis.
+    /// Two friendly territories joined by a chain of friendly territories.
     func areLinked(_ a: TerritoryID, _ b: TerritoryID, for player: PlayerID) -> Bool {
         guard owner[a] == player, owner[b] == player else { return false }
         if !rules.fortifyAlongChain { return map.areAdjacent(a, b) }
@@ -333,12 +337,11 @@ struct GameState {
         return false
     }
 
-    /// La catégorie où ce joueur a le plus trébuché — et où il trébuche
-    /// vraiment : à partir de deux questions posées, et à moins d'une bonne
-    /// réponse sur deux. En dessous du seuil, ce n'est pas une faiblesse,
-    /// c'est un hasard ; au-dessus, ce n'en est pas une du tout, et la
-    /// marquer d'une lunette contredirait le score affiché en vert juste à
-    /// côté.
+    /// The category where this player has stumbled most — and where they
+    /// really do stumble: from two questions asked, and below one correct
+    /// answer in two. Under that bar it is not a weakness, it is chance;
+    /// above it, it is not one at all, and marking it with a target would
+    /// contradict the score shown in green right beside it.
     func weakness(of player: PlayerID) -> Category? {
         knowledge[player]?
             .filter { $0.value.asked >= 2 && $0.value.rate < 0.5 }
@@ -347,67 +350,66 @@ struct GameState {
                  : $0.key.id < $1.key.id }?.key
     }
 
-    /// Les thèmes que cette partie utilise, dans l'ordre de la grille.
+    /// The themes this game uses, in the order of the grid.
     ///
-    /// Rien de dit veut dire le jeu de base — les thèmes que tout le monde
-    /// possède — et non tous les thèmes connus de l'appareil : les packs se
-    /// choisissent, ils ne s'invitent pas. C'est aussi ce qui fait qu'une
-    /// partie enregistrée avant les packs reprend telle qu'elle était.
+    /// Nothing stated means the base game — the themes everyone owns — and
+    /// not every theme the device knows: packs are chosen, they do not invite
+    /// themselves.
     ///
-    /// Un repli plutôt qu'une liste vide : des règles qui ne nommeraient que
-    /// des thèmes absents de cet appareil rendraient la partie injouable, et
-    /// une partie sans question ne se distingue pas d'une panne.
-    var themesEnJeu: [Category] {
-        guard let choisis = rules.themes, !choisis.isEmpty else { return Themes.base }
-        let retenus = Themes.tous.filter { choisis.contains($0.id) }
-        return retenus.isEmpty ? Themes.base : retenus
+    /// A fallback rather than an empty list: rules naming only themes absent
+    /// from this device would make the game unplayable, and a game without a
+    /// question is indistinguishable from a breakdown.
+    var themesInPlay: [Category] {
+        guard let chosen = rules.themes, !chosen.isEmpty else { return Themes.base }
+        let kept = Themes.all.filter { chosen.contains($0.id) }
+        return kept.isEmpty ? Themes.base : kept
     }
 
     func record(of player: PlayerID, in category: Category) -> Score {
         knowledge[player]?[category] ?? Score()
     }
 
-    /// Tient-il assez du monde pour que la partie soit jouée ?
+    /// Do they hold enough of the world for the game to be decided?
     func dominates(_ player: PlayerID) -> Bool {
         territories(of: player).count >= dominationThreshold
     }
 
-    /// Combien de territoires il faut tenir pour que la partie soit jouée.
+    /// How many territories must be held for the game to be decided.
     var dominationThreshold: Int {
         rules.dominationThreshold(territories: map.order.count, playerCount: players.count)
     }
 
     var isOver: Bool { if case .finished = phase { true } else { false } }
 
-    /// Poser une situation de toutes pièces : un territoire, son propriétaire,
-    /// sa garnison. La partie normale ne passe jamais par là — c'est la porte
-    /// des essais et des scénarios, et la seule.
+    /// Setting up a position from scratch: a territory, its owner, its
+    /// garrison. An ordinary game never goes through here — this is the door
+    /// for tests and scenarios, and the only one.
     mutating func seize(_ id: TerritoryID, by player: PlayerID, armies count: Int = 1) {
         owner[id] = player
         armies[id] = max(0, count)
     }
 
-    /// Même porte, pour une main de cartes.
-    mutating func seizeHand(of player: PlayerID, _ cartes: [Card]) {
-        hands[player] = cartes
+    /// The same door, for a hand of cards.
+    mutating func seizeHand(of player: PlayerID, _ cards: [Card]) {
+        hands[player] = cards
     }
 
-    /// Même porte, pour une conquête personnelle et ce qu'il en advient.
-    mutating func seize(objectif: Objectif, of joueur: PlayerID) {
-        objectifs[joueur] = objectif
+    /// The same door, for a personal conquest and what becomes of it.
+    mutating func seize(objective: Objective, of player: PlayerID) {
+        objectives[player] = objective
     }
 
-    mutating func seize(elimine victime: PlayerID, par bourreau: PlayerID) {
-        elimines[victime] = bourreau
+    mutating func seize(eliminated victim: PlayerID, by killer: PlayerID) {
+        self.eliminated[victim] = killer
     }
 
-    /// Même porte, pour ce qu'un joueur a montré savoir dans une catégorie.
+    /// The same door, for what a player has shown they know in a category.
     mutating func seize(_ category: Category, of player: PlayerID, asked: Int, correct: Int) {
         knowledge[player, default: [:]][category] = Score(asked: max(0, asked),
                                                           correct: max(0, min(asked, correct)))
     }
 
-    // MARK: - Renforts
+    // MARK: - Reinforcements
 
     @discardableResult
     mutating func place(on id: TerritoryID, count: Int = 1) -> Bool {
@@ -417,39 +419,39 @@ struct GameState {
         let left = remaining - count
         phase = .reinforcement(remaining: left)
         if left == 0 {
-            note(.renfort, "\(currentPlayer.name) a placé ses renforts.")
+            note(.reinforcement, "\(currentPlayer.name) has placed their reinforcements.")
             phase = .attack
         }
-        // Un objectif qui demande tant de places à deux ou trois hommes se
-        // remplit en posant un renfort, et pas seulement en prenant une place.
-        verifierLObjectif()
+        // An objective asking for so many places at two or three troops is
+        // met by laying down a reinforcement, not only by taking a place.
+        checkObjective()
         return true
     }
 
-    /// La conquête personnelle se vérifie partout où elle peut s'accomplir :
-    /// une place prise, un homme posé, un déplacement de fin de tour. Le
-    /// seuil de domination, lui, ne dépend que du nombre de territoires et se
-    /// vérifie là où ils changent de main.
+    /// The personal conquest is checked everywhere it can be achieved: a
+    /// place taken, a troop laid down, an end-of-turn move. The domination
+    /// threshold, on the other hand, depends only on the number of
+    /// territories and is checked where those change hands.
     ///
-    /// Elle ne s'accomplit que pendant son propre tour — on ne gagne pas
-    /// pendant celui d'un autre, quand bien même il vous rendrait un
-    /// continent en se retirant.
-    private mutating func verifierLObjectif() {
-        guard rules.objectifs, !isOver, players.count > 1,
-              objectifAccompli(currentPlayer.id) else { return }
+    /// It can only be achieved during your own turn — you do not win during
+    /// someone else's, even if they hand you a continent by withdrawing.
+    private mutating func checkObjective() {
+        guard rules.objectives, !isOver, players.count > 1,
+              objectiveAchieved(currentPlayer.id) else { return }
         assault = nil
         phase = .finished(winner: currentPlayer.id)
-        note(.fin, recitDeLObjectif(currentPlayer.id))
+        note(.end, objectiveStory(currentPlayer.id))
     }
 
-    // MARK: - Assaut
+    // MARK: - Assault
 
-    /// L'assaut est-il permis ? Séparé de son exécution parce qu'un coup joué
-    /// en réseau doit être vérifié avant d'être envoyé, pas après.
+    /// Is the assault allowed? Kept apart from carrying it out because a move
+    /// played over the network has to be checked before being sent, not
+    /// after.
     func canDeclare(from: TerritoryID, to: TerritoryID, questions: Int) -> Bool {
         guard case .attack = phase, assault == nil,
               owner[from] == currentPlayer.id,
-              let defenseur = owner[to], defenseur != currentPlayer.id,
+              let defender = owner[to], defender != currentPlayer.id,
               map.areAdjacent(from, to),
               questions >= 1, questions <= maxQuestions(from: from) else { return false }
         return true
@@ -463,12 +465,12 @@ struct GameState {
 
         var a = Assault(attacker: currentPlayer.id, defender: defender,
                         from: from, to: to, category: category, volley: questions)
-        note(.duel, "\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — "
+        note(.duel, "\(currentPlayer.name) attacks \(name(to)) from \(name(from)) — "
              + "\(questions) question\(questions > 1 ? "s" : "") "
-             + "\(category?.apresDe ?? "au hasard").")
-        // Le terrain laissé au sort ne compte pas comme un terrain choisi :
-        // la machine s'interdit de reprendre le même thème deux fois de
-        // suite, et « au hasard » ne l'engage à rien.
+             + "\(category.map { "on \($0.label)" } ?? "at random").")
+        // Ground left to chance does not count as ground chosen: the machine
+        // forbids itself the same theme twice running, and "at random"
+        // commits it to nothing.
         if let category { lastCategoryAgainst[defender] = category }
         if !drawQuestion(&a) { assault = nil; return false }
         assault = a
@@ -477,7 +479,7 @@ struct GameState {
 
     private mutating func drawQuestion(_ a: inout Assault) -> Bool {
         let level = rules.drawDifficulty(using: &rng)
-        guard let asked = bank.draw(category: a.category, parmi: themesEnJeu,
+        guard let asked = bank.draw(category: a.category, among: themesInPlay,
                                     difficulty: level, using: &rng) else {
             return false
         }
@@ -488,78 +490,79 @@ struct GameState {
         return true
     }
 
-    /// Qui doit répondre à la question posée.
+    /// Who has to answer the question asked.
     ///
-    /// En classique, le défenseur, et lui seul. En face à face, le défenseur
-    /// **puis** l'attaquant — dans cet ordre, et l'ordre n'est pas indifférent.
-    /// Sur un appareil partagé, celui qui répond en second a eu le temps de
-    /// réfléchir pendant que l'autre cherchait ; cet avantage revient donc à
-    /// l'attaquant, qui perd déjà toutes les égalités.
-    var quiRepond: PlayerID? {
+    /// In classic play, the defender, and them alone. In a showdown, the
+    /// defender **then** the attacker — in that order, and the order is not
+    /// indifferent. On a shared device, whoever answers second has had time
+    /// to think while the other was searching; that advantage therefore goes
+    /// to the attacker, who already loses every tie.
+    var whoAnswers: PlayerID? {
         guard let a = assault, a.current != nil else { return nil }
-        guard rules.mode == .faceAFace else { return a.defender }
+        guard rules.mode == .showdown else { return a.defender }
         return a.defenderAnswer == nil ? a.defender : a.attacker
     }
 
-    /// Le défenseur peut-il encore doubler l'enjeu ? Une fois par question,
-    /// et avant d'avoir répondu — après, ce ne serait plus un pari.
-    var peutRelancer: Bool {
-        guard rules.mode == .faceAFace, let a = assault, a.current != nil else { return false }
-        return a.defenderAnswer == nil && a.mise == 1
+    /// Can the defender still double the stake? Once per question, and before
+    /// having answered — afterwards it would no longer be a bet.
+    var canRaise: Bool {
+        guard rules.mode == .showdown, let a = assault, a.current != nil else { return false }
+        return a.defenderAnswer == nil && a.stake == 1
     }
 
-    /// La relance : le second dé du défenseur.
+    /// The raise: the defender's second die.
     ///
-    /// Au Risk, le défenseur choisit un ou deux dés, et deux dés font gagner
-    /// ou perdre davantage. Ici il mise sur sa propre connaissance du thème
-    /// que l'attaquant vient de choisir : l'échange vaudra deux hommes au lieu
-    /// d'un, dans le sens où il tombera.
-    mutating func relancer() {
-        guard peutRelancer else { return }
-        assault?.mise = 2
-        note(.duel, "\(playerName(assault?.defender ?? -1)) relance : "
-             + "l'échange vaudra deux hommes.")
+    /// In Risk the defender chooses one die or two, and two dice win or lose
+    /// more. Here they bet on their own knowledge of the theme the attacker
+    /// has just chosen: the exchange will be worth two troops instead of one,
+    /// whichever way it falls.
+    mutating func raise() {
+        guard canRaise else { return }
+        assault?.stake = 2
+        note(.duel, "\(playerName(assault?.defender ?? -1)) raises: "
+             + "the exchange will be worth two troops.")
     }
 
     func playerName(_ id: PlayerID) -> String {
         players.first { $0.id == id }?.name ?? "?"
     }
 
-    private mutating func crediter(_ joueur: PlayerID, _ categorie: Category, juste: Bool) {
-        var score = knowledge[joueur]?[categorie] ?? Score()
+    private mutating func credit(_ player: PlayerID, _ category: Category, correct: Bool) {
+        var score = knowledge[player]?[category] ?? Score()
         score.asked += 1
-        if juste { score.correct += 1 }
-        knowledge[joueur, default: [:]][categorie] = score
+        if correct { score.correct += 1 }
+        knowledge[player, default: [:]][category] = score
     }
 
-    private func hommes(_ n: Int) -> String { "\(n) homme\(n > 1 ? "s" : "")" }
+    private func troops(_ n: Int) -> String { "\(n) troop\(n > 1 ? "s" : "")" }
 
-    /// Une réponse arrive. C'est le seul coup qui fait couler du sang — sauf
-    /// la première des deux en face à face, qui ne fait qu'attendre l'autre.
+    /// An answer arrives. This is the only move that draws blood — except the
+    /// first of the two in a showdown, which only waits for the other.
     @discardableResult
     mutating func answer(_ response: Answer) -> DuelReport? {
         guard var a = assault, let duel = a.current else { return nil }
 
-        // Face à face, premier temps : le défenseur a répondu, sa réponse
-        // dort jusqu'à celle de l'attaquant. Rien n'est révélé, sans quoi
-        // l'attaquant lirait la solution avant de répondre à la même question.
-        if rules.mode == .faceAFace, a.defenderAnswer == nil {
+        // Showdown, first beat: the defender has answered, and their answer
+        // sleeps until the attacker's. Nothing is revealed, or the attacker
+        // would read the solution before answering the same question.
+        if rules.mode == .showdown, a.defenderAnswer == nil {
             a.defenderAnswer = response
             assault = a
             return nil
         }
 
         let report: DuelReport
-        if rules.mode == .faceAFace, let defense = a.defenderAnswer {
-            report = Combat.resolveCroise(defender: defense, attacker: response,
-                                          of: duel, mise: a.mise)
-            crediter(a.defender, duel.question.category, juste: report.correct)
-            // L'attaquant répond, donc sa culture compte aussi : c'est tout
-            // le propos du mode, et le renfort d'érudition suit.
-            crediter(a.attacker, duel.question.category, juste: report.attackerCorrect)
+        if rules.mode == .showdown, let defense = a.defenderAnswer {
+            report = Combat.resolveShowdown(defender: defense, attacker: response,
+                                            of: duel, stake: a.stake)
+            credit(a.defender, duel.question.category, correct: report.correct)
+            // The attacker answers, so their knowledge counts too: that is
+            // the whole point of the mode, and the scholarship reinforcement
+            // follows.
+            credit(a.attacker, duel.question.category, correct: report.attackerCorrect)
         } else {
             report = Combat.resolve(response, of: duel)
-            crediter(a.defender, duel.question.category, juste: report.correct)
+            credit(a.defender, duel.question.category, correct: report.correct)
         }
 
         a.current = nil
@@ -570,20 +573,20 @@ struct GameState {
 
         switch report.outcome {
         case .defenderHolds:
-            // On n'enlève jamais à l'assaillant sa garnison : une mise de deux
-            // ne rapporte que ce que la pile d'en face peut payer.
-            let perte = max(0, min(report.mise, armies(a.from) - 1))
-            armies[a.from, default: 0] -= perte
-            a.attackerLosses += perte
-            note(.duel, recit(report, place: name(a.to), perte: perte))
+            // The attacker is never stripped of their garrison: a stake of
+            // two only pays what the stack across the line can pay.
+            let loss = max(0, min(report.stake, armies(a.from) - 1))
+            armies[a.from, default: 0] -= loss
+            a.attackerLosses += loss
+            note(.duel, story(report, place: name(a.to), loss: loss))
         case .attackerBreaks:
-            let perte = min(report.mise, armies(a.to))
-            armies[a.to, default: 0] -= perte
-            a.defenderLosses += perte
-            note(.duel, recit(report, place: name(a.to), perte: perte))
+            let loss = min(report.stake, armies(a.to))
+            armies[a.to, default: 0] -= loss
+            a.defenderLosses += loss
+            note(.duel, story(report, place: name(a.to), loss: loss))
         }
 
-        a.mise = 1
+        a.stake = 1
         if armies(a.to) <= 0 {
             a.conquered = true
             assault = a
@@ -591,8 +594,8 @@ struct GameState {
             return report
         }
 
-        // La salve continue tant qu'il reste une question annoncée et un homme
-        // de trop pour la mener : on n'attaque jamais avec sa garnison.
+        // The volley continues while a declared question remains and there is
+        // one troop to spare to carry it: you never attack with your garrison.
         if a.asked < a.volley && armies(a.from) >= 2 {
             _ = drawQuestion(&a)
         }
@@ -600,59 +603,59 @@ struct GameState {
         return report
     }
 
-    /// Ce que le journal retient de l'échange. Le mode face à face a quatre
-    /// issues là où le classique en a deux, et il faut les nommer : un joueur
-    /// qui perd une place doit savoir si c'est parce qu'il ignorait, ou parce
-    /// qu'il a été moins vif.
-    private func recit(_ r: DuelReport, place: String, perte: Int) -> String {
-        let tient = r.outcome == .defenderHolds
+    /// What the log keeps of the exchange. Showdown mode has four outcomes
+    /// where classic has two, and they have to be named: a player who loses a
+    /// place must know whether it was because they did not know, or because
+    /// they were slower.
+    private func story(_ r: DuelReport, place: String, loss: Int) -> String {
+        let holds = r.outcome == .defenderHolds
         switch r.verdict {
-        case .reponse:
-            return tient
-                ? "\(place) tient : bonne réponse, l'assaillant laisse \(hommes(perte))."
+        case .answered:
+            return holds
+                ? "\(place) holds: correct answer, the attacker leaves \(troops(loss))."
                 : (r.answer == .timeout
-                   ? "Temps écoulé : \(place) perd \(hommes(perte))."
-                   : "Mauvaise réponse : \(place) perd \(hommes(perte)).")
-        case .seul:
-            return tient
-                ? "\(place) tient : le défenseur savait, l'assaillant non — \(hommes(perte)) de moins pour lui."
-                : "L'assaillant savait, la place non : \(place) perd \(hommes(perte))."
-        case .vitesse:
-            return tient
-                ? "Les deux savaient : le défenseur a été le plus vif, \(place) tient et coûte \(hommes(perte))."
-                : "Les deux savaient : l'assaillant a été le plus vif, \(place) perd \(hommes(perte))."
-        case .egalite:
-            return "Personne ne savait : \(place) tient, et l'assaillant laisse \(hommes(perte))."
+                   ? "Time is up: \(place) loses \(troops(loss))."
+                   : "Wrong answer: \(place) loses \(troops(loss)).")
+        case .onlyOne:
+            return holds
+                ? "\(place) holds: the defender knew, the attacker did not — \(troops(loss)) fewer for them."
+                : "The attacker knew, the place did not: \(place) loses \(troops(loss))."
+        case .speed:
+            return holds
+                ? "Both knew: the defender was quicker, \(place) holds and costs \(troops(loss))."
+                : "Both knew: the attacker was quicker, \(place) loses \(troops(loss))."
+        case .tie:
+            return "Nobody knew: \(place) holds, and the attacker leaves \(troops(loss))."
         }
     }
 
-    /// Range l'assaut terminé et rend la main.
+    /// Files away the finished assault and hands back control.
     mutating func dismissAssault() {
         guard let a = assault, a.isOver else { return }
         assault = nil
     }
 
-    /// Les cartes du vaincu passent à celui qui l'achève.
+    /// The loser's cards pass to whoever finishes them off.
     ///
-    /// C'est la règle du Risk, et elle a une raison qu'on ne voit qu'en la
-    /// retirant : sans elle, la main du vaincu reste gelée là où elle est et
-    /// ces cartes sortent du jeu pour de bon. Le paquet s'appauvrit à chaque
-    /// élimination, silencieusement, jusqu'à ne plus rien pouvoir donner.
+    /// This is Risk's rule, and it has a reason you only see by removing it:
+    /// without it, the loser's hand stays frozen where it is and those cards
+    /// leave the game for good. The deck grows poorer with every elimination,
+    /// silently, until it has nothing left to give.
     ///
-    /// Le Risk oblige à redescendre sous cinq cartes sur-le-champ, hommes
-    /// posés dans la foulée. On laisse ici la règle qui existe déjà s'en
-    /// charger : `doitEchanger` bloque à cinq, et le surplus se solde à
-    /// l'ouverture du tour suivant. Le seul écart avec la règle d'origine est
-    /// le moment où les hommes arrivent — et il évite d'inventer une étape de
-    /// placement au milieu d'un assaut, seul endroit du jeu où l'on ne pose
-    /// jamais rien.
-    private mutating func heriter(de vaincu: PlayerID) {
-        let butin = hand(of: vaincu)
-        guard !butin.isEmpty else { return }
-        hands[vaincu] = []
-        hands[currentPlayer.id, default: []].append(contentsOf: butin)
-        note(.renfort, "\(currentPlayer.name) hérite de \(butin.count) carte"
-             + "\(butin.count > 1 ? "s" : "") du vaincu.")
+    /// Risk requires coming back under five cards on the spot, with troops
+    /// laid down straight after. Here we let the rule that already exists
+    /// handle it: `mustExchange` blocks at five, and the surplus is settled
+    /// when the next turn opens. The only departure from the original rule is
+    /// when the troops arrive — and it avoids inventing a placement step in
+    /// the middle of an assault, the one place in the game where nothing is
+    /// ever laid down.
+    private mutating func inherit(from loser: PlayerID) {
+        let spoils = hand(of: loser)
+        guard !spoils.isEmpty else { return }
+        hands[loser] = []
+        hands[currentPlayer.id, default: []].append(contentsOf: spoils)
+        note(.reinforcement, "\(currentPlayer.name) inherits \(spoils.count) card"
+             + "\(spoils.count > 1 ? "s" : "") from the loser.")
     }
 
     private mutating func conquer(from: TerritoryID, to: TerritoryID, volley: Int) {
@@ -660,39 +663,38 @@ struct GameState {
         owner[to] = currentPlayer.id
         armies[to] = 0
         conqueredThisTurn = true
-        note(.conquete, "\(name(to)) tombe. \(currentPlayer.name) s'en empare.")
+        note(.conquest, "\(name(to)) falls. \(currentPlayer.name) takes it.")
 
         if let loser, territories(of: loser).isEmpty,
            let i = players.firstIndex(where: { $0.id == loser }) {
             players[i].eliminated = true
-            elimines[loser] = currentPlayer.id
-            note(.elimination, "\(players[i].name) est éliminé.")
-            heriter(de: loser)
+            eliminated[loser] = currentPlayer.id
+            note(.elimination, "\(players[i].name) is eliminated.")
+            inherit(from: loser)
         }
 
         let survivors = players.filter { !$0.eliminated }
-        // La garnison ne s'arrête pas à mi-chemin quand la partie se gagne :
-        // on ne demande pas « combien d'hommes avancent » pour une place qui
-        // n'aura pas de lendemain.
-        let parLObjectif = objectifAccompli(currentPlayer.id)
-        guard survivors.count > 1, !dominates(currentPlayer.id), !parLObjectif else {
-            // Tout est pris : la garnison suit, et la partie s'arrête.
+        // The garrison does not stop halfway when the game is won: we do not
+        // ask "how many troops advance" for a place that has no tomorrow.
+        let byObjective = objectiveAchieved(currentPlayer.id)
+        guard survivors.count > 1, !dominates(currentPlayer.id), !byObjective else {
+            // Everything is taken: the garrison follows, and the game stops.
             armies[to] = max(1, armies(from) - 1)
             armies[from] = 1
             assault = nil
             phase = .finished(winner: currentPlayer.id)
-            // La conquête passe avant le seuil quand la même place ouvre les
-            // deux portes : c'est elle qu'on jouait, et le seuil se serait
-            // franchi de toute façon. Le cas ne se présente plus depuis que
-            // le seuil se retire devant les conquêtes — la condition reste
-            // pour que le jour où un seuil reviendrait, il n'enterre pas la
-            // carte au moment précis où elle paye.
-            if parLObjectif, survivors.count > 1 {
-                note(.fin, recitDeLObjectif(currentPlayer.id))
+            // Conquest comes before the threshold when the same place opens
+            // both gates: conquest is what was being played, and the
+            // threshold would have been crossed anyway. The case no longer
+            // arises now that the threshold withdraws in front of conquests —
+            // the condition stays so that the day a threshold comes back, it
+            // does not bury the card at the very moment it pays.
+            if byObjective, survivors.count > 1 {
+                note(.end, objectiveStory(currentPlayer.id))
             } else {
-                note(.fin, survivors.count > 1
-                     ? "\(currentPlayer.name) tient assez du monde pour que le reste ne compte plus."
-                     : "\(currentPlayer.name) tient le monde entier.")
+                note(.end, survivors.count > 1
+                     ? "\(currentPlayer.name) holds enough of the world for the rest to stop counting."
+                     : "\(currentPlayer.name) holds the whole world.")
             }
             return
         }
@@ -702,8 +704,9 @@ struct GameState {
                             minimum: min(volley, available), maximum: available)
     }
 
-    /// Combien d'hommes avancent dans la place conquise. Au moins autant que
-    /// de questions posées — l'équivalent du « au moins autant que de dés ».
+    /// How many troops advance into the conquered place. At least as many as
+    /// there were questions asked — the equivalent of "at least as many as
+    /// there were dice".
     @discardableResult
     mutating func occupy(_ count: Int) -> Bool {
         guard case let .occupation(from, to, minimum, maximum) = phase else { return false }
@@ -712,12 +715,12 @@ struct GameState {
         armies[to, default: 0] += n
         assault = nil
         phase = .attack
-        note(.conquete, "\(n) homme\(n > 1 ? "s avancent" : " avance") sur \(name(to)).")
-        verifierLObjectif()
+        note(.conquest, "\(n) troop\(n > 1 ? "s advance" : " advances") into \(name(to)).")
+        checkObjective()
         return true
     }
 
-    // MARK: - Déplacement et fin de tour
+    // MARK: - Moving and ending the turn
 
     @discardableResult
     mutating func fortify(from: TerritoryID, to: TerritoryID, count: Int) -> Bool {
@@ -726,19 +729,20 @@ struct GameState {
               count > 0, count <= armies(from) - 1 else { return false }
         armies[from, default: 0] -= count
         armies[to, default: 0] += count
-        note(.renfort, "\(count) homme\(count > 1 ? "s" : "") de \(name(from)) vers \(name(to)).")
-        // Avant de passer la main : un déplacement peut porter la dernière
-        // place à deux hommes, et c'est encore votre tour.
-        verifierLObjectif()
+        note(.reinforcement, "\(troops(count)) from \(name(from)) to \(name(to)).")
+        // Before handing over: a move can bring the last place up to two
+        // troops, and it is still your turn.
+        checkObjective()
         endTurn()
         return true
     }
 
-    /// Passe à l'étape suivante du tour, et au joueur suivant s'il n'y en a plus.
+    /// Moves to the next step of the turn, and to the next player if there
+    /// are no steps left.
     mutating func advance() {
         switch phase {
         case .reinforcement(let remaining):
-            // On ne passe pas son tour avec des renforts en poche.
+            // You do not pass your turn with reinforcements in your pocket.
             if remaining == 0 { phase = .attack }
         case .attack:
             guard assault == nil else { return }
@@ -754,23 +758,23 @@ struct GameState {
 
     mutating func endTurn() {
         guard !isOver else { return }
-        if rules.territoryCards, conqueredThisTurn { piocher(currentPlayer.id) }
+        if rules.territoryCards, conqueredThisTurn { drawCard(currentPlayer.id) }
         conqueredThisTurn = false
         assault = nil
-        siege.removeAll()     // le souffle du défenseur revient entre deux tours
+        siege.removeAll()     // the defender's breath comes back between turns
         var next = current
         repeat {
             next = (next + 1) % players.count
             if next == 0 { turn += 1 }
         } while players[next].eliminated
         current = next
-        let renforts = reinforcements(for: currentPlayer.id)
-        settleErudition(currentPlayer.id)
-        phase = .reinforcement(remaining: renforts)
-        note(.tour, "Tour \(turn) — à \(currentPlayer.name) de jouer.")
+        let reinforcements = reinforcements(for: currentPlayer.id)
+        settleScholarship(currentPlayer.id)
+        phase = .reinforcement(remaining: reinforcements)
+        note(.turn, "Turn \(turn) — \(currentPlayer.name) to play.")
     }
 
-    // MARK: - Journal
+    // MARK: - Log
 
     func name(_ id: TerritoryID) -> String { map[id]?.name ?? id }
 

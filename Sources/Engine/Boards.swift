@@ -1,77 +1,77 @@
 //
 //  Boards.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Les plateaux, et le choix entre eux.
+//  The boards, and the choice between them.
 //
-//  Chacun est un dessin en toutes lettres, dont les voisinages se déduisent :
-//  c'est ce qui permet d'en ajouter un sans risquer la faute invisible — un
-//  voisinage saisi de travers ne plante rien, il rend un territoire imprenable
-//  et se découvre trois parties plus tard.
+//  Each one is a drawing in plain characters, from which the adjacencies
+//  follow: that is what makes it safe to add another without risking the
+//  invisible mistake — a mistyped adjacency crashes nothing, it makes a
+//  territory unassailable and turns up three games later.
 //
-//  Les cartes réelles sont ici des hexagones posés sur la géographie, et non
-//  des contours relevés. On y gagne le plan qui se retouche en déplaçant une
-//  lettre, le tracé des frontières, et les tests qui vérifient à chaque
-//  compilation que le monde se tient. On y perd la silhouette des côtes — que
-//  personne ne distinguerait à cette taille sur un téléphone. Le moteur ne
-//  connaissant que le voisinage, un rendu réaliste pourra remplacer celui-ci
-//  sans qu'une ligne des règles bouge.
+//  The real maps here are hexagons laid over the geography, not traced
+//  coastlines. What that buys is a plan you rework by moving a letter, drawn
+//  borders, and tests that check at every build that the world holds
+//  together. What it costs is the shape of the coasts — which nobody would
+//  make out at this size on a phone. Since the engine knows nothing but
+//  adjacency, a realistic rendering could replace this one without a single
+//  line of the rules moving.
 //
 
 import Foundation
 
 enum Boards: String, CaseIterable, Identifiable, Codable {
 
-    /// Le nom d'un camp. Il tient ici plutôt que dans une vue : deux appareils
-    /// doivent nommer les mêmes joueurs de la même façon.
-    static func nomDeCamp(_ rang: PlayerID) -> String {
-        let noms = ["Bleu", "Rouge", "Vert", "Ambre", "Violet"]
-        return noms[((rang % noms.count) + noms.count) % noms.count]
+    /// The name of a side. It belongs here rather than in a view: two
+    /// devices must name the same players the same way.
+    static func sideName(_ rank: PlayerID) -> String {
+        let names = ["Blue", "Red", "Green", "Amber", "Purple"]
+        return names[((rank % names.count) + names.count) % names.count]
     }
 
-    case anneau, europe, monde
+    case ring, europe, world
 
     var id: String { rawValue }
 
     var label: String {
         switch self {
-        case .anneau: "L'Anneau"
+        case .ring:   "The Ring"
         case .europe: "Europe"
-        case .monde:  "Monde"
+        case .world:  "World"
         }
     }
 
     var detail: String {
         switch self {
-        case .anneau: "Un monde inventé, cinq terres en cercle. 28 territoires."
-        case .europe: "De l'Atlantique à la mer Noire. 38 territoires."
-        case .monde:  "Les six continents, 42 territoires — comme la boîte."
+        case .ring:   "An invented world, five lands in a circle. 28 territories."
+        case .europe: "From the Atlantic to the Black Sea. 38 territories."
+        case .world:  "The six continents, 42 territories — like the box."
         }
     }
 
-    /// Construit une fois pour toutes : un plateau ne change jamais.
-    var board: Board { Boards.tous[self]! }
+    /// Built once and for all: a board never changes.
+    var board: Board { Boards.all[self]! }
 
-    private static let tous: [Boards: Board] = Dictionary(
+    private static let all: [Boards: Board] = Dictionary(
         uniqueKeysWithValues: Boards.allCases.map { ($0, $0.build()) })
 
     private func build() -> Board {
         switch self {
-        case .anneau: HexPlan.build(rows: Boards.planAnneau, continents: Boards.terresAnneau)
-        case .europe: HexPlan.build(rows: Boards.planEurope, continents: Boards.terresEurope,
-                                    seaRoutes: Boards.traverseesEurope)
-        case .monde:  HexPlan.build(rows: Boards.planMonde, continents: Boards.terresMonde,
-                                    seaRoutes: Boards.traverseesMonde)
+        case .ring:   HexPlan.build(rows: Boards.ringPlan, continents: Boards.ringLands)
+        case .europe: HexPlan.build(rows: Boards.europePlan, continents: Boards.europeLands,
+                                    seaRoutes: Boards.europeCrossings)
+        case .world:  HexPlan.build(rows: Boards.worldPlan, continents: Boards.worldLands,
+                                    seaRoutes: Boards.worldCrossings)
         }
     }
 
-    // MARK: - L'Anneau
+    // MARK: - The Ring
 
-    /// Cinq terres disposées en cercle — Boréa, Ostmark, Méridia, Zéphyrie,
-    /// Ponant, et retour. Aucune n'a une seule porte : celle qui n'a qu'une
-    /// entrée devient imprenable et décide la partie à elle seule, c'est le
-    /// défaut de l'Australie du Risk d'origine.
-    static let planAnneau = [
+    /// Five lands set in a circle — Borea, Ostmark, Meridia, Zephyria,
+    /// Westmark, and back around. None of them has a single door: the land
+    /// with only one way in becomes unassailable and decides the game on its
+    /// own, which is the flaw of Australia in the original Risk.
+    static let ringPlan = [
         ". A A A . .",
         ". A A . B .",
         "C C . B B B",
@@ -82,27 +82,27 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
         ". . E E . .",
     ]
 
-    static let terresAnneau: [HexPlan.ContinentSpec] = [
-        .init(id: "A", name: "Boréa", bonus: 3,
-              names: ["Fjordane", "Grise-Lande", "Havreterre", "Skerrie", "Cap Blanc"]),
+    static let ringLands: [HexPlan.ContinentSpec] = [
+        .init(id: "A", name: "Borea", bonus: 3,
+              names: ["Fjordane", "Greymoor", "Havenhold", "Skerry", "Whitecape"]),
         .init(id: "B", name: "Ostmark", bonus: 3,
-              names: ["Steppe Haute", "Khanat", "Sablier", "Vieux-Port", "Mont Rouge"]),
-        .init(id: "C", name: "Ponant", bonus: 4,
-              names: ["Armorique", "Bocage", "Val-Clair", "Les Marches",
-                      "Saline", "Pierregrise", "Landes Hautes"]),
-        .init(id: "D", name: "Méridia", bonus: 2,
-              names: ["Oliveraie", "Sirocco", "Baie d'Or", "Dune", "Serrat"]),
-        .init(id: "E", name: "Zéphyrie", bonus: 3,
-              names: ["Alizé", "Corail", "Récif", "Palmeraie", "Lagune", "Mangrove"]),
+              names: ["High Steppe", "Khanate", "Hourglass", "Oldport", "Redmount"]),
+        .init(id: "C", name: "Westmark", bonus: 4,
+              names: ["Thornmere", "Hedgerow", "Brightvale", "The Marches",
+                      "Saltings", "Greystone", "High Moors"]),
+        .init(id: "D", name: "Meridia", bonus: 2,
+              names: ["Olivegrove", "Sirocco", "Gold Bay", "Dune", "Serrat"]),
+        .init(id: "E", name: "Zephyria", bonus: 3,
+              names: ["Tradewind", "Coral", "Reef", "Palmgrove", "Lagoon", "Mangrove"]),
     ]
 
     // MARK: - Europe
 
-    /// La silhouette de l'Europe, autant qu'un damier le permet : le bras
-    /// scandinave qui monte au nord, la péninsule ibérique qui descend au
-    /// sud-ouest, la botte italienne, la Grèce et ses îles en bas, et les
-    /// Britanniques au large — reliées par la Manche, qui est une traversée.
-    static let planEurope = [
+    /// The shape of Europe, as far as a checkerboard allows: the Scandinavian
+    /// arm reaching north, the Iberian peninsula dropping southwest, the
+    /// Italian boot, Greece and its islands at the bottom, and the British
+    /// Isles offshore — joined by the Channel, which is a crossing.
+    static let europePlan = [
         ". . . A A A . .",
         ". . . A . F . .",
         ". B . C F F . .",
@@ -114,39 +114,39 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
         ". . D D . . . .",
     ]
 
-    static let terresEurope: [HexPlan.ContinentSpec] = [
-        .init(id: "A", name: "Scandinavie", bonus: 2,
-              names: ["Norvège", "Suède", "Finlande", "Danemark"]),
-        .init(id: "B", name: "Îles Britanniques", bonus: 2,
-              names: ["Écosse", "Angleterre"]),
-        .init(id: "C", name: "Europe de l'Ouest", bonus: 4,
-              names: ["Pays-Bas", "Belgique", "Allemagne", "France",
-                      "Tchéquie", "Autriche", "Suisse", "Italie du Nord"]),
-        .init(id: "D", name: "Méditerranée", bonus: 3,
-              names: ["Portugal", "Espagne", "Baléares", "Corse",
-                      "Sardaigne", "Italie", "Sicile"]),
-        .init(id: "E", name: "Europe centrale", bonus: 4,
-              names: ["Pologne", "Slovaquie", "Hongrie", "Slovénie",
-                      "Croatie", "Serbie", "Albanie", "Grèce", "Crète"]),
-        .init(id: "F", name: "Europe de l'Est", bonus: 4,
-              names: ["Pays baltes", "Russie", "Biélorussie", "Ukraine",
-                      "Moldavie", "Roumanie", "Bulgarie", "Turquie"]),
+    static let europeLands: [HexPlan.ContinentSpec] = [
+        .init(id: "A", name: "Scandinavia", bonus: 2,
+              names: ["Norway", "Sweden", "Finland", "Denmark"]),
+        .init(id: "B", name: "British Isles", bonus: 2,
+              names: ["Scotland", "England"]),
+        .init(id: "C", name: "Western Europe", bonus: 4,
+              names: ["Netherlands", "Belgium", "Germany", "France",
+                      "Czechia", "Austria", "Switzerland", "Northern Italy"]),
+        .init(id: "D", name: "Mediterranean", bonus: 3,
+              names: ["Portugal", "Spain", "Balearics", "Corsica",
+                      "Sardinia", "Italy", "Sicily"]),
+        .init(id: "E", name: "Central Europe", bonus: 4,
+              names: ["Poland", "Slovakia", "Hungary", "Slovenia",
+                      "Croatia", "Serbia", "Albania", "Greece", "Crete"]),
+        .init(id: "F", name: "Eastern Europe", bonus: 4,
+              names: ["Baltic States", "Russia", "Belarus", "Ukraine",
+                      "Moldova", "Romania", "Bulgaria", "Turkey"]),
     ]
 
-    /// La Manche : sans elle, les îles seraient inatteignables.
-    static let traverseesEurope: [(String, String)] = [
-        ("Angleterre", "Belgique"),
-        ("Angleterre", "France"),
-        ("Écosse", "Norvège"),
+    /// The Channel: without it, the islands would be out of reach.
+    static let europeCrossings: [(String, String)] = [
+        ("England", "Belgium"),
+        ("England", "France"),
+        ("Scotland", "Norway"),
     ]
 
-    // MARK: - Monde
+    // MARK: - World
 
-    /// Les six continents du Risk, posés comme sur la boîte : l'Amérique à
-    /// gauche, l'Asie qui occupe tout le nord-est, l'Afrique au centre-sud,
-    /// l'Océanie dans son coin. Les traversées font le reste — c'est ainsi
-    /// que le jeu d'origine relie l'Alaska au Kamtchatka.
-    static let planMonde = [
+    /// The six continents of Risk, laid out as on the box: the Americas on
+    /// the left, Asia filling the whole northeast, Africa center-south,
+    /// Australia in its corner. The crossings do the rest — this is how the
+    /// original game joins Alaska to Kamchatka.
+    static let worldPlan = [
         "N N N . E E . A A A .",
         "N N N . E E E A A A A",
         ". N N . E E . A A . .",
@@ -156,46 +156,46 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
         ". S . . . . . . . . .",
     ]
 
-    static let terresMonde: [HexPlan.ContinentSpec] = [
-        .init(id: "N", name: "Amérique du Nord", bonus: 5,
-              names: ["Alaska", "Territoires du Nord-Ouest", "Groenland",
-                      "Alberta", "Ontario", "Québec",
-                      "Ouest des États-Unis", "Est des États-Unis",
-                      "Amérique centrale"]),
-        .init(id: "S", name: "Amérique du Sud", bonus: 2,
-              names: ["Venezuela", "Pérou", "Brésil", "Argentine"]),
+    static let worldLands: [HexPlan.ContinentSpec] = [
+        .init(id: "N", name: "North America", bonus: 5,
+              names: ["Alaska", "Northwest Territory", "Greenland",
+                      "Alberta", "Ontario", "Quebec",
+                      "Western United States", "Eastern United States",
+                      "Central America"]),
+        .init(id: "S", name: "South America", bonus: 2,
+              names: ["Venezuela", "Peru", "Brazil", "Argentina"]),
         .init(id: "E", name: "Europe", bonus: 5,
-              names: ["Islande", "Scandinavie", "Grande-Bretagne",
-                      "Europe du Nord", "Ukraine", "Europe de l'Ouest",
-                      "Europe du Sud"]),
-        .init(id: "F", name: "Afrique", bonus: 3,
-              names: ["Afrique du Nord", "Égypte", "Congo",
-                      "Afrique de l'Est", "Afrique du Sud", "Madagascar"]),
-        .init(id: "A", name: "Asie", bonus: 7,
-              names: ["Sibérie", "Iakoutie", "Kamtchatka",
-                      "Oural", "Irkoutsk", "Mongolie", "Japon",
-                      "Afghanistan", "Chine",
-                      "Moyen-Orient", "Inde", "Siam"]),
-        .init(id: "O", name: "Océanie", bonus: 2,
-              names: ["Indonésie", "Nouvelle-Guinée",
-                      "Australie occidentale", "Australie orientale"]),
+              names: ["Iceland", "Scandinavia", "Great Britain",
+                      "Northern Europe", "Ukraine", "Western Europe",
+                      "Southern Europe"]),
+        .init(id: "F", name: "Africa", bonus: 3,
+              names: ["North Africa", "Egypt", "Congo",
+                      "East Africa", "South Africa", "Madagascar"]),
+        .init(id: "A", name: "Asia", bonus: 7,
+              names: ["Siberia", "Yakutsk", "Kamchatka",
+                      "Ural", "Irkutsk", "Mongolia", "Japan",
+                      "Afghanistan", "China",
+                      "Middle East", "India", "Siam"]),
+        .init(id: "O", name: "Australia", bonus: 2,
+              names: ["Indonesia", "New Guinea",
+                      "Western Australia", "Eastern Australia"]),
     ]
 
-    /// Trois traversées, et trois seulement.
+    /// Three crossings, and three only.
     ///
-    /// L'Amérique du Sud a été écartée de l'Afrique : les deux se touchaient
-    /// par le Brésil, ce qui faisait passer un continent dans l'autre à pied.
-    /// Elles sont désormais séparées par la mer, avec une seule porte —
-    /// Congo–Brésil. De même l'Océanie ne tient plus à l'Asie que par
-    /// Siam–Indonésie, qui se touchent et n'ont donc pas besoin de route.
-    static let traverseesMonde: [(String, String)] = [
-        ("Alaska", "Kamtchatka"),
-        ("Groenland", "Islande"),
-        ("Congo", "Brésil"),
+    /// South America has been pushed away from Africa: the two used to touch
+    /// at Brazil, which let you walk from one continent into the other. They
+    /// are now separated by sea, with a single door — Congo–Brazil. In the
+    /// same way Australia hangs onto Asia by Siam–Indonesia alone, and those
+    /// two touch, so they need no route.
+    static let worldCrossings: [(String, String)] = [
+        ("Alaska", "Kamchatka"),
+        ("Greenland", "Iceland"),
+        ("Congo", "Brazil"),
     ]
 }
 
-/// Le plateau par défaut, celui des essais et des aperçus.
+/// The default board, the one used by tests and previews.
 enum TestBoard {
-    static var board: Board { Boards.anneau.board }
+    static var board: Board { Boards.ring.board }
 }

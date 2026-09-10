@@ -1,216 +1,214 @@
 //
 //  Rules.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Toutes les manettes du jeu, au même endroit — et ce que la simulation a
-//  répondu quand on les a tournées.
+//  Every lever in the game, in one place — and what the simulation answered
+//  when they were turned.
 //
-//  Le Risk tient son équilibre du hasard : l'attaquant lance plus de dés que
-//  le défenseur et finit statistiquement par passer. Remplacer le dé par une
-//  question supprime ce ressort. Deux conséquences, toutes deux mesurées sur
-//  des milliers de parties jouées par la machine contre elle-même :
+//  Risk gets its balance from chance: the attacker rolls more dice than the
+//  defender and statistically ends up getting through. Replacing the die with
+//  a question removes that spring. Two consequences, both measured over
+//  thousands of games played by the machine against itself:
 //
-//  1. La part de duels gagnés par l'attaquant vaut exactement « un moins le
-//     taux de bonnes réponses du défenseur ». Avec trente secondes par
-//     question, le défenseur tenait sept fois sur dix : attaquer devenait une
-//     mauvaise affaire, et il fallait près de deux cents questions pour finir
-//     une partie. À quinze secondes, l'attaquant l'emporte dans 48 % des
-//     duels — la fourchette du Risk d'origine, où il gagne 39 % des
-//     comparaisons à deux dés contre deux, 42 % à un contre un.
+//  1. The share of duels won by the attacker is exactly "one minus the
+//     defender's rate of correct answers". At thirty seconds a question, the
+//     defender held seven times out of ten: attacking became a bad deal, and
+//     it took close to two hundred questions to finish a game. At fifteen
+//     seconds the attacker wins 48% of duels — the range of the original
+//     Risk, where they win 39% of two-dice-against-two comparisons, 42% of
+//     one against one.
 //
-//  2. Sans hasard, un joueur qui sait ne perd jamais sa place, quelle que
-//     soit l'armée en face. Ce qui remplace la statistique, c'est l'usure :
-//     le sablier se raccourcit à chaque question subie par un même territoire
-//     dans le même tour. Presser une place finit par payer, comme au Risk —
-//     mais c'est le souffle du défenseur qui cède, pas le sort.
+//  2. Without chance, a player who knows never loses their place, whatever
+//     army stands across from them. What replaces the statistics is wear: the
+//     hourglass gets shorter with every question the same territory faces
+//     within the same turn. Pressing a place eventually pays, as in Risk —
+//     but it is the defender's breath that gives out, not the luck of a roll.
 //
-//  Une seule manette pousse dans ce sens, volontairement : la difficulté des
-//  questions ne monte pas avec le siège. Deux réglages qui tirent au même
-//  endroit ne se règlent plus séparément.
+//  One lever deliberately does not push that way: question difficulty does
+//  not climb with the siege. Two settings that pull at the same point can no
+//  longer be tuned separately.
 //
 
 import Foundation
 
 struct Rules: Equatable, Codable {
 
-    // MARK: - Le duel
+    // MARK: - The duel
 
-    /// Le mode de jeu, choisi à la mise en place.
+    /// The mode of play, chosen at setup.
     ///
-    /// En **classique**, l'attaquant choisit le terrain et le défenseur seul
-    /// répond : la culture est une armure, jamais une arme, et l'attaquant
-    /// passe son propre tour à regarder l'autre réfléchir.
+    /// In **classic**, the attacker chooses the ground and the defender alone
+    /// answers: knowledge is armor, never a weapon, and the attacker spends
+    /// their own turn watching the other think.
     ///
-    /// En **face à face**, les deux répondent à la même question. C'est le
-    /// duel du Risk retrouvé — les deux lancent — et il a fallu pour cela
-    /// emprunter deux règles telles quelles au dé :
+    /// In a **showdown**, both answer the same question. This is the duel of
+    /// Risk recovered — both roll — and it took borrowing two rules
+    /// unchanged from the die to get there:
     ///
-    ///     les deux savent          → le sablier tranche, le plus vif l'emporte
-    ///     aucun des deux ne sait   → la place tient, comme sur une égalité
+    ///     both know          → the hourglass decides, the quicker wins
+    ///     neither knows      → the place holds, as on a tie
     ///
-    /// Le départage au sablier n'est pas un ornement, c'est ce qui tient
-    /// l'équilibre. Sans lui, l'attaquant ne l'emporterait plus que dans
-    /// `p × (1−p)` des échanges — 23 % à 65 % de bonnes réponses — et la
-    /// partie se figerait, personne ne pouvant plus prendre une place. Avec
-    /// lui on remonte à 44 %, la fourchette du dé contre dé du Risk (41,7 %).
-    var mode: Mode = .classique
+    /// Settling it on the hourglass is not an ornament, it is what holds the
+    /// balance. Without it the attacker would win only `p × (1−p)` of
+    /// exchanges — 23% at a 65% answer rate — and the game would freeze, with
+    /// nobody able to take a place any more. With it we come back up to 44%,
+    /// the range of die-against-die in Risk (41.7%).
+    var mode: Mode = .classic
 
     enum Mode: String, CaseIterable, Identifiable, Codable {
-        case classique
-        case faceAFace
+        case classic
+        case showdown
 
         var id: String { rawValue }
 
         var label: String {
             switch self {
-            case .classique: "Classique"
-            case .faceAFace: "Face à face"
+            case .classic:  "Classic"
+            case .showdown: "Showdown"
             }
         }
 
         var detail: String {
             switch self {
-            case .classique:
-                "L'attaquant choisit le thème, le défenseur seul répond."
-            case .faceAFace:
-                "Les deux répondent à la même question. Le défenseur peut doubler l'enjeu."
+            case .classic:
+                "The attacker picks the theme, the defender alone answers."
+            case .showdown:
+                "Both answer the same question. The defender can double the stake."
             }
         }
     }
 
-    /// Les « dés » de l'attaquant : une ou deux questions par assaut.
+    /// The attacker's "dice": one or two questions per assault.
     var maxQuestions = 2
 
-    /// Sablier de la première question d'un siège.
+    /// Hourglass for the first question of a siege.
     ///
-    /// Quinze secondes, et non trente : c'est le réglage qui décide de tout
-    /// l'équilibre du jeu (voir l'en-tête). Le temps de lire l'énoncé, de
-    /// savoir, et de répondre.
+    /// Fifteen seconds, not thirty: this is the setting that decides the
+    /// whole balance of the game (see the header). Time to read the prompt,
+    /// to know, and to answer.
     var baseSeconds: TimeInterval = 15
 
-    /// Ce qu'il reste du sablier à chaque question suivante sur le même
-    /// territoire, dans le même tour : 15 s, 11,7 s, 9,1 s, 7,1 s, 6 s.
+    /// What is left of the hourglass at each further question on the same
+    /// territory within the same turn: 15s, 11.7s, 9.1s, 7.1s, 6s.
     var siegePressure: Double = 0.78
 
-    /// En dessous, la question n'est plus une question mais un réflexe.
+    /// Below this, the question stops being a question and becomes a reflex.
     var minSeconds: TimeInterval = 6
 
-    /// Poids de tirage des trois niveaux de difficulté.
-    var difficultyWeights: [Difficulty: Int] = Dosage.melees.poids
+    /// Draw weights for the three difficulty levels.
+    var difficultyWeights: [Difficulty: Int] = Mix.mixed.weights
 
-    /// Les thèmes en jeu, par leur identifiant.
+    /// The themes in play, by identifier.
     ///
-    /// C'est une règle de la partie et non un réglage de l'appareil : elle
-    /// voyage donc avec elle, et celui qui rejoint joue les thèmes de l'hôte.
-    /// Deux appareils qui ne s'accorderaient pas là-dessus ne poseraient pas
-    /// les mêmes questions.
+    /// This is a rule of the game and not a device setting: it travels with
+    /// the game, and whoever joins plays the host's themes. Two devices that
+    /// disagreed about this would not ask the same questions.
     ///
-    /// Absente ou vide, elle veut dire **tous** — et non aucun. Deux raisons :
-    /// une partie enregistrée avant ce réglage n'en a pas et doit reprendre
-    /// telle qu'elle était, et un thème ajouté plus tard entre de lui-même
-    /// dans les parties de qui n'a rien choisi. Une liste de tous les thèmes
-    /// cochés serait une liste qui vieillit.
+    /// Absent or empty means **all** — not none. Two reasons: a game saved
+    /// before this setting existed does not have one and must resume as it
+    /// was, and a theme added later joins the games of anyone who chose
+    /// nothing on its own. A list of every theme ticked would be a list that
+    /// ages.
     var themes: Set<String>?
 
-    /// Le dosage des questions, tel qu'on le choisit à la mise en place. C'est
-    /// un réglage de jeu — on choisit à quel point la partie est corsée, comme
-    /// on choisit la culture de la machine.
-    enum Dosage: String, CaseIterable, Identifiable, Codable {
-        case faciles, melees, corsees
+    /// The difficulty mix, as chosen at setup. This is a game setting — you
+    /// choose how tough the game runs, the way you choose the machine's
+    /// knowledge.
+    enum Mix: String, CaseIterable, Identifiable, Codable {
+        case easy, mixed, tough
         var id: String { rawValue }
 
         var label: String {
             switch self {
-            case .faciles: "Faciles"
-            case .melees:  "Mêlées"
-            case .corsees: "Corsées"
+            case .easy:  "Easy"
+            case .mixed: "Mixed"
+            case .tough: "Tough"
             }
         }
 
         var detail: String {
             switch self {
-            case .faciles: "De quoi jouer avec des enfants."
-            case .melees:  "Les trois niveaux, comme dans une boîte de jeu."
-            case .corsees: "Pour ceux qui trouvent le reste trop facile."
+            case .easy:  "Gentle enough to play with children."
+            case .mixed: "All three levels, as in a boxed game."
+            case .tough: "For anyone who finds the rest too easy."
             }
         }
 
-        var poids: [Difficulty: Int] {
+        var weights: [Difficulty: Int] {
             switch self {
-            case .faciles: [.facile: 6, .moyen: 3, .difficile: 1]
-            case .melees:  [.facile: 4, .moyen: 4, .difficile: 2]
-            case .corsees: [.facile: 1, .moyen: 3, .difficile: 6]
+            case .easy:  [.easy: 6, .medium: 3, .hard: 1]
+            case .mixed: [.easy: 4, .medium: 4, .hard: 2]
+            case .tough: [.easy: 1, .medium: 3, .hard: 6]
             }
         }
     }
 
-    // MARK: - Le tour
+    // MARK: - The turn
 
-    /// Renfort minimal par tour, quoi qu'il arrive.
+    /// Minimum reinforcement per turn, whatever happens.
     var reinforcementFloor = 3
 
-    /// Un renfort par tranche de tant de territoires. Passer à quatre allonge
-    /// la partie de moitié sans rien changer à l'équilibre.
+    /// One reinforcement per so many territories. Going to four lengthens the
+    /// game by half without changing the balance at all.
     var territoriesPerReinforcement = 3
 
-    /// Armées de départ, avant répartition sur les territoires reçus.
+    /// Starting armies, before they are spread over the territories dealt.
     var startingArmies = 22
 
-    /// Les cartes de territoire du Risk. Option : elles changent l'économie
-    /// des renforts, et le plateau se joue très bien sans elles.
+    /// Risk's territory cards. Optional: they change the economics of
+    /// reinforcement, and the board plays perfectly well without them.
     var territoryCards = false
 
-    /// Les conquêtes personnelles : chacun reçoit au départ un objectif que
-    /// lui seul connaît, et qui lui donne une seconde façon de gagner.
+    /// Personal conquests: each player is dealt an objective at the start
+    /// that they alone know, giving them a second way to win.
     ///
-    /// Option, et éteinte par défaut : elle change la partie du tout au tout.
-    /// Le compte des territoires de la barre du haut cesse de dire qui est en
-    /// train de gagner, et l'on ne sait plus ce que l'autre cherche — ce qui
-    /// est tout l'intérêt, mais n'est pas la partie que quelqu'un attend s'il
-    /// ne l'a pas demandée.
+    /// Optional, and off by default: it changes the game completely. The
+    /// territory count in the top bar stops saying who is winning, and you no
+    /// longer know what the other player is after — which is the whole point,
+    /// but is not the game anyone expects if they did not ask for it.
     ///
-    /// La règle allumée, la conquête devient la seule façon de gagner : le
-    /// seuil de domination se retire, et ne reste que le plateau entier —
-    /// c'est-à-dire qu'il ne reste plus personne. Une carte qui deviendrait
-    /// impossible ne laisse pas son joueur sans issue pour autant : elle se
-    /// retourne en un repli, et c'est lui qui porte le seuil (voir
-    /// `Objectif.repli`).
-    var objectifs = false
+    /// With the rule on, conquest becomes the only way to win: the domination
+    /// threshold withdraws, and only the whole board is left — which is to
+    /// say nobody is left. A card that became impossible does not leave its
+    /// player without a way out for all that: it turns over into a fallback,
+    /// and that fallback carries the threshold (see `Objective.fallback`).
+    var objectives = false
 
-    /// Un homme de plus toutes les tant de bonnes réponses dans un même thème.
-    /// `nil` retire la règle.
+    /// One extra troop for every so many correct answers within one theme.
+    /// `nil` removes the rule.
     ///
-    /// Seul le défenseur répond : ce renfort récompense donc celui qui tient
-    /// sa place en sachant, et il échoit surtout à qui se fait attaquer —
-    /// c'est-à-dire, le plus souvent, à celui qui est en train de perdre. Reste
-    /// à savoir si cela rattrape les écarts ou les creuse : c'est mesuré.
+    /// Only the defender answers: this reinforcement therefore rewards
+    /// whoever holds their place by knowing, and it falls above all to
+    /// whoever is being attacked — that is to say, most often, to whoever is
+    /// losing. Whether that closes the gaps or widens them is another
+    /// question: it has been measured.
     var answersPerBonusMan: Int? = 5
 
-    /// Le déplacement de fin de tour suit-il une chaîne de territoires amis
-    /// (règle « moderne »), ou seulement un voisinage direct ?
+    /// Does the end-of-turn move follow a chain of friendly territories
+    /// ("modern" rule), or only direct adjacency?
     var fortifyAlongChain = true
 
-    // MARK: - La fin
+    // MARK: - The end
 
-    /// Part du monde qui suffit à gagner, sans avoir à ramasser les miettes.
-    /// `nil` prend la valeur mesurée ; `0` demande la **guerre totale** — tous
-    /// les territoires, sans exception.
+    /// The share of the world that is enough to win, without having to sweep
+    /// up the crumbs. `nil` takes the measured value; `0` asks for **total
+    /// war** — every territory, no exceptions.
     ///
-    /// La conquête intégrale fait traîner la fin : les derniers territoires
-    /// sont tenus par un joueur qui n'a plus rien à perdre et se contente de
-    /// répondre juste. À deux, elle coûte 177 questions là où le seuil de 65 %
-    /// en demande 90 — et le vainqueur est le même.
+    /// Full conquest drags the ending out: the last territories are held by a
+    /// player with nothing left to lose who simply answers correctly. With
+    /// two players it costs 177 questions where the 65% threshold asks for
+    /// 90 — and the winner is the same.
     var dominationOverride: Double?
 
-    /// Ce que reçoit en plus, au départ, chaque joueur qui passe après le
-    /// premier. `nil` prend la valeur mesurée.
+    /// What each player after the first receives in addition at the start.
+    /// `nil` takes the measured value.
     ///
-    /// Ouvrir vaut cher : à deux joueurs, sans compensation, celui qui
-    /// commence gagne 61 % des parties. Deux hommes rétablissent le partage
-    /// (51/48 sur six cents parties).
+    /// Opening is expensive: with two players and no compensation, whoever
+    /// goes first wins 61% of games. Two troops restore the split (51/48 over
+    /// six hundred games).
     var compensationOverride: Int?
 
-    // MARK: - Ce qui en découle
+    // MARK: - What follows from it
 
     func answerTime(siege: Int) -> TimeInterval {
         max(minSeconds, baseSeconds * pow(siegePressure, Double(max(0, siege))))
@@ -224,41 +222,40 @@ struct Rules: Equatable, Codable {
         let table = Difficulty.allCases.flatMap { d in
             Array(repeating: d, count: difficultyWeights[d] ?? 1)
         }
-        return table.randomElement(using: &rng) ?? .moyen
+        return table.randomElement(using: &rng) ?? .medium
     }
 
-    /// Le seuil de victoire : sa part de départ, plus trois territoires et
-    /// demi. Ce n'est pas une part fixe du monde — 65 % ne veut pas dire la
-    /// même chose à deux et à quatre, où l'on part de 25 %. C'est un écart, et
-    /// c'est lui qui fixe la durée : quel que soit le nombre de joueurs, il
-    /// faut une douzaine de tours pour le franchir.
+    /// The victory threshold: a player's starting share, plus three and a
+    /// half territories. It is not a fixed share of the world — 65% does not
+    /// mean the same thing with two players as with four, where you start
+    /// from 25%. It is a gap, and the gap is what sets the length: whatever
+    /// the number of players, it takes a dozen turns to cross.
     func dominationThreshold(territories: Int, playerCount: Int) -> Int {
-        // Les conquêtes personnelles prennent la partie à leur compte. Le
-        // seuil cessait d'être une porte de plus pour devenir la porte : à
-        // deux sur le Monde, il décidait cinq parties sur six, et à quatre il
-        // les décidait toutes — la carte ne servait à rien, et le joueur qui
-        // gagnait au compte voyait sa conquête non remplie s'afficher sous
-        // son nom. Il ne reste donc plus ici que pour dire « il n'y avait
-        // plus personne en face ».
-        if objectifs { return territories }
+        // Personal conquests take the game on themselves. The threshold
+        // stopped being one more door and became the door: with two players
+        // on the World board it decided five games out of six, and with four
+        // it decided all of them — the card was useless, and the player who
+        // won on count saw their unmet conquest displayed under their name.
+        // So it stays here only to say "there was nobody left across the
+        // table".
+        if objectives { return territories }
         if let dominationOverride {
             return dominationOverride <= 0 ? territories
                 : Int((Double(territories) * dominationOverride).rounded(.up))
         }
-        let depart = Double(territories) / Double(max(2, playerCount))
-        return min(territories, Int((depart + victoryGap).rounded(.up)))
+        let start = Double(territories) / Double(max(2, playerCount))
+        return min(territories, Int((start + victoryGap).rounded(.up)))
     }
 
-    /// L'écart à prendre, en territoires, sur sa part de départ. Sept donne
-    /// des parties de 65 questions à deux, 120 à trois, 160 à quatre — une
-    /// vingtaine de minutes à une heure. Chaque point ajoute une dizaine de
-    /// questions.
+    /// The gap to take, in territories, over your starting share. Seven gives
+    /// games of 65 questions with two players, 120 with three, 160 with four
+    /// — twenty minutes to an hour. Each point adds about ten questions.
     var victoryGap: Double = 7
 
-    /// La compensation de rang, telle que la simulation l'a réglée : deux
-    /// hommes à deux joueurs, rien au-delà. À trois et plus, l'avantage
-    /// d'ouvrir se dilue de lui-même — celui qui frappe le premier s'expose
-    /// à deux voisins au lieu d'un.
+    /// The turn-order compensation, as the simulation settled it: two troops
+    /// with two players, nothing beyond that. At three and above, the
+    /// advantage of opening dilutes on its own — whoever strikes first
+    /// exposes themselves to two neighbors instead of one.
     func compensation(playerCount: Int) -> Int {
         if let compensationOverride { return compensationOverride }
         return playerCount <= 2 ? 2 : 0

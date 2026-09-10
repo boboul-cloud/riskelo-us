@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- The sandbox: the app is shut inside its own folder and sees nothing
+	     of the rest of the Mac. The Mac App Store requires it, no exceptions.
+	     On iPhone and iPad the system applies it by default — which is why
+	     this file is for macOS only. -->
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<!-- The sandbox cuts off the network along with everything else. These
+	     two keys reopen it, and only it: reaching out to find the other
+	     device, and letting itself be found. Without them the Mac and the
+	     iPhone would stop seeing each other — and nothing on screen would
+	     say why. -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.network.server</key>
+	<true/>
+</dict>
+</plist>

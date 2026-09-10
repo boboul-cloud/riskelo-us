@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Riskelo</string>
+	<string>Riskelo US</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,11 +24,11 @@
 	<false/>
 	<key>NSBonjourServices</key>
 	<array>
-		<string>_riskelo-jeu._tcp</string>
-		<string>_riskelo-jeu._udp</string>
+		<string>_riskelo-us._tcp</string>
+		<string>_riskelo-us._udp</string>
 	</array>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Riskelo s'en sert pour trouver l'autre appareil et jouer la partie à deux.</string>
+	<string>Riskelo US uses it to find the other device and play a two-player game.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchScreen</key>

@@ -1,0 +1,242 @@
+# Life Science — Grade 7 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Seventh grade science is alive: the cell, the way we sort living
+# things, plants and animals, the human body, the first rules of
+# heredity, and how it all hangs together in an ecosystem.
+
+! id      | science-7
+! name    | Science — Grade 7
+! detail  | Life science: cells, classification, plants, animals, the body and ecology.
+! icon    | pawprint
+! tint    | 0.52 0.72 0.38
+! rank    | 14
+! product | com.oulhen.riskelo.us.pack.science7
+
+
+# --- The cell ---
+
+E | Which unit is the basic building block of all living things? | The cell | The atom | The organ | The tissue
+E | Which instrument do we use to look at cells? | A microscope | A telescope | A spectroscope | A stethoscope
+E | Which part controls the activity of a plant or animal cell? | The nucleus | The vacuole | The ribosome | The cell wall
+E | Which structure surrounds every cell and controls what enters? | The cell membrane | The cell wall | The nucleus | The cytoplasm
+E | Which jelly fills the cell around its parts? | The cytoplasm | The nucleus | The membrane | The vacuole
+E | Which cell part captures sunlight in plants? | The chloroplast | The mitochondrion | The ribosome | The lysosome
+E | Which cell part releases energy from food? | The mitochondrion | The chloroplast | The nucleus | The vacuole
+E | Which stiff layer surrounds plant cells but not animal cells? | The cell wall | The cell membrane | The cytoplasm | The nuclear envelope
+E | Which cell part builds proteins? | The ribosome | The lysosome | The vacuole | The centriole
+E | Which cells have no nucleus at all? | Prokaryotic cells | Eukaryotic cells | Plant cells | Animal cells
+M | Which large sac stores water in a plant cell? | The central vacuole | The nucleolus | The lysosome | The vesicle
+M | Which cells keep their DNA inside a nucleus? | Eukaryotic cells | Prokaryotic cells | Bacterial cells | Archaeal cells
+M | Which scientist first named cells after looking at cork? | Robert Hooke | Anton van Leeuwenhoek | Matthias Schleiden | Rudolf Virchow
+M | Which level of organization comes just above the cell? | The tissue | The organ | The organ system | The organism
+H | Which sugar makes up plant cell walls? | Cellulose | Glucose | Starch | Chitin
+H | Which network of tubes moves materials inside the cell? | The endoplasmic reticulum | The Golgi apparatus | The cytoskeleton | The nuclear pore
+H | Which cell part packages and ships proteins? | The Golgi apparatus | The ribosome | The nucleus | The vacuole
+H | Which cell part digests waste with enzymes? | The lysosome | The ribosome | The chloroplast | The vacuole
+H | Which theory says all living things are made of cells? | Cell theory | Germ theory | Endosymbiosis | Spontaneous generation
+H | Which scientist first saw living microorganisms in pond water? | Anton van Leeuwenhoek | Robert Hooke | Louis Pasteur | Robert Koch
+H | Which level of organization comes just above the tissue? | The organ | The cell | The organism | The population
+H | Which process moves particles from high to low concentration? | Diffusion | Active transport | Endocytosis | Phagocytosis
+H | Which kind of diffusion moves water across a membrane? | Osmosis | Active transport | Filtration | Exocytosis
+H | Which transport needs energy to move against a gradient? | Active transport | Diffusion | Osmosis | Facilitated diffusion
+H | Which process brings large particles into a cell in a pouch? | Endocytosis | Exocytosis | Osmosis | Diffusion
+H | Which process pushes materials out of a cell in a vesicle? | Exocytosis | Endocytosis | Diffusion | Osmosis
+H | Which term describes a membrane that lets only some things through? | Selectively permeable | Impermeable | Fully permeable | Rigid
+H | Which idea says mitochondria were once free-living bacteria? | Endosymbiosis | Spontaneous generation | Panspermia | Preformation
+
+# --- Sorting living things ---
+
+E | Which science sorts and names living things? | Taxonomy | Ecology | Genetics | Anatomy
+E | Which two words make up a scientific name? | Genus and species | Family and order | Kingdom and phylum | Class and genus
+M | Which scientist created the two-word naming system? | Carl Linnaeus | Charles Darwin | Gregor Mendel | Georges Cuvier
+M | Which kingdom includes mushrooms and molds? | Fungi | Plantae | Protista | Bacteria
+M | Which kingdom makes its own food by photosynthesis? | Plantae | Animalia | Fungi | Bacteria
+M | Which animals have a backbone? | Vertebrates | Invertebrates | Arthropods | Mollusks
+M | Which animals have no backbone? | Invertebrates | Vertebrates | Mammals | Reptiles
+M | Which five groups make up the vertebrates? | Fish, amphibians, reptiles, birds, mammals | Insects, spiders, worms, snails, crabs | Fish, insects, birds, mammals, reptiles | Reptiles, birds, mammals, fungi, plants
+M | Which class of vertebrates feeds its young milk? | Mammals | Birds | Reptiles | Amphibians
+M | Which class of vertebrates lives partly in water and partly on land? | Amphibians | Reptiles | Fish | Birds
+M | Which class of vertebrates has feathers? | Birds | Mammals | Reptiles | Amphibians
+M | Which invertebrate group has jointed legs and an exoskeleton? | Arthropods | Mollusks | Annelids | Cnidarians
+M | Which arthropods have six legs and three body parts? | Insects | Spiders | Crustaceans | Millipedes
+H | Which is the broadest rank, above kingdom? | Domain | Phylum | Class | Family
+H | Which three domains do biologists recognize? | Bacteria, Archaea, Eukarya | Plants, Animals, Fungi | Prokarya, Eukarya, Virya | Monera, Protista, Fungi
+H | Which order lists the ranks from broad to narrow? | Domain, kingdom, phylum, class | Class, order, family, genus | Species, genus, family, order | Kingdom, class, phylum, order
+H | Which kingdom holds mostly single-celled organisms with a nucleus? | Protista | Bacteria | Fungi | Archaea
+H | Which arthropods have eight legs and two body parts? | Arachnids | Insects | Crustaceans | Centipedes
+H | Which invertebrate group includes snails, clams and octopuses? | Mollusks | Arthropods | Echinoderms | Annelids
+H | Which invertebrate group includes sea stars and urchins? | Echinoderms | Mollusks | Cnidarians | Sponges
+H | Which invertebrate group includes jellyfish and corals? | Cnidarians | Echinoderms | Sponges | Flatworms
+H | Which invertebrate group includes earthworms and leeches? | Annelids | Nematodes | Flatworms | Mollusks
+H | Which tool uses paired choices to identify a species? | A dichotomous key | A phylogenetic tree | A cladogram | A field guide
+H | Which diagram shows how species are related by descent? | A phylogenetic tree | A dichotomous key | A food web | A pyramid of numbers
+
+# --- Plants ---
+
+E | Which process do plants use to make food from sunlight? | Photosynthesis | Respiration | Transpiration | Germination
+E | Which gas do plants take in for photosynthesis? | Carbon dioxide | Oxygen | Nitrogen | Helium
+E | Which gas do plants release during photosynthesis? | Oxygen | Carbon dioxide | Nitrogen | Methane
+E | Which green pigment captures light in leaves? | Chlorophyll | Carotene | Melanin | Hemoglobin
+E | Which plant part anchors it and takes in water? | The roots | The stem | The leaves | The flowers
+E | Which plant tissue carries water up from the roots? | The xylem | The phloem | The cambium | The cortex
+E | Which part of a flower makes pollen? | The anther | The stigma | The ovary | The sepal
+E | Which process moves pollen from anther to stigma? | Pollination | Germination | Fertilization | Transpiration
+E | Which process starts a seed growing? | Germination | Pollination | Photosynthesis | Respiration
+E | Which plants make their seeds inside cones? | Conifers | Flowering plants | Ferns | Mosses
+M | Which tiny openings on a leaf let gases in and out? | Stomata | Veins | Cuticles | Tendrils
+M | Which animals are the most common pollinators? | Insects | Fish | Reptiles | Amphibians
+M | Which plants make their seeds inside fruit? | Flowering plants | Conifers | Mosses | Horsetails
+H | Which plant tissue carries sugars away from the leaves? | The phloem | The xylem | The epidermis | The pith
+H | Which cells open and close the pores of a leaf? | Guard cells | Sieve cells | Companion cells | Palisade cells
+H | Which sticky part of a flower receives pollen? | The stigma | The anther | The filament | The petal
+H | Which part of a flower becomes the fruit? | The ovary | The anther | The style | The sepal
+H | Which plants reproduce by spores and make no seeds? | Ferns and mosses | Conifers | Grasses | Palms
+H | Which plants have no tubes to carry water through them? | Mosses | Ferns | Conifers | Oaks
+H | Which plant response turns a shoot toward the light? | Phototropism | Gravitropism | Thigmotropism | Hydrotropism
+H | Which plant response turns roots downward? | Gravitropism | Phototropism | Photoperiodism | Nastic movement
+H | Which hormone makes plant stems grow longer? | Auxin | Ethylene | Abscisic acid | Cytokinin
+H | Which plant hormone ripens fruit? | Ethylene | Auxin | Gibberellin | Cytokinin
+H | Which plant completes its life cycle in a single season? | An annual | A perennial | A biennial | An ephemeral
+H | Which plant lives and flowers for many years? | A perennial | An annual | A biennial | A monocarp
+H | Which waxy coat keeps a leaf from drying out? | The cuticle | The epidermis | The mesophyll | The stoma
+
+# --- Animals ---
+
+E | Which animals are warm-blooded and covered in hair or fur? | Mammals | Reptiles | Fish | Amphibians
+E | Which organ do fish use to take oxygen from water? | Gills | Lungs | Spiracles | Skin flaps
+E | Which change turns a tadpole into a frog? | Metamorphosis | Migration | Hibernation | Regeneration
+E | Which stage follows the caterpillar in a butterfly's life? | The pupa | The egg | The adult | The nymph
+E | Which animals lay eggs with tough shells on land? | Reptiles | Amphibians | Fish | Jellyfish
+E | Which seasonal journey do many birds make each year? | Migration | Hibernation | Molting | Imprinting
+E | Which coloring helps an animal blend into its background? | Camouflage | Mimicry | Warning color | Bioluminescence
+E | Which animals eat only meat? | Carnivores | Herbivores | Omnivores | Detritivores
+E | Which animals eat only plants? | Herbivores | Carnivores | Omnivores | Insectivores
+M | Which insect life cycle has four separate stages? | Complete metamorphosis | Incomplete metamorphosis | Direct development | Budding
+M | Which insect life cycle has a nymph that resembles the adult? | Incomplete metamorphosis | Complete metamorphosis | Alternation of generations | Fission
+M | Which deep sleep carries some animals through the winter? | Hibernation | Estivation | Migration | Daily torpor
+M | Which behavior is built in rather than learned? | Instinct | Conditioning | Imitation | Insight
+M | Which learning links a signal to a reward? | Conditioning | Imprinting | Habituation | Instinct
+M | Which animals eat both plants and meat? | Omnivores | Herbivores | Carnivores | Filter feeders
+M | Which animals are hunted by others for food? | Prey | Predators | Scavengers | Decomposers
+M | Which hard outer covering must an insect shed in order to grow? | The exoskeleton | The endoskeleton | The carapace ring | The cuticle plate
+M | Which fluid carries oxygen through a vertebrate's body? | Blood | Lymph | Bile | Mucus
+H | Which animals hold a steady body temperature from the inside? | Endotherms | Ectotherms | Poikilotherms | Heterotherms
+H | Which animals take their body temperature from their surroundings? | Ectotherms | Endotherms | Homeotherms | Mesotherms
+H | Which summer dormancy carries animals through heat and drought? | Estivation | Hibernation | Migration | Diapause
+H | Which learning makes a hatchling follow the first thing it sees? | Imprinting | Conditioning | Habituation | Trial and error
+H | Which strategy copies a dangerous species to stay safe? | Mimicry | Camouflage | Crypsis | Countershading
+H | Which bright colors warn predators that prey is toxic? | Warning coloration | Camouflage | Countershading | Disruptive patterning
+H | Which animals feed on bodies they did not kill themselves? | Scavengers | Predators | Grazers | Parasites
+H | Which sense do bats use to navigate in the dark? | Echolocation | Magnetoreception | Electroreception | Infrared vision
+H | Which sense lets sharks detect electric fields? | Electroreception | Echolocation | Chemoreception | Thermoreception
+H | Which animals have a notochord at some stage of life? | Chordates | Arthropods | Mollusks | Cnidarians
+H | Which kind of reproduction needs only one parent? | Asexual reproduction | Sexual reproduction | Cross-fertilization | Outbreeding
+
+# --- The human body ---
+
+E | Which muscular organ drives blood through the vessels? | The heart | The lungs | The liver | The kidney
+E | Which organs take oxygen from the air? | The lungs | The kidneys | The liver | The stomach
+E | Which organ controls thought and movement? | The brain | The heart | The liver | The spleen
+E | Which organs filter waste out of the blood? | The kidneys | The lungs | The liver | The pancreas
+E | Which organ is the largest in the human body? | The skin | The liver | The brain | The heart
+E | Which system holds the body up and protects the organs? | The skeletal system | The muscular system | The nervous system | The digestive system
+E | Which system moves the body? | The muscular system | The skeletal system | The endocrine system | The lymphatic system
+E | About how many bones does an adult human have? | About 206 | About 106 | About 306 | About 406
+E | Into how many chambers is the human heart divided? | Four | Two | Three | Six
+E | Which vessels carry blood away from the heart? | Arteries | Veins | Capillaries | Lymph ducts
+M | Which vessels carry blood back to the heart? | Veins | Arteries | Capillaries | Aortas
+M | Which tiny vessels let gases pass into the tissues? | Capillaries | Arteries | Veins | Venules
+M | Which blood cells carry oxygen? | Red blood cells | White blood cells | Platelets | Plasma cells
+M | Which blood cells fight infection? | White blood cells | Red blood cells | Platelets | Stem cells
+M | Which blood parts help a wound clot? | Platelets | Red blood cells | White blood cells | Antibodies
+M | Which organ makes bile to help digest fat? | The liver | The pancreas | The stomach | The spleen
+M | Which organ absorbs most of the nutrients from food? | The small intestine | The large intestine | The stomach | The esophagus
+M | Which organ absorbs water from what is left of the food? | The large intestine | The small intestine | The stomach | The rectum
+M | Which acid helps break down food in the stomach? | Hydrochloric acid | Sulfuric acid | Acetic acid | Citric acid
+M | Which tube carries food from the throat to the stomach? | The esophagus | The trachea | The larynx | The duodenum
+M | Which system carries messages as electrical signals? | The nervous system | The endocrine system | The lymphatic system | The urinary system
+M | Which cells carry those signals? | Neurons | Osteocytes | Myocytes | Adipocytes
+M | Which part of the brain keeps your movements steady and balanced? | The cerebellum | The cerebrum | The brain stem | The thalamus
+M | Which part of the brain handles thinking and memory? | The cerebrum | The cerebellum | The medulla | The pons
+M | Which part of the brain controls breathing and heartbeat? | The brain stem | The cerebrum | The cerebellum | The cortex
+M | Which system releases hormones into the blood? | The endocrine system | The nervous system | The digestive system | The muscular system
+H | Which protein in red blood cells carries the oxygen? | Hemoglobin | Myoglobin | Keratin | Collagen
+H | Which tiny sacs in the lungs exchange the gases? | Alveoli | Bronchioles | Cilia | Pleurae
+H | Which muscle below the lungs drives breathing? | The diaphragm | The pectoralis | The trapezius | The latissimus
+H | Which organ stores bile until it is needed? | The gallbladder | The liver | The pancreas | The appendix
+H | Which small gland at the base of the brain directs the others? | The pituitary | The thyroid | The adrenal | The thymus
+H | Which gland sets the body's metabolic rate? | The thyroid | The pituitary | The pancreas | The pineal
+H | Which organ makes insulin? | The pancreas | The liver | The thyroid | The spleen
+H | Which muscles work without you thinking about them? | Smooth muscles | Skeletal muscles | Voluntary muscles | Striated muscles
+H | Which tissue joins muscle to bone? | Tendon | Ligament | Cartilage | Fascia
+H | Which tissue joins bone to bone? | Ligament | Tendon | Cartilage | Periosteum
+
+# --- Heredity ---
+
+E | Which molecule carries the instructions for a living thing? | DNA | RNA | Protein | Starch
+E | Which structures in the nucleus carry the genes? | Chromosomes | Ribosomes | Vacuoles | Lysosomes
+E | Which monk's pea experiments founded genetics? | Gregor Mendel | Charles Darwin | Louis Pasteur | Thomas Morgan
+M | How many chromosomes does a human body cell have? | 46 | 23 | 92 | 64
+M | Which term names a stretch of DNA that codes for a trait? | A gene | A chromosome | A ribosome | A codon
+M | Which term names the different forms a gene can take? | Alleles | Codons | Loci | Clones
+M | Which allele shows itself even when only one copy is present? | The dominant allele | The recessive allele | The neutral allele | The lethal allele
+M | Which allele shows only when both copies match? | The recessive allele | The dominant allele | The codominant allele | The wild-type allele
+M | Which term describes carrying two identical alleles? | Homozygous | Heterozygous | Hemizygous | Polygenic
+M | Which term describes carrying two different alleles? | Heterozygous | Homozygous | Hemizygous | Monogenic
+M | Which term names the genes an organism carries? | Its genotype | Its phenotype | Its karyotype | Its ecotype
+M | Which term names the traits you can actually see? | Its phenotype | Its genotype | Its allele pair | Its genome
+M | Which grid predicts the offspring of a cross? | A Punnett square | A pedigree chart | A karyotype | A cladogram
+M | Which ratio comes from crossing two heterozygous parents? | Three to one | One to one | Two to one | Four to one
+M | Which pair of chromosomes decides human sex? | The twenty-third pair | The first pair | The twenty-second pair | The tenth pair
+H | Which chromosomes does a human male usually carry? | One X and one Y | Two X chromosomes | Two Y chromosomes | Three X chromosomes
+H | Which term names a change in the DNA sequence? | A mutation | A migration | A recombination | An adaptation
+H | Which inheritance blends two alleles into a middle trait? | Incomplete dominance | Codominance | Epistasis | Pleiotropy
+H | Which inheritance shows both alleles fully at the same time? | Codominance | Incomplete dominance | Polygenic inheritance | Linkage
+H | Which traits are controlled by many genes at once? | Polygenic traits | Monogenic traits | Sex-linked traits | Lethal traits
+H | Which traits are carried on the X chromosome? | Sex-linked traits | Autosomal traits | Polygenic traits | Maternal traits
+H | Which chart traces a trait through a family over generations? | A pedigree | A Punnett square | A karyotype | A phylogeny
+
+# --- Ecology ---
+
+E | Which term names all the living and nonliving things in an area? | An ecosystem | A population | A community | A biome
+E | Which term names all the members of one species in an area? | A population | A community | An ecosystem | A biome
+E | Which term names all the populations living together in an area? | A community | A population | A biome | A niche
+E | Which organisms make their own food? | Producers | Consumers | Decomposers | Parasites
+E | Which organisms eat other organisms? | Consumers | Producers | Autotrophs | Photosynthesizers
+E | Which organisms break down dead material? | Decomposers | Producers | Primary consumers | Herbivores
+E | Which diagram shows who eats whom in a single line? | A food chain | A food web | A pyramid of numbers | A cycle diagram
+E | Which diagram shows many overlapping feeding relationships? | A food web | A food chain | A niche chart | A range map
+M | Which level of a food chain holds the producers? | The first | The second | The third | The fourth
+M | Which consumers eat the producers directly? | Primary consumers | Secondary consumers | Tertiary consumers | Decomposers
+M | Roughly how much energy passes to the next feeding level? | About ten percent | About fifty percent | About ninety percent | All of it
+M | Which shape shows energy shrinking at each feeding level? | An energy pyramid | A food web | A bar graph | A circle graph
+M | Which term names the role a species plays in its ecosystem? | Its niche | Its habitat | Its range | Its biome
+M | Which term names the place where a species lives? | Its habitat | Its niche | Its trophic level | Its guild
+M | Which relationship helps both species involved? | Mutualism | Commensalism | Parasitism | Predation
+M | Which relationship helps one species without affecting the other? | Commensalism | Mutualism | Parasitism | Competition
+M | Which relationship helps one species and harms the other? | Parasitism | Mutualism | Commensalism | Neutralism
+M | Which struggle happens when two species need the same resource? | Competition | Mutualism | Commensalism | Succession
+M | Which cycle moves carbon between air, living things and soil? | The carbon cycle | The water cycle | The rock cycle | The phosphorus cycle
+M | Which cycle turns the nitrogen in air into a form plants can use? | The nitrogen cycle | The carbon cycle | The sulfur cycle | The oxygen cycle
+M | Which organisms fix nitrogen in the roots of legumes? | Bacteria | Fungi | Algae | Protozoa
+M | Which term names the largest number of individuals a place supports? | Carrying capacity | Biotic potential | Population density | Birth rate
+M | Which factors are the living parts of an ecosystem? | Biotic factors | Abiotic factors | Limiting factors | Physical factors
+M | Which factors are the nonliving parts of an ecosystem? | Abiotic factors | Biotic factors | Trophic factors | Symbiotic factors
+M | Which process rebuilds a community after a fire or a flood? | Ecological succession | Eutrophication | Biomagnification | Speciation
+M | Which succession starts on bare rock with no soil at all? | Primary succession | Secondary succession | Retrogression | Climax stasis
+M | Which succession follows a disturbance where the soil remains? | Secondary succession | Primary succession | Colonization | Invasion
+M | Which organisms first colonize bare rock? | Lichens and mosses | Oak trees | Prairie grasses | Shrubs
+H | Which species holds an ecosystem together beyond its numbers? | A keystone species | An indicator species | An invasive species | A pioneer species
+H | Which species signals the health of an ecosystem? | An indicator species | A keystone species | An invasive species | An umbrella species
+H | Which species spreads into a new place and crowds out the natives? | An invasive species | An endemic species | A keystone species | A pioneer species
+H | Which species lives in only one place on Earth? | An endemic species | A cosmopolitan species | An invasive species | A migratory species
+H | Which process concentrates toxins as they move up the food chain? | Biomagnification | Bioremediation | Eutrophication | Denitrification
+H | Which growth curve levels off at the carrying capacity? | The logistic curve | The exponential curve | The linear curve | The parabolic curve
+H | Which term names the number of individuals per unit of area? | Population density | Carrying capacity | Biotic potential | Species richness

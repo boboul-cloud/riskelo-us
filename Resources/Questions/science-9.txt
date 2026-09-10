@@ -1,0 +1,245 @@
+# Biology — Grade 9 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Ninth grade biology goes down a level: the molecules of life, what the
+# cell actually does with them, division, DNA and protein, heredity past
+# Mendel, and evolution as the thread that ties it together.
+
+! id      | science-9
+! name    | Science — Grade 9
+! detail  | Biology: biochemistry, the cell at work, DNA, genetics and evolution.
+! icon    | microbe
+! tint    | 0.30 0.66 0.60
+! rank    | 22
+! product | com.oulhen.riskelo.us.pack.science9
+
+
+# --- The molecules of life ---
+
+E | Which element is the backbone of every organic molecule? | Carbon | Silicon | Nitrogen | Sulfur
+E | Which four macromolecules make up living things? | Carbohydrates, lipids, proteins, nucleic acids | Sugars, salts, acids and bases | Starch, fat, water and minerals | Enzymes, hormones, vitamins, ions
+E | Which macromolecule is the body's quickest source of energy? | Carbohydrates | Proteins | Nucleic acids | Vitamins
+E | Which macromolecule stores energy densely and builds membranes? | Lipids | Carbohydrates | Nucleic acids | Minerals
+E | Which small units build up proteins? | Amino acids | Nucleotides | Monosaccharides | Fatty acids
+E | Which proteins speed up the reactions in living things? | Enzymes | Hormones | Antibodies | Lipids
+E | Which sugar do cells use most directly for energy? | Glucose | Cellulose | Sucrose | Lactose
+E | Which storage carbohydrate do plants make? | Starch | Glycogen | Chitin | Cellulose
+E | Which storage carbohydrate do animals make? | Glycogen | Starch | Cellulose | Pectin
+M | Which small units build up nucleic acids? | Nucleotides | Amino acids | Glycerol molecules | Simple sugars
+M | Which small units build up complex carbohydrates? | Monosaccharides | Amino acids | Nucleotides | Fatty acids
+M | How many amino acids are used to build proteins? | Twenty | Four | Sixty-four | Six
+M | Which bond joins two amino acids together? | A peptide bond | A glycosidic bond | An ester bond | A hydrogen bond
+M | Which reaction joins monomers and releases water? | Dehydration synthesis | Hydrolysis | Oxidation | Fermentation
+M | Which reaction breaks polymers apart using water? | Hydrolysis | Dehydration synthesis | Condensation | Reduction
+M | Which molecule does an enzyme act on? | Its substrate | Its product | Its cofactor | Its inhibitor
+M | Which part of an enzyme binds the substrate? | The active site | The allosteric site | The hinge region | The signal peptide
+M | Which two conditions can stop an enzyme from working? | High heat and the wrong pH | Low light and low sound | Motion and pressure | Color and texture
+M | Which term names an enzyme losing its shape and its function? | Denaturation | Saturation | Inhibition | Activation
+H | Which molecule carries energy for the cell's day-to-day work? | ATP | DNA | RNA | NADP
+H | Which bond of ATP releases energy when it is broken? | The bond to the third phosphate | The sugar-base bond | A peptide bond | A hydrogen bond
+H | Which property of water lets it dissolve so many substances? | Its polarity | Its density | Its viscosity | Its transparency
+H | Which attraction between water molecules causes surface tension? | Hydrogen bonding | Ionic bonding | Covalent bonding | Metallic bonding
+H | Which lipids form the double layer of a cell membrane? | Phospholipids | Triglycerides | Steroids | Waxes
+H | Which term describes a molecule that repels water? | Hydrophobic | Hydrophilic | Amphipathic | Polar
+H | Which pH does most of the human body hold near? | About 7.4 | About 4 | About 9.5 | About 2
+
+# --- The cell at work ---
+
+E | Which structure controls what crosses into the cell? | The plasma membrane | The nucleolus | The ribosome | The centriole
+E | Which organelle is the site of protein synthesis? | The ribosome | The lysosome | The peroxisome | The centriole
+E | Which proteins carry substances across a membrane? | Transport proteins | Structural proteins | Antibodies | Collagen fibers
+M | Which model describes a membrane of drifting proteins and lipids? | The fluid mosaic model | The lock and key model | The induced fit model | The bilayer lattice
+M | Which solution holds more solute than the cell inside it? | A hypertonic solution | A hypotonic solution | An isotonic solution | A saturated solution
+M | Which solution holds less solute than the cell inside it? | A hypotonic solution | A hypertonic solution | An isotonic solution | A colloidal solution
+M | Which solution leaves a cell's water in balance? | An isotonic solution | A hypertonic solution | A hypotonic solution | A buffered solution
+M | What happens to an animal cell placed in pure water? | It swells and may burst | It shrivels | It stays the same | It divides
+M | What happens to a plant cell placed in a salty solution? | It plasmolyzes | It bursts | It grows a new wall | It divides faster
+M | Which pressure keeps a plant cell firm against its wall? | Turgor pressure | Osmotic shock | Root pressure | Capillary pressure
+M | Which organelle folds and modifies newly made proteins? | The rough endoplasmic reticulum | The smooth endoplasmic reticulum | The lysosome | The vacuole
+M | Which organelle makes lipids and breaks down drugs? | The smooth endoplasmic reticulum | The rough endoplasmic reticulum | The Golgi apparatus | The nucleolus
+M | Which structure inside the nucleus assembles ribosomes? | The nucleolus | The chromatin | The nuclear pore | The centromere
+M | Which network of fibers gives a cell its shape? | The cytoskeleton | The cell wall | The membrane | The matrix
+H | Which two organelles both carry their own DNA? | Mitochondria and chloroplasts | Ribosomes and lysosomes | Golgi and vacuoles | Nucleus and nucleolus
+H | Which folds inside a mitochondrion increase its surface? | The cristae | The thylakoids | The grana | The villi
+H | Which stacks of discs sit inside a chloroplast? | The grana | The cristae | The matrix folds | The wall lamellae
+H | Which fluid fills a chloroplast around those stacks? | The stroma | The matrix | The cytosol | The lumen
+H | Which process do white blood cells use to engulf bacteria? | Phagocytosis | Pinocytosis | Exocytosis | Osmosis
+H | Which transport uses a protein channel but no energy? | Facilitated diffusion | Active transport | Endocytosis | The sodium pump
+H | Which pump moves ions against their gradient in nerve cells? | The sodium-potassium pump | The proton channel | The aquaporin | The gap junction
+H | Which junction lets small molecules pass between animal cells? | A gap junction | A tight junction | A desmosome | A plasmodesma
+
+# --- Photosynthesis and respiration ---
+
+E | Which two things does photosynthesis need besides light? | Carbon dioxide and water | Oxygen and sugar | Nitrogen and salt | Protein and starch
+E | Which two things does photosynthesis produce? | Glucose and oxygen | Carbon dioxide and water | Starch and nitrogen | ATP and ammonia
+E | Which process releases energy from glucose using oxygen? | Aerobic respiration | Photosynthesis | Fermentation | Transpiration
+E | Which organelle carries out photosynthesis? | The chloroplast | The mitochondrion | The ribosome | The vacuole
+E | Which organelle carries out most of respiration? | The mitochondrion | The chloroplast | The nucleus | The lysosome
+E | Which gas is released when water is split in photosynthesis? | Oxygen | Carbon dioxide | Nitrogen | Hydrogen
+E | Which process releases energy from glucose without oxygen? | Fermentation | Aerobic respiration | Photosynthesis | Chemosynthesis
+M | Which stage of photosynthesis needs light directly? | The light-dependent reactions | The Calvin cycle | Glycolysis | The Krebs cycle
+M | Which stage of photosynthesis builds sugar from carbon dioxide? | The Calvin cycle | The light reactions | Glycolysis | Fermentation
+M | Where do the light-dependent reactions take place? | In the thylakoid membranes | In the stroma | In the cytoplasm | In the cell wall
+M | Where does the Calvin cycle take place? | In the stroma | In the thylakoids | In the matrix | In the cytosol
+M | Which first stage of respiration splits glucose in the cytoplasm? | Glycolysis | The Krebs cycle | The electron transport chain | Fermentation
+M | Which cycle follows glycolysis inside the mitochondrion? | The Krebs cycle | The Calvin cycle | The nitrogen cycle | The urea cycle
+M | Which stage of respiration makes the most ATP? | The electron transport chain | Glycolysis | The Krebs cycle | Fermentation
+M | Which molecule is the final electron acceptor in aerobic respiration? | Oxygen | Carbon dioxide | Water | Glucose
+M | Which fermentation makes bread rise and beer bubble? | Alcoholic fermentation | Lactic acid fermentation | Acetic fermentation | Methanogenesis
+M | Which fermentation makes muscles ache during hard exercise? | Lactic acid fermentation | Alcoholic fermentation | Butyric fermentation | Nitrification
+H | Roughly how much ATP does aerobic respiration yield per glucose? | About 36 | About 2 | About 100 | About 10
+H | How much ATP does glycolysis alone yield per glucose? | Two | Thirty-six | Eighteen | Six
+H | Which pigment complexes trap light energy in the thylakoid? | Photosystems | Ribosomes | Cristae | Plastids
+H | Which carrier shuttles electrons in the light reactions? | NADPH | ATP synthase | Rubisco | Catalase
+H | Which enzyme fixes carbon dioxide in the Calvin cycle? | Rubisco | ATP synthase | Amylase | Catalase
+H | Which enzyme spins to make ATP from a proton gradient? | ATP synthase | Rubisco | DNA polymerase | Ligase
+H | Which two processes are roughly the reverse of each other? | Photosynthesis and respiration | Mitosis and meiosis | Transcription and translation | Diffusion and osmosis
+H | Which organisms make food from chemicals instead of from light? | Chemosynthetic bacteria | Green algae | Fungi | Protozoa
+H | Which term names an organism that makes its own food? | An autotroph | A heterotroph | A saprotroph | A detritivore
+
+# --- Cell division ---
+
+E | Which division makes two identical body cells? | Mitosis | Meiosis | Fertilization | Binary fission
+E | Which division makes sex cells with half the chromosomes? | Meiosis | Mitosis | Cytokinesis | Budding
+E | Which step splits the cytoplasm into two cells? | Cytokinesis | Mitosis | Karyokinesis | Fission
+E | How many cells does meiosis produce from one? | Four | Two | Eight | One
+E | How many chromosomes does a human sex cell carry? | 23 | 46 | 92 | 22
+E | Which event joins a sperm and an egg? | Fertilization | Meiosis | Mitosis | Germination
+M | Which cycle covers a cell's growth and its division? | The cell cycle | The Calvin cycle | The Krebs cycle | The lytic cycle
+M | Which phase of the cell cycle is by far the longest? | Interphase | Prophase | Metaphase | Telophase
+M | Which stage of interphase copies the DNA? | The S phase | The G1 phase | The G2 phase | The M phase
+M | Which phase of mitosis lines chromosomes up in the middle? | Metaphase | Prophase | Anaphase | Telophase
+M | Which phase of mitosis pulls the copies to opposite poles? | Anaphase | Metaphase | Prophase | Telophase
+M | Which phase of mitosis condenses the chromosomes first? | Prophase | Metaphase | Anaphase | Cytokinesis
+M | Which phase of mitosis rebuilds the two nuclei? | Telophase | Anaphase | Metaphase | Prophase
+M | Which fibers pull chromosomes apart during division? | Spindle fibers | Cilia | Flagella | Microvilli
+M | Which point joins the two copies of a chromosome? | The centromere | The telomere | The centriole | The nuclear pore
+M | Which term describes a cell with a full double set of chromosomes? | Diploid | Haploid | Triploid | Aneuploid
+M | Which term describes a cell with a single set of chromosomes? | Haploid | Diploid | Polyploid | Tetraploid
+H | Which exchange between paired chromosomes shuffles genes in meiosis? | Crossing over | Nondisjunction | Translocation | Replication
+H | Which stage of meiosis is crossing over part of? | Prophase I | Metaphase II | Anaphase I | Telophase II
+H | Which paired chromosomes line up together in meiosis? | Homologous chromosomes | Sister chromatids | Sex chromosomes | Autosomes
+H | Which error leaves a gamete with the wrong chromosome number? | Nondisjunction | Crossing over | Independent assortment | Recombination
+H | Which condition results from an extra copy of chromosome 21? | Down syndrome | Turner syndrome | Klinefelter syndrome | Cystic fibrosis
+H | Which uncontrolled cell division can build a tumor? | Cancer | Apoptosis | Necrosis | Differentiation
+H | Which programmed process makes a cell destroy itself? | Apoptosis | Mitosis | Meiosis | Metastasis
+
+# --- DNA and protein ---
+
+E | Which shape does a DNA molecule take? | A double helix | A single spiral | A flat sheet | A branching tree
+E | Which four bases make up DNA? | Adenine, thymine, guanine, cytosine | Adenine, uracil, guanine, cytosine | Alanine, tyrosine, glycine, cysteine | Arginine, threonine, glutamine, serine
+E | Across the double helix, which base sits opposite adenine? | Thymine | Guanine | Cytosine | Uracil
+E | Which base pairs with guanine? | Cytosine | Thymine | Adenine | Uracil
+E | Which two scientists published the double helix model in 1953? | Watson and Crick | Mendel and Morgan | Hershey and Chase | Avery and MacLeod
+E | Which process copies DNA before a cell divides? | Replication | Transcription | Translation | Mutation
+E | Which process copies a gene into messenger RNA? | Transcription | Translation | Replication | Splicing
+E | Which process builds a protein from messenger RNA? | Translation | Transcription | Replication | Transduction
+E | Where does translation take place? | At the ribosome | In the nucleus | In the mitochondrion | At the Golgi
+E | Which RNA carries the message out of the nucleus? | Messenger RNA | Transfer RNA | Ribosomal RNA | Small nuclear RNA
+E | Which RNA brings amino acids to the ribosome? | Transfer RNA | Messenger RNA | Ribosomal RNA | Micro RNA
+E | How many bases make up one codon? | Three | Two | Four | Six
+M | Whose X-ray images were crucial to that 1953 model? | Rosalind Franklin | Barbara McClintock | Lynn Margulis | Marie Curie
+M | Which sugar sits in the DNA backbone? | Deoxyribose | Ribose | Glucose | Fructose
+M | Which base takes the place of thymine when RNA is built? | Uracil | Cytosine | Guanine | Adenine
+M | Which enzyme builds the new DNA strand? | DNA polymerase | RNA polymerase | Ligase | Helicase
+M | Which enzyme unwinds the double helix? | Helicase | Ligase | Polymerase | Primase
+M | How many codons are there in the genetic code? | 64 | 20 | 32 | 128
+M | Which codon usually starts translation? | AUG | UAA | UGA | GCU
+M | Which codons stop translation? | UAA, UAG and UGA | AUG and GUG | CCC and GGG | AAA and UUU
+H | Which term names the whole set of an organism's DNA? | Its genome | Its proteome | Its karyotype | Its phenotype
+H | Which term describes a code read in threes with no gaps? | Nonoverlapping triplets | Continuous doublets | Overlapping quadruplets | Variable length codes
+H | Which DNA sections are removed before translation? | Introns | Exons | Codons | Promoters
+H | Which DNA sections are kept and expressed? | Exons | Introns | Operators | Terminators
+H | Which region of DNA marks where transcription should begin? | The promoter | The terminator | The operator | The enhancer
+H | Which mutation swaps one base for another? | A point mutation | A frameshift | A triple deletion | A duplication
+H | Which mutation shifts how every later codon is read? | A frameshift mutation | A silent mutation | A missense mutation | A nonsense mutation
+H | Which mutation changes a codon but not the amino acid? | A silent mutation | A missense mutation | A nonsense mutation | A frameshift
+H | Which mutation turns a codon into a stop signal? | A nonsense mutation | A silent mutation | A missense mutation | An insertion
+H | Which tool cuts DNA at specific sequences? | Restriction enzymes | DNA ligase | RNA polymerase | Ribosomes
+
+# --- Heredity past Mendel ---
+
+E | Which law says allele pairs separate when gametes form? | The law of segregation | The law of dominance | Independent assortment | Hardy-Weinberg
+E | Which blood type is the universal donor? | Type O negative | Type AB positive | Type A positive | Type B negative
+E | Which blood type is the universal recipient? | Type AB positive | Type O negative | Type A negative | Type B positive
+E | Which chart shows a person's full set of chromosomes? | A karyotype | A pedigree | A Punnett square | A cladogram
+M | Which law says genes for different traits sort independently? | Independent assortment | Segregation | Dominance | Linkage
+M | Which blood type system shows codominance? | The ABO system | The Rh system | The MN system | The Duffy system
+M | Which disorder comes from a recessive allele on chromosome 7? | Cystic fibrosis | Huntington's disease | Marfan syndrome | Hemophilia
+M | Which disorder comes from a dominant allele and appears in midlife? | Huntington's disease | Cystic fibrosis | Sickle cell disease | Tay-Sachs disease
+M | Which disorder is carried on the X chromosome and affects clotting? | Hemophilia | Cystic fibrosis | Huntington's disease | Phenylketonuria
+M | Which genes sit close together and are inherited as a unit? | Linked genes | Independent genes | Alleles | Homologs
+M | Which technique copies a small piece of DNA many times over? | The polymerase chain reaction | Gel electrophoresis | Karyotyping | Chromatography
+M | Which technique sorts DNA fragments by size in a gel? | Gel electrophoresis | The polymerase chain reaction | Sequencing | Cloning
+H | Which cross tests whether an individual is homozygous dominant? | A testcross with a recessive | A cross with a hybrid | A self-cross | A backcross to a dominant
+H | Which ratio comes from a dihybrid cross of two hybrids? | Nine to three to three to one | Three to one | One to two to one | Fifteen to one
+H | Which fact explains why more males are red-green colorblind? | The trait is X-linked recessive | The trait is dominant | The trait is polygenic | The trait is mitochondrial
+H | Which sickle cell carriers gain some protection from malaria? | Heterozygous carriers | Homozygous dominant people | Homozygous recessive people | Nobody at all
+H | Which term names moving a gene from one organism to another? | Genetic engineering | Selective breeding | Hybridization | Inbreeding
+H | Which organisms carry genes taken from another species? | Transgenic organisms | Hybrids | Clones | Mutants
+H | Which small circular DNA do bacteria use as a gene vector? | A plasmid | A chromosome | A ribosome | A prion
+H | Which tool edits DNA using a guide RNA and a cutting protein? | CRISPR | PCR | Electrophoresis | A microarray
+H | Which project mapped all the human genes by 2003? | The Human Genome Project | The HapMap project | The ENCODE project | The 1000 Genomes Project
+H | Which term names an organism genetically identical to its parent? | A clone | A hybrid | A mutant | A chimera
+H | Which sheep was cloned from an adult cell in 1996? | Dolly | Molly | Polly | Megan
+H | Which equation describes allele frequencies in a stable population? | The Hardy-Weinberg equation | The logistic equation | The Punnett ratio | The Mendel constant
+H | Which term names all the alleles present in a population? | The gene pool | The genome | The karyotype | The genotype
+H | Which condition does amniocentesis most often screen for? | Chromosome abnormalities | Vitamin deficiency | Blood pressure | Muscle tone
+
+# --- Evolution ---
+
+E | Which naturalist proposed evolution by natural selection? | Charles Darwin | Jean-Baptiste Lamarck | Carl Linnaeus | Gregor Mendel
+E | Which ship carried Darwin around the world? | The Beagle | The Endeavour | The Challenger | The Discovery
+E | Which islands' finches shaped Darwin's thinking? | The Galapagos | The Canaries | The Azores | Hawaii
+E | Which 1859 book laid out his argument? | On the Origin of Species | The Descent of Man | The Voyage of the Beagle | Principles of Geology
+E | Which term names a trait that helps an organism survive? | An adaptation | A mutation | A vestige | A homology
+E | Which individuals leave the most offspring under natural selection? | The best adapted to their conditions | The largest | The oldest | The fastest
+E | Which term names breeding chosen by people rather than nature? | Artificial selection | Natural selection | Genetic drift | Gene flow
+M | Which naturalist reached the same idea independently? | Alfred Russel Wallace | Thomas Huxley | Charles Lyell | Erasmus Darwin
+M | Which term names the differences among individuals of one species? | Variation | Speciation | Selection | Isolation
+M | Which term names random shifts in allele frequency in a small group? | Genetic drift | Natural selection | Gene flow | Directional selection
+M | Which effect shrinks variation when a few individuals found a colony? | The founder effect | The bottleneck effect | Gene flow | Sexual selection
+M | Which effect shrinks variation after a population crashes? | The bottleneck effect | The founder effect | The Allee effect | Genetic load
+M | Which term names the rise of a new species? | Speciation | Extinction | Adaptation | Migration
+M | Which isolation separates populations by a river or a mountain? | Geographic isolation | Temporal isolation | Behavioral isolation | Mechanical isolation
+M | Which structures share ancestry but differ in use, like a fin and an arm? | Homologous structures | Analogous structures | Vestigial structures | Convergent organs
+M | Which structures share a use but not ancestry, like two kinds of wing? | Analogous structures | Homologous structures | Vestigial structures | Embryonic structures
+M | Which structures remain from an ancestor but no longer serve? | Vestigial structures | Homologous structures | Analogous structures | Rudimentary genes
+M | Which evidence of evolution comes out of the rock layers? | The fossil record | DNA sequencing | Embryology | Biogeography
+H | Which term names alleles moving between populations? | Gene flow | Genetic drift | Mutation pressure | Isolation
+H | Which isolation separates populations by breeding season? | Temporal isolation | Geographic isolation | Behavioral isolation | Gametic isolation
+H | Which process makes unrelated species come to resemble each other? | Convergent evolution | Divergent evolution | Coevolution | Parallel descent
+H | Which process splits one lineage into many across new niches? | Adaptive radiation | Convergent evolution | Punctuated change | Stabilizing selection
+H | Which pattern shows two species shaping each other over time? | Coevolution | Convergent evolution | Divergence | Genetic drift
+H | Which selection favors one extreme of a trait? | Directional selection | Stabilizing selection | Disruptive selection | Balancing selection
+H | Which selection favors the middle of a trait range? | Stabilizing selection | Directional selection | Disruptive selection | Sexual selection
+H | Which selection favors both extremes over the middle? | Disruptive selection | Stabilizing selection | Directional selection | Kin selection
+H | Which idea says evolution runs in bursts between long calm stretches? | Punctuated equilibrium | Gradualism | Orthogenesis | Saltationism
+H | Which discredited idea claimed acquired traits are inherited? | Lamarck's inheritance | Darwin's selection | Mendel's segregation | Wallace's line
+H | Which molecular evidence compares species by their DNA? | Sequence similarity | Fossil dating | Comparative anatomy | Embryonic staging
+H | Which clock dates a lineage split from its mutation rate? | The molecular clock | The carbon clock | The geologic clock | The phylogenetic ruler
+
+# --- Keeping the balance ---
+
+E | Which cells defend the body against infection? | White blood cells | Red blood cells | Platelets | Nerve cells
+E | Which proteins bind to one specific invader? | Antibodies | Enzymes | Hormones | Lipids
+E | Which hormone lowers blood sugar? | Insulin | Glucagon | Adrenaline | Thyroxine
+M | Which term names anything that triggers an immune response? | An antigen | An antibody | A leukocyte | A cytokine
+M | Which immunity comes from a vaccine? | Active acquired immunity | Passive immunity | Innate immunity | Maternal immunity
+M | Which cells remember a pathogen for years afterward? | Memory cells | Red blood cells | Platelets | Osteocytes
+M | Which pathogens are treated with antibiotics? | Bacteria | Viruses | Prions | Protozoa
+M | Which term names the balance the body keeps inside itself? | Homeostasis | Metabolism | Osmosis | Diffusion
+M | Which loop reverses a change to restore balance? | Negative feedback | Positive feedback | Open loop control | Feedforward
+M | Which loop pushes a change further, as in childbirth? | Positive feedback | Negative feedback | Homeostasis | Buffering
+M | Which hormone raises blood sugar? | Glucagon | Insulin | Cortisol | Melatonin
+H | Which particle is not made of cells and needs a host to copy itself? | A virus | A bacterium | A protist | A yeast
+H | Which measure names the energy a community captures each year? | Primary productivity | Standing crop | Biomass turnover | Trophic yield
+H | Which biome holds the greatest diversity of species? | The tropical rainforest | The taiga | The tundra | The temperate grassland
+H | Which resource holds back growth even when others are plentiful? | The limiting factor | The carrying capacity | The biotic potential | The niche width
+H | Which term names the total mass of living matter in an area? | Biomass | Biodiversity | Biocapacity | Bioload

@@ -1,46 +1,46 @@
 //
 //  Action.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Un coup, sous forme de valeur.
+//  A move, as a value.
 //
-//  Le moteur savait déjà se laisser modifier par des méthodes nommées ; il lui
-//  manquait de pouvoir recevoir ces coups sous une forme qu'on transmet. C'est
-//  toute la condition du jeu entre deux appareils : chacun tient la même
-//  partie, et l'on ne s'envoie que ce qui la fait changer — quelques dizaines
-//  d'octets par coup au lieu de recopier l'état entier.
+//  The engine already knew how to be changed by named methods; what it
+//  lacked was a way to receive those moves in a form that travels. That is
+//  the whole condition of play between two devices: each holds the same
+//  game, and only what changes it is sent — a few dozen bytes per move
+//  instead of copying the entire state.
 //
-//  Cela ne marche que parce que le moteur est reproductible : mêmes coups,
-//  même tirage au sort, même partie. C'est la propriété qu'a prouvée la
-//  reprise de partie, et le test qui la garde vaut aussi pour le réseau.
+//  This works only because the engine is reproducible: same moves, same
+//  draw, same game. That is the property proved by game resumption, and the
+//  test that guards it holds for the network too.
 //
 
 import Foundation
 
 enum Action: Codable, Equatable {
     case place(TerritoryID)
-    /// La catégorie absente, c'est « au hasard » : la question se tire dans
-    /// toute la banque.
+    /// No category means "at random": the question is drawn from the whole
+    /// bank.
     case declareAssault(from: TerritoryID, to: TerritoryID, questions: Int, category: Category?)
     case answer(Answer)
-    /// Le défenseur double l'enjeu, en face à face.
-    case relancer
+    /// The defender doubles the stake, in a showdown.
+    case raise
     case dismissAssault
     case occupy(Int)
     case fortify(from: TerritoryID, to: TerritoryID, count: Int)
     case advance
     case endTurn
-    /// L'échange de trois cartes contre des hommes. Les cartes voyagent par
-    /// leur numéro : c'est ce qui les rend identiques d'un appareil à l'autre.
+    /// Trading three cards for troops. Cards travel by their number: that is
+    /// what makes them identical from one device to the other.
     case exchangeCards([Int])
 
-    /// Qui a le droit de jouer ce coup : celui dont c'est le tour, sauf
-    /// autour du duel. En classique le défenseur seul répond ; en face à face
-    /// les deux répondent, chacun son tour, et c'est le moteur qui dit lequel.
+    /// Who is allowed to play this move: whoever's turn it is, except around
+    /// the duel. In classic play the defender alone answers; in a showdown
+    /// both answer, each in turn, and it is the engine that says which.
     func author(in game: GameState) -> PlayerID? {
         switch self {
-        case .answer: game.quiRepond ?? game.assault?.defender
-        case .relancer: game.assault?.defender
+        case .answer: game.whoAnswers ?? game.assault?.defender
+        case .raise: game.assault?.defender
         default: game.currentPlayer.id
         }
     }
@@ -48,9 +48,9 @@ enum Action: Codable, Equatable {
 
 extension GameState {
 
-    /// Le seul chemin par lequel une partie change. Tout ce que fait
-    /// l'interface passe ici — et donc tout ce qui passe ici peut être envoyé
-    /// à l'autre appareil, ou rejoué.
+    /// The only path by which a game changes. Everything the interface does
+    /// goes through here — and so everything that goes through here can be
+    /// sent to the other device, or replayed.
     @discardableResult
     mutating func apply(_ action: Action) -> DuelReport? {
         switch action {
@@ -58,10 +58,10 @@ extension GameState {
             place(on: id)
         case let .declareAssault(from, to, questions, category):
             declareAssault(from: from, to: to, questions: questions, category: category)
-        case .answer(let reponse):
-            return answer(reponse)
-        case .relancer:
-            relancer()
+        case .answer(let response):
+            return answer(response)
+        case .raise:
+            raise()
         case .dismissAssault:
             dismissAssault()
         case .occupy(let n):
@@ -78,27 +78,27 @@ extension GameState {
         return nil
     }
 
-    /// Une empreinte de la partie, pour vérifier que les deux appareils n'ont
-    /// pas divergé. Une divergence ne se voit pas : les deux écrans montrent
-    /// chacun une partie cohérente, et ce sont deux parties différentes.
-    /// Mieux vaut s'en apercevoir au coup suivant qu'à la fin.
+    /// A digest of the game, to check that the two devices have not drifted
+    /// apart. Drift does not show: both screens display a coherent game, and
+    /// they are two different games. Better to notice on the next move than
+    /// at the end.
     var digest: UInt64 {
         var h: UInt64 = 0xcbf2_9ce4_8422_2325
-        func avale(_ v: Int) {
+        func fold(_ v: Int) {
             h = (h ^ UInt64(bitPattern: Int64(v))) &* 0x100_0000_01b3
         }
-        avale(turn); avale(current)
+        fold(turn); fold(current)
         for id in map.order {
-            avale((owner[id] ?? -1) &* 97 &+ armies(id))
+            fold((owner[id] ?? -1) &* 97 &+ armies(id))
         }
-        avale(assault?.asked ?? -1)
-        avale(assault?.mise ?? 0)
-        avale(exchanges)
-        for j in players { avale(hand(of: j.id).count) }
-        // Surtout pas `hashValue` : Swift le sale à chaque lancement, et deux
-        // appareils en bonne santé se croiraient divergents. Le rang du
-        // territoire, lui, est le même partout.
-        avale(assault.flatMap { map.order.firstIndex(of: $0.from) } ?? -1)
+        fold(assault?.asked ?? -1)
+        fold(assault?.stake ?? 0)
+        fold(exchanges)
+        for p in players { fold(hand(of: p.id).count) }
+        // Never `hashValue`: Swift salts it on every launch, and two healthy
+        // devices would think they had drifted. The territory's rank, on the
+        // other hand, is the same everywhere.
+        fold(assault.flatMap { map.order.firstIndex(of: $0.from) } ?? -1)
         return h
     }
 }

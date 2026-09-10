@@ -1,22 +1,23 @@
 //
 //  Helpers.swift
-//  RiskeloTests
+//  RiskeloUSTests
 //
-//  De quoi amener une partie à l'endroit qu'on veut examiner, sans rien
-//  ouvrir dans le moteur : tout passe par les coups ordinaires, plus la
-//  seule porte prévue pour cela, `seize`.
+//  What it takes to bring a game to the point you want to examine, without
+//  opening anything up in the engine: everything goes through ordinary moves,
+//  plus the one door provided for it, `seize`.
 //
 
 import Foundation
-@testable import Riskelo
+@testable import RiskeloUS
 
 extension GameState {
 
-    /// Solde les renforts sur ses propres terres et ouvre la phase d'attaque.
+    /// Settles the reinforcements on your own lands and opens the attack
+    /// phase.
     mutating func debugSkipToAttack() {
-        guard case let .reinforcement(reste) = phase else { return }
-        let chezMoi = territories(of: currentPlayer.id)[0]
-        for _ in 0 ..< reste { place(on: chezMoi) }
+        guard case let .reinforcement(left) = phase else { return }
+        let mine = territories(of: currentPlayer.id)[0]
+        for _ in 0 ..< left { place(on: mine) }
     }
 
     mutating func debugSkipToFortify() {
@@ -24,37 +25,43 @@ extension GameState {
         advance()
     }
 
-    /// Compose un assaut net : une base à soi, une cible voisine à l'ennemi,
-    /// et les garnisons voulues de part et d'autre.
+    /// Sets up a clean assault: a base of your own, a neighboring enemy
+    /// target, and the garrisons you want on each side.
     mutating func debugFirstAssault(minArmies: Int, targetArmies: Int)
-    -> (base: TerritoryID, cible: TerritoryID)? {
-        let moi = currentPlayer.id
-        guard let base = territories(of: moi).first(where: { !targets(from: $0).isEmpty }),
-              let cible = targets(from: base).first, let lautre = owner[cible] else { return nil }
-        seize(base, by: moi, armies: minArmies)
-        seize(cible, by: lautre, armies: targetArmies)
-        return (base, cible)
+    -> (base: TerritoryID, target: TerritoryID)? {
+        let me = currentPlayer.id
+        guard let base = territories(of: me).first(where: { !targets(from: $0).isEmpty }),
+              let target = targets(from: base).first, let other = owner[target] else { return nil }
+        seize(base, by: me, armies: minArmies)
+        seize(target, by: other, armies: targetArmies)
+        return (base, target)
     }
 }
 
-/// Les thèmes livrés, nommés pour les tests.
+/// The themes that ship with the game, named for the tests.
 ///
-/// Le code de production ne nomme plus aucun thème — c'était tout l'objet du
-/// passage de l'enum au catalogue lu dans le dossier. Les tests, eux, éprouvent
-/// la banque réelle : ils ont besoin de désigner celui-ci plutôt que celui-là,
-/// et un test qui écrirait « Category("histoire") » vingt fois se relirait mal.
+/// Production code no longer names any theme — that was the whole point of
+/// moving from an enum to a catalogue read from the folder. The tests, on the
+/// other hand, exercise the real bank: they need to point at this one rather
+/// than that one, and a test writing `Category("history")` twenty times would
+/// read badly.
 ///
-/// Ces noms vivent donc ici, dans la cible de test, et nulle part ailleurs. Si
-/// l'un d'eux disparaissait du dossier des questions, les tests le diraient —
-/// c'est exactement ce qu'on leur demande.
-/// Le nom est qualifié : « Category » seul est ambigu dans la cible de test,
-/// et le reste des tests le qualifiait déjà.
-extension Riskelo.Category {
-    static let geographie = Riskelo.Category("geographie")
-    static let histoire   = Riskelo.Category("histoire")
-    static let sciences   = Riskelo.Category("sciences")
-    static let arts       = Riskelo.Category("arts")
-    static let sports     = Riskelo.Category("sports")
-    static let spectacle  = Riskelo.Category("spectacle")
-    static let histoire4e = Riskelo.Category("histoire-4e")
+/// So these names live here, in the test target, and nowhere else. If one of
+/// them disappeared from the questions folder, the tests would say so — which
+/// is exactly what they are for.
+///
+/// `pack` points at one school pack in particular — the eighth-grade
+/// history deck. Any of the sixteen would do; the tests only need one that
+/// is sold rather than free.
+///
+/// The name is qualified: `Category` on its own is ambiguous in the test
+/// target.
+extension RiskeloUS.Category {
+    static let geography = RiskeloUS.Category("geography")
+    static let history   = RiskeloUS.Category("history")
+    static let science   = RiskeloUS.Category("science")
+    static let arts      = RiskeloUS.Category("arts")
+    static let sports    = RiskeloUS.Category("sports")
+    static let screen    = RiskeloUS.Category("screen")
+    static let pack      = RiskeloUS.Category("history-8")
 }

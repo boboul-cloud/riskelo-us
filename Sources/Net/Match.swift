@@ -1,155 +1,148 @@
 //
 //  Match.swift
-//  Riskelo
+//  Riskelo US
 //
-//  Ce qui circule sur le fil.
+//  What travels on the wire.
 //
-//  Trois sortes de messages seulement. L'état complet une fois, à la
-//  connexion — c'est plus simple et plus sûr que de faire deviner la mise en
-//  place à l'autre appareil. Puis les coups, un par un. Et une demande de
-//  renvoi, si jamais les deux parties divergent.
+//  Only three kinds of message. The complete state once, on connecting —
+//  simpler and safer than making the other device guess the setup. Then the
+//  moves, one at a time. And a request to resend, if the two games ever drift
+//  apart.
 //
-//  Chaque coup voyage avec l'empreinte de la partie telle qu'elle est APRÈS
-//  l'avoir joué. Celui qui reçoit compare : s'il ne trouve pas la même, il
-//  demande l'état complet plutôt que de continuer à jouer une autre partie
-//  que son adversaire. C'est le seul garde-fou possible — une divergence ne
-//  se voit pas, les deux écrans restent cohérents chacun de son côté.
+//  Every move travels with the digest of the game as it stands AFTER playing
+//  it. Whoever receives it compares: if they do not find the same one, they
+//  ask for the complete state rather than go on playing a different game from
+//  their opponent. It is the only safeguard possible — drift does not show,
+//  both screens stay coherent each on its own side.
 //
 
 import Foundation
 
 enum Message: Codable {
 
-    /// Le dialecte parlé sur le fil. À monter dès que la forme d'un message
-    /// change — et elle change dès qu'on touche à `Action` ou à `GameState`.
+    /// The dialect spoken on the wire. To be raised as soon as the shape of a
+    /// message changes — and it changes as soon as `Action` or `GameState` is
+    /// touched.
     ///
-    /// Deux appareils qui ne parlent pas le même dialecte ne peuvent pas
-    /// jouer ensemble. Sans ce numéro, celui qui reçoit une partie qu'il ne
-    /// sait pas lire ne la lit pas, ne dit rien, et attend indéfiniment : la
-    /// panne la plus difficile à comprendre de tout le jeu, parce qu'elle
-    /// ressemble à une panne de réseau alors que la liaison est parfaite.
+    /// Two devices that do not speak the same dialect cannot play together.
+    /// Without this number, a device receiving a game it cannot read does not
+    /// read it, says nothing, and waits forever: the hardest fault in the
+    /// whole game to understand, because it looks like a network failure when
+    /// the link is perfect.
     ///
-    /// Il était **à l'intérieur** du message, et ne protégeait donc que d'un
-    /// côté : pour le lire il fallait d'abord décoder le message, c'est-à-dire
-    /// réussir précisément ce qu'un désaccord de version fait échouer. Il est
-    /// désormais devant, dans une enveloppe qui ne change jamais de forme.
+    /// It used to sit **inside** the message, and so protected only one side:
+    /// reading it meant decoding the message first, which is precisely what a
+    /// version disagreement makes fail. It now sits in front, in an envelope
+    /// whose shape never changes.
     ///
-    /// 3 : le dialecte sort du message et passe dans l'enveloppe.
-    /// 4 : chacun dit son nom en arrivant — `bonjour`.
-    /// 5 : le terrain d'un assaut peut être laissé au sort — la catégorie
-    ///     devient facultative dans `Action`, et la banque emporte avec elle
-    ///     ce que l'appareil a déjà vu.
-    /// 6 : les conquêtes personnelles voyagent avec la partie, et avec elles
-    ///     le compte de qui a fait tomber qui.
-    /// 7 : les thèmes ne sont plus une liste figée dans le code. Un appareil
-    ///     resté en 1.3 refuse alors la partie au lieu de l'attendre : son
-    ///     enum ne connaît pas « histoire-4e », et c'est l'état entier qui
-    ///     devenait illisible — la panne muette que cette enveloppe existe
-    ///     précisément pour éviter.
-    static let dialecte = 7
+    /// 1: the first dialect of this app. It starts over at one — Riskelo US
+    ///    shares no wire with the French app, whose Bonjour service is not
+    ///    even the same, so there is no older version to humor here.
+    static let dialect = 1
 
-    /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
-    /// rang, et le compte des coups déjà joués.
-    case partie(GameState, votreRang: PlayerID, numero: Int)
-    /// Un coup : son rang dans la suite, et l'empreinte attendue une fois
-    /// qu'il est joué.
+    /// The whole game, sent by whoever opened it — each player's seat, and
+    /// the count of moves already played.
+    case game(GameState, yourSeat: PlayerID, number: Int)
+    /// A move: its rank in the sequence, and the digest expected once it has
+    /// been played.
     ///
-    /// Le numéro sert deux fois. À quatre appareils, l'hôte relaie les coups
-    /// aux autres, et un appareil peut recevoir deux fois le même — il le
-    /// reconnaît et l'ignore. Et si un numéro manque, c'est qu'un coup s'est
-    /// perdu : mieux vaut redemander la partie que de continuer sans lui.
-    case coup(Action, numero: Int, empreinte: UInt64)
-    /// « Je ne suis plus à la même partie que vous, renvoyez-la. »
-    case perdu
-    /// « Voici comment je m'appelle. »
+    /// The number serves twice. With four devices the host relays moves to
+    /// the others, and a device can receive the same one twice — it
+    /// recognizes it and ignores it. And if a number is missing, a move has
+    /// been lost: better to ask for the game again than to carry on without
+    /// it.
+    case move(Action, number: Int, digest: UInt64)
+    /// "I am no longer in the same game as you, send it again."
+    case lost
+    /// "This is what I am called."
     ///
-    /// Envoyé par chacun dès la liaison établie, avant toute partie. Celui
-    /// qui héberge s'en sert pour nommer les camps : le nom part alors avec
-    /// l'état, et tous les appareils voient les mêmes joueurs.
+    /// Sent by each device as soon as the link is up, before any game.
+    /// Whoever hosts uses it to name the sides: the name then leaves with the
+    /// state, and every device sees the same players.
     ///
-    /// Le nom de l'appareil n'aurait pas suffi. Depuis iOS 16, il répond
-    /// « iPhone » à qui n'a pas l'autorisation d'en demander plus : deux
-    /// téléphones se présentent au salon sous le même nom.
+    /// The device name would not have been enough. Since iOS 16 it answers
+    /// "iPhone" to anyone without permission to ask for more: two phones
+    /// arrive in the lobby under the same name.
     ///
-    /// Vide quand on ne s'est pas donné de nom — le camp garde alors sa
-    /// couleur pour seul nom, et c'est très bien.
-    case bonjour(nom: String)
+    /// Empty when no name has been given — the side then keeps its color for
+    /// its only name, and that is perfectly fine.
+    case hello(name: String)
 
-    /// Ce qu'on trouve dans un paquet reçu.
+    /// What is found in a packet received.
     ///
-    /// Trois issues et non deux. « Je n'ai pas compris » ne dit pas
-    /// *pourquoi*, et c'est justement ce qu'il fallait pouvoir nommer : à
-    /// l'écran, « installez la même version » et « ceci est un défaut du jeu »
-    /// ne demandent pas la même chose au joueur.
-    enum Lecture {
+    /// Three outcomes and not two. "I did not understand" does not say *why*,
+    /// and that is exactly what needed naming: on screen, "install the same
+    /// version" and "this is a bug in the game" do not ask the same thing of
+    /// the player.
+    enum Reading {
         case message(Message)
-        /// Le paquet vient d'une autre version du jeu. Le numéro est celui
-        /// qu'elle annonce — ou `nil` si elle est antérieure à l'enveloppe et
-        /// n'en annonce aucun.
-        case autreDialecte(Int?)
-        /// Le dialecte est le bon et le contenu ne se lit pas. Ce n'est plus
-        /// une affaire de version : c'est que la forme d'un message a changé
-        /// sans que le numéro soit monté.
-        case illisible
+        /// The packet comes from another version of the game. The number is
+        /// the one that version announces — or `nil` if it predates the
+        /// envelope and announces none.
+        case otherDialect(Int?)
+        /// The dialect is right and the content will not read. This is no
+        /// longer a matter of versions: it means the shape of a message
+        /// changed without the number being raised.
+        case unreadable
     }
 
-    /// L'enveloppe : le dialecte devant, le message derrière.
+    /// The envelope: the dialect in front, the message behind.
     ///
-    /// Sa forme est le seul contrat que toutes les versions à venir doivent
-    /// tenir. Tout le reste peut bouger.
-    private struct Paquet: Codable {
-        let dialecte: Int
+    /// Its shape is the one contract every future version has to keep.
+    /// Everything else may move.
+    private struct Packet: Codable {
+        let dialect: Int
         let message: Message
     }
 
-    /// L'en-tête seul.
+    /// The header alone.
     ///
-    /// Il se lit **même quand le message qui suit est écrit dans une langue
-    /// qu'on ignore** : un décodeur ne réclame que les clés qu'il connaît, et
-    /// celui-ci n'en connaît qu'une. C'est toute la raison d'être de
-    /// l'enveloppe.
-    private struct Entete: Decodable {
-        let dialecte: Int
+    /// It reads **even when the message that follows is written in a language
+    /// we do not know**: a decoder asks only for the keys it knows about, and
+    /// this one knows about exactly one. That is the entire reason the
+    /// envelope exists.
+    private struct Header: Decodable {
+        let dialect: Int
     }
 
     var data: Data? {
         do {
-            return try JSONEncoder().encode(Paquet(dialecte: Message.dialecte,
+            return try JSONEncoder().encode(Packet(dialect: Message.dialect,
                                                    message: self))
         } catch {
-            // Un message qui ne part pas laisse l'autre appareil en attente
-            // sans que rien n'apparaisse nulle part. Au moins qu'il le dise.
-            print("Riskelo — message non envoyé : \(error)")
+            // A message that does not leave keeps the other device waiting
+            // with nothing showing anywhere. At least let it say so.
+            print("Riskelo US — message not sent: \(error)")
             return nil
         }
     }
 
-    static func lire(_ data: Data) -> Lecture {
-        let decodeur = JSONDecoder()
+    static func read(_ data: Data) -> Reading {
+        let decoder = JSONDecoder()
 
-        guard let entete = try? decodeur.decode(Entete.self, from: data) else {
-            // Pas d'en-tête du tout. Deux cas, et il vaut la peine de les
-            // séparer : du JSON sans enveloppe vient d'une version d'avant
-            // celle-ci — c'est un désaccord de version, et il faut le dire.
-            // Ce qui n'est pas du JSON n'est pas un paquet du jeu.
+        guard let header = try? decoder.decode(Header.self, from: data) else {
+            // No header at all. Two cases, and it is worth separating them:
+            // JSON without an envelope comes from a version older than this
+            // one — that is a version disagreement, and it should be said.
+            // What is not JSON is not a packet from this game.
             if (try? JSONSerialization.jsonObject(with: data)) != nil {
-                print("Riskelo — paquet sans dialecte : version antérieure à l'enveloppe")
-                return .autreDialecte(nil)
+                print("Riskelo US — packet with no dialect: version older than the envelope")
+                return .otherDialect(nil)
             }
-            print("Riskelo — paquet illisible : ce n'est pas du JSON")
-            return .illisible
+            print("Riskelo US — unreadable packet: this is not JSON")
+            return .unreadable
         }
 
-        guard entete.dialecte == Message.dialecte else {
-            print("Riskelo — dialecte \(entete.dialecte) reçu, \(Message.dialecte) attendu")
-            return .autreDialecte(entete.dialecte)
+        guard header.dialect == Message.dialect else {
+            print("Riskelo US — dialect \(header.dialect) received, \(Message.dialect) expected")
+            return .otherDialect(header.dialect)
         }
 
         do {
-            return .message(try decodeur.decode(Paquet.self, from: data).message)
+            return .message(try decoder.decode(Packet.self, from: data).message)
         } catch {
-            print("Riskelo — message illisible sous le bon dialecte : \(error)")
-            return .illisible
+            print("Riskelo US — unreadable message under the right dialect: \(error)")
+            return .unreadable
         }
     }
 }

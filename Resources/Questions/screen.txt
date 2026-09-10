@@ -1,0 +1,481 @@
+# Screen & Music — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Movies, television and popular song. Books, painting and concert music
+# live in Arts & Literature, and nothing here trespasses on them.
+#
+# Two traps peculiar to this theme. A title carrying a question mark would
+# give the line two, and a prompt carries exactly one — such titles are not
+# asked about. And nothing here is a current chart, a running series or a
+# living record: those go stale between the writing and the release.
+
+# What this theme declares — readable name, icon, color, and its
+# place in the grid. These lines are not comments: without
+# them the theme has no name.
+
+! id      | screen
+! name    | Screen & Music
+! icon    | music.note.tv
+! tint    | 0.75 0.40 0.62
+! rank    | 5
+
+
+# --- The movies everyone has seen ---
+
+E | In which film does a girl named Dorothy follow a yellow brick road? | The Wizard of Oz | Alice in Wonderland | Peter Pan | Mary Poppins
+E | Which 1975 film made audiences afraid of the water? | Jaws | The Deep | Orca | Piranha
+E | Which 1977 film opened with a crawl about a galaxy far, far away? | Star Wars | Star Trek | Battlestar Galactica | Dune
+E | In which film does a boy help an alien phone home? | E.T. the Extra-Terrestrial | Close Encounters | Explorers | Flight of the Navigator
+E | Which 1993 film brought dinosaurs back to an island theme park? | Jurassic Park | King Kong | The Lost World only | Land of the Lost
+E | Which 1997 film featured a doomed ocean liner and a necklace? | Titanic | The Poseidon Adventure | A Night to Remember | Pearl Harbor
+E | Which film series follows a boy wizard at Hogwarts? | Harry Potter | The Hobbit | Percy Jackson | Narnia
+E | Which studio made Snow White and the Seven Dwarfs? | Disney | Warner Bros. | MGM | Paramount
+M | Which 1939 film ends with a heroine vowing that tomorrow is another day? | Gone with the Wind | The Wizard of Oz | Rebecca | Jezebel
+M | Which 1942 film is set in a Moroccan nightclub during the war? | Casablanca | To Have and Have Not | The Maltese Falcon | Algiers
+M | Which 1972 film opens at a wedding and follows a crime family? | The Godfather | Goodfellas | Scarface | Once Upon a Time in America
+M | Which 1941 film is built around a dying man's last word? | Citizen Kane | The Third Man | Sunset Boulevard | Rebecca
+M | Which 1960 film features a motel and a shower scene? | Psycho | The Birds | Vertigo | Rear Window
+M | Which 1952 musical has a man dancing through a downpour? | Singin' in the Rain | An American in Paris | The Band Wagon | Top Hat
+M | Which 1994 film follows a man who runs across America and meets presidents? | Forrest Gump | Rain Man | Big | The Truman Show
+M | Which 1980 film is the second Star Wars film released? | The Empire Strikes Back | Return of the Jedi | A New Hope | The Phantom Menace
+M | Which 1985 film sends a teenager back to 1955 in a modified car? | Back to the Future | Peggy Sue Got Married | Time Bandits | Bill and Ted
+M | Which 1994 film intercuts hit men, a boxer and a briefcase? | Pulp Fiction | Reservoir Dogs | Jackie Brown | Get Shorty
+H | Which 1968 film features a computer named HAL? | 2001: A Space Odyssey | Solaris | Silent Running | Colossus
+H | Which 1959 comedy ends with the line nobody's perfect? | Some Like It Hot | The Apartment | Sabrina | Roman Holiday
+H | Which 1962 epic follows a British officer across the Arabian desert? | Lawrence of Arabia | The Bridge on the River Kwai | Khartoum | Zulu
+H | Which 1946 film has an angel show a man a world without him? | It's a Wonderful Life | Miracle on 34th Street | The Bishop's Wife | Christmas in Connecticut
+H | Which 1954 film has a boxer say he could have been a contender? | On the Waterfront | Raging Bull | Body and Soul | The Set-Up
+H | Which 1976 film follows a Philadelphia boxer given a title shot? | Rocky | Raging Bull | The Champ | Somebody Up There Likes Me
+H | Which 1939 film was among the first to move from black and white to color mid-story? | The Wizard of Oz | Gone with the Wind | Becky Sharp | A Star Is Born
+H | Which 1927 film is generally called the first feature with synchronized speech? | The Jazz Singer | Don Juan | Lights of New York | The Singing Fool
+H | Which 1915 or later silent comic was known as the Little Tramp? | Charlie Chaplin | Buster Keaton | Harold Lloyd | Fatty Arbuckle
+H | Which silent comedian was known as the Great Stone Face? | Buster Keaton | Charlie Chaplin | Harold Lloyd | Harry Langdon
+
+# --- Directors and the people behind the camera ---
+
+E | Who directed Jaws, E.T. and Jurassic Park? | Steven Spielberg | George Lucas | James Cameron | Ron Howard
+E | Who created the original Star Wars films? | George Lucas | Steven Spielberg | Ridley Scott | J. J. Abrams
+M | Who directed Titanic and Avatar? | James Cameron | Steven Spielberg | Michael Bay | Ridley Scott
+M | Which director was known as the Master of Suspense? | Alfred Hitchcock | Orson Welles | Fritz Lang | Billy Wilder
+M | Who directed The Godfather? | Francis Ford Coppola | Martin Scorsese | Brian De Palma | Sidney Lumet
+M | Who directed Goodfellas and Taxi Driver? | Martin Scorsese | Francis Ford Coppola | Robert Altman | William Friedkin
+M | Who directed Pulp Fiction? | Quentin Tarantino | Robert Rodriguez | Guy Ritchie | Paul Thomas Anderson
+M | Who directed Do the Right Thing and Malcolm X? | Spike Lee | John Singleton | Charles Burnett | Gordon Parks
+M | Who directed 2001: A Space Odyssey and The Shining? | Stanley Kubrick | Ridley Scott | Roman Polanski | Nicolas Roeg
+H | Which director made Alien and Blade Runner? | Ridley Scott | James Cameron | John Carpenter | David Lynch
+H | Which Japanese director made Seven Samurai and Rashomon? | Akira Kurosawa | Yasujiro Ozu | Kenji Mizoguchi | Hayao Miyazaki
+H | Which Japanese director founded a famous animation studio and made Spirited Away? | Hayao Miyazaki | Isao Takahata | Mamoru Oshii | Satoshi Kon
+H | Which Swedish director made The Seventh Seal? | Ingmar Bergman | Victor Sjostrom | Bo Widerberg | Lasse Hallstrom
+H | Which Italian director made La Dolce Vita? | Federico Fellini | Vittorio De Sica | Luchino Visconti | Michelangelo Antonioni
+H | Which woman became the first to win the Academy Award for directing? | Kathryn Bigelow | Sofia Coppola | Jane Campion | Barbra Streisand
+H | Which director made Citizen Kane at twenty-five? | Orson Welles | John Huston | Elia Kazan | Preston Sturges
+H | Which director is known for westerns starring John Wayne, including The Searchers? | John Ford | Howard Hawks | Sergio Leone | Anthony Mann
+H | Which Italian director made a trilogy of westerns with Clint Eastwood? | Sergio Leone | Sergio Corbucci | Damiano Damiani | Duccio Tessari
+
+# --- Awards ---
+
+E | What are the Academy Awards better known as? | The Oscars | The Emmys | The Grammys | The Globes
+E | Which awards honor American television? | The Emmys | The Oscars | The Grammys | The Tonys
+E | Which awards honor recorded music? | The Grammys | The Emmys | The Oscars | The Obies
+M | Which category is the top prize at the Academy Awards? | Best Picture | Best Director | Best Actor | Best Original Screenplay
+M | Which awards are voted on by foreign press covering Hollywood? | The Golden Globes | The Screen Actors Guild Awards | The Critics Choice Awards | The Independent Spirit Awards
+M | What does the acronym EGOT stand for? | Emmy, Grammy, Oscar, Tony | Emmy, Globe, Oscar, Tony | Emmy, Grammy, Obie, Tony | Emmy, Grammy, Oscar, Theatre
+M | Which film festival awards the Palme d'Or? | Cannes | Venice | Berlin | Sundance
+M | Which American film festival is held each winter in Utah? | Sundance | Telluride | Tribeca | South by Southwest
+H | Which festival awards the Golden Lion? | Venice | Cannes | Berlin | Locarno
+H | Which festival awards the Golden Bear? | Berlin | Venice | Cannes | Karlovy Vary
+H | Which awards honor American theater and share the EGOT? | The Tonys | The Obies | The Drama Desk Awards | The Outer Critics Awards
+H | In which decade were the Academy Awards first presented? | The 1920s | The 1930s | The 1910s | The 1940s
+
+# --- Television ---
+
+E | Which sitcom starred Lucille Ball as a redhead with big schemes? | I Love Lucy | The Honeymooners | Bewitched | The Dick Van Dyke Show
+E | Which animated family lives in Springfield with a father named Homer? | The Simpsons | Family Guy | King of the Hill | Bob's Burgers
+E | Which children's show features Big Bird and Oscar the Grouch? | Sesame Street | Mister Rogers | The Muppet Show | Barney
+E | Which show follows a starship crew under Captain Kirk? | Star Trek | Lost in Space | Battlestar Galactica | Babylon 5
+E | Which late-night sketch show has aired live from New York since 1975? | Saturday Night Live | SCTV | In Living Color | MADtv
+M | Which sitcom followed four friends and was set in a New York apartment building? | Seinfeld | Friends | Will and Grace | Mad About You
+M | Which sitcom was set in a Boston bar where everybody knows your name? | Cheers | Frasier | Taxi | Night Court
+M | Which series followed an army surgical unit in the Korean War? | M*A*S*H | China Beach | Combat | Tour of Duty
+M | Which anthology series was introduced by Rod Serling? | The Twilight Zone | The Outer Limits | Night Gallery | One Step Beyond
+M | Which quiz show gives answers and asks for the question? | Jeopardy | Wheel of Fortune | The Price Is Right | Family Feud
+M | Which game show has contestants spin a wheel and guess a phrase? | Wheel of Fortune | Jeopardy | Press Your Luck | Card Sharks
+M | Which neighborhood show began each episode with a cardigan and sneakers? | Mister Rogers' Neighborhood | Captain Kangaroo | Romper Room | Sesame Street
+M | Which cable channel launched in 1981 playing music videos? | MTV | VH1 | BET | CMT
+M | Which puppet troupe was created by Jim Henson? | The Muppets | The Thunderbirds | Sifl and Olly | Fraggle only
+H | Which drama followed a New Jersey crime family in therapy? | The Sopranos | The Wire | Boardwalk Empire | Oz
+H | Which drama followed advertising executives on Madison Avenue in the 1960s? | Mad Men | The Hour | Pan Am | Halt and Catch Fire
+H | Which western series ran for twenty years and starred James Arness? | Gunsmoke | Bonanza | The Rifleman | Rawhide
+H | Which family western was set on the Ponderosa ranch? | Bonanza | Gunsmoke | The Big Valley | The High Chaparral
+H | Which sitcom spun off from All in the Family and starred a Black family in Manhattan? | The Jeffersons | Good Times | Sanford and Son | What's Happening
+H | Which series about a Black family in Brooklyn began as a Roots follow-up in 1977? | Roots itself was the miniseries | The Cosby Show | Good Times | Family Matters
+H | Which 1977 miniseries traced an African American family from capture to freedom? | Roots | Holocaust | Shogun | North and South
+H | Which network is nicknamed the Peacock Network? | NBC | CBS | ABC | Fox
+H | Which network is nicknamed the Eye Network? | CBS | NBC | ABC | PBS
+H | Which public network airs Sesame Street and Frontline? | PBS | NBC | CBS | HBO
+
+# --- Animation ---
+
+E | Which mouse first appeared in Steamboat Willie in 1928? | Mickey Mouse | Minnie Mouse | Felix the Cat | Oswald the Rabbit
+E | Which was the first full-length animated feature from Disney? | Snow White and the Seven Dwarfs | Pinocchio | Fantasia | Bambi
+E | Which 1995 film was the first feature made entirely with computer animation? | Toy Story | A Bug's Life | Shrek | Antz
+E | Which cowboy doll and space ranger star in Toy Story? | Woody and Buzz | Woody and Rex | Buzz and Hamm | Andy and Sid
+M | Which studio made Toy Story and Finding Nemo? | Pixar | DreamWorks | Blue Sky | Illumination
+M | Which studio made Shrek and Kung Fu Panda? | DreamWorks | Pixar | Sony Animation | Laika
+M | Which Warner Bros. rabbit asks what's up? | Bugs Bunny | Roger Rabbit | Br'er Rabbit | Peter Cottontail
+M | Which cartoon cat forever chases a mouse named Jerry? | Tom | Sylvester | Felix | Top Cat
+M | Which Disney film features a lion cub named Simba? | The Lion King | Bambi | The Jungle Book | Brother Bear
+M | Which Disney film features a mermaid named Ariel? | The Little Mermaid | Moana | Aquamarine | Splash
+M | Which Disney film features a beast and a girl named Belle? | Beauty and the Beast | Cinderella | Sleeping Beauty | Tangled
+H | Which coyote endlessly chases a road runner? | Wile E. Coyote | Yosemite Sam | Marvin the Martian | Foghorn Leghorn
+H | Which studio created the Looney Tunes shorts? | Warner Bros. | Disney | MGM | Universal
+H | Which prehistoric family lived in Bedrock? | The Flintstones | The Jetsons | The Rubbles only | The Croods
+H | Which cartoon family lived in the future in Orbit City? | The Jetsons | The Flintstones | Futurama's Planet Express | The Robinsons
+H | Which Japanese animated film features a girl working in a bathhouse for spirits? | Spirited Away | My Neighbor Totoro | Princess Mononoke | Howl's Moving Castle
+H | Which technique photographs models one frame at a time? | Stop motion | Rotoscoping | Cel animation | Motion capture
+H | Which technique traces over filmed footage frame by frame? | Rotoscoping | Stop motion | Cel shading | Keyframing
+
+# --- Rock and pop ---
+
+E | Which band was made up of John, Paul, George and Ringo? | The Beatles | The Rolling Stones | The Who | The Kinks
+E | Which English city did the Beatles come from? | Liverpool | Manchester | London | Birmingham
+E | Which singer was known as the King of Rock and Roll? | Elvis Presley | Chuck Berry | Little Richard | Buddy Holly
+E | Which Memphis mansion was Elvis Presley's home? | Graceland | Sun Studio | Beale House | Heartbreak Hall
+E | Which singer was known as the King of Pop? | Michael Jackson | Prince | James Brown | Stevie Wonder
+E | Which 1982 album became the best-selling record of all time? | Thriller | Back in Black | The Dark Side of the Moon | Rumours
+M | Which 1969 festival drew half a million people to a New York farm? | Woodstock | Altamont | Monterey Pop | The Isle of Wight
+M | Which Detroit record label gave the world the Supremes and the Temptations? | Motown | Stax | Chess | Atlantic
+M | Which Memphis label recorded Otis Redding and Booker T? | Stax | Motown | Sun | Chess
+M | Which Memphis studio first recorded Elvis Presley? | Sun Studio | Stax | Ardent | Royal
+M | Which singer was known as the Queen of Soul? | Aretha Franklin | Diana Ross | Tina Turner | Gladys Knight
+M | Which singer was known as the Godfather of Soul? | James Brown | Otis Redding | Sam Cooke | Wilson Pickett
+M | Which band recorded The Dark Side of the Moon? | Pink Floyd | Led Zeppelin | Yes | Genesis
+M | Which band recorded Stairway to Heaven? | Led Zeppelin | Deep Purple | Black Sabbath | Cream
+M | Which singer was known as the Boss and came from New Jersey? | Bruce Springsteen | Bon Jovi | Billy Joel | Tom Petty
+M | Which city is home to the Rock and Roll Hall of Fame? | Cleveland | Memphis | Nashville | Detroit
+M | Which folk singer wrote Blowin' in the Wind and won a Nobel Prize? | Bob Dylan | Pete Seeger | Woody Guthrie | Joan Baez
+H | Which guitarist played the national anthem at Woodstock? | Jimi Hendrix | Carlos Santana | Pete Townshend | Eric Clapton
+H | Which band's members included Freddie Mercury and Brian May? | Queen | The Who | Genesis | Deep Purple
+H | Which band recorded Rumours in 1977? | Fleetwood Mac | The Eagles | Steely Dan | The Doobie Brothers
+H | Which band recorded Hotel California? | The Eagles | Fleetwood Mac | America | Poco
+H | Which singer recorded Like a Rolling Stone in 1965? | Bob Dylan | Neil Young | Van Morrison | Roger McGuinn
+H | Which group's harmony records defined the California surf sound? | The Beach Boys | Jan and Dean | The Ventures | The Surfaris
+H | Which band from Seattle led the grunge wave with Nevermind? | Nirvana | Pearl Jam | Soundgarden | Alice in Chains
+H | Which singer wrote and recorded Purple Rain? | Prince | Michael Jackson | Rick James | Terence Trent D'Arby
+H | Which singer's records include Respect and Natural Woman? | Aretha Franklin | Etta James | Nina Simone | Mavis Staples
+H | Which guitarist wrote Johnny B. Goode and shaped rock guitar? | Chuck Berry | Bo Diddley | Scotty Moore | Link Wray
+
+# --- Country, jazz and the rest ---
+
+E | Which city is the home of country music and the Grand Ole Opry? | Nashville | Memphis | Austin | Branson
+E | Which singer was known as the Man in Black? | Johnny Cash | Willie Nelson | Waylon Jennings | Merle Haggard
+M | Which singer wrote Jolene and founded a Tennessee theme park? | Dolly Parton | Loretta Lynn | Tammy Wynette | Patsy Cline
+M | Which city is regarded as the birthplace of jazz? | New Orleans | Chicago | New York | Kansas City
+M | Which trumpeter and singer was nicknamed Satchmo? | Louis Armstrong | Dizzy Gillespie | Miles Davis | Chet Baker
+M | Which bandleader and composer wrote Take the A Train with his orchestra? | Duke Ellington | Count Basie | Glenn Miller | Benny Goodman
+M | Which singer was known as the First Lady of Song and scatted? | Ella Fitzgerald | Billie Holiday | Sarah Vaughan | Dinah Washington
+M | Which style of jazz emerged in the 1940s with fast tempos and complex chords? | Bebop | Swing | Dixieland | Cool jazz
+M | Which trumpeter recorded Kind of Blue in 1959? | Miles Davis | Dizzy Gillespie | Clifford Brown | Freddie Hubbard
+M | Which borough of New York is credited as the birthplace of hip-hop? | The Bronx | Brooklyn | Harlem | Queens
+M | Which singer was known as Ol' Blue Eyes and came from Hoboken? | Frank Sinatra | Dean Martin | Bing Crosby | Tony Bennett
+H | Which pianist and composer is called the father of ragtime? | Scott Joplin | Jelly Roll Morton | Fats Waller | James P. Johnson
+H | Which Joplin rag was revived by a 1973 film? | The Entertainer | Maple Leaf Rag | Solace | Elite Syncopations
+H | Which singer's voice defined the blues from Chattanooga in the 1920s? | Bessie Smith | Ma Rainey | Billie Holiday | Alberta Hunter
+H | Which Mississippi bluesman's legend involves a crossroads bargain? | Robert Johnson | Muddy Waters | Son House | Charley Patton
+H | Which Chicago bluesman recorded Hoochie Coochie Man? | Muddy Waters | Howlin' Wolf | Willie Dixon | Buddy Guy
+H | Which composer wrote the score for West Side Story? | Leonard Bernstein | Stephen Sondheim | Jule Styne | Marvin Hamlisch
+H | Which songwriter wrote God Bless America and White Christmas? | Irving Berlin | Cole Porter | George Gershwin | Jerome Kern
+H | Which singer's version of White Christmas became a perennial best-seller? | Bing Crosby | Frank Sinatra | Nat King Cole | Perry Como
+H | Which style of Latin music combines Cuban rhythms and big-band brass? | Salsa | Bossa nova | Tango | Merengue
+H | Which Brazilian style gave the world The Girl from Ipanema? | Bossa nova | Samba | Forro | Choro
+H | Which instrument is central to bluegrass and is played with fingerpicks? | The banjo | The fiddle | The mandolin | The dobro
+
+# --- Screen people and screen words ---
+
+E | Which actor played the boxer Rocky Balboa? | Sylvester Stallone | Arnold Schwarzenegger | Bruce Willis | Kurt Russell
+E | Which actress played Dorothy in The Wizard of Oz? | Judy Garland | Shirley Temple | Deanna Durbin | Jane Powell
+M | Which actor played Vito Corleone in The Godfather? | Marlon Brando | Al Pacino | Robert De Niro | James Caan
+M | Which actor played Michael Corleone in The Godfather? | Al Pacino | Marlon Brando | Robert Duvall | John Cazale
+M | Which actress starred in Roman Holiday and Breakfast at Tiffany's? | Audrey Hepburn | Grace Kelly | Elizabeth Taylor | Natalie Wood
+M | Which actor is most associated with westerns and the nickname Duke? | John Wayne | Clint Eastwood | Gary Cooper | Randolph Scott
+M | Which actress won four Academy Awards for acting, more than anyone? | Katharine Hepburn | Meryl Streep | Bette Davis | Ingrid Bergman
+M | Which dancer partnered Ginger Rogers in a string of 1930s musicals? | Fred Astaire | Gene Kelly | Donald O'Connor | Dan Dailey
+M | Which actor was the first Black performer to win the Academy Award for Best Actor? | Sidney Poitier | Denzel Washington | James Earl Jones | Harry Belafonte
+H | Which actress was the first Black performer to win an acting Academy Award? | Hattie McDaniel | Dorothy Dandridge | Ethel Waters | Lena Horne
+H | Which term describes the person who oversees a film's money and schedule? | The producer | The director | The gaffer | The showrunner
+H | Which crew member is chief electrician on a film set? | The gaffer | The grip | The best boy only | The key grip
+H | Which crew member handles camera support and rigging? | The grip | The gaffer | The foley artist | The dolly hand
+H | Which crew member creates everyday sounds in post-production? | The foley artist | The mixer | The composer | The editor
+H | Which shot shows a subject from a great distance? | A wide shot | A close-up | A two-shot | A cutaway
+H | Which shot fills the frame with a face? | A close-up | A wide shot | An establishing shot | A long take
+H | Which term describes a single uninterrupted run of camera time? | A take | A cut | A frame | A scene
+H | Which term describes the arrangement of everything within the frame? | Mise-en-scene | Montage | Continuity | Blocking only
+H | Which technique cuts many short shots together to compress time? | Montage | Match cut | Jump scare | Tracking
+H | Which term describes an actor's stand-in for dangerous work? | A stunt double | A body double | An extra | An understudy
+H | Which term describes performers filling the background of a scene? | Extras | Understudies | Doubles | Walk-ons only
+H | How many frames per second is standard for film projection? | Twenty-four | Thirty | Sixty | Sixteen
+
+# --- Openers ---
+
+E | Which award statuette is a gold figure holding a sword? | The Oscar | The Emmy | The Grammy | The Tony
+E | Which street in Los Angeles is lined with stars in the sidewalk? | Hollywood Boulevard | Sunset Strip | Rodeo Drive | Melrose Avenue
+E | Which sign on a Los Angeles hillside spells out a film district? | The Hollywood sign | The Burbank sign | The Studio City sign | The Universal sign
+E | Which device did families gather around to watch shows before streaming? | The television set | The radio only | The phonograph | The projector
+E | What do we call a film that continues the story of an earlier one? | A sequel | A prequel | A remake | A spin-off
+E | What do we call a film set before the story of an earlier one? | A prequel | A sequel | A reboot | A crossover
+E | What do we call a new version of an older film? | A remake | A sequel | A prequel | A parody
+E | What do we call a series that follows a character from another show? | A spin-off | A sequel | A pilot | A crossover
+E | What do we call the first episode of a television series? | The pilot | The premiere only | The opener | The teaser
+E | What do we call the short preview shown before a film? | A trailer | A teaser only | A short | A reel
+E | What do we call the list of names shown at the end of a film? | The credits | The billing | The roll | The card
+E | What do we call the music written for a film? | The score | The lyrics | The libretto | The cue sheet
+E | What do we call the collection of songs featured in a film? | The soundtrack | The score only | The playlist | The setlist
+E | What do we call an actor's audition for a role? | A screen test | A rehearsal | A callback only | A read-through
+E | What do we call the written text of a film? | The screenplay | The score | The storyboard | The treatment only
+E | What do we call the drawings that plan a film's shots? | The storyboard | The screenplay | The shot list only | The blueprint
+M | What do we call a film shot in a documentary style about real events? | A documentary | A biopic | A mockumentary | A newsreel
+M | What do we call a film about a real person's life? | A biopic | A documentary | A memoir film | A period piece
+M | What do we call a comedy that imitates another film's style for laughs? | A parody | A satire only | A farce | A pastiche
+M | What do we call a film released directly to home viewing? | A direct-to-video release | A limited release | A wide release | A platform release
+
+# --- Franchises ---
+
+E | Which secret agent carries the code number 007? | James Bond | Jason Bourne | Ethan Hunt | Jack Ryan
+E | Which archaeologist wears a fedora and carries a bullwhip? | Indiana Jones | Allan Quatermain | Lara Croft | Rick O'Connell
+E | Which series features a boy who survives a crash and a school of superheroes? | The X-Men | The Avengers | The Fantastic Four | The Justice League
+E | Which caped hero protects Gotham City? | Batman | Superman | Spider-Man | Daredevil
+E | Which hero comes from the planet Krypton? | Superman | Batman | Iron Man | Thor
+E | Which hero was bitten by a radioactive spider? | Spider-Man | Batman | Ant-Man | Daredevil
+M | Which actor first played James Bond on film, in 1962? | Sean Connery | Roger Moore | George Lazenby | David Niven
+M | Which actor played Indiana Jones? | Harrison Ford | Kurt Russell | Tom Selleck | Michael Douglas
+M | Which 2008 film launched the connected Marvel film series? | Iron Man | The Incredible Hulk | Thor | Captain America
+M | Which director filmed The Lord of the Rings in New Zealand? | Peter Jackson | Guillermo del Toro | Ridley Scott | Sam Raimi
+M | Which 1999 film asked its hero to choose a red or a blue pill? | The Matrix | Dark City | eXistenZ | Total Recall
+M | Which 1984 film features a cyborg sent back in time to Los Angeles? | The Terminator | RoboCop | Blade Runner | Escape from New York
+M | Which series follows a team pulling off impossible espionage missions? | Mission: Impossible | The Bourne series | Ocean's Eleven | Kingsman
+M | Which series follows street racers and heists with a family theme? | The Fast and the Furious | Gone in 60 Seconds | Baby Driver | Death Race
+H | Which actor played James Bond in seven films through the 1970s and 1980s? | Roger Moore | Sean Connery | Timothy Dalton | Pierce Brosnan
+H | Which actor played James Bond only once, in 1969? | George Lazenby | Timothy Dalton | David Niven | Barry Nelson
+H | Which author created James Bond in a series of novels? | Ian Fleming | John le Carre | Len Deighton | Frederick Forsyth
+H | Which starship captain was played by Patrick Stewart? | Jean-Luc Picard | James Kirk | Benjamin Sisko | Kathryn Janeway
+H | Which actor played Captain Kirk in the original Star Trek series? | William Shatner | Leonard Nimoy | DeForest Kelley | James Doohan
+H | Which Star Wars character says the line about the Force being strong? | Obi-Wan Kenobi | Han Solo | Luke Skywalker | Yoda
+H | Which prison drama of 1994 became a cable favorite despite a quiet release? | The Shawshank Redemption | The Green Mile | Cool Hand Luke | Escape from Alcatraz
+H | Which 1991 thriller pairs an FBI trainee with an imprisoned psychiatrist? | The Silence of the Lambs | Manhunter | Se7en | Primal Fear
+
+# --- Lines everyone knows ---
+
+M | Which film gave us the line here's looking at you, kid? | Casablanca | Gone with the Wind | The Maltese Falcon | To Have and Have Not
+M | Which film gave us the line may the Force be with you? | Star Wars | Star Trek | Dune | Flash Gordon
+M | Which film gave us the line I'll be back? | The Terminator | Predator | Commando | Total Recall
+M | Which film gave us the line there's no place like home? | The Wizard of Oz | Home Alone | It's a Wonderful Life | Meet Me in St. Louis
+M | Which film gave us the line life is like a box of chocolates? | Forrest Gump | Big | Sleepless in Seattle | Rain Man
+H | Which film gave us the line Houston, we have a problem? | Apollo 13 | The Right Stuff | Gravity | Marooned
+H | Which film gave us the line show me the money? | Jerry Maguire | Wall Street | Boiler Room | Glengarry Glen Ross
+H | Which film gave us the line go ahead, make my day? | Sudden Impact | Dirty Harry | Magnum Force | The Enforcer
+H | Which film gave us the line I see dead people? | The Sixth Sense | The Others | Poltergeist | The Shining
+H | Which film gave us the line I'm going to make him an offer he can't refuse? | The Godfather | Goodfellas | Scarface | The Untouchables
+H | Which film gave us the line frankly, my dear, I don't give a damn? | Gone with the Wind | Casablanca | Rebecca | Jezebel
+H | Which film gave us the line you're gonna need a bigger boat? | Jaws | The Perfect Storm | Moby Dick | Master and Commander
+
+# --- More television ---
+
+E | Which show features a large yellow bird teaching letters and numbers? | Sesame Street | Barney and Friends | Blue's Clues | Teletubbies
+E | Which show follows detectives investigating crimes in two halves each episode? | Law and Order | NYPD Blue | Homicide | Hill Street Blues
+M | Which drama followed a chemistry teacher turned drug manufacturer? | Breaking Bad | Weeds | Ozark | Better Call Saul only
+M | Which comedy was filmed as a documentary about a paper company branch? | The Office | Parks and Recreation | Superstore | 30 Rock
+M | Which drama followed survivors of a plane crash on a mysterious island? | Lost | Survivor | Yellowjackets | The Society
+M | Which medical drama was set in a Chicago emergency room? | ER | Grey's Anatomy | Chicago Hope | St. Elsewhere
+M | Which anchor was called the most trusted man in America? | Walter Cronkite | Edward Murrow | David Brinkley | Peter Jennings
+M | Which broadcaster reported from London rooftops during the Blitz? | Edward R. Murrow | Walter Cronkite | Eric Sevareid | Howard K. Smith
+M | Which late-night host led The Tonight Show for thirty years? | Johnny Carson | Jack Paar | Steve Allen | David Letterman
+M | Which daytime host built a Chicago studio into a media empire? | Oprah Winfrey | Phil Donahue | Ellen DeGeneres | Merv Griffin
+M | Which news program has ticked its way through Sunday nights since 1968? | 60 Minutes | 20/20 | Dateline | Nightline
+M | Which competition series strands contestants who vote each other out? | Survivor | The Amazing Race | Big Brother | Fear Factor
+H | Which series about a fantasy realm was based on novels by George R. R. Martin? | Game of Thrones | The Witcher | The Wheel of Time | Shannara
+H | Which police drama was set in Baltimore and followed drugs and institutions? | The Wire | Homicide | The Shield | Southland
+H | Which sitcom followed a Boston psychiatrist who moved to Seattle? | Frasier | Cheers | Wings | Becker
+H | Which series followed advertising in a fictional New York agency called Sterling Cooper? | Mad Men | Bewitched | Thirtysomething | The Crazy Ones
+H | Which variety host said really big show and hosted the Beatles in 1964? | Ed Sullivan | Jack Benny | Milton Berle | Sid Caesar
+H | Which comedian was known as Mr. Television in the early days of the medium? | Milton Berle | Sid Caesar | Jackie Gleason | Red Skelton
+H | Which sitcom about a bus driver and a sewer worker ran only one season in 1955? | The Honeymooners | The Life of Riley | Car 54 | The Bickersons
+H | Which sketch series introduced the Coneheads and the Blues Brothers? | Saturday Night Live | SCTV | The Carol Burnett Show | Laugh-In
+H | Which sitcom set in a Minneapolis newsroom starred Mary Tyler Moore? | The Mary Tyler Moore Show | Rhoda | Phyllis | Murphy Brown
+H | Which children's series has a red monster named Elmo? | Sesame Street | The Muppet Show | Fraggle Rock | Between the Lions
+
+# --- More movies, decade by decade ---
+
+M | Which 1959 epic featured a chariot race and won eleven Academy Awards? | Ben-Hur | Spartacus | Quo Vadis | The Robe
+M | Which 1965 musical follows a governess and seven Austrian children? | The Sound of Music | Mary Poppins | My Fair Lady | Oliver
+M | Which 1964 musical features a flying nanny with an umbrella? | Mary Poppins | The Sound of Music | Bedknobs and Broomsticks | Chitty Chitty Bang Bang
+M | Which 1978 musical is set in a 1950s high school? | Grease | Hairspray | Cry-Baby | American Graffiti
+M | Which 1987 film features a summer resort and a dance lift? | Dirty Dancing | Footloose | Flashdance | Staying Alive
+M | Which 1986 film follows Navy fighter pilots and their instructor? | Top Gun | Iron Eagle | The Right Stuff | Firefox
+M | Which 1990 film left a boy home alone at Christmas? | Home Alone | Jingle All the Way | The Santa Clause | Uncle Buck
+M | Which 1984 comedy has a team catching ghosts in New York? | Ghostbusters | Beetlejuice | The Frighteners | Men in Black
+M | Which 1982 film features a dying man and a suburban family hiding an alien? | E.T. the Extra-Terrestrial | Close Encounters | Starman | Cocoon
+M | Which 1991 animated film was the first to be nominated for Best Picture? | Beauty and the Beast | Aladdin | The Lion King | Toy Story
+H | Which 1969 film about two drifters on motorcycles opened the New Hollywood era? | Easy Rider | Bonnie and Clyde | The Graduate | Midnight Cowboy
+H | Which 1967 film starred Dustin Hoffman and a plastics speech? | The Graduate | Midnight Cowboy | Little Big Man | The Odd Couple
+H | Which 1967 film paired Faye Dunaway and Warren Beatty as outlaws? | Bonnie and Clyde | Butch Cassidy and the Sundance Kid | Badlands | Thieves Like Us
+H | Which 1974 film about a Los Angeles water scandal starred Jack Nicholson? | Chinatown | The Long Goodbye | Serpico | Klute
+H | Which 1975 film is set in a mental hospital and won five top Academy Awards? | One Flew Over the Cuckoo's Nest | Network | Dog Day Afternoon | The Deer Hunter
+H | Which 1979 film about the Vietnam War sailed up a river to find a colonel? | Apocalypse Now | The Deer Hunter | Platoon | Full Metal Jacket
+H | Which 1993 film about the Holocaust was shot mostly in black and white? | Schindler's List | The Pianist | Sophie's Choice | Life Is Beautiful
+H | Which 1998 war film opens with the Normandy landings? | Saving Private Ryan | The Thin Red Line | Enemy at the Gates | Band of Brothers
+H | Which 1995 film about the Apollo program starred Tom Hanks as a commander? | Apollo 13 | The Right Stuff | First Man | Hidden Figures
+H | Which 2016 film told the story of Black women mathematicians at NASA? | Hidden Figures | Loving | Fences | Selma
+
+# --- More rock, pop and soul ---
+
+E | Which band from Liverpool released Abbey Road? | The Beatles | The Kinks | The Hollies | The Zombies
+E | Which British band's members included Mick Jagger and Keith Richards? | The Rolling Stones | The Who | The Animals | The Yardbirds
+E | Which Swedish group won Eurovision in 1974 and recorded Dancing Queen? | ABBA | Roxette | Ace of Base | A-ha
+E | Which Jamaican singer made reggae known worldwide? | Bob Marley | Peter Tosh | Jimmy Cliff | Toots Hibbert
+M | Which Irish band's singer is known as Bono? | U2 | The Cranberries | Thin Lizzy | The Pogues
+M | Which Australian band recorded Back in Black? | AC/DC | INXS | Midnight Oil | Men at Work
+M | Which New York band is credited with launching punk at a club called CBGB? | The Ramones | Blondie | Talking Heads | Television
+M | Which British band's Never Mind the Bollocks defined British punk? | The Sex Pistols | The Clash | The Damned | The Jam
+M | Which style of dance music dominated clubs in the late 1970s? | Disco | House | Techno | Funk only
+M | Which 1977 film soundtrack helped make disco a national craze? | Saturday Night Fever | Grease | Thank God It's Friday | Xanadu
+M | Which duo recorded Bridge Over Troubled Water? | Simon and Garfunkel | Hall and Oates | The Everly Brothers | Sam and Dave
+M | Which Minnesota-born singer released Purple Rain as a film and an album? | Prince | Bob Dylan | Morris Day | Terry Lewis
+M | Which singer recorded Born to Run and Born in the U.S.A.? | Bruce Springsteen | John Mellencamp | Bob Seger | Tom Petty
+M | Which band recorded Bohemian Rhapsody? | Queen | Led Zeppelin | Yes | Supertramp
+M | Which chart has ranked American singles since 1958? | The Billboard Hot 100 | The Cashbox Top 50 | The Variety Chart | The Radio Ranking
+H | Which Grammy category honors a single recording of the year? | Record of the Year | Album of the Year | Song of the Year | Best New Artist
+H | Which Grammy category honors the writer of a song rather than the recording? | Song of the Year | Record of the Year | Album of the Year | Producer of the Year
+H | Which band recorded Pet Sounds in 1966? | The Beach Boys | The Byrds | The Mamas and the Papas | The Turtles
+H | Which band recorded Sgt. Pepper's Lonely Hearts Club Band? | The Beatles | The Rolling Stones | The Kinks | The Small Faces
+H | Which Detroit singer recorded What's Going On in 1971? | Marvin Gaye | Stevie Wonder | Smokey Robinson | Curtis Mayfield
+H | Which blind Motown artist recorded Songs in the Key of Life? | Stevie Wonder | Ray Charles | Marvin Gaye | Al Green
+H | Which singer and pianist blended gospel and blues on What'd I Say? | Ray Charles | Fats Domino | Little Richard | Jerry Lee Lewis
+H | Which group of Motown session musicians played on countless hits? | The Funk Brothers | The Wrecking Crew | The Swampers | Booker T and the MGs
+H | Which Los Angeles session collective is called the Wrecking Crew? | Studio musicians of the 1960s | A surf band | A record label | A songwriting team
+H | Which Alabama studio town gave soul records their distinctive sound? | Muscle Shoals | Macon | Tupelo | Clarksdale
+H | Which producer built the wall of sound technique in the 1960s? | Phil Spector | Berry Gordy | George Martin | Quincy Jones
+H | Which producer worked with the Beatles and was called the fifth Beatle? | George Martin | Brian Epstein | Phil Spector | Glyn Johns
+H | Which producer arranged Thriller and worked with countless artists? | Quincy Jones | Nile Rodgers | Rick Rubin | Jimmy Jam
+
+# --- Video games and screens ---
+
+E | Which 1972 arcade game bounced a square between two paddles? | Pong | Space Invaders | Breakout | Asteroids
+E | Which 1980 arcade game featured a yellow circle eating dots? | Pac-Man | Donkey Kong | Frogger | Centipede
+E | Which mustachioed plumber is Nintendo's best-known character? | Mario | Luigi | Link | Kirby
+M | Which 1985 game launched Mario's console adventures? | Super Mario Bros. | Donkey Kong | Mario Kart | Super Mario World
+M | Which puzzle game from 1984 drops falling shapes into rows? | Tetris | Columns | Dr. Mario | Puyo Puyo
+M | Which company made the Game Boy? | Nintendo | Sega | Atari | Sony
+M | Which company made the Genesis console? | Sega | Nintendo | Atari | NEC
+M | Which company made the PlayStation? | Sony | Nintendo | Microsoft | Sega
+M | Which company makes the Xbox? | Microsoft | Sony | Nintendo | Valve
+M | Which blue hedgehog was Sega's answer to Mario? | Sonic | Knuckles | Tails | Shadow
+M | Which building game lets players place blocks in an open world? | Minecraft | Roblox | Terraria | Fortnite
+H | Which 1981 arcade game introduced a carpenter later renamed Mario? | Donkey Kong | Pac-Man | Galaga | Dig Dug
+H | Which 1978 Japanese game filled arcades with descending aliens? | Space Invaders | Galaxian | Asteroids | Defender
+H | Which 1986 game began a series about a green-clad hero in Hyrule? | The Legend of Zelda | Metroid | Castlevania | Final Fantasy
+H | Which console crash of 1983 nearly ended home gaming in America? | The video game crash | The Atari collapse only | The arcade slump | The cartridge glut
+H | Which company dominated home consoles before that crash? | Atari | Nintendo | Coleco | Magnavox
+H | Which term describes games played by many people together over a network? | Multiplayer online | Single-player | Local co-op only | Split screen
+H | Which term describes competitive video gaming as a spectator sport? | Esports | Speedrunning | Modding | Streaming only
+
+# --- Openers ---
+
+E | Which device do people use to change television channels from a couch? | A remote control | A dial | A joystick | A keypad phone
+E | Which format replaced videotape for home movies in the late 1990s? | The DVD | The laserdisc | The Blu-ray | The CD-ROM
+E | Which format replaced the DVD for high-definition home movies? | Blu-ray | VHS | Laserdisc | MiniDisc
+E | Which round format held music before cassettes and compact discs? | The vinyl record | The eight-track | The reel-to-reel | The wax cylinder only
+E | Which format let listeners record music onto tape in a small plastic shell? | The cassette | The vinyl record | The compact disc | The MiniDisc
+E | Which portable player made carrying a music library ordinary in the 2000s? | The iPod | The Walkman | The Discman | The Zune
+E | Which portable player let people carry cassettes in the 1980s? | The Walkman | The iPod | The Discman | The boombox
+E | Which large portable radio and tape player was carried on the shoulder? | The boombox | The transistor radio | The Walkman | The turntable
+E | What do we call watching several episodes of a series in one sitting? | Binge-watching | Channel surfing | Marathoning only | Streaming
+E | What do we call watching video delivered over the internet? | Streaming | Broadcasting | Syndication | Downloading only
+E | What do we call reruns of a show sold to many local stations? | Syndication | Streaming | Simulcasting | Rebroadcasting
+E | What do we call the person who introduces songs on the radio? | A disc jockey | A producer | An engineer | A programmer
+E | What do we call a short film made to promote a song? | A music video | A trailer | A promo reel | A teaser
+E | What do we call an audio series people subscribe to and download? | A podcast | A broadcast | A webcast | A newsletter
+E | What do we call the words sung over a beat in hip-hop? | Rapping | Scatting | Crooning | Yodeling
+E | What do we call the practice of moving a record back and forth for rhythm? | Scratching | Mixing | Mastering | Sampling
+E | What do we call reusing a snippet of an old record in a new song? | Sampling | Scratching | Remixing only | Covering
+E | What do we call a new recording of a song first done by someone else? | A cover | A remix | A sample | A bootleg
+E | What do we call a song's most repeated section? | The chorus | The verse | The bridge | The intro
+E | What do we call the contrasting section between choruses? | The bridge | The verse | The hook | The outro
+M | What do we call an unauthorized recording of a concert? | A bootleg | A demo | A remaster | A pressing
+M | What do we call a rough recording made to pitch a song? | A demo | A master | A bootleg | A single
+M | What do we call the final approved recording a release is copied from? | The master | The demo | The mix | The stem
+M | What do we call a record with one main song and a B-side? | A single | An album | An EP | A compilation
+M | What do we call a release longer than a single but shorter than an album? | An EP | An LP | A single | A box set
+M | What do we call an album collecting an artist's best-known songs? | A greatest hits | A live album | A concept album | A soundtrack
+M | What do we call an album whose songs tell one continuous story? | A concept album | A greatest hits | A double album | A tribute album
+M | What do we call the opening act of a concert? | The support act | The headliner | The encore | The soundcheck
+M | What do we call the last song played after the main set? | The encore | The finale only | The closer | The reprise
+M | What do we call the practice of playing music from a laptop or turntables at a club? | DJing | Mixing only | Producing | Engineering
+
+# --- The last reel ---
+
+E | Which holiday film features a department store Santa on trial? | Miracle on 34th Street | It's a Wonderful Life | A Christmas Story | Elf
+E | Which film features a boy who wants a BB gun for Christmas? | A Christmas Story | Home Alone | Elf | The Polar Express
+E | Which Disney film features a wooden puppet who wants to be a real boy? | Pinocchio | Peter Pan | Dumbo | Bambi
+E | Which Disney film features a flying elephant? | Dumbo | Bambi | Pinocchio | The Rescuers
+E | Which Disney film features a girl who trades her voice for legs? | The Little Mermaid | Pocahontas | Mulan | Tangled
+E | Which Disney film features a princess awakened from a long sleep? | Sleeping Beauty | Snow White | Cinderella | Rapunzel
+E | Which Pixar film sends an old man's house aloft with balloons? | Up | Wall-E | Ratatouille | Inside Out
+E | Which Pixar film follows a rat who wants to cook in Paris? | Ratatouille | Up | Cars | Brave
+E | Which Pixar film follows a clownfish searching for his son? | Finding Nemo | Finding Dory | Shark Tale | The Little Mermaid
+E | Which Pixar film gives feelings their own control room in a girl's head? | Inside Out | Soul | Coco | Turning Red
+M | Which musical film features a young lion and a song about no worries? | The Lion King | Madagascar | Tarzan | Jungle Book
+M | Which 2013 animated film features two royal sisters and an ice power? | Frozen | Brave | Tangled | Moana
+M | Which studio distributed the original King Kong in 1933? | RKO | MGM | Warner Bros. | Universal
+M | Which monster film series began in Japan in 1954? | Godzilla | Mothra | Gamera | Rodan
+M | Which 1931 film made a Hungarian actor synonymous with a vampire count? | Dracula | Nosferatu | The Mummy | Frankenstein
+M | Which 1931 film featured a monster assembled by a scientist? | Frankenstein | Dracula | The Invisible Man | The Wolf Man
+M | Which 1978 slasher film introduced a masked killer in a small town? | Halloween | Friday the 13th | Black Christmas | The Fog
+M | Which 1973 horror film centered on the possession of a young girl? | The Exorcist | The Omen | Carrie | Rosemary's Baby
+H | Which 1922 German film is an unlicensed version of Dracula? | Nosferatu | The Cabinet of Dr. Caligari | Metropolis | Faust
+H | Which 1927 German film shows a futuristic city split above and below ground? | Metropolis | Nosferatu | M | The Golem
+H | Which 1925 Soviet film is famous for a sequence on the Odessa steps? | Battleship Potemkin | October | Strike | Man with a Movie Camera
+H | Which 1948 Italian film follows a father and son searching for a stolen bike? | Bicycle Thieves | Rome, Open City | La Strada | Umberto D
+H | Which movement in postwar Italy filmed ordinary life with nonactors? | Neorealism | Expressionism | The New Wave | Dogme
+H | Which French movement of the late 1950s broke filmmaking rules? | The New Wave | Neorealism | Poetic realism | Surrealism
+H | Which French director of the New Wave made Breathless? | Jean-Luc Godard | Francois Truffaut | Claude Chabrol | Eric Rohmer
+H | Which French director of the New Wave made The 400 Blows? | Francois Truffaut | Jean-Luc Godard | Alain Resnais | Louis Malle
+
+# --- The last chorus ---
+
+E | Which instrument does a lead guitarist play? | The electric guitar | The bass | The drums | The keyboard
+E | Which instrument keeps the beat in a rock band? | The drums | The guitar | The keyboard | The saxophone
+E | Which instrument plays the lowest notes in a rock band? | The bass guitar | The lead guitar | The keyboard | The harmonica
+E | Which small reed instrument is held in the hands and played with the mouth? | The harmonica | The kazoo | The recorder | The ocarina
+M | Which genre grew out of gospel and rhythm and blues in the 1960s? | Soul | Country | Folk | Bluegrass
+M | Which genre combines country instruments with fast picking and high harmony? | Bluegrass | Zydeco | Cajun | Western swing
+M | Which Louisiana genre uses accordion and washboard? | Zydeco | Bluegrass | Rockabilly | Gospel
+M | Which genre blends country and early rock and roll? | Rockabilly | Doo-wop | Surf rock | Swing
+M | Which vocal genre used nonsense syllables and street corner harmony? | Doo-wop | Scat | Barbershop | Yodeling
+M | Which genre uses four unaccompanied male voices in close harmony? | Barbershop | Doo-wop | Gospel | A cappella pop
+M | Which genre began in Jamaica with offbeat guitar and heavy bass? | Reggae | Calypso | Soca | Ska only
+M | Which genre grew from reggae's faster predecessor in Jamaica? | Ska | Dub | Dancehall | Rocksteady only
+M | Which German band of the 1970s pioneered electronic pop with machines? | Kraftwerk | Can | Neu | Tangerine Dream
+M | Which city gave its name to a stripped-down style of electronic dance music? | Detroit, for techno | Chicago, for techno | New York, for house | Berlin, for garage
+M | Which city gave its name to house music? | Chicago | Detroit | New York | Newark
+H | Which singer's Hound Dog was first recorded by Big Mama Thornton? | Elvis Presley | Jerry Lee Lewis | Carl Perkins | Roy Orbison
+H | Which guitarist of the 1950s played a Gibson and wrote Maybellene? | Chuck Berry | Bo Diddley | Muddy Waters | Bobby Bland
+H | Which pianist from Georgia recorded Tutti Frutti in 1955? | Little Richard | Ray Charles | Fats Domino | Otis Spann
+H | Which New Orleans pianist recorded Blueberry Hill? | Fats Domino | Professor Longhair | Dr. John | Allen Toussaint
+H | Which Texas guitarist revived blues rock in the 1980s? | Stevie Ray Vaughan | Johnny Winter | Billy Gibbons | Eric Johnson
+H | Which folk singer wrote This Land Is Your Land? | Woody Guthrie | Pete Seeger | Lead Belly | Cisco Houston
+H | Which folk singer played banjo and helped revive American folk song? | Pete Seeger | Woody Guthrie | Burl Ives | Josh White
+H | Which Nashville institution has broadcast country music since 1925? | The Grand Ole Opry | The Ryman only | The Bluebird Cafe | The Station Inn
+H | Which Nashville hall honors country performers? | The Country Music Hall of Fame | The Grand Ole Opry Hall | The Ryman Hall | The Opryland Museum
+H | Which singer's Coal Miner's Daughter told her own story? | Loretta Lynn | Dolly Parton | Tammy Wynette | Patsy Cline
+H | Which country singer was known as the Hillbilly Shakespeare? | Hank Williams | Ernest Tubb | Lefty Frizzell | Roy Acuff
+H | Which country outlaw recorded On the Road Again? | Willie Nelson | Waylon Jennings | Merle Haggard | Kris Kristofferson
+H | Which annual show has honored country music since 1967? | The CMA Awards | The ACM Awards only | The Opry Awards | The Nashville Awards
+H | Which term describes a record that sells one million copies in America? | Platinum | Gold | Diamond | Silver
+H | Which term describes a record that sells five hundred thousand copies? | Gold | Platinum | Silver | Bronze
+H | Which term describes a record that sells ten million copies? | Diamond | Platinum | Multi-platinum only | Crown

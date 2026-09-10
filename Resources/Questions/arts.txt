@@ -1,432 +1,475 @@
-# Arts & Lettres — une question par ligne.
+# Arts & Literature — one question per line.
 #
-# niveau | énoncé ? | bonne réponse | leurre | leurre | leurre
-# F facile · M moyen · D difficile
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
 #
-# Les propositions sont mêlées au tirage : l'ordre n'a aucune importance.
-# Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
-# une question, il fait une question à trois propositions.
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Books, painting, sculpture, concert music, the stage and the old myths.
+# Movies, television and popular song live in Screen & Music, and nothing
+# here trespasses on them.
+#
+# One trap peculiar to this theme: a title carrying a question mark would
+# give the line two, and a prompt carries exactly one. Such titles are
+# simply not asked about.
 
-# Ce que ce thème déclare — nom lisible, élision, icône, couleur, et sa
-# place dans la grille. Ces lignes ne sont pas des commentaires : sans
-# elles le thème n'a pas de nom.
+# What this theme declares — readable name, icon, color, and its
+# place in the grid. These lines are not comments: without
+# them the theme has no name.
 
-! id     | arts
-! nom    | Arts & Lettres
-! de     | d'Arts & Lettres
-! icone  | book
-! teinte | 0.62 0.45 0.34
-! rang   | 3
+! id      | arts
+! name    | Arts & Literature
+! icon    | book
+! tint    | 0.62 0.45 0.34
+! rank    | 3
 
-F | Qui a peint La Joconde ? | Léonard de Vinci | Michel-Ange | Raphaël | Botticelli
-F | Qui a écrit Les Misérables ? | Victor Hugo | Émile Zola | Balzac | Alexandre Dumas
-F | Qui a écrit Roméo et Juliette ? | William Shakespeare | Molière | Christopher Marlowe | Racine
-M | Qui a sculpté Le Penseur ? | Auguste Rodin | Camille Claudel | Aristide Maillol | Antoine Bourdelle
-M | Quel peintre néerlandais s'est mutilé l'oreille ? | Vincent van Gogh | Rembrandt | Vermeer | Piet Mondrian
-M | Quel compositeur, devenu sourd, a écrit la Neuvième Symphonie ? | Ludwig van Beethoven | Mozart | Schubert | Brahms
-M | Qui a écrit À la recherche du temps perdu ? | Marcel Proust | André Gide | Gustave Flaubert | Louis Aragon
-D | Qui a écrit Le Rouge et le Noir ? | Stendhal | Balzac | Flaubert | Maupassant
-D | Quel tableau de Monet a donné son nom à l'impressionnisme ? | Impression, soleil levant | Les Nymphéas | La Gare Saint-Lazare | Le Déjeuner sur l'herbe
-D | Qui a écrit Cent ans de solitude ? | Gabriel García Márquez | Jorge Luis Borges | Mario Vargas Llosa | Julio Cortázar
-F | Qui a écrit Le Petit Prince ? | Antoine de Saint-Exupéry | Jules Verne | Albert Camus | Jacques Prévert
-F | Quel musée abrite la Vénus de Milo ? | Le Louvre | Le musée d'Orsay | Le Prado | Le British Museum
-F | Qui a écrit Vingt mille lieues sous les mers ? | Jules Verne | Victor Hugo | Alexandre Dumas | Émile Zola
-M | Quel peintre espagnol a peint Guernica ? | Pablo Picasso | Salvador Dalí | Joan Miró | Francisco de Goya
-M | Qui a composé Les Quatre Saisons ? | Antonio Vivaldi | Jean-Sébastien Bach | Georg Friedrich Haendel | Mozart
-M | Quel poète a écrit Les Fleurs du mal ? | Charles Baudelaire | Arthur Rimbaud | Paul Verlaine | Stéphane Mallarmé
-M | Quel dramaturge français a écrit Le Misanthrope ? | Molière | Racine | Corneille | Marivaux
-D | Quel architecte a conçu la Sagrada Família ? | Antoni Gaudí | Le Corbusier | Gustave Eiffel | Mies van der Rohe
-D | Qui a écrit L'Étranger ? | Albert Camus | Jean-Paul Sartre | André Malraux | André Gide
-D | Quel mouvement André Breton a-t-il théorisé ? | Le surréalisme | Le cubisme | Le dadaïsme | Le futurisme
-F | Qui a écrit Les Trois Mousquetaires ? | Alexandre Dumas | Victor Hugo | Jules Verne | Stendhal
-F | Dans quelle ville se dresse la statue de la Liberté ? | New York | Boston | Philadelphie | Washington
-F | Qui a peint le plafond de la chapelle Sixtine ? | Michel-Ange | Raphaël | Léonard de Vinci | Le Caravage
-M | Qui a écrit Madame Bovary ? | Gustave Flaubert | Guy de Maupassant | Honoré de Balzac | Émile Zola
-M | Qui a écrit Germinal ? | Émile Zola | Victor Hugo | Alphonse Daudet | Jules Vallès
-M | Quel peintre a fondé le cubisme avec Picasso ? | Georges Braque | Fernand Léger | Juan Gris | Robert Delaunay
-M | Quel compositeur autrichien a laissé un Requiem inachevé ? | Mozart | Joseph Haydn | Franz Schubert | Anton Bruckner
-D | Quel écrivain russe a écrit Guerre et Paix ? | Léon Tolstoï | Fiodor Dostoïevski | Anton Tchekhov | Nicolas Gogol
-D | Quel courant Victor Hugo défend-il dans la préface de Cromwell ? | Le romantisme | Le naturalisme | Le symbolisme | Le classicisme
-D | Qui a peint Le Cri ? | Edvard Munch | Vassily Kandinsky | Egon Schiele | James Ensor
 
-# ————— Deuxième fournée —————
+# --- American novels ---
 
-F | Qui a écrit Le Petit Chaperon rouge dans sa version française ? | Charles Perrault | Les frères Grimm | Hans Christian Andersen | Jean de La Fontaine
-F | Qui a écrit les Fables du Corbeau et du Renard ? | Jean de La Fontaine | Charles Perrault | Molière | Victor Hugo
-F | Dans quel musée parisien se trouve La Joconde ? | Le Louvre | Le musée d'Orsay | Le Centre Pompidou | Le Grand Palais
-F | De quelle matière est faite la Vénus de Milo ? | Le marbre | Le bronze | Le bois | L'argile
-F | Quel peintre est célèbre pour ses tournesols ? | Vincent van Gogh | Claude Monet | Paul Gauguin | Henri Matisse
-F | Qui a écrit Le Tour du monde en quatre-vingts jours ? | Jules Verne | Alexandre Dumas | Victor Hugo | Émile Zola
-F | Quel instrument possède un archet et quatre cordes ? | Le violon | La guitare | La harpe | Le piano
-F | Qui a écrit Notre-Dame de Paris ? | Victor Hugo | Alexandre Dumas | Balzac | Zola
-F | Quelle période de Picasso a suivi sa période bleue ? | La période rose | La période verte | La période noire | La période dorée
-F | Qui a peint Les Tournesols et La Nuit étoilée ? | Vincent van Gogh | Paul Cézanne | Édouard Manet | Camille Pissarro
-F | Quel poète a écrit « Demain, dès l'aube » ? | Victor Hugo | Alfred de Musset | Lamartine | Rimbaud
-F | Quel monument parisien Gustave Eiffel a-t-il conçu ? | La tour Eiffel | L'Arc de Triomphe | Le Panthéon | L'Opéra Garnier
-F | Qui a écrit Le Malade imaginaire ? | Molière | Racine | Corneille | Beaumarchais
-F | Quel art désigne la sculpture, la peinture et l'architecture réunies ? | Les arts plastiques | La musicologie | La littérature | Les arts du spectacle
-F | Qui a écrit l'Odyssée ? | Homère | Virgile | Hésiode | Sophocle
-F | Quel compositeur a écrit La Lettre à Élise ? | Beethoven | Mozart | Chopin | Schubert
-F | Quel peintre a peint des nénuphars à Giverny ? | Claude Monet | Auguste Renoir | Edgar Degas | Alfred Sisley
-F | Qui a écrit Les Fleurs du mal ? | Charles Baudelaire | Paul Verlaine | Arthur Rimbaud | Alfred de Vigny
-F | Quel roman raconte l'histoire d'un capitaine obsédé par une baleine blanche ? | Moby Dick | L'Île au trésor | Vingt mille lieues sous les mers | Le Vieil Homme et la Mer
-F | Quel instrument comporte des touches noires et blanches ? | Le piano | La harpe | Le violoncelle | La flûte
-F | Qui a peint le tableau de la Liberté guidant le peuple ? | Eugène Delacroix | Théodore Géricault | Jacques-Louis David | Gustave Courbet
-F | Quel écrivain a créé le personnage de Cyrano de Bergerac ? | Edmond Rostand | Victor Hugo | Alfred de Musset | Alexandre Dumas
-F | Combien de cordes possède un violon ? | Quatre | Six | Cinq | Trois
-F | Qui a écrit Les Aventures de Tom Sawyer ? | Mark Twain | Jack London | Herman Melville | Charles Dickens
-F | Quel style d'architecture caractérise les cathédrales aux arcs brisés ? | Le gothique | Le roman | Le baroque | Le classique
-M | Qui a peint Le Radeau de La Méduse ? | Théodore Géricault | Eugène Delacroix | Jacques-Louis David | Camille Corot
-M | Quel écrivain russe a écrit Crime et Châtiment ? | Fiodor Dostoïevski | Léon Tolstoï | Anton Tchekhov | Ivan Tourgueniev
-M | Quel compositeur a écrit Le Lac des cygnes ? | Piotr Ilitch Tchaïkovski | Igor Stravinski | Sergueï Prokofiev | Nikolaï Rimski-Korsakov
-M | Qui a écrit En attendant Godot ? | Samuel Beckett | Eugène Ionesco | Jean Genet | Harold Pinter
-M | Quel mouvement Andy Warhol représente-t-il ? | Le pop art | Le surréalisme | L'expressionnisme | Le minimalisme
-M | Qui a écrit Le Rouge et le Noir et La Chartreuse de Parme ? | Stendhal | Balzac | Flaubert | Mérimée
-M | Quel peintre hollandais a peint La Jeune Fille à la perle ? | Johannes Vermeer | Rembrandt | Frans Hals | Jan Steen
-M | Qui a composé Le Boléro ? | Maurice Ravel | Claude Debussy | Erik Satie | Camille Saint-Saëns
-M | Quel écrivain a créé le personnage de Don Quichotte ? | Miguel de Cervantès | Lope de Vega | Calderón | Góngora
-M | Quel peintre a fondé le fauvisme avec Derain ? | Henri Matisse | Georges Braque | Raoul Dufy | Maurice de Vlaminck
-M | Qui a écrit La Métamorphose ? | Franz Kafka | Thomas Mann | Robert Musil | Hermann Hesse
-M | Quel sculpteur suisse est connu pour ses silhouettes filiformes ? | Alberto Giacometti | Constantin Brancusi | Henry Moore | Jean Arp
-M | Quel compositeur allemand a écrit L'Anneau du Nibelung ? | Richard Wagner | Johannes Brahms | Robert Schumann | Felix Mendelssohn
-M | Qui a écrit Les Misérables et Ruy Blas ? | Victor Hugo | Alexandre Dumas | Alfred de Musset | Prosper Mérimée
-M | Quel peintre espagnol a peint des montres molles ? | Salvador Dalí | Joan Miró | Pablo Picasso | Francisco Goya
-M | Quel poète français est mort à trente-sept ans après avoir cessé d'écrire à vingt ans ? | Arthur Rimbaud | Paul Verlaine | Charles Baudelaire | Gérard de Nerval
-M | Qui a écrit Orgueil et Préjugés ? | Jane Austen | Charlotte Brontë | Emily Brontë | George Eliot
-M | Quel architecte a conçu la Villa Savoye ? | Le Corbusier | Auguste Perret | Frank Lloyd Wright | Walter Gropius
-M | Quel compositeur a écrit les Nocturnes pour piano ? | Frédéric Chopin | Franz Liszt | Robert Schumann | Johannes Brahms
-M | Qui a écrit Le Vieil Homme et la Mer ? | Ernest Hemingway | John Steinbeck | William Faulkner | Francis Scott Fitzgerald
-M | Quel peintre a peint Le Déjeuner sur l'herbe ? | Édouard Manet | Claude Monet | Auguste Renoir | Edgar Degas
-M | Quel dramaturge norvégien a écrit Une maison de poupée ? | Henrik Ibsen | August Strindberg | Knut Hamsun | Bjørnson
-M | Qui a écrit Les Trois Sœurs et La Cerisaie ? | Anton Tchekhov | Maxime Gorki | Nicolas Gogol | Ivan Tourgueniev
-M | Quel peintre a représenté des danseuses de l'Opéra de Paris ? | Edgar Degas | Auguste Renoir | Henri de Toulouse-Lautrec | Édouard Manet
-M | Quel écrivain a créé Sherlock Holmes ? | Arthur Conan Doyle | Agatha Christie | Edgar Allan Poe | Wilkie Collins
-D | Quel peintre flamand a peint Le Jardin des délices ? | Jérôme Bosch | Pieter Bruegel | Jan van Eyck | Rogier van der Weyden
-D | Qui a écrit À l'ombre des jeunes filles en fleurs ? | Marcel Proust | André Gide | Paul Valéry | Colette
-D | Quel compositeur a écrit Les Noces de Figaro ? | Mozart | Rossini | Verdi | Donizetti
-D | Quel écrivain irlandais a écrit Ulysse ? | James Joyce | Samuel Beckett | Oscar Wilde | William Butler Yeats
-D | Quel peintre a peint Les Demoiselles d'Avignon ? | Pablo Picasso | Georges Braque | Juan Gris | Fernand Léger
-D | Qui a écrit Voyage au bout de la nuit ? | Louis-Ferdinand Céline | André Malraux | Jean Giono | Georges Bernanos
-D | Quel sculpteur roumain a réalisé L'Oiseau dans l'espace ? | Constantin Brancusi | Alberto Giacometti | Jean Arp | Henry Moore
-D | Quel compositeur a écrit Le Sacre du printemps ? | Igor Stravinski | Claude Debussy | Béla Bartók | Maurice Ravel
-D | Qui a écrit Le Nom de la rose ? | Umberto Eco | Italo Calvino | Primo Levi | Alberto Moravia
-D | Quel peintre a peint La Ronde de nuit ? | Rembrandt | Vermeer | Rubens | Van Dyck
-D | Quel écrivain a reçu le prix Nobel de littérature en 1957 ? | Albert Camus | Jean-Paul Sartre | André Malraux | Saint-John Perse
-D | Quel architecte a conçu le musée Guggenheim de New York ? | Frank Lloyd Wright | Le Corbusier | Mies van der Rohe | Louis Kahn
-D | Quel poète a écrit Une saison en enfer ? | Arthur Rimbaud | Paul Verlaine | Stéphane Mallarmé | Lautréamont
-D | Quel peintre autrichien a peint Le Baiser recouvert d'or ? | Gustav Klimt | Egon Schiele | Oskar Kokoschka | Alfons Mucha
-D | Qui a écrit Le Bruit et la Fureur ? | William Faulkner | Ernest Hemingway | John Dos Passos | Francis Scott Fitzgerald
-D | Quel compositeur a écrit les Suites pour violoncelle seul ? | Jean-Sébastien Bach | Antonio Vivaldi | Georg Friedrich Haendel | Arcangelo Corelli
-D | Quel écrivain japonais a écrit Kafka sur le rivage ? | Haruki Murakami | Yukio Mishima | Kenzaburō Ōe | Yasunari Kawabata
-D | Quel mouvement pictural Kandinsky a-t-il ouvert ? | L'art abstrait | Le futurisme | Le dadaïsme | Le constructivisme
-D | Quel écrivain a écrit Le Meilleur des mondes ? | Aldous Huxley | George Orwell | H. G. Wells | Ray Bradbury
-D | Quel peintre a peint la série des Cathédrales de Rouen ? | Claude Monet | Camille Pissarro | Alfred Sisley | Gustave Caillebotte
+E | Who wrote The Adventures of Huckleberry Finn? | Mark Twain | Herman Melville | Jack London | Bret Harte
+E | Who wrote The Great Gatsby? | F. Scott Fitzgerald | Ernest Hemingway | John Steinbeck | William Faulkner
+E | Who wrote To Kill a Mockingbird? | Harper Lee | Flannery O'Connor | Carson McCullers | Eudora Welty
+E | Which novel opens with the line Call me Ishmael? | Moby-Dick | The Old Man and the Sea | Treasure Island | Billy Budd
+E | Who wrote Little Women? | Louisa May Alcott | Harriet Beecher Stowe | Edith Wharton | Kate Chopin
+E | Which author created Tom Sawyer? | Mark Twain | Washington Irving | James Fenimore Cooper | O. Henry
+M | Who wrote The Grapes of Wrath? | John Steinbeck | Ernest Hemingway | Sinclair Lewis | Theodore Dreiser
+M | Who wrote Of Mice and Men? | John Steinbeck | William Faulkner | Sherwood Anderson | Erskine Caldwell
+M | Who wrote The Old Man and the Sea? | Ernest Hemingway | John Steinbeck | Jack London | Zane Grey
+M | Who wrote The Catcher in the Rye? | J. D. Salinger | Jack Kerouac | John Updike | Philip Roth
+M | Who wrote The Scarlet Letter? | Nathaniel Hawthorne | Herman Melville | Washington Irving | Henry James
+M | Who wrote The Call of the Wild? | Jack London | Mark Twain | Owen Wister | Rudyard Kipling
+M | Who wrote Uncle Tom's Cabin? | Harriet Beecher Stowe | Louisa May Alcott | Frances Harper | Lydia Child
+M | Who wrote Fahrenheit 451? | Ray Bradbury | Isaac Asimov | Kurt Vonnegut | Philip K. Dick
+M | Who wrote Slaughterhouse-Five? | Kurt Vonnegut | Joseph Heller | Norman Mailer | Ken Kesey
+M | Who wrote The Color Purple? | Alice Walker | Toni Morrison | Maya Angelou | Zora Neale Hurston
+M | Which lawyer defends Tom Robinson in To Kill a Mockingbird? | Atticus Finch | Boo Radley | Jem Finch | Judge Taylor
+H | Who wrote Beloved? | Toni Morrison | Alice Walker | Gloria Naylor | Octavia Butler
+H | Who wrote The Sound and the Fury? | William Faulkner | Thomas Wolfe | Robert Penn Warren | Flannery O'Connor
+H | Who wrote Invisible Man? | Ralph Ellison | Richard Wright | James Baldwin | Chester Himes
+H | Who wrote Their Eyes Were Watching God? | Zora Neale Hurston | Nella Larsen | Jessie Fauset | Ann Petry
+H | Who wrote On the Road? | Jack Kerouac | Allen Ginsberg | William Burroughs | Neal Cassady
+H | Who wrote The Age of Innocence? | Edith Wharton | Willa Cather | Ellen Glasgow | Gertrude Stein
+H | Who wrote My Antonia? | Willa Cather | Edith Wharton | Sarah Orne Jewett | Hamlin Garland
+H | Who wrote Native Son? | Richard Wright | Ralph Ellison | James Baldwin | Langston Hughes
+H | Which novel of 1961 gave English the phrase for a no-win rule? | Catch-22 | The Naked and the Dead | From Here to Eternity | The Thin Red Line
+H | Who wrote The Awakening in 1899? | Kate Chopin | Edith Wharton | Charlotte Perkins Gilman | Sarah Grand
+H | Who wrote The Legend of Sleepy Hollow? | Washington Irving | Nathaniel Hawthorne | Edgar Allan Poe | James Fenimore Cooper
 
-# ————— Troisième fournée —————
+# --- Novels from elsewhere ---
 
-F | Qui a écrit Le Comte de Monte-Cristo ? | Alexandre Dumas | Victor Hugo | Jules Verne | Stendhal
-F | Quel peintre a peint la Chambre à Arles ? | Vincent van Gogh | Paul Gauguin | Paul Cézanne | Henri Matisse
-F | Qui a écrit Les Fourberies de Scapin ? | Molière | Racine | Corneille | Marivaux
-F | Quel écrivain a créé le personnage de Gavroche ? | Victor Hugo | Émile Zola | Alphonse Daudet | Jules Vallès
-F | Quel instrument possède des pédales et des marteaux ? | Le piano | L'orgue | La harpe | Le clavecin
-F | Qui a écrit Robinson Crusoé ? | Daniel Defoe | Jonathan Swift | Walter Scott | Charles Dickens
-F | Quel peintre italien a peint la Cène ? | Léonard de Vinci | Michel-Ange | Raphaël | Le Titien
-F | Qui a écrit Le Petit Nicolas avec Sempé ? | René Goscinny | Uderzo | Hergé | Franquin
-F | Quel monument romain accueillait les combats de gladiateurs ? | Le Colisée | Le Panthéon | Le Forum | Les thermes de Caracalla
-F | Qui a écrit L'Avare ? | Molière | Beaumarchais | Marivaux | Voltaire
-F | Quel écrivain britannique a créé Oliver Twist ? | Charles Dickens | Thomas Hardy | William Thackeray | George Eliot
-F | Quel peintre a peint des ballerines et des courses de chevaux ? | Edgar Degas | Claude Monet | Auguste Renoir | Édouard Manet
-F | Qui a écrit Les Voyages de Gulliver ? | Jonathan Swift | Daniel Defoe | Laurence Sterne | Henry Fielding
-F | Quelle est la forme d'écriture des poèmes de quatorze vers ? | Le sonnet | L'ode | La ballade | Le rondeau
-F | Qui a écrit Candide ? | Voltaire | Rousseau | Diderot | Montesquieu
-F | Quel peintre a peint L'Origine du monde ? | Gustave Courbet | Édouard Manet | Eugène Delacroix | Jean-François Millet
-F | Qui a écrit Germinie Lacerteux ? | Les frères Goncourt | Émile Zola | Guy de Maupassant | Alphonse Daudet
-F | Quel compositeur a écrit la Symphonie du Nouveau Monde ? | Antonín Dvořák | Bedřich Smetana | Leoš Janáček | Béla Bartók
-F | Qui a écrit Les Contes de ma mère l'Oye ? | Charles Perrault | Les frères Grimm | Andersen | Madame d'Aulnoy
-F | Quel peintre est l'auteur des Ménines ? | Diego Vélasquez | Francisco Goya | Le Greco | Murillo
-F | Quel écrivain a écrit Vingt Ans après ? | Alexandre Dumas | Victor Hugo | Eugène Sue | Paul Féval
-F | Quel style musical est né à La Nouvelle-Orléans ? | Le jazz | Le blues | Le rock | La country
-F | Qui a écrit La Peau de chagrin ? | Honoré de Balzac | Stendhal | Flaubert | Mérimée
-F | Quel instrument à vent est le plus grave de l'orchestre ? | Le tuba | Le trombone | Le basson | La clarinette basse
-F | Qui a écrit Le Lion, la Sorcière blanche et l'Armoire magique ? | C. S. Lewis | J. R. R. Tolkien | Lewis Carroll | Roald Dahl
-M | Quel peintre a peint Le Bassin aux nymphéas ? | Claude Monet | Camille Pissarro | Berthe Morisot | Gustave Caillebotte
-M | Qui a écrit Bel-Ami ? | Guy de Maupassant | Émile Zola | Alphonse Daudet | Jules Renard
-M | Quel compositeur a écrit la Symphonie fantastique ? | Hector Berlioz | Camille Saint-Saëns | César Franck | Gabriel Fauré
-M | Quel peintre a peint le plafond de l'Opéra Garnier ? | Marc Chagall | Pablo Picasso | Henri Matisse | Fernand Léger
-M | Qui a écrit Le Grand Meaulnes ? | Alain-Fournier | Marcel Proust | Julien Gracq | Georges Bernanos
-M | Quel sculpteur a réalisé Le Baiser en marbre ? | Auguste Rodin | Camille Claudel | Antonio Canova | Aristide Maillol
-M | Qui a écrit Salammbô ? | Gustave Flaubert | Théophile Gautier | Pierre Loti | Anatole France
-M | Quel courant musical Claude Debussy représente-t-il ? | L'impressionnisme | Le romantisme | Le classicisme | Le sérialisme
-M | Qui a écrit L'Amour au temps du choléra ? | Gabriel García Márquez | Mario Vargas Llosa | Isabel Allende | Julio Cortázar
-M | Quel peintre a peint Le Sacre de Napoléon ? | Jacques-Louis David | Antoine-Jean Gros | François Gérard | Ingres
-M | Qui a écrit Les Liaisons dangereuses ? | Choderlos de Laclos | L'abbé Prévost | Rétif de la Bretonne | Sade
-M | Quel compositeur a écrit Ainsi parlait Zarathoustra ? | Richard Strauss | Gustav Mahler | Anton Bruckner | Richard Wagner
-M | Quel écrivain russe a écrit Anna Karénine ? | Léon Tolstoï | Dostoïevski | Tourgueniev | Gontcharov
-M | Quel peintre a peint la Tour de Babel ? | Pieter Bruegel l'Ancien | Jérôme Bosch | Jan van Eyck | Albrecht Dürer
-M | Qui a écrit Le Deuxième Sexe ? | Simone de Beauvoir | Colette | Marguerite Duras | Nathalie Sarraute
-M | Quel architecte a dessiné les plans de la basilique Saint-Pierre ? | Michel-Ange | Bramante | Bernin | Raphaël
-M | Qui a écrit Le Horla ? | Guy de Maupassant | Edgar Allan Poe | Villiers de l'Isle-Adam | Théophile Gautier
-M | Quel compositeur autrichien a écrit La Truite ? | Franz Schubert | Joseph Haydn | Mozart | Beethoven
-M | Quel peintre a peint la série des Meules ? | Claude Monet | Alfred Sisley | Camille Pissarro | Paul Signac
-M | Qui a écrit La Ferme des animaux ? | George Orwell | Aldous Huxley | Arthur Koestler | Anthony Burgess
-M | Quel écrivain a écrit Voyage au centre de la Terre ? | Jules Verne | H. G. Wells | Conan Doyle | Rider Haggard
-M | Quel compositeur a écrit Casse-Noisette ? | Piotr Ilitch Tchaïkovski | Sergueï Prokofiev | Igor Stravinski | Alexandre Borodine
-M | Qui a écrit Le Lys dans la vallée ? | Honoré de Balzac | Stendhal | George Sand | Alfred de Musset
-M | Quel peintre a peint Le Chevalier, la Mort et le Diable ? | Albrecht Dürer | Lucas Cranach | Hans Holbein | Matthias Grünewald
-M | Quel écrivain a créé le capitaine Nemo ? | Jules Verne | Herman Melville | Joseph Conrad | Pierre Loti
-D | Quel peintre a peint Le Tricheur à l'as de carreau ? | Georges de La Tour | Le Caravage | Nicolas Poussin | Philippe de Champaigne
-D | Qui a écrit Les Faux-Monnayeurs ? | André Gide | Marcel Proust | Paul Valéry | Roger Martin du Gard
-D | Quel compositeur a écrit Pelléas et Mélisande ? | Claude Debussy | Maurice Ravel | Gabriel Fauré | Paul Dukas
-D | Quel peintre a peint la série des Ménines revisitées ? | Pablo Picasso | Salvador Dalí | Joan Miró | Antoni Tàpies
-D | Qui a écrit Belle du Seigneur ? | Albert Cohen | Romain Gary | Emmanuel Bove | Jean Giono
-D | Quel architecte a conçu l'Opéra de Sydney ? | Jørn Utzon | Oscar Niemeyer | Renzo Piano | Norman Foster
-D | Quel écrivain a reçu le prix Nobel de littérature en 2014 ? | Patrick Modiano | Le Clézio | Annie Ernaux | Claude Simon
-D | Quel peintre a peint Le Verrou ? | Jean-Honoré Fragonard | François Boucher | Antoine Watteau | Jean-Baptiste Greuze
-D | Quel compositeur a écrit les Variations Goldberg ? | Jean-Sébastien Bach | Georg Friedrich Haendel | Domenico Scarlatti | François Couperin
-D | Qui a écrit Le Guépard ? | Giuseppe Tomasi di Lampedusa | Alberto Moravia | Italo Svevo | Cesare Pavese
-D | Quel sculpteur a réalisé le Moïse de Saint-Pierre-aux-Liens ? | Michel-Ange | Donatello | Le Bernin | Ghiberti
-D | Quel peintre norvégien a peint La Danse de la vie ? | Edvard Munch | Christian Krohg | Harald Sohlberg | Nikolai Astrup
-D | Qui a écrit Le Maître et Marguerite ? | Mikhaïl Boulgakov | Boris Pasternak | Vassili Grossman | Andreï Platonov
-D | Quel compositeur a écrit le Requiem allemand ? | Johannes Brahms | Giuseppe Verdi | Gabriel Fauré | Hector Berlioz
-D | Quel peintre a peint Le Char de foin ? | Jérôme Bosch | Pieter Bruegel | Joachim Patinir | Quentin Metsys
-D | Qui a écrit Les Mots ? | Jean-Paul Sartre | Albert Camus | Simone de Beauvoir | Raymond Aron
-D | Quel architecte a conçu la pyramide du Louvre ? | Ieoh Ming Pei | Jean Nouvel | Renzo Piano | Christian de Portzamparc
-D | Qui a écrit Pedro Páramo ? | Juan Rulfo | Octavio Paz | Carlos Fuentes | Jorge Luis Borges
-D | Quel peintre a peint Le Massacre de Scio ? | Eugène Delacroix | Théodore Géricault | Antoine-Jean Gros | Horace Vernet
-D | Quel compositeur a écrit L'Oiseau de feu ? | Igor Stravinski | Sergueï Diaghilev | Claude Debussy | Maurice Ravel
-D | Qui a écrit Sous le volcan ? | Malcolm Lowry | Graham Greene | Evelyn Waugh | Lawrence Durrell
-D | Quel peintre a peint le retable d'Issenheim ? | Matthias Grünewald | Albrecht Dürer | Hans Holbein | Lucas Cranach
-D | Quel écrivain autrichien a écrit Le Joueur d'échecs ? | Stefan Zweig | Robert Musil | Joseph Roth | Arthur Schnitzler
-D | Quel compositeur a écrit Don Giovanni ? | Mozart | Gluck | Salieri | Haydn
-D | Qui a écrit Le Désert des Tartares ? | Dino Buzzati | Italo Calvino | Elsa Morante | Cesare Pavese
-F | Quel écrivain a créé le personnage de Tarzan ? | Edgar Rice Burroughs | Rudyard Kipling | Jack London | Jules Verne
-F | Quel peintre a peint le Bal du moulin de la Galette ? | Auguste Renoir | Claude Monet | Édouard Manet | Edgar Degas
-F | Qui a écrit Le Livre de la jungle ? | Rudyard Kipling | Robert Louis Stevenson | Jack London | H. Rider Haggard
-F | Quel instrument tient-on sous le menton ? | Le violon | Le violoncelle | La contrebasse | La harpe
-F | Qui a écrit Michel Strogoff ? | Jules Verne | Alexandre Dumas | Pierre Loti | Paul d'Ivoi
-M | Quel peintre a peint Les Glaneuses ? | Jean-François Millet | Gustave Courbet | Camille Corot | Théodore Rousseau
-M | Qui a écrit Thérèse Raquin ? | Émile Zola | Guy de Maupassant | Alphonse Daudet | Edmond de Goncourt
-M | Quel compositeur a écrit le Requiem de 1791 resté inachevé ? | Mozart | Haydn | Salieri | Cherubini
-M | Quel peintre a peint la Naissance de Vénus ? | Sandro Botticelli | Raphaël | Le Titien | Giorgione
-M | Qui a écrit Les Confessions ? | Jean-Jacques Rousseau | Voltaire | Diderot | Montaigne
-M | Quel écrivain a écrit Le Portrait de Dorian Gray ? | Oscar Wilde | Bram Stoker | Robert Louis Stevenson | Henry James
-M | Quel peintre a peint L'Angélus ? | Jean-François Millet | Gustave Courbet | Camille Pissarro | Charles-François Daubigny
-D | Quel compositeur a écrit Le Vaisseau fantôme ? | Richard Wagner | Carl Maria von Weber | Robert Schumann | Franz Liszt
-D | Qui a écrit Le Rivage des Syrtes ? | Julien Gracq | André Breton | Michel Butor | Alain Robbe-Grillet
-D | Quel peintre a peint L'Atelier du peintre ? | Gustave Courbet | Eugène Delacroix | Édouard Manet | Honoré Daumier
-D | Quel écrivain portugais a écrit Le Livre de l'intranquillité ? | Fernando Pessoa | José Saramago | Eça de Queiroz | António Lobo Antunes
-D | Quel compositeur a écrit les Tableaux d'une exposition ? | Modeste Moussorgski | Nikolaï Rimski-Korsakov | Alexandre Borodine | César Cui
-D | Quel peintre a peint Le Déjeuner des canotiers ? | Auguste Renoir | Claude Monet | Gustave Caillebotte | Berthe Morisot
-D | Qui a écrit Le Bruit des choses qui tombent ? | Juan Gabriel Vásquez | Mario Vargas Llosa | Roberto Bolaño | Javier Cercas
-D | Quel architecte a conçu la tour Montparnasse ? | Eugène Beaudouin | Le Corbusier | Auguste Perret | Jean Nouvel
-D | Quel compositeur a écrit la Symphonie Jupiter ? | Mozart | Haydn | Beethoven | Schubert
-D | Qui a écrit Le Tambour ? | Günter Grass | Heinrich Böll | Thomas Mann | Hermann Hesse
-D | Quel peintre a peint Les Époux Arnolfini ? | Jan van Eyck | Rogier van der Weyden | Hans Memling | Robert Campin
-D | Quel écrivain a écrit Si c'est un homme ? | Primo Levi | Elie Wiesel | Imre Kertész | Jorge Semprún
-D | Quel compositeur a écrit Le Beau Danube bleu ? | Johann Strauss fils | Johann Strauss père | Franz Lehár | Jacques Offenbach
+E | Who wrote Pride and Prejudice? | Jane Austen | Charlotte Bronte | George Eliot | Elizabeth Gaskell
+E | Who wrote Oliver Twist? | Charles Dickens | Thomas Hardy | Anthony Trollope | Wilkie Collins
+E | Who wrote Romeo and Juliet? | William Shakespeare | Christopher Marlowe | Ben Jonson | John Webster
+E | Who wrote Frankenstein? | Mary Shelley | Bram Stoker | Edgar Allan Poe | Ann Radcliffe
+E | Who created Sherlock Holmes? | Arthur Conan Doyle | Agatha Christie | Wilkie Collins | G. K. Chesterton
+E | Who wrote The Lord of the Rings? | J. R. R. Tolkien | C. S. Lewis | Terry Pratchett | Ursula Le Guin
+E | Who wrote the Harry Potter novels? | J. K. Rowling | Philip Pullman | Roald Dahl | Eoin Colfer
+M | Who wrote War and Peace? | Leo Tolstoy | Fyodor Dostoevsky | Ivan Turgenev | Nikolai Gogol
+M | Who wrote Crime and Punishment? | Fyodor Dostoevsky | Leo Tolstoy | Anton Chekhov | Maxim Gorky
+M | Who wrote Les Miserables? | Victor Hugo | Emile Zola | Gustave Flaubert | Honore de Balzac
+M | Who wrote The Three Musketeers? | Alexandre Dumas | Victor Hugo | Jules Verne | Stendhal
+M | Who wrote Twenty Thousand Leagues Under the Sea? | Jules Verne | H. G. Wells | Alexandre Dumas | Robert Louis Stevenson
+M | Who wrote Don Quixote? | Miguel de Cervantes | Lope de Vega | Federico Garcia Lorca | Camilo Cela
+M | Who wrote Nineteen Eighty-Four? | George Orwell | Aldous Huxley | H. G. Wells | Anthony Burgess
+M | Who wrote Animal Farm? | George Orwell | Aldous Huxley | Arthur Koestler | Evelyn Waugh
+M | Who wrote Brave New World? | Aldous Huxley | George Orwell | H. G. Wells | E. M. Forster
+M | Who wrote Jane Eyre? | Charlotte Bronte | Emily Bronte | Anne Bronte | Jane Austen
+M | Who wrote Wuthering Heights? | Emily Bronte | Charlotte Bronte | Elizabeth Gaskell | George Eliot
+M | Who wrote Dracula? | Bram Stoker | Mary Shelley | Sheridan Le Fanu | Arthur Machen
+M | Who wrote A Christmas Carol? | Charles Dickens | Washington Irving | Robert Louis Stevenson | Thomas Hardy
+M | Who wrote Treasure Island? | Robert Louis Stevenson | Daniel Defoe | Jules Verne | Rudyard Kipling
+M | Who wrote Alice's Adventures in Wonderland? | Lewis Carroll | Edward Lear | J. M. Barrie | Kenneth Grahame
+H | Who wrote One Hundred Years of Solitude? | Gabriel Garcia Marquez | Mario Vargas Llosa | Jorge Luis Borges | Julio Cortazar
+H | Who wrote Things Fall Apart? | Chinua Achebe | Wole Soyinka | Ngugi wa Thiong'o | Ben Okri
+H | Who wrote The Metamorphosis? | Franz Kafka | Thomas Mann | Hermann Hesse | Robert Musil
+H | Who wrote Madame Bovary? | Gustave Flaubert | Emile Zola | Guy de Maupassant | Stendhal
+H | Who wrote The Divine Comedy? | Dante Alighieri | Petrarch | Boccaccio | Ariosto
+H | Who wrote The Picture of Dorian Gray? | Oscar Wilde | Bram Stoker | Thomas Hardy | George Meredith
+H | Who wrote Robinson Crusoe? | Daniel Defoe | Jonathan Swift | Samuel Richardson | Henry Fielding
+H | Who wrote Gulliver's Travels? | Jonathan Swift | Daniel Defoe | Laurence Sterne | Tobias Smollett
+H | Who wrote The Little Prince? | Antoine de Saint-Exupery | Jean Giono | Andre Gide | Albert Camus
+H | Who wrote The Stranger? | Albert Camus | Jean-Paul Sartre | Andre Malraux | Simone de Beauvoir
+H | Who wrote Anna Karenina? | Leo Tolstoy | Fyodor Dostoevsky | Ivan Bunin | Boris Pasternak
+H | Which epic poem tells of a hero's ten-year voyage home from Troy? | The Odyssey | The Iliad | The Aeneid | Beowulf
+H | Which epic poem tells of the wrath of Achilles? | The Iliad | The Odyssey | The Aeneid | Gilgamesh
 
-# — Lettres, pensée et mythes —
+# --- Shakespeare ---
 
-F | Qui a écrit Le Bourgeois gentilhomme ? | Molière | Racine | Corneille | Marivaux
-F | Qui a écrit Le Cid ? | Corneille | Racine | Molière | Voltaire
-F | Qui a écrit Le Père Goriot ? | Balzac | Flaubert | Stendhal | Zola
-F | Qui a écrit L'Assommoir ? | Zola | Balzac | Maupassant | Daudet
-F | Qui a écrit La Peste ? | Albert Camus | Jean-Paul Sartre | André Malraux | Louis Aragon
-F | Qui a écrit 1984 ? | George Orwell | Aldous Huxley | Ray Bradbury | H. G. Wells
-F | Qui a écrit Le Seigneur des anneaux ? | J. R. R. Tolkien | C. S. Lewis | George R. R. Martin | Ursula Le Guin
-F | Qui a écrit Hamlet ? | William Shakespeare | Christopher Marlowe | Ben Jonson | John Milton
-F | Qui a écrit l'Iliade ? | Homère | Virgile | Hésiode | Sophocle
-F | Qui a créé Tintin ? | Hergé | Franquin | Peyo | Morris
-F | Qui a créé les Schtroumpfs ? | Peyo | Hergé | Franquin | Uderzo
-F | Qui a créé Lucky Luke ? | Morris | Goscinny | Franquin | Jacobs
-F | Quelle ville accueille chaque année le grand festival français de la bande dessinée ? | Angoulême | Avignon | Cannes | Deauville
-F | Qui est le roi des dieux dans la mythologie grecque ? | Zeus | Poséidon | Hadès | Apollon
-F | Quel dieu grec règne sur les mers ? | Poséidon | Zeus | Hadès | Héphaïstos
-F | Quel héros grec a accompli douze travaux ? | Héraclès | Thésée | Persée | Ulysse
-F | Quel personnage a volé le feu aux dieux ? | Prométhée | Icare | Sisyphe | Tantale
-F | Quel philosophe a dit « Je pense, donc je suis » ? | René Descartes | Blaise Pascal | Emmanuel Kant | Baruch Spinoza
-F | Quel philosophe grec a bu la ciguë ? | Socrate | Platon | Aristote | Diogène
-M | Qui a écrit Phèdre ? | Racine | Corneille | Molière | Voltaire
-M | Qui a écrit Tartuffe ? | Molière | Racine | Beaumarchais | Marivaux
-M | Qui a écrit Le Mariage de Figaro ? | Beaumarchais | Molière | Marivaux | Musset
-M | Qui a écrit Les Lettres persanes ? | Montesquieu | Voltaire | Diderot | Rousseau
-M | Qui a écrit Du contrat social ? | Jean-Jacques Rousseau | Voltaire | Montesquieu | Diderot
-M | Qui a dirigé la rédaction de l'Encyclopédie avec d'Alembert ? | Denis Diderot | Voltaire | Montesquieu | Buffon
-M | Qui a écrit Jacques le Fataliste ? | Denis Diderot | Voltaire | Rousseau | Marivaux
-M | Qui a écrit Les Contemplations ? | Victor Hugo | Alfred de Vigny | Lamartine | Musset
-M | Qui a écrit Illusions perdues ? | Balzac | Stendhal | Zola | Flaubert
-M | Quel cycle romanesque Balzac a-t-il intitulé du nom de la société ? | La Comédie humaine | Les Rougon-Macquart | Les Thibault | Les Hommes de bonne volonté
-M | Quel cycle de vingt romans Zola a-t-il consacré à une famille ? | Les Rougon-Macquart | La Comédie humaine | Les Thibault | Le Cycle de Jean-Christophe
-M | Qui a écrit Au Bonheur des Dames ? | Émile Zola | Balzac | Maupassant | Huysmans
-M | Qui a écrit L'Éducation sentimentale ? | Gustave Flaubert | Balzac | Stendhal | Zola
-M | Qui a écrit Boule de Suif ? | Guy de Maupassant | Alphonse Daudet | Émile Zola | Prosper Mérimée
-M | Qui a écrit Alcools et Calligrammes ? | Guillaume Apollinaire | Paul Valéry | Paul Éluard | Blaise Cendrars
-M | Quel poète a écrit « Il pleure dans mon cœur » ? | Paul Verlaine | Arthur Rimbaud | Charles Baudelaire | Stéphane Mallarmé
-M | Qui a écrit La Condition humaine ? | André Malraux | Albert Camus | Jean-Paul Sartre | Paul Nizan
-M | Qui a écrit La Nausée ? | Jean-Paul Sartre | Albert Camus | Simone de Beauvoir | Maurice Merleau-Ponty
-M | Qui a écrit Huis clos ? | Jean-Paul Sartre | Albert Camus | Jean Anouilh | Eugène Ionesco
-M | Qui a écrit Mémoires d'Hadrien ? | Marguerite Yourcenar | Marguerite Duras | Colette | Nathalie Sarraute
-M | Quelle écrivaine fut la première femme élue à l'Académie française ? | Marguerite Yourcenar | Colette | Simone de Beauvoir | Marguerite Duras
-M | Qui a écrit L'Amant ? | Marguerite Duras | Marguerite Yourcenar | Françoise Sagan | Annie Ernaux
-M | Qui a écrit L'Écume des jours ? | Boris Vian | Raymond Queneau | Georges Perec | Romain Gary
-M | Qui a écrit Zazie dans le métro ? | Raymond Queneau | Boris Vian | Georges Perec | Marcel Aymé
-M | Qui a écrit La Vie mode d'emploi ? | Georges Perec | Raymond Queneau | Michel Butor | Alain Robbe-Grillet
-M | Qui a écrit Le Hussard sur le toit ? | Jean Giono | Marcel Pagnol | Henri Bosco | Jean Carrière
-M | Qui a écrit La Gloire de mon père ? | Marcel Pagnol | Jean Giono | Alphonse Daudet | Henri Bosco
-M | Quelle écrivaine française a reçu le prix Nobel de littérature en 2022 ? | Annie Ernaux | Marguerite Duras | Christine Angot | Amélie Nothomb
-M | Quel écrivain français a reçu le prix Nobel de littérature en 2008 ? | J. M. G. Le Clézio | Patrick Modiano | Michel Houellebecq | Claude Simon
-M | Qui a écrit Faust ? | Goethe | Schiller | Novalis | Heine
-M | Qui a écrit La Divine Comédie ? | Dante | Pétrarque | Boccace | L'Arioste
-M | Qui a écrit Le Procès ? | Franz Kafka | Thomas Mann | Robert Musil | Hermann Hesse
-M | Qui a écrit Les Raisins de la colère ? | John Steinbeck | Ernest Hemingway | William Faulkner | Sinclair Lewis
-M | Qui a écrit Les Hauts de Hurlevent ? | Emily Brontë | Charlotte Brontë | Jane Austen | George Eliot
-M | Qui a écrit Jane Eyre ? | Charlotte Brontë | Emily Brontë | Anne Brontë | Elizabeth Gaskell
-M | Qui a écrit Un chant de Noël ? | Charles Dickens | Lewis Carroll | Robert Louis Stevenson | Wilkie Collins
-M | Qui a écrit L'Île au trésor ? | Robert Louis Stevenson | Daniel Defoe | Jack London | Herman Melville
-M | Qui a écrit L'Appel de la forêt ? | Jack London | Rudyard Kipling | Fenimore Cooper | Mark Twain
-M | Qui a écrit Alice au pays des merveilles ? | Lewis Carroll | J. M. Barrie | Roald Dahl | Kenneth Grahame
-M | Qui a écrit l'Énéide ? | Virgile | Ovide | Horace | Lucrèce
-M | Qui a écrit Les Métamorphoses en latin ? | Ovide | Virgile | Apulée | Sénèque
-M | Qui a écrit Fictions ? | Jorge Luis Borges | Julio Cortázar | Gabriel García Márquez | Carlos Fuentes
-M | Qui a créé Astérix avec Uderzo ? | René Goscinny | Jean Giraud | Jacques Tardi | Marcel Gotlib
-M | Qui a créé Gaston Lagaffe ? | Franquin | Peyo | Morris | Hergé
-M | Qui a créé Corto Maltese ? | Hugo Pratt | Milo Manara | Guido Crepax | Sergio Toppi
-M | Qui a créé Blake et Mortimer ? | Edgar P. Jacobs | Hergé | Jacques Martin | Bob de Moor
-M | Qui a créé Titeuf ? | Zep | Zidrou | Midam | Tome
-M | Quelle dessinatrice iranienne a raconté son enfance dans Persepolis ? | Marjane Satrapi | Claire Bretécher | Pénélope Bagieu | Catel
-M | Qui a tué le Minotaure dans le labyrinthe ? | Thésée | Héraclès | Persée | Jason
-M | Quel héros grec a tranché la tête de Méduse ? | Persée | Thésée | Héraclès | Bellérophon
-M | Quel musicien est descendu aux Enfers chercher sa femme ? | Orphée | Apollon | Amphion | Marsyas
-M | Quelle déesse grecque incarne la beauté ? | Aphrodite | Héra | Athéna | Artémis
-M | Quel dieu romain correspond au grec Arès ? | Mars | Jupiter | Mercure | Vulcain
-M | Quel roi transformait en or tout ce qu'il touchait ? | Midas | Crésus | Tantale | Priam
-M | Qui a conçu le labyrinthe de Crète ? | Dédale | Icare | Hephaïstos | Minos
-M | Quel navire emmenait Jason à la conquête de la Toison d'or ? | L'Argo | Le Pélée | L'Éole | Le Nautile
-M | Quelle boîte a répandu tous les maux sur le monde ? | La boîte de Pandore | L'urne d'Éole | Le coffre de Danaé | La corne d'Amalthée
-M | Qui a écrit La République ? | Platon | Aristote | Socrate | Cicéron
-M | Qui a écrit l'Éthique à Nicomaque ? | Aristote | Platon | Épicure | Sénèque
-M | Quel philosophe vivait dans un tonneau ? | Diogène | Épicure | Zénon | Héraclite
-M | Qui a écrit Les Essais ? | Michel de Montaigne | Blaise Pascal | La Rochefoucauld | La Bruyère
-M | Qui a écrit les Pensées ? | Blaise Pascal | Montaigne | Descartes | Malebranche
-M | Qui a écrit la Critique de la raison pure ? | Emmanuel Kant | Hegel | Fichte | Schopenhauer
-M | Qui a écrit Le Capital ? | Karl Marx | Friedrich Engels | Pierre-Joseph Proudhon | Ferdinand Lassalle
-M | Qui a écrit L'Être et le Néant ? | Jean-Paul Sartre | Martin Heidegger | Maurice Merleau-Ponty | Albert Camus
-D | Qui a écrit Le Neveu de Rameau ? | Denis Diderot | Voltaire | Marivaux | Chamfort
-D | Qui a écrit Adolphe ? | Benjamin Constant | Chateaubriand | Senancour | Nodier
-D | Qui a écrit Les Mémoires d'outre-tombe ? | Chateaubriand | Lamartine | Vigny | Michelet
-D | Quel poète a écrit Le Lac ? | Alphonse de Lamartine | Alfred de Musset | Victor Hugo | Gérard de Nerval
-D | Qui a écrit Aurélia et Les Chimères ? | Gérard de Nerval | Charles Baudelaire | Théophile Gautier | Alfred de Vigny
-D | Qui a écrit À rebours ? | Joris-Karl Huysmans | Émile Zola | Villiers de L'Isle-Adam | Barbey d'Aurevilly
-D | Qui a écrit L'Après-midi d'un faune ? | Stéphane Mallarmé | Paul Verlaine | Arthur Rimbaud | Paul Valéry
-D | Qui a écrit Le Cimetière marin ? | Paul Valéry | Stéphane Mallarmé | Saint-John Perse | Paul Claudel
-D | Quel roman de Georges Perec est écrit sans la lettre e ? | La Disparition | Les Choses | W ou le souvenir d'enfance | Un homme qui dort
-D | Quel écrivain a reçu deux fois le prix Goncourt sous deux noms ? | Romain Gary | Marcel Aymé | Julien Gracq | Michel Tournier
-D | Quel écrivain a refusé le prix Goncourt en 1951 ? | Julien Gracq | Jean-Paul Sartre | Louis-Ferdinand Céline | André Malraux
-D | Qui a écrit Le Roi des Aulnes ? | Michel Tournier | Julien Gracq | Patrick Modiano | Claude Simon
-D | Qui a écrit La Route des Flandres ? | Claude Simon | Alain Robbe-Grillet | Nathalie Sarraute | Michel Butor
-D | Qui a écrit La Jalousie ? | Alain Robbe-Grillet | Claude Simon | Michel Butor | Nathalie Sarraute
-D | Qui a écrit Bonjour tristesse à dix-huit ans ? | Françoise Sagan | Marguerite Duras | Simone de Beauvoir | Colette
-D | Qui a écrit Les Souffrances du jeune Werther ? | Goethe | Schiller | Novalis | Hölderlin
-D | Qui a écrit La Montagne magique ? | Thomas Mann | Hermann Hesse | Robert Musil | Stefan Zweig
-D | Qui a écrit L'Homme sans qualités ? | Robert Musil | Thomas Mann | Hermann Broch | Joseph Roth
-D | Qui a écrit Le Loup des steppes ? | Hermann Hesse | Thomas Mann | Stefan Zweig | Franz Werfel
+E | Which Shakespeare play features a prince of Denmark? | Hamlet | Macbeth | Othello | King Lear
+E | In which Italian city is Romeo and Juliet set? | Verona | Venice | Florence | Padua
+M | Which Shakespeare play features three witches on a heath? | Macbeth | Hamlet | The Tempest | Julius Caesar
+M | Which Shakespeare play features a moor of Venice and Iago? | Othello | Macbeth | Hamlet | Coriolanus
+M | Which Shakespeare play features a king who divides his kingdom among daughters? | King Lear | Macbeth | Richard III | Henry V
+M | Which Shakespeare play features Puck and a mischievous fairy king? | A Midsummer Night's Dream | The Tempest | As You Like It | Twelfth Night
+M | In which Shakespeare play does a merchant borrow against a pound of flesh? | The Merchant of Venice | Timon of Athens | Measure for Measure | Cymbeline
+M | Which Shakespeare play features a shipwreck and the magician Prospero? | The Tempest | A Midsummer Night's Dream | Pericles | The Winter's Tale
+M | In which English town was Shakespeare born? | Stratford-upon-Avon | Canterbury | Oxford | Warwick
+H | Which London theater is most associated with Shakespeare's company? | The Globe | The Rose | The Swan | The Curtain
+H | Which Shakespeare line begins the famous soliloquy of Hamlet? | To be or not to be | Friends, Romans, countrymen | Now is the winter | All the world's a stage
+H | Which play contains the line Friends, Romans, countrymen? | Julius Caesar | Coriolanus | Antony and Cleopatra | Titus Andronicus
+H | How many lines does a Shakespearean sonnet have? | Fourteen | Twelve | Sixteen | Ten
+H | Which meter did Shakespeare use most in his verse? | Iambic pentameter | Dactylic hexameter | Trochaic tetrameter | Anapestic trimeter
+H | Which Shakespeare comedy features twins separated by shipwreck in Illyria? | Twelfth Night | The Comedy of Errors | Much Ado About Nothing | Love's Labour's Lost
+H | Which Shakespeare play features the hunchbacked king who offers a horse for his kingdom? | Richard III | Henry IV | King John | Richard II
 
-# — Peinture, sculpture, architecture, musique et scène —
+# --- Poets and poetry ---
 
-F | Qui a sculpté le David de Florence ? | Michel-Ange | Donatello | Cellini | Bernin
-F | Qui a peint La Création d'Adam au plafond de la Sixtine ? | Michel-Ange | Raphaël | Léonard de Vinci | Le Titien
-F | Qui a composé La Flûte enchantée ? | Mozart | Beethoven | Haydn | Gluck
-F | Qui a composé Carmen ? | Georges Bizet | Jules Massenet | Charles Gounod | Camille Saint-Saëns
-F | Qui a composé La Traviata ? | Giuseppe Verdi | Giacomo Puccini | Gioachino Rossini | Vincenzo Bellini
-F | Dans quel pays Ludwig van Beethoven est-il né ? | En Allemagne | En Autriche | En Hongrie | Aux Pays-Bas
-F | Combien de symphonies Beethoven a-t-il achevées ? | Neuf | Cinq | Douze | Quarante et une
-F | Combien de touches compte un piano de concert ? | 88 | 66 | 100 | 72
-F | Combien de musiciens compte un quatuor ? | Quatre | Trois | Cinq | Six
-F | Comment appelle-t-on la voix de femme la plus aiguë ? | La soprano | La contralto | Le mezzo | La basse
-F | Quelle ville accueille chaque été le grand festival français de théâtre ? | Avignon | Cannes | Angoulême | Aix-en-Provence
-F | Quel théâtre parisien est surnommé la maison de Molière ? | La Comédie-Française | L'Odéon | Le Châtelet | Le théâtre de la Ville
-F | Quelle basilique blanche domine la butte Montmartre ? | Le Sacré-Cœur | La Madeleine | Saint-Sulpice | Le Panthéon
-F | Quel musée parisien occupe une ancienne gare ? | Le musée d'Orsay | Le Louvre | Le Centre Pompidou | Le Petit Palais
-F | Qui a sculpté la statue de la Liberté ? | Auguste Bartholdi | Auguste Rodin | Gustave Eiffel | Antoine Bourdelle
-M | Qui a peint L'École d'Athènes ? | Raphaël | Michel-Ange | Léonard de Vinci | Le Pérugin
-M | Qui a peint Le Printemps et La Naissance de Vénus ? | Botticelli | Raphaël | Le Titien | Giotto
-M | Qui a peint La Vierge aux rochers ? | Léonard de Vinci | Raphaël | Michel-Ange | Le Corrège
-M | Qui a peint Les Noces de Cana conservées au Louvre ? | Véronèse | Le Tintoret | Le Titien | Caravage
-M | Quel peintre italien a bouleversé la peinture par ses contrastes d'ombre ? | Le Caravage | Le Titien | Raphaël | Botticelli
-M | Qui a peint Le Trois Mai 1808 ? | Goya | Vélasquez | Murillo | Zurbarán
-M | Qui a peint La Grande Odalisque ? | Ingres | Delacroix | Géricault | David
-M | Qui a peint Le Serment des Horaces ? | Jacques-Louis David | Ingres | Girodet | Gros
-M | Qui a peint La Mort de Marat ? | Jacques-Louis David | Delacroix | Géricault | Prud'hon
-M | Qui a peint Un enterrement à Ornans ? | Gustave Courbet | Jean-François Millet | Camille Corot | Honoré Daumier
-M | Qui a peint Olympia ? | Édouard Manet | Claude Monet | Edgar Degas | Auguste Renoir
-M | Qui a peint La Montagne Sainte-Victoire ? | Paul Cézanne | Vincent van Gogh | Paul Gauguin | Georges Braque
-M | Qui a peint Les Joueurs de cartes ? | Paul Cézanne | Édouard Manet | Gustave Courbet | Camille Pissarro
-M | Quel peintre a inventé le pointillisme ? | Georges Seurat | Paul Signac | Camille Pissarro | Henri-Edmond Cross
-M | Sur quelle île du Pacifique Gauguin a-t-il peint ses dernières toiles ? | En Polynésie française | À Cuba | Aux Açores | À Madagascar
-M | Qui a peint Ceci n'est pas une pipe ? | René Magritte | Salvador Dalí | Max Ernst | Yves Tanguy
-M | Qui a peint Le Fils de l'homme, au visage caché par une pomme ? | René Magritte | Salvador Dalí | Giorgio de Chirico | Paul Delvaux
-M | Quel peintre néerlandais a composé des grilles de rouge, jaune et bleu ? | Piet Mondrian | Theo van Doesburg | Kazimir Malevitch | Josef Albers
-M | Quel peintre américain versait la peinture sur des toiles au sol ? | Jackson Pollock | Mark Rothko | Willem de Kooning | Barnett Newman
-M | Quelle peintre mexicaine est célèbre pour ses autoportraits ? | Frida Kahlo | Remedios Varo | Leonora Carrington | Tina Modotti
-M | Quel musée parisien abrite les grands Nymphéas de Monet ? | Le musée de l'Orangerie | Le musée d'Orsay | Le Louvre | Le musée Marmottan
-M | Quel musée de Madrid abrite Les Ménines ? | Le Prado | Le Reina Sofía | Le Thyssen | L'Escurial
-M | Quel musée de Madrid abrite Guernica ? | Le Reina Sofía | Le Prado | Le Thyssen | La Casa de Campo
-M | Quel musée de Florence abrite La Naissance de Vénus ? | Les Offices | Le palais Pitti | Le Bargello | L'Accademia
-M | Quel musée d'Amsterdam abrite La Ronde de nuit ? | Le Rijksmuseum | Le musée Van Gogh | Le Stedelijk | La maison d'Anne Frank
-M | Quel grand musée se trouve à Saint-Pétersbourg ? | L'Ermitage | La galerie Tretiakov | Le Kremlin | Le musée Pouchkine
-M | Dans quel musée se trouve la Victoire de Samothrace ? | Le Louvre | Le British Museum | Le Prado | Les Offices
-M | Qui a sculpté la Pietà conservée au Vatican ? | Michel-Ange | Donatello | Le Bernin | Raphaël
-M | Qui a sculpté Les Bourgeois de Calais ? | Auguste Rodin | Camille Claudel | Aristide Maillol | Antoine Bourdelle
-M | Quelle sculptrice fut l'élève et la compagne de Rodin ? | Camille Claudel | Suzanne Valadon | Berthe Morisot | Sarah Bernhardt
-M | Quel style architectural précède le gothique ? | Le roman | Le baroque | Le classique | Le byzantin
-M | Qui a dessiné les jardins du château de Versailles ? | André Le Nôtre | Jules Hardouin-Mansart | Louis Le Vau | Charles Le Brun
-M | Quel architecte a agrandi Versailles pour Louis XIV ? | Jules Hardouin-Mansart | André Le Nôtre | Claude Perrault | Philibert Delorme
-M | Quelle cathédrale française est célèbre pour le bleu de ses vitraux ? | Chartres | Amiens | Bourges | Beauvais
-M | Quel monument parisien abrite le tombeau de Napoléon ? | Les Invalides | Le Panthéon | Notre-Dame | L'Arc de triomphe
-M | Quel palais accueillit les papes au XIVᵉ siècle en France ? | Le palais des Papes d'Avignon | Le Louvre | Le palais du Latran | Le palais de Fontainebleau
-M | Quel château de la Loire possède un escalier à double révolution ? | Chambord | Chenonceau | Amboise | Blois
-M | Quels architectes ont conçu le Centre Pompidou ? | Renzo Piano et Richard Rogers | Le Corbusier et Perret | Jean Nouvel et Gehry | Norman Foster et Ando
-M | Quel architecte a conçu le musée Guggenheim de Bilbao ? | Frank Gehry | Frank Lloyd Wright | Norman Foster | Zaha Hadid
-M | Qui a composé La Bohème ? | Giacomo Puccini | Giuseppe Verdi | Ruggero Leoncavallo | Pietro Mascagni
-M | Qui a composé Madame Butterfly ? | Giacomo Puccini | Giuseppe Verdi | Jules Massenet | Georges Bizet
-M | Qui a composé Aïda ? | Giuseppe Verdi | Giacomo Puccini | Gaetano Donizetti | Vincenzo Bellini
-M | Qui a composé Le Barbier de Séville ? | Gioachino Rossini | Giuseppe Verdi | Wolfgang Mozart | Gaetano Donizetti
-M | Qui a composé Guillaume Tell ? | Gioachino Rossini | Giuseppe Verdi | Carl Maria von Weber | Daniel Auber
-M | Qui a composé Le Messie ? | Georg Friedrich Haendel | Jean-Sébastien Bach | Joseph Haydn | Antonio Vivaldi
-M | Qui a composé la Passion selon saint Matthieu ? | Jean-Sébastien Bach | Georg Friedrich Haendel | Heinrich Schütz | Georg Philipp Telemann
-M | Qui a composé la suite Peer Gynt ? | Edvard Grieg | Jean Sibelius | Carl Nielsen | Franz Berwald
-M | Qui a composé Finlandia ? | Jean Sibelius | Edvard Grieg | Antonín Dvorák | Bedrich Smetana
-M | Qui a composé les Rhapsodies hongroises ? | Franz Liszt | Johannes Brahms | Béla Bartók | Frédéric Chopin
-M | Qui a composé Clair de lune ? | Claude Debussy | Maurice Ravel | Erik Satie | Gabriel Fauré
-M | Qui a composé les Gymnopédies ? | Erik Satie | Claude Debussy | Maurice Ravel | Francis Poulenc
-M | Qui a composé le chant devenu l'hymne national français ? | Rouget de Lisle | Hector Berlioz | Étienne Méhul | François Gossec
-M | Quel est le plus grand des instruments à vent ? | L'orgue | Le tuba | La contrebasse | Le basson
-M | Comment appelle-t-on la voix d'homme la plus grave ? | La basse | Le ténor | Le baryton | La haute-contre
-M | Qui a écrit La Cantatrice chauve ? | Eugène Ionesco | Samuel Beckett | Jean Genet | Arthur Adamov
-M | Qui a écrit Rhinocéros ? | Eugène Ionesco | Samuel Beckett | Jean Anouilh | Jean-Paul Sartre
-M | Qui a écrit l'Antigone jouée à Paris en 1944 ? | Jean Anouilh | Jean Giraudoux | Jean Cocteau | Paul Claudel
-M | Qui a écrit Ubu roi ? | Alfred Jarry | Guillaume Apollinaire | Antonin Artaud | Tristan Tzara
-M | Combien d'actes compte une tragédie classique française ? | Cinq | Trois | Quatre | Deux
-M | Quelle règle du théâtre classique impose temps, lieu et action uniques ? | La règle des trois unités | La règle de bienséance | La règle du quatrième mur | L'unité de ton
-D | Qui a peint La Reddition de Breda ? | Vélasquez | Goya | Murillo | Ribera
-D | Qui a peint Un dimanche après-midi à l'île de la Grande Jatte ? | Georges Seurat | Paul Signac | Camille Pissarro | Claude Monet
-D | Qui a peint Le Christ jaune ? | Paul Gauguin | Vincent van Gogh | Émile Bernard | Maurice Denis
-D | Qui a peint Le Fifre ? | Édouard Manet | Edgar Degas | Gustave Courbet | James Whistler
-D | Qui a peint Le Cri après avoir traversé un fjord au crépuscule ? | Edvard Munch | Ernst Ludwig Kirchner | James Ensor | Egon Schiele
-D | Quel peintre russe a peint un carré noir sur fond blanc ? | Kazimir Malevitch | Vassily Kandinsky | Marc Chagall | Alexandre Rodtchenko
-D | Quel peintre a couvert ses toiles de villages russes et de violonistes volants ? | Marc Chagall | Kazimir Malevitch | Vassily Kandinsky | Chaïm Soutine
-D | Quel peintre britannique a peint des papes hurlants ? | Francis Bacon | Lucian Freud | David Hockney | Graham Sutherland
-D | Quel peintre américain a peint des solitudes urbaines et des bars la nuit ? | Edward Hopper | Andrew Wyeth | Grant Wood | Norman Rockwell
-D | Qui a sculpté La Danse pour la façade de l'Opéra Garnier ? | Jean-Baptiste Carpeaux | Auguste Rodin | François Rude | James Pradier
-D | Qui a sculpté le haut-relief de La Marseillaise sur l'Arc de triomphe ? | François Rude | Jean-Baptiste Carpeaux | Antoine Étex | David d'Angers
-D | Quel ingénieur a conçu l'armature intérieure de la statue de la Liberté ? | Gustave Eiffel | Auguste Bartholdi | Viollet-le-Duc | Eugène Freyssinet
-D | Quel architecte a restauré Notre-Dame de Paris au XIXᵉ siècle ? | Viollet-le-Duc | Haussmann | Garnier | Labrouste
-D | Quel architecte allemand a dirigé le Bauhaus à sa fondation ? | Walter Gropius | Mies van der Rohe | Hannes Meyer | Bruno Taut
-D | Quel architecte a résumé son art par la formule moins c'est plus ? | Mies van der Rohe | Le Corbusier | Walter Gropius | Louis Sullivan
-D | Quelle architecte irako-britannique a conçu des bâtiments tout en courbes ? | Zaha Hadid | Kazuyo Sejima | Odile Decq | Denise Scott Brown
-D | Qui a composé la Symphonie du destin, dite la Cinquième ? | Ludwig van Beethoven | Franz Schubert | Johannes Brahms | Gustav Mahler
-D | Qui a composé la Symphonie inachevée ? | Franz Schubert | Ludwig van Beethoven | Anton Bruckner | Gustav Mahler
-D | Qui a composé le Chant de la terre ? | Gustav Mahler | Richard Strauss | Anton Bruckner | Hugo Wolf
-D | Qui a composé les Danses hongroises ? | Johannes Brahms | Franz Liszt | Antonín Dvorák | Béla Bartók
-D | Qui a composé Le Château de Barbe-Bleue ? | Béla Bartók | Zoltán Kodály | Leos Janácek | György Ligeti
-D | Qui a composé Boris Godounov ? | Modeste Moussorgski | Piotr Tchaïkovski | Nikolaï Rimski-Korsakov | Alexandre Borodine
+E | Who wrote the poem The Raven? | Edgar Allan Poe | Walt Whitman | Emily Dickinson | Henry Longfellow
+E | How many lines does a haiku traditionally have? | Three | Five | Four | Seven
+M | Who wrote The Road Not Taken? | Robert Frost | Carl Sandburg | Wallace Stevens | William Carlos Williams
+M | Who wrote Leaves of Grass? | Walt Whitman | Ralph Waldo Emerson | Henry Thoreau | Herman Melville
+M | Which reclusive poet of Amherst wrote nearly two thousand short poems? | Emily Dickinson | Marianne Moore | Elizabeth Bishop | Sara Teasdale
+M | Who wrote I Know Why the Caged Bird Sings? | Maya Angelou | Nikki Giovanni | Gwendolyn Brooks | Rita Dove
+M | Who wrote The Song of Hiawatha? | Henry Wadsworth Longfellow | Walt Whitman | James Russell Lowell | John Greenleaf Whittier
+M | How many syllables does a traditional haiku contain? | Seventeen | Fourteen | Twelve | Twenty
+M | How many lines does a limerick have? | Five | Four | Six | Three
+H | Who wrote The Waste Land? | T. S. Eliot | Ezra Pound | W. B. Yeats | W. H. Auden
+H | Who wrote the Harlem Renaissance poem about a dream deferred? | Langston Hughes | Countee Cullen | Claude McKay | James Weldon Johnson
+H | Which poet wrote Chicago and Fog? | Carl Sandburg | Robert Frost | Vachel Lindsay | Edgar Lee Masters
+H | Who wrote Paradise Lost? | John Milton | John Donne | Andrew Marvell | Edmund Spenser
+H | Who wrote The Canterbury Tales? | Geoffrey Chaucer | William Langland | John Gower | Thomas Malory
+H | Who wrote the Ode on a Grecian Urn? | John Keats | Percy Shelley | Lord Byron | William Wordsworth
+H | Which Romantic poet wrote Ozymandias? | Percy Bysshe Shelley | John Keats | Lord Byron | Samuel Coleridge
+H | Which poet wrote The Rime of the Ancient Mariner? | Samuel Taylor Coleridge | William Wordsworth | Robert Southey | William Blake
+H | Which poet wrote The Tyger? | William Blake | William Wordsworth | John Keats | Thomas Gray
+H | Which Chilean poet won the Nobel Prize in 1971? | Pablo Neruda | Octavio Paz | Cesar Vallejo | Gabriela Mistral
+H | What is a poem of fourteen lines with a strict rhyme scheme called? | A sonnet | An ode | An elegy | A ballad
+H | What is a poem mourning the dead called? | An elegy | An ode | A sonnet | A eulogy
+H | What do we call the repetition of the same starting sound in a line? | Alliteration | Assonance | Consonance | Onomatopoeia
+
+# --- Books for younger readers ---
+
+E | Which children's book features a pig named Wilbur and a spider? | Charlotte's Web | Stuart Little | The Trumpet of the Swan | Babe
+E | Who wrote The Cat in the Hat? | Dr. Seuss | Shel Silverstein | Maurice Sendak | Eric Carle
+E | Which book follows a boy named Max to an island of monsters? | Where the Wild Things Are | The Giving Tree | Goodnight Moon | The Snowy Day
+E | Which caterpillar eats his way through a famous picture book? | The Very Hungry Caterpillar | The Grouchy Ladybug | The Mixed-Up Chameleon | The Busy Spider
+M | Who wrote Charlie and the Chocolate Factory? | Roald Dahl | Roald Amundsen | C. S. Lewis | Michael Bond
+M | Who wrote The Chronicles of Narnia? | C. S. Lewis | J. R. R. Tolkien | Philip Pullman | George MacDonald
+M | Which book series begins with a boy receiving a letter by owl? | Harry Potter | Percy Jackson | Artemis Fowl | The Spiderwick Chronicles
+M | Who wrote The Giving Tree? | Shel Silverstein | Dr. Seuss | Ezra Jack Keats | Tomie dePaola
+M | Which novel follows a girl on the Kansas prairie carried off by a cyclone? | The Wonderful Wizard of Oz | Little House on the Prairie | Anne of Green Gables | A Little Princess
+M | Who wrote Anne of Green Gables? | Lucy Maud Montgomery | Louisa May Alcott | Frances Hodgson Burnett | Laura Ingalls Wilder
+M | Who wrote The Secret Garden? | Frances Hodgson Burnett | Lucy Maud Montgomery | Kate Douglas Wiggin | Johanna Spyri
+M | Who wrote the Little House books? | Laura Ingalls Wilder | Willa Cather | Carol Ryrie Brink | Rachel Field
+H | Who wrote A Wrinkle in Time? | Madeleine L'Engle | Lois Lowry | Susan Cooper | Ursula Le Guin
+H | Who wrote The Giver? | Lois Lowry | Madeleine L'Engle | Katherine Paterson | Jerry Spinelli
+H | Who wrote Bridge to Terabithia? | Katherine Paterson | Lois Lowry | Beverly Cleary | Judy Blume
+H | Which award honors the best American picture book each year? | The Caldecott Medal | The Newbery Medal | The Printz Award | The Coretta Scott King Award
+H | Which award honors the best American children's novel each year? | The Newbery Medal | The Caldecott Medal | The National Book Award | The Pulitzer
+H | Who created the bear called Paddington? | Michael Bond | A. A. Milne | Roald Dahl | Beatrix Potter
+H | Who created Winnie-the-Pooh? | A. A. Milne | Michael Bond | Kenneth Grahame | Beatrix Potter
+H | Who wrote The Wind in the Willows? | Kenneth Grahame | A. A. Milne | Beatrix Potter | E. Nesbit
+
+# --- Painting ---
+
+E | Who painted the Mona Lisa? | Leonardo da Vinci | Michelangelo | Raphael | Titian
+E | Who painted The Starry Night? | Vincent van Gogh | Claude Monet | Paul Cezanne | Edvard Munch
+E | Who painted Guernica? | Pablo Picasso | Salvador Dali | Joan Miro | Georges Braque
+E | Who painted the water lilies of his own garden again and again? | Claude Monet | Edgar Degas | Pierre-Auguste Renoir | Camille Pissarro
+E | Which painting shows a farmer and a woman before a pointed farmhouse window? | American Gothic | Christina's World | The Gleaners | Nighthawks
+M | Who painted The Last Supper? | Leonardo da Vinci | Michelangelo | Raphael | Caravaggio
+M | Who painted the ceiling frescoes of the Sistine Chapel? | Michelangelo | Raphael | Botticelli | Leonardo
+M | Who painted The Persistence of Memory with its melting clocks? | Salvador Dali | Rene Magritte | Max Ernst | Giorgio de Chirico
+M | Who painted Nighthawks, the late-night diner scene? | Edward Hopper | Grant Wood | Thomas Hart Benton | Charles Sheeler
+M | Who painted American Gothic? | Grant Wood | Edward Hopper | Andrew Wyeth | John Steuart Curry
+M | Who made silkscreens of soup cans and celebrities? | Andy Warhol | Roy Lichtenstein | Jasper Johns | Robert Rauschenberg
+M | Who painted The Scream? | Edvard Munch | Vincent van Gogh | Egon Schiele | James Ensor
+M | Who painted The Birth of Venus? | Sandro Botticelli | Raphael | Titian | Giorgione
+M | Which American painter is known for large flowers and Southwest landscapes? | Georgia O'Keeffe | Mary Cassatt | Helen Frankenthaler | Lee Krasner
+M | Who painted by dripping and pouring onto canvas on the floor? | Jackson Pollock | Mark Rothko | Willem de Kooning | Franz Kline
+M | Who painted Girl with a Pearl Earring? | Johannes Vermeer | Rembrandt | Frans Hals | Pieter de Hooch
+M | Who painted The Night Watch? | Rembrandt | Vermeer | Rubens | Van Dyck
+H | Who painted The School of Athens in the Vatican? | Raphael | Michelangelo | Leonardo | Bramante
+H | Which American illustrator painted decades of magazine covers of small-town life? | Norman Rockwell | Maxfield Parrish | N. C. Wyeth | Howard Pyle
+H | Who painted the Migration Series about the Great Migration? | Jacob Lawrence | Romare Bearden | Aaron Douglas | Horace Pippin
+H | Who painted Christina's World? | Andrew Wyeth | Edward Hopper | Grant Wood | Charles Burchfield
+H | Which Mexican painter is known for her self-portraits? | Frida Kahlo | Remedios Varo | Maria Izquierdo | Leonora Carrington
+H | Which Mexican muralist painted vast works on public walls? | Diego Rivera | David Siqueiros | Jose Orozco | Rufino Tamayo
+H | Who painted Las Meninas? | Diego Velazquez | Francisco Goya | El Greco | Murillo
+H | Who painted the Third of May 1808? | Francisco Goya | Diego Velazquez | Eugene Delacroix | Jacques-Louis David
+H | Who painted Liberty Leading the People? | Eugene Delacroix | Jacques-Louis David | Theodore Gericault | Gustave Courbet
+H | Who painted comic-strip panels enlarged with printed dots? | Roy Lichtenstein | Andy Warhol | Claes Oldenburg | James Rosenquist
+H | Who painted large soft rectangles of glowing color? | Mark Rothko | Barnett Newman | Clyfford Still | Ad Reinhardt
+H | Which impressionist specialized in dancers and the ballet? | Edgar Degas | Claude Monet | Auguste Renoir | Berthe Morisot
+H | Which American impressionist painted mothers and children in Paris? | Mary Cassatt | Georgia O'Keeffe | Cecilia Beaux | Lilla Perry
+H | Who painted the ceiling of a chapel and also sculpted David? | Michelangelo | Donatello | Bernini | Cellini
+
+# --- Movements and terms ---
+
+E | Which art movement is named for a Monet painting of a sunrise? | Impressionism | Expressionism | Cubism | Realism
+M | Which movement broke objects into geometric planes? | Cubism | Impressionism | Fauvism | Baroque
+M | Which movement painted dreams and impossible scenes? | Surrealism | Realism | Neoclassicism | Romanticism
+M | Which movement used images from advertising and comics? | Pop art | Op art | Minimalism | Dada
+M | Which period of European art followed the Middle Ages and revived classical forms? | The Renaissance | The Baroque | The Rococo | The Gothic
+M | Which style is known for drama, movement and deep shadow in the 1600s? | Baroque | Rococo | Gothic | Neoclassical
+M | What do we call a painting made on wet plaster? | A fresco | A mural only | An icon | A triptych
+M | What do we call a painting of a person's face and shoulders? | A portrait | A landscape | A still life | A tableau
+M | What do we call a painting of arranged objects like fruit and vases? | A still life | A landscape | A portrait | A genre scene
+H | Which New York movement made huge abstract canvases after the war? | Abstract expressionism | Precisionism | Ashcan realism | Regionalism
+H | Which anti-art movement arose in Zurich during the First World War? | Dada | Futurism | Vorticism | Constructivism
+H | Which movement celebrated speed and machines in early Italy? | Futurism | Cubism | Suprematism | Symbolism
+H | Which technique uses strong contrast of light and dark? | Chiaroscuro | Sfumato | Impasto | Grisaille
+H | Which technique blurs outlines with soft transitions, as in the Mona Lisa? | Sfumato | Chiaroscuro | Pointillism | Impasto
+H | Which technique builds an image from small dots of pure color? | Pointillism | Impasto | Glazing | Scumbling
+H | What do we call a three-panel painting? | A triptych | A diptych | A polyptych | A predella
+H | What do we call the printing method that cuts an image into a metal plate? | Engraving | Lithography | Screen printing | Woodcut
+H | Which Japanese woodblock print shows a towering wave near Mount Fuji? | The Great Wave off Kanagawa | Red Fuji | The Plum Garden | Sudden Shower
+H | Which art form arranges small colored tiles into an image? | Mosaic | Fresco | Tapestry | Marquetry
+H | Which Dutch movement used only straight lines and primary colors? | De Stijl | Bauhaus | Art Nouveau | Vienna Secession
+
+# --- Sculpture and buildings ---
+
+E | Who sculpted the marble David in Florence? | Michelangelo | Donatello | Bernini | Leonardo
+M | Who sculpted The Thinker? | Auguste Rodin | Camille Claudel | Aristide Maillol | Antoine Bourdelle
+M | Which American architect designed a house over a waterfall? | Frank Lloyd Wright | Louis Sullivan | Philip Johnson | Richard Neutra
+M | Which New York skyscraper opened in 1931 and held the height record for decades? | The Empire State Building | The Chrysler Building | Rockefeller Center | The Woolworth Building
+M | Which New York skyscraper is famous for its stainless steel crown? | The Chrysler Building | The Empire State Building | The Flatiron Building | One Liberty Plaza
+M | Which style of architecture features pointed arches and flying buttresses? | Gothic | Romanesque | Baroque | Byzantine
+M | Which ancient Greek temple crowns the Acropolis? | The Parthenon | The Erechtheion | The Temple of Zeus | The Theseion
+H | Which architect designed the spiral Guggenheim Museum in New York? | Frank Lloyd Wright | Mies van der Rohe | Le Corbusier | Marcel Breuer
+H | Which architect designed the titanium museum in Bilbao? | Frank Gehry | Zaha Hadid | Renzo Piano | Norman Foster
+H | Which Catalan architect left an unfinished basilica in Barcelona? | Antoni Gaudi | Josep Puig | Lluis Domenech | Ricardo Bofill
+H | Which sculptor made the mobiles that hang and turn in the air? | Alexander Calder | David Smith | Louise Nevelson | Isamu Noguchi
+H | Which artist designed the Vietnam Veterans Memorial in Washington? | Maya Lin | Louise Bourgeois | Richard Serra | Claes Oldenburg
+H | Which order of Greek column has a plain, simple capital? | Doric | Ionic | Corinthian | Tuscan
+H | Which order of Greek column has scroll-shaped capitals? | Ionic | Doric | Corinthian | Composite
+H | Which order of Greek column has capitals carved with leaves? | Corinthian | Doric | Ionic | Aeolic
+H | Which style dominated American public buildings with domes and columns? | Neoclassical | Art deco | Brutalist | Prairie
+H | Which Renaissance sculptor cast an early bronze David? | Donatello | Michelangelo | Ghiberti | Verrocchio
+H | Which sculptor carved the four presidents at Mount Rushmore? | Gutzon Borglum | Daniel Chester French | Augustus Saint-Gaudens | Lorado Taft
+H | Who sculpted the seated Lincoln in the Lincoln Memorial? | Daniel Chester French | Gutzon Borglum | Augustus Saint-Gaudens | Paul Manship
+
+# --- Concert music ---
+
+E | Which composer wrote nine symphonies and went deaf? | Ludwig van Beethoven | Wolfgang Mozart | Johann Bach | Franz Schubert
+E | Which composer wrote The Nutcracker? | Pyotr Tchaikovsky | Igor Stravinsky | Sergei Prokofiev | Nikolai Rimsky-Korsakov
+E | Which composer wrote The Four Seasons? | Antonio Vivaldi | Johann Bach | George Handel | Arcangelo Corelli
+E | How many strings does a standard violin have? | Four | Six | Five | Three
+M | Which composer wrote The Magic Flute? | Wolfgang Mozart | Ludwig van Beethoven | Joseph Haydn | Christoph Gluck
+M | Which composer wrote the Brandenburg Concertos? | Johann Sebastian Bach | George Handel | Antonio Vivaldi | Georg Telemann
+M | Which composer wrote Rhapsody in Blue? | George Gershwin | Aaron Copland | Leonard Bernstein | Cole Porter
+M | Which composer wrote Appalachian Spring? | Aaron Copland | George Gershwin | Charles Ives | Samuel Barber
+M | Which composer wrote Swan Lake? | Pyotr Tchaikovsky | Sergei Prokofiev | Leo Delibes | Adolphe Adam
+M | Which oratorio contains the Hallelujah chorus? | Messiah | The Creation | Elijah | The Seasons
+M | Which section of the orchestra includes the flute and the oboe? | The woodwinds | The brass | The strings | The percussion
+M | Which section of the orchestra includes the trumpet and trombone? | The brass | The woodwinds | The strings | The percussion
+M | Which instrument has eighty-eight keys? | The piano | The organ | The harpsichord | The accordion
+M | How many players are in a string quartet? | Four | Three | Five | Six
+H | Which composer wrote The Rite of Spring, which caused a riot in 1913? | Igor Stravinsky | Claude Debussy | Maurice Ravel | Bela Bartok
+H | Which composer wrote Bolero? | Maurice Ravel | Claude Debussy | Erik Satie | Gabriel Faure
+H | Which composer wrote the opera Aida? | Giuseppe Verdi | Giacomo Puccini | Gioachino Rossini | Vincenzo Bellini
+H | Which composer wrote La Boheme? | Giacomo Puccini | Giuseppe Verdi | Ruggero Leoncavallo | Pietro Mascagni
+H | Which composer wrote the Ring cycle of four operas? | Richard Wagner | Richard Strauss | Gustav Mahler | Anton Bruckner
+H | Which American composer wrote the Fanfare for the Common Man? | Aaron Copland | Samuel Barber | Leonard Bernstein | Roy Harris
+H | Which composer is known as the father of the symphony? | Joseph Haydn | Johann Bach | Wolfgang Mozart | Christoph Gluck
+H | Which composer wrote the Unfinished Symphony? | Franz Schubert | Ludwig van Beethoven | Robert Schumann | Felix Mendelssohn
+H | Which Beethoven symphony ends with a choral setting of a poem to joy? | The Ninth | The Fifth | The Third | The Seventh
+H | Which composer wrote Clair de Lune? | Claude Debussy | Maurice Ravel | Erik Satie | Cesar Franck
+H | Which instrument is the lowest in the string section? | The double bass | The cello | The viola | The harp
+H | Which Italian word tells a musician to play very softly? | Pianissimo | Fortissimo | Allegro | Andante
+H | Which Italian word tells a musician to play quickly? | Allegro | Adagio | Largo | Grave
+H | How many lines does a musical staff have? | Five | Four | Six | Three
+
+# --- The stage ---
+
+E | Which New York street is a byword for American theater? | Broadway | Fifth Avenue | Wall Street | Madison Avenue
+M | Which award honors the best of American theater each year? | The Tony Award | The Emmy | The Grammy | The Obie
+M | Who wrote the play Death of a Salesman? | Arthur Miller | Tennessee Williams | Eugene O'Neill | Edward Albee
+M | Who wrote the play A Streetcar Named Desire? | Tennessee Williams | Arthur Miller | William Inge | Clifford Odets
+M | Who wrote the play The Crucible, about the Salem trials? | Arthur Miller | Tennessee Williams | Thornton Wilder | Lillian Hellman
+M | Which musical is set in a New York gang rivalry and echoes Romeo and Juliet? | West Side Story | Guys and Dolls | On the Town | The Music Man
+M | Which musical features a chandelier and a masked composer? | The Phantom of the Opera | Cats | Les Miserables | Miss Saigon
+H | Which playwright wrote Long Day's Journey into Night? | Eugene O'Neill | Arthur Miller | Tennessee Williams | Clifford Odets
+H | Which playwright wrote Our Town? | Thornton Wilder | Eugene O'Neill | Arthur Miller | Sam Shepard
+H | Which playwright chronicled a century of Black life in Pittsburgh? | August Wilson | Lorraine Hansberry | Amiri Baraka | Suzan-Lori Parks
+H | Which playwright wrote A Raisin in the Sun? | Lorraine Hansberry | August Wilson | Alice Childress | Ntozake Shange
+H | Which composer and lyricist wrote Sweeney Todd and Into the Woods? | Stephen Sondheim | Andrew Lloyd Webber | Jerry Herman | Kander and Ebb
+H | Which pair wrote Oklahoma and The Sound of Music? | Rodgers and Hammerstein | Lerner and Loewe | Kander and Ebb | Comden and Green
+H | Which Irish playwright wrote Waiting for Godot? | Samuel Beckett | Sean O'Casey | Brian Friel | J. M. Synge
+H | Which Norwegian playwright wrote A Doll's House? | Henrik Ibsen | August Strindberg | Knut Hamsun | Bjornson
+H | Which Russian playwright wrote The Cherry Orchard? | Anton Chekhov | Maxim Gorky | Nikolai Gogol | Ivan Turgenev
+H | What do we call a stage speech delivered by a character alone? | A soliloquy | A monologue | An aside | A prologue
+H | What do we call a remark spoken to the audience but not to other characters? | An aside | A soliloquy | A chorus | An epilogue
+
+# --- The old myths ---
+
+E | Who was the king of the Greek gods? | Zeus | Poseidon | Apollo | Hades
+E | Who was the Greek god of the sea? | Poseidon | Zeus | Hades | Hermes
+E | Which Greek hero performed twelve labors? | Hercules | Theseus | Perseus | Jason
+E | Which wooden animal hid Greek soldiers at Troy? | A horse | A bull | An elephant | A ram
+M | Who was the Roman equivalent of Zeus? | Jupiter | Mars | Neptune | Saturn
+M | Who was the Roman goddess of love? | Venus | Juno | Minerva | Diana
+M | Who was the Greek goddess of wisdom? | Athena | Hera | Artemis | Demeter
+M | Which Greek monster had snakes for hair? | Medusa | The Sphinx | Scylla | The Chimera
+M | Which creature was half man and half bull in a labyrinth? | The Minotaur | The Centaur | The Satyr | The Cyclops
+M | Who flew too near the sun on wings of wax? | Icarus | Phaethon | Bellerophon | Perseus
+M | Whose box released every trouble into the world? | Pandora's | Cassandra's | Persephone's | Ariadne's
+M | Which king turned all he touched to gold? | Midas | Croesus | Priam | Tantalus
+M | Which Greek god was the messenger of the gods? | Hermes | Apollo | Ares | Hephaestus
+M | Which Greek god ruled the underworld? | Hades | Poseidon | Cronus | Charon
+H | Which Norse god wielded a hammer? | Thor | Odin | Loki | Balder
+H | Which Norse god was the trickster? | Loki | Thor | Odin | Freyr
+H | Which hall welcomed slain Norse warriors? | Valhalla | Asgard | Midgard | Niflheim
+H | What was the Norse end of the world called? | Ragnarok | Yggdrasil | Bifrost | Fimbulwinter
+H | Which Greek hero's only weak point was his heel? | Achilles | Ajax | Hector | Patroclus
+H | Which Greek maiden's return from the underworld explains the seasons? | Persephone | Eurydice | Ariadne | Antigone
+H | Who was the Greek god of the forge and fire? | Hephaestus | Ares | Apollo | Dionysus
+H | Who was the Roman god of war? | Mars | Jupiter | Vulcan | Mercury
+H | Which Greek titan was condemned to hold up the sky? | Atlas | Prometheus | Cronus | Oceanus
+H | Which titan gave fire to humankind and was punished for it? | Prometheus | Atlas | Epimetheus | Hyperion
+H | Which musician charmed the underworld to reclaim his wife? | Orpheus | Apollo | Amphion | Arion
+H | Which Egyptian god had the head of a jackal? | Anubis | Horus | Ra | Thoth
+H | Which Egyptian god was the falcon-headed sky god? | Horus | Anubis | Set | Osiris
+
+# --- More books and authors ---
+
+E | Who wrote The Hobbit? | J. R. R. Tolkien | C. S. Lewis | George MacDonald | Lloyd Alexander
+E | Which diary was kept by a girl hiding in Amsterdam? | The Diary of a Young Girl | Night | The Hiding Place | Number the Stars
+E | Which novel features a whale hunted by Captain Ahab? | Moby-Dick | The Old Man and the Sea | Billy Budd | Typee
+E | Who wrote The Adventures of Tom Sawyer and lived in Missouri? | Mark Twain | Bret Harte | Ambrose Bierce | Joel Harris
+E | What was Mark Twain's real name? | Samuel Clemens | Samuel Langhorne | Josiah Clemens | Thomas Sawyer
+M | Which novel features the mansion of Manderley and an unnamed narrator? | Rebecca | Jane Eyre | Wuthering Heights | The Turn of the Screw
+M | Which Dickens novel begins with the best of times and the worst of times? | A Tale of Two Cities | Great Expectations | Bleak House | Hard Times
+M | Which Dickens novel features the convict Magwitch and Miss Havisham? | Great Expectations | Oliver Twist | David Copperfield | Nicholas Nickleby
+M | Which novel features Elizabeth Bennet and Mr. Darcy? | Pride and Prejudice | Sense and Sensibility | Emma | Persuasion
+M | Which Russian novel follows Pierre, Natasha and Andrei through 1812? | War and Peace | Anna Karenina | Fathers and Sons | Doctor Zhivago
+M | Which detective lives at 221B Baker Street? | Sherlock Holmes | Hercule Poirot | Lord Peter Wimsey | Father Brown
+M | Which Belgian detective did Agatha Christie create? | Hercule Poirot | Sherlock Holmes | Inspector Maigret | Nero Wolfe
+M | Which elderly village sleuth did Agatha Christie create? | Miss Marple | Miss Silver | Mrs. Bradley | Miss Climpson
+M | Who wrote The Handmaid's Tale? | Margaret Atwood | Doris Lessing | Ursula Le Guin | Marge Piercy
+M | Who wrote The Hitchhiker's Guide to the Galaxy? | Douglas Adams | Terry Pratchett | Neil Gaiman | Iain Banks
+M | Who wrote The Old Curiosity Shop and Bleak House? | Charles Dickens | William Thackeray | George Eliot | Anthony Trollope
+H | Who wrote Middlemarch? | George Eliot | Elizabeth Gaskell | Charlotte Bronte | Frances Trollope
+H | What was George Eliot's real name? | Mary Ann Evans | Emily Lawless | Caroline Norton | Harriet Martineau
+H | Who wrote Tess of the d'Urbervilles? | Thomas Hardy | George Eliot | George Meredith | Samuel Butler
+H | Who wrote In Search of Lost Time? | Marcel Proust | Andre Gide | Paul Valery | Anatole France
+H | Who wrote Ulysses, set on a single Dublin day? | James Joyce | Samuel Beckett | Flann O'Brien | Oliver Gogarty
+H | Who wrote Mrs Dalloway and To the Lighthouse? | Virginia Woolf | Katherine Mansfield | Vita Sackville-West | Elizabeth Bowen
+H | Who wrote The Master and Margarita? | Mikhail Bulgakov | Boris Pasternak | Andrei Platonov | Yevgeny Zamyatin
+H | Who wrote Doctor Zhivago? | Boris Pasternak | Mikhail Sholokhov | Alexander Solzhenitsyn | Ivan Bunin
+H | Who wrote One Day in the Life of Ivan Denisovich? | Alexander Solzhenitsyn | Varlam Shalamov | Boris Pasternak | Vasily Grossman
+H | Who wrote The Kite Runner? | Khaled Hosseini | Jhumpa Lahiri | Mohsin Hamid | Rohinton Mistry
+H | Who wrote Midnight's Children? | Salman Rushdie | V. S. Naipaul | Vikram Seth | Amitav Ghosh
+H | Which prize is the highest honor in world literature, awarded in Stockholm? | The Nobel Prize | The Booker Prize | The Pulitzer | The Goncourt
+H | Which prize honors American journalism, letters and music each year? | The Pulitzer Prize | The National Book Award | The Peabody | The Bancroft
+H | Which American novelist won the Nobel Prize in 1954 for spare, hard prose? | Ernest Hemingway | William Faulkner | John Steinbeck | Sinclair Lewis
+H | Which American was the first to win the Nobel Prize in Literature? | Sinclair Lewis | Eugene O'Neill | Pearl Buck | T. S. Eliot
+
+# --- More painting and painters ---
+
+E | Which Dutch painter cut off part of his own ear? | Vincent van Gogh | Rembrandt | Piet Mondrian | Johannes Vermeer
+E | Which artist is famous for painting sunflowers in a vase? | Vincent van Gogh | Claude Monet | Paul Gauguin | Henri Matisse
+M | Which French painter left for Tahiti and painted its people? | Paul Gauguin | Henri Matisse | Paul Cezanne | Edouard Manet
+M | Which painter of apples and mountains is called the father of modern art? | Paul Cezanne | Claude Monet | Edgar Degas | Camille Corot
+M | Which French painter used bold flat color and cut paper late in life? | Henri Matisse | Georges Braque | Raoul Dufy | Andre Derain
+M | Which artist painted the mural cycle inside Rockefeller Center that was destroyed? | Diego Rivera | Thomas Hart Benton | Jose Orozco | Ben Shahn
+M | Which painter of the American West is known for cowboys and horses in bronze? | Frederic Remington | Charles Russell | Albert Bierstadt | George Catlin
+M | Which painter recorded the peoples of the Plains in the 1830s? | George Catlin | Frederic Remington | Karl Bodmer | Alfred Miller
+M | Which school of American painters made grand landscapes of the Hudson Valley? | The Hudson River School | The Ashcan School | The Ten | The Eight
+H | Which painter of vast western vistas worked in the Rocky Mountains? | Albert Bierstadt | Thomas Cole | Frederic Church | Asher Durand
+H | Which American painter made watercolors of the sea in Maine? | Winslow Homer | Thomas Eakins | John Singer Sargent | Childe Hassam
+H | Which American painter is known for The Gross Clinic and rowing scenes? | Thomas Eakins | Winslow Homer | William Chase | Robert Henri
+H | Which portraitist painted the unfinished George Washington on the dollar bill? | Gilbert Stuart | Charles Willson Peale | John Trumbull | Benjamin West
+H | Which painter recorded the birds of America in life-size plates? | John James Audubon | Alexander Wilson | Mark Catesby | Louis Agassiz Fuertes
+H | Which Swiss-German painter said a line is a dot that went for a walk? | Paul Klee | Wassily Kandinsky | Franz Marc | August Macke
+H | Which Russian painter is credited with the first purely abstract works? | Wassily Kandinsky | Kazimir Malevich | Marc Chagall | Natalia Goncharova
+H | Which painter filled canvases with floating villagers and violinists? | Marc Chagall | Marc Ryden | Amedeo Modigliani | Chaim Soutine
+H | Which Italian painter stretched his sitters' necks and faces? | Amedeo Modigliani | Giorgio Morandi | Umberto Boccioni | Gino Severini
+H | Which Belgian surrealist painted men in bowler hats and a pipe that is not one? | Rene Magritte | Salvador Dali | Paul Delvaux | Max Ernst
+H | Which painter of the Dutch Golden Age painted mostly quiet interiors in Delft? | Johannes Vermeer | Jan Steen | Gerard ter Borch | Pieter de Hooch
+H | Which Flemish painter ran a large studio and painted fleshy figures? | Peter Paul Rubens | Anthony van Dyck | Jacob Jordaens | Frans Snyders
+H | Which Italian painter used harsh light and street models for sacred scenes? | Caravaggio | Guido Reni | Annibale Carracci | Artemisia Gentileschi
+H | Which Italian woman painter of the Baroque painted Judith beheading Holofernes? | Artemisia Gentileschi | Sofonisba Anguissola | Lavinia Fontana | Elisabetta Sirani
+
+# --- More music and instruments ---
+
+E | Which instrument has six strings and is played with fingers or a pick? | The guitar | The violin | The cello | The banjo
+E | Which brass instrument is the largest and lowest? | The tuba | The trombone | The trumpet | The French horn
+E | Which instrument is played by striking keys that lift hammers onto strings? | The piano | The organ | The xylophone | The harp
+M | Which instrument does an orchestra tune to before a concert? | The oboe | The violin | The flute | The clarinet
+M | Which instrument is the highest in the woodwind section? | The piccolo | The flute | The clarinet | The oboe
+M | Which stringed instrument is held between the knees and bowed? | The cello | The viola | The double bass | The violin
+M | Which percussion instrument has tuned metal bars struck with mallets? | The glockenspiel | The snare drum | The timpani | The tambourine
+M | Which large drums can be tuned to definite pitches? | Timpani | Snare drums | Bass drums | Bongos
+M | What is a group of singers performing together called? | A choir | An ensemble | A quartet | A consort
+M | What is the highest female singing voice called? | Soprano | Alto | Mezzo-soprano | Contralto
+M | What is the lowest male singing voice called? | Bass | Tenor | Baritone | Countertenor
+H | How many keys are black on a standard piano? | Thirty-six | Fifty-two | Forty | Twenty-eight
+H | What do we call the speed at which a piece of music is played? | Tempo | Timbre | Dynamics | Meter
+H | What do we call the character or color of a musical sound? | Timbre | Tempo | Pitch | Volume
+H | Which sign raises a note by a half step? | A sharp | A flat | A natural | A rest
+H | Which sign lowers a note by a half step? | A flat | A sharp | A natural | A clef
+H | How many notes are in a major scale before the octave repeats? | Seven | Five | Eight | Twelve
+H | Which clef is normally used for the lower notes on a piano? | The bass clef | The treble clef | The alto clef | The tenor clef
+H | What do we call music written for a small group in a room rather than a hall? | Chamber music | Symphonic music | Choral music | Program music
+H | What do we call an instrumental piece featuring one soloist against an orchestra? | A concerto | A symphony | A sonata | A suite
+
+# --- Odds and ends of the arts ---
+
+E | Which art form uses clay shaped and fired in a kiln? | Pottery | Weaving | Etching | Mosaic
+E | Which craft weaves colored threads into a picture on cloth? | Tapestry | Pottery | Enamel | Marquetry
+M | Which Japanese art folds paper into shapes without cutting? | Origami | Ikebana | Kintsugi | Sumi-e
+M | Which Japanese art arranges flowers by strict rules? | Ikebana | Origami | Bonsai | Chado
+M | Which Japanese practice grows miniature trees in trays? | Bonsai | Ikebana | Origami | Suiseki
+M | Which art of beautiful handwriting is prized in China and the Arab world? | Calligraphy | Typography | Illumination | Heraldry
+M | Which medieval books were hand-copied and decorated with gold? | Illuminated manuscripts | Codices only | Broadsheets | Chapbooks
+M | What do we call the art of designing letters for print? | Typography | Calligraphy | Lithography | Engraving
+H | Which museum in Paris holds the Mona Lisa? | The Louvre | The Musee d'Orsay | The Pompidou | The Orangerie
+H | Which Paris museum specializes in impressionist painting? | The Musee d'Orsay | The Louvre | The Rodin Museum | The Petit Palais
+H | Which New York museum is known by the initials MoMA? | The Museum of Modern Art | The Metropolitan | The Whitney | The Frick
+H | Which Washington institution runs a group of national museums? | The Smithsonian | The Library of Congress | The National Archives | The Kennedy Center
+H | Which Madrid museum holds Guernica? | The Reina Sofia | The Prado | The Thyssen | The Lazaro Galdiano
+H | Which London gallery holds the national collection of British art? | The Tate | The National Gallery | The Courtauld | The Wallace Collection
+H | Which Amsterdam museum holds The Night Watch? | The Rijksmuseum | The Van Gogh Museum | The Stedelijk | The Mauritshuis
+H | Which St. Petersburg museum occupies the old Winter Palace? | The Hermitage | The Russian Museum | The Tretyakov | The Pushkin
+H | Which craft joins colored glass with lead into windows? | Stained glass | Mosaic | Enameling | Glassblowing
+H | Which technique prints from a stone or plate using grease and water? | Lithography | Etching | Engraving | Woodcut
+H | Which term describes the arrangement of elements within a picture? | Composition | Perspective | Palette | Texture
+H | Which technique makes distant objects smaller to suggest depth? | Perspective | Foreshortening | Modeling | Hatching
+H | Which pale blue haze suggests distance in a landscape painting? | Atmospheric perspective | Linear perspective | Chiaroscuro | Trompe l'oeil
+H | Which French term describes painting so real it fools the eye? | Trompe l'oeil | Plein air | Nature morte | Objet trouve
+H | Which French term describes painting outdoors from life? | Plein air | Atelier | Salon | Croquis
+
+# --- Openers ---
+
+E | Which two colors mixed make purple? | Red and blue | Red and yellow | Blue and yellow | Yellow and white
+E | Which two colors mixed make green? | Blue and yellow | Red and blue | Red and yellow | Black and yellow
+E | Which two colors mixed make orange? | Red and yellow | Blue and yellow | Red and blue | Green and red
+E | What are the three primary colors in paint? | Red, yellow and blue | Red, green and blue | Orange, green and purple | Black, white and grey
+E | Which fairy tale features a glass slipper? | Cinderella | Snow White | Rapunzel | Sleeping Beauty
+E | Which fairy tale features a girl in a red hood and a wolf? | Little Red Riding Hood | Goldilocks | Hansel and Gretel | The Three Little Pigs
+E | Which fairy tale features a girl who eats porridge in a bear's house? | Goldilocks and the Three Bears | Snow White | Little Red Riding Hood | Beauty and the Beast
+E | Which brothers collected German fairy tales? | The Brothers Grimm | The Wright brothers | The Lumiere brothers | The Bronte brothers
+E | Who wrote The Little Mermaid and The Ugly Duckling? | Hans Christian Andersen | The Brothers Grimm | Charles Perrault | Aesop
+E | Who is credited with the fables about the tortoise and the hare? | Aesop | Homer | La Fontaine | Ovid
+E | Who wrote Peter Pan? | J. M. Barrie | Lewis Carroll | Kenneth Grahame | A. A. Milne
+E | What do we call a short story with a moral, often starring animals? | A fable | A myth | A legend | A parable
+E | What do we call the main character of a story? | The protagonist | The antagonist | The narrator | The foil
+E | What do we call the character who opposes the hero? | The antagonist | The protagonist | The narrator | The sidekick
+E | What do we call the time and place in which a story happens? | The setting | The plot | The theme | The tone
+E | What do we call a comparison using the word like or as? | A simile | A metaphor | An idiom | A pun
+E | What do we call a comparison that says one thing is another? | A metaphor | A simile | An analogy | A symbol
+E | What do we call giving human qualities to an object or animal? | Personification | Alliteration | Irony | Hyperbole
+E | What do we call a deliberate exaggeration for effect? | Hyperbole | Understatement | Irony | Allusion
+E | What do we call a book about a person's life written by someone else? | A biography | An autobiography | A memoir | A journal
+E | What do we call the story of a life written by the person who lived it? | An autobiography | A biography | A chronicle | A profile
+E | What do we call a picture an artist makes of themselves? | A self-portrait | A still life | A study | A caricature
+E | Which paint is thinned with water and dries quickly? | Watercolor | Oil paint | Encaustic | Fresco
+E | Which paint uses oil as its binder and dries slowly? | Oil paint | Watercolor | Gouache | Tempera
+E | Which instrument family does the drum belong to? | Percussion | Brass | Strings | Woodwinds
+E | What do we call the words of a song? | The lyrics | The score | The libretto | The refrain
+E | What do we call a drama sung throughout rather than spoken? | An opera | A musical | An oratorio | A cantata
+E | What do we call the person who leads an orchestra? | The conductor | The composer | The soloist | The concertmaster
+E | Which dance form is performed on pointe in soft slippers or hard shoes? | Ballet | Tap | Flamenco | Modern
+E | Which Greek god of music is shown with a lyre? | Apollo | Hermes | Dionysus | Pan
+E | Which instrument is held sideways and played by blowing across a hole? | The flute | The clarinet | The oboe | The trumpet
+E | Which large stringed instrument is plucked and stands taller than the player? | The harp | The cello | The double bass | The lute
+E | Which Italian city is famous for its glassmaking on an island? | Venice | Florence | Naples | Genoa
+E | Which building material did Michelangelo carve his statues from? | Marble | Granite | Limestone | Sandstone
+M | What do we call the words written for an opera? | The libretto | The lyrics | The score | The prologue
+M | What do we call a drawing made to prepare for a larger work? | A study | A print | A plate | A cartoon strip
+M | Which Washington museum holds the Wright brothers' airplane? | The National Air and Space Museum | The Museum of American History | The National Gallery | The Natural History Museum
+M | What do we call the pattern of stressed and unstressed beats in poetry? | Meter | Rhyme | Stanza | Verse
+M | What do we call a group of lines forming a unit in a poem? | A stanza | A canto | A couplet | A refrain

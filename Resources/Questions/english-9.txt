@@ -1,0 +1,242 @@
+# English Language Arts — Grade 9 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Ninth grade goes abroad: Shakespeare, the Greeks and Romans, the epics
+# and the Middle Ages, the British novel, world literature in
+# translation, the sharper literary terms, and the freshman shelf.
+
+! id      | english-9
+! name    | English — Grade 9
+! detail  | Shakespeare, the classics, the British novel and world literature.
+! icon    | theatermasks
+! tint    | 0.64 0.56 0.34
+! rank    | 21
+! product | com.oulhen.riskelo.us.pack.english9
+
+
+# --- Shakespeare ---
+
+E | Which Shakespeare play follows two young lovers in Verona? | Romeo and Juliet | Hamlet | Macbeth | Othello
+E | Which two families feud in Romeo and Juliet? | The Montagues and Capulets | The Yorks and Lancasters | The Medicis and Pazzis | The Guelphs and Ghibellines
+E | Which Shakespeare tragedy is set in Denmark? | Hamlet | Macbeth | King Lear | Othello
+E | Which Shakespeare tragedy is set in Scotland? | Macbeth | Hamlet | Othello | Julius Caesar
+E | Which English town was Shakespeare born in? | Stratford-upon-Avon | Canterbury | Warwick | Coventry
+E | Which London theater was the home of Shakespeare's company? | The Globe | The Rose | The Swan | The Curtain
+E | Which friar marries Romeo and Juliet in secret? | Friar Laurence | Friar John | Friar Tuck | Friar Bartholomew
+E | Which cousin of Juliet kills Mercutio? | Tybalt | Paris | Benvolio | Balthasar
+E | Which friend of Romeo dies cursing both houses? | Mercutio | Benvolio | Balthasar | Gregory
+E | Which ghost sets Hamlet on his course? | His father's ghost | Banquo's ghost | Caesar's ghost | His mother's ghost
+E | Which woman drowns after Hamlet turns on her? | Ophelia | Gertrude | Cordelia | Desdemona
+E | Which uncle takes the throne of Hamlet's father? | Claudius | Polonius | Fortinbras | Laertes
+E | Which three figures greet Macbeth with a prophecy? | The witches | The fates | The Furies | The Norns
+E | Which king does Macbeth kill in his own castle? | Duncan | Malcolm | Edward | Siward
+E | Which general is deceived by Iago? | Othello | Cassio | Roderigo | Brabantio
+E | Which wife does Othello kill? | Desdemona | Emilia | Bianca | Gertrude
+E | Which king divides his kingdom among his daughters? | Lear | Duncan | Richard | Henry
+E | Which Roman is stabbed on the Ides of March in a Shakespeare play? | Julius Caesar | Mark Antony | Brutus | Cassius
+E | Which magician rules the island in The Tempest? | Prospero | Oberon | Puck | Faustus
+E | Which comedy sends four lovers into a wood near Athens? | A Midsummer Night's Dream | Twelfth Night | As You Like It | Much Ado About Nothing
+M | Which friend does Macbeth have murdered? | Banquo | Duncan | Macduff | Malcolm
+M | Which object convinces Othello of his wife's guilt? | A handkerchief | A ring | A letter | A locket
+M | Which daughter of Lear refuses to flatter him? | Cordelia | Goneril | Regan | Miranda
+M | Which friend of Caesar joins the conspiracy against him? | Brutus | Antony | Octavius | Casca
+M | Which spirit serves Prospero? | Ariel | Caliban | Puck | Titania
+M | Which mischievous sprite serves Oberon? | Puck | Ariel | Bottom | Peaseblossom
+H | Which prince rules Verona in the play? | Escalus | Ferdinand | Leonato | Antonio
+H | Which of Hamlet's schoolfellows spy on him for the king? | Rosencrantz and Guildenstern | Horatio and Laertes | Osric and Reynaldo | Voltemand and Cornelius
+H | Which forest seems to march toward Macbeth's castle? | Birnam Wood | Sherwood Forest | Arden Forest | Dunsinane Wood
+H | Which speech begins friends, Romans, countrymen? | Mark Antony's funeral oration | Brutus's defense | Cassius's appeal | Caesar's refusal
+H | Which weaver is given a donkey's head in that comedy? | Bottom | Quince | Flute | Snug
+H | Which comedy disguises Viola as a young man in Illyria? | Twelfth Night | As You Like It | The Merchant of Venice | Measure for Measure
+H | Which comedy sends Rosalind into the Forest of Arden? | As You Like It | Twelfth Night | Love's Labour's Lost | The Winter's Tale
+H | Which speech begins all the world's a stage? | Jaques's speech in As You Like It | Prospero's epilogue | Hamlet's soliloquy | Portia's plea
+H | Which moneylender demands a pound of flesh? | Shylock | Antonio | Bassanio | Gratiano
+H | Which heroine argues in court disguised as a lawyer? | Portia | Nerissa | Jessica | Rosalind
+H | Which pair trade insults before falling in love? | Beatrice and Benedick | Katherina and Petruchio | Rosalind and Orlando | Viola and Orsino
+H | Which meter did Shakespeare write most of his verse in? | Iambic pentameter | Trochaic tetrameter | Dactylic hexameter | Anapestic trimeter
+H | About how many sonnets did Shakespeare write? | About 154 | About 40 | About 300 | About 90
+H | Which sonnet begins shall I compare thee to a summer's day? | Sonnet 18 | Sonnet 116 | Sonnet 130 | Sonnet 73
+
+# --- Greece and Rome ---
+
+E | Which Greek poet is credited with the Iliad and the Odyssey? | Homer | Sophocles | Virgil | Hesiod
+E | Which Roman poet followed Aeneas from Troy to Italy? | Virgil | Ovid | Horace | Homer
+E | Which Trojan prince does Achilles kill? | Hector | Paris | Aeneas | Priam
+E | Which Greek warrior sulks in his tent for much of the Iliad? | Achilles | Odysseus | Ajax | Diomedes
+E | Which one-eyed giant does Odysseus blind? | Polyphemus | Argus | Antaeus | Talos
+E | Which wife of Odysseus unweaves her weaving each night? | Penelope | Helen | Andromache | Clytemnestra
+E | Which singers lure sailors onto the rocks? | The Sirens | The Harpies | The Muses | The Nereids
+M | Which enchantress turns Odysseus's men into swine? | Circe | Calypso | Medea | Scylla
+M | Which nymph holds Odysseus for seven years? | Calypso | Circe | Nausicaa | Thetis
+M | Which son of Odysseus goes in search of his father? | Telemachus | Orestes | Ascanius | Neoptolemus
+M | Which two monsters guard a narrow strait in the Odyssey? | Scylla and Charybdis | Gorgon and Hydra | Sirens and Harpies | Cerberus and Chimera
+M | Which Trojan hero founds the Roman line in the Aeneid? | Aeneas | Hector | Priam | Romulus
+M | Which queen of Carthage loves Aeneas and dies for it? | Dido | Cleopatra | Lavinia | Camilla
+M | Which play follows a king who unknowingly killed his father? | Oedipus Rex | Antigone | Medea | Agamemnon
+M | Which playwright wrote Oedipus Rex and Antigone? | Sophocles | Aeschylus | Euripides | Aristophanes
+M | Which heroine buries her brother against the king's order? | Antigone | Electra | Medea | Iphigenia
+M | Which king forbids that burial in the play? | Creon | Oedipus | Theseus | Menelaus
+M | Which Greek playwright wrote comedies like Lysistrata? | Aristophanes | Sophocles | Euripides | Menander
+H | Which Euripides heroine kills her children to punish her husband? | Medea | Hecuba | Electra | Phaedra
+H | Which Aeschylus trilogy follows a curse through the house of Atreus? | The Oresteia | The Theban plays | The Danaid trilogy | The Prometheia
+H | Which Roman poet wrote the Metamorphoses? | Ovid | Virgil | Horace | Lucretius
+H | Which Roman poet gave us carpe diem? | Horace | Ovid | Catullus | Propertius
+H | Which philosopher's Poetics analyzed tragedy? | Aristotle | Plato | Socrates | Epicurus
+H | Which dialogue by Plato describes prisoners in a cave? | The Republic | The Symposium | The Apology | The Phaedo
+H | Which Roman playwright's comedies were later mined by Shakespeare? | Plautus | Seneca | Terence | Ennius
+H | Which Roman historian told the story of the early republic? | Livy | Tacitus | Suetonius | Sallust
+H | Which Greek wrote the Histories of the Persian wars? | Herodotus | Thucydides | Xenophon | Polybius
+H | Which Greek historian wrote of the Peloponnesian War? | Thucydides | Herodotus | Plutarch | Arrian
+
+# --- Epics and the Middle Ages ---
+
+E | Which Old English epic pits a hero against Grendel? | Beowulf | The Song of Roland | El Cid | The Nibelungenlied
+E | Which poet wrote The Canterbury Tales? | Geoffrey Chaucer | William Langland | John Gower | Thomas Malory
+E | Where are Chaucer's pilgrims traveling to? | Canterbury | Rome | Compostela | Jerusalem
+E | Which Italian poet wrote the Divine Comedy? | Dante | Petrarch | Boccaccio | Ariosto
+E | Which sword did King Arthur draw or receive by legend? | Excalibur | Durendal | Joyeuse | Tizona
+M | Which creature kills Beowulf in his old age? | A dragon | Grendel | A sea serpent | A giant
+M | Which hall does Grendel attack in Beowulf? | Heorot | Valhalla | Camelot | Uppsala
+M | Which Canterbury tale sends three rioters looking for Death? | The Pardoner's Tale | The Wife of Bath's Tale | The Nun's Priest's Tale | The Reeve's Tale
+M | Which Chaucer pilgrim has had five husbands? | The Wife of Bath | The Prioress | The Second Nun | The Franklin
+M | Which Roman poet guides Dante through Hell? | Virgil | Ovid | Horace | Statius
+M | Which woman guides Dante through Paradise? | Beatrice | Laura | Francesca | Piccarda
+M | How many circles does Dante's Hell have? | Nine | Seven | Twelve | Three
+M | Which Boccaccio book gathers a hundred tales told during a plague? | The Decameron | The Canterbury Tales | The Heptameron | Il Novellino
+M | Which French epic tells of a rearguard destroyed at a mountain pass? | The Song of Roland | El Cid | The Nibelungenlied | Tristan
+M | Which Spanish epic follows an exiled knight called the Cid? | El Cid | The Song of Roland | Amadis | The Poem of Fernan Gonzalez
+H | Which Canterbury tale is told by a knight about two cousins in love? | The Knight's Tale | The Miller's Tale | The Pardoner's Tale | The Franklin's Tale
+H | Which knight faces a green challenger who survives beheading? | Gawain | Lancelot | Percival | Galahad
+H | Which Malory book gathers the Arthurian legends in English? | Le Morte d'Arthur | The Mabinogion | Sir Gawain | The Brut
+H | Which Mesopotamian epic follows a king and his friend Enkidu? | The Epic of Gilgamesh | The Enuma Elish | The Descent of Inanna | The Atrahasis
+H | Which Indian epic follows Rama's search for Sita? | The Ramayana | The Mahabharata | The Bhagavad Gita | The Puranas
+H | Which Indian epic contains the Bhagavad Gita? | The Mahabharata | The Ramayana | The Vedas | The Upanishads
+H | Which Persian epic gathers the kings of Iran in verse? | The Shahnameh | The Rubaiyat | The Conference of the Birds | The Masnavi
+H | Which eleventh-century Japanese work is called the first novel? | The Tale of Genji | The Pillow Book | The Tale of the Heike | The Kojiki
+H | Which Icelandic prose stories tell of feuding families? | The sagas | The eddas | The runes | The kennings
+
+# --- The British novel and its poets ---
+
+E | Which novel begins with a truth universally acknowledged? | Pride and Prejudice | Sense and Sensibility | Emma | Jane Eyre
+E | Which novelist created Elizabeth Bennet and Mr. Darcy? | Jane Austen | Charlotte Bronte | George Eliot | Elizabeth Gaskell
+E | Which novel follows a governess who loves Mr. Rochester? | Jane Eyre | Wuthering Heights | Villette | Agnes Grey
+E | Which novel follows Heathcliff on the Yorkshire moors? | Wuthering Heights | Jane Eyre | The Tenant of Wildfell Hall | Middlemarch
+E | Which novelist wrote Oliver Twist and A Christmas Carol? | Charles Dickens | Anthony Trollope | William Thackeray | Wilkie Collins
+E | Which Dickens novel follows Pip and a secret benefactor? | Great Expectations | David Copperfield | Bleak House | Hard Times
+E | Which Dickens miser is visited by three spirits? | Ebenezer Scrooge | Uriah Heep | Wackford Squeers | Daniel Quilp
+E | Which novel follows a creature made in a laboratory near Geneva? | Frankenstein | Dracula | The Island of Doctor Moreau | Dr. Jekyll and Mr. Hyde
+E | Which novel sends Gulliver among tiny people and giants? | Gulliver's Travels | Robinson Crusoe | Candide | Erewhon
+E | Which Romantic poet left a shattered king's statue in the sand? | Percy Shelley | John Keats | Lord Byron | William Blake
+M | Which Dickens character stopped every clock at her wedding hour? | Miss Havisham | Mrs. Joe | Betsey Trotwood | Mrs. Gamp
+M | Which Dickens novel opens with the best of times? | A Tale of Two Cities | Great Expectations | Bleak House | Little Dorrit
+M | Which two cities does that novel set against each other? | London and Paris | London and Dublin | Paris and Rome | London and New York
+M | Which teenage writer produced Frankenstein? | Mary Shelley | Emily Bronte | Ann Radcliffe | Fanny Burney
+M | Which novel splits a doctor into two selves? | Dr. Jekyll and Mr. Hyde | Frankenstein | The Picture of Dorian Gray | The Turn of the Screw
+M | Which novel lets a portrait age while its subject does not? | The Picture of Dorian Gray | Dr. Jekyll and Mr. Hyde | Frankenstein | The Invisible Man
+M | Which Irish writer wrote The Importance of Being Earnest? | Oscar Wilde | George Bernard Shaw | J. M. Synge | Sean O'Casey
+M | Which satirist proposed eating Irish children to fix poverty? | Jonathan Swift | Alexander Pope | Daniel Defoe | Samuel Johnson
+M | Which Romantic poet wrote Ode to a Nightingale? | John Keats | Percy Shelley | Lord Byron | Samuel Coleridge
+M | Which poet wandered lonely as a cloud among daffodils? | William Wordsworth | Samuel Coleridge | Robert Southey | John Clare
+M | Which poet hung an albatross around a sailor's neck? | Samuel Coleridge | William Wordsworth | Robert Burns | Thomas Gray
+M | Which poet asked the tiger about its fearful symmetry? | William Blake | John Keats | Percy Shelley | Robert Blair
+M | Which Victorian poet wrote The Charge of the Light Brigade? | Alfred Tennyson | Robert Browning | Matthew Arnold | Algernon Swinburne
+H | Which poet wrote the dramatic monologue My Last Duchess? | Robert Browning | Alfred Tennyson | Thomas Hardy | Gerard Hopkins
+H | Which novelist wrote Middlemarch under a man's name? | George Eliot | Elizabeth Gaskell | Charlotte Bronte | Mrs. Humphry Ward
+H | Which Hardy novel ends with Tess at Stonehenge? | Tess of the d'Urbervilles | Jude the Obscure | Far from the Madding Crowd | The Mayor of Casterbridge
+H | Which Conrad novella travels up an African river? | Heart of Darkness | Lord Jim | The Secret Sharer | Typhoon
+H | Which Forster novel takes an English visitor to the Marabar Caves? | A Passage to India | Howards End | A Room with a View | Maurice
+H | Which Woolf novel follows a single day in a woman's London? | Mrs Dalloway | To the Lighthouse | Orlando | The Waves
+H | Which Woolf essay argues a woman writer needs money and privacy? | A Room of One's Own | Three Guineas | The Common Reader | Modern Fiction
+H | Which Joyce novel follows one Dublin day in June 1904? | Ulysses | A Portrait of the Artist | Dubliners | Finnegans Wake
+H | Which Orwell novel puts the pigs in charge of a farm? | Animal Farm | 1984 | Burmese Days | Coming Up for Air
+H | Which poet wrote of soldiers dying as cattle in the trenches? | Wilfred Owen | Rupert Brooke | Siegfried Sassoon | Isaac Rosenberg
+H | Which Yeats poem says the centre cannot hold? | The Second Coming | Sailing to Byzantium | Easter 1916 | Among School Children
+
+# --- World literature ---
+
+E | Which Spanish novel follows a knight who tilts at windmills? | Don Quixote | Lazarillo de Tormes | La Celestina | Amadis of Gaul
+E | Which squire rides with Don Quixote? | Sancho Panza | Rocinante | Dulcinea | Cardenio
+E | Which Dostoevsky novel follows a student who murders a pawnbroker? | Crime and Punishment | The Idiot | Demons | The Gambler
+E | Which French novel follows an escaped convict named Jean Valjean? | Les Miserables | The Count of Monte Cristo | Germinal | Notre-Dame de Paris
+E | Which French novel imprisons Edmond Dantes in a sea fortress? | The Count of Monte Cristo | Les Miserables | The Three Musketeers | The Man in the Iron Mask
+M | Which Russian novel follows Napoleon's invasion through five families? | War and Peace | Anna Karenina | Fathers and Sons | Dead Souls
+M | Which Tolstoy novel opens with unhappy families each unhappy their own way? | Anna Karenina | War and Peace | Resurrection | The Cossacks
+M | Which Dostoevsky novel follows three brothers and their father's death? | The Brothers Karamazov | Crime and Punishment | The Idiot | Notes from Underground
+M | Which Flaubert novel follows a doctor's wife in Normandy? | Madame Bovary | Sentimental Education | Salammbo | Bouvard and Pecuchet
+M | Which Zola novel takes readers down into a coal mine? | Germinal | Nana | L'Assommoir | The Belly of Paris
+M | Which German play sells a scholar's soul to Mephistopheles? | Faust | The Robbers | Woyzeck | Nathan the Wise
+M | Which Kafka story turns a man into a giant insect? | The Metamorphosis | The Trial | The Castle | A Hunger Artist
+M | Which Kafka novel arrests a man who is never told his crime? | The Trial | The Castle | Amerika | The Judgment
+M | Which Camus novel opens with the death of the narrator's mother? | The Stranger | The Plague | The Fall | Exile and the Kingdom
+M | Which Colombian novel follows the Buendia family in Macondo? | One Hundred Years of Solitude | Love in the Time of Cholera | The Autumn of the Patriarch | Chronicle of a Death Foretold
+M | Which style mixes the everyday with the miraculous in Latin fiction? | Magical realism | Naturalism | Surrealism | Costumbrismo
+M | Which Nigerian novel follows Okonkwo as the colonizers arrive? | Things Fall Apart | Arrow of God | No Longer at Ease | Half of a Yellow Sun
+M | Which poem gave Things Fall Apart its title? | The Second Coming | The Waste Land | Ozymandias | Dover Beach
+H | Which Chilean poet wrote love sonnets and odes to ordinary things? | Pablo Neruda | Octavio Paz | Cesar Vallejo | Nicanor Parra
+H | Which Argentine writer built labyrinths of story in Ficciones? | Jorge Luis Borges | Julio Cortazar | Adolfo Bioy Casares | Ernesto Sabato
+H | Which Norwegian play slams a door on a marriage at the end? | A Doll's House | Hedda Gabler | Ghosts | The Wild Duck
+H | Which Chekhov play ends with the sound of axes in an orchard? | The Cherry Orchard | Three Sisters | Uncle Vanya | The Seagull
+H | Which Ibsen play follows its heroine through her last day? | Hedda Gabler | A Doll's House | The Master Builder | Rosmersholm
+H | Which Japanese novelist wrote Kokoro and Botchan? | Natsume Soseki | Yukio Mishima | Yasunari Kawabata | Junichiro Tanizaki
+H | Which Chinese classic follows a monkey king toward India? | Journey to the West | Dream of the Red Chamber | Water Margin | Romance of the Three Kingdoms
+H | Which collection frames tales told night after night by Scheherazade? | One Thousand and One Nights | The Panchatantra | The Decameron | The Conference of the Birds
+H | Which Egyptian novelist won the Nobel Prize in 1988? | Naguib Mahfouz | Tayeb Salih | Nawal El Saadawi | Taha Hussein
+H | Which Kenyan writer argued for writing in African languages? | Ngugi wa Thiong'o | Wole Soyinka | Chinua Achebe | Ben Okri
+H | Which South African novel follows a country priest to Johannesburg? | Cry, the Beloved Country | Disgrace | July's People | Burger's Daughter
+H | Which Czech-born novelist wrote The Unbearable Lightness of Being? | Milan Kundera | Vaclav Havel | Bohumil Hrabal | Karel Capek
+
+# --- The sharper terms ---
+
+E | Which term names the central insight a work leaves you with? | The theme | The plot | The setting | The exposition
+M | Which term names a work's overall design and shape? | Structure | Diction | Tone | Motif
+M | Which term names a comparison drawn out through a whole poem? | An extended metaphor | A simile | A pun | An epithet
+M | Which term names an outcome that runs against expectation? | Irony | Imagery | Allegory | Analogy
+M | Which term names the historical setting that shaped a work? | Its context | Its genre | Its register | Its canon
+M | Which term names the list of works a culture treats as essential? | The canon | The corpus | The anthology | The syllabus
+M | Which term names a work that answers or reworks an earlier one? | An intertext | A palimpsest | A pastiche | A gloss
+M | Which term names the mood created by a story's place and time? | Atmosphere | Plot | Syntax | Meter
+M | Which term names a character type that recurs across cultures? | An archetype | A stereotype | A caricature | A persona
+M | Which archetype guides and teaches the hero? | The mentor | The trickster | The shadow | The herald
+M | Which pattern sends a hero out, through trials, and home changed? | The hero's journey | The tragic arc | The picaresque | The frame tale
+M | Which term names a novel about growing up? | A bildungsroman | A picaresque | A roman a clef | An epistolary novel
+M | Which term names a novel told in letters? | An epistolary novel | A frame novel | A picaresque | A novella
+M | Which term names a rambling novel about a roguish traveler? | A picaresque | A bildungsroman | A romance | A saga
+H | Which term names a novel that hides real people under invented names? | A roman a clef | A bildungsroman | An allegory | A satire
+H | Which term names a poem that mourns and then consoles? | An elegy | An ode | An epigram | An eclogue
+H | Which term names a short witty saying that stings? | An epigram | An elegy | An epitaph | An epithet
+H | Which term names a descriptive tag attached to a name? | An epithet | An epigram | An epigraph | An epitaph
+H | Which term names a quotation set at the head of a chapter? | An epigraph | An epitaph | An epigram | An epilogue
+H | Which term names writing carved for a grave? | An epitaph | An epigraph | An epigram | An elegy
+H | Which technique follows a character's thoughts as they come? | Stream of consciousness | Direct address | Dramatic monologue | Exposition
+H | Which technique slips the narrator's voice into a character's thoughts? | Free indirect discourse | Stream of consciousness | Soliloquy | Apostrophe
+H | Which term names the deliberate breaking of a story's chronology? | Nonlinear narrative | Foreshadowing | Framing | Exposition
+H | Which term names starting a story in the middle of the action? | In medias res | Deus ex machina | Chekhov's gun | The frame
+H | Which term names an unexpected rescue that solves everything? | Deus ex machina | In medias res | Peripeteia | Catharsis
+H | Which principle says a gun shown in act one must be fired? | Chekhov's gun | Occam's razor | The rule of three | The unities
+
+# --- The freshman shelf ---
+
+E | Which Greek epic does ninth grade usually read beside Shakespeare? | The Odyssey | The Aeneid | Gilgamesh | The Divine Comedy
+E | Which Shakespeare play is the standard ninth grade text? | Romeo and Juliet | King Lear | Coriolanus | Cymbeline
+E | Which memoir recalls a girlhood in Stamps, Arkansas? | I Know Why the Caged Bird Sings | The Woman Warrior | Black Boy | Coming of Age in Mississippi
+E | Which graphic memoir tells of growing up in revolutionary Iran? | Persepolis | Maus | Fun Home | American Born Chinese
+M | Which book of vignettes follows Esperanza on a Chicago street? | The House on Mango Street | Bless Me, Ultima | Down These Mean Streets | Drown
+M | Which memoir recounts a Japanese American family's internment? | Farewell to Manzanar | Snow Falling on Cedars | When the Emperor Was Divine | No-No Boy
+M | Which novel follows Amir and Hassan in Kabul? | The Kite Runner | A Thousand Splendid Suns | The Bookseller of Kabul | The Swallows of Kabul
+M | Which novel follows a shepherd boy from Spain to the pyramids? | The Alchemist | Siddhartha | The Little Prince | Veronika Decides to Die
+M | Which Steinbeck novella follows a pearl diver and his family? | The Pearl | Of Mice and Men | The Red Pony | Cannery Row
+M | Which memoir recounts a boy soldier's years in Sierra Leone? | A Long Way Gone | Half of a Yellow Sun | What Is the What | The Bite of the Mango
+M | Which novella by Ayn Rand imagines a world without the word I? | Anthem | We the Living | The Fountainhead | Atlas Shrugged
+M | Which Sophocles play do ninth graders read beside Romeo and Juliet? | Antigone | Oedipus at Colonus | Ajax | Philoctetes
+M | Which Shakespeare play about a Roman conspiracy is a school staple? | Julius Caesar | Coriolanus | Titus Andronicus | Antony and Cleopatra
+M | Which novel follows a Dominican family's flight to New York? | How the Garcia Girls Lost Their Accents | In the Time of the Butterflies | Drown | The Brief Wondrous Life
+H | Which novel follows four sisters against a Dominican dictator? | In the Time of the Butterflies | How the Garcia Girls Lost Their Accents | The Feast of the Goat | Drown
+H | Which verse novel follows a boy and his twin on a basketball court? | The Crossover | Long Way Down | Brown Girl Dreaming | Booked
+H | Which verse memoir recalls a childhood between Ohio and South Carolina? | Brown Girl Dreaming | The Crossover | Out of the Dust | Inside Out and Back Again
+H | Which Hesse novel follows a seeker through ancient India? | Siddhartha | Steppenwolf | Demian | The Glass Bead Game

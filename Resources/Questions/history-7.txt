@@ -1,0 +1,248 @@
+# History — Grade 7 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# The seventh-grade world history course: Byzantium and the rise of Islam,
+# feudal Europe, the empires of Africa and the Americas, medieval Asia,
+# the Renaissance and Reformation, and the age of exploration.
+#
+# Two hundred questions, and no prompt duplicates one in any other file.
+
+! id      | history-7
+! name    | History — Grade 7
+! detail  | The medieval and early modern world, from Byzantium to Columbus.
+! icon    | crown
+! tint    | 0.56 0.32 0.58
+! rank    | 11
+! product | com.oulhen.riskelo.us.pack.history7
+
+
+# --- Byzantium ---
+
+E | Which empire carried on after the western Roman Empire fell? | The Byzantine Empire | The Holy Roman Empire | The Ottoman Empire | The Frankish Empire
+E | Which city was the Byzantine capital? | Constantinople | Rome | Athens | Antioch
+M | Which Byzantine emperor had Roman law collected into one code? | Justinian | Constantine | Basil II | Heraclius
+M | Which great domed church did Justinian build in his capital? | Hagia Sophia | St. Mark's | The Church of the Nativity | St. John Lateran
+M | Which empress ruled beside Justinian and urged him to stand firm? | Theodora | Irene | Zoe | Anna
+M | Which weapon of liquid fire helped Byzantine ships win battles? | Greek fire | Naphtha bombs | Pitch arrows | Wildfire oil
+M | Which split in 1054 divided eastern and western Christianity? | The Great Schism | The Reformation | The Iconoclasm | The Investiture Contest
+H | Which branch of Christianity grew from the Byzantine church? | Eastern Orthodoxy | Roman Catholicism | Lutheranism | Coptic Christianity
+H | Which Byzantine controversy involved destroying religious images? | Iconoclasm | Arianism | Monophysitism | Nestorianism
+H | Which alphabet did missionaries create for Slavic peoples? | Cyrillic | Glagolitic only | Runic | Gothic
+H | Which two brothers are credited with bringing writing to the Slavs? | Cyril and Methodius | Boris and Gleb | Peter and Paul | Vladimir and Olga
+H | In which year did Constantinople finally fall to the Ottomans? | 1453 | 1204 | 1071 | 1517
+H | Which 1071 battle opened Anatolia to the Seljuk Turks? | Manzikert | Yarmouk | Nicopolis | Varna
+
+# --- The rise and spread of Islam ---
+
+E | On which peninsula did Islam begin? | The Arabian Peninsula | The Iberian Peninsula | The Balkan Peninsula | The Anatolian Peninsula
+E | Which city is the holiest in Islam? | Mecca | Medina | Damascus | Baghdad
+M | Which city did Muhammad and his followers move to in 622? | Medina | Mecca | Jerusalem | Kufa
+M | What is the Muslim holy book called? | The Quran | The Hadith | The Torah | The Sunna
+M | What is the title given to Muhammad's successors as leaders? | Caliph | Sultan | Emir | Vizier
+M | How many pillars of practice does Islam set out? | Five | Three | Seven | Ten
+M | Which pilgrimage to Mecca is expected once in a lifetime? | The hajj | The umrah only | The zakat | The salat
+M | Which dynasty ruled the caliphate from Damascus? | The Umayyads | The Abbasids | The Fatimids | The Seljuks
+M | Which dynasty moved the caliphate's center to Baghdad? | The Abbasids | The Umayyads | The Ayyubids | The Mamluks
+M | Which region of Spain was ruled by Muslims for centuries? | Al-Andalus | Aquitaine | Navarre | Asturias
+H | Which Baghdad institution gathered scholars and translated Greek works? | The House of Wisdom | The Great Library | The Academy of Basra | The College of Kufa
+H | Which Persian scholar's medical encyclopedia was used in Europe for centuries? | Ibn Sina | Al-Razi | Ibn Rushd | Al-Kindi
+H | Which mathematician gave his name to the word algorithm? | Al-Khwarizmi | Al-Biruni | Omar Khayyam | Ibn al-Haytham
+H | Which branch of mathematics takes its name from an Arabic word? | Algebra | Geometry | Calculus | Trigonometry
+H | Which 732 battle checked Muslim expansion into Frankish lands? | Tours | Poitiers only | Roncevaux | Covadonga
+H | Which Spanish city held a famous mosque later turned into a cathedral? | Cordoba | Toledo | Seville | Granada
+H | Which palace complex in Granada is a masterpiece of Islamic art? | The Alhambra | The Alcazar | The Giralda | The Mezquita
+H | Which Kurdish leader retook Jerusalem from the crusaders in 1187? | Saladin | Baybars | Nur al-Din | Suleiman
+H | Which long campaign drove Muslim rule out of Spain by 1492? | The Reconquista | The Crusades | The Hundred Years' War | The Albigensian Crusade
+
+# --- Feudal Europe ---
+
+E | What do we call the medieval system of land held in return for service? | Feudalism | Capitalism | Mercantilism | Socialism
+E | What were mounted warriors who served a lord called? | Knights | Serfs | Squires only | Yeomen
+E | What were the peasants bound to a lord's land called? | Serfs | Knights | Vassals | Burghers
+E | What kind of fortified home did a medieval lord build? | A castle | A cathedral | A monastery | A guildhall
+M | What do we call the estate a lord held with its village and fields? | A manor | A fief only | A parish | A borough
+M | What do we call the land a lord granted to a vassal? | A fief | A tithe | A demesne | A charter
+M | Which oath bound a vassal to serve his lord? | Homage | Tribute | Penance | Investiture
+M | Which Frankish king was crowned emperor by the pope in 800? | Charlemagne | Clovis | Charles Martel | Pepin the Short
+M | Which Frankish leader stopped a Muslim advance in 732? | Charles Martel | Clovis | Charlemagne | Pepin
+M | Which seafaring raiders attacked Europe from Scandinavia after 793? | The Vikings | The Magyars | The Moors | The Slavs
+M | Which Viking is said to have reached North America around 1000? | Leif Erikson | Erik the Red | Harald Hardrada | Rollo
+M | Which Viking site in Newfoundland shows a Norse settlement? | L'Anse aux Meadows | Vinland Point | Hop Bay | Markland Cove
+M | Which 1066 battle brought Norman rule to England? | Hastings | Stamford Bridge | Agincourt | Bosworth
+M | Which Norman duke conquered England in 1066? | William the Conqueror | Harold Godwinson | Rollo | Robert Curthose
+M | Which 1215 document forced the English king to accept limits? | Magna Carta | The Domesday Book | The Bill of Rights | The Petition of Right
+M | Which English institution grew from councils of nobles and townsmen? | Parliament | The Star Chamber | The Exchequer | The Privy Council
+H | Which survey of England was ordered by William in 1086? | The Domesday Book | Magna Carta | The Anglo-Saxon Chronicle | The Pipe Rolls
+H | Which architectural style used pointed arches and stained glass? | Gothic | Romanesque | Byzantine | Baroque
+H | Which architectural style used rounded arches and thick walls? | Romanesque | Gothic | Renaissance | Norman only
+H | Which communities of monks copied manuscripts and farmed land? | Monasteries | Cathedrals | Universities | Guilds
+H | Which monastic rule shaped western monasteries from the sixth century? | The Rule of St. Benedict | The Rule of St. Basil | The Cistercian Charter | The Franciscan Rule
+H | Which medieval associations regulated a craft and trained apprentices? | Guilds | Manors | Parishes | Communes
+H | Which contest set popes against emperors over appointing bishops? | The Investiture Controversy | The Great Schism | The Iconoclast Crisis | The Avignon Papacy
+H | Which German-centered realm called itself an empire from 962? | The Holy Roman Empire | The Byzantine Empire | The Carolingian Empire | The Frankish Kingdom
+
+# --- Crusades and the Black Death ---
+
+E | What were the medieval military expeditions to the Holy Land called? | The Crusades | The Reconquista | The Pilgrimages | The Inquisitions
+M | Which pope called the First Crusade in 1095? | Urban II | Gregory VII | Innocent III | Leo IX
+M | Which city was the main goal of the crusaders? | Jerusalem | Damascus | Cairo | Antioch
+M | Which crusade sacked Constantinople instead of reaching the Holy Land? | The Fourth | The Second | The Third | The Fifth
+M | Which pandemic killed perhaps a third of Europe from 1347? | The Black Death | The Great Plague of London | Cholera | Smallpox
+M | Which animals carried the fleas that spread the Black Death? | Rats | Cattle | Dogs | Pigs
+M | Which trade routes helped carry the plague from Asia to Europe? | The Silk Road and sea trade | The Nile route | The Baltic route only | The Sahara routes
+H | Which effect did the plague have on surviving peasants' bargaining power? | It rose as labor grew scarce | It fell sharply | It stayed the same | It ended entirely
+H | Which English uprising of 1381 followed the plague years? | The Peasants' Revolt | The Jacquerie | The Pilgrimage of Grace | Wat's Rebellion only
+H | Which French peasant uprising of 1358 followed the same pressures? | The Jacquerie | The Peasants' Revolt | The Fronde | The Croquants
+H | Which military order was founded to protect pilgrims and later dissolved? | The Knights Templar | The Teutonic Knights | The Hospitallers | The Order of Santiago
+H | Which crusader states were set up along the eastern Mediterranean? | The Latin states of the Levant | The Duchies of Anatolia | The Marches of Syria | The Kingdoms of Cyprus only
+
+# --- Africa, Asia and the Americas ---
+
+M | Which West African empire grew rich controlling gold and salt trade? | Ghana | Kongo | Benin | Zimbabwe
+M | Which West African empire followed Ghana and reached its height under Mansa Musa? | Mali | Songhai | Kanem | Oyo
+M | Which West African empire followed Mali and centered on Gao? | Songhai | Ghana | Benin | Hausa
+M | Which city on the Niger became a center of learning and books? | Timbuktu | Lagos | Kano | Accra
+M | Which East African coast traded with Arabia and India in a Swahili culture? | The Swahili coast | The Gold Coast | The Ivory Coast | The Slave Coast
+M | Which stone city in southern Africa gave a modern country its name? | Great Zimbabwe | Great Kongo | Old Benin | Mapungubwe
+M | Which Mongol leader united the tribes and began vast conquests? | Genghis Khan | Kublai Khan | Tamerlane | Batu Khan
+M | Which Mongol ruler founded a dynasty in China? | Kublai Khan | Genghis Khan | Ogedei | Hulagu
+M | Which Venetian traveler served at the Mongol court in China? | Marco Polo | Christopher Columbus | John Mandeville | Niccolo Zeno
+M | Which Chinese dynasty invented gunpowder weapons and printing improvements? | The Song | The Tang | The Ming | The Qing
+M | Which Chinese dynasty sent great treasure fleets across the Indian Ocean? | The Ming | The Song | The Yuan | The Han
+M | Which admiral commanded those Ming treasure voyages? | Zheng He | Zhu Di | Wang Anshi | Li Shimin
+M | Which Japanese warrior class served the great lords? | The samurai | The daimyo | The ronin only | The shogun's clerks
+M | Which title belonged to Japan's military ruler? | Shogun | Emperor | Daimyo | Kampaku
+M | Which Japanese code of conduct guided the samurai? | Bushido | Shinto | Zen | Kendo
+M | Which Mesoamerican people built Tenochtitlan on a lake? | The Aztec | The Maya | The Inca | The Toltec
+M | Which South American empire built roads through the Andes? | The Inca | The Aztec | The Maya | The Chimu
+M | Which Inca city sits high on a ridge and was rediscovered in 1911? | Machu Picchu | Cuzco | Ollantaytambo | Sacsayhuaman
+H | Which knotted-cord system did the Inca use for records? | Quipu | Codex | Wampum | Kohau
+H | Which floating garden plots fed the Aztec capital? | Chinampas | Terraces | Paddies | Milpas
+H | Which Aztec ruler met the Spanish in 1519? | Moctezuma II | Cuauhtemoc | Ahuitzotl | Itzcoatl
+H | Which Inca ruler was captured by the Spanish in 1532? | Atahualpa | Huayna Capac | Manco Inca | Tupac Amaru
+H | Which Malian ruler's pilgrimage in 1324 disrupted Egypt's gold prices? | Mansa Musa | Sundiata | Askia Muhammad | Sunni Ali
+H | Which Moroccan traveler journeyed across Africa, Asia and beyond? | Ibn Battuta | Ibn Khaldun | Al-Idrisi | Leo Africanus
+H | Which peace across Eurasia let travelers cross safely under Mongol rule? | The Pax Mongolica | The Pax Romana | The Silk Peace | The Khan's Truce
+H | Which Japanese period saw the country closed to most foreigners after 1639? | The Tokugawa period | The Heian period | The Kamakura period | The Meiji period
+H | Which storms twice wrecked Mongol invasion fleets bound for Japan? | The kamikaze typhoons | The monsoon squalls | The Kuroshio gales | The Ryukyu storms
+
+# --- Renaissance and Reformation ---
+
+E | Which movement revived classical learning and art in Europe? | The Renaissance | The Reformation | The Enlightenment | The Restoration
+E | In which country did the Renaissance begin? | Italy | France | England | Germany
+E | Which invention spread books and ideas quickly after about 1450? | The printing press | The telescope | Paper | The quill pen
+M | Which Italian city is regarded as the cradle of the Renaissance? | Florence | Venice | Rome | Milan
+M | Which banking family paid for much Renaissance art in Florence? | The Medici | The Sforza | The Borgia | The Fugger
+M | Which German printer built the first European movable-type press? | Johannes Gutenberg | Aldus Manutius | William Caxton | Christophe Plantin
+M | Which outlook of the Renaissance focused on human potential and classical texts? | Humanism | Scholasticism | Mysticism | Stoicism
+M | Which Italian wrote a blunt handbook on how rulers keep power? | Niccolo Machiavelli | Baldassare Castiglione | Lorenzo Valla | Pico della Mirandola
+M | Which monk posted ninety-five theses in 1517? | Martin Luther | John Calvin | Huldrych Zwingli | Jan Hus
+M | Which German city's church door is linked with those theses? | Wittenberg | Worms | Augsburg | Mainz
+M | Which practice of selling pardons angered Luther? | Indulgences | Tithing | Simony only | Pilgrimage fees
+M | Which reformer led the church in Geneva? | John Calvin | Martin Luther | John Knox | Menno Simons
+M | Which English king broke with Rome to remarry? | Henry VIII | Edward VI | Henry VII | James I
+M | Which church did Henry VIII's break create? | The Church of England | The Presbyterian Church | The Lutheran Church | The Methodist Church
+H | Which Catholic response to the Reformation reformed and reasserted doctrine? | The Counter-Reformation | The Great Schism | The Inquisition only | The Concordat
+H | Which council of the Catholic Church met from 1545 to 1563? | The Council of Trent | The Council of Nicaea | The Council of Constance | Vatican I
+H | Which order founded by Ignatius of Loyola led Catholic education abroad? | The Jesuits | The Franciscans | The Dominicans | The Benedictines
+H | Which 1555 peace let German princes choose their territory's religion? | The Peace of Augsburg | The Edict of Nantes | The Treaty of Westphalia | The Diet of Worms
+H | Which 1598 French edict granted Protestants toleration? | The Edict of Nantes | The Peace of Augsburg | The Edict of Fontainebleau | The Concordat of Bologna
+H | Which Dutch humanist edited the Greek New Testament and mocked abuses? | Erasmus | Thomas More | Melanchthon | Reuchlin
+H | Which Englishman wrote Utopia and was executed by Henry VIII? | Thomas More | Thomas Cromwell | Thomas Wolsey | Thomas Cranmer
+H | Which Bohemian reformer was burned in 1415, a century before Luther? | Jan Hus | John Wycliffe | Girolamo Savonarola | Peter Waldo
+
+# --- Exploration and its consequences ---
+
+E | Which sailor crossed the Atlantic in 1492 for the Spanish crown? | Christopher Columbus | Ferdinand Magellan | John Cabot | Amerigo Vespucci
+E | Which two countries led the first wave of ocean exploration? | Portugal and Spain | England and France | The Netherlands and Sweden | Italy and Genoa
+M | Which Portuguese prince backed voyages down the African coast? | Henry the Navigator | John II | Manuel I | Pedro
+M | Which navigation instrument measured a star's angle above the horizon? | The astrolabe | The compass | The chronometer | The sextant only
+M | Which ship design let Portuguese sailors work against the wind? | The caravel | The galleon | The carrack only | The longship
+M | Which explorer first sailed around Africa to India in 1498? | Vasco da Gama | Bartolomeu Dias | Ferdinand Magellan | Pedro Cabral
+M | Which Portuguese captain reached Brazil in 1500? | Pedro Cabral | Vasco da Gama | Bartolomeu Dias | Diogo Cao
+M | Which Spaniard crossed Panama and saw the Pacific in 1513? | Vasco Nunez de Balboa | Juan Ponce de Leon | Hernando de Soto | Francisco Coronado
+M | Which exchange moved crops, animals and disease between hemispheres? | The Columbian Exchange | The Triangular Trade | The Silk Exchange | The Atlantic Compact
+M | Which American crops transformed diets in Europe, Africa and Asia? | Potatoes and maize | Wheat and barley | Rice and millet | Olives and grapes
+M | Which Old World animals transformed life on the American plains? | Horses | Llamas | Bison | Camels
+M | Which disease killed the largest share of Indigenous Americans after contact? | Smallpox | Cholera | Yellow fever | Typhus
+M | Which forced migration carried millions of Africans across the Atlantic? | The Atlantic slave trade | The Barbary trade | The Indian Ocean trade | The Saharan trade
+M | Which three-cornered trade linked Europe, Africa and the Americas? | The triangular trade | The circular trade | The Baltic trade | The China trade
+H | Which 1494 treaty split newly reached lands between Spain and Portugal? | The Treaty of Tordesillas | The Treaty of Zaragoza | The Treaty of Alcacovas | The Bull of Demarcation
+H | Which economic policy sought national wealth through exports and colonies? | Mercantilism | Free trade | Physiocracy | Bullionism only
+H | Which Spanish labor system forced Indigenous people to work for colonists? | The encomienda | The mita only | The corvee | The hacienda
+H | Which Spanish friar argued against the abuse of Indigenous people? | Bartolome de las Casas | Juan Gines de Sepulveda | Diego de Landa | Junipero Serra
+H | Which Bolivian mountain's silver funded the Spanish empire? | Potosi | Cerro Rico only | Huancavelica | Zacatecas
+H | Which Dutch company dominated trade in the East Indies? | The Dutch East India Company | The Muscovy Company | The Levant Company | The Hudson's Bay Company
+H | Which strait at South America's tip is named for the man who found it? | The Strait of Magellan | The Drake Passage | The Beagle Channel | The Le Maire Strait
+H | Which of Magellan's ships completed the circumnavigation? | The Victoria | The Trinidad | The Concepcion | The San Antonio
+H | Which Spaniard sailed on after Magellan's death to finish the voyage? | Juan Sebastian Elcano | Antonio Pigafetta | Gonzalo Espinosa | Duarte Barbosa
+
+# --- Openers ---
+
+E | Which period of European history followed the fall of Rome? | The Middle Ages | The Renaissance | The Enlightenment | Antiquity
+E | Which other name is given to the Middle Ages? | The medieval period | The classical period | The modern period | The industrial period
+E | Which religion did most of medieval western Europe follow? | Christianity | Islam | Judaism | Buddhism
+E | Which language did medieval European scholars write in? | Latin | Greek | French | German
+E | Which large churches were the tallest buildings of medieval towns? | Cathedrals | Castles | Guildhalls | Manors
+E | Which institution taught law, medicine and theology from the twelfth century? | The university | The monastery only | The guild | The court school
+E | Which weapon gave English archers an advantage in the Hundred Years' War? | The longbow | The crossbow | The pike | The musket
+E | Which teenage French leader rallied armies before being burned in 1431? | Joan of Arc | Eleanor of Aquitaine | Blanche of Castile | Isabella of France
+E | In which war did Joan of Arc lead French troops? | The Hundred Years' War | The Wars of the Roses | The Crusades | The Thirty Years' War
+E | Which English civil war set the houses of York and Lancaster against each other? | The Wars of the Roses | The Anarchy | The Barons' War | The Civil War
+E | Which explorer's name was given to the Americas? | Amerigo Vespucci | Christopher Columbus | John Cabot | Ferdinand Magellan
+E | Which Italian artist painted the Sistine Chapel ceiling in the Renaissance? | Michelangelo | Leonardo | Raphael | Donatello
+E | Which Italian artist designed flying machines and painted a famous portrait? | Leonardo da Vinci | Michelangelo | Botticelli | Titian
+E | Which continent did Portuguese sailors round to reach Asia? | Africa | South America | Australia | Antarctica
+E | Which ocean did Columbus cross? | The Atlantic | The Pacific | The Indian | The Arctic
+E | Which islands did Columbus reach on his first voyage? | Islands of the Caribbean | The Canary Islands | The Azores | The Cape Verde Islands
+E | Which empire did Cortes bring down? | The Aztec Empire | The Inca Empire | The Maya states | The Mixtec kingdoms
+E | Which empire did Pizarro bring down? | The Inca Empire | The Aztec Empire | The Chimu Empire | The Muisca chiefdoms
+M | Which 1492 event ended Muslim rule in Spain? | The fall of Granada | The fall of Cordoba | The fall of Toledo | The fall of Seville
+M | Which Spanish monarchs funded Columbus? | Ferdinand and Isabella | Charles V and Philip II | Alfonso and Urraca | Philip III and Margaret
+M | Which fleet did England defeat in 1588? | The Spanish Armada | The Dutch fleet | The French fleet | The Ottoman fleet
+M | Which English queen reigned when the Armada was defeated? | Elizabeth I | Mary I | Anne | Victoria
+M | Which astronomer argued in 1543 that the Earth circles the Sun? | Nicolaus Copernicus | Galileo Galilei | Johannes Kepler | Tycho Brahe
+M | Which Italian was tried for defending the sun-centered system? | Galileo Galilei | Copernicus | Kepler | Bruno only
+M | Which Englishman set out laws of motion and gravitation in 1687? | Isaac Newton | Robert Hooke | Edmond Halley | Christiaan Huygens
+
+E | Which sea did Viking longships cross to raid Britain? | The North Sea | The Baltic Sea | The Mediterranean | The Black Sea
+E | Which continent were the Aztec and Inca empires on? | The Americas | Africa | Asia | Europe
+E | Which metal did West African empires trade north across the Sahara? | Gold | Iron | Tin | Copper
+E | Which goods did traders bring south across the Sahara in exchange? | Salt | Silk | Tea | Timber
+E | Which animal made Saharan trade caravans possible? | The camel | The horse | The donkey | The ox
+E | Which large ships carried Zheng He's fleets? | Treasure ships | Caravels | Galleons | Dhows
+E | Which country was Marco Polo from? | Italy | Spain | Portugal | France
+E | Which Japanese warriors carried two swords? | The samurai | The ninja | The sumo | The ashigaru
+E | Which sea route did Europeans want to reach the spices of Asia? | A route by sea rather than overland | A route through Russia | A route over the Alps | A route down the Nile
+E | Which continent did the Portuguese sail around to reach India? | Africa | South America | Asia | Australia
+E | Which people ruled England after 1066? | The Normans | The Saxons | The Danes | The Celts
+E | Which country did the Black Death reach Europe from? | It came from Asia along trade routes | It began in England | It began in Spain | It began in Egypt
+E | Which building housed monks who copied books by hand? | The monastery | The castle | The cathedral | The guildhall
+E | Which social group made up the largest part of medieval society? | Peasants | Nobles | Clergy | Merchants
+E | Which movement broke western Christianity into new churches after 1517? | The Reformation | The Renaissance | The Crusades | The Enlightenment
+M | Which term describes a payment of one tenth to the church? | The tithe | The tariff | The tribute | The toll
+M | Which term describes a walled medieval town with trading rights? | A borough | A manor | A fief | A parish
+M | Which German trading league dominated the Baltic and North Sea? | The Hanseatic League | The Lombard League | The Delian League | The Swabian League
+M | Which Italian city built a trading empire across the eastern Mediterranean? | Venice | Florence | Milan | Naples
+M | Which Italian city rivaled Venice in Mediterranean trade? | Genoa | Pisa only | Turin | Bologna
+M | Which Ottoman ruler took Constantinople in 1453? | Mehmed II | Suleiman | Bayezid | Osman
+M | Which Ottoman ruler is called the Magnificent in the West? | Suleiman | Mehmed | Selim | Murad
+M | Which elite Ottoman infantry corps was recruited from conscripted boys? | The Janissaries | The Sipahis | The Mamluks | The Bashi-bazouks
+M | Which empire ruled Persia and made Shia Islam its state faith after 1501? | The Safavid Empire | The Ottoman Empire | The Mughal Empire | The Timurid Empire
+M | Which empire ruled much of India from 1526? | The Mughal Empire | The Maratha Empire | The Delhi Sultanate | The Gupta Empire
+M | Which Mughal emperor built the Taj Mahal? | Shah Jahan | Akbar | Aurangzeb | Babur
+H | Which Mughal emperor is remembered for religious tolerance? | Akbar | Aurangzeb | Babur | Humayun
+H | Which Russian ruler took the title tsar and expanded eastward? | Ivan the Terrible | Peter the Great | Boris Godunov | Ivan III
+H | Which period of Russian history followed the death of Ivan's heirs? | The Time of Troubles | The Great Northern War | The Oprichnina | The Boyar Regency
+H | Which dynasty ruled Russia from 1613 to 1917? | The Romanovs | The Rurikids | The Godunovs | The Shuiskys
+H | Which 1618 to 1648 war devastated the German lands? | The Thirty Years' War | The Hundred Years' War | The Seven Years' War | The Nine Years' War
+H | Which 1648 settlement ended that war and shaped modern states? | The Peace of Westphalia | The Peace of Augsburg | The Treaty of Utrecht | The Congress of Vienna
+H | Which French king called himself the Sun King? | Louis XIV | Louis XIII | Francis I | Henry IV
+H | Which palace did Louis XIV build outside Paris? | Versailles | Fontainebleau | The Louvre | Chambord
+H | Which English conflict of the 1640s ended with a king executed? | The English Civil War | The Wars of the Roses | The Glorious Revolution | The Jacobite Rising

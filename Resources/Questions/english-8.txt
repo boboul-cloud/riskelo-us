@@ -1,0 +1,245 @@
+# English Language Arts — Grade 8 — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Eighth grade reads American: the Puritans and the founders, the
+# Transcendentalists, Poe and Melville, Twain and the realists, Harlem
+# and the moderns, the great novels, the plays and the speeches.
+
+! id      | english-8
+! name    | English — Grade 8
+! detail  | American literature from the Puritans to Toni Morrison.
+! icon    | quote.bubble
+! tint    | 0.42 0.64 0.72
+! rank    | 17
+! product | com.oulhen.riskelo.us.pack.english8
+
+
+# --- The founders and the first American voices ---
+
+E | Which 1776 pamphlet by Thomas Paine urged independence? | Common Sense | The Federalist | Poor Richard's Almanack | The American Crisis
+E | Which almanac full of proverbs did Benjamin Franklin publish? | Poor Richard's Almanack | The Farmer's Almanac | The Pennsylvania Gazette | The Silence Dogood letters
+M | Which Paine essay opened with the times that try men's souls? | The American Crisis | Common Sense | Rights of Man | The Age of Reason
+M | Which Franklin work tells the story of his own life? | The Autobiography | Poor Richard's Almanack | The Way to Wealth | Letters to a Friend
+M | Which colonial poet wrote verses on the burning of her house? | Anne Bradstreet | Phillis Wheatley | Edward Taylor | Mary Rowlandson
+M | Which enslaved poet published a book of verse in 1773? | Phillis Wheatley | Anne Bradstreet | Jupiter Hammon | Lucy Terry
+M | Which preacher delivered Sinners in the Hands of an Angry God? | Jonathan Edwards | Cotton Mather | Increase Mather | Roger Williams
+M | Which governor wrote Of Plymouth Plantation? | William Bradford | John Winthrop | John Smith | Miles Standish
+M | Which Puritan leader called the colony a city upon a hill? | John Winthrop | William Bradford | Cotton Mather | Jonathan Edwards
+H | Which captivity narrative tells of a Puritan woman held by Native captors? | Mary Rowlandson's narrative | Anne Hutchinson's trial | Cotton Mather's Wonders | Bradford's history
+H | Which Frenchman's letters asked what an American is? | Crevecoeur | Tocqueville | Lafayette | Chateaubriand
+H | Which Frenchman's 1835 book studied democracy in America? | Tocqueville | Crevecoeur | Montesquieu | Guizot
+H | Which papers argued for ratifying the Constitution? | The Federalist Papers | The Anti-Federalist letters | The Continental essays | The Virginia resolves
+H | Which three men wrote those papers? | Hamilton, Madison, Jay | Adams, Jefferson, Franklin | Washington, Henry, Mason | Marshall, Rush, Wilson
+H | Which document opens with when in the course of human events? | The Declaration of Independence | The Constitution | The Bill of Rights | The Articles of Confederation
+H | Which formerly enslaved man wrote a famous 1845 narrative of his life? | Frederick Douglass | Booker T. Washington | Olaudah Equiano | Solomon Northup
+H | Which 1853 memoir tells of a free man kidnapped into slavery? | Twelve Years a Slave | Up from Slavery | The Souls of Black Folk | Our Nig
+H | Which 1861 narrative was written by Harriet Jacobs? | Incidents in the Life of a Slave Girl | Twelve Years a Slave | Uncle Tom's Cabin | Clotel
+
+# --- Romantics and Transcendentalists ---
+
+E | Which writer lived two years alone at Walden Pond? | Henry David Thoreau | Ralph Waldo Emerson | Walt Whitman | Nathaniel Hawthorne
+E | Which essay by Thoreau defended refusing an unjust law? | Civil Disobedience | Walden | The Maine Woods | Walking
+E | Which essayist led the Transcendentalist circle in Concord? | Ralph Waldo Emerson | Henry David Thoreau | Bronson Alcott | Margaret Fuller
+E | Which Emerson essay urges you to trust your own mind? | Self-Reliance | Nature | The American Scholar | Circles
+E | Which American Romantic wrote the tale of Rip Van Winkle? | Washington Irving | James Fenimore Cooper | Nathaniel Hawthorne | William Cullen Bryant
+E | Which Irving story sends a headless horseman after a schoolmaster? | The Legend of Sleepy Hollow | Rip Van Winkle | The Devil and Tom Walker | The Spectre Bridegroom
+E | Which Cooper novel follows Hawkeye through a colonial war? | The Last of the Mohicans | The Pioneers | The Deerslayer | The Prairie
+E | Which poem retells the midnight ride of a Boston silversmith? | Paul Revere's Ride | The Song of Hiawatha | Evangeline | Snow-Bound
+M | Which Emerson essay called for an American literature of its own? | The American Scholar | Self-Reliance | Nature | Experience
+M | Which 1836 Emerson essay opened the Transcendentalist movement? | Nature | Self-Reliance | The Over-Soul | Compensation
+M | Which idea did Transcendentalists place above church doctrine? | Individual intuition | Papal authority | Scientific proof | Royal decree
+M | Which movement valued feeling and nature over cold reason? | Romanticism | Neoclassicism | Realism | Naturalism
+M | Which novelist created the frontiersman Natty Bumppo? | James Fenimore Cooper | Washington Irving | Herman Melville | Bret Harte
+M | Which poet wrote Thanatopsis while still very young? | William Cullen Bryant | Henry Longfellow | John Whittier | Oliver Holmes
+M | Which Longfellow poem tells of a Native hero by the great lake? | The Song of Hiawatha | Evangeline | The Courtship of Miles Standish | The Village Blacksmith
+M | Which Longfellow poem follows an exiled Acadian woman? | Evangeline | The Song of Hiawatha | Snow-Bound | The Wreck of the Hesperus
+H | Which writer edited The Dial and wrote on the rights of women? | Margaret Fuller | Louisa May Alcott | Lydia Child | Elizabeth Peabody
+H | Which utopian farm did Transcendentalists found near Boston? | Brook Farm | New Harmony | Oneida | Amana
+H | Which name did Emerson give the universal spirit? | The Over-Soul | The Absolute | The Anima Mundi | The Inner Light
+H | Which pond did Thoreau build his cabin beside? | Walden Pond | Flint's Pond | White Pond | Fairhaven Bay
+H | Which night in jail inspired Thoreau's essay on unjust laws? | A night for refusing a poll tax | A night for aiding a fugitive | A night for trespassing | A night for debt
+H | Which later leaders drew on Civil Disobedience? | Gandhi and King | Lincoln and Grant | Wilson and Roosevelt | Douglass and Tubman
+H | Which Massachusetts town was the Transcendentalist center? | Concord | Salem | Amherst | Lowell
+H | Which Alcott novel drew on her Concord childhood? | Little Women | Little Men | Jo's Boys | Hospital Sketches
+H | Which Fireside poet wrote Snow-Bound? | John Greenleaf Whittier | Henry Longfellow | James Lowell | Oliver Wendell Holmes
+H | Which Oliver Wendell Holmes poem saved a warship from the scrapyard? | Old Ironsides | The Chambered Nautilus | The Deacon's Masterpiece | The Last Leaf
+H | Which humorist's sketches came out of the California gold camps? | Bret Harte | Mark Twain | Ambrose Bierce | Joaquin Miller
+H | Which Bret Harte story sends a town's outcasts into a snowstorm? | The Outcasts of Poker Flat | The Luck of Roaring Camp | Tennessee's Partner | Miggles
+
+# --- The dark Romantics ---
+
+E | Which poet wrote The Raven? | Edgar Allan Poe | Walt Whitman | Emily Dickinson | Henry Longfellow
+E | Which word does the raven repeat in that poem? | Nevermore | Evermore | Forlorn | Lenore
+E | Which Poe story walls a man up in a wine cellar? | The Cask of Amontillado | The Tell-Tale Heart | The Black Cat | The Pit and the Pendulum
+E | Which Poe story is told by a murderer who hears a heartbeat? | The Tell-Tale Heart | The Cask of Amontillado | Ligeia | Berenice
+E | Which novel opens with the words call me Ishmael? | Moby-Dick | Billy Budd | Typee | Omoo
+E | Which captain hunts the white whale? | Ahab | Starbuck | Queequeg | Peleg
+E | Which novel pins a scarlet A on Hester Prynne? | The Scarlet Letter | The House of the Seven Gables | The Blithedale Romance | The Marble Faun
+M | Which Poe story collapses a mansion into a black tarn? | The Fall of the House of Usher | The Masque of the Red Death | The Oval Portrait | Morella
+M | Which Poe story shuts a prince and his court away from a plague? | The Masque of the Red Death | The Fall of the House of Usher | Hop-Frog | Shadow
+M | Which ship carries Ishmael to sea? | The Pequod | The Rachel | The Jeroboam | The Essex
+M | Which minister hides his guilt in The Scarlet Letter? | Dimmesdale | Chillingworth | Bellingham | Wilson
+M | Which Hawthorne novel is set in a cursed Salem house? | The House of the Seven Gables | The Scarlet Letter | The Blithedale Romance | Fanshawe
+M | Which Hawthorne story sends a Puritan into the forest at night? | Young Goodman Brown | The Minister's Black Veil | Rappaccini's Daughter | The Birthmark
+H | Which Poe tale is often called the first detective story? | The Murders in the Rue Morgue | The Gold-Bug | The Purloined Letter | Thou Art the Man
+H | Which detective did Poe invent? | C. Auguste Dupin | Sherlock Holmes | Sam Spade | Inspector Bucket
+H | Which Melville story features a clerk who would prefer not to? | Bartleby, the Scrivener | Benito Cereno | The Encantadas | The Lightning-Rod Man
+H | Which Hawthorne story hangs a black cloth over a preacher's face? | The Minister's Black Veil | Young Goodman Brown | Ethan Brand | The Gray Champion
+H | Which Hawthorne story poisons a girl in an Italian garden? | Rappaccini's Daughter | The Birthmark | Dr. Heidegger's Experiment | Feathertop
+H | Which Melville novella tries a sailor for striking an officer? | Billy Budd | Benito Cereno | Redburn | White-Jacket
+H | Which Melville novella hides a slave revolt aboard a Spanish ship? | Benito Cereno | Billy Budd | Typee | Mardi
+H | Which Poe poem mourns a bride buried by the sounding sea? | Annabel Lee | The Raven | Ulalume | The Bells
+H | Which Poe essay claimed a poem should be read at one sitting? | The Philosophy of Composition | The Poetic Principle | Eureka | Marginalia
+
+# --- Whitman, Dickinson, Twain and the realists ---
+
+E | Which poet published Leaves of Grass? | Walt Whitman | Emily Dickinson | Edgar Allan Poe | Robert Frost
+E | Which poet of Amherst wrote in dashes and rarely published? | Emily Dickinson | Elizabeth Bishop | Marianne Moore | Sara Teasdale
+E | Which writer's real name was Samuel Clemens? | Mark Twain | O. Henry | Bret Harte | Washington Irving
+E | Which Twain novel follows a boy who whitewashes a fence? | The Adventures of Tom Sawyer | Huckleberry Finn | The Prince and the Pauper | Roughing It
+E | Which river does Huck Finn travel by raft? | The Mississippi | The Ohio | The Missouri | The Hudson
+E | Which man escapes with Huck aboard the raft? | Jim | Tom | Pap | Silas
+E | Which novel follows a young Union soldier through his first battle? | The Red Badge of Courage | The Killer Angels | Andersonville | Company K
+E | Which novelist wrote The Call of the Wild and White Fang? | Jack London | Zane Grey | Owen Wister | James Oliver Curwood
+E | Which London story pits a man against the Yukon cold? | To Build a Fire | The Law of Life | Love of Life | Batard
+M | Which Whitman elegy mourns Lincoln as a fallen captain? | O Captain My Captain | I Hear America Singing | Song of the Open Road | Crossing Brooklyn Ferry
+M | Which Whitman poem hears America singing at its trades? | I Hear America Singing | O Captain My Captain | A Noiseless Patient Spider | Song of Myself
+M | Which Dickinson poem calls hope the thing with feathers? | Hope is the thing with feathers | Because I could not stop for Death | I heard a Fly buzz | I felt a Funeral
+M | Which Dickinson poem rides in a carriage beside Death? | Because I could not stop for Death | I heard a Fly buzz when I died | A Bird came down the Walk | Success is counted sweetest
+M | Which Twain story features a jumping frog contest? | The Celebrated Jumping Frog | The Mysterious Stranger | The Million Pound Bank-Note | A Dog's Tale
+M | Which Twain novel swaps a prince with a pauper in Tudor England? | The Prince and the Pauper | A Connecticut Yankee | Pudd'nhead Wilson | Tom Sawyer Abroad
+M | Which Twain novel sends a modern man to King Arthur's court? | A Connecticut Yankee | The Prince and the Pauper | Life on the Mississippi | The Innocents Abroad
+M | Which movement set out to show life exactly as it is? | Realism | Romanticism | Transcendentalism | Symbolism
+M | Which movement treated people as shaped by heredity and environment? | Naturalism | Romanticism | Transcendentalism | Imagism
+M | Which Stephen Crane story sets four men adrift in a small boat? | The Open Boat | The Blue Hotel | The Bride Comes to Yellow Sky | Maggie
+H | Which Whitman elegy uses lilacs to mourn Lincoln? | When Lilacs Last in the Dooryard Bloomd | O Captain My Captain | Drum-Taps | The Wound-Dresser
+H | Which Kate Chopin novel follows Edna Pontellier in Louisiana? | The Awakening | At Fault | A Night in Acadie | Bayou Folk
+H | Which Chopin story kills a wife with the joy that kills? | The Story of an Hour | Desiree's Baby | A Pair of Silk Stockings | The Storm
+H | Which novelist wrote The House of Mirth and The Age of Innocence? | Edith Wharton | Willa Cather | Kate Chopin | Ellen Glasgow
+H | Which Wharton novella strands three people on a New England farm? | Ethan Frome | Summer | The Touchstone | Bunner Sisters
+H | Which novelist wrote of Nebraska pioneers in My Antonia? | Willa Cather | Edith Wharton | Ellen Glasgow | Zona Gale
+H | Which Cather novel follows a Bohemian girl on the prairie? | My Antonia | O Pioneers | The Song of the Lark | Shadows on the Rock
+H | Which 1906 novel exposed the Chicago meatpacking industry? | The Jungle | McTeague | The Octopus | The Pit
+H | Which name was given to journalists who exposed corruption around 1900? | Muckrakers | Yellow journalists | Stringers | Pamphleteers
+
+# --- Harlem and the moderns ---
+
+E | Which movement made Harlem a center of Black art in the 1920s? | The Harlem Renaissance | The Beat movement | The Lost Generation | The Black Arts Movement
+E | Which poet wrote I, Too, Sing America? | Langston Hughes | Countee Cullen | Claude McKay | Jean Toomer
+E | Which Hughes poem asks what happens to a raisin in the sun? | Harlem | The Weary Blues | Mother to Son | I, Too
+E | Which novelist wrote Their Eyes Were Watching God? | Zora Neale Hurston | Nella Larsen | Jessie Fauset | Ann Petry
+E | Which Frost poem stops by woods on a snowy evening? | Stopping by Woods on a Snowy Evening | Birches | Mending Wall | After Apple-Picking
+E | Which Frost poem says good fences make good neighbors? | Mending Wall | The Road Not Taken | Home Burial | Directive
+E | Which poet called Chicago the hog butcher for the world? | Carl Sandburg | Vachel Lindsay | Edgar Lee Masters | Robert Frost
+M | Which Hughes poem tells a son that life is no crystal stair? | Mother to Son | Harlem | Theme for English B | Dream Variations
+M | Which Hughes poem speaks of rivers older than human blood? | The Negro Speaks of Rivers | The Weary Blues | Harlem | Let America Be America Again
+M | Which Hurston heroine tells her story to a friend on a porch? | Janie Crawford | Helga Crane | Lutie Johnson | Sula Peace
+M | Which poet wrote the sonnet If We Must Die? | Claude McKay | Countee Cullen | Langston Hughes | Arna Bontemps
+M | Which poet wrote Yet Do I Marvel? | Countee Cullen | Claude McKay | Langston Hughes | Jean Toomer
+M | Which scholar wrote The Souls of Black Folk? | W. E. B. Du Bois | Booker T. Washington | Alain Locke | Marcus Garvey
+M | Which poet wrote The Love Song of J. Alfred Prufrock? | T. S. Eliot | Ezra Pound | Wallace Stevens | Hart Crane
+M | Which 1922 poem opens with April is the cruellest month? | The Waste Land | The Hollow Men | Four Quartets | Ash Wednesday
+M | Which poet wrote about a red wheelbarrow glazed with rain? | William Carlos Williams | Wallace Stevens | Marianne Moore | E. E. Cummings
+M | Which movement demanded hard clear images and no wasted words? | Imagism | Symbolism | Surrealism | Objectivism
+H | Which 1923 book mixed poetry and prose about the rural South? | Cane | The Weary Blues | Home to Harlem | Banjo
+H | Which anthology gave the era's writers the name New Negro? | The New Negro | The Book of American Negro Poetry | Fire | Opportunity
+H | Which poet wrote in lowercase and broke words apart on the page? | E. E. Cummings | Wallace Stevens | Hart Crane | Robinson Jeffers
+H | Which book of poems speaks from the graves of a small town? | Spoon River Anthology | Tilbury Town | North of Boston | The People, Yes
+H | Which poet created Richard Cory, who went home and shot himself? | Edwin Arlington Robinson | Edgar Lee Masters | Robert Frost | Vachel Lindsay
+H | Which poet led the Imagists and edited The Waste Land? | Ezra Pound | T. S. Eliot | Amy Lowell | H. D.
+H | Which poet wrote Thirteen Ways of Looking at a Blackbird? | Wallace Stevens | Marianne Moore | Hart Crane | Robert Lowell
+H | Which poet wrote a long poem about the Brooklyn Bridge? | Hart Crane | Wallace Stevens | Carl Sandburg | William Carlos Williams
+H | Which poet read at John Kennedy's inauguration in 1961? | Robert Frost | Carl Sandburg | Archibald MacLeish | Robert Lowell
+
+# --- The great American novels ---
+
+E | Which novel follows Jay Gatsby and his green light? | The Great Gatsby | Tender Is the Night | This Side of Paradise | The Beautiful and Damned
+E | Which novel follows Scout Finch and her father Atticus? | To Kill a Mockingbird | Go Set a Watchman | The Help | A Time to Kill
+E | Which novel follows George and Lennie on a California ranch? | Of Mice and Men | The Grapes of Wrath | Cannery Row | East of Eden
+E | Which novel drives the Joad family west during the Dust Bowl? | The Grapes of Wrath | Of Mice and Men | The Pearl | Travels with Charley
+E | Which novel imagines a society watched over by Big Brother? | 1984 | Brave New World | Fahrenheit 451 | Animal Farm
+E | Which narrator tells the story of The Great Gatsby? | Nick Carraway | Tom Buchanan | Jordan Baker | Meyer Wolfsheim
+E | Which man does Atticus Finch defend at trial? | Tom Robinson | Boo Radley | Bob Ewell | Walter Cunningham
+E | Which Hemingway novel follows an old fisherman and a marlin? | The Old Man and the Sea | A Farewell to Arms | The Sun Also Rises | Islands in the Stream
+E | Which novel follows Holden Caulfield through New York? | The Catcher in the Rye | Franny and Zooey | A Separate Peace | The Bell Jar
+E | Which novel burns books at 451 degrees? | Fahrenheit 451 | 1984 | Brave New World | The Martian Chronicles
+E | Which novel imagines a hatchery that breeds people into castes? | Brave New World | 1984 | Fahrenheit 451 | We
+M | Which town does Scout Finch live in? | Maycomb | Monroeville | Jackson | Greenbow
+M | Which Steinbeck novel retells Cain and Abel in the Salinas Valley? | East of Eden | The Grapes of Wrath | The Winter of Our Discontent | Sweet Thursday
+M | Which Hemingway novel is set during the Spanish Civil War? | For Whom the Bell Tolls | A Farewell to Arms | The Sun Also Rises | To Have and Have Not
+M | Which Hemingway novel follows an ambulance driver in Italy? | A Farewell to Arms | For Whom the Bell Tolls | The Sun Also Rises | Across the River
+M | Which name was given to the disillusioned writers of the 1920s abroad? | The Lost Generation | The Beat Generation | The Angry Young Men | The Bloomsbury Group
+M | Which novelist invented Yoknapatawpha County? | William Faulkner | Eudora Welty | Flannery O'Connor | Robert Penn Warren
+M | Which Faulkner novel is told in part by Benjy Compson? | The Sound and the Fury | As I Lay Dying | Light in August | Absalom, Absalom
+M | Which Faulkner novel carries a coffin across Mississippi? | As I Lay Dying | The Sound and the Fury | Sanctuary | The Hamlet
+M | Which novel follows an unnamed Black narrator through New York? | Invisible Man | Native Son | Go Tell It on the Mountain | The Street
+M | Which novel follows Bigger Thomas through Chicago? | Native Son | Invisible Man | Black Boy | The Outsider
+M | Which novel follows Billy Pilgrim, unstuck in time? | Slaughterhouse-Five | Cat's Cradle | Breakfast of Champions | Player Piano
+M | Which novel names the rule that traps airmen who want out? | Catch-22 | Slaughterhouse-Five | The Naked and the Dead | From Here to Eternity
+M | Which novel follows Celie's letters in rural Georgia? | The Color Purple | Beloved | Their Eyes Were Watching God | Sula
+M | Which Toni Morrison novel is haunted by a dead child? | Beloved | Song of Solomon | Sula | The Bluest Eye
+M | Which Morrison novel follows Milkman Dead in search of his family? | Song of Solomon | Beloved | Jazz | Tar Baby
+H | Which novel follows two boys at a New Hampshire school in wartime? | A Separate Peace | The Catcher in the Rye | The Chocolate War | Lord of the Flies
+H | Which novel follows Esther Greenwood through a summer in New York? | The Bell Jar | Franny and Zooey | The Group | Play It as It Lays
+H | Which novel opens a road trip with Sal Paradise and Dean Moriarty? | On the Road | The Dharma Bums | Big Sur | Desolation Angels
+H | Which movement gathered Kerouac, Ginsberg and Burroughs? | The Beats | The Imagists | The Fugitives | The Objectivists
+H | Which Ginsberg poem begins with the best minds of a generation? | Howl | Kaddish | America | Sunflower Sutra
+H | Which novel follows Chief Bromden on a psychiatric ward? | One Flew Over the Cuckoo's Nest | The Bell Jar | Catch-22 | Sometimes a Great Notion
+H | Which novel follows Chinese American mothers and daughters at mah-jongg? | The Joy Luck Club | The Woman Warrior | Typical American | China Boy
+H | Which memoir mixes Chinese myth with a girlhood in California? | The Woman Warrior | The Joy Luck Club | Hunger of Memory | Bone
+
+# --- The stage and the podium ---
+
+E | Which 1963 speech declared I have a dream? | The March on Washington speech | The Gettysburg Address | Kennedy's inaugural | A Roosevelt fireside chat
+E | Which 1863 speech begins with four score and seven years ago? | The Gettysburg Address | The Second Inaugural | The Emancipation Proclamation | The House Divided speech
+E | Which president said Americans had nothing to fear but fear itself? | Franklin Roosevelt | Woodrow Wilson | Harry Truman | Herbert Hoover
+E | Which play follows the Loman family and a failing salesman? | Death of a Salesman | A Streetcar Named Desire | The Glass Menagerie | All My Sons
+E | Which salesman is the father in that play? | Willy Loman | Biff Loman | Happy Loman | Charley
+E | Which play stages the Salem witch trials as a warning? | The Crucible | Death of a Salesman | Our Town | Inherit the Wind
+E | Which play follows a Black family buying a house in Chicago? | A Raisin in the Sun | Fences | The Piano Lesson | Ma Rainey's Black Bottom
+M | Which president asked what you can do for your country? | John Kennedy | Franklin Roosevelt | Lyndon Johnson | Dwight Eisenhower
+M | Which 1851 speech asked ain't I a woman? | Sojourner Truth's speech | Harriet Tubman's address | Susan Anthony's plea | Lucretia Mott's sermon
+M | Which orator asked what the Fourth of July means to the slave? | Frederick Douglass | William Garrison | Wendell Phillips | Charles Sumner
+M | Which patriot demanded liberty or death in 1775? | Patrick Henry | Samuel Adams | John Hancock | James Otis
+M | Which political hunt did The Crucible answer? | McCarthyism | Prohibition | The Palmer raids | The Scopes trial
+M | Which play follows Blanche DuBois to her sister's apartment? | A Streetcar Named Desire | The Glass Menagerie | Cat on a Hot Tin Roof | Summer and Smoke
+M | Which play centers on Laura and her collection of glass animals? | The Glass Menagerie | A Streetcar Named Desire | The Night of the Iguana | Orpheus Descending
+M | Which poem gave A Raisin in the Sun its title? | Harlem by Langston Hughes | If We Must Die | Sympathy | The Weary Blues
+M | Which Thornton Wilder play is set in Grover's Corners? | Our Town | The Skin of Our Teeth | The Matchmaker | The Long Christmas Dinner
+H | Which playwright wrote a cycle of ten plays on Black life by decade? | August Wilson | Lorraine Hansberry | Amiri Baraka | Ntozake Shange
+H | Which Wilson play sets a garbage collector against his son? | Fences | The Piano Lesson | Joe Turner's Come and Gone | Jitney
+H | Which American playwright won the Nobel Prize in 1936? | Eugene O'Neill | Arthur Miller | Tennessee Williams | Thornton Wilder
+H | Which O'Neill play follows the Tyrone family through a single day? | Long Day's Journey Into Night | The Iceman Cometh | Desire Under the Elms | Anna Christie
+H | Which 1961 farewell warned of a military-industrial complex? | Eisenhower's farewell address | Truman's doctrine speech | MacArthur's farewell | Kennedy's inaugural
+H | Which 1858 speech warned that a house divided cannot stand? | Lincoln's house divided speech | The Freeport doctrine | The irrepressible conflict | Webster's reply to Hayne
+H | Which 1941 address named four freedoms? | Roosevelt's Four Freedoms speech | Wilson's Fourteen Points | Truman's Point Four | The Atlantic Charter
+H | Which 1848 declaration demanded women's rights at Seneca Falls? | The Declaration of Sentiments | The Seneca Resolutions | The Rochester Appeal | The Woman's Bill
+
+# --- Research and rhetoric ---
+
+E | Which page lists the sources at the end of a paper? | The works cited page | The index | The glossary | The abstract
+E | Which mark shows a direct quotation in a paper? | Quotation marks | Italics | Parentheses | Brackets
+M | Which style guide do English classes usually follow? | MLA | APA | Chicago | AMA
+M | Which style guide do social science classes usually follow? | APA | MLA | Chicago | Turabian
+M | Which marks show that words were left out of a quotation? | An ellipsis | Brackets | Parentheses | A dash
+M | Which marks show a word added inside a quotation? | Brackets | Parentheses | Quotation marks | Braces
+M | Which citation appears right after a borrowed idea in the text? | An in-text citation | A footnote index | A bibliography entry | A cross-reference
+M | Which term names a source you can trust for accuracy? | A credible source | A popular source | A secondary source | A tertiary source
+M | Which question tests whether a source is current enough? | When was it published | Who published it | How long is it | Where was it printed
+M | Which term names the claim a research paper sets out to prove? | The thesis | The abstract | The premise of style | The finding
+M | Which term names a short summary at the head of a paper? | An abstract | A preface | An epigraph | A foreword
+M | Which search technique narrows results with quotation marks? | Searching an exact phrase | Searching a wildcard | Searching a synonym | Searching a stem
+H | Which device asks a question with no answer expected? | A rhetorical question | An apostrophe | An epithet | An antithesis
+H | Which device repeats a phrase at the end of several clauses? | Epistrophe | Anaphora | Chiasmus | Polysyndeton
+H | Which device sets two opposite ideas side by side? | Antithesis | Anaphora | Litotes | Zeugma
+H | Which device reverses the word order in the second clause? | Chiasmus | Anaphora | Epistrophe | Asyndeton
+H | Which device strings clauses together with many conjunctions? | Polysyndeton | Asyndeton | Anaphora | Ellipsis
+H | Which device leaves out the conjunctions between items? | Asyndeton | Polysyndeton | Chiasmus | Antithesis
+H | Which device addresses someone absent or an abstract idea? | Apostrophe | Anaphora | Epithet | Metonymy
+H | Which device affirms by denying the opposite, as in not bad? | Litotes | Hyperbole | Meiosis | Irony
