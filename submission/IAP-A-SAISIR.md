@@ -49,7 +49,7 @@ Capture               submission/screenshots/iap-review-1-top.png
 
 ```
 Nom de référence      Geography Grade 6 Pack
-Identifiant produit   com.oulhen.riskelo.us.pack.geography6
+Identifiant produit   com.oulhen.riskelo.us.pack.geography6b
 Nom d'affichage       Geography — Grade 6
 Description           Map skills, landforms, Africa, Asia. 200 questions.
 Capture               submission/screenshots/iap-review-1-top.png

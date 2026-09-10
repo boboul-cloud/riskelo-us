@@ -279,6 +279,17 @@ Les identifiants sont ceux que le code demande. Une lettre de travers et
 l'article n'est jamais trouvé — et un identifiant ne se corrige ni ne se
 réutilise.
 
+> **Geography — Grade 6 porte un `b` à la fin, et ce n'est pas une coquille.**
+> L'identifiant sans suffixe a été créé dans App Store Connect le 10 septembre
+> 2026, puis l'article supprimé. Apple ne libère jamais un identifiant de
+> produit : celui-là est perdu pour toujours, y compris pour cette app. Le `b`
+> le remplace, dans le fichier de questions, le fichier StoreKit et les deux
+> documents. Ne pas l'aligner sur les seize autres.
+>
+> La leçon, pour les articles qui restent : **relire avant de cliquer sur
+> Créer.** Supprimer un article ne rend pas son identifiant, et c'est le seul
+> champ de toute la soumission qui se comporte ainsi.
+
 App Store Connect s'y prend en **deux temps**, et c'est là qu'on se trompe.
 
 **1. Le dialogue « Créer un achat intégré »** ne demande que trois choses, dans
@@ -303,7 +314,7 @@ puis le prix et la disponibilité.
 |---|---|---|---|
 | Rock 70 80 Pack | `com.oulhen.riskelo.us.pack.rock7080` | Rock 70-80 | `Bands and voices of the 1970s and 80s. 400 questions.` |
 | History Grade 6 Pack | `com.oulhen.riskelo.us.pack.history6` | History — Grade 6 | `Mesopotamia, Egypt, Greece and Rome. 200 questions.` |
-| Geography Grade 6 Pack | `com.oulhen.riskelo.us.pack.geography6` | Geography — Grade 6 | `Map skills, landforms, Africa, Asia. 200 questions.` |
+| Geography Grade 6 Pack | `com.oulhen.riskelo.us.pack.geography6b` | Geography — Grade 6 | `Map skills, landforms, Africa, Asia. 200 questions.` |
 | English Grade 6 Pack | `com.oulhen.riskelo.us.pack.english6` | English — Grade 6 | `Grammar, punctuation, roots and myths. 200 questions.` |
 | Science Grade 6 Pack | `com.oulhen.riskelo.us.pack.science6` | Science — Grade 6 | `Earth science: rocks, weather, space. 200 questions.` |
 | History Grade 7 Pack | `com.oulhen.riskelo.us.pack.history7` | History — Grade 7 | `The medieval and early modern world. 200 questions.` |

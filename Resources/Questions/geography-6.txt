@@ -17,7 +17,12 @@
 ! icon    | map
 ! tint    | 0.30 0.62 0.68
 ! rank    | 8
-! product | com.oulhen.riskelo.us.pack.geography6
+# Le « b » n'est pas une coquille. L'identifiant sans suffixe a été créé dans
+# App Store Connect puis supprimé, et Apple ne libère jamais un identifiant de
+# produit : il est perdu pour toujours, y compris pour cette app. Celui-ci le
+# remplace. Ne pas « corriger » l'irrégularité — elle est la cicatrice, pas
+# l'erreur.
+! product | com.oulhen.riskelo.us.pack.geography6b
 
 
 # --- Maps and the Earth ---
