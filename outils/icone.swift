@@ -29,8 +29,14 @@ enum Icone {
 
     enum Machine { case ios, mac }
 
-    // Les couleurs des camps, reprises telles quelles de Palette.
-    static let campBleu  = CGColor(red: 0.24, green: 0.51, blue: 0.78, alpha: 1)
+    // Les couleurs des camps, reprises telles quelles de Palette.sides.
+    //
+    // La version française prend le premier camp et le deuxième, bleu et
+    // rouge ; celle-ci prend le troisième et le deuxième, vert et rouge. Ce
+    // ne sont pas des couleurs inventées pour l'occasion : ce sont deux camps
+    // du plateau, et l'icône continue donc de dire vrai. Deux icônes qui ne
+    // se confondent pas dans un dock, sans qu'aucune des deux mente.
+    static let campVert  = CGColor(red: 0.36, green: 0.60, blue: 0.36, alpha: 1)
     static let campRouge = CGColor(red: 0.80, green: 0.31, blue: 0.24, alpha: 1)
     static let cielHaut  = CGColor(red: 0.12, green: 0.16, blue: 0.21, alpha: 1)
     static let cielBas   = CGColor(red: 0.06, green: 0.08, blue: 0.11, alpha: 1)
@@ -98,7 +104,7 @@ enum Icone {
         ctx.restoreGState()
 
         // Les deux camps, de part et d'autre de l'axe.
-        for (camp, gauche) in [(campBleu, true), (campRouge, false)] {
+        for (camp, gauche) in [(campVert, true), (campRouge, false)] {
             ctx.saveGState()
             ctx.addPath(hexa)
             ctx.clip()
