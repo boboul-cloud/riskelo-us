@@ -301,55 +301,52 @@ puis le prix et la disponibilité.
 
 **3. La capture de vérification**, dans « Informations pour la vérification »,
 est obligatoire pour chaque article. Elle n'est jamais montrée aux clients :
-elle sert à prouver au relecteur que l'article existe dans l'application.
+elle sert à prouver au relecteur que l'article existe dans l'application et
+qu'il correspond à ce qu'il annonce.
 
-Elle est prête : `submission/screenshots/iap-review-packs.png` — l'écran Packs,
-1206 × 2622, prix affichés. **Le même fichier se dépose pour les dix-sept** :
-ils sont tous sur cet écran, il n'y a pas dix-sept captures à faire.
+**Il en faut quatre, pas une.** Les dix-sept packs sont sur le même écran, mais
+cet écran défile : une seule capture n'en montre que cinq ou six, et pour les
+autres le relecteur ne verrait pas l'article qu'il doit vérifier. Les quatre se
+recouvrent, et chaque pack est entièrement visible dans au moins l'une.
 
-Pour la refaire, si l'écran change : elle ne peut pas se prendre depuis le
-simulateur seul, où StoreKit ne répond pas et où chaque pack affiche
-« unavailable ». Il faut lancer depuis **Xcode** (`⌘R`), qui attache
-`Resources/RiskeloUS.storekit` au schéma — c'est de là que viennent les 2,99 $.
-Puis, l'écran Packs ouvert :
+Elles sont prises, dans `submission/screenshots/`, en 1206 × 2622, sans canal
+alpha, prix affichés. Pour chaque article, la capture à déposer :
+
+| Article | Capture |
+|---|---|
+| Rock 70-80 | `iap-review-1-top.png` |
+| History — Grade 6 | `iap-review-1-top.png` |
+| Geography — Grade 6 | `iap-review-1-top.png` |
+| English — Grade 6 | `iap-review-1-top.png` |
+| Science — Grade 6 | `iap-review-1-top.png` |
+| History — Grade 7 | `iap-review-2-grade7.png` |
+| Geography — Grade 7 | `iap-review-2-grade7.png` |
+| English — Grade 7 | `iap-review-2-grade7.png` |
+| Science — Grade 7 | `iap-review-2-grade7.png` |
+| History — Grade 8 | `iap-review-3-grade8.png` |
+| Geography — Grade 8 | `iap-review-3-grade8.png` |
+| English — Grade 8 | `iap-review-3-grade8.png` |
+| Science — Grade 8 | `iap-review-3-grade8.png` |
+| History — Grade 9 | `iap-review-3-grade8.png` |
+| Geography — Grade 9 | `iap-review-4-grade9.png` |
+| English — Grade 9 | `iap-review-4-grade9.png` |
+| Science — Grade 9 | `iap-review-4-grade9.png` |
+
+Pour les refaire, si la liste change : elles ne peuvent pas se prendre depuis
+le simulateur seul, où StoreKit ne répond pas et où chaque pack affiche
+« unavailable » au lieu de son prix. Il faut lancer depuis **Xcode** (`⌘R`),
+qui attache `Resources/RiskeloUS.storekit` au schéma — c'est de là que viennent
+les 2,99 $. Puis, l'écran Packs ouvert, faire défiler par petits pas et prendre
+chaque écran :
 
 ```bash
-xcrun simctl io booted screenshot submission/screenshots/iap-review-packs.png
+xcrun simctl io booted screenshot submission/screenshots/iap-review-1-top.png
 ```
 
-| Nom de référence | Identifiant de produit | Nom affiché (35) | Description (55) |
-|---|---|---|---|
-| Rock 70 80 Pack | `com.oulhen.riskelo.us.pack.rock7080` | Rock 70-80 | `Bands and voices of the 1970s and 80s. 400 questions.` |
-| History Grade 6 Pack | `com.oulhen.riskelo.us.pack.history6` | History — Grade 6 | `Mesopotamia, Egypt, Greece and Rome. 200 questions.` |
-| Geography Grade 6 Pack | `com.oulhen.riskelo.us.pack.geography6` | Geography — Grade 6 | `Map skills, landforms, Africa, Asia. 200 questions.` |
-| English Grade 6 Pack | `com.oulhen.riskelo.us.pack.english6` | English — Grade 6 | `Grammar, punctuation, roots and myths. 200 questions.` |
-| Science Grade 6 Pack | `com.oulhen.riskelo.us.pack.science6` | Science — Grade 6 | `Earth science: rocks, weather, space. 200 questions.` |
-| History Grade 7 Pack | `com.oulhen.riskelo.us.pack.history7` | History — Grade 7 | `The medieval and early modern world. 200 questions.` |
-| Geography Grade 7 Pack | `com.oulhen.riskelo.us.pack.geography7` | Geography — Grade 7 | `Europe, the Americas, the Pacific. 200 questions.` |
-| English Grade 7 Pack | `com.oulhen.riskelo.us.pack.english7` | English — Grade 7 | `Poetry, fiction, drama and novels. 200 questions.` |
-| Science Grade 7 Pack | `com.oulhen.riskelo.us.pack.science7` | Science — Grade 7 | `Life science: cells, plants, animals. 200 questions.` |
-| History Grade 8 Pack | `com.oulhen.riskelo.us.pack.history8` | History — Grade 8 | `Colonial America to Reconstruction. 200 questions.` |
-| Geography Grade 8 Pack | `com.oulhen.riskelo.us.pack.geography8` | Geography — Grade 8 | `The fifty states and their geography. 200 questions.` |
-| English Grade 8 Pack | `com.oulhen.riskelo.us.pack.english8` | English — Grade 8 | `American literature, Poe to Morrison. 200 questions.` |
-| Science Grade 8 Pack | `com.oulhen.riskelo.us.pack.science8` | Science — Grade 8 | `Atoms, reactions, forces and waves. 200 questions.` |
-| History Grade 9 Pack | `com.oulhen.riskelo.us.pack.history9` | History — Grade 9 | `The modern world, 1750 to today. 200 questions.` |
-| Geography Grade 9 Pack | `com.oulhen.riskelo.us.pack.geography9` | Geography — Grade 9 | `Population, cities and world trade. 200 questions.` |
-| English Grade 9 Pack | `com.oulhen.riskelo.us.pack.english9` | English — Grade 9 | `Shakespeare and world literature. 200 questions.` |
-| Science Grade 9 Pack | `com.oulhen.riskelo.us.pack.science9` | Science — Grade 9 | `Biology: DNA, genetics and evolution. 200 questions.` |
-
-Les deux premières colonnes vont dans le dialogue de création, les deux
-dernières dans « Ajouter la langue dans l'App Store », en anglais États-Unis.
-
-Le nom affiché est limité à **35** signes et la description à **55**. Attention
-au compteur d'App Store Connect : il affiche le **restant**, pas le saisi — un
-champ vide marque donc la limite du champ, et non zéro.
-
-La ligne `! detail` en tête de chaque fichier de questions, celle que montre la
-boutique de l'application, en fait quatre-vingts ou quatre-vingt-dix : là-bas
-la place existe. Les formes ci-dessus sont écrites pour le champ d'Apple et ne
-servent nulle part ailleurs. Toutes ont été comptées, avec deux signes de marge
-sous la limite — assez pour qu'une divergence de comptage d'un caractère ne
-casse rien.
+Le piège à connaître : entre deux captures espacées d'un écran plein, un pack
+tombe pile dans la charnière et n'apparaît nulle part. C'est arrivé à
+History — Grade 7. Des pas d'un tiers d'écran laissent le recouvrement qu'il
+faut.
 
 ### Ce qui reste à décider
 
