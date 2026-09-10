@@ -382,6 +382,39 @@ tombe pile dans la charnière et n'apparaît nulle part. C'est arrivé à
 History — Grade 7. Des pas d'un tiers d'écran laissent le recouvrement qu'il
 faut.
 
+### Les créer par l'API plutôt qu'à la main
+
+Dix-sept articles, quatre champs et une capture chacun : c'est long, et c'est
+exactement le genre de saisie où l'on finit par intervertir deux valeurs.
+`outils/asc-achats.py` fait les trois gestes par l'API officielle — créer
+l'article, poser la localisation anglais États-Unis, téléverser la capture.
+
+Il ne pose pas le prix : il n'est pas décidé, et le poser par l'API demande de
+choisir un « price point » par territoire. Dix-sept prix se cliquent vite une
+fois le reste en place.
+
+Il lui faut une clé d'API — App Store Connect ▸ Utilisateurs et accès ▸
+Intégrations ▸ Clés, rôle **App Manager** — qui donne un fichier `.p8`, un Key
+ID et un Issuer ID, plus l'identifiant Apple de l'app, lisible sur sa fiche
+une fois l'enregistrement créé. L'API ne crée pas l'enregistrement lui-même :
+ça reste un passage par l'interface.
+
+Ces valeurs vont dans `outils/asc-config.json`, que `.gitignore` retient, comme
+il retient tout `.p8` : cette clé ouvre le compte développeur en écriture.
+
+```bash
+python3 outils/asc-achats.py            # à blanc : dit ce qu'il ferait
+python3 outils/asc-achats.py --apply    # écrit
+```
+
+À blanc par défaut, et il compare à ce qui existe déjà : interrompu au
+douzième article, il reprend au douzième plutôt que de tout refaire. Les noms,
+identifiants et descriptions viennent des fichiers de questions et du tableau
+ci-dessus — pas d'une troisième copie qui divergerait.
+
+Si tu préfères la saisie à la main, `submission/IAP-A-SAISIR.md` déroule les
+dix-sept blocs dans l'ordre des champs, avec des cases à cocher.
+
 ### Ce qui reste à décider
 
 **Le prix.** Le fichier d'essai porte 2,99 $ : un nombre inventé pour pouvoir

@@ -17,3 +17,10 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+# La clé de l'API App Store Connect ouvre le compte développeur en écriture :
+# elle ne va pas dans le dépôt, et le fichier de configuration nomme son
+# emplacement plus l'identifiant de l'app. Voir outils/asc-achats.py.
+outils/asc-config.json
+*.p8
+AuthKey_*.p8
