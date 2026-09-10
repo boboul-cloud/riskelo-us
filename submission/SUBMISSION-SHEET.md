@@ -379,6 +379,10 @@ alpha, prix affichés. Pour chaque article, la capture à déposer :
 | English — Grade 9 | `iap-review-4-grade9.png` |
 | Science — Grade 9 | `iap-review-4-grade9.png` |
 
+Les quatre fichiers en `-6.5in` sont les mêmes écrans en 1242 × 2688, pris à
+part. Apple n'exige que 640 × 920 : les deux séries conviennent, il n'en faut
+qu'une.
+
 Pour les refaire, si la liste change : elles ne peuvent pas se prendre depuis
 le simulateur seul, où StoreKit ne répond pas et où chaque pack affiche
 « unavailable » au lieu de son prix. Il faut lancer depuis **Xcode** (`⌘R`),
