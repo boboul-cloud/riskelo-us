@@ -122,6 +122,11 @@ struct HalfHexagon: Shape {
 /// The app icon, redrawn in views rather than as an image: that is what
 /// allows it to open in two. An image would have had to be cut into two
 /// files, and the two halves would have stopped following the palette.
+///
+/// The two halves are sides 3 and 2 of the board, green and red — the same
+/// pair `outils/icone.swift` draws. Not sides 1 and 2: the French app is the
+/// blue one, and a player who taps a green icon must not land on a blue
+/// hexagon. This view *is* the icon, so it follows it.
 struct RiskeloLogo: View {
     /// From 0 — the two sides wide apart — to 1, joined.
     var join: Double = 1
@@ -138,7 +143,7 @@ struct RiskeloLogo: View {
     var body: some View {
         let gap = (1 - join) * size * 0.8
         ZStack {
-            HalfHexagon(left: true).fill(Palette.side(0))
+            HalfHexagon(left: true).fill(Palette.side(2))
                 .frame(width: width, height: size)
                 .offset(x: -gap)
             HalfHexagon(left: false).fill(Palette.side(1))
