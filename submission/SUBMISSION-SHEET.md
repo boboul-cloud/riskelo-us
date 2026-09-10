@@ -1,92 +1,95 @@
-# Submission sheet — Riskelo US 1.0
+# Fiche de soumission — Riskelo US 1.0
 
-Everything App Store Connect asks for, in the order it asks. Each fenced block
-is meant to be pasted as it stands. What is still open is marked **to decide**;
-what would get the submission refused is marked **blocker**.
+Tout ce que demande App Store Connect, dans l'ordre où il le demande.
 
-This is the American app. The French one has its own dossier and its own
-record; the two share nothing but an ancestor.
+**Les consignes sont en français, les textes à coller sont en anglais.** Chaque
+bloc encadré se colle tel quel dans le site d'Apple, sans le retoucher : il est
+écrit pour le marché américain et compté contre la limite du champ. Ce qui
+reste à décider est marqué **à décider** ; ce qui ferait refuser la soumission
+est marqué **bloquant**.
 
----
-
-## 0. Four things stand between this and a submission
-
-Read this section before anything else. The rest of the document assumes these
-are settled.
-
-1. **Done — the website is live.** `docs/` holds four English pages, GitHub
-   Pages serves them from `main` ▸ `/docs`, and all four addresses return 200.
-   The three the app links to work from inside the app. See section 2.
-2. **The app still declares no support address.** `ManualView` publishes a
-   site, a privacy page and a terms page — the three links on the home and
-   setup screens — but nothing for support. `support.html` exists for Apple's
-   required Support URL field; wiring it into the app is optional. See
-   section 2.
-3. **blocker — The screenshots are of the French app.** The eighteen files in
-   `soumission/captures/` show French text on every panel. They cannot be used
-   for an English listing. See section 7.
-4. **to decide — The app's Store name.** App Store names are unique across the
-   whole store, so the French app and this one cannot both be called
-   "Riskelo". See section 4.
+C'est l'application américaine. La française a son propre dossier et son propre
+enregistrement ; les deux ne partagent qu'un ancêtre.
 
 ---
 
-## 1. Identifiers
+## 0. Ce qui reste entre ceci et une soumission
 
-| Field | Value |
+À lire avant le reste : la suite du document suppose ces points réglés.
+
+1. **Fait — le site est en ligne.** `docs/` porte quatre pages anglaises,
+   GitHub Pages les sert depuis `main` ▸ `/docs`, et les quatre adresses
+   répondent 200. Les trois que l'application ouvre fonctionnent depuis
+   l'application. Section 2.
+2. **L'application ne déclare toujours aucune adresse d'assistance.**
+   `ManualView` publie un site, une page de confidentialité et une page de
+   conditions — les trois liens de l'accueil et des réglages — mais rien pour
+   l'assistance. `support.html` existe pour le champ Support URL exigé par
+   Apple ; le câbler dans l'application est facultatif. Section 2.
+3. **bloquant — Les captures d'écran sont celles de l'app française.** Les
+   dix-huit fichiers de `soumission/captures/` montrent du texte français sur
+   chaque panneau. Inutilisables pour une fiche anglaise. Section 7.
+4. **à décider — Le nom sur l'App Store.** Les noms d'app sont uniques sur tout
+   le magasin : la française et celle-ci ne peuvent pas s'appeler toutes les
+   deux « Riskelo ». Section 4.
+
+---
+
+## 1. Les identifiants
+
+| Champ | Valeur |
 |---|---|
-| App name | `Riskelo US` — **to decide**, see section 4 |
-| Bundle ID | `com.oulhen.riskelo.us` |
-| Team | `38DQ8FW23J` |
-| SKU (internal, never public, never reusable) | `riskelo-us-2026` |
-| Apple ID for the app | assigned by App Store Connect at creation |
-| Primary language | English (U.S.) |
+| Nom de l'app | `Riskelo US` — **à décider**, voir section 4 |
+| Identifiant du bundle | `com.oulhen.riskelo.us` |
+| Équipe | `38DQ8FW23J` |
+| SKU (interne, invisible du public, jamais réutilisable) | `riskelo-us-2026` |
+| Identifiant Apple de l'app | attribué par App Store Connect à la création |
+| Langue principale | Anglais (États-Unis) |
 | Version | `1.0` |
 | Build | `1` |
-| Platforms | iOS and macOS (one target, two platforms on the record) |
-| Minimum OS | iOS 17.0 · macOS 14.0 |
-| Devices | iPhone and iPad (`TARGETED_DEVICE_FAMILY = 1,2`) and Mac |
-| Orientations | portrait and landscape; upside-down as well on iPad |
-| Primary category | Games ▸ **Strategy** |
-| Secondary category | Games ▸ **Trivia** |
-| Age rating | **4+** |
-| Game Center | no |
-| In-app purchases | seventeen packs, non-consumable — section 4 bis |
-| App price | **to decide** |
-| Territories | all |
-| Release | **to decide** — automatic on approval, or manual |
+| Plateformes | iOS et macOS (une seule cible, deux plateformes sur la fiche) |
+| Version minimale | iOS 17.0 · macOS 14.0 |
+| Appareils | iPhone et iPad (`TARGETED_DEVICE_FAMILY = 1,2`) et Mac |
+| Orientations | portrait et paysage ; portrait inversé en plus sur iPad |
+| Catégorie principale | Games ▸ **Strategy** |
+| Catégorie secondaire | Games ▸ **Trivia** |
+| Classification par âge | **4+** |
+| Game Center | non |
+| Achats intégrés | dix-sept packs, non consommables — section 4 bis |
+| Prix de l'app | **à décider** |
+| Territoires | tous |
+| Publication | **à décider** — automatique à l'approbation, ou manuelle |
 
-Both numbers live in `project.yml` (`MARKETING_VERSION`,
-`CURRENT_PROJECT_VERSION`) and nowhere else: the in-app manual reads the one it
-displays from the bundle. The build number has to climb with every upload; the
-version climbs when what ships deserves a name.
+Les deux numéros se lisent dans `project.yml` (`MARKETING_VERSION`,
+`CURRENT_PROJECT_VERSION`) et nulle part ailleurs : le manuel intégré prend
+dans le bundle celui qu'il affiche. Le build monte à chaque envoi ; la version
+monte quand ce qui part mérite un nom.
 
-This is a first version, so both start at 1.
+C'est une première version, donc les deux partent à 1.
 
-## 2. Addresses
+## 2. Les adresses
 
-**All four are live and returning 200**, served by GitHub Pages from `main` ▸
-`/docs`.
+**Les quatre répondent 200**, servies par GitHub Pages depuis `main` ▸ `/docs`.
 
-| App Store Connect field | Address | Page |
+| Champ App Store Connect | Adresse | Page |
 |---|---|---|
-| Marketing URL (optional) | `https://boboul-cloud.github.io/riskelo-us/` | `docs/index.html` |
-| **Support URL** (required) | `https://boboul-cloud.github.io/riskelo-us/support.html` | `docs/support.html` |
-| **Privacy Policy URL** (required) | `https://boboul-cloud.github.io/riskelo-us/privacy.html` | `docs/privacy.html` |
-| Custom EULA (optional) | `https://boboul-cloud.github.io/riskelo-us/terms.html` | `docs/terms.html` |
-| Code and site repository | `https://github.com/boboul-cloud/riskelo-us` | — |
+| URL marketing (facultative) | `https://boboul-cloud.github.io/riskelo-us/` | `docs/index.html` |
+| **URL d'assistance** (obligatoire) | `https://boboul-cloud.github.io/riskelo-us/support.html` | `docs/support.html` |
+| **URL de confidentialité** (obligatoire) | `https://boboul-cloud.github.io/riskelo-us/privacy.html` | `docs/privacy.html` |
+| CLUF personnalisé (facultatif) | `https://boboul-cloud.github.io/riskelo-us/terms.html` | `docs/terms.html` |
+| Dépôt du code et du site | `https://github.com/boboul-cloud/riskelo-us` | — |
 
-The filenames are not decorative: `privacy.html` and `terms.html` are what
-`Manual.privacyURL` and `Manual.termsURL` publish, and those two links sit on
-the home screen, on the setup screen and in the manual's legal chapter. Rename
-a file and three buttons in the app break.
+Les noms de fichiers ne sont pas décoratifs : `privacy.html` et `terms.html`
+sont ce que publient `Manual.privacyURL` et `Manual.termsURL`, et ces deux
+liens sont sur l'écran d'accueil, sur l'écran de réglages et dans le chapitre
+légal du manuel. Renommer un fichier casse trois boutons dans l'application.
 
-`support.html` is not linked from the app: the app has no support button.
-It exists because Apple's Support URL field is required and has to resolve.
-Adding a `supportURL` to `Manual` and a fourth link beside the other three is
-a five-line change if you want it.
+`support.html` n'est pas lié depuis l'application : elle n'a pas de bouton
+d'assistance. La page existe parce que le champ Support URL d'Apple est
+obligatoire et doit répondre. Ajouter un `supportURL` à `Manual` et un
+quatrième lien à côté des trois autres, c'est cinq lignes si tu le veux.
 
-Check before submitting. Anything other than 200 and the review stops there:
+À revérifier avant de soumettre. Autre chose que 200 et la revue s'arrête là :
 
 ```bash
 for p in "" support.html privacy.html terms.html; do
@@ -95,82 +98,87 @@ for p in "" support.html privacy.html terms.html; do
 done
 ```
 
-## 3. Review contact
+## 3. Les coordonnées pour la revue
 
-| Field | Value |
+| Champ | Valeur |
 |---|---|
-| First name | Robert |
-| Last name | Oulhen |
-| Phone | **to decide** — Apple requires it, it is never made public |
-| Email | `bob.oulhen@gmail.com` |
-| Demo account username | *none — the app has no accounts* |
-| Demo account password | *none* |
-| Sign-in required | **No** |
+| Prénom | Robert |
+| Nom | Oulhen |
+| Téléphone | **à décider** — Apple l'exige, il n'est jamais rendu public |
+| Adresse électronique | `bob.oulhen@gmail.com` |
+| Identifiant de démonstration | *aucun — l'app n'a pas de compte* |
+| Mot de passe de démonstration | *aucun* |
+| Compte requis | **Non** |
 
 ---
 
-## 4. The text to paste
+## 4. Les textes à coller
 
-### App name — 30 characters max
+Tout ce qui suit est en anglais et se colle sans retouche. Les longueurs
+indiquées ont été comptées, pas estimées.
+
+### Nom de l'app — 30 signes max
 
 ```
 Riskelo US
 ```
 
-**to decide.** App Store names are unique across the entire store, for every
-developer including yourself. Whichever of the two apps is created first takes
-"Riskelo", and the other has to differ. The French app is at 1.3 and further
-along, so it will take the plain name — which leaves this one needing its own.
+**à décider.** Les noms d'app sont uniques sur tout l'App Store, pour tous les
+développeurs, toi compris. Celle des deux qui est créée en premier prend
+« Riskelo », et l'autre doit différer. La française est en 1.3 et plus avancée :
+elle prendra le nom simple, ce qui laisse celle-ci en chercher un.
 
-`Riskelo US` is the safe choice: it matches `CFBundleDisplayName`, so the name
-on the Store and the name under the icon agree. Its weakness is that "US" reads
-as a regional variant to an American, which is not what sells a game.
+`Riskelo US` est le choix sûr : il correspond à `CFBundleDisplayName`, donc le
+nom sur le magasin et le nom sous l'icône s'accordent. Sa faiblesse est que
+« US » se lit comme une variante régionale pour un Américain, ce qui n'est pas
+ce qui vend un jeu.
 
-Alternatives, all inside thirty characters and all searchable:
+Trois autres, toutes sous trente signes et toutes cherchables :
 
-- `Riskelo: Trivia Conquest` (24) — carries two keywords, at the cost of no
-  longer matching the name under the icon
+- `Riskelo: Trivia Conquest` (24) — porte deux mots-clés, au prix de ne plus
+  correspondre au nom sous l'icône
 - `Riskelo Conquest` (16)
 - `Riskelo Trivia Wars` (19)
 
-Whatever is chosen, changing `CFBundleDisplayName` to match is one line in
+Quel que soit le choix, aligner `CFBundleDisplayName` dessus est une ligne de
 `project.yml`.
 
-### Subtitle — 30 characters max
+### Sous-titre — 30 signes max
 
 ```
 The conquest game without dice
 ```
 
-Exactly 30. Variants: `Conquer by knowing the answer` (29) · `No dice — just
-what you know` (28) · `Trivia conquest, 2-4 players` (28)
+Exactement 30. Variantes : `Conquer by knowing the answer` (29) ·
+`No dice — just what you know` (28) · `Trivia conquest, 2-4 players` (28)
 
-### Keywords — 100 characters max, commas with no space after
+### Mots-clés — 100 signes max, virgules sans espace après
 
 ```
 trivia,quiz,strategy,board,territory,turn-based,offline,multiplayer,family,geography,history,solo
 ```
 
-97 characters. The name and subtitle are already indexed, so "conquest",
-"dice" and "Riskelo" are deliberately absent — repeating them wastes the field.
+97 signes. Le nom et le sous-titre sont déjà indexés, donc « conquest »,
+« dice » et « Riskelo » en sont volontairement absents : les répéter gâcherait
+le champ.
 
-**No board-game trademark, in any form.** The genre resemblance gives no right
-to anyone else's name, and using one is an immediate rejection. That rules out
-the obvious three-letter word this game will be compared to.
+**Aucune marque de jeu de société, sous aucune forme.** La ressemblance de
+genre ne donne aucun droit sur le nom d'autrui, et en utiliser un est un rejet
+immédiat. Cela exclut le mot de quatre lettres auquel ce jeu va être comparé.
 
-Swap candidates if something needs room: `knowledge`, `pass and play`,
+De quoi échanger s'il faut faire de la place : `knowledge`, `pass and play`,
 `brain`, `study`, `middle school`.
 
-### Promotional text — 170 characters max, editable without a new version
+### Texte promotionnel — 170 signes max, modifiable sans nouvelle version
 
 ```
 2,400 questions in the game, three boards, two ways to duel. No ads, no account, no connection needed — the whole thing runs on the device, even on a plane.
 ```
 
-154 characters. This is the field to change when the packs go on sale or a
-price moves; it does not need a new build.
+156 signes. C'est le champ à changer quand les packs passent en promotion ou
+qu'un prix bouge ; il ne demande pas de nouveau build.
 
-### Description — 4,000 characters max
+### Description — 4 000 signes max
 
 ```
 Riskelo is a turn-based conquest game where the roll of the dice is replaced by a trivia question.
@@ -226,22 +234,24 @@ No ads. No account. No tracker, no analytics. No internet connection is needed: 
 iPhone, iPad and Mac — one app, in English.
 ```
 
-> The French description ends on "no in-app purchases". **Do not carry that
-> sentence over.** This app ships seventeen of them, and a description that
-> denies what the record declares is a metadata rejection waiting to happen.
-> The block above says what is true: no ads, no account, no tracking, no
-> connection, and packs you may buy if you want them.
+3 794 signes.
 
-### What's New in This Version — 4,000 characters max
+> La description française se termine sur « aucun achat intégré ». **Ne
+> reprends pas cette phrase.** Cette application en embarque dix-sept, et une
+> description qui contredit la fiche est un rejet de métadonnées qui attend son
+> heure. Le bloc ci-dessus dit ce qui est vrai : pas de publicité, pas de
+> compte, pas de traceur, pas de connexion, et des packs si on veut.
 
-App Store Connect does not ask for this on a first version, and there is
-nothing a player would look for in it. If the field appears anyway:
+### Nouveautés de cette version — 4 000 signes max
+
+App Store Connect ne pose pas la question sur une première version, et un
+joueur n'y chercherait rien. Si le champ apparaît quand même :
 
 ```
 First release.
 ```
 
-### Copyright
+### Droits d'auteur
 
 ```
 2026 Robert Oulhen
@@ -249,26 +259,27 @@ First release.
 
 ---
 
-## 4 bis. In-app purchases
+## 4 bis. Les achats intégrés
 
-> **Only create these when you are ready to submit them.** An item created in
-> App Store Connect is never deleted and its identifier is never reused. A
-> version submitted with the packs screen but with no items attached would show
-> "unavailable" to everyone.
+> **À ne créer qu'au moment de les soumettre.** Un article créé dans App Store
+> Connect ne se supprime jamais et son identifiant ne se réutilise pas. Une
+> version soumise avec l'écran des packs mais sans articles joints montrerait
+> « indisponible » à tout le monde.
 
-Seventeen question packs, **non-consumable**: bought once, kept for good.
-Sixteen school decks — History, Geography, English and Science across four
-grades — and Rock 70-80.
+Dix-sept packs de questions, **non consommables** : achetés une fois, gardés
+pour toujours. Seize packs scolaires — History, Geography, English et Science
+sur quatre niveaux — et Rock 70-80.
 
-What is bought is not the content: the files ship inside the app, on every
-device. What is bought is the right to **choose** a pack. That is what lets
-somebody joining a table play the host's packs without owning them, and it is
-deliberate.
+Ce qui s'achète n'est pas le contenu : les fichiers sont dans l'application,
+sur tous les appareils. C'est le droit de **choisir** un pack. C'est ce qui
+permet à celui qui rejoint une table de jouer les packs de l'hôte sans les
+avoir achetés, et c'est voulu.
 
-The identifiers are the ones the code asks for. One letter out of place and the
-item is never found.
+Les identifiants sont ceux que le code demande. Une lettre de travers et
+l'article n'est jamais trouvé. Les trois colonnes de droite se collent telles
+quelles.
 
-| Identifier | Reference name | Display name (30) | Description (45) |
+| Identifiant | Nom de référence | Nom affiché (30) | Description (45) |
 |---|---|---|---|
 | `com.oulhen.riskelo.us.pack.rock7080` | Rock 70 80 Pack | Rock 70-80 | `Rock of the 1970s and 80s. 400 questions.` |
 | `com.oulhen.riskelo.us.pack.history6` | History Grade 6 Pack | History — Grade 6 | `Egypt, Greece and Rome. 200 questions.` |
@@ -287,106 +298,111 @@ item is never found.
 | `com.oulhen.riskelo.us.pack.geography9` | Geography Grade 9 Pack | Geography — Grade 9 | `People, cities and trade. 200 questions.` |
 | `com.oulhen.riskelo.us.pack.english9` | English Grade 9 Pack | English — Grade 9 | `Shakespeare and the classics. 200 questions.` |
 | `com.oulhen.riskelo.us.pack.science9` | Science Grade 9 Pack | Science — Grade 9 | `Biology: DNA and evolution. 200 questions.` |
+Les trois champs ont des limites dures dans App Store Connect, et la dernière
+est plus serrée qu'il n'y paraît : **45 signes**. La ligne `! detail` en tête
+de chaque fichier de questions — ce que montre la boutique de l'application —
+en fait quatre-vingts ou quatre-vingt-dix, parce que là-bas la place existe.
+Les formes courtes ci-dessus sont écrites pour le champ d'Apple et ne servent
+nulle part ailleurs. Toutes ont été comptées.
 
-The three fields have hard limits in App Store Connect, and the last one is
-tighter than it looks: **45 characters**. The `! detail` line at the top of
-each question file — what the app's own shop shows — runs to eighty or ninety,
-because there the room exists. The short forms above are written for Apple's
-field and belong nowhere else. Every one has been counted.
+### Ce qui reste à décider
 
-### Still to decide
+**Le prix.** Le fichier d'essai porte 2,99 $ : un nombre inventé pour pouvoir
+cliquer, pas une proposition. Les paliers américains commencent à 0,99 $.
 
-**The price.** The test file carries $2.99, which is a number invented so the
-buttons could be clicked, not a proposal. US tier pricing starts at $0.99.
+**Le partage familial.** Un pack scolaire acheté une fois et joué par les deux
+enfants de la maison est plus juste qu'un pack acheté deux fois, et Apple le
+propose article par article. Le fichier d'essai l'a activé.
 
-**Family Sharing.** A school pack bought once and played by both children in a
-house is fairer than the same pack bought twice, and Apple offers it item by
-item. The test file has it on.
+**Les packs scolaires sont américains, et c'est tout l'argument.** History suit
+la séquence classique des États-Unis, Science suit Earth / Life / Physical /
+Biology, et English va de la grammaire à la littérature mondiale en passant par
+les lettres américaines en grade 8. Si un relecteur demande ce qui justifie de
+les vendre, la réponse est là : ils sont écrits sur le programme américain, pas
+traduits d'ailleurs.
 
-**The school packs are American, and that is the whole point.** History follows
-the classic US sequence, Science follows Earth / Life / Physical / Biology, and
-English runs from grammar to world literature by way of American literature in
-grade 8. If a reviewer asks what makes them worth money, that is the answer:
-they are written to the American curriculum, not translated from somewhere
-else.
+### La première fois, ils partent avec la version
 
-### First time out, they ship with the version
+Apple relit les achats intégrés en même temps que l'application. Il faut donc
+les **joindre à la version** sur la fiche avant de soumettre : créés mais non
+joints, ils restent « en attente d'envoi » et l'écran des packs dira
+« indisponible » à tout le monde.
 
-Apple reviews in-app purchases alongside the app, so they have to be
-**attached to the version** on the record before submitting. Created but not
-attached, they sit in "waiting for upload" and the packs screen says
-"unavailable" to everybody.
+### Pour les essayer sans rien envoyer
 
-### Trying them without sending anything
+`Resources/RiskeloUS.storekit` est un App Store de bureau, attaché au schéma.
+On lance depuis Xcode, on achète pour rien, et **Debug ▸ StoreKit** rembourse
+ou annule. Rien ne remonte chez Apple.
 
-`Resources/RiskeloUS.storekit` is a desk-sized App Store, attached to the
-scheme. Run from Xcode, buy for nothing, and **Debug ▸ StoreKit** will refund
-or cancel. None of it reaches Apple.
-
-The file is not in the bundle: it sits in the project with no build phase, so
-prices can change without shipping anything. It is rebuilt from the question files' headers — the
-`! id`, `! name`, `! detail`, `! product` and `! rank` lines — so the shop, the
-test store and the table above can never drift apart.
+Le fichier ne part pas dans le paquet : il est dans le projet sans phase de
+construction, pour qu'on puisse en changer les prix sans rien livrer. Il est
+reconstruit depuis les en-têtes des fichiers de questions — les lignes `! id`,
+`! name`, `! detail`, `! product` et `! rank` — pour que la boutique, la
+boutique d'essai et le tableau ci-dessus ne puissent jamais diverger.
 
 ---
 
-## 5. The questionnaires
+## 5. Les questionnaires
 
-### App Privacy
+### Confidentialité de l'app
 
-> **Do you collect data from this app?** → **No, we do not collect data from
-> this app.**
+> **Collectez-vous des données depuis cette app ?** → **Non, nous ne collectons
+> aucune donnée de cette app.**
 
-Checkable: no external dependency, no request to any server, no advertising
-identifier. Save files stay in the app container and go when it goes. Data
-written locally and never sent does not count as collected.
+Vérifiable : aucune dépendance externe, aucune requête vers un serveur, aucun
+identifiant publicitaire. Les fichiers de partie restent dans le conteneur de
+l'app et disparaissent avec elle. Des données écrites localement et jamais
+envoyées ne comptent pas comme collectées.
 
-### The side questions
+### Les réponses annexes
 
-| Question | Answer |
+| Question | Réponse |
 |---|---|
-| Advertising identifier (IDFA)? | No |
-| Tracking (App Tracking Transparency)? | No |
-| In-app purchases? | Yes — seventeen non-consumable packs |
-| Advertising in the app? | No |
-| Third-party copyrighted content? | No — code, questions, boards and icon are the publisher's own work |
-| Encryption / export compliance | `ITSAppUsesNonExemptEncryption = false`, already in Info.plist: nothing to answer at each upload |
-| Account sign-in | None |
+| Identifiant publicitaire (IDFA) ? | Non |
+| Suivi (App Tracking Transparency) ? | Non |
+| Achats intégrés ? | Oui — dix-sept packs non consommables |
+| Publicité dans l'app ? | Non |
+| Contenu de tiers soumis à droits ? | Non — code, questions, plateaux et icône sont l'œuvre de l'éditeur |
+| Chiffrement / conformité export | `ITSAppUsesNonExemptEncryption = false`, déjà dans l'Info.plist : plus rien à répondre à chaque envoi |
+| Connexion à un compte | Aucune |
 
-### Age rating
+### Classification par âge
 
-Answer **None / Never** to everything: no depicted violence (the game is
-hexagons and numbers), no sexual content, no gambling, no alcohol or tobacco,
-no user-generated content, no unrestricted web access. Expected result: **4+**.
+Répondre **Aucun / Jamais** à tout : pas de violence figurée (le jeu est fait
+d'hexagones et de nombres), pas de contenu sexuel, pas de jeu d'argent, pas
+d'alcool ni de tabac, pas de contenu généré par les utilisateurs, pas d'accès
+web libre. Résultat attendu : **4+**.
 
-One question deserves a moment's thought rather than a reflex: the questions
-are written for grades 6 through 9, and touch war, slavery and genocide as a
-school textbook does — the Middle Passage, the Holocaust, the Rwandan genocide.
-This is historical reference in a multiple-choice question, not depicted
-violence, and it does not move the rating. It is worth knowing the answer
-before being asked it.
+Une question mérite d'y penser plutôt que d'y répondre par réflexe : les
+questions sont écrites pour les grades 6 à 9, et touchent la guerre,
+l'esclavage et le génocide comme le fait un manuel scolaire — le Passage du
+milieu, la Shoah, le génocide rwandais. C'est une référence historique dans un
+questionnaire à choix multiple, pas de la violence figurée, et cela ne change
+pas la classification. Mieux vaut connaître la réponse avant qu'on la demande.
 
-### The only permission requested
+### La seule autorisation demandée
 
-| Permission | When | Text shown |
+| Autorisation | Quand | Texte affiché |
 |---|---|---|
-| Local network | The first time "Play on several devices" is opened | "Riskelo US uses it to find the other device and play a two-player game." |
+| Réseau local | À la première ouverture de « Play on several devices » | « Riskelo US uses it to find the other device and play a two-player game. » |
 
-Refused, the app stays entirely playable: only multi-device play is
-unavailable. No other permission — no location, no photos, no contacts, no
-microphone, no notifications.
+Refusée, l'app reste entièrement jouable : seul le jeu à plusieurs appareils
+est indisponible. Aucune autre autorisation — ni position, ni photos, ni
+contacts, ni micro, ni notifications.
 
-### The point nobody declares, and that is better written down
+### Le point que personne ne déclare, et qu'il vaut mieux avoir écrit
 
-The device name ("Camille's iPhone") is visible to nearby devices while a table
-is being looked for: the Bonjour advertisement uses it as a label. It is not a
-collection — nothing is recorded and nothing reaches the publisher — and it
-belongs in section 4 of the privacy policy. If a reviewer asks, the answer is
-already in writing.
+Le nom de l'appareil (« iPhone de Camille ») est visible des appareils proches
+pendant la recherche d'une table : l'annonce Bonjour s'en sert comme étiquette.
+Ce n'est pas une collecte — rien n'est enregistré ni transmis à l'éditeur — et
+c'est dit à la section 4 de la politique de confidentialité. Si un relecteur
+pose la question, la réponse y est déjà.
 
 ---
 
-## 6. App Review Information
+## 6. Notes pour la revue
+
+Ce bloc est lu par Apple : il est en anglais et se colle tel quel.
 
 ```
 Hello,
@@ -452,41 +468,41 @@ Robert Oulhen — bob.oulhen@gmail.com
 
 ---
 
-## 7. Screenshots
+## 7. Les captures d'écran
 
-**blocker — the existing ones cannot be used.** The eighteen files in
-`soumission/captures/` are the French app: French questions, French buttons,
-French panels. They have to be retaken against this build.
+**bloquant — celles qui existent ne servent pas.** Les dix-huit fichiers de
+`soumission/captures/` sont l'app française : questions, boutons et panneaux en
+français. Il faut les reprendre sur ce build.
 
-| Folder | Size | Resolution | Required? |
+| Dossier | Taille | Résolution | Exigée ? |
 |---|---|---|---|
-| `submission/screenshots/iphone-6.9/` | iPhone 6.9-inch | 1320 × 2868 | yes |
-| `submission/screenshots/iphone-6.5/` | iPhone 6.5-inch | 1242 × 2688 | no — supply anyway |
-| `submission/screenshots/ipad-13/` | iPad 13-inch | 2064 × 2752 | yes, if iPad is offered |
-| — | Mac | 2880 × 1800 (16:10) | only if the Mac ships too |
+| `submission/screenshots/iphone-6.9/` | iPhone 6,9 pouces | 1320 × 2868 | oui |
+| `submission/screenshots/iphone-6.5/` | iPhone 6,5 pouces | 1242 × 2688 | non — la fournir quand même |
+| `submission/screenshots/ipad-13/` | iPad 13 pouces | 2064 × 2752 | oui, si l'iPad est proposé |
+| — | Mac | 2880 × 1800 (16:10) | seulement si le Mac part aussi |
 
-One iPhone 6.9" screenshot covers every other iPhone size. Minimum one per
-size, maximum ten.
+Une capture d'iPhone 6,9" couvre toutes les autres tailles d'iPhone. Minimum
+une par taille, maximum dix.
 
-**The six screens, in this order** — the first is the one that shows in search
-results:
+**Les six écrans, dans cet ordre** — le premier est celui qui sort dans les
+résultats de recherche :
 
-1. **A duel under way** — the question over the board, the clock already
-   running.
-2. **The assault panel** — the six subjects, the defender's scores, the glass
-   on their weak spot.
-3. **The World board** mid-game — two or three sides tangled, one continent
-   held.
-4. **The showdown verdict sheet** — both answers, their times, the crown.
-5. **The setup screen** — everything that can be set, at a glance.
-6. **The home screen** — it does not say what the game is, hence last, but it
-   shows the icon and the one button needed to begin.
+1. **Un duel en cours** — la question par-dessus le plateau, le sablier entamé.
+2. **Le panneau d'assaut** — les six thèmes, les scores du défenseur, la
+   lunette sur son point faible.
+3. **Le plateau du Monde** en milieu de partie — deux ou trois camps
+   enchevêtrés, un continent tenu.
+4. **La feuille du verdict en face à face** — les deux réponses, leurs temps,
+   la couronne.
+5. **L'écran de mise en place** — tout ce qui se règle, d'un coup d'œil.
+6. **L'accueil** — il ne dit pas ce qu'est le jeu, d'où la dernière place, mais
+   il montre l'icône et le seul bouton dont on ait besoin pour commencer.
 
-`outils/captures.py` plays a game by itself on the three devices, takes the six
-screens, sets the status bar to 9:41 and files everything. **It has not been
-run against this app** — it was written for the French one and still carries
-its scheme name and its French screen labels. Expect to fix it before it
-works:
+`outils/captures.py` joue une partie tout seul sur les trois appareils, prend
+les six écrans, règle la barre d'état à 9:41 et range le tout. **Il n'a jamais
+été lancé sur cette application** : il a été écrit pour la française et porte
+encore son nom de schéma et ses libellés d'écrans français. Il faudra le
+corriger avant qu'il fonctionne :
 
 ```bash
 xcodebuild -project RiskeloUS.xcodeproj -scheme RiskeloUS \
@@ -496,21 +512,21 @@ cp -R build/dd/Build/Products/Debug-iphonesimulator/RiskeloUS.app build/
 python3 outils/captures.py
 ```
 
-Mac screenshots are taken by hand, and only if the Mac version ships —
-`⌘⇧4` then space adds a drop shadow that Apple refuses:
+Celles du Mac se prennent à la main, et seulement si la version Mac part aussi
+— `⌘⇧4` puis la barre d'espace ajoute une ombre portée qu'Apple refuse :
 
 ```bash
 screencapture -o -w ~/Desktop/riskelo-us-mac-01.png
 ```
 
-What gets a screenshot rejected: a device frame drawn around the screen, a
-composite that does not come from the app, status bars that disagree from one
-shot to the next (the simulator shows 9:41 everywhere), promotional text
-covering the interface.
+Ce qui fait rejeter une capture : une maquette d'appareil dessinée autour de
+l'écran, un montage qui ne vient pas de l'app, des barres d'état incohérentes
+d'une capture à l'autre (le simulateur affiche 9:41 partout), du texte
+promotionnel qui recouvre l'interface.
 
-The App Store icon is already in the catalogue at 1024 × 1024 with no alpha
-channel, and is remade with one command — green and red here, where the French
-app is blue and red:
+L'icône de l'App Store est déjà au catalogue en 1024 × 1024 sans canal alpha,
+et se refait d'une commande — verte et rouge ici, là où la française est bleue
+et rouge :
 
 ```bash
 swiftc -O -parse-as-library -o /tmp/icone outils/icone.swift && /tmp/icone
@@ -518,7 +534,7 @@ swiftc -O -parse-as-library -o /tmp/icone outils/icone.swift && /tmp/icone
 
 ---
 
-## 8. Build and upload
+## 8. Fabriquer et envoyer
 
 ```bash
 xcodegen generate
@@ -527,110 +543,113 @@ xcodebuild -scheme RiskeloUS -destination 'generic/platform=iOS' \
            -archivePath ~/Desktop/RiskeloUS-ios.xcarchive archive
 ```
 
-Then Xcode ▸ Window ▸ Organizer ▸ the archive ▸ **Distribute App** ▸ *App Store
-Connect* ▸ *Upload*. The build shows up in App Store Connect a few minutes
-later, once processing finishes.
+Puis Xcode ▸ Window ▸ Organizer ▸ l'archive ▸ **Distribute App** ▸ *App Store
+Connect* ▸ *Upload*. La build apparaît dans App Store Connect au bout de
+quelques minutes, le temps du traitement.
 
-The build number has to **climb with every upload**: the same `1` cannot be
-sent twice. Change it in `project.yml` (`CURRENT_PROJECT_VERSION`), never in
-Xcode — `xcodegen generate` rewrites the project.
+Le numéro de build doit **monter à chaque envoi** : un même `1` ne se dépose
+pas deux fois. Il se change dans `project.yml` (`CURRENT_PROJECT_VERSION`),
+jamais dans Xcode — `xcodegen generate` réécrit le projet.
 
 ---
 
-## 9. The Mac App Store
+## 9. Le Mac App Store
 
-One target for iPhone, iPad and Mac; on the record that is **two platforms
-under one app**, each with its own screenshots and its own upload. The text can
-be identical.
+Une seule cible pour iPhone, iPad et Mac ; sur la fiche, cela fait **deux
+plateformes sous le même enregistrement**, chacune avec ses captures et son
+envoi. Les textes peuvent être identiques.
 
-The Mac App Store requires the **sandbox**, and the project has it, in
-`Resources/RiskeloUS-mac.entitlements`:
+Le Mac App Store impose le **bac à sable**, et le projet l'a, dans
+`Resources/RiskeloUS-mac.entitlements` :
 
-| Key | What it says |
+| Clé | Ce qu'elle dit |
 |---|---|
-| `com.apple.security.app-sandbox` | Shuts the app in. Required by the Mac App Store. |
-| `com.apple.security.network.client` | Lets it go out and find the other device. |
-| `com.apple.security.network.server` | Lets it be found by that device. |
+| `com.apple.security.app-sandbox` | Enferme l'application. Exigé par le Mac App Store. |
+| `com.apple.security.network.client` | La laisse sortir chercher l'autre appareil. |
+| `com.apple.security.network.server` | La laisse se faire trouver par lui. |
 
-The last two matter as much as the first: **the sandbox cuts the network off**,
-and without them the Mac and the iPhone would stop seeing each other with
-nothing on screen to explain why. The setting applies to the Mac only —
-`project.yml` puts it under `CODE_SIGN_ENTITLEMENTS[sdk=macosx*]`.
+Les deux dernières comptent autant que la première : **le bac à sable coupe le
+réseau**, et sans elles le Mac et l'iPhone cesseraient de se voir sans que rien
+à l'écran ne dise pourquoi. Le réglage ne s'applique qu'au Mac — `project.yml`
+le pose sous `CODE_SIGN_ENTITLEMENTS[sdk=macosx*]`.
 
-**Not verified on this app.** The French app was tested on real hardware and
-the link held with the sandbox on; the configuration here is the same file
-under a new name, but the Bonjour service name changed (`_riskelo-us._tcp`) and
-that is exactly the kind of thing that fails silently. Run the check before
-shipping the Mac:
+**Non vérifié sur cette application.** La française a été essayée sur du
+matériel réel et la liaison tenait avec le bac à sable ; la configuration ici
+est le même fichier sous un nouveau nom, mais le nom de service Bonjour a
+changé (`_riskelo-us._tcp`) et c'est exactement le genre de chose qui échoue en
+silence. À vérifier avant de livrer le Mac :
 
-1. Wi-Fi on at both ends, both machines in the same room.
-2. On the Mac: open the project and run (`⌘R`).
-3. On the iPhone: plug it in, select it as the destination, run (`⌘R`).
-4. On one of them: **Play on several devices** ▸ *Open a table*.
-5. On the other: **Play on several devices** ▸ *Join a table*, then tap the
-   name that appears.
-6. If the Mac asks for the local network permission, **accept**.
-7. If nothing comes after a minute: **swap the roles**. That is the usual
-   remedy, and it does not mean the sandbox is at fault.
+1. Wi-Fi allumé des deux côtés, les deux machines dans la même pièce.
+2. Sur le Mac : ouvrir le projet et lancer (`⌘R`).
+3. Sur l'iPhone : le brancher, le choisir comme destination, lancer (`⌘R`).
+4. Sur l'une des deux : **Play on several devices** ▸ *Open a table*.
+5. Sur l'autre : **Play on several devices** ▸ *Join a table*, puis toucher le
+   nom qui apparaît.
+6. Si le Mac demande l'autorisation d'utiliser le réseau local, **accepter**.
+7. Si rien ne vient au bout d'une minute : **inverser les rôles**. C'est le
+   remède habituel, et il ne veut pas dire que le bac à sable est en cause.
 
-Nothing forces both platforms out on the same day. The iPhone can go alone and
-the Mac join later under the same record.
-
----
-
-## 10. Order of operations
-
-- [ ] **Apple Developer Program** membership active ($99/year)
-- [ ] **Free Applications** contract signed in App Store Connect ▸ Agreements,
-      Tax and Banking — an unsigned contract blocks the release without
-      explaining itself
-- [ ] If the app is paid, or the packs are sold: paid contract, banking and tax
-      details
-- [x] GitHub Pages switched on, the four addresses in section 2 returning 200
-- [ ] *(optional)* `supportURL` added to `Manual` and a fourth link in the app
-- [ ] App ID `com.oulhen.riskelo.us` registered on the portal
-- [ ] Record created in App Store Connect (the name is reserved at that moment
-      — settle section 4 first)
-- [ ] Tests green, a game played on each machine, a two-device game both ways
-- [ ] Archive uploaded, build processed and visible on the record
-- [ ] TestFlight run on a real device
-- [ ] Section 4 text pasted
-- [ ] Screenshots **retaken in English** and uploaded
-- [ ] Section 5 questionnaires answered
-- [ ] Section 6 notes pasted
-- [ ] Price and availability chosen
-- [ ] The seventeen in-app purchases created and **attached to the version**
-- [ ] Purchases tried with a sandbox account on a real device
-- [ ] Submitted for review
-
-Expect two to forty-eight hours. Answer any reviewer question quickly: a thread
-left hanging goes back to the bottom of the queue.
+Rien n'oblige à sortir les deux plateformes le même jour. L'iPhone peut partir
+seul et le Mac s'ajouter plus tard sous le même enregistrement.
 
 ---
 
-## 11. What is left to decide
+## 10. L'ordre des opérations
 
-| Point | Why it is yours |
+- [ ] Adhésion **Apple Developer Program** active (99 $/an)
+- [ ] Contrat **Applications gratuites** signé dans App Store Connect ▸
+      Contrats, taxes et opérations bancaires — un contrat non signé bloque la
+      publication sans rien expliquer
+- [ ] Si l'app est payante, ou si les packs sont vendus : contrat payant,
+      coordonnées bancaires et fiscales
+- [x] GitHub Pages activé, les quatre adresses de la section 2 répondent 200
+- [ ] *(facultatif)* `supportURL` ajouté à `Manual` et un quatrième lien dans
+      l'application
+- [ ] Identifiant d'app `com.oulhen.riskelo.us` enregistré sur le portail
+- [ ] Enregistrement créé dans App Store Connect (le nom est réservé à ce
+      moment-là — régler la section 4 d'abord)
+- [ ] Tests verts, une partie jouée sur chaque machine, une partie à deux
+      appareils dans les deux sens
+- [ ] Archive envoyée, build traitée et visible sur la fiche
+- [ ] Essai TestFlight sur un appareil réel
+- [ ] Textes de la section 4 collés
+- [ ] Captures **reprises en anglais** et déposées
+- [ ] Questionnaires de la section 5 remplis
+- [ ] Notes de la section 6 collées
+- [ ] Prix et disponibilité choisis
+- [ ] Les dix-sept achats intégrés créés et **joints à la version**
+- [ ] Achats essayés avec un compte sandbox sur un appareil réel
+- [ ] Soumis à la revue
+
+Compter de deux à quarante-huit heures. Répondre vite à toute question du
+relecteur : un fil qui traîne repart en bas de la file.
+
+---
+
+## 11. Ce qui reste à décider
+
+| Point | Pourquoi c'est à toi |
 |---|---|
-| The Store name | Two apps cannot share one name. Section 4 lays out the trade-off; it has to be settled before the record is created, because that is when the name is reserved. |
-| The app's price | Free makes players, paid makes revenue. With seventeen packs on sale, free plus packs is the usual shape — but it is a decision, not a default. |
-| The price of the packs | $2.99 is a placeholder in the test file. |
-| Family Sharing on the packs | On in the test file. Fairer for a household with two children. |
-| The review phone number | Apple requires it; it is never made public. |
-| Automatic or manual release | Manual if you want to pick the day. |
-| macOS now or later | The sandbox is configured but the link has not been tested on this app. Section 9. |
-| The subtitle | Four candidates in section 4; it is the only text read before the description. |
+| Le nom sur le magasin | Deux apps ne peuvent pas partager un nom. La section 4 pose le compromis ; à régler avant de créer l'enregistrement, puisque c'est là que le nom est réservé. |
+| Le prix de l'app | Gratuit fait des joueurs, payant fait un revenu. Avec dix-sept packs à vendre, gratuit plus packs est la forme habituelle — mais c'est une décision, pas un défaut. |
+| Le prix des packs | 2,99 $ est une valeur de remplissage dans le fichier d'essai. |
+| Le partage familial sur les packs | Activé dans le fichier d'essai. Plus juste pour une maison avec deux enfants. |
+| Le numéro de téléphone de la revue | Apple l'exige ; il n'est jamais rendu public. |
+| Publication automatique ou manuelle | Manuelle si tu veux choisir le jour. |
+| macOS maintenant ou plus tard | Le bac à sable est posé mais la liaison n'a pas été essayée sur cette app. Section 9. |
+| Le sous-titre | Quatre candidats en section 4 ; c'est le seul texte lu avant la description. |
 
 ---
 
-## 12. What is still French in this project
+## 12. Ce qui est encore en français dans le projet
 
-Not blockers for the binary, but all of them show to a user or a reviewer:
+Rien qui bloque le binaire, mais tout cela se montre à un utilisateur ou à un
+relecteur :
 
-| Thing | State |
+| Quoi | État |
 |---|---|
-| `docs/` | Done — four English pages, matching the filenames the app publishes. |
-| `soumission/` | The French app's dossier — this file supersedes its submission sheet. The screenshots inside are of the French UI. |
-| `README.md` | French. |
-| `outils/icone.swift` | French comments and identifiers. Runs fine. |
-| `outils/listen.swift`, `outils/captures.py` | French. `captures.py` also still names the French scheme and screens. |
+| `docs/` | Fait — quatre pages anglaises, aux noms que l'application publie. |
+| `soumission/` | Le dossier de l'app française. Ce fichier remplace sa fiche. Les captures qui y sont montrent l'interface française. |
+| `README.md` | En français. |
+| `outils/icone.swift` | Commentaires et identifiants en français. Fonctionne. |
+| `outils/listen.swift`, `outils/captures.py` | En français. `captures.py` nomme en plus le schéma et les écrans français. |
