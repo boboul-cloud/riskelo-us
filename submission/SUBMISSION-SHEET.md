@@ -14,10 +14,9 @@ record; the two share nothing but an ancestor.
 Read this section before anything else. The rest of the document assumes these
 are settled.
 
-1. **The website is written — switch GitHub Pages on.** `docs/` now holds four
-   English pages: `index.html`, `privacy.html`, `terms.html` and
-   `support.html`, under the exact filenames the app asks for. They will stay
-   404 until Pages is enabled on `boboul-cloud/riskelo-us`. See section 2.
+1. **Done — the website is live.** `docs/` holds four English pages, GitHub
+   Pages serves them from `main` ▸ `/docs`, and all four addresses return 200.
+   The three the app links to work from inside the app. See section 2.
 2. **The app still declares no support address.** `ManualView` publishes a
    site, a privacy page and a terms page — the three links on the home and
    setup screens — but nothing for support. `support.html` exists for Apple's
@@ -66,8 +65,8 @@ This is a first version, so both start at 1.
 
 ## 2. Addresses
 
-The pages are written and in the repository. What is left is switching on the
-host.
+**All four are live and returning 200**, served by GitHub Pages from `main` ▸
+`/docs`.
 
 | App Store Connect field | Address | Page |
 |---|---|---|
@@ -81,9 +80,6 @@ The filenames are not decorative: `privacy.html` and `terms.html` are what
 `Manual.privacyURL` and `Manual.termsURL` publish, and those two links sit on
 the home screen, on the setup screen and in the manual's legal chapter. Rename
 a file and three buttons in the app break.
-
-**GitHub Pages** — Repository ▸ Settings ▸ Pages ▸ Source: `main`, folder
-`/docs`. A minute or two to go live.
 
 `support.html` is not linked from the app: the app has no support button.
 It exists because Apple's Support URL field is required and has to resolve.
@@ -590,7 +586,7 @@ the Mac join later under the same record.
       explaining itself
 - [ ] If the app is paid, or the packs are sold: paid contract, banking and tax
       details
-- [ ] GitHub Pages switched on and the four addresses in section 2 returning 200
+- [x] GitHub Pages switched on, the four addresses in section 2 returning 200
 - [ ] *(optional)* `supportURL` added to `Manual` and a fourth link in the app
 - [ ] App ID `com.oulhen.riskelo.us` registered on the portal
 - [ ] Record created in App Store Connect (the name is reserved at that moment
